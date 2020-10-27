@@ -33,7 +33,7 @@
                                 <constraint firstAttribute="height" constant="1" id="nkg-s5-6ZM"/>
                             </constraints>
                         </view>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gFu-jt-lxR">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gFu-jt-lxR" userLabel="TitleForm">
                             <rect key="frame" x="19" y="85.5" width="335" height="43"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Aa6-V6-ffO">
@@ -65,7 +65,7 @@
                                 <constraint firstItem="6yt-ac-g9V" firstAttribute="width" secondItem="dgw-oL-irr" secondAttribute="width" multiplier="0.15" id="Qzr-LA-xVm"/>
                             </constraints>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GCE-8w-MhL">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GCE-8w-MhL" userLabel="DescForm">
                             <rect key="frame" x="19" y="148.5" width="335" height="43"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0YP-n8-cu3">
@@ -97,7 +97,7 @@
                                 <constraint firstItem="ZjG-JI-5ax" firstAttribute="trailing" secondItem="ZSP-6E-Af9" secondAttribute="trailing" id="rZP-Ld-vJ9"/>
                             </constraints>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dGq-d0-UTY">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="dGq-d0-UTY" userLabel="ColorForm">
                             <rect key="frame" x="19" y="211.5" width="335" height="43"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="UmO-IS-rxI">
