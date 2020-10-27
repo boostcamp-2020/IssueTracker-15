@@ -6,17 +6,26 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/index.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint --fix src/**/*.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "eslint-plugin-prettier": "^3.1.4",
     "express": "^4.17.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.8",
     "@types/node": "^14.14.5",
-    "nodemon": "^2.0.6"
+    "@typescript-eslint/eslint-plugin": "^4.6.0",
+    "@typescript-eslint/parser": "^4.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.14.0",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.6",
+    "typescript": "^4.0.5"
   }
 }
