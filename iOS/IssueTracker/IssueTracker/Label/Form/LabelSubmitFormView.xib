@@ -118,6 +118,11 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kEc-d6-30z">
                                             <rect key="frame" x="174" y="0.0" width="84" height="32"/>
                                             <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzi-ck-7mW">
                                             <rect key="frame" x="278" y="0.0" width="50" height="32"/>
@@ -126,6 +131,11 @@
                                             <state key="normal" image="arrow.clockwise.circle" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                             </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="refreshColorTapped:" destination="dYw-qn-eiK" eventType="touchUpInside" id="G0h-lr-nOg"/>
                                             </connections>
@@ -152,6 +162,11 @@
                             <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="저장"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="submitButtonTapped:" destination="dYw-qn-eiK" eventType="touchUpInside" id="zJl-oZ-cDd"/>
                             </connections>
@@ -196,6 +211,11 @@
                         <constraint firstItem="vVb-qH-tlb" firstAttribute="leading" secondItem="Qhi-8x-y4Q" secondAttribute="leading" constant="15" id="vtc-eO-PoV"/>
                         <constraint firstItem="xef-Fr-QHO" firstAttribute="height" secondItem="Qhi-8x-y4Q" secondAttribute="height" multiplier="0.12" id="wdH-V1-DIn"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
