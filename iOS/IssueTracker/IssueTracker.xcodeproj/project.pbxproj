@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		60D4FF13E042363CE8805B41 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5A0B739C1DAF0771E82345 /* Pods_IssueTracker.framework */; };
+		95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
+		95C2F8962547EBE0006B3BC6 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
 		95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57B2546EC07001FBA0D /* AppDelegate.swift */; };
 		95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */; };
-		95E9F5802546EC07001FBA0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57F2546EC07001FBA0D /* ViewController.swift */; };
+		95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57F2546EC07001FBA0D /* LabelListViewController.swift */; };
 		95E9F5832546EC07001FBA0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5812546EC07001FBA0D /* Main.storyboard */; };
 		95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5842546EC0C001FBA0D /* Assets.xcassets */; };
 		95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5862546EC0C001FBA0D /* LaunchScreen.storyboard */; };
@@ -33,10 +35,11 @@
 		0109B64F210AD3E237D228DA /* Pods_IssueTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F538126B46A1B17CF926A6A /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		2E821A460A4A5DD482366AE3 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
+		95C2F8942547EBE0006B3BC6 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		95E9F5782546EC06001FBA0D /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E9F57B2546EC07001FBA0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		95E9F57F2546EC07001FBA0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		95E9F57F2546EC07001FBA0D /* LabelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewController.swift; sourceTree = "<group>"; };
 		95E9F5822546EC07001FBA0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		95E9F5842546EC0C001FBA0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95E9F5872546EC0C001FBA0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,6 +82,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		95C2F8932547EBD1006B3BC6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				95C2F8942547EBE0006B3BC6 /* Label.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		95E9F56F2546EC06001FBA0D = {
 			isa = PBXGroup;
 			children = (
@@ -103,9 +114,10 @@
 		95E9F57A2546EC06001FBA0D /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				95C2F8932547EBD1006B3BC6 /* Model */,
 				95E9F57B2546EC07001FBA0D /* AppDelegate.swift */,
 				95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */,
-				95E9F57F2546EC07001FBA0D /* ViewController.swift */,
+				95E9F57F2546EC07001FBA0D /* LabelListViewController.swift */,
 				95E9F5812546EC07001FBA0D /* Main.storyboard */,
 				95E9F5842546EC0C001FBA0D /* Assets.xcassets */,
 				95E9F5862546EC0C001FBA0D /* LaunchScreen.storyboard */,
@@ -281,7 +293,7 @@
 		};
 		9613C12C2547B1F5005EF13C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -292,7 +304,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# SwiftLint\n${PODS_ROOT}/SwiftLint/swiftlint\n# SwiftGen\nif [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" …\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
 		};
@@ -303,8 +315,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95E9F5802546EC07001FBA0D /* ViewController.swift in Sources */,
+				95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */,
 				95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */,
+				95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */,
 				95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95C2F8962547EBE0006B3BC6 /* Label.swift in Sources */,
 				95E9F5932546EC0C001FBA0D /* IssueTrackerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
