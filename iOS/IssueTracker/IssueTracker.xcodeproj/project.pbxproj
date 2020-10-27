@@ -101,10 +101,9 @@
 		950EA0592547FF74005BE133 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				950EA05A2547FFA0005BE133 /* LabelCellView.swift */,
-				950EA05B2547FFA0005BE133 /* LabelCellView.xib */,
-				950EA05E2547FFF9005BE133 /* LabelHeaderView.swift */,
-				950EA05F2547FFF9005BE133 /* LabelHeaderView.xib */,
+				95E9F57F2546EC07001FBA0D /* LabelListViewController.swift */,
+				952FF3D9254814350042A96F /* LabelHeader */,
+				952FF3D82548142E0042A96F /* LabelCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -113,10 +112,57 @@
 			isa = PBXGroup;
 			children = (
 				95C2F89B2547EF47006B3BC6 /* String+Color.swift */,
-				952FF3D4254805EE0042A96F /* LabelHeader+CollectionView.swift */,
-				952FF3D2254804970042A96F /* LabelCell+CollectionView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		952FF3D6254813BA0042A96F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		952FF3D7254813F50042A96F /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				952FF3D6254813BA0042A96F /* ViewModel */,
+				950EA0592547FF74005BE133 /* View */,
+				95C2F8932547EBD1006B3BC6 /* Model */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		952FF3D82548142E0042A96F /* LabelCell */ = {
+			isa = PBXGroup;
+			children = (
+				950EA05A2547FFA0005BE133 /* LabelCellView.swift */,
+				950EA05B2547FFA0005BE133 /* LabelCellView.xib */,
+				952FF3D2254804970042A96F /* LabelCell+CollectionView.swift */,
+			);
+			path = LabelCell;
+			sourceTree = "<group>";
+		};
+		952FF3D9254814350042A96F /* LabelHeader */ = {
+			isa = PBXGroup;
+			children = (
+				950EA05E2547FFF9005BE133 /* LabelHeaderView.swift */,
+				950EA05F2547FFF9005BE133 /* LabelHeaderView.xib */,
+				952FF3D4254805EE0042A96F /* LabelHeader+CollectionView.swift */,
+			);
+			path = LabelHeader;
+			sourceTree = "<group>";
+		};
+		952FF3DA254814650042A96F /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				95E9F5842546EC0C001FBA0D /* Assets.xcassets */,
+				95E9F5862546EC0C001FBA0D /* LaunchScreen.storyboard */,
+				95E9F5892546EC0C001FBA0D /* Info.plist */,
+				95E9F57B2546EC07001FBA0D /* AppDelegate.swift */,
+				95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */,
+			);
+			path = Supports;
 			sourceTree = "<group>";
 		};
 		95C2F8932547EBD1006B3BC6 /* Model */ = {
@@ -151,16 +197,10 @@
 		95E9F57A2546EC06001FBA0D /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				952FF3DA254814650042A96F /* Supports */,
+				952FF3D7254813F50042A96F /* Label */,
 				952FF3D1254804120042A96F /* Extensions */,
-				950EA0592547FF74005BE133 /* View */,
-				95C2F8932547EBD1006B3BC6 /* Model */,
-				95E9F57B2546EC07001FBA0D /* AppDelegate.swift */,
-				95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */,
-				95E9F57F2546EC07001FBA0D /* LabelListViewController.swift */,
 				95E9F5812546EC07001FBA0D /* Main.storyboard */,
-				95E9F5842546EC0C001FBA0D /* Assets.xcassets */,
-				95E9F5862546EC0C001FBA0D /* LaunchScreen.storyboard */,
-				95E9F5892546EC0C001FBA0D /* Info.plist */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -530,7 +570,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
-				INFOPLIST_FILE = IssueTracker/Info.plist;
+				INFOPLIST_FILE = IssueTracker/Supports/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -549,7 +589,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
-				INFOPLIST_FILE = IssueTracker/Info.plist;
+				INFOPLIST_FILE = IssueTracker/Supports/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

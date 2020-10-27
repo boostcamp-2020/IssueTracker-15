@@ -33,10 +33,6 @@ class LabelListViewController: UIViewController {
         LabelCellView.register(in: collectionView)
         LabelHeaderView.register(in: collectionView)
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
 }
 
 extension LabelListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -47,6 +43,9 @@ extension LabelListViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = LabelCellView.dequeue(from: collectionView, for: indexPath) else { return UICollectionViewCell() }
         
+        let currentCell = tempLabels[indexPath.row]
+        
+        // cell.configure <- current
         return cell
     }
     
