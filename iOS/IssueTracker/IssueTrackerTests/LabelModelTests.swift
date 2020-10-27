@@ -9,7 +9,7 @@
 import XCTest
 @testable import IssueTracker
 
-class IssueTrackerTests: XCTestCase {
+class LabelModelTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -26,5 +26,4 @@ class IssueTrackerTests: XCTestCase {
         XCTAssertEqual(label.description, "설명")
         XCTAssertEqual(label.color, "#ABABAB")
     }
-
 }
