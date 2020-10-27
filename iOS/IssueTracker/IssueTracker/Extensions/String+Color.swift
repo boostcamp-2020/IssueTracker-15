@@ -13,15 +13,15 @@ extension String {
     var color: CGColor {
         var tempString: String = self
         
-        if (self.hasPrefix("#")) {
+        if self.hasPrefix("#") {
             tempString.remove(at: tempString.startIndex)
         }
         
-        if (tempString.count != 6) {
+        if tempString.count != 6 {
             return CGColor.init(srgbRed: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
         }
         
-        var rgbValue:UInt64 = 0
+        var rgbValue: UInt64 = 0
         Scanner(string: tempString).scanHexInt64(&rgbValue)
 
         return CGColor(srgbRed: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
