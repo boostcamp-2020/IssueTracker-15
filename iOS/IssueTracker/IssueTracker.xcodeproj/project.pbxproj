@@ -8,13 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		60D4FF13E042363CE8805B41 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5A0B739C1DAF0771E82345 /* Pods_IssueTracker.framework */; };
+		95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
+		95C2F8962547EBE0006B3BC6 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
+		95C2F8982547EDC7006B3BC6 /* ColorConvertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */; };
+		95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F89B2547EF47006B3BC6 /* String+Color.swift */; };
+		95C2F89D2547EF47006B3BC6 /* String+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F89B2547EF47006B3BC6 /* String+Color.swift */; };
 		95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57B2546EC07001FBA0D /* AppDelegate.swift */; };
 		95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */; };
-		95E9F5802546EC07001FBA0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57F2546EC07001FBA0D /* ViewController.swift */; };
+		95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57F2546EC07001FBA0D /* LabelListViewController.swift */; };
 		95E9F5832546EC07001FBA0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5812546EC07001FBA0D /* Main.storyboard */; };
 		95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5842546EC0C001FBA0D /* Assets.xcassets */; };
 		95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5862546EC0C001FBA0D /* LaunchScreen.storyboard */; };
-		95E9F5932546EC0C001FBA0D /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F5922546EC0C001FBA0D /* IssueTrackerTests.swift */; };
+		95E9F5932546EC0C001FBA0D /* LabelModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */; };
 		9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9613C12D2547B265005EF13C /* .swiftlint.yml */; };
 		D2C7CE68FC3C8579A64346BE /* Pods_IssueTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0109B64F210AD3E237D228DA /* Pods_IssueTrackerTests.framework */; };
 /* End PBXBuildFile section */
@@ -33,16 +38,19 @@
 		0109B64F210AD3E237D228DA /* Pods_IssueTrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F538126B46A1B17CF926A6A /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		2E821A460A4A5DD482366AE3 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
+		95C2F8942547EBE0006B3BC6 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConvertTests.swift; sourceTree = "<group>"; };
+		95C2F89B2547EF47006B3BC6 /* String+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Color.swift"; sourceTree = "<group>"; };
 		95E9F5782546EC06001FBA0D /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E9F57B2546EC07001FBA0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		95E9F57F2546EC07001FBA0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		95E9F57F2546EC07001FBA0D /* LabelListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewController.swift; sourceTree = "<group>"; };
 		95E9F5822546EC07001FBA0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		95E9F5842546EC0C001FBA0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95E9F5872546EC0C001FBA0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95E9F5892546EC0C001FBA0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95E9F58E2546EC0C001FBA0D /* IssueTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		95E9F5922546EC0C001FBA0D /* IssueTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerTests.swift; sourceTree = "<group>"; };
+		95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelModelTests.swift; sourceTree = "<group>"; };
 		95E9F5942546EC0C001FBA0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9613C12D2547B265005EF13C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		B9280E9634EEE3C0BADC1EBF /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -79,6 +87,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		95C2F8932547EBD1006B3BC6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				95C2F8942547EBE0006B3BC6 /* Label.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		95E9F56F2546EC06001FBA0D = {
 			isa = PBXGroup;
 			children = (
@@ -103,13 +119,15 @@
 		95E9F57A2546EC06001FBA0D /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				95C2F8932547EBD1006B3BC6 /* Model */,
 				95E9F57B2546EC07001FBA0D /* AppDelegate.swift */,
 				95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */,
-				95E9F57F2546EC07001FBA0D /* ViewController.swift */,
+				95E9F57F2546EC07001FBA0D /* LabelListViewController.swift */,
 				95E9F5812546EC07001FBA0D /* Main.storyboard */,
 				95E9F5842546EC0C001FBA0D /* Assets.xcassets */,
 				95E9F5862546EC0C001FBA0D /* LaunchScreen.storyboard */,
 				95E9F5892546EC0C001FBA0D /* Info.plist */,
+				95C2F89B2547EF47006B3BC6 /* String+Color.swift */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -117,7 +135,8 @@
 		95E9F5912546EC0C001FBA0D /* IssueTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				95E9F5922546EC0C001FBA0D /* IssueTrackerTests.swift */,
+				95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */,
+				95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */,
 				95E9F5942546EC0C001FBA0D /* Info.plist */,
 			);
 			path = IssueTrackerTests;
@@ -281,7 +300,7 @@
 		};
 		9613C12C2547B1F5005EF13C /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -292,7 +311,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# SwiftLint\n${PODS_ROOT}/SwiftLint/swiftlint\n# SwiftGen\nif [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" …\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
 		};
@@ -303,8 +322,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95E9F5802546EC07001FBA0D /* ViewController.swift in Sources */,
+				95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */,
+				95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */,
 				95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */,
+				95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */,
 				95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,7 +334,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95E9F5932546EC0C001FBA0D /* IssueTrackerTests.swift in Sources */,
+				95C2F8962547EBE0006B3BC6 /* Label.swift in Sources */,
+				95C2F8982547EDC7006B3BC6 /* ColorConvertTests.swift in Sources */,
+				95E9F5932546EC0C001FBA0D /* LabelModelTests.swift in Sources */,
+				95C2F89D2547EF47006B3BC6 /* String+Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
