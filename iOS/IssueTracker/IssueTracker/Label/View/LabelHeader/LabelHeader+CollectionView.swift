@@ -9,7 +9,7 @@
 import UIKit
 
 extension LabelHeaderView {
-    static let headerID : String = "LabelHeaderView"
+    static let headerID: String = "LabelHeaderView"
     
     static func register(in collectionView: UICollectionView) {
         collectionView.register(UINib(nibName: headerID, bundle: .main),
@@ -17,7 +17,7 @@ extension LabelHeaderView {
                                 withReuseIdentifier: headerID)
     }
     
-    static func dequeue(from collectionView: UICollectionView,for indexPath: IndexPath) -> LabelHeaderView? {
+    static func dequeue(from collectionView: UICollectionView, for indexPath: IndexPath) -> LabelHeaderView? {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
                                                                      withReuseIdentifier: headerID,
                                                                      for: indexPath)

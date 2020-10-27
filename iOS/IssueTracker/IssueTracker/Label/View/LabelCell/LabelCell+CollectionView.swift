@@ -15,7 +15,7 @@ extension LabelCellView {
         collectionView.register(UINib(nibName: cellID, bundle: .main), forCellWithReuseIdentifier: cellID)
     }
     
-    static func dequeue(from collectionView: UICollectionView,for indexPath: IndexPath) -> LabelCellView? {
+    static func dequeue(from collectionView: UICollectionView, for indexPath: IndexPath) -> LabelCellView? {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
         return cell as? LabelCellView
     }

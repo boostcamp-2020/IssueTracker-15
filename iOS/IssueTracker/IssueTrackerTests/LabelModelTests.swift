@@ -20,10 +20,10 @@ class LabelModelTests: XCTestCase {
     }
     
     func testLabelInit() {
-        let label = Label(title: "title", description: "설명", color: "#ABABAB")
+        let label = Label(title: "title", description: "설명", hexColor: "#ABABAB")
         
         XCTAssertEqual(label.title, "title")
         XCTAssertEqual(label.description, "설명")
-        XCTAssertEqual(label.color, "#ABABAB")
+        XCTAssertEqual(label.hexColor, "#ABABAB")
     }
 }

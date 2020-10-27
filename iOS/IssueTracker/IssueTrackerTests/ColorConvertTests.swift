@@ -21,13 +21,12 @@ class ColorConvertTests: XCTestCase {
 
     func testStringToColor() {
         let colorCode = "#FF5D5D" // 255, 93, 93
-        let color: UIColor = colorCode.color
+        let color: CGColor = colorCode.color
         
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        let colorComponents = color.components!
+        let red: CGFloat = colorComponents[0]
+        let green: CGFloat = colorComponents[1]
+        let blue: CGFloat = colorComponents[2]
         
         XCTAssertEqual(red, 1)
         XCTAssertEqual(green, 93/255.0)
