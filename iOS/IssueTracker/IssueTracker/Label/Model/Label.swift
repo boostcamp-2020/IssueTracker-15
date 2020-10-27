@@ -11,5 +11,5 @@ import Foundation
 struct Label {
     var title: String
     var description: String
-    var color: String
+    var hexColor: String
 }

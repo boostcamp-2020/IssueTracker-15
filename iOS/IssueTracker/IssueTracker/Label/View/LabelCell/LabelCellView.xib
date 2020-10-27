@@ -9,28 +9,62 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LabelCellView" customModule="IssueTracker" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="250" height="45"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="LabelCellView" id="gTV-IL-0wX" customClass="LabelCellView" customModule="IssueTracker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="411" height="113"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="250" height="45"/>
+                <rect key="frame" x="0.0" y="0.0" width="411" height="113"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOc-6l-bbX">
-                        <rect key="frame" x="104" y="12" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAl-ag-6SQ" userLabel="titleLabel">
+                        <rect key="frame" x="10" y="31" width="42" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78q-8a-ZQH" userLabel="nextButton">
+                        <rect key="frame" x="378" y="42.5" width="28" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="78q-8a-ZQH" secondAttribute="height" multiplier="1:1" id="c3q-OO-tAl"/>
+                        </constraints>
+                        <state key="normal" image="chevron.right" catalog="system"/>
+                        <connections>
+                            <action selector="nextButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="i7D-gb-NLW"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEG-Rb-vZI" userLabel="descriptionLabel">
+                        <rect key="frame" x="10" y="61.5" width="42" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="tOc-6l-bbX" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="BXc-Ee-fZb"/>
-                <constraint firstItem="tOc-6l-bbX" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="dyd-ur-kEY"/>
+                <constraint firstItem="OAl-ag-6SQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="C47-Xn-ZwW"/>
+                <constraint firstItem="EEG-Rb-vZI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="KTQ-VZ-SVl"/>
+                <constraint firstAttribute="trailing" secondItem="78q-8a-ZQH" secondAttribute="trailing" constant="5" id="OwT-Nr-6Af"/>
+                <constraint firstAttribute="centerY" secondItem="OAl-ag-6SQ" secondAttribute="bottom" constant="5" id="Rf6-p8-rYP"/>
+                <constraint firstItem="EEG-Rb-vZI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="5" id="jeP-cR-hmX"/>
+                <constraint firstItem="78q-8a-ZQH" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.25" id="lQB-Qs-heh"/>
+                <constraint firstItem="78q-8a-ZQH" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="qfx-um-WPO"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <size key="customSize" width="250" height="45"/>
-            <point key="canvasLocation" x="276.81159420289856" y="155.02232142857142"/>
+            <size key="customSize" width="411" height="113"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="EEG-Rb-vZI" id="vod-41-r9A"/>
+                <outlet property="titleLabel" destination="OAl-ag-6SQ" id="AOV-ik-5D4"/>
+            </connections>
+            <point key="canvasLocation" x="393.47826086956525" y="177.79017857142856"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
+    </resources>
 </document>

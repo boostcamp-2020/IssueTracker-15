@@ -116,17 +116,9 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		952FF3D6254813BA0042A96F /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		952FF3D7254813F50042A96F /* Label */ = {
 			isa = PBXGroup;
 			children = (
-				952FF3D6254813BA0042A96F /* ViewModel */,
 				950EA0592547FF74005BE133 /* View */,
 				95C2F8932547EBD1006B3BC6 /* Model */,
 			);
