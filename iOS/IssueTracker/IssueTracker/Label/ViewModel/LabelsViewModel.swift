@@ -18,7 +18,7 @@ protocol LabelsViewModelProtocol {
 class LabelsViewModel: LabelsViewModelProtocol {
     
     var didFetch: (() -> Void)?
-    var labels = [Label]()
+    private var labels = [Label]()
     
     func needFetchItems() {
         labels = [Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),

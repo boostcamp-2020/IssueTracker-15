@@ -10,16 +10,6 @@ import UIKit
 
 class LabelListViewController: UIViewController {
 
-    private lazy var collectionViewLayout: UICollectionViewFlowLayout = {
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 10)
-        layout.headerReferenceSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 6.5)
-        layout.minimumLineSpacing = 1
-        layout.sectionHeadersPinToVisibleBounds = true
-        
-        return layout
-    }()
-    
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -27,17 +17,34 @@ class LabelListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.setCollectionViewLayout(collectionViewLayout, animated: false)
-        LabelCellView.register(in: collectionView)
-        LabelHeaderView.register(in: collectionView)
+        configureCollectionView()
+        configureLabelsViewModel()
+        labelListViewModel.needFetchItems()
+    }
+    
+    private func configureLabelsViewModel() {
         labelListViewModel.didFetch = { [weak self] in
             self?.collectionView.reloadData()
         }
-        labelListViewModel.needFetchItems()
     }
 
+    private func configureCollectionView() {
+        setupCollectionViewLayout()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        LabelCellView.register(in: collectionView)
+        LabelHeaderView.register(in: collectionView)
+    }
+    
+    private func setupCollectionViewLayout() {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 10)
+        layout.headerReferenceSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 6.5)
+        layout.minimumLineSpacing = 1
+        layout.sectionHeadersPinToVisibleBounds = true
+        collectionView.setCollectionViewLayout(layout, animated: false)
+    }
+    
 }
 
 extension LabelListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
