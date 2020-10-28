@@ -2,6 +2,7 @@ included:
 
 excluded:
 - Pods
+- IssueTrackerTests
 
 disabled_rules:
 - trailing_whitespace
