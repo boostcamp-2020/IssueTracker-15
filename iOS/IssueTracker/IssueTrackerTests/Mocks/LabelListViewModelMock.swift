@@ -14,31 +14,34 @@ class LabelListViewModelMock: IssueTracker.LabelListViewModelProtocol {
     var didFetch: (() -> Void)?
     
     var needFetchItemsCalled = false
+    
     var cellForItemAtCalled = false
+    var calledCellIndexPath: IndexPath?
+    
     var numberOfItemCalled = false
-    var addNewLabelCalled = false
-    var editLabelCalled = false
+    var numberOfItemValue = 0
     
     func needFetchItems() {
         needFetchItemsCalled = true
     }
     
     func cellForItemAt(path: IndexPath) -> IssueTracker.LabelItemViewModel {
+        calledCellIndexPath = path
         cellForItemAtCalled = true
         return IssueTracker.LabelItemViewModel(label: IssueTracker.Label(title: "A", description: "B", hexColor: "C"))
     }
     
     func numberOfItem() -> Int {
         numberOfItemCalled = true
-        return 1
+        return 10
     }
     
     func addNewLabel(title: String, desc: String, hexColor: String) {
-        addNewLabelCalled = true
+        
     }
     
     func editLabel(at indexPath: IndexPath, title: String, desc: String, hexColor: String) {
-        editLabelCalled = true
+        
     }
     
 }
