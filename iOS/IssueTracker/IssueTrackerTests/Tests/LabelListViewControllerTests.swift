@@ -12,14 +12,24 @@ import XCTest
 class LabelListViewControllerTests: XCTestCase {
     
     let mockViewModel = LabelListViewModelMock()
-
+    
     func makeSUT() -> IssueTracker.LabelListViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let vc = storyboard.instantiateViewController(withIdentifier: "LabelListVC") as! IssueTracker.LabelListViewController
+        mockViewModel.labels = dummyLabels
         vc.labelListViewModel = mockViewModel
         vc.loadView()
         return vc
     }
+    
+    var dummyLabels: [IssueTracker.Label] = {
+        return [IssueTracker.Label(title: "A", description: "a", hexColor: "#AAAAAA"),
+                IssueTracker.Label(title: "B", description: "b", hexColor: "#BBBBBB"),
+                IssueTracker.Label(title: "C", description: "c", hexColor: "#CCCCCC"),
+                IssueTracker.Label(title: "D", description: "d", hexColor: "#DDDDDD"),
+                IssueTracker.Label(title: "E", description: "e", hexColor: "#EEEEEE"),
+                IssueTracker.Label(title: "F", description: "f", hexColor: "#FFFFFF")]
+    }()
     
     func testNeedFetchLabelsCalled() {
         let vc = makeSUT()
@@ -42,12 +52,11 @@ class LabelListViewControllerTests: XCTestCase {
     func testNumberOfItemCalled() {
         let vc = makeSUT()
         vc.viewDidLoad()
-        mockViewModel.numberOfItemValue = 10
         
         let numberOfItem = vc.collectionView(vc.collectionView, numberOfItemsInSection: 0)
         
         XCTAssertTrue(mockViewModel.numberOfItemCalled)
-        XCTAssertEqual(numberOfItem, mockViewModel.numberOfItemValue)
+        XCTAssertEqual(numberOfItem, dummyLabels.count)
     }
     
 }
