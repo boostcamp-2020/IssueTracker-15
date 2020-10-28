@@ -13,7 +13,7 @@ class BadgeLabelView: UILabel {
     var padding: UIEdgeInsets = UIEdgeInsets.zero
     var cornerRadiusRatio: CGFloat = 0
     
-    func setPadding(top: CGFloat,left: CGFloat, bottom: CGFloat, right: CGFloat) {
+    func setPadding(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
         padding = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
     
