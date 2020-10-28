@@ -13,7 +13,7 @@ class LabelListViewController: UIViewController {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var labelListViewModel: LabelsViewModelProtocol = LabelsViewModel()
+    private var labelListViewModel: LabelListViewModelProtocol = LabelListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,11 +51,11 @@ class LabelListViewController: UIViewController {
         if let indexPath = indexPath {
             labelSubmitFormView.configure(labelViewModel: labelListViewModel.cellForItemAt(path: indexPath))
             labelSubmitFormView.submitbuttonTapped = { (title, description, hexColor) in
-                self.labelListViewModel.didEditLabel(at: indexPath, title: title, desc: description, hexColor: hexColor)
+                self.labelListViewModel.editLabel(at: indexPath, title: title, desc: description, hexColor: hexColor)
             }
         } else {
             labelSubmitFormView.configure()
-            labelSubmitFormView.submitbuttonTapped = self.labelListViewModel.didAddNewLabel
+            labelSubmitFormView.submitbuttonTapped = self.labelListViewModel.addNewLabel
         }
         
         tabBarController.view.addSubview(labelSubmitFormView)
