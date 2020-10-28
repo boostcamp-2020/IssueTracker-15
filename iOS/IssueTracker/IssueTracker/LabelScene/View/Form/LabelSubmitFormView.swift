@@ -21,7 +21,7 @@ class LabelSubmitFormView: UIView {
     
     func configure(labelViewModel: LabelItemViewModel? = nil) {
         configureTapGesture()
-        subscribeNotificationForKeyboardBehaviors()
+        subscribeNotifications()
         
         hexCodeField.delegate = self
         
@@ -36,18 +36,11 @@ class LabelSubmitFormView: UIView {
         colorView.layer.backgroundColor = hexCodeField.text?.color
     }
     
-    private func subscribeNotificationForKeyboardBehaviors() {
-        // subscribe to a Notification which will fire before the keyboard will show
-        subscribeToNotification(UIResponder.keyboardWillShowNotification, selector: #selector(keyboardWillShowOrHide))
-        
-        // subscribe to a Notification which will fire before the keyboard will hide
-        subscribeToNotification(UIResponder.keyboardWillHideNotification, selector: #selector(keyboardWillShowOrHide))
+    private func subscribeNotifications() {
+        self.subscribe(UIResponder.keyboardWillShowNotification, selector: #selector(keyboardWillShowOrHide))
+        self.subscribe(UIResponder.keyboardWillHideNotification, selector: #selector(keyboardWillShowOrHide))
     }
-    
-    private func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector) {
-        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
-    }
-    
+
     @objc func keyboardWillShowOrHide(notification: NSNotification) {
         if let userInfo = notification.userInfo, let keyboardValue = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
             
@@ -112,5 +105,11 @@ class LabelSubmitFormView: UIView {
 extension LabelSubmitFormView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         colorView.layer.backgroundColor = hexCodeField.text?.color
+    }
+}
+
+extension LabelSubmitFormView {
+    func subscribe(_ notification: NSNotification.Name, selector: Selector) {
+        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
     }
 }
