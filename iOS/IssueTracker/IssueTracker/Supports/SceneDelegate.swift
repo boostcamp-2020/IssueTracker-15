@@ -13,8 +13,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard (scene as? UIWindowScene) != nil else { return }
+        guard (scene as? UIWindowScene) != nil,
+              let mainTabVC = window?.rootViewController as? MainTabBarController
+        else { return }
         // TODO:- Network, Cache, AuthService 초기화 및 로그인 여부 검증 -> AppDelegate로??
+        mainTabVC.setupDependencies()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

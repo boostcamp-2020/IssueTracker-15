@@ -11,7 +11,7 @@ import UIKit
 class LabelListViewController: UIViewController {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    var labelListViewModel: LabelListViewModelProtocol?// = LabelListViewModel()
+    var labelListViewModel: LabelListViewModelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()

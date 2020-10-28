@@ -9,20 +9,15 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setupDependencies()
-    }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupDependencies()
-    }
-    
+    // TODO:- Dependency Injection
     func setupDependencies() {
-        guard let labelListViewController = self.viewControllers?.first as? LabelListViewController else { return }
+        // controllers[1] = UINavigationController -> root: IssueListViewController
+        // controllers[2] = LabelListViewController
+        guard let labelListViewController = self.viewControllers?[1] as? LabelListViewController else { return }
         labelListViewController.labelListViewModel = LabelListViewModel()
+        // controllers[3] = MilestoneListViewConroller
+        // controllers[4] = SettingViewController
     }
     
     override func viewDidLoad() {
