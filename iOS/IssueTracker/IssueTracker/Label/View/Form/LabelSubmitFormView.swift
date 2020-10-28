@@ -17,7 +17,7 @@ class LabelSubmitFormView: UIView {
     @IBOutlet weak var descField: UITextField!
     @IBOutlet weak var hexCodeField: UITextField!
     @IBOutlet weak var colorView: UIView!
-    private let defaultColorCode: String = "#EB7434"
+    private let defaultColorCode: String = "#000000"
     
     func configure(labelViewModel: LabelItemViewModel? = nil) {
         hexCodeField.delegate = self
@@ -34,11 +34,14 @@ class LabelSubmitFormView: UIView {
     }
     
     @IBAction func refreshColorTapped(_ sender: UIButton) {
-        //        let array = ["1","2","3","4","5","6","7","8","9","A","B","C","D", "E", "F"]
-        //        hexCodeLabel.text = "#".appending(array[Int(arc4random_uniform(15))])
-        //                                .appending(array[Int(arc4random_uniform(15))])
-        //                                .appending(array[Int(arc4random_uniform(15))])
-        //        colorView.layer.backgroundColor = defaultColorCode.color
+        let newHexColorCode: String = "#" + getRandomGeneratedString()
+        hexCodeField.text = newHexColorCode
+        colorView.layer.backgroundColor = hexCodeField.text?.color
+    }
+    
+    private func getRandomGeneratedString() -> String {
+        let letters = "ABCDEF0123456789"
+        return String((1...6).map { _ in letters.randomElement()! })
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
