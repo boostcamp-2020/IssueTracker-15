@@ -2,10 +2,13 @@ import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { APIRouter } from "../routers/";
+import { createDBConnection } from "./databse";
 
 const app = express();
 
-export default ({ app }: { app: express.Application }) => {
+export default async ({ app }: { app: express.Application }) => {
+  await createDBConnection();
+
   app.use(cors());
   app.use(bodyParser.json());
 
