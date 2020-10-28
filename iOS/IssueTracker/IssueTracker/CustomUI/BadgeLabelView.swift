@@ -17,6 +17,10 @@ class BadgeLabelView: UILabel {
         padding = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
     
+    func setBackgroundColor(_ color: CGColor) {
+        layer.backgroundColor = color
+    }
+    
     func setBorder(width: CGFloat, color: CGColor) {
         layer.borderWidth = width
         layer.borderColor = color
