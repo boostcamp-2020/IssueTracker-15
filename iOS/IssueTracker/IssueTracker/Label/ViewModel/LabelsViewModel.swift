@@ -22,7 +22,17 @@ class LabelsViewModel: LabelsViewModelProtocol {
     
     func needFetchItems() {
         labels = [Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879")]
+                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
+                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
+                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
+                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
+                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
+                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
+                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
+                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
+                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
+                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
+                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D")]
         didFetch?()
     }
     

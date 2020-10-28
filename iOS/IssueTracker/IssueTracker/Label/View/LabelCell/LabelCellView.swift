@@ -22,7 +22,6 @@ class LabelCellView: UICollectionViewCell {
         titleLabel.setBackgroundColor(color)
         titleLabel.cornerRadiusRatio = 0.5
         titleLabel.setPadding(top: 3, left: 5, bottom: 3, right: 5)
-        titleLabel.fitSizeWithBounds()
     }
     
     func configureDescription(with description: String) {
