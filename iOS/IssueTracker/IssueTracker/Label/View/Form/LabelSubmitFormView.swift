@@ -48,7 +48,9 @@ class LabelSubmitFormView: UIView {
             submitbuttonTapped?(titleText, descText, hexCodeText)
             self.removeFromSuperview()
         } else {
-            // TODO: 사용자에게 내용을 채우라는 alert 띄워주기
+            let alert = UIAlertController(title: "제목, 설명, 색상을\n모두 입력해주세요!", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
+            self.window?.rootViewController?.present(alert, animated: true, completion: nil)
         }
     }
     
