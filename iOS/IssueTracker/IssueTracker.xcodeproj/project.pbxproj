@@ -26,6 +26,8 @@
 		95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5862546EC0C001FBA0D /* LaunchScreen.storyboard */; };
 		95E9F5932546EC0C001FBA0D /* LabelModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */; };
 		9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9613C12D2547B265005EF13C /* .swiftlint.yml */; };
+		964D25C225485578003EB067 /* LabelSubmitFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964D25C125485578003EB067 /* LabelSubmitFormView.swift */; };
+		964D25C425485585003EB067 /* LabelSubmitFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 964D25C325485585003EB067 /* LabelSubmitFormView.xib */; };
 		96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */; };
 		D2C7CE68FC3C8579A64346BE /* Pods_IssueTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0109B64F210AD3E237D228DA /* Pods_IssueTrackerTests.framework */; };
 /* End PBXBuildFile section */
@@ -65,6 +67,8 @@
 		95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelModelTests.swift; sourceTree = "<group>"; };
 		95E9F5942546EC0C001FBA0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9613C12D2547B265005EF13C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		964D25C125485578003EB067 /* LabelSubmitFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSubmitFormView.swift; sourceTree = "<group>"; };
+		964D25C325485585003EB067 /* LabelSubmitFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelSubmitFormView.xib; sourceTree = "<group>"; };
 		96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabelView.swift; sourceTree = "<group>"; };
 		B9280E9634EEE3C0BADC1EBF /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		EF5A0B739C1DAF0771E82345 /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +125,7 @@
 		952FF3D7254813F50042A96F /* Label */ = {
 			isa = PBXGroup;
 			children = (
+				964D25C0254854B3003EB067 /* Form */,
 				950EA0592547FF74005BE133 /* View */,
 				95C2F8932547EBD1006B3BC6 /* Model */,
 			);
@@ -210,6 +215,13 @@
 			path = IssueTrackerTests;
 			sourceTree = "<group>";
 		};
+		964D25C0254854B3003EB067 /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				964D25C125485578003EB067 /* LabelSubmitFormView.swift */,
+				964D25C325485585003EB067 /* LabelSubmitFormView.xib */,
+			);
+			path = Form;
 		96C8357325490EFF0086A6E6 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +331,7 @@
 				95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */,
 				95E9F5832546EC07001FBA0D /* Main.storyboard in Resources */,
 				950EA05D2547FFA0005BE133 /* LabelCellView.xib in Resources */,
+				964D25C425485585003EB067 /* LabelSubmitFormView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +416,7 @@
 				950EA0602547FFF9005BE133 /* LabelHeaderView.swift in Sources */,
 				95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */,
 				95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */,
+				964D25C225485578003EB067 /* LabelSubmitFormView.swift in Sources */,
 				952FF3D3254804970042A96F /* LabelCell+CollectionView.swift in Sources */,
 				95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */,
 				950EA05C2547FFA0005BE133 /* LabelCellView.swift in Sources */,
