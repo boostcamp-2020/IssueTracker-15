@@ -9,11 +9,11 @@
 import UIKit
 
 class LabelListViewController: UIViewController {
-
+    
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var labelListViewModel: LabelsViewModelProtocol = LabelsViewModel()
+    private var labelListViewModel: LabelListViewModelProtocol = LabelListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class LabelListViewController: UIViewController {
             self?.collectionView.reloadData()
         }
     }
-
+    
     private func configureCollectionView() {
         setupCollectionViewLayout()
         collectionView.delegate = self
@@ -45,9 +45,27 @@ class LabelListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
+    private func showSubmitFormView(indexPath: IndexPath? = nil) {
+        guard let tabBarController = self.tabBarController, let labelSubmitFormView = LabelSubmitFormView.createView() else { return }
+        
+        if let indexPath = indexPath {
+            labelSubmitFormView.configure(labelViewModel: labelListViewModel.cellForItemAt(path: indexPath))
+            labelSubmitFormView.submitbuttonTapped = { (title, description, hexColor) in
+                self.labelListViewModel.editLabel(at: indexPath, title: title, desc: description, hexColor: hexColor)
+            }
+        } else {
+            labelSubmitFormView.configure()
+            labelSubmitFormView.submitbuttonTapped = self.labelListViewModel.addNewLabel
+        }
+        
+        tabBarController.view.addSubview(labelSubmitFormView)
+        labelSubmitFormView.frame = tabBarController.view.frame
+    }
+    
 }
 
 extension LabelListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return labelListViewModel.numberOfItem()
     }
@@ -55,11 +73,20 @@ extension LabelListViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = LabelCellView.dequeue(from: collectionView, for: indexPath) else { return UICollectionViewCell() }
         cell.configure(with: labelListViewModel.cellForItemAt(path: indexPath))
+        cell.nextButtonTapped = { [weak self] in
+            self?.showSubmitFormView(indexPath: indexPath)
+        }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = LabelHeaderView.dequeue(from: collectionView, for: indexPath) else { return UICollectionReusableView() }
+        
+        header.plusButtonTapped = { [weak self] in
+            self?.showSubmitFormView()
+        }
+        
         return header
     }
     

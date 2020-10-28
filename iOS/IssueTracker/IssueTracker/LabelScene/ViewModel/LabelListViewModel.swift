@@ -8,17 +8,32 @@
 
 import Foundation
 
-protocol LabelsViewModelProtocol {
+protocol LabelListViewModelProtocol {
     var didFetch: (() -> Void)? { get set }
     func needFetchItems()
     func cellForItemAt(path: IndexPath) -> LabelItemViewModel
     func numberOfItem() -> Int
+    func addNewLabel(title: String, desc: String, hexColor: String)
+    func editLabel(at indexPath: IndexPath, title: String, desc: String, hexColor: String)
 }
 
-class LabelsViewModel: LabelsViewModelProtocol {
+class LabelListViewModel: LabelListViewModelProtocol {
     
     var didFetch: (() -> Void)?
     private var labels = [Label]()
+    
+    func editLabel(at indexPath: IndexPath, title: String, desc: String, hexColor: String) {
+        labels[indexPath.row] = Label(title: title, description: desc, hexColor: hexColor)
+        
+        didFetch?()
+    }
+    
+    func addNewLabel(title: String, desc: String, hexColor: String) {
+        let newLabel: Label = Label(title: title, description: desc, hexColor: hexColor)
+        labels.append(newLabel)
+        
+        didFetch?()
+    }
     
     func needFetchItems() {
         labels = [Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),

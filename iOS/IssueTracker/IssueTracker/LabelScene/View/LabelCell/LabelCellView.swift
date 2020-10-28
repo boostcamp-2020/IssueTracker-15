@@ -9,6 +9,7 @@
 import UIKit
 
 class LabelCellView: UICollectionViewCell {
+    var nextButtonTapped: (() -> Void)?
     @IBOutlet weak var titleLabel: BadgeLabelView!
     @IBOutlet weak var descriptionLabel: UILabel!
     
@@ -22,7 +23,6 @@ class LabelCellView: UICollectionViewCell {
         titleLabel.setBackgroundColor(color)
         titleLabel.cornerRadiusRatio = 0.5
         titleLabel.setPadding(top: 3, left: 5, bottom: 3, right: 5)
-        titleLabel.fitSizeWithBounds()
     }
     
     func configureDescription(with description: String) {
@@ -31,6 +31,6 @@ class LabelCellView: UICollectionViewCell {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        
+        nextButtonTapped?()
     }
 }
