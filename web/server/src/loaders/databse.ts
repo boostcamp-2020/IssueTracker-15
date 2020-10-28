@@ -3,7 +3,7 @@ import { createConnection } from "typeorm";
 export const createDBConnection = () => {
   createConnection()
     .then(() => {
-      console.log("연결완료");
+      console.log("✌️ Database Connected");
     })
     .catch((err) => console.log(err));
 };
