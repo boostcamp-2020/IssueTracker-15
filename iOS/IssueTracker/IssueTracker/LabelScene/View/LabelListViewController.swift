@@ -11,17 +11,17 @@ import UIKit
 class LabelListViewController: UIViewController {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    private var labelListViewModel: LabelListViewModelProtocol = LabelListViewModel()
+    var labelListViewModel: LabelListViewModelProtocol? = LabelListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
         configureLabelsViewModel()
-        labelListViewModel.needFetchItems()
+        labelListViewModel?.needFetchItems()
     }
     
     private func configureLabelsViewModel() {
-        labelListViewModel.didFetch = { [weak self] in
+        labelListViewModel?.didFetch = { [weak self] in
             self?.collectionView.reloadData()
         }
     }
@@ -47,13 +47,13 @@ class LabelListViewController: UIViewController {
         guard let tabBarController = self.tabBarController, let labelSubmitFormView = LabelSubmitFormView.createView() else { return }
         
         if let indexPath = indexPath {
-            labelSubmitFormView.configure(labelViewModel: labelListViewModel.cellForItemAt(path: indexPath))
+            labelSubmitFormView.configure(labelViewModel: labelListViewModel?.cellForItemAt(path: indexPath))
             labelSubmitFormView.submitbuttonTapped = { (title, description, hexColor) in
-                self.labelListViewModel.editLabel(at: indexPath, title: title, desc: description, hexColor: hexColor)
+                self.labelListViewModel?.editLabel(at: indexPath, title: title, desc: description, hexColor: hexColor)
             }
         } else {
             labelSubmitFormView.configure()
-            labelSubmitFormView.submitbuttonTapped = self.labelListViewModel.addNewLabel
+            labelSubmitFormView.submitbuttonTapped = self.labelListViewModel?.addNewLabel
         }
         
         tabBarController.view.addSubview(labelSubmitFormView)
@@ -65,12 +65,14 @@ class LabelListViewController: UIViewController {
 extension LabelListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return labelListViewModel.numberOfItem()
+        return labelListViewModel?.numberOfItem() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = LabelCellView.dequeue(from: collectionView, for: indexPath) else { return UICollectionViewCell() }
-        cell.configure(with: labelListViewModel.cellForItemAt(path: indexPath))
+        guard let cell = LabelCellView.dequeue(from: collectionView, for: indexPath),
+            let cellViewModel = labelListViewModel?.cellForItemAt(path: indexPath)
+            else { return UICollectionViewCell() }
+        cell.configure(with: cellViewModel)
         cell.nextButtonTapped = { [weak self] in
             self?.showSubmitFormView(indexPath: indexPath)
         }
