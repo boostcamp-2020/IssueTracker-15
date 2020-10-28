@@ -10,7 +10,7 @@ import UIKit
 
 class LabelSubmitFormView: UIView {
 
-    @IBOutlet weak var FormView: UIView!
+    @IBOutlet weak var formView: UIView!
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descField: UITextField!
     @IBOutlet weak var hexCodeLabel: UILabel!
