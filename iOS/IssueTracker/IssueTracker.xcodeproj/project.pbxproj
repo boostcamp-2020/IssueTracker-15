@@ -222,6 +222,7 @@
 				964D25C325485585003EB067 /* LabelSubmitFormView.xib */,
 			);
 			path = Form;
+		};
 		96C8357325490EFF0086A6E6 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
