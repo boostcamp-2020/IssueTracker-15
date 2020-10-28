@@ -18,6 +18,7 @@
 		95C2F8962547EBE0006B3BC6 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
 		95C2F8982547EDC7006B3BC6 /* ColorConvertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */; };
 		95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F89B2547EF47006B3BC6 /* String+Color.swift */; };
+		95C97282254957E40056ACA1 /* LableSubmitForm+Nibload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C97281254957E40056ACA1 /* LableSubmitForm+Nibload.swift */; };
 		95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57B2546EC07001FBA0D /* AppDelegate.swift */; };
 		95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */; };
 		95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57F2546EC07001FBA0D /* LabelListViewController.swift */; };
@@ -57,6 +58,7 @@
 		95C2F8942547EBE0006B3BC6 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConvertTests.swift; sourceTree = "<group>"; };
 		95C2F89B2547EF47006B3BC6 /* String+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Color.swift"; sourceTree = "<group>"; };
+		95C97281254957E40056ACA1 /* LableSubmitForm+Nibload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LableSubmitForm+Nibload.swift"; sourceTree = "<group>"; };
 		95E9F5782546EC06001FBA0D /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E9F57B2546EC07001FBA0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				96C734CD254941FF00DEC9A4 /* LabelSubmitFormView.xib */,
 				96C734CE254941FF00DEC9A4 /* LabelSubmitFormView.swift */,
+				95C97281254957E40056ACA1 /* LableSubmitForm+Nibload.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */,
 				95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */,
 				952FF3D5254805EE0042A96F /* LabelHeader+CollectionView.swift in Sources */,
+				95C97282254957E40056ACA1 /* LableSubmitForm+Nibload.swift in Sources */,
 				96C734D32549444E00DEC9A4 /* LabelsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

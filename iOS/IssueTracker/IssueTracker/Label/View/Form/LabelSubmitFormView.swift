@@ -10,6 +10,7 @@ import UIKit
 
 class LabelSubmitFormView: UIView {
 
+    @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var formView: UIView!
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descField: UITextField!
@@ -32,6 +33,10 @@ class LabelSubmitFormView: UIView {
     
     @IBAction func refreshFormButtonTapped(_ sender: UIButton) {
         // TODO:- Refresh whole form datas
+    }
+    
+    @IBAction func closeButtonTapped(_ sender: Any) {
+        self.removeFromSuperview()
     }
     
 }
