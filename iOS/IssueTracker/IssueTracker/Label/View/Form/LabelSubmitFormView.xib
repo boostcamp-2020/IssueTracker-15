@@ -116,12 +116,11 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#FFFFFF" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rF2-5U-nSs">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="#EB7434" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mc7-oS-bu0">
                                             <rect key="frame" x="70" y="0.0" width="84" height="32"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kEc-d6-30z">
                                             <rect key="frame" x="174" y="0.0" width="84" height="32"/>
                                             <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -133,9 +132,8 @@
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzi-ck-7mW">
                                             <rect key="frame" x="278" y="0.0" width="50" height="32"/>
-                                            <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <state key="normal" image="arrow.clockwise.circle" catalog="system">
+                                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" image="arrow.clockwise.circle.fill" catalog="system">
                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                             </state>
                                             <userDefinedRuntimeAttributes>
@@ -158,10 +156,10 @@
                                 </view>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="rF2-5U-nSs" firstAttribute="width" secondItem="mEx-tS-fRP" secondAttribute="width" multiplier="0.25" id="6ZP-Xc-eA3"/>
                                 <constraint firstItem="zHv-ac-pa3" firstAttribute="width" secondItem="mEx-tS-fRP" secondAttribute="width" multiplier="0.15" id="KfK-6q-Dem"/>
                                 <constraint firstItem="kEc-d6-30z" firstAttribute="width" secondItem="mEx-tS-fRP" secondAttribute="width" multiplier="0.25" id="Ww3-V5-4aH"/>
                                 <constraint firstItem="fzi-ck-7mW" firstAttribute="width" secondItem="mEx-tS-fRP" secondAttribute="width" multiplier="0.15" id="bAN-kK-ZtW"/>
+                                <constraint firstItem="Mc7-oS-bu0" firstAttribute="width" secondItem="mEx-tS-fRP" secondAttribute="width" multiplier="0.25" id="vnI-qm-OsG"/>
                             </constraints>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xef-Fr-QHO">
@@ -241,14 +239,14 @@
                 <outlet property="backgroundView" destination="z1t-wx-uea" id="ZlZ-dZ-Wen"/>
                 <outlet property="colorView" destination="kEc-d6-30z" id="g5v-hE-hTU"/>
                 <outlet property="descField" destination="ZjG-JI-5ax" id="NmI-Xw-CK7"/>
-                <outlet property="hexCodeLabel" destination="rF2-5U-nSs" id="D1e-4k-iuH"/>
+                <outlet property="hexCodeField" destination="Mc7-oS-bu0" id="eRX-DT-wN6"/>
                 <outlet property="titleField" destination="ypA-W0-9T5" id="yWn-wH-8cM"/>
             </connections>
             <point key="canvasLocation" x="134.78260869565219" y="799.55357142857144"/>
         </view>
     </objects>
     <resources>
-        <image name="arrow.clockwise.circle" catalog="system" width="128" height="121"/>
+        <image name="arrow.clockwise.circle.fill" catalog="system" width="128" height="121"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>

@@ -14,12 +14,19 @@ protocol LabelsViewModelProtocol {
     func cellForItemAt(path: IndexPath) -> LabelItemViewModel
     func numberOfItem() -> Int
     func didAddNewLabel(title: String, desc: String, hexColor: String)
+    func didEditLabel(at indexPath: IndexPath, title: String, desc: String, hexColor: String)
 }
 
 class LabelsViewModel: LabelsViewModelProtocol {
     
     var didFetch: (() -> Void)?
     private var labels = [Label]()
+    
+    func didEditLabel(at indexPath: IndexPath, title: String, desc: String, hexColor: String) {
+        labels[indexPath.row] = Label(title: title, description: desc, hexColor: hexColor)
+        
+        didFetch?()
+    }
     
     func didAddNewLabel(title: String, desc: String, hexColor: String) {
         let newLabel: Label = Label(title: title, description: desc, hexColor: hexColor)

@@ -9,6 +9,7 @@
 import UIKit
 
 class LabelCellView: UICollectionViewCell {
+    var nextButtonTapped: (() -> Void)?
     @IBOutlet weak var titleLabel: BadgeLabelView!
     @IBOutlet weak var descriptionLabel: UILabel!
     
@@ -30,6 +31,6 @@ class LabelCellView: UICollectionViewCell {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        
+        nextButtonTapped?()
     }
 }

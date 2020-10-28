@@ -15,34 +15,37 @@ class LabelSubmitFormView: UIView {
     @IBOutlet weak var formView: UIView!
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descField: UITextField!
-    @IBOutlet weak var hexCodeLabel: UILabel!
+    @IBOutlet weak var hexCodeField: UITextField!
     @IBOutlet weak var colorView: UIView!
     private let defaultColorCode: String = "#EB7434"
     
     func configure(labelViewModel: LabelItemViewModel? = nil) {
+        hexCodeField.delegate = self
+        
         if let labelViewModel = labelViewModel {
             titleField.text = labelViewModel.title
             descField.text = labelViewModel.description
-            hexCodeLabel.text = labelViewModel.hexColor
+            hexCodeField.text = labelViewModel.hexColor
         } else {
-            hexCodeLabel.text = defaultColorCode
+            hexCodeField.text = defaultColorCode
         }
         
-        colorView.layer.backgroundColor = hexCodeLabel.text?.color
+        colorView.layer.backgroundColor = hexCodeField.text?.color
     }
     
     @IBAction func refreshColorTapped(_ sender: UIButton) {
-//        let array = ["1","2","3","4","5","6","7","8","9","A","B","C","D", "E", "F"]
-//        hexCodeLabel.text = "#".appending(array[Int(arc4random_uniform(15))])
-//                                .appending(array[Int(arc4random_uniform(15))])
-//                                .appending(array[Int(arc4random_uniform(15))])
-//        colorView.layer.backgroundColor = defaultColorCode.color
+        //        let array = ["1","2","3","4","5","6","7","8","9","A","B","C","D", "E", "F"]
+        //        hexCodeLabel.text = "#".appending(array[Int(arc4random_uniform(15))])
+        //                                .appending(array[Int(arc4random_uniform(15))])
+        //                                .appending(array[Int(arc4random_uniform(15))])
+        //        colorView.layer.backgroundColor = defaultColorCode.color
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
-        if let titleText = titleField.text, let descText = descField.text, let hexCodeText = hexCodeLabel.text {
+        if let titleText = titleField.text, !titleText.isEmpty,
+            let descText = descField.text, !descText.isEmpty,
+            let hexCodeText = hexCodeField.text, !hexCodeText.isEmpty {
             submitbuttonTapped?(titleText, descText, hexCodeText)
-            
             self.removeFromSuperview()
         } else {
             // TODO: 사용자에게 내용을 채우라는 alert 띄워주기
@@ -52,12 +55,17 @@ class LabelSubmitFormView: UIView {
     @IBAction func refreshFormButtonTapped(_ sender: UIButton) {
         titleField.text = ""
         descField.text = ""
-        hexCodeLabel.text = defaultColorCode
+        hexCodeField.text = defaultColorCode
         colorView.layer.backgroundColor = defaultColorCode.color
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
         self.removeFromSuperview()
     }
-    
+}
+
+extension LabelSubmitFormView: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        colorView.layer.backgroundColor = hexCodeField.text?.color
+    }
 }

@@ -50,6 +50,9 @@ class LabelListViewController: UIViewController {
         
         if let indexPath = indexPath {
             labelSubmitFormView.configure(labelViewModel: labelListViewModel.cellForItemAt(path: indexPath))
+            labelSubmitFormView.submitbuttonTapped = { (title, description, hexColor) in
+                self.labelListViewModel.didEditLabel(at: indexPath, title: title, desc: description, hexColor: hexColor)
+            }
         } else {
             labelSubmitFormView.configure()
             labelSubmitFormView.submitbuttonTapped = self.labelListViewModel.didAddNewLabel
@@ -62,6 +65,7 @@ class LabelListViewController: UIViewController {
 }
 
 extension LabelListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return labelListViewModel.numberOfItem()
     }
@@ -69,6 +73,10 @@ extension LabelListViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = LabelCellView.dequeue(from: collectionView, for: indexPath) else { return UICollectionViewCell() }
         cell.configure(with: labelListViewModel.cellForItemAt(path: indexPath))
+        cell.nextButtonTapped = { [weak self] in
+            self?.showSubmitFormView(indexPath: indexPath)
+        }
+        
         return cell
     }
     
