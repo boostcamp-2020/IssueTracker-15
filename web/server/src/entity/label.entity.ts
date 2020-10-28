@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { IssueHasLabelEntity } from "./issue-label.entity";
 
 @Entity("Label")
-export class UserEntity {
+export class LabelEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -11,6 +12,12 @@ export class UserEntity {
   @Column({ type: "varchar", nullable: false })
   description!: string;
 
-  @Column({ type: "varchar", nullable: true })
+  @Column({ type: "varchar", nullable: false })
   color!: string;
+
+  @OneToMany(
+    (type) => IssueHasLabelEntity,
+    (issueHasLabel) => issueHasLabel.label
+  )
+  issueHasLabel?: IssueHasLabelEntity;
 }

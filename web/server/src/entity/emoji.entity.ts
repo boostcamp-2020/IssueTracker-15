@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("Comment")
-export class UserEntity {
+@Entity("Emoji")
+export class EmojiEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 

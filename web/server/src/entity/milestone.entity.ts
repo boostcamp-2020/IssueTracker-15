@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { IssueEntity } from "./issue.entity";
 
 @Entity("Milestone")
-export class UserEntity {
+export class MilestoneEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -12,5 +13,8 @@ export class UserEntity {
   description!: string;
 
   @Column({ type: "timestamp", nullable: true })
-  dueDate!: Date;
+  dueDate?: Date;
+
+  @OneToMany((type) => IssueEntity, (issue) => issue.milestoneId)
+  issue?: IssueEntity[];
 }

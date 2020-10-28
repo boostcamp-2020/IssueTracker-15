@@ -1,5 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
+import { type } from "os";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { AssigneesEntity } from "./assignees.entity";
+import { CommentEntity } from "./comment.entity";
+import { IssueEntity } from "./issue.entity";
 @Entity("User")
 export class UserEntity {
   @PrimaryGeneratedColumn()
@@ -15,8 +18,17 @@ export class UserEntity {
   userName!: string;
 
   @Column({ type: "varchar", nullable: true })
-  imageURL!: string;
+  imageURL?: string;
 
   @Column({ type: "varchar", nullable: false })
   type!: string;
+
+  @OneToMany((type) => CommentEntity, (comment) => comment.user)
+  comment?: CommentEntity[];
+
+  @OneToMany((type) => IssueEntity, (issue) => issue.author)
+  issue?: IssueEntity;
+
+  @OneToMany((type) => AssigneesEntity, (assigness) => assigness.user)
+  assignees?: AssigneesEntity;
 }
