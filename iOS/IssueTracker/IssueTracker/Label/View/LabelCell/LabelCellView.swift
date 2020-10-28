@@ -9,7 +9,7 @@
 import UIKit
 
 class LabelCellView: UICollectionViewCell {
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: BadgeLabelView!
     @IBOutlet weak var descriptionLabel: UILabel!
     
     override func awakeFromNib() {
@@ -23,7 +23,10 @@ class LabelCellView: UICollectionViewCell {
     
     func configureTitle(text: String, color: CGColor) {
         titleLabel.text = text
-        titleLabel.layer.backgroundColor = color
+        titleLabel.setBackgroundColor(color)
+        titleLabel.cornerRadiusRatio = 0.5
+        titleLabel.setPadding(top: 3, left: 5, bottom: 3, right: 5)
+        titleLabel.fitSizeWithBounds()
     }
     
     func configureDescription(with description: String) {

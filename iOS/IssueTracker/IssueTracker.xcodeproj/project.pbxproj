@@ -28,6 +28,7 @@
 		9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9613C12D2547B265005EF13C /* .swiftlint.yml */; };
 		964D25C225485578003EB067 /* LabelSubmitFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964D25C125485578003EB067 /* LabelSubmitFormView.swift */; };
 		964D25C425485585003EB067 /* LabelSubmitFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 964D25C325485585003EB067 /* LabelSubmitFormView.xib */; };
+		96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */; };
 		D2C7CE68FC3C8579A64346BE /* Pods_IssueTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0109B64F210AD3E237D228DA /* Pods_IssueTrackerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		9613C12D2547B265005EF13C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		964D25C125485578003EB067 /* LabelSubmitFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSubmitFormView.swift; sourceTree = "<group>"; };
 		964D25C325485585003EB067 /* LabelSubmitFormView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelSubmitFormView.xib; sourceTree = "<group>"; };
+		96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabelView.swift; sourceTree = "<group>"; };
 		B9280E9634EEE3C0BADC1EBF /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		EF5A0B739C1DAF0771E82345 /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A7FBAD0CB05FF3BD8DEF4A /* Pods-IssueTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		95E9F57A2546EC06001FBA0D /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				96C8357325490EFF0086A6E6 /* CustomUI */,
 				952FF3DA254814650042A96F /* Supports */,
 				952FF3D7254813F50042A96F /* Label */,
 				952FF3D1254804120042A96F /* Extensions */,
@@ -219,6 +222,12 @@
 				964D25C325485585003EB067 /* LabelSubmitFormView.xib */,
 			);
 			path = Form;
+		96C8357325490EFF0086A6E6 /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */,
+			);
+			path = CustomUI;
 			sourceTree = "<group>";
 		};
 		9E2F3F721E0479B9F088C18C /* Pods */ = {
@@ -412,6 +421,7 @@
 				95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */,
 				950EA05C2547FFA0005BE133 /* LabelCellView.swift in Sources */,
 				95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */,
+				96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */,
 				95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */,
 				952FF3D5254805EE0042A96F /* LabelHeader+CollectionView.swift in Sources */,
 			);
