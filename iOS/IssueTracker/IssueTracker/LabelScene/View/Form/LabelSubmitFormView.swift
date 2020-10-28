@@ -9,7 +9,7 @@
 import UIKit
 
 class LabelSubmitFormView: UIView {
-    
+    var formViewEndPoint: CGFloat?
     var submitbuttonTapped: ((String, String, String) -> Void)?
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var formView: UIView!
@@ -20,6 +20,9 @@ class LabelSubmitFormView: UIView {
     private let defaultColorCode: String = "#000000"
     
     func configure(labelViewModel: LabelItemViewModel? = nil) {
+        configureTapGesture()
+        subscribeNotifications()
+        
         hexCodeField.delegate = self
         
         if let labelViewModel = labelViewModel {
@@ -31,6 +34,10 @@ class LabelSubmitFormView: UIView {
         }
         
         colorView.layer.backgroundColor = hexCodeField.text?.color
+    }
+    
+    private func configureTapGesture() {
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
     
     @IBAction func refreshColorTapped(_ sender: UIButton) {
