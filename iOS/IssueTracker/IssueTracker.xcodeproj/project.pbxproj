@@ -41,6 +41,8 @@
 		963971EC2549BB91005BB4FA /* BadgeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */; };
 		963971ED2549BB91005BB4FA /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
 		963971EE2549BB91005BB4FA /* String+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F89B2547EF47006B3BC6 /* String+Color.swift */; };
+		963971F02549BC45005BB4FA /* LabelListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963971EF2549BC45005BB4FA /* LabelListViewControllerTests.swift */; };
+		963971F22549BC5F005BB4FA /* LabelListViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963971F12549BC5F005BB4FA /* LabelListViewModelMock.swift */; };
 		96C734CF2549420000DEC9A4 /* LabelSubmitFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96C734CD254941FF00DEC9A4 /* LabelSubmitFormView.xib */; };
 		96C734D02549420000DEC9A4 /* LabelSubmitFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734CE254941FF00DEC9A4 /* LabelSubmitFormView.swift */; };
 		96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */; };
@@ -85,6 +87,8 @@
 		95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelModelTests.swift; sourceTree = "<group>"; };
 		95E9F5942546EC0C001FBA0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9613C12D2547B265005EF13C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		963971EF2549BC45005BB4FA /* LabelListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewControllerTests.swift; sourceTree = "<group>"; };
+		963971F12549BC5F005BB4FA /* LabelListViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModelMock.swift; sourceTree = "<group>"; };
 		96C734CD254941FF00DEC9A4 /* LabelSubmitFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelSubmitFormView.xib; sourceTree = "<group>"; };
 		96C734CE254941FF00DEC9A4 /* LabelSubmitFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelSubmitFormView.swift; sourceTree = "<group>"; };
 		96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 		963971DC2549BB66005BB4FA /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				963971F12549BC5F005BB4FA /* LabelListViewModelMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -248,6 +253,7 @@
 			children = (
 				95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */,
 				95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */,
+				963971EF2549BC45005BB4FA /* LabelListViewControllerTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -495,6 +501,8 @@
 				963971ED2549BB91005BB4FA /* Label.swift in Sources */,
 				963971EC2549BB91005BB4FA /* BadgeLabelView.swift in Sources */,
 				963971E62549BB83005BB4FA /* LabelHeader+CollectionView.swift in Sources */,
+				963971F22549BC5F005BB4FA /* LabelListViewModelMock.swift in Sources */,
+				963971F02549BC45005BB4FA /* LabelListViewControllerTests.swift in Sources */,
 				95C2F8982547EDC7006B3BC6 /* ColorConvertTests.swift in Sources */,
 				963971E32549BB83005BB4FA /* LableSubmitForm+Nibload.swift in Sources */,
 				95E9F5932546EC0C001FBA0D /* LabelModelTests.swift in Sources */,
