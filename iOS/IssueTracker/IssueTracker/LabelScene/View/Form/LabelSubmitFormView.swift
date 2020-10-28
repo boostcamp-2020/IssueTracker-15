@@ -9,7 +9,6 @@
 import UIKit
 
 class LabelSubmitFormView: UIView {
-    
     var submitbuttonTapped: ((String, String, String) -> Void)?
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var formView: UIView!
@@ -18,8 +17,12 @@ class LabelSubmitFormView: UIView {
     @IBOutlet weak var hexCodeField: UITextField!
     @IBOutlet weak var colorView: UIView!
     private let defaultColorCode: String = "#000000"
+    private var formViewEndPoint: CGFloat?
     
     func configure(labelViewModel: LabelItemViewModel? = nil) {
+        configureTapGesture()
+        subscribeNotificationForKeyboardBehaviors()
+        
         hexCodeField.delegate = self
         
         if let labelViewModel = labelViewModel {
@@ -31,6 +34,43 @@ class LabelSubmitFormView: UIView {
         }
         
         colorView.layer.backgroundColor = hexCodeField.text?.color
+    }
+    
+    private func subscribeNotificationForKeyboardBehaviors() {
+        // subscribe to a Notification which will fire before the keyboard will show
+        subscribeToNotification(UIResponder.keyboardWillShowNotification, selector: #selector(keyboardWillShowOrHide))
+        
+        // subscribe to a Notification which will fire before the keyboard will hide
+        subscribeToNotification(UIResponder.keyboardWillHideNotification, selector: #selector(keyboardWillShowOrHide))
+    }
+    
+    private func subscribeToNotification(_ notification: NSNotification.Name, selector: Selector) {
+        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
+    }
+    
+    @objc func keyboardWillShowOrHide(notification: NSNotification) {
+        if let userInfo = notification.userInfo, let keyboardValue = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
+            
+            guard formViewEndPoint == nil else { return }
+            
+            formViewEndPoint = self.formView.frame.origin.y + self.formView.frame.height
+            let moveUpward = formViewEndPoint! - keyboardValue.origin.y
+            if formViewEndPoint! > keyboardValue.origin.y {
+                self.frame.origin.y -= moveUpward
+            }
+        }
+    }
+    
+    private func configureTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(handleTap))
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func handleTap() {
+        self.endEditing(true)
+        self.frame.origin.y = 0
+        self.formViewEndPoint = nil
     }
     
     @IBAction func refreshColorTapped(_ sender: UIButton) {
