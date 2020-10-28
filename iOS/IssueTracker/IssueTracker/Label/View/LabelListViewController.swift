@@ -23,7 +23,7 @@ class LabelListViewController: UIViewController {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var labelListViewModel = LabelListViewModel()
+    private var labelListViewModel: LabelsViewModelProtocol = LabelsViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,12 @@ class LabelListViewController: UIViewController {
         collectionView.setCollectionViewLayout(collectionViewLayout, animated: false)
         LabelCellView.register(in: collectionView)
         LabelHeaderView.register(in: collectionView)
+        labelListViewModel.didFetch = { [weak self] in
+            self?.collectionView.reloadData()
+        }
+        labelListViewModel.needFetchItems()
     }
+
 }
 
 extension LabelListViewController: UICollectionViewDataSource, UICollectionViewDelegate {

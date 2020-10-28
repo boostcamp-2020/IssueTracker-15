@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol LabelList {
+protocol LabelsViewModelProtocol {
     var didFetch: (() -> Void)? { get set }
     func needFetchItems()
     func cellForItemAt(path: IndexPath) -> LabelItemViewModel
     func numberOfItem() -> Int
 }
 
-class LabelsViewModel: LabelList {
+class LabelsViewModel: LabelsViewModelProtocol {
     
     var didFetch: (() -> Void)?
     var labels = [Label]()
