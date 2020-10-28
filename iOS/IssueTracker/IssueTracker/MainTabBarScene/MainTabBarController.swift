@@ -14,8 +14,9 @@ class MainTabBarController: UITabBarController {
     func setupDependencies() {
         // controllers[1] = UINavigationController -> root: IssueListViewController
         // controllers[2] = LabelListViewController
-        guard let labelListViewController = self.viewControllers?[1] as? LabelListViewController else { return }
-        labelListViewController.labelListViewModel = LabelListViewModel()
+        if let labelListViewController = self.viewControllers?[safe: 1] as? LabelListViewController{
+            labelListViewController.labelListViewModel = LabelListViewModel()
+        }
         // controllers[3] = MilestoneListViewConroller
         // controllers[4] = SettingViewController
     }
