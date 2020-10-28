@@ -13,6 +13,7 @@ protocol LabelsViewModelProtocol {
     func needFetchItems()
     func cellForItemAt(path: IndexPath) -> LabelItemViewModel
     func numberOfItem() -> Int
+    func didAddNewLabel(title: String, desc: String, hexColor: String)
 }
 
 class LabelsViewModel: LabelsViewModelProtocol {
@@ -20,19 +21,16 @@ class LabelsViewModel: LabelsViewModelProtocol {
     var didFetch: (() -> Void)?
     private var labels = [Label]()
     
+    func didAddNewLabel(title: String, desc: String, hexColor: String) {
+        let newLabel: Label = Label(title: title, description: desc, hexColor: hexColor)
+        labels.append(newLabel)
+        
+        didFetch?()
+    }
+    
     func needFetchItems() {
         labels = [Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D")]
+                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879")]
         didFetch?()
     }
     

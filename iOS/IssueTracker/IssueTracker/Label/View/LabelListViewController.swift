@@ -45,8 +45,15 @@ class LabelListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
-    private func showSubmitFormView() {
+    private func showSubmitFormView(indexPath: IndexPath? = nil) {
         guard let tabBarController = self.tabBarController, let labelSubmitFormView = LabelSubmitFormView.createView() else { return }
+        
+        if let indexPath = indexPath {
+            labelSubmitFormView.configure(labelViewModel: labelListViewModel.cellForItemAt(path: indexPath))
+        } else {
+            labelSubmitFormView.configure()
+            labelSubmitFormView.submitbuttonTapped = self.labelListViewModel.didAddNewLabel
+        }
         
         tabBarController.view.addSubview(labelSubmitFormView)
         labelSubmitFormView.frame = tabBarController.view.frame
