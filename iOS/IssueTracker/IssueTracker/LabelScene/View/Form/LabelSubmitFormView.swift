@@ -9,6 +9,7 @@
 import UIKit
 
 class LabelSubmitFormView: UIView {
+    var formViewEndPoint: CGFloat?
     var submitbuttonTapped: ((String, String, String) -> Void)?
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var formView: UIView!
@@ -17,7 +18,6 @@ class LabelSubmitFormView: UIView {
     @IBOutlet weak var hexCodeField: UITextField!
     @IBOutlet weak var colorView: UIView!
     private let defaultColorCode: String = "#000000"
-    private var formViewEndPoint: CGFloat?
     
     func configure(labelViewModel: LabelItemViewModel? = nil) {
         configureTapGesture()
@@ -36,34 +36,8 @@ class LabelSubmitFormView: UIView {
         colorView.layer.backgroundColor = hexCodeField.text?.color
     }
     
-    private func subscribeNotifications() {
-        self.subscribe(UIResponder.keyboardWillShowNotification, selector: #selector(keyboardWillShowOrHide))
-        self.subscribe(UIResponder.keyboardWillHideNotification, selector: #selector(keyboardWillShowOrHide))
-    }
-
-    @objc func keyboardWillShowOrHide(notification: NSNotification) {
-        if let userInfo = notification.userInfo, let keyboardValue = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
-            
-            guard formViewEndPoint == nil else { return }
-            
-            formViewEndPoint = self.formView.frame.origin.y + self.formView.frame.height
-            let moveUpward = formViewEndPoint! - keyboardValue.origin.y
-            if formViewEndPoint! > keyboardValue.origin.y {
-                self.frame.origin.y -= moveUpward
-            }
-        }
-    }
-    
     private func configureTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self,
-                                                action: #selector(handleTap))
-        self.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc func handleTap() {
-        self.endEditing(true)
-        self.frame.origin.y = 0
-        self.formViewEndPoint = nil
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
     
     @IBAction func refreshColorTapped(_ sender: UIButton) {
@@ -105,11 +79,5 @@ class LabelSubmitFormView: UIView {
 extension LabelSubmitFormView: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         colorView.layer.backgroundColor = hexCodeField.text?.color
-    }
-}
-
-extension LabelSubmitFormView {
-    func subscribe(_ notification: NSNotification.Name, selector: Selector) {
-        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
     }
 }
