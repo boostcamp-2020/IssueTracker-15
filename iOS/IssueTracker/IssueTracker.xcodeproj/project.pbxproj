@@ -47,6 +47,8 @@
 		963971F32549D32F005BB4FA /* LabelSubmitForm+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F303752549CA2D00851964 /* LabelSubmitForm+Keyboard.swift */; };
 		963971F52549D5AF005BB4FA /* LabelCellViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963971F42549D5AF005BB4FA /* LabelCellViewTest.swift */; };
 		963971F92549D9B6005BB4FA /* LabelSubmitFormViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963971F82549D9B6005BB4FA /* LabelSubmitFormViewTests.swift */; };
+		966DD02B254A259F00A44FBA /* Array+SafeAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966DD02A254A259F00A44FBA /* Array+SafeAccess.swift */; };
+		9670B37F2549E9E10026B0C9 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9670B37E2549E9E10026B0C9 /* MainTabBarController.swift */; };
 		96C734CF2549420000DEC9A4 /* LabelSubmitFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96C734CD254941FF00DEC9A4 /* LabelSubmitFormView.xib */; };
 		96C734D02549420000DEC9A4 /* LabelSubmitFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734CE254941FF00DEC9A4 /* LabelSubmitFormView.swift */; };
 		96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */; };
@@ -96,6 +98,8 @@
 		963971F12549BC5F005BB4FA /* LabelListViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModelMock.swift; sourceTree = "<group>"; };
 		963971F42549D5AF005BB4FA /* LabelCellViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCellViewTest.swift; sourceTree = "<group>"; };
 		963971F82549D9B6005BB4FA /* LabelSubmitFormViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSubmitFormViewTests.swift; sourceTree = "<group>"; };
+		966DD02A254A259F00A44FBA /* Array+SafeAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeAccess.swift"; sourceTree = "<group>"; };
+		9670B37E2549E9E10026B0C9 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		96C734CD254941FF00DEC9A4 /* LabelSubmitFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelSubmitFormView.xib; sourceTree = "<group>"; };
 		96C734CE254941FF00DEC9A4 /* LabelSubmitFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelSubmitFormView.swift; sourceTree = "<group>"; };
 		96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				95C2F89B2547EF47006B3BC6 /* String+Color.swift */,
+				966DD02A254A259F00A44FBA /* Array+SafeAccess.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 		95E9F57A2546EC06001FBA0D /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				9670B37D2549E9B80026B0C9 /* MainTabBarScene */,
 				96C8357325490EFF0086A6E6 /* CustomUI */,
 				952FF3DA254814650042A96F /* Supports */,
 				952FF3D7254813F50042A96F /* LabelScene */,
@@ -265,6 +271,14 @@
 				963971EF2549BC45005BB4FA /* LabelListViewControllerTests.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		9670B37D2549E9B80026B0C9 /* MainTabBarScene */ = {
+			isa = PBXGroup;
+			children = (
+				9670B37E2549E9E10026B0C9 /* MainTabBarController.swift */,
+			);
+			path = MainTabBarScene;
 			sourceTree = "<group>";
 		};
 		96C734CC254941FF00DEC9A4 /* Form */ = {
@@ -485,12 +499,14 @@
 				950EA0602547FFF9005BE133 /* LabelHeaderView.swift in Sources */,
 				95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */,
 				95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */,
+				966DD02B254A259F00A44FBA /* Array+SafeAccess.swift in Sources */,
 				952FF3D3254804970042A96F /* LabelCell+CollectionView.swift in Sources */,
 				95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */,
 				950EA05C2547FFA0005BE133 /* LabelCellView.swift in Sources */,
 				96C734D02549420000DEC9A4 /* LabelSubmitFormView.swift in Sources */,
 				95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */,
 				96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */,
+				9670B37F2549E9E10026B0C9 /* MainTabBarController.swift in Sources */,
 				95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */,
 				952FF3D5254805EE0042A96F /* LabelHeader+CollectionView.swift in Sources */,
 				95C97282254957E40056ACA1 /* LableSubmitForm+Nibload.swift in Sources */,

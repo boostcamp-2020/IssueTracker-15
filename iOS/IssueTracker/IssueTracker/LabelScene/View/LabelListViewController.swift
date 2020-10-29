@@ -11,7 +11,7 @@ import UIKit
 class LabelListViewController: UIViewController {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-    var labelListViewModel: LabelListViewModelProtocol? = LabelListViewModel()
+    var labelListViewModel: LabelListViewModelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +83,7 @@ extension LabelListViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = LabelHeaderView.dequeue(from: collectionView, for: indexPath) else { return UICollectionReusableView() }
         
+        header.configure(title: "레이블")
         header.plusButtonTapped = { [weak self] in
             self?.showSubmitFormView()
         }

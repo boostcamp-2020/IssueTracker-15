@@ -12,6 +12,10 @@ class LabelHeaderView: UICollectionReusableView {
     @IBOutlet weak var headerLabel: UILabel!
     var plusButtonTapped: (() -> Void)?
     
+    func configure(title: String) {
+        headerLabel.text = title
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         headerLabel.font = headerLabel.font.withSize(headerLabel.bounds.height)
