@@ -116,8 +116,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gh5-1c-rBJ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem id="0Gn-Ak-F8E">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="aOq-D6-Llh">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lMH-AP-bpd">
+                                                <rect key="frame" x="266" y="0.0" width="128" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="plus" catalog="system"/>
+                                                <connections>
+                                                    <action selector="plusButtonTapped:" destination="DLS-2q-TJY" eventType="touchUpInside" id="KOx-Wa-2Zp"/>
+                                                    <action selector="plusButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ddh-Rj-EVM"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="s3J-Rm-mPR">
-                                <rect key="frame" x="0.0" y="87" width="414" height="726"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OZP-6Q-hnZ">
                                     <size key="itemSize" width="128" height="128"/>
@@ -136,31 +155,13 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dZ-x2-OnV">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <navigationItem id="Lzl-fd-QNl">
-                                        <barButtonItem key="rightBarButtonItem" style="plain" id="ujw-Bk-hah">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="d4g-gi-ZML">
-                                                <rect key="frame" x="266" y="0.0" width="128" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="plus" catalog="system"/>
-                                                <connections>
-                                                    <action selector="plusButtonTapped:" destination="DLS-2q-TJY" eventType="touchUpInside" id="5Md-In-xKj"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="5dZ-x2-OnV" firstAttribute="top" secondItem="KJZ-wC-3qJ" secondAttribute="top" id="b2Z-0i-XCK"/>
-                            <constraint firstItem="5dZ-x2-OnV" firstAttribute="leading" secondItem="KJZ-wC-3qJ" secondAttribute="leading" id="fu6-OF-tfG"/>
-                            <constraint firstAttribute="trailing" secondItem="5dZ-x2-OnV" secondAttribute="trailing" id="pfU-PV-jRN"/>
-                            <constraint firstItem="s3J-Rm-mPR" firstAttribute="top" secondItem="5dZ-x2-OnV" secondAttribute="bottom" constant="-1" id="qCA-s9-4mw"/>
+                            <constraint firstItem="gh5-1c-rBJ" firstAttribute="top" secondItem="KJZ-wC-3qJ" secondAttribute="top" id="5aA-wc-OPZ"/>
+                            <constraint firstItem="s3J-Rm-mPR" firstAttribute="top" secondItem="gh5-1c-rBJ" secondAttribute="bottom" id="FbL-LJ-qiz"/>
+                            <constraint firstItem="gh5-1c-rBJ" firstAttribute="trailing" secondItem="KJZ-wC-3qJ" secondAttribute="trailing" id="Lad-ec-A55"/>
+                            <constraint firstItem="gh5-1c-rBJ" firstAttribute="leading" secondItem="KJZ-wC-3qJ" secondAttribute="leading" id="kx7-ww-xwd"/>
                             <constraint firstItem="KJZ-wC-3qJ" firstAttribute="bottom" secondItem="s3J-Rm-mPR" secondAttribute="bottom" id="qtx-X7-7Oc"/>
                             <constraint firstItem="KJZ-wC-3qJ" firstAttribute="trailing" secondItem="s3J-Rm-mPR" secondAttribute="trailing" id="urT-cu-jfP"/>
                             <constraint firstItem="s3J-Rm-mPR" firstAttribute="leading" secondItem="KJZ-wC-3qJ" secondAttribute="leading" id="vaD-uK-fCS"/>
@@ -187,10 +188,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="B8N-ph-yYZ" kind="relationship" relationship="viewControllers" id="YnQ-dh-PYS"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="23p-zc-Eaa"/>
-                        <segue destination="DLS-2q-TJY" kind="relationship" relationship="viewControllers" id="mkz-Sa-6JO"/>
-                        <segue destination="A2t-uE-9cx" kind="relationship" relationship="viewControllers" id="va4-Ug-gFL"/>
+                        <segue destination="B8N-ph-yYZ" kind="relationship" relationship="viewControllers" id="vlJ-r6-CzG"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="K3w-1D-eUR"/>
+                        <segue destination="DLS-2q-TJY" kind="relationship" relationship="viewControllers" id="abc-RE-KoP"/>
+                        <segue destination="A2t-uE-9cx" kind="relationship" relationship="viewControllers" id="opK-J4-skp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="niw-cI-Qff" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
