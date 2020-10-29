@@ -1,5 +1,5 @@
 //
-//  Milestone.swift
+//  Date+.swift
 //  IssueTracker
 //
 //  Created by 김신우 on 2020/10/29.
@@ -8,9 +8,10 @@
 
 import Foundation
 
-struct Milestone {
-    let id: Int
-    let title: String
-    let description: String
-    let dueDate: String
+extension Date {
+    
+    var stringForMilestone: String {
+        DateFormatter.dateForMileStone.string(from: self)
+    }
+    
 }
