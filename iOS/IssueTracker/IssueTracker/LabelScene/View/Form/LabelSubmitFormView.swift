@@ -77,7 +77,7 @@ class LabelSubmitFormView: UIView {
     }
     
     @objc func backgroundTapped() {
-        removeFromSuperview()
+        self.removeFromSuperview()
     }
 }
 
