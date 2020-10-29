@@ -22,4 +22,11 @@ extension DateFormatter {
         formatter.dateFormat = "yyyy년 MM월 dd일"
         return formatter
     }()
+    
+    static let dateForSubmitForm: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
+    
 }
