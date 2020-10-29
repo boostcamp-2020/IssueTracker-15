@@ -34,3 +34,13 @@ class LabelCellView: UICollectionViewCell {
         nextButtonTapped?()
     }
 }
+
+extension LabelCellView: UICollectionViewRegisterable {
+    static var cellIdentifier: String {
+        return "LabelCellView"
+    }
+
+    static var cellNib: UINib {
+        return UINib(nibName: "LabelCellView", bundle: nil)
+    }
+}

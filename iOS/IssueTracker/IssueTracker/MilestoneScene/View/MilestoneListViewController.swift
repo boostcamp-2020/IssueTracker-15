@@ -24,7 +24,7 @@ class MilestoneListViewController: UIViewController {
         setupCollectionViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
-        MilestoneCellView.register(in: collectionView)
+        collectionView.register(type: MilestoneCellView.self)
         HeaderView.register(in: collectionView)
     }
     
@@ -77,7 +77,8 @@ extension MilestoneListViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = MilestoneCellView.dequeue(from: collectionView, for: indexPath), let cellViewModel = milestoneListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
+        guard let cell: MilestoneCellView = collectionView.dequeueCell(at: indexPath),
+            let cellViewModel = milestoneListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
         
         cell.configure(with: cellViewModel)
         return cell
