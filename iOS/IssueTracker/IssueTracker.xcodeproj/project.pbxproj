@@ -187,7 +187,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		952FF3D1254804120042A96F /* Extensions */ = {
+		952FF3D1254804120042A96F /* 06.Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				96A58F3C254A6A3300248F1E /* DateFormatter+.swift */,
@@ -200,17 +200,17 @@
 				95054472254AAC0D007767C6 /* CollectionView+.swift */,
 				96A58F54254AA5BC00248F1E /* String+Date.swift */,
 			);
-			path = Extensions;
+			path = 06.Extensions;
 			sourceTree = "<group>";
 		};
-		952FF3D7254813F50042A96F /* LabelScene */ = {
+		952FF3D7254813F50042A96F /* 02.LabelScene */ = {
 			isa = PBXGroup;
 			children = (
 				96C734D1254943BF00DEC9A4 /* ViewModel */,
 				950EA0592547FF74005BE133 /* View */,
 				95C2F8932547EBD1006B3BC6 /* Model */,
 			);
-			path = LabelScene;
+			path = 02.LabelScene;
 			sourceTree = "<group>";
 		};
 		952FF3D82548142E0042A96F /* LabelCell */ = {
@@ -232,16 +232,14 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
-		952FF3DA254814650042A96F /* Supports */ = {
+		952FF3DA254814650042A96F /* 07.Supports */ = {
 			isa = PBXGroup;
 			children = (
 				95E9F5842546EC0C001FBA0D /* Assets.xcassets */,
 				95E9F5862546EC0C001FBA0D /* LaunchScreen.storyboard */,
 				95E9F5892546EC0C001FBA0D /* Info.plist */,
-				95E9F57B2546EC07001FBA0D /* AppDelegate.swift */,
-				95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */,
 			);
-			path = Supports;
+			path = 07.Supports;
 			sourceTree = "<group>";
 		};
 		95C2F8932547EBD1006B3BC6 /* Model */ = {
@@ -286,12 +284,14 @@
 		95E9F57A2546EC06001FBA0D /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				9670B37D2549E9B80026B0C9 /* MainTabBarScene */,
-				952FF3D7254813F50042A96F /* LabelScene */,
-				966DD034254A5ADF00A44FBA /* MilestoneScene */,
-				96C8357325490EFF0086A6E6 /* CustomUI */,
-				952FF3DA254814650042A96F /* Supports */,
-				952FF3D1254804120042A96F /* Extensions */,
+				95E9F57B2546EC07001FBA0D /* AppDelegate.swift */,
+				95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */,
+				9670B37D2549E9B80026B0C9 /* 00.MainTabBarScene */,
+				952FF3D7254813F50042A96F /* 02.LabelScene */,
+				966DD034254A5ADF00A44FBA /* 03.MilestoneScene */,
+				96C8357325490EFF0086A6E6 /* 05.CustomUI */,
+				952FF3DA254814650042A96F /* 07.Supports */,
+				952FF3D1254804120042A96F /* 06.Extensions */,
 				95E9F5812546EC07001FBA0D /* Main.storyboard */,
 			);
 			path = IssueTracker;
@@ -328,14 +328,14 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		966DD034254A5ADF00A44FBA /* MilestoneScene */ = {
+		966DD034254A5ADF00A44FBA /* 03.MilestoneScene */ = {
 			isa = PBXGroup;
 			children = (
 				966DD037254A5B0100A44FBA /* Model */,
 				966DD035254A5AF300A44FBA /* ViewModel */,
 				966DD036254A5AFA00A44FBA /* View */,
 			);
-			path = MilestoneScene;
+			path = 03.MilestoneScene;
 			sourceTree = "<group>";
 		};
 		966DD035254A5AF300A44FBA /* ViewModel */ = {
@@ -365,12 +365,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		9670B37D2549E9B80026B0C9 /* MainTabBarScene */ = {
+		9670B37D2549E9B80026B0C9 /* 00.MainTabBarScene */ = {
 			isa = PBXGroup;
 			children = (
 				9670B37E2549E9E10026B0C9 /* MainTabBarController.swift */,
 			);
-			path = MainTabBarScene;
+			path = 00.MainTabBarScene;
 			sourceTree = "<group>";
 		};
 		96A58F49254A86A900248F1E /* SubmitForm */ = {
@@ -404,13 +404,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		96C8357325490EFF0086A6E6 /* CustomUI */ = {
+		96C8357325490EFF0086A6E6 /* 05.CustomUI */ = {
 			isa = PBXGroup;
 			children = (
 				952FF3D9254814350042A96F /* Header */,
 				96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */,
 			);
-			path = CustomUI;
+			path = 05.CustomUI;
 			sourceTree = "<group>";
 		};
 		9E2F3F721E0479B9F088C18C /* Pods */ = {
