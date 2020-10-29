@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+protocol MilestoneCellConfigurable {
+    var title: String { get }
+    var description: String { get }
+    var dueDate: String { get }
+    var openIssue: String { get }
+    var closedIssue: String { get }
+    var percentage: String { get }
+}
+
