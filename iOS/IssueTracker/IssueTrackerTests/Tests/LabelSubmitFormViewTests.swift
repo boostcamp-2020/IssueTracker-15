@@ -51,7 +51,7 @@ class LabelSubmitFormViewTests: XCTestCase {
             XCTAssertEqual(hex, "HexChanged")
         }
         
-        view.submitButtonTapped(UIButton())
+        view.saveButtonTapped(UIButton())
     }
     
     func testRefresh() {

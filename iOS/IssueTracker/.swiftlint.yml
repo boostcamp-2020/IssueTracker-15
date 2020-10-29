@@ -6,6 +6,7 @@ excluded:
 
 disabled_rules:
 - trailing_whitespace
+- identifier_name
 
 force_cast: warning
 line_length: 250
