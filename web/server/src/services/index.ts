@@ -1,3 +1,5 @@
-import LabelService from './label';
+import LabelService from "./label";
 
-export { LabelService };
+const Services = { LabelService };
+
+export default Services;

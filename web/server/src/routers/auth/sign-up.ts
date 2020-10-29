@@ -1,3 +1,5 @@
 import express from "express";
 
-export const SignUpRouter = express.Router();
+const SignUpRouter = express.Router();
+
+export default SignUpRouter;
