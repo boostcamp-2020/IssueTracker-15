@@ -4,17 +4,23 @@ import { UserEntity } from "./user.entity";
 
 @Entity("Assignees")
 export class AssigneesEntity {
-  @PrimaryColumn({ type: "int" })
+  @PrimaryColumn()
   userId!: number;
 
-  @PrimaryColumn({ type: "int" })
+  @PrimaryColumn()
   issueId!: number;
 
-  @ManyToOne((type) => UserEntity, (user) => user.assignees)
+  @ManyToOne((type) => UserEntity, (user) => user.assignees, {
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
+  })
   @JoinColumn({ name: "userId", referencedColumnName: "id" })
   user!: UserEntity;
 
-  @ManyToOne((type) => IssueEntity, (issue) => issue.assignees)
+  @ManyToOne((type) => IssueEntity, (issue) => issue.assignees, {
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
+  })
   @JoinColumn({
     name: "issueId",
     referencedColumnName: "id",

@@ -3,7 +3,7 @@ import { IssueHasLabelEntity } from "./issue-label.entity";
 
 @Entity("Label")
 export class LabelEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: "int" })
   id!: number;
 
   @Column({ type: "varchar", nullable: false })
@@ -17,7 +17,8 @@ export class LabelEntity {
 
   @OneToMany(
     (type) => IssueHasLabelEntity,
-    (issueHasLabel) => issueHasLabel.label
+    (issueHasLabel) => issueHasLabel.label,
+    { cascade: true }
   )
-  issueHasLabel?: IssueHasLabelEntity;
+  issueHasLabels?: IssueHasLabelEntity[];
 }

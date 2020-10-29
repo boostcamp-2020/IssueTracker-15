@@ -41,29 +41,38 @@ export class IssueEntity {
   @Column({ type: "number", nullable: false })
   authorId!: number;
 
-  @ManyToOne((type) => MilestoneEntity, (milestone) => milestone.issue)
+  @ManyToOne((type) => MilestoneEntity, (milestone) => milestone.issues, {
+    onUpdate: "CASCADE",
+  })
   @JoinColumn({
     name: "milestoneId",
     referencedColumnName: "id",
   })
   milestone?: MilestoneEntity;
 
-  @ManyToOne((type) => UserEntity, (user) => user.issue)
+  @ManyToOne((type) => UserEntity, (user) => user.issues, {
+    onUpdate: "CASCADE",
+  })
   @JoinColumn({
     name: "authorId",
     referencedColumnName: "id",
   })
   author!: UserEntity;
 
-  @OneToMany((type) => CommentEntity, (comment) => comment.issue)
-  comment?: CommentEntity;
+  @OneToMany((type) => CommentEntity, (comment) => comment.issue, {
+    cascade: true,
+  })
+  comments?: CommentEntity[];
 
   @OneToMany(
     (type) => IssueHasLabelEntity,
-    (issueHasLabel) => issueHasLabel.issue
+    (issueHasLabel) => issueHasLabel.issue,
+    { cascade: true }
   )
-  issueHasLabel?: IssueHasLabelEntity;
+  issueHasLabels?: IssueHasLabelEntity[];
 
-  @OneToMany((type) => AssigneesEntity, (assignees) => assignees.issue)
-  assignees?: AssigneesEntity;
+  @OneToMany((type) => AssigneesEntity, (assignees) => assignees.issue, {
+    cascade: true,
+  })
+  assignees?: AssigneesEntity[];
 }
