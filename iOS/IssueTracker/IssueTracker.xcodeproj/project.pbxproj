@@ -17,6 +17,13 @@
 		95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
 		95C2F8982547EDC7006B3BC6 /* ColorConvertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */; };
 		95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F89B2547EF47006B3BC6 /* String+Color.swift */; };
+		95C36581254A6F80008ACCB5 /* MilestoneListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C36580254A6F80008ACCB5 /* MilestoneListViewController.swift */; };
+		95C3658C254A745D008ACCB5 /* MilestoneHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C3658A254A745D008ACCB5 /* MilestoneHeaderView.swift */; };
+		95C3658D254A745D008ACCB5 /* MilestoneHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95C3658B254A745D008ACCB5 /* MilestoneHeaderView.xib */; };
+		95C3658F254A7501008ACCB5 /* MilestoneHeader+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C3658E254A7501008ACCB5 /* MilestoneHeader+CollectionView.swift */; };
+		95C36592254A76BB008ACCB5 /* MilestoneCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C36590254A76BB008ACCB5 /* MilestoneCellView.swift */; };
+		95C36593254A76BB008ACCB5 /* MilestoneCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95C36591254A76BB008ACCB5 /* MilestoneCellView.xib */; };
+		95C36595254A76C8008ACCB5 /* MilestoneCell+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C36594254A76C8008ACCB5 /* MilestoneCell+CollectionView.swift */; };
 		95C97282254957E40056ACA1 /* LableSubmitForm+Nibload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C97281254957E40056ACA1 /* LableSubmitForm+Nibload.swift */; };
 		95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57B2546EC07001FBA0D /* AppDelegate.swift */; };
 		95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57D2546EC07001FBA0D /* SceneDelegate.swift */; };
@@ -84,6 +91,13 @@
 		95C2F8942547EBE0006B3BC6 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConvertTests.swift; sourceTree = "<group>"; };
 		95C2F89B2547EF47006B3BC6 /* String+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Color.swift"; sourceTree = "<group>"; };
+		95C36580254A6F80008ACCB5 /* MilestoneListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MilestoneListViewController.swift; path = View/MilestoneListViewController.swift; sourceTree = "<group>"; };
+		95C3658A254A745D008ACCB5 /* MilestoneHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneHeaderView.swift; sourceTree = "<group>"; };
+		95C3658B254A745D008ACCB5 /* MilestoneHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MilestoneHeaderView.xib; sourceTree = "<group>"; };
+		95C3658E254A7501008ACCB5 /* MilestoneHeader+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MilestoneHeader+CollectionView.swift"; sourceTree = "<group>"; };
+		95C36590254A76BB008ACCB5 /* MilestoneCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneCellView.swift; sourceTree = "<group>"; };
+		95C36591254A76BB008ACCB5 /* MilestoneCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MilestoneCellView.xib; sourceTree = "<group>"; };
+		95C36594254A76C8008ACCB5 /* MilestoneCell+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MilestoneCell+CollectionView.swift"; sourceTree = "<group>"; };
 		95C97281254957E40056ACA1 /* LableSubmitForm+Nibload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LableSubmitForm+Nibload.swift"; sourceTree = "<group>"; };
 		95E9F5782546EC06001FBA0D /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E9F57B2546EC07001FBA0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -219,6 +233,28 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		95C36588254A740F008ACCB5 /* MilestoneHeader */ = {
+			isa = PBXGroup;
+			children = (
+				95C3658A254A745D008ACCB5 /* MilestoneHeaderView.swift */,
+				95C3658B254A745D008ACCB5 /* MilestoneHeaderView.xib */,
+				95C3658E254A7501008ACCB5 /* MilestoneHeader+CollectionView.swift */,
+			);
+			name = MilestoneHeader;
+			path = View/MilestoneHeader;
+			sourceTree = "<group>";
+		};
+		95C36589254A7415008ACCB5 /* MilestoneCell */ = {
+			isa = PBXGroup;
+			children = (
+				95C36590254A76BB008ACCB5 /* MilestoneCellView.swift */,
+				95C36591254A76BB008ACCB5 /* MilestoneCellView.xib */,
+				95C36594254A76C8008ACCB5 /* MilestoneCell+CollectionView.swift */,
+			);
+			name = MilestoneCell;
+			path = View/MilestoneCell;
+			sourceTree = "<group>";
+		};
 		95E9F56F2546EC06001FBA0D = {
 			isa = PBXGroup;
 			children = (
@@ -305,8 +341,11 @@
 		966DD036254A5AFA00A44FBA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				95C36580254A6F80008ACCB5 /* MilestoneListViewController.swift */,
+				95C36588254A740F008ACCB5 /* MilestoneHeader */,
+				95C36589254A7415008ACCB5 /* MilestoneCell */,
 			);
-			path = View;
+			name = View;
 			sourceTree = "<group>";
 		};
 		966DD037254A5B0100A44FBA /* Model */ = {
@@ -448,10 +487,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95C36593254A76BB008ACCB5 /* MilestoneCellView.xib in Resources */,
 				9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */,
 				95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */,
 				950EA0612547FFF9005BE133 /* LabelHeaderView.xib in Resources */,
 				95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */,
+				95C3658D254A745D008ACCB5 /* MilestoneHeaderView.xib in Resources */,
 				95E9F5832546EC07001FBA0D /* Main.storyboard in Resources */,
 				950EA05D2547FFA0005BE133 /* LabelCellView.xib in Resources */,
 				96C734CF2549420000DEC9A4 /* LabelSubmitFormView.xib in Resources */,
@@ -539,10 +580,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95C36592254A76BB008ACCB5 /* MilestoneCellView.swift in Sources */,
 				96A58F3F254A6C2500248F1E /* Date+.swift in Sources */,
 				96A58F3B254A629500248F1E /* MilestoneItemViewModel.swift in Sources */,
 				966DD039254A5B1600A44FBA /* Milestone.swift in Sources */,
 				96C734D52549452600DEC9A4 /* LabelItemViewModel.swift in Sources */,
+				95C36595254A76C8008ACCB5 /* MilestoneCell+CollectionView.swift in Sources */,
 				950EA0602547FFF9005BE133 /* LabelHeaderView.swift in Sources */,
 				96A58F3D254A6A3300248F1E /* DateFormatter+.swift in Sources */,
 				95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */,
@@ -554,9 +597,12 @@
 				96C734D02549420000DEC9A4 /* LabelSubmitFormView.swift in Sources */,
 				95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */,
 				96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */,
+				95C36581254A6F80008ACCB5 /* MilestoneListViewController.swift in Sources */,
 				9670B37F2549E9E10026B0C9 /* MainTabBarController.swift in Sources */,
 				95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */,
+				95C3658F254A7501008ACCB5 /* MilestoneHeader+CollectionView.swift in Sources */,
 				952FF3D5254805EE0042A96F /* LabelHeader+CollectionView.swift in Sources */,
+				95C3658C254A745D008ACCB5 /* MilestoneHeaderView.swift in Sources */,
 				95C97282254957E40056ACA1 /* LableSubmitForm+Nibload.swift in Sources */,
 				96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */,
 				95F303762549CA2D00851964 /* LabelSubmitForm+Keyboard.swift in Sources */,
