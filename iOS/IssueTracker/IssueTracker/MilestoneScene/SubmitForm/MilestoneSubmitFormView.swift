@@ -10,7 +10,7 @@ import UIKit
 
 class MilestoneSubmitFormView: UIView {
     var formViewEndPoint: CGFloat?
-    var submitButtonTapped: ((String, String, String) -> Void)?
+    var saveButtonTapped: ((String, String, String) -> Void)?
     @IBOutlet weak var formView: UIView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var titleField: UITextField!
@@ -47,7 +47,7 @@ class MilestoneSubmitFormView: UIView {
             return
         }
         
-        submitButtonTapped?(titleText, descField?.text ?? "", dateField?.text ?? "")
+        saveButtonTapped?(titleText, descField?.text ?? "", dateField?.text ?? "")
         self.removeFromSuperview()
     }
     

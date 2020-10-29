@@ -26,11 +26,6 @@ class BadgeLabelView: UILabel {
         layer.borderColor = color
     }
     
-    func fitSizeWithBounds() {
-        let contentHeight = self.bounds.height
-        font = font.withSize(contentHeight - padding.top - padding.bottom)
-    }
-    
     override var intrinsicContentSize: CGSize {
         let contentSize = super.intrinsicContentSize
         let contentWidth = contentSize.width + padding.left + padding.right
@@ -43,6 +38,7 @@ class BadgeLabelView: UILabel {
         let boundSize = CGSize(width: intrinsicContentSize.width, height: bounds.height)
         bounds = CGRect(origin: boundOrigin, size: boundSize)
         layer.cornerRadius = bounds.height / 2 * cornerRadiusRatio
+        font = font.withSize(boundSize.height - padding.top - padding.bottom)
     }
 
 }

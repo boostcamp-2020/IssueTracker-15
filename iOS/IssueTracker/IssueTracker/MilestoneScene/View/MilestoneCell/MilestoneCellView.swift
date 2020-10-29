@@ -38,7 +38,6 @@ class MilestoneCellView: UICollectionViewCell {
         titleLabel.setBorder(width: 1, color: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1))
         titleLabel.cornerRadiusRatio = 0.5
         titleLabel.setPadding(top: 5, left: 5, bottom: 5, right: 5)
-        titleLabel.fitSizeWithBounds()
     }
     
     private func configureDescription(with description: String) {
