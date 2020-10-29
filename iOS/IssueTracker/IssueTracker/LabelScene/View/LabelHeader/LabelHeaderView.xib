@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,9 +20,8 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mw2-8b-vbq">
-                    <rect key="frame" x="450" y="10" width="32" height="29.5"/>
-                    <state key="normal">
-                        <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                    <rect key="frame" x="455" y="10" width="27" height="26"/>
+                    <state key="normal" image="plus" catalog="system">
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                     </state>
                     <connections>
@@ -39,7 +36,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="Zfl-6O-V8w" secondAttribute="bottom" constant="10" id="1HX-HV-odK"/>
@@ -51,6 +47,7 @@
                 <constraint firstItem="Mw2-8b-vbq" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="10" id="hRr-F3-15e"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="5ek-Cm-KId" secondAttribute="trailing" id="iYc-0E-Qxx"/>
             </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <connections>
                 <outlet property="headerLabel" destination="Zfl-6O-V8w" id="Bpy-R9-5tg"/>
             </connections>
