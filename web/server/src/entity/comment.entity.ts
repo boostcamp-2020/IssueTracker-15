@@ -10,7 +10,7 @@ import { UserEntity } from "./user.entity";
 
 @Entity("Comment")
 export class CommentEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: "int" })
   id!: number;
 
   @Column({ type: "varchar", nullable: false })
@@ -29,14 +29,19 @@ export class CommentEntity {
   @Column({ type: "int" })
   issueId!: number;
 
-  @ManyToOne((type) => UserEntity, (user) => user.id)
+  @ManyToOne((type) => UserEntity, (user) => user.comments, {
+    onUpdate: "CASCADE",
+  })
   @JoinColumn({
     name: "userId",
     referencedColumnName: "id",
   })
   user!: UserEntity;
 
-  @ManyToOne((type) => IssueEntity, (issue) => issue.comment)
+  @ManyToOne((type) => IssueEntity, (issue) => issue.comments, {
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
+  })
   @JoinColumn({
     name: "issueId",
     referencedColumnName: "id",

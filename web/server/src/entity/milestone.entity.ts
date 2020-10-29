@@ -15,6 +15,8 @@ export class MilestoneEntity {
   @Column({ type: "timestamp", nullable: true })
   dueDate?: Date;
 
-  @OneToMany((type) => IssueEntity, (issue) => issue.milestoneId)
-  issue?: IssueEntity[];
+  @OneToMany((type) => IssueEntity, (issue) => issue.milestone, {
+    cascade: true,
+  })
+  issues?: IssueEntity[];
 }

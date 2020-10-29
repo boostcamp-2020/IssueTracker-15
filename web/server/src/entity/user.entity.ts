@@ -1,11 +1,10 @@
-import { type } from "os";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { AssigneesEntity } from "./assignees.entity";
 import { CommentEntity } from "./comment.entity";
 import { IssueEntity } from "./issue.entity";
 @Entity("User")
 export class UserEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: "int" })
   id!: number;
 
   @Column({ type: "varchar", nullable: false })
@@ -23,12 +22,16 @@ export class UserEntity {
   @Column({ type: "varchar", nullable: false })
   type!: string;
 
-  @OneToMany((type) => CommentEntity, (comment) => comment.user)
-  comment?: CommentEntity[];
+  @OneToMany((type) => CommentEntity, (comment) => comment.user, {
+    cascade: true,
+  })
+  comments?: CommentEntity[];
 
-  @OneToMany((type) => IssueEntity, (issue) => issue.author)
-  issue?: IssueEntity;
+  @OneToMany((type) => IssueEntity, (issue) => issue.author, { cascade: true })
+  issues?: IssueEntity[];
 
-  @OneToMany((type) => AssigneesEntity, (assigness) => assigness.user)
-  assignees?: AssigneesEntity;
+  @OneToMany((type) => AssigneesEntity, (assigness) => assigness.user, {
+    cascade: true,
+  })
+  assignees?: AssigneesEntity[];
 }
