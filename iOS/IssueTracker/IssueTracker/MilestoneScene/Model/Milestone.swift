@@ -13,4 +13,5 @@ struct Milestone {
     let title: String
     let description: String
     let dueDate: String
+    // TODO:- Milestone에 포함되어 있는 Issue들에 대한 정보 (미정)
 }

@@ -17,7 +17,7 @@ protocol MilestoneCellConfigurable {
     var percentage: String { get }
 }
 
-struct MilestoneCellViewModel: MilestoneCellConfigurable {
+struct MilestoneItemViewModel: MilestoneCellConfigurable {
     
     private(set) var title: String
     private(set) var description: String
@@ -45,7 +45,8 @@ struct MilestoneCellViewModel: MilestoneCellConfigurable {
     }
     
     var percentage: String {
-        let percentile = issueOpened * 100 / issueClosed
+        guard issueOpened + issueClosed > 0 else { return "0%" }
+        let percentile = issueOpened * 100 / (issueOpened + issueClosed)
         return "\(percentile)%"
     }
     
