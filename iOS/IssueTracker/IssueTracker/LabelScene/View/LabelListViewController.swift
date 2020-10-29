@@ -9,18 +9,17 @@
 import UIKit
 
 class LabelListViewController: UIViewController {
-    @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     var labelListViewModel: LabelListViewModelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        configureLabelsViewModel()
+        configureLabelListViewModel()
         labelListViewModel?.needFetchItems()
     }
     
-    private func configureLabelsViewModel() {
+    private func configureLabelListViewModel() {
         labelListViewModel?.didFetch = { [weak self] in
             self?.collectionView.reloadData()
         }
@@ -43,6 +42,10 @@ class LabelListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
+    @IBAction func plusButtonTapped(_ sender: Any) {
+        showSubmitFormView()
+    }
+    
     private func showSubmitFormView(indexPath: IndexPath? = nil) {
         guard let tabBarController = self.tabBarController, let labelSubmitFormView = LabelSubmitFormView.createView() else { return }
         
@@ -59,14 +62,9 @@ class LabelListViewController: UIViewController {
         tabBarController.view.addSubview(labelSubmitFormView)
         labelSubmitFormView.frame = tabBarController.view.frame
     }
-    
-    @IBAction func plusButtonTapped(_ sender: Any) {
-        showSubmitFormView()
-    }
 }
 
 extension LabelListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return labelListViewModel?.numberOfItem() ?? 0
     }

@@ -14,7 +14,7 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="레이블" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zfl-6O-V8w">
-                    <rect key="frame" x="10" y="25" width="44.5" height="76"/>
+                    <rect key="frame" x="10" y="25" width="477" height="76"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -25,6 +25,7 @@
                 <constraint firstItem="Zfl-6O-V8w" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="0QL-wt-qQe"/>
                 <constraint firstItem="Zfl-6O-V8w" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="10" id="AgK-wg-lUY"/>
                 <constraint firstItem="Zfl-6O-V8w" firstAttribute="height" secondItem="U6b-Vx-4bR" secondAttribute="height" multiplier="0.6" id="fDy-jH-AyF"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="Zfl-6O-V8w" secondAttribute="trailing" constant="10" id="g0o-py-Et7"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <connections>

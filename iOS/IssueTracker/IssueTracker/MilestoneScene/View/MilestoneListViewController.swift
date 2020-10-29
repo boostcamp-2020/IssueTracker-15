@@ -11,10 +11,13 @@ import UIKit
 class MilestoneListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    var milestoneListViewModel: MilestoneListViewModelProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        configureMilestoneListViewModel()
+        milestoneListViewModel?.needFetchItems()
     }
     
     private func configureCollectionView() {
@@ -25,9 +28,15 @@ class MilestoneListViewController: UIViewController {
         HeaderView.register(in: collectionView)
     }
     
+    private func configureMilestoneListViewModel() {
+        milestoneListViewModel?.didFetch = { [weak self] in
+            self?.collectionView.reloadData()
+        }
+    }
+    
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 10)
+        layout.itemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 8)
         layout.headerReferenceSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 12)
         layout.minimumLineSpacing = 1
         layout.sectionHeadersPinToVisibleBounds = true
@@ -36,17 +45,14 @@ class MilestoneListViewController: UIViewController {
 }
 
 extension MilestoneListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return milestoneListViewModel?.numberOfItem() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = MilestoneCellView.dequeue(from: collectionView, for: indexPath) else { return UICollectionViewCell() }
+        guard let cell = MilestoneCellView.dequeue(from: collectionView, for: indexPath), let cellViewModel = milestoneListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
         
+        cell.configure(with: cellViewModel)
         return cell
     }
     
@@ -56,5 +62,9 @@ extension MilestoneListViewController: UICollectionViewDataSource, UICollectionV
         header.configure(title: "마일스톤")
         
         return header
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
 }

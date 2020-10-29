@@ -34,7 +34,6 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZXv-M7-w6X">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem id="M0E-SE-J7H">
@@ -119,7 +118,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="s3J-Rm-mPR">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OZP-6Q-hnZ">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -155,10 +154,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="s3J-Rm-mPR" firstAttribute="top" secondItem="5dZ-x2-OnV" secondAttribute="bottom" id="0gc-eR-EZB"/>
                             <constraint firstItem="5dZ-x2-OnV" firstAttribute="top" secondItem="KJZ-wC-3qJ" secondAttribute="top" id="b2Z-0i-XCK"/>
                             <constraint firstItem="5dZ-x2-OnV" firstAttribute="leading" secondItem="KJZ-wC-3qJ" secondAttribute="leading" id="fu6-OF-tfG"/>
                             <constraint firstAttribute="trailing" secondItem="5dZ-x2-OnV" secondAttribute="trailing" id="pfU-PV-jRN"/>
+                            <constraint firstItem="s3J-Rm-mPR" firstAttribute="top" secondItem="5dZ-x2-OnV" secondAttribute="bottom" id="qCA-s9-4mw"/>
                             <constraint firstItem="KJZ-wC-3qJ" firstAttribute="bottom" secondItem="s3J-Rm-mPR" secondAttribute="bottom" id="qtx-X7-7Oc"/>
                             <constraint firstItem="KJZ-wC-3qJ" firstAttribute="trailing" secondItem="s3J-Rm-mPR" secondAttribute="trailing" id="urT-cu-jfP"/>
                             <constraint firstItem="s3J-Rm-mPR" firstAttribute="leading" secondItem="KJZ-wC-3qJ" secondAttribute="leading" id="vaD-uK-fCS"/>

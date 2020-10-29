@@ -10,15 +10,17 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
-    // TODO:- Dependency Injection
     func setupDependencies() {
-        // controllers[1] = UINavigationController -> root: IssueListViewController
-        // controllers[2] = LabelListViewController
-        if let labelListViewController = self.viewControllers?[safe: 1] as? LabelListViewController{
+        // controllers[0] = UINavigationController -> root: IssueListViewController
+        // controllers[1] = LabelListViewController
+        if let labelListViewController = self.viewControllers?[safe: 1] as? LabelListViewController {
             labelListViewController.labelListViewModel = LabelListViewModel()
         }
-        // controllers[3] = MilestoneListViewConroller
-        // controllers[4] = SettingViewController
+        // controllers[2] = MilestoneListViewConroller
+        if let milestoneListViewController = self.viewControllers?[safe: 2] as? MilestoneListViewController {
+            milestoneListViewController.milestoneListViewModel = MilestoneListViewModel()
+        }
+        // controllers[3] = SettingViewController
     }
     
     override func viewDidLoad() {

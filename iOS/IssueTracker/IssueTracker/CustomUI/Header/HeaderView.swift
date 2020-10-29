@@ -17,7 +17,7 @@ class HeaderView: UICollectionReusableView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        headerLabel.font = headerLabel.font.withSize(headerLabel.bounds.height)
+        headerLabel.font = headerLabel.font.withSize(headerLabel.bounds.height - 1)
     }
 
 }

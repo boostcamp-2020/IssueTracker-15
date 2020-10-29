@@ -12,6 +12,8 @@
 		950EA05D2547FFA0005BE133 /* LabelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950EA05B2547FFA0005BE133 /* LabelCellView.xib */; };
 		950EA0602547FFF9005BE133 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EA05E2547FFF9005BE133 /* HeaderView.swift */; };
 		950EA0612547FFF9005BE133 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950EA05F2547FFF9005BE133 /* HeaderView.xib */; };
+		950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EB00C254A8DE2004857C2 /* MilestoneListViewModel.swift */; };
+		950EB00F254A94D0004857C2 /* UILabel+FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EB00E254A94D0004857C2 /* UILabel+FontSize.swift */; };
 		952FF3D3254804970042A96F /* LabelCell+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF3D2254804970042A96F /* LabelCell+CollectionView.swift */; };
 		952FF3D5254805EE0042A96F /* Header+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF3D4254805EE0042A96F /* Header+CollectionView.swift */; };
 		95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
@@ -90,6 +92,8 @@
 		950EA05B2547FFA0005BE133 /* LabelCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCellView.xib; sourceTree = "<group>"; };
 		950EA05E2547FFF9005BE133 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		950EA05F2547FFF9005BE133 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		950EB00C254A8DE2004857C2 /* MilestoneListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneListViewModel.swift; sourceTree = "<group>"; };
+		950EB00E254A94D0004857C2 /* UILabel+FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+FontSize.swift"; sourceTree = "<group>"; };
 		952FF3D2254804970042A96F /* LabelCell+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LabelCell+CollectionView.swift"; sourceTree = "<group>"; };
 		952FF3D4254805EE0042A96F /* Header+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Header+CollectionView.swift"; sourceTree = "<group>"; };
 		95C2F8942547EBE0006B3BC6 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 				95C2F89B2547EF47006B3BC6 /* String+Color.swift */,
 				966DD02A254A259F00A44FBA /* Array+SafeAccess.swift */,
 				96A58F3E254A6C2500248F1E /* Date+.swift */,
+				950EB00E254A94D0004857C2 /* UILabel+FontSize.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -326,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				96A58F3A254A629400248F1E /* MilestoneItemViewModel.swift */,
+				950EB00C254A8DE2004857C2 /* MilestoneListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -583,6 +589,7 @@
 			files = (
 				95C36592254A76BB008ACCB5 /* MilestoneCellView.swift in Sources */,
 				96A58F3F254A6C2500248F1E /* Date+.swift in Sources */,
+				950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */,
 				96A58F3B254A629500248F1E /* MilestoneItemViewModel.swift in Sources */,
 				966DD039254A5B1600A44FBA /* Milestone.swift in Sources */,
 				96C734D52549452600DEC9A4 /* LabelItemViewModel.swift in Sources */,
@@ -596,6 +603,7 @@
 				95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */,
 				950EA05C2547FFA0005BE133 /* LabelCellView.swift in Sources */,
 				96C734D02549420000DEC9A4 /* LabelSubmitFormView.swift in Sources */,
+				950EB00F254A94D0004857C2 /* UILabel+FontSize.swift in Sources */,
 				95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */,
 				96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */,
 				95C36581254A6F80008ACCB5 /* MilestoneListViewController.swift in Sources */,
