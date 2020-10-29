@@ -37,7 +37,7 @@
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem id="M0E-SE-J7H">
-                                        <barButtonItem key="rightBarButtonItem" style="plain" id="rkn-9v-HSW">
+                                        <barButtonItem key="rightBarButtonItem" id="rkn-9v-HSW">
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jhq-ak-zeV">
                                                 <rect key="frame" x="266" y="0.0" width="128" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -202,7 +202,7 @@
         <scene sceneID="cO4-Yn-VzX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="B8N-ph-yYZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="이슈" image="2.circle.fill" catalog="system" id="A1f-zK-Nd4"/>
+                    <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="A1f-zK-Nd4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LqH-iR-KEA">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -219,6 +219,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="1.circle.fill" catalog="system" width="128" height="121"/>
         <image name="2.circle.fill" catalog="system" width="128" height="121"/>
         <image name="3.circle.fill" catalog="system" width="128" height="121"/>
         <image name="4.circle.fill" catalog="system" width="128" height="121"/>

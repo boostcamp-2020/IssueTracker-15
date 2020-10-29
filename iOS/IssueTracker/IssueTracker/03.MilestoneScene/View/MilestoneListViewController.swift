@@ -52,12 +52,12 @@ class MilestoneListViewController: UIViewController {
         
         if let indexPath = indexPath {
             milestoneSubmitFormView.configure(milestoneItemViewModel: milestoneListViewModel?.cellForItemAt(path: indexPath))
-            milestoneSubmitFormView.submitButtonTapped = { (title, description, dueDate) in
+            milestoneSubmitFormView.saveButtonTapped = { (title, description, dueDate) in
                 self.milestoneListViewModel?.editMileStone(at: indexPath, title: title, description: description, dueDate: dueDate)
             }
         } else {
             milestoneSubmitFormView.configure()
-            milestoneSubmitFormView.submitButtonTapped = self.milestoneListViewModel?.addNewMileStone
+            milestoneSubmitFormView.saveButtonTapped = self.milestoneListViewModel?.addNewMileStone
         }
         
         tabBarController.view.addSubview(milestoneSubmitFormView)
