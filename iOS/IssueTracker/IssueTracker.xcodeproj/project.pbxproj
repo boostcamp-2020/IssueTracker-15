@@ -286,11 +286,11 @@
 		95E9F57A2546EC06001FBA0D /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				966DD034254A5ADF00A44FBA /* MilestoneScene */,
 				9670B37D2549E9B80026B0C9 /* MainTabBarScene */,
+				952FF3D7254813F50042A96F /* LabelScene */,
+				966DD034254A5ADF00A44FBA /* MilestoneScene */,
 				96C8357325490EFF0086A6E6 /* CustomUI */,
 				952FF3DA254814650042A96F /* Supports */,
-				952FF3D7254813F50042A96F /* LabelScene */,
 				952FF3D1254804120042A96F /* Extensions */,
 				95E9F5812546EC07001FBA0D /* Main.storyboard */,
 			);
