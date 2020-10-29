@@ -1,8 +1,8 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { IssueEntity } from "./issue.entity";
+import IssueEntity from "./issue.entity";
 
 @Entity("Milestone")
-export class MilestoneEntity {
+class MilestoneEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -15,8 +15,9 @@ export class MilestoneEntity {
   @Column({ type: "timestamp", nullable: true })
   dueDate?: Date;
 
-  @OneToMany((type) => IssueEntity, (issue) => issue.milestone, {
+  @OneToMany(() => IssueEntity, (issue) => issue.milestone, {
     cascade: true,
   })
   issues?: IssueEntity[];
 }
+export default MilestoneEntity;

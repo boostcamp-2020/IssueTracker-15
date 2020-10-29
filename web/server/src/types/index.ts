@@ -1,3 +1,3 @@
-import * as LabelType from './label.type';
+import * as LabelType from "./label.type";
 
-export { LabelType };
+export default { LabelType };

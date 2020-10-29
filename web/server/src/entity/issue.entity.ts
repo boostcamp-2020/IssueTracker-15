@@ -6,13 +6,14 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { CommentEntity } from "./comment.entity";
-import { MilestoneEntity } from "./milestone.entity";
-import { UserEntity } from "./user.entity";
-import { IssueHasLabelEntity } from "./issue-label.entity";
-import { AssigneesEntity } from "./assignees.entity";
+import CommentEntity from "./comment.entity";
+import MilestoneEntity from "./milestone.entity";
+import UserEntity from "./user.entity";
+import IssueHasLabelEntity from "./issue-label.entity";
+import AssigneesEntity from "./assignees.entity";
+
 @Entity("Issue")
-export class IssueEntity {
+class IssueEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
@@ -41,7 +42,7 @@ export class IssueEntity {
   @Column({ type: "number", nullable: false })
   authorId!: number;
 
-  @ManyToOne((type) => MilestoneEntity, (milestone) => milestone.issues, {
+  @ManyToOne(() => MilestoneEntity, (milestone) => milestone.issues, {
     onUpdate: "CASCADE",
   })
   @JoinColumn({
@@ -50,7 +51,7 @@ export class IssueEntity {
   })
   milestone?: MilestoneEntity;
 
-  @ManyToOne((type) => UserEntity, (user) => user.issues, {
+  @ManyToOne(() => UserEntity, (user) => user.issues, {
     onUpdate: "CASCADE",
   })
   @JoinColumn({
@@ -59,20 +60,22 @@ export class IssueEntity {
   })
   author!: UserEntity;
 
-  @OneToMany((type) => CommentEntity, (comment) => comment.issue, {
+  @OneToMany(() => CommentEntity, (comment) => comment.issue, {
     cascade: true,
   })
   comments?: CommentEntity[];
 
   @OneToMany(
-    (type) => IssueHasLabelEntity,
+    () => IssueHasLabelEntity,
     (issueHasLabel) => issueHasLabel.issue,
     { cascade: true }
   )
   issueHasLabels?: IssueHasLabelEntity[];
 
-  @OneToMany((type) => AssigneesEntity, (assignees) => assignees.issue, {
+  @OneToMany(() => AssigneesEntity, (assignees) => assignees.issue, {
     cascade: true,
   })
   assignees?: AssigneesEntity[];
 }
+
+export default IssueEntity;

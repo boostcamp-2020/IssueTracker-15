@@ -1,8 +1,8 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { IssueHasLabelEntity } from "./issue-label.entity";
+import IssueHasLabelEntity from "./issue-label.entity";
 
 @Entity("Label")
-export class LabelEntity {
+class LabelEntity {
   @PrimaryGeneratedColumn({ type: "int" })
   id!: number;
 
@@ -16,9 +16,10 @@ export class LabelEntity {
   color!: string;
 
   @OneToMany(
-    (type) => IssueHasLabelEntity,
+    () => IssueHasLabelEntity,
     (issueHasLabel) => issueHasLabel.label,
     { cascade: true }
   )
   issueHasLabels?: IssueHasLabelEntity[];
 }
+export default LabelEntity;

@@ -1,23 +1,23 @@
 import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
-import { IssueEntity } from "./issue.entity";
-import { UserEntity } from "./user.entity";
+import IssueEntity from "./issue.entity";
+import UserEntity from "./user.entity";
 
 @Entity("Assignees")
-export class AssigneesEntity {
+class AssigneesEntity {
   @PrimaryColumn()
   userId!: number;
 
   @PrimaryColumn()
   issueId!: number;
 
-  @ManyToOne((type) => UserEntity, (user) => user.assignees, {
+  @ManyToOne(() => UserEntity, (user) => user.assignees, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
   @JoinColumn({ name: "userId", referencedColumnName: "id" })
   user!: UserEntity;
 
-  @ManyToOne((type) => IssueEntity, (issue) => issue.assignees, {
+  @ManyToOne(() => IssueEntity, (issue) => issue.assignees, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
@@ -27,3 +27,5 @@ export class AssigneesEntity {
   })
   issue!: IssueEntity;
 }
+
+export default AssigneesEntity;

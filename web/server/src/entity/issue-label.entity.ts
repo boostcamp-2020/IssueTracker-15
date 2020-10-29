@@ -1,16 +1,16 @@
-import { Entity, Index, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
-import { IssueEntity } from "./issue.entity";
-import { LabelEntity } from "./label.entity";
+import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
+import IssueEntity from "./issue.entity";
+import LabelEntity from "./label.entity";
 
 @Entity("IssueHasLabel")
-export class IssueHasLabelEntity {
+class IssueHasLabelEntity {
   @PrimaryColumn()
   issueId!: number;
 
   @PrimaryColumn()
   labelId!: number;
 
-  @ManyToOne((type) => LabelEntity, (label) => label.issueHasLabels, {
+  @ManyToOne(() => LabelEntity, (label) => label.issueHasLabels, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
@@ -20,7 +20,7 @@ export class IssueHasLabelEntity {
   })
   label!: LabelEntity;
 
-  @ManyToOne((type) => IssueEntity, (issue) => issue.issueHasLabels, {
+  @ManyToOne(() => IssueEntity, (issue) => issue.issueHasLabels, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
@@ -30,3 +30,5 @@ export class IssueHasLabelEntity {
   })
   issue!: IssueEntity;
 }
+
+export default IssueHasLabelEntity;
