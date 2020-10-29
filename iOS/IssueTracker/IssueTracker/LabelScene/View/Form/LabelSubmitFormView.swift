@@ -38,6 +38,7 @@ class LabelSubmitFormView: UIView {
     
     private func configureTapGesture() {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
     }
     
     @IBAction func refreshColorTapped(_ sender: UIButton) {
@@ -73,6 +74,10 @@ class LabelSubmitFormView: UIView {
     
     @IBAction func closeButtonTapped(_ sender: Any) {
         self.removeFromSuperview()
+    }
+    
+    @objc func backgroundTapped() {
+        removeFromSuperview()
     }
 }
 

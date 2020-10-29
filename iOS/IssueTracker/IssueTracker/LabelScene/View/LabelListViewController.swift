@@ -83,6 +83,7 @@ extension LabelListViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = LabelHeaderView.dequeue(from: collectionView, for: indexPath) else { return UICollectionReusableView() }
         
+        header.configure(title: "레이블")
         header.plusButtonTapped = { [weak self] in
             self?.showSubmitFormView()
         }
