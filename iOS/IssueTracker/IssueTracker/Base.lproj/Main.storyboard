@@ -146,6 +146,9 @@
                                                 <rect key="frame" x="266" y="0.0" width="128" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="plus" catalog="system"/>
+                                                <connections>
+                                                    <action selector="plusButtonTapped:" destination="DLS-2q-TJY" eventType="touchUpInside" id="5Md-In-xKj"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>

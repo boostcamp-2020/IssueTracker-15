@@ -42,9 +42,36 @@ class MilestoneListViewController: UIViewController {
         layout.sectionHeadersPinToVisibleBounds = true
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
+    
+    @IBAction func plusButtonTapped(_ sender: Any) {
+        showSubmitFormView()
+    }
+    
+    private func showSubmitFormView(indexPath: IndexPath? = nil) {
+        guard let tabBarController = self.tabBarController, let milestoneSubmitFormView = MilestoneSubmitFormView.createView() else { return }
+        
+        if let indexPath = indexPath {
+            milestoneSubmitFormView.configure(milestoneItemViewModel: milestoneListViewModel?.cellForItemAt(path: indexPath))
+            milestoneSubmitFormView.submitButtonTapped = { (title, description, dueDate) in
+                self.milestoneListViewModel?.editMileStone(at: indexPath, title: title, description: description, dueDate: dueDate)
+            }
+        } else {
+            milestoneSubmitFormView.configure()
+            milestoneSubmitFormView.submitButtonTapped = self.milestoneListViewModel?.addNewMileStone
+        }
+        
+        tabBarController.view.addSubview(milestoneSubmitFormView)
+        milestoneSubmitFormView.frame = tabBarController.view.frame
+    }
+    
 }
 
 extension MilestoneListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showSubmitFormView(indexPath: indexPath)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return milestoneListViewModel?.numberOfItem() ?? 0
     }

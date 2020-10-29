@@ -348,9 +348,9 @@
 		966DD036254A5AFA00A44FBA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				96A58F49254A86A900248F1E /* SubmitForm */,
 				95C36580254A6F80008ACCB5 /* MilestoneListViewController.swift */,
 				95C36589254A7415008ACCB5 /* MilestoneCell */,
+				96A58F49254A86A900248F1E /* SubmitForm */,
 			);
 			name = View;
 			sourceTree = "<group>";
