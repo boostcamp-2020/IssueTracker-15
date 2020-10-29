@@ -11,15 +11,22 @@ import Foundation
 
 class LabelListViewModelMock: IssueTracker.LabelListViewModelProtocol {
     
-    var didFetch: (() -> Void)?
-    
     var needFetchItemsCalled = false
     
     var cellForItemAtCalled = false
     var calledCellIndexPath: IndexPath?
     
     var numberOfItemCalled = false
-    var numberOfItemValue = 0
+    
+    var addNewLabelCalled = false
+    var addedLabel: IssueTracker.Label?
+    
+    var editLabelCalled = false
+    var edittedIndex: IndexPath?
+    
+    var labels = [IssueTracker.Label]()
+    
+    var didFetch: (() -> Void)?
     
     func needFetchItems() {
         needFetchItemsCalled = true
@@ -28,20 +35,20 @@ class LabelListViewModelMock: IssueTracker.LabelListViewModelProtocol {
     func cellForItemAt(path: IndexPath) -> IssueTracker.LabelItemViewModel {
         calledCellIndexPath = path
         cellForItemAtCalled = true
-        return IssueTracker.LabelItemViewModel(label: IssueTracker.Label(title: "A", description: "B", hexColor: "C"))
+        return IssueTracker.LabelItemViewModel(label: labels[path.row])
     }
     
     func numberOfItem() -> Int {
         numberOfItemCalled = true
-        return 10
+        return labels.count
     }
     
     func addNewLabel(title: String, desc: String, hexColor: String) {
-        
+        labels.append(IssueTracker.Label(title: title, description: desc, hexColor: hexColor))
     }
     
     func editLabel(at indexPath: IndexPath, title: String, desc: String, hexColor: String) {
-        
+        labels[indexPath.row] = IssueTracker.Label(title: title, description: desc, hexColor: hexColor)
     }
     
 }
