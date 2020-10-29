@@ -65,7 +65,7 @@ class LabelSubmitFormView: UIView {
         }
     }
     
-    @IBAction func refreshFormButtonTapped(_ sender: UIButton) {
+    @IBAction func resetFormButtonTapped(_ sender: UIButton) {
         titleField.text = ""
         descField.text = ""
         hexCodeField.text = defaultColorCode

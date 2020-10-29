@@ -58,7 +58,7 @@ class LabelSubmitFormViewTests: XCTestCase {
         let view = makeSUT()
         view.configure(labelViewModel: testData)
         
-        view.refreshFormButtonTapped(UIButton())
+        view.resetFormButtonTapped(UIButton())
         
         XCTAssertEqual(view.titleField.text, "")
         XCTAssertEqual(view.descField.text, "")
