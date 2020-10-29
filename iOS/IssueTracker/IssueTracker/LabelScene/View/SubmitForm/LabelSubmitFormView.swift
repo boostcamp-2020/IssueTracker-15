@@ -52,16 +52,14 @@ class LabelSubmitFormView: UIView {
         return String((1...6).map { _ in letters.randomElement()! })
     }
     
-    @IBAction func submitButtonTapped(_ sender: UIButton) {
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
         if let titleText = titleField.text, !titleText.isEmpty,
             let descText = descField.text, !descText.isEmpty,
             let hexCodeText = hexCodeField.text, !hexCodeText.isEmpty {
             submitbuttonTapped?(titleText, descText, hexCodeText)
             self.removeFromSuperview()
         } else {
-            let alert = UIAlertController(title: "제목, 설명, 색상을\n모두 입력해주세요!", message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: nil))
-            self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+            self.showAlert(title: "제목, 설명, 색상을\n모두 입력해주세요!")
         }
     }
     
