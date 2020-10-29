@@ -69,6 +69,7 @@
 		96A58F4F254A8C1B00248F1E /* MilestoneSubmitForm+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F4E254A8C1B00248F1E /* MilestoneSubmitForm+Keyboard.swift */; };
 		96A58F51254A8C3500248F1E /* MilestoneSubmitForm+NibLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F50254A8C3500248F1E /* MilestoneSubmitForm+NibLoad.swift */; };
 		96A58F53254A91AC00248F1E /* String+ContainRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F52254A91AC00248F1E /* String+ContainRegex.swift */; };
+		96A58F55254AA5BC00248F1E /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F54254AA5BC00248F1E /* String+Date.swift */; };
 		96C734CF2549420000DEC9A4 /* LabelSubmitFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96C734CD254941FF00DEC9A4 /* LabelSubmitFormView.xib */; };
 		96C734D02549420000DEC9A4 /* LabelSubmitFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734CE254941FF00DEC9A4 /* LabelSubmitFormView.swift */; };
 		96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */; };
@@ -136,6 +137,7 @@
 		96A58F4E254A8C1B00248F1E /* MilestoneSubmitForm+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MilestoneSubmitForm+Keyboard.swift"; sourceTree = "<group>"; };
 		96A58F50254A8C3500248F1E /* MilestoneSubmitForm+NibLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MilestoneSubmitForm+NibLoad.swift"; sourceTree = "<group>"; };
 		96A58F52254A91AC00248F1E /* String+ContainRegex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ContainRegex.swift"; sourceTree = "<group>"; };
+		96A58F54254AA5BC00248F1E /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		96C734CD254941FF00DEC9A4 /* LabelSubmitFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelSubmitFormView.xib; sourceTree = "<group>"; };
 		96C734CE254941FF00DEC9A4 /* LabelSubmitFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelSubmitFormView.swift; sourceTree = "<group>"; };
 		96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				96A58F52254A91AC00248F1E /* String+ContainRegex.swift */,
 				9505446E254AA6E0007767C6 /* UIView+ShowAlert.swift */,
 				95054472254AAC0D007767C6 /* CollectionView+.swift */,
+				96A58F54254AA5BC00248F1E /* String+Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				966DD02B254A259F00A44FBA /* Array+SafeAccess.swift in Sources */,
 				9505446F254AA6E0007767C6 /* UIView+ShowAlert.swift in Sources */,
 				95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */,
+				96A58F55254AA5BC00248F1E /* String+Date.swift in Sources */,
 				950EA05C2547FFA0005BE133 /* LabelCellView.swift in Sources */,
 				96C734D02549420000DEC9A4 /* LabelSubmitFormView.swift in Sources */,
 				950EB00F254A94D0004857C2 /* UILabel+FontSize.swift in Sources */,

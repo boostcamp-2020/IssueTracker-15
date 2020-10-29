@@ -27,7 +27,7 @@ struct MilestoneItemViewModel: MilestoneCellConfigurable, MilestoneSubmitFormCon
     
     private(set) var title: String
     private(set) var description: String
-    private(set) var dueDate: Date
+    private(set) var dueDate: Date?
     private(set) var issueOpened: Int = 0
     private(set) var issueClosed: Int = 0
     
@@ -35,16 +35,18 @@ struct MilestoneItemViewModel: MilestoneCellConfigurable, MilestoneSubmitFormCon
         self.title = milestone.title
         self.description = milestone.description
         // TODO:- TIMESTAMP 형식 데이터를 알맞게 변환
-        self.dueDate = Date()
+        self.dueDate = milestone.dueDate.dateForMilestoneViewModel
     }
     
     var dueDateText: String {
-        dueDate.stringForMilestone + "까지"
+        if let date = dueDate {
+            return date.stringForMilestone + "까지"
+        }
+        return ""
     }
     
-    
     var dueDateForForm: String {
-        dueDate.stringForSubmitForm
+        dueDate?.stringForSubmitForm ?? ""
     }
     
     var openIssue: String {

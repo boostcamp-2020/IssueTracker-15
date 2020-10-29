@@ -29,6 +29,7 @@ class MilestoneListViewModel: MilestoneListViewModelProtocol {
     
     func editMileStone(at indexPath: IndexPath, title: String, description: String, dueDate: String) {
         milestones[indexPath.row] = Milestone(id: milestones[indexPath.row].id, title: title, description: description, dueDate: dueDate + " 00:00:00")
+        didFetch?()
     }
     
     func needFetchItems() {
