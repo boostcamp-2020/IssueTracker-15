@@ -17,7 +17,13 @@ protocol MilestoneCellConfigurable {
     var percentage: String { get }
 }
 
-struct MilestoneItemViewModel: MilestoneCellConfigurable {
+protocol MilestoneSubmitFormConfigurable {
+    var title: String { get }
+    var description: String { get }
+    var dueDateForForm: String { get }
+}
+
+struct MilestoneItemViewModel: MilestoneCellConfigurable, MilestoneSubmitFormConfigurable {
     
     private(set) var title: String
     private(set) var description: String
@@ -34,6 +40,11 @@ struct MilestoneItemViewModel: MilestoneCellConfigurable {
     
     var dueDateText: String {
         dueDate.stringForMilestone + "까지"
+    }
+    
+    
+    var dueDateForForm: String {
+        dueDate.stringForSubmitForm
     }
     
     var openIssue: String {

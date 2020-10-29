@@ -14,4 +14,8 @@ extension Date {
         DateFormatter.dateForMileStone.string(from: self)
     }
     
+    var stringForSubmitForm: String {
+        DateFormatter.dateForSubmitForm.string(from: self)
+    }
+    
 }
