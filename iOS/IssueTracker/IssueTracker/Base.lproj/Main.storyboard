@@ -32,8 +32,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZXv-M7-w6X">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem id="M0E-SE-J7H">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" id="rkn-9v-HSW">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jhq-ak-zeV">
+                                                <rect key="frame" x="266" y="0.0" width="128" height="44"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" image="plus" catalog="system"/>
+                                                <connections>
+                                                    <action selector="plusButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="p2T-ux-4Fr"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TRp-x7-khU">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hOc-uy-123">
                                     <size key="itemSize" width="128" height="128"/>
@@ -55,7 +74,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="TRp-x7-khU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XWF-uc-3Lr"/>
+                            <constraint firstItem="TRp-x7-khU" firstAttribute="top" secondItem="ZXv-M7-w6X" secondAttribute="bottom" id="8Av-ms-M06"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" secondItem="ZXv-M7-w6X" secondAttribute="leading" id="Glc-vk-0f2"/>
+                            <constraint firstItem="ZXv-M7-w6X" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JkW-yN-0nq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZXv-M7-w6X" secondAttribute="trailing" id="T6S-YY-6w9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TRp-x7-khU" secondAttribute="trailing" id="Zf6-Wj-gYO"/>
                             <constraint firstItem="TRp-x7-khU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mz3-kn-C60"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="TRp-x7-khU" secondAttribute="bottom" id="qt8-Aj-enq"/>
@@ -71,6 +93,22 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="114.50892857142857"/>
         </scene>
+        <!--설정-->
+        <scene sceneID="50k-Na-IIw">
+            <objects>
+                <viewController id="A2t-uE-9cx" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bvu-0U-8wt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="G6G-aE-yPu"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="설정" image="4.circle.fill" catalog="system" id="FLg-cc-DFw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f5y-OR-wqb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="894"/>
+        </scene>
         <!--마일스톤-->
         <scene sceneID="vGW-gX-tPY">
             <objects>
@@ -80,7 +118,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="s3J-Rm-mPR">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OZP-6Q-hnZ">
                                     <size key="itemSize" width="128" height="128"/>
@@ -99,10 +137,20 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dZ-x2-OnV">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <color key="barTintColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <items>
+                                    <navigationItem title="Title" id="Lzl-fd-QNl"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="s3J-Rm-mPR" firstAttribute="top" secondItem="KJZ-wC-3qJ" secondAttribute="top" id="gUu-f6-HHO"/>
+                            <constraint firstItem="s3J-Rm-mPR" firstAttribute="top" secondItem="5dZ-x2-OnV" secondAttribute="bottom" id="0gc-eR-EZB"/>
+                            <constraint firstItem="5dZ-x2-OnV" firstAttribute="top" secondItem="KJZ-wC-3qJ" secondAttribute="top" id="b2Z-0i-XCK"/>
+                            <constraint firstItem="5dZ-x2-OnV" firstAttribute="leading" secondItem="KJZ-wC-3qJ" secondAttribute="leading" id="fu6-OF-tfG"/>
+                            <constraint firstAttribute="trailing" secondItem="5dZ-x2-OnV" secondAttribute="trailing" id="pfU-PV-jRN"/>
                             <constraint firstItem="KJZ-wC-3qJ" firstAttribute="bottom" secondItem="s3J-Rm-mPR" secondAttribute="bottom" id="qtx-X7-7Oc"/>
                             <constraint firstItem="KJZ-wC-3qJ" firstAttribute="trailing" secondItem="s3J-Rm-mPR" secondAttribute="trailing" id="urT-cu-jfP"/>
                             <constraint firstItem="s3J-Rm-mPR" firstAttribute="leading" secondItem="KJZ-wC-3qJ" secondAttribute="leading" id="vaD-uK-fCS"/>
@@ -116,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SRx-lK-EyO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1048" y="847"/>
+            <point key="canvasLocation" x="1076.8115942028987" y="893.97321428571422"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="lZW-qO-aFg">
@@ -132,6 +180,7 @@
                         <segue destination="B8N-ph-yYZ" kind="relationship" relationship="viewControllers" id="YnQ-dh-PYS"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="23p-zc-Eaa"/>
                         <segue destination="DLS-2q-TJY" kind="relationship" relationship="viewControllers" id="mkz-Sa-6JO"/>
+                        <segue destination="A2t-uE-9cx" kind="relationship" relationship="viewControllers" id="va4-Ug-gFL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="niw-cI-Qff" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -161,5 +210,7 @@
     <resources>
         <image name="2.circle.fill" catalog="system" width="128" height="121"/>
         <image name="3.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="4.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
     </resources>
 </document>

@@ -10,10 +10,10 @@
 		60D4FF13E042363CE8805B41 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5A0B739C1DAF0771E82345 /* Pods_IssueTracker.framework */; };
 		950EA05C2547FFA0005BE133 /* LabelCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EA05A2547FFA0005BE133 /* LabelCellView.swift */; };
 		950EA05D2547FFA0005BE133 /* LabelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950EA05B2547FFA0005BE133 /* LabelCellView.xib */; };
-		950EA0602547FFF9005BE133 /* LabelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EA05E2547FFF9005BE133 /* LabelHeaderView.swift */; };
-		950EA0612547FFF9005BE133 /* LabelHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950EA05F2547FFF9005BE133 /* LabelHeaderView.xib */; };
+		950EA0602547FFF9005BE133 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EA05E2547FFF9005BE133 /* HeaderView.swift */; };
+		950EA0612547FFF9005BE133 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950EA05F2547FFF9005BE133 /* HeaderView.xib */; };
 		952FF3D3254804970042A96F /* LabelCell+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF3D2254804970042A96F /* LabelCell+CollectionView.swift */; };
-		952FF3D5254805EE0042A96F /* LabelHeader+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF3D4254805EE0042A96F /* LabelHeader+CollectionView.swift */; };
+		952FF3D5254805EE0042A96F /* Header+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF3D4254805EE0042A96F /* Header+CollectionView.swift */; };
 		95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
 		95C2F8982547EDC7006B3BC6 /* ColorConvertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */; };
 		95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F89B2547EF47006B3BC6 /* String+Color.swift */; };
@@ -40,9 +40,9 @@
 		963971E12549BB83005BB4FA /* LabelSubmitFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96C734CD254941FF00DEC9A4 /* LabelSubmitFormView.xib */; };
 		963971E22549BB83005BB4FA /* LabelSubmitFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734CE254941FF00DEC9A4 /* LabelSubmitFormView.swift */; };
 		963971E32549BB83005BB4FA /* LableSubmitForm+Nibload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C97281254957E40056ACA1 /* LableSubmitForm+Nibload.swift */; };
-		963971E42549BB83005BB4FA /* LabelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EA05E2547FFF9005BE133 /* LabelHeaderView.swift */; };
-		963971E52549BB83005BB4FA /* LabelHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950EA05F2547FFF9005BE133 /* LabelHeaderView.xib */; };
-		963971E62549BB83005BB4FA /* LabelHeader+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF3D4254805EE0042A96F /* LabelHeader+CollectionView.swift */; };
+		963971E42549BB83005BB4FA /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EA05E2547FFF9005BE133 /* HeaderView.swift */; };
+		963971E52549BB83005BB4FA /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950EA05F2547FFF9005BE133 /* HeaderView.xib */; };
+		963971E62549BB83005BB4FA /* Header+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF3D4254805EE0042A96F /* Header+CollectionView.swift */; };
 		963971E72549BB83005BB4FA /* LabelCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EA05A2547FFA0005BE133 /* LabelCellView.swift */; };
 		963971E82549BB83005BB4FA /* LabelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950EA05B2547FFA0005BE133 /* LabelCellView.xib */; };
 		963971E92549BB83005BB4FA /* LabelCell+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF3D2254804970042A96F /* LabelCell+CollectionView.swift */; };
@@ -90,10 +90,10 @@
 		2E821A460A4A5DD482366AE3 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		950EA05A2547FFA0005BE133 /* LabelCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCellView.swift; sourceTree = "<group>"; };
 		950EA05B2547FFA0005BE133 /* LabelCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCellView.xib; sourceTree = "<group>"; };
-		950EA05E2547FFF9005BE133 /* LabelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelHeaderView.swift; sourceTree = "<group>"; };
-		950EA05F2547FFF9005BE133 /* LabelHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelHeaderView.xib; sourceTree = "<group>"; };
+		950EA05E2547FFF9005BE133 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		950EA05F2547FFF9005BE133 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		952FF3D2254804970042A96F /* LabelCell+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LabelCell+CollectionView.swift"; sourceTree = "<group>"; };
-		952FF3D4254805EE0042A96F /* LabelHeader+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LabelHeader+CollectionView.swift"; sourceTree = "<group>"; };
+		952FF3D4254805EE0042A96F /* Header+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Header+CollectionView.swift"; sourceTree = "<group>"; };
 		95C2F8942547EBE0006B3BC6 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConvertTests.swift; sourceTree = "<group>"; };
 		95C2F89B2547EF47006B3BC6 /* String+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Color.swift"; sourceTree = "<group>"; };
@@ -173,7 +173,6 @@
 			children = (
 				95E9F57F2546EC07001FBA0D /* LabelListViewController.swift */,
 				96C734CC254941FF00DEC9A4 /* Form */,
-				952FF3D9254814350042A96F /* LabelHeader */,
 				952FF3D82548142E0042A96F /* LabelCell */,
 			);
 			path = View;
@@ -210,14 +209,14 @@
 			path = LabelCell;
 			sourceTree = "<group>";
 		};
-		952FF3D9254814350042A96F /* LabelHeader */ = {
+		952FF3D9254814350042A96F /* Header */ = {
 			isa = PBXGroup;
 			children = (
-				950EA05E2547FFF9005BE133 /* LabelHeaderView.swift */,
-				950EA05F2547FFF9005BE133 /* LabelHeaderView.xib */,
-				952FF3D4254805EE0042A96F /* LabelHeader+CollectionView.swift */,
+				950EA05E2547FFF9005BE133 /* HeaderView.swift */,
+				950EA05F2547FFF9005BE133 /* HeaderView.xib */,
+				952FF3D4254805EE0042A96F /* Header+CollectionView.swift */,
 			);
-			path = LabelHeader;
+			path = Header;
 			sourceTree = "<group>";
 		};
 		952FF3DA254814650042A96F /* Supports */ = {
@@ -395,6 +394,7 @@
 		96C8357325490EFF0086A6E6 /* CustomUI */ = {
 			isa = PBXGroup;
 			children = (
+				952FF3D9254814350042A96F /* Header */,
 				96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */,
 			);
 			path = CustomUI;
@@ -498,7 +498,7 @@
 				95C36593254A76BB008ACCB5 /* MilestoneCellView.xib in Resources */,
 				9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */,
 				95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */,
-				950EA0612547FFF9005BE133 /* LabelHeaderView.xib in Resources */,
+				950EA0612547FFF9005BE133 /* HeaderView.xib in Resources */,
 				95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */,
 				95C3658D254A745D008ACCB5 /* MilestoneHeaderView.xib in Resources */,
 				95E9F5832546EC07001FBA0D /* Main.storyboard in Resources */,
@@ -511,7 +511,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				963971E52549BB83005BB4FA /* LabelHeaderView.xib in Resources */,
+				963971E52549BB83005BB4FA /* HeaderView.xib in Resources */,
 				963971E82549BB83005BB4FA /* LabelCellView.xib in Resources */,
 				963971E12549BB83005BB4FA /* LabelSubmitFormView.xib in Resources */,
 			);
@@ -594,7 +594,7 @@
 				966DD039254A5B1600A44FBA /* Milestone.swift in Sources */,
 				96C734D52549452600DEC9A4 /* LabelItemViewModel.swift in Sources */,
 				95C36595254A76C8008ACCB5 /* MilestoneCell+CollectionView.swift in Sources */,
-				950EA0602547FFF9005BE133 /* LabelHeaderView.swift in Sources */,
+				950EA0602547FFF9005BE133 /* HeaderView.swift in Sources */,
 				96A58F3D254A6A3300248F1E /* DateFormatter+.swift in Sources */,
 				95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */,
 				95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */,
@@ -609,7 +609,7 @@
 				9670B37F2549E9E10026B0C9 /* MainTabBarController.swift in Sources */,
 				95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */,
 				95C3658F254A7501008ACCB5 /* MilestoneHeader+CollectionView.swift in Sources */,
-				952FF3D5254805EE0042A96F /* LabelHeader+CollectionView.swift in Sources */,
+				952FF3D5254805EE0042A96F /* Header+CollectionView.swift in Sources */,
 				95C3658C254A745D008ACCB5 /* MilestoneHeaderView.swift in Sources */,
 				95C97282254957E40056ACA1 /* LableSubmitForm+Nibload.swift in Sources */,
 				96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */,
@@ -625,14 +625,14 @@
 				963971E02549BB83005BB4FA /* LabelListViewController.swift in Sources */,
 				963971E92549BB83005BB4FA /* LabelCell+CollectionView.swift in Sources */,
 				96A58F41254A6E4100248F1E /* MilestoneItemViewModel.swift in Sources */,
-				963971E42549BB83005BB4FA /* LabelHeaderView.swift in Sources */,
+				963971E42549BB83005BB4FA /* HeaderView.swift in Sources */,
 				963971EE2549BB91005BB4FA /* String+Color.swift in Sources */,
 				963971F32549D32F005BB4FA /* LabelSubmitForm+Keyboard.swift in Sources */,
 				96A58F47254A6F4100248F1E /* Date+.swift in Sources */,
 				963971E22549BB83005BB4FA /* LabelSubmitFormView.swift in Sources */,
 				963971ED2549BB91005BB4FA /* Label.swift in Sources */,
 				963971EC2549BB91005BB4FA /* BadgeLabelView.swift in Sources */,
-				963971E62549BB83005BB4FA /* LabelHeader+CollectionView.swift in Sources */,
+				963971E62549BB83005BB4FA /* Header+CollectionView.swift in Sources */,
 				96A58F46254A6F4100248F1E /* DateFormatter+.swift in Sources */,
 				963971F22549BC5F005BB4FA /* LabelListViewModelMock.swift in Sources */,
 				963971F52549D5AF005BB4FA /* LabelCellViewTest.swift in Sources */,

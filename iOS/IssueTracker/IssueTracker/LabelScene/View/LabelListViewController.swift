@@ -31,13 +31,13 @@ class LabelListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         LabelCellView.register(in: collectionView)
-        LabelHeaderView.register(in: collectionView)
+        HeaderView.register(in: collectionView)
     }
     
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 10)
-        layout.headerReferenceSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 6.5)
+        layout.headerReferenceSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 12)
         layout.minimumLineSpacing = 1
         layout.sectionHeadersPinToVisibleBounds = true
         collectionView.setCollectionViewLayout(layout, animated: false)
@@ -60,6 +60,9 @@ class LabelListViewController: UIViewController {
         labelSubmitFormView.frame = tabBarController.view.frame
     }
     
+    @IBAction func plusButtonTapped(_ sender: Any) {
+        showSubmitFormView()
+    }
 }
 
 extension LabelListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -81,12 +84,9 @@ extension LabelListViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = LabelHeaderView.dequeue(from: collectionView, for: indexPath) else { return UICollectionReusableView() }
+        guard let header = HeaderView.dequeue(from: collectionView, for: indexPath) else { return UICollectionReusableView() }
         
         header.configure(title: "레이블")
-        header.plusButtonTapped = { [weak self] in
-            self?.showSubmitFormView()
-        }
         
         return header
     }

@@ -8,9 +8,8 @@
 
 import UIKit
 
-class LabelHeaderView: UICollectionReusableView {
+class HeaderView: UICollectionReusableView {
     @IBOutlet weak var headerLabel: UILabel!
-    var plusButtonTapped: (() -> Void)?
     
     func configure(title: String) {
         headerLabel.text = title
@@ -20,9 +19,5 @@ class LabelHeaderView: UICollectionReusableView {
         super.layoutSubviews()
         headerLabel.font = headerLabel.font.withSize(headerLabel.bounds.height)
     }
-    
-    @IBAction func plusButtonTapped(_ sender: Any) {
-        plusButtonTapped?()
-    }
-    
+
 }
