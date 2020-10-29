@@ -21,7 +21,6 @@ class MilestoneListViewController: UIViewController {
         setupCollectionViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
-        MilestoneHeaderView.register(in: collectionView)
         MilestoneCellView.register(in: collectionView)
     }
     
@@ -50,10 +49,4 @@ extension MilestoneListViewController: UICollectionViewDataSource, UICollectionV
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = MilestoneHeaderView.dequeue(from: collectionView, for: indexPath) else { return UICollectionReusableView() }
-        
-        header.configure(title: "마일스톤")
-        return header
-    }
 }
