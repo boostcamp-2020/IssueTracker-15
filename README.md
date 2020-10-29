@@ -14,6 +14,7 @@
 </div>
 
 ## [🏡 Wiki Home](https://github.com/boostcamp-2020/IssueTracker-15/wiki)
+그라운드 룰, 데일리 스크럼, 스프린트계획 회의 등을 기록합니다.  
 
 ## 👨‍👨‍👧‍👦팀원 소개
 
