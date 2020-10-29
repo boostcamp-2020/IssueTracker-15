@@ -3,7 +3,6 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { APIRouter } from "../routers/";
 import { createDBConnection } from "./databse";
-
 const app = express();
 
 export default async ({ app }: { app: express.Application }) => {
