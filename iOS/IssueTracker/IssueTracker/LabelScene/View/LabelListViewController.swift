@@ -29,7 +29,7 @@ class LabelListViewController: UIViewController {
         setupCollectionViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
-        LabelCellView.register(in: collectionView)
+        collectionView.register(type: LabelCellView.self)
         HeaderView.register(in: collectionView)
     }
     
@@ -70,9 +70,10 @@ extension LabelListViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = LabelCellView.dequeue(from: collectionView, for: indexPath),
+        guard let cell: LabelCellView = collectionView.dequeueCell(at: indexPath),
             let cellViewModel = labelListViewModel?.cellForItemAt(path: indexPath)
             else { return UICollectionViewCell() }
+        
         cell.configure(with: cellViewModel)
         cell.nextButtonTapped = { [weak self] in
             self?.showSubmitFormView(indexPath: indexPath)

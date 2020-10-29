@@ -9,6 +9,7 @@
 import UIKit
 
 class MilestoneCellView: UICollectionViewCell {
+    static let identifier = "MilestoneCellView"
     @IBOutlet weak var titleLabel: BadgeLabelView!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -53,5 +54,15 @@ class MilestoneCellView: UICollectionViewCell {
     
     private func configureCloseddIssue(with closedIssue: String) {
         closedIssueLabel.text = closedIssue
+    }
+}
+
+extension MilestoneCellView: UICollectionViewRegisterable {
+    static var cellIdentifier: String {
+        return "MilestoneCellView"
+    }
+
+    static var cellNib: UINib {
+        return UINib(nibName: "MilestoneCellView", bundle: nil)
     }
 }
