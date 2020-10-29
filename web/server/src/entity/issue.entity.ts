@@ -32,7 +32,7 @@ export class IssueEntity {
   @Column({ type: "timestamp", nullable: true })
   updateAt?: Date;
 
-  @Column({ type: "boolean", nullable: false })
+  @Column({ type: "boolean", nullable: false, default: true })
   isOpend!: boolean;
 
   @Column({ type: "number", nullable: true })
