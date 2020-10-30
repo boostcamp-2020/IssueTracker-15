@@ -1,2 +1,5 @@
 import express from "express";
-export const CommentRouter = express.Router();
+
+const CommentRouter = express.Router();
+
+export default CommentRouter;

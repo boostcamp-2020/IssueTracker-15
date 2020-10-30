@@ -1,3 +1,5 @@
-import express, { Request, Response } from "express";
+import express from "express";
 
-export const SignInRouter = express.Router();
+const SignInRouter = express.Router();
+
+export default SignInRouter;

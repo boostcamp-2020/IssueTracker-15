@@ -1,2 +1,5 @@
 import express from "express";
-export const MilestoneRouter = express.Router();
+
+const MilestoneRouter = express.Router();
+
+export default MilestoneRouter;
