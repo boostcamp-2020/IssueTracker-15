@@ -6,7 +6,7 @@
 <div align="center" style="margin-top : 10px ">
 
 ![Swift](https://img.shields.io/badge/swift-v5.1-orange?logo=swift)
-![Xcode](https://img.shields.io/badge/xcode-v12.1-blue?logo=xcode)
+![Xcode](https://img.shields.io/badge/xcode-v11.7-blue?logo=xcode)
 ![Typescript](https://img.shields.io/badge/typescript-v4.0.3-white?logo=typescript)
 ![react](https://img.shields.io/badge/react-0.0-9cf?logo=react)
 ![NodeJS](https://img.shields.io/badge/node.js-v12.18.3-green?logo=node.js)
