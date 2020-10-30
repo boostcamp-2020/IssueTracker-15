@@ -5,11 +5,11 @@
 
 <div align="center" style="margin-top : 10px ">
 
-![Swift](https://img.shields.io/badge/swift-v5.1-orange?logo=swift)
+![Swift](https://img.shields.io/badge/swift-v5.2.4-orange?logo=swift)
 ![Xcode](https://img.shields.io/badge/xcode-v11.7-blue?logo=xcode)
-![Typescript](https://img.shields.io/badge/typescript-v4.0.3-white?logo=typescript)
+![Typescript](https://img.shields.io/badge/typescript-v4.0.5-white?logo=typescript)
 ![react](https://img.shields.io/badge/react-17.0.1-9cf?logo=react)
-![NodeJS](https://img.shields.io/badge/node.js-v12.18.3-green?logo=node.js)
+![NodeJS](https://img.shields.io/badge/node.js-v14.13.1-green?logo=node.js)
 
 </div>
 
