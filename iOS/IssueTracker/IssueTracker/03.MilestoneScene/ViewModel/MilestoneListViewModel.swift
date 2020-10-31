@@ -23,7 +23,8 @@ class MilestoneListViewModel: MilestoneListViewModelProtocol {
     
     func addNewMileStone(title: String, description: String, dueDate: String) {
         let newMilestone = Milestone(id: 1, title: title, description: description, dueDate: dueDate + " 00:00:00")
-        milestones.append(newMilestone)
+        milestones.insert(newMilestone, at: 0)
+        
         didFetch?()
     }
     
