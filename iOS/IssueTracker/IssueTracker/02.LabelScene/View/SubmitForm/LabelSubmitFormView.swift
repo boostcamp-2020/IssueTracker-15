@@ -10,6 +10,7 @@ import UIKit
 
 class LabelSubmitFormView: UIView {
     var formViewEndPoint: CGFloat?
+    var moveUpward: CGFloat = 0
     var saveButtonTapped: ((String, String, String) -> Void)?
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var formView: UIView!
@@ -37,7 +38,7 @@ class LabelSubmitFormView: UIView {
     }
     
     private func configureTapGesture() {
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        formView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(formViewTapped)))
         backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
     }
     
@@ -59,8 +60,16 @@ class LabelSubmitFormView: UIView {
             saveButtonTapped?(titleText, descText, hexCodeText)
             self.removeFromSuperview()
         } else {
-            self.showAlert(title: "제목, 설명, 색상을\n모두 입력해주세요!")
+            self.showAlert(title: "제목, 설명, 색상을\n모두 입력해주세요!", prepare: movewFormViewDownward, completion: moveFormViewUpward)
         }
+    }
+    
+    private func moveFormViewUpward() {
+        formView.frame.origin.y -= moveUpward
+    }
+    
+    private func movewFormViewDownward() {
+        formView.frame.origin.y += moveUpward
     }
     
     @IBAction func resetFormButtonTapped(_ sender: UIButton) {

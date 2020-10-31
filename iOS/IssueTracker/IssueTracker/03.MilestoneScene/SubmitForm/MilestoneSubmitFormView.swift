@@ -10,6 +10,7 @@ import UIKit
 
 class MilestoneSubmitFormView: UIView {
     var formViewEndPoint: CGFloat?
+    var moveUpward: CGFloat = 0
     var saveButtonTapped: ((String, String, String) -> Void)?
     @IBOutlet weak var formView: UIView!
     @IBOutlet weak var backgroundView: UIView!
@@ -32,23 +33,31 @@ class MilestoneSubmitFormView: UIView {
     }
     
     private func configureTapGesture() {
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(formViewTapped)))
         backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         guard checkDateFieldValidation() else {
-            self.showAlert(title: "날짜를 양식에 맞게 적어주세요!")
+            self.showAlert(title: "날짜를 양식에 맞게 적어주세요!", prepare: moveFormViewDownward, completion: moveFormViewUpward)
             return
         }
         
         guard let titleText = titleField.text, !titleText.isEmpty else {
-            self.showAlert(title: "제목은 반드시 입력해야해요!")
+            self.showAlert(title: "제목은 반드시 입력해야해요!", prepare: moveFormViewDownward, completion: moveFormViewUpward)
             return
         }
         
         saveButtonTapped?(titleText, descField?.text ?? "", dateField?.text ?? "")
         self.removeFromSuperview()
+    }
+    
+    private func moveFormViewUpward() {
+        formView.frame.origin.y -= moveUpward
+    }
+    
+    private func moveFormViewDownward() {
+        formView.frame.origin.y += moveUpward
     }
     
     @IBAction func resetButtonTapped(_ sender: UIButton) {

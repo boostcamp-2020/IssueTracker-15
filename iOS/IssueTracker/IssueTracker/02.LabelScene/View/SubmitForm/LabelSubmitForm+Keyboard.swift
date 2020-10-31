@@ -25,17 +25,21 @@ extension LabelSubmitFormView {
             
             guard formViewEndPoint == nil else { return }
             
-            formViewEndPoint = self.formView.frame.origin.y + self.formView.frame.height
-            let moveUpward = formViewEndPoint! - keyboardValue.origin.y
-            if formViewEndPoint! > keyboardValue.origin.y {
-                self.frame.origin.y -= moveUpward
+            let newEndPoint = self.formView.frame.origin.y + self.formView.frame.height
+            formViewEndPoint = newEndPoint
+            
+            moveUpward = newEndPoint - keyboardValue.origin.y
+            if newEndPoint > keyboardValue.origin.y {
+                formView.frame.origin.y -= moveUpward
             }
         }
     }
     
-    @objc func handleTap() {
+    @objc func formViewTapped() {
         self.endEditing(true)
-        self.frame.origin.y = 0
         self.formViewEndPoint = nil
+        
+        formView.frame.origin.y += moveUpward
+        self.moveUpward = 0
     }
 }
