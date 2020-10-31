@@ -10,7 +10,7 @@ import UIKit
 
 class LabelSubmitFormView: UIView {
     var formViewEndPoint: CGFloat?
-    var moveUpward: CGFloat?
+    var moveUpward: CGFloat = 0
     var saveButtonTapped: ((String, String, String) -> Void)?
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var formView: UIView!
@@ -65,12 +65,10 @@ class LabelSubmitFormView: UIView {
     }
     
     private func moveFormViewUpward() {
-        guard let moveUpward = moveUpward else { return }
         formView.frame.origin.y -= moveUpward
     }
     
     private func movewFormViewDownward() {
-        guard let moveUpward = moveUpward else { return }
         formView.frame.origin.y += moveUpward
     }
     
@@ -95,8 +93,3 @@ extension LabelSubmitFormView: UITextFieldDelegate {
         colorView.layer.backgroundColor = hexCodeField.text?.color
     }
 }
-
-    enum MovingFormView {
-        case up
-        case down
-    }
