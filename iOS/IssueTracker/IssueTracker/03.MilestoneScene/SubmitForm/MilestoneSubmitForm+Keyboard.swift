@@ -26,16 +26,19 @@ extension MilestoneSubmitFormView {
             guard formViewEndPoint == nil else { return }
             
             formViewEndPoint = self.formView.frame.origin.y + self.formView.frame.height
-            let moveUpward = formViewEndPoint! - keyboardValue.origin.y
-            if formViewEndPoint! > keyboardValue.origin.y {
-                self.frame.origin.y -= moveUpward
+            moveUpward = formViewEndPoint! - keyboardValue.origin.y
+            if formViewEndPoint! > keyboardValue.origin.y, let moveUpward = moveUpward {
+                formView.frame.origin.y -= moveUpward
             }
         }
     }
     
     @objc func formViewTapped() {
         self.endEditing(true)
-        self.frame.origin.y = 0
         self.formViewEndPoint = nil
+        
+        guard let moveUpward = moveUpward else { return }
+        formView.frame.origin.y += moveUpward
+        self.moveUpward = nil
     }
 }
