@@ -38,12 +38,12 @@ class MilestoneSubmitFormView: UIView {
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         guard checkDateFieldValidation() else {
-            self.showAlert(title: "날짜를 양식에 맞게 적어주세요!")
+            self.showAlert(title: "날짜를 양식에 맞게 적어주세요!", prepare: nil, completion: nil)
             return
         }
         
         guard let titleText = titleField.text, !titleText.isEmpty else {
-            self.showAlert(title: "제목은 반드시 입력해야해요!")
+            self.showAlert(title: "제목은 반드시 입력해야해요!", prepare: nil, completion: nil)
             return
         }
         
