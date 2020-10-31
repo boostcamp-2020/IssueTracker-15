@@ -30,7 +30,7 @@ class LabelListViewModel: LabelListViewModelProtocol {
     
     func addNewLabel(title: String, desc: String, hexColor: String) {
         let newLabel: Label = Label(title: title, description: desc, hexColor: hexColor)
-        labels.append(newLabel)
+        labels.insert(newLabel, at: 0)
         
         didFetch?()
     }
