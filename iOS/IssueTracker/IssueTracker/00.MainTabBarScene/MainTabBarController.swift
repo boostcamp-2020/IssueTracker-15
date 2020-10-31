@@ -13,11 +13,13 @@ class MainTabBarController: UITabBarController {
     func setupDependencies() {
         // controllers[0] = UINavigationController -> root: IssueListViewController
         // controllers[1] = LabelListViewController
-        if let labelListViewController = self.viewControllers?[safe: 1] as? LabelListViewController {
+        if let navigationController = self.viewControllers?[safe: 1] as? UINavigationController,
+            let labelListViewController = navigationController.topViewController as? LabelListViewController {
             labelListViewController.labelListViewModel = LabelListViewModel()
         }
         // controllers[2] = MilestoneListViewConroller
-        if let milestoneListViewController = self.viewControllers?[safe: 2] as? MilestoneListViewController {
+        if let navigationController = self.viewControllers?[safe: 2] as? UINavigationController,
+            let milestoneListViewController = navigationController.topViewController as? MilestoneListViewController {
             milestoneListViewController.milestoneListViewModel = MilestoneListViewModel()
         }
         // controllers[3] = SettingViewController
