@@ -10,7 +10,7 @@ import UIKit
 
 class LabelSubmitFormView: UIView {
     var formViewEndPoint: CGFloat?
-    var submitbuttonTapped: ((String, String, String) -> Void)?
+    var saveButtonTapped: ((String, String, String) -> Void)?
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var formView: UIView!
     @IBOutlet weak var titleField: UITextField!
@@ -56,7 +56,7 @@ class LabelSubmitFormView: UIView {
         if let titleText = titleField.text, !titleText.isEmpty,
             let descText = descField.text, !descText.isEmpty,
             let hexCodeText = hexCodeField.text, !hexCodeText.isEmpty {
-            submitbuttonTapped?(titleText, descText, hexCodeText)
+            saveButtonTapped?(titleText, descText, hexCodeText)
             self.removeFromSuperview()
         } else {
             self.showAlert(title: "제목, 설명, 색상을\n모두 입력해주세요!")
