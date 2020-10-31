@@ -19,10 +19,10 @@ class MilestoneCellView: UICollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        descriptionLabel.configureFontSize()
-        dateLabel.configureFontSize()
-        openedIssueLabel.configureFontSize()
-        closedIssueLabel.configureFontSize()
+        descriptionLabel.autoResizeFontWithHeight()
+        dateLabel.autoResizeFontWithHeight()
+        openedIssueLabel.autoResizeFontWithHeight()
+        closedIssueLabel.autoResizeFontWithHeight()
     }
     
     func configure(with currentItem: MilestoneItemViewModel) {

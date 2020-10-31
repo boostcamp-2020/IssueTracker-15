@@ -38,7 +38,7 @@ class BadgeLabelView: UILabel {
         let boundSize = CGSize(width: intrinsicContentSize.width, height: bounds.height)
         bounds = CGRect(origin: boundOrigin, size: boundSize)
         layer.cornerRadius = bounds.height / 2 * cornerRadiusRatio
-        font = font.withSize(boundSize.height - padding.top - padding.bottom)
+        autoResizeFontWithHeight()
     }
 
 }
