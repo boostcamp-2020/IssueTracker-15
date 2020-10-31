@@ -43,17 +43,17 @@ extension MilestoneSubmitFieldsView: SubmitFieldProtocol {
     
     var contentView: UIView { self }
     
-    func saveButtonTapped() -> SubmitFieldProtocol.SaveResult {
+    func saveButtonTapped() -> SubmitFormView.SaveResult {
         guard checkDateFieldValidation() else {
-            return (false, "날짜를 양식에 맞게 적어주세요!")
+            return .failure("날짜를 양식에 맞게 적어주세요!")
         }
         
         guard let titleText = titleTextFieldView.text, !titleText.isEmpty else {
-            return (false, "제목은 반드시 입력해야해요!")
+            return .failure("제목은 반드시 입력해야해요!")
         }
         
         onSaveButtonTapped?(titleText, dueDateTextFieldView?.text ?? "", descTextFieldView?.text ?? "")
-        return (true, "")
+        return .success
     }
     
     func resetButtonTapped() {

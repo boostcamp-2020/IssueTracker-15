@@ -9,6 +9,12 @@
 import UIKit
 
 class SubmitFormView: UIView {
+    
+    enum SaveResult {
+        case success
+        case failure(String)
+    }
+    
     var formViewEndPoint: CGFloat?
     var moveUpward: CGFloat = 0
     
@@ -49,12 +55,13 @@ class SubmitFormView: UIView {
             return
         }
         
-        let saveResult = submitField.saveButtonTapped()
-        if saveResult.success {
+        switch submitField.saveButtonTapped() {
+        case .success:
             removeFromSuperview()
-        } else {
-            showAlert(title: saveResult.message, prepare: moveFormViewDownward, completion: moveFormViewUpward)
+        case .failure(let message):
+            showAlert(title: message, prepare: moveFormViewDownward, completion: moveFormViewUpward)
         }
+        
     }
     
     @objc func formViewTapped() {

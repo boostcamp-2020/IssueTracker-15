@@ -48,16 +48,15 @@ extension LabelSubmitFieldsView: SubmitFieldProtocol {
     
     var contentView: UIView { self }
     
-    func saveButtonTapped() -> SubmitFieldProtocol.SaveResult {
+    func saveButtonTapped() -> SubmitFormView.SaveResult {
         if let titleText = titleTextField.text, !titleText.isEmpty,
             let descText = descTextField.text, !descText.isEmpty,
             let hexCodeText = colorTextField.text, !hexCodeText.isEmpty {
             onSaveButtonTapped?(titleText, descText, hexCodeText)
-            return (true, "")
-        } else {
-            return (false, "제목, 설명, 색상을\n모두 입력해주세요!")
+            return .success
         }
-
+        
+        return .failure("제목, 설명, 색상을\n모두 입력해주세요!")
     }
     
     func resetButtonTapped() {
