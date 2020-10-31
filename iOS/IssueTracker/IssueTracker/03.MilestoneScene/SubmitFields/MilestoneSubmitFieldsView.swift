@@ -1,0 +1,65 @@
+//
+//  MilestoneSubmitFields.swift
+//  IssueTracker
+//
+//  Created by 김신우 on 2020/10/31.
+//  Copyright © 2020 IssueTracker-15. All rights reserved.
+//
+
+import UIKit
+
+class MilestoneSubmitFieldsView: UIStackView {
+    @IBOutlet weak var dueDateLabel: UILabel!
+    @IBOutlet weak var titleTextFieldView: UITextField!
+    @IBOutlet weak var dueDateTextFieldView: UITextField!
+    @IBOutlet weak var descTextFieldView: UITextField!
+    
+    var onSaveButtonTapped: ((String, String, String) -> Void)?
+    
+    func configure(milestoneItemViewModel: MilestoneSubmitFormConfigurable? = nil) {
+        if let viewModel = milestoneItemViewModel {
+            titleTextFieldView.text = viewModel.title
+            descTextFieldView.text = viewModel.description
+            dueDateTextFieldView.text = viewModel.dueDateForForm
+        }
+        dueDateTextFieldView.addTarget(self, action: #selector(dateFieldOnEditing), for: .editingChanged)
+    }
+
+    private func checkDateFieldValidation() -> Bool {
+        guard let text = dueDateTextFieldView.text, !text.isEmpty else {
+            dueDateLabel.textColor = .black
+            return true
+        }
+        return text.contains(of: String.RegexPattern.milestoneFormDate)
+    }
+    
+    @objc func dateFieldOnEditing() {
+        dueDateLabel.textColor = checkDateFieldValidation() ? .black : .red
+    }
+    
+}
+
+extension MilestoneSubmitFieldsView: SubmitFieldProtocol {
+    
+    var contentView: UIView { self }
+    
+    func saveButtonTapped() -> SubmitFieldProtocol.SaveResult {
+        guard checkDateFieldValidation() else {
+            return (false, "날짜를 양식에 맞게 적어주세요!")
+        }
+        
+        guard let titleText = titleTextFieldView.text, !titleText.isEmpty else {
+            return (false, "제목은 반드시 입력해야해요!")
+        }
+        
+        onSaveButtonTapped?(titleText, dueDateTextFieldView?.text ?? "", descTextFieldView?.text ?? "")
+        return (true, "")
+    }
+    
+    func resetButtonTapped() {
+        titleTextFieldView.text = ""
+        descTextFieldView.text = ""
+        dueDateTextFieldView.text = ""
+    }
+    
+}

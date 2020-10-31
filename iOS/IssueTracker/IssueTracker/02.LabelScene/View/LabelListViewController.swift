@@ -45,23 +45,28 @@ class LabelListViewController: UIViewController {
     @IBAction func plusButtonTapped(_ sender: Any) {
         showSubmitFormView()
     }
-    
+
     private func showSubmitFormView(indexPath: IndexPath? = nil) {
-        guard let tabBarController = self.tabBarController, let labelSubmitFormView = LabelSubmitFormView.createView() else { return }
+        guard let tabBarController = self.tabBarController,
+            let formView = SubmitFormView.createView(),
+            let labelFormFieldView = LabelSubmitFieldsView.createView()
+            else { return }
+        
+        formView.configure(submitField: labelFormFieldView)
         
         if let indexPath = indexPath {
-            labelSubmitFormView.configure(labelViewModel: labelListViewModel?.cellForItemAt(path: indexPath))
-            labelSubmitFormView.saveButtonTapped = { (title, description, hexColor) in
-                self.labelListViewModel?.editLabel(at: indexPath, title: title, desc: description, hexColor: hexColor)
+            labelFormFieldView.configure(labelViewModel: labelListViewModel?.cellForItemAt(path: indexPath))
+            labelFormFieldView.onSaveButtonTapped = { (title, desc, colorCode) in
+                self.labelListViewModel?.editLabel(at: indexPath, title: title, desc: desc, hexColor: colorCode)
             }
         } else {
-            labelSubmitFormView.configure()
-            labelSubmitFormView.saveButtonTapped = self.labelListViewModel?.addNewLabel
+            labelFormFieldView.onSaveButtonTapped = labelListViewModel?.addNewLabel
         }
         
-        tabBarController.view.addSubview(labelSubmitFormView)
-        labelSubmitFormView.frame = tabBarController.view.frame
+        tabBarController.view.addSubview(formView)
+        formView.frame = tabBarController.view.frame
     }
+    
 }
 
 extension LabelListViewController: UICollectionViewDataSource, UICollectionViewDelegate {

@@ -1,15 +1,14 @@
 //
-//  MilestoneSubmitForm+Keyboard.swift
+//  SubmitFormView+Keyboard.swift
 //  IssueTracker
 //
-//  Created by 김신우 on 2020/10/29.
+//  Created by 김신우 on 2020/10/31.
 //  Copyright © 2020 IssueTracker-15. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-extension MilestoneSubmitFormView {
+extension SubmitFormView {
     
     func subscribeNotifications() {
         self.subscribe(UIResponder.keyboardWillShowNotification, selector: #selector(keyboardWillShowOrHide))
@@ -20,8 +19,13 @@ extension MilestoneSubmitFormView {
         NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
     }
     
+    @objc func backgroundTapped() {
+        self.removeFromSuperview()
+    }
+    
     @objc func keyboardWillShowOrHide(notification: NSNotification) {
-        if let userInfo = notification.userInfo, let keyboardValue = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
+        if let userInfo = notification.userInfo,
+            let keyboardValue = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
             
             guard formViewEndPoint == nil else { return }
             
