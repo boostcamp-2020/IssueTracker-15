@@ -37,7 +37,7 @@ class LabelSubmitFormView: UIView {
     }
     
     private func configureTapGesture() {
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        formView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(formViewTapped)))
         backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
     }
     

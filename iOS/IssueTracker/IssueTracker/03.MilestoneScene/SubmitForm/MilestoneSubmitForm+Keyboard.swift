@@ -33,7 +33,7 @@ extension MilestoneSubmitFormView {
         }
     }
     
-    @objc func handleTap() {
+    @objc func formViewTapped() {
         self.endEditing(true)
         self.frame.origin.y = 0
         self.formViewEndPoint = nil
