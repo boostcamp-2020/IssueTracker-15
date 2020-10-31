@@ -39,5 +39,6 @@ extension LabelSubmitFormView {
         
         guard let moveUpward = moveUpward else { return }
         formView.frame.origin.y += moveUpward
+        self.moveUpward = nil
     }
 }

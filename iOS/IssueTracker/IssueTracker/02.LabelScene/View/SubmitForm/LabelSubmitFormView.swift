@@ -60,8 +60,18 @@ class LabelSubmitFormView: UIView {
             saveButtonTapped?(titleText, descText, hexCodeText)
             self.removeFromSuperview()
         } else {
-            self.showAlert(title: "제목, 설명, 색상을\n모두 입력해주세요!")
+            self.showAlert(title: "제목, 설명, 색상을\n모두 입력해주세요!", prepare: movewFormViewDownward, completion: moveFormViewUpward)
         }
+    }
+    
+    private func moveFormViewUpward() {
+        guard let moveUpward = moveUpward else { return }
+        formView.frame.origin.y -= moveUpward
+    }
+    
+    private func movewFormViewDownward() {
+        guard let moveUpward = moveUpward else { return }
+        formView.frame.origin.y += moveUpward
     }
     
     @IBAction func resetFormButtonTapped(_ sender: UIButton) {
@@ -85,3 +95,8 @@ extension LabelSubmitFormView: UITextFieldDelegate {
         colorView.layer.backgroundColor = hexCodeField.text?.color
     }
 }
+
+    enum MovingFormView {
+        case up
+        case down
+    }
