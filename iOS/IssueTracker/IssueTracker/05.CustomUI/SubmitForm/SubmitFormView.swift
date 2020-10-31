@@ -31,7 +31,7 @@ class SubmitFormView: UIView {
     }
     
     private func configureTapGesture() {
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(formViewTapped)))
+        formView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(formViewTapped)))
         backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
     }
     
@@ -55,6 +55,18 @@ class SubmitFormView: UIView {
         } else {
             showAlert(title: saveResult.message, prepare: moveFormViewDownward, completion: moveFormViewUpward)
         }
+    }
+    
+    @objc func formViewTapped() {
+        self.endEditing(true)
+        self.formViewEndPoint = nil
+        
+        formView.frame.origin.y += moveUpward
+        self.moveUpward = 0
+    }
+    
+    @objc func backgroundTapped() {
+        self.removeFromSuperview()
     }
     
     func moveFormViewUpward() {

@@ -19,10 +19,6 @@ extension SubmitFormView {
         NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
     }
     
-    @objc func backgroundTapped() {
-        self.removeFromSuperview()
-    }
-    
     @objc func keyboardWillShowOrHide(notification: NSNotification) {
         if let userInfo = notification.userInfo,
             let keyboardValue = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
@@ -39,11 +35,4 @@ extension SubmitFormView {
         }
     }
     
-    @objc func formViewTapped() {
-        self.endEditing(true)
-        self.formViewEndPoint = nil
-        
-        formView.frame.origin.y += moveUpward
-        self.moveUpward = 0
-    }
 }
