@@ -32,7 +32,7 @@ class MilestoneSubmitFormView: UIView {
     }
     
     private func configureTapGesture() {
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(formViewTapped)))
         backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
     }
     
