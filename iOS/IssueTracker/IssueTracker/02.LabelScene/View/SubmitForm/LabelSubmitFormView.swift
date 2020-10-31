@@ -10,6 +10,7 @@ import UIKit
 
 class LabelSubmitFormView: UIView {
     var formViewEndPoint: CGFloat?
+    var moveUpward: CGFloat?
     var saveButtonTapped: ((String, String, String) -> Void)?
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var formView: UIView!
