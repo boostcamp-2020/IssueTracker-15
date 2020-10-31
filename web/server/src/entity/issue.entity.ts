@@ -5,6 +5,8 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import CommentEntity from "./comment.entity";
 import MilestoneEntity from "./milestone.entity";
@@ -23,14 +25,10 @@ class IssueEntity {
   @Column({ type: "varchar", nullable: true })
   description?: string;
 
-  @Column({
-    type: "timestamp",
-    nullable: false,
-    default: () => "CURRENT_TIMESTAMP()",
-  })
+  @CreateDateColumn()
   createAt!: Date;
 
-  @Column({ type: "timestamp", nullable: true })
+  @UpdateDateColumn()
   updateAt?: Date;
 
   @Column({ type: "boolean", nullable: false, default: true })
