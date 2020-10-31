@@ -10,7 +10,7 @@ import UIKit
 
 class MilestoneSubmitFormView: UIView {
     var formViewEndPoint: CGFloat?
-    var moveUpward: CGFloat?
+    var moveUpward: CGFloat = 0
     var saveButtonTapped: ((String, String, String) -> Void)?
     @IBOutlet weak var formView: UIView!
     @IBOutlet weak var backgroundView: UIView!
@@ -39,12 +39,12 @@ class MilestoneSubmitFormView: UIView {
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         guard checkDateFieldValidation() else {
-            self.showAlert(title: "날짜를 양식에 맞게 적어주세요!", prepare: movewFormViewDownward, completion: moveFormViewUpward)
+            self.showAlert(title: "날짜를 양식에 맞게 적어주세요!", prepare: moveFormViewDownward, completion: moveFormViewUpward)
             return
         }
         
         guard let titleText = titleField.text, !titleText.isEmpty else {
-            self.showAlert(title: "제목은 반드시 입력해야해요!", prepare: movewFormViewDownward, completion: moveFormViewUpward)
+            self.showAlert(title: "제목은 반드시 입력해야해요!", prepare: moveFormViewDownward, completion: moveFormViewUpward)
             return
         }
         
@@ -53,12 +53,10 @@ class MilestoneSubmitFormView: UIView {
     }
     
     private func moveFormViewUpward() {
-        guard let moveUpward = moveUpward else { return }
         formView.frame.origin.y -= moveUpward
     }
     
-    private func movewFormViewDownward() {
-        guard let moveUpward = moveUpward else { return }
+    private func moveFormViewDownward() {
         formView.frame.origin.y += moveUpward
     }
     

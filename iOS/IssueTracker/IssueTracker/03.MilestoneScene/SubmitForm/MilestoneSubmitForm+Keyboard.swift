@@ -25,9 +25,11 @@ extension MilestoneSubmitFormView {
             
             guard formViewEndPoint == nil else { return }
             
-            formViewEndPoint = self.formView.frame.origin.y + self.formView.frame.height
-            moveUpward = formViewEndPoint! - keyboardValue.origin.y
-            if formViewEndPoint! > keyboardValue.origin.y, let moveUpward = moveUpward {
+            let newEndPoint = self.formView.frame.origin.y + self.formView.frame.height
+            formViewEndPoint = newEndPoint
+            
+            moveUpward = newEndPoint - keyboardValue.origin.y
+            if newEndPoint > keyboardValue.origin.y {
                 formView.frame.origin.y -= moveUpward
             }
         }
@@ -37,8 +39,7 @@ extension MilestoneSubmitFormView {
         self.endEditing(true)
         self.formViewEndPoint = nil
         
-        guard let moveUpward = moveUpward else { return }
         formView.frame.origin.y += moveUpward
-        self.moveUpward = nil
+        self.moveUpward = 0
     }
 }
