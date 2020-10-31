@@ -11,15 +11,20 @@ import UIKit
 class MainTabBarController: UITabBarController {
     
     func setupDependencies() {
+        let appearence = UINavigationBarAppearance()
+        appearence.backgroundColor = .white
+        appearence.shadowColor = .gray
         // controllers[0] = UINavigationController -> root: IssueListViewController
         // controllers[1] = LabelListViewController
         if let navigationController = self.viewControllers?[safe: 1] as? UINavigationController,
             let labelListViewController = navigationController.topViewController as? LabelListViewController {
+            navigationController.navigationBar.scrollEdgeAppearance = appearence
             labelListViewController.labelListViewModel = LabelListViewModel()
         }
         // controllers[2] = MilestoneListViewConroller
         if let navigationController = self.viewControllers?[safe: 2] as? UINavigationController,
             let milestoneListViewController = navigationController.topViewController as? MilestoneListViewController {
+            navigationController.navigationBar.scrollEdgeAppearance = appearence
             milestoneListViewController.milestoneListViewModel = MilestoneListViewModel()
         }
         // controllers[3] = SettingViewController
