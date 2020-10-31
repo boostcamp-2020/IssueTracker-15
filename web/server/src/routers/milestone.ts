@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import MilestoneEntity from "../entity/issue.entity";
+import MilestoneService from "../services/milestone.service";
 import { createMilestone } from "../types/milestone.types";
 
 const MilestoneRouter = express.Router();
@@ -7,7 +7,10 @@ MilestoneRouter.post("/", async (req: Request, res: Response) => {
   const newMilestoneData: createMilestone = req.body;
 
   try {
-    res.json("hello");
-  } catch (e) {}
+    await MilestoneService.createMilestone(newMilestoneData);
+    return res.status(200);
+  } catch (e) {
+    return res.status(400);
+  }
 });
 export default MilestoneRouter;
