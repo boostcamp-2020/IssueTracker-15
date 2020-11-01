@@ -31,7 +31,7 @@ const IssueService = {
   updateIssueContent: async (issueId: number, content: UpdateIssueContent) => {
     const issueRepository = getRepository(IssueEntity);
     const issue = await IssueService.getIssueById(issueId);
-    if (!issue) throw new Error("issue dose not exist ");
+    if (!issue) throw new Error("issue dose not exist");
 
     const updatedIssue = issueRepository.merge(issue, content);
     await issueRepository.save(updatedIssue);
@@ -43,10 +43,20 @@ const IssueService = {
     const issueRepository = getRepository(IssueEntity);
     const issue = await IssueService.getIssueById(issueId);
 
-    if (!issue) throw new Error("issue dose not exist ");
+    if (!issue) throw new Error("issue dose not exist");
 
     const updatedIssue = issueRepository.merge(issue, title);
     await issueRepository.save(updatedIssue);
+
+    return;
+  },
+
+  deleteIssue: async (issueId: number) => {
+    const issueRepository = getRepository(IssueEntity);
+    const issue = await IssueService.getIssueById(issueId);
+    if (!issue) throw new Error("issue dose not exist");
+
+    await issueRepository.delete({ id: issueId });
 
     return;
   },
