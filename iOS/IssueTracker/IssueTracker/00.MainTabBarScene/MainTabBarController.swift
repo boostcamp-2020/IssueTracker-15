@@ -15,6 +15,11 @@ class MainTabBarController: UITabBarController {
         appearence.backgroundColor = .white
         appearence.shadowColor = .gray
         // controllers[0] = UINavigationController -> root: IssueListViewController
+        if let navigationController = self.viewControllers?[safe: 0] as? UINavigationController,
+            let issueListViewController = navigationController.topViewController as? IssueListViewController {
+            navigationController.navigationBar.scrollEdgeAppearance = appearence
+            
+        }
         // controllers[1] = LabelListViewController
         if let navigationController = self.viewControllers?[safe: 1] as? UINavigationController,
             let labelListViewController = navigationController.topViewController as? LabelListViewController {
