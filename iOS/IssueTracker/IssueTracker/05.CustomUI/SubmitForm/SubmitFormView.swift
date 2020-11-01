@@ -23,7 +23,7 @@ class SubmitFormView: UIView {
     @IBOutlet weak var submitFieldGuideView: UIView!
     private var submitField: SubmitFieldProtocol?
     
-    func configure( submitField: SubmitFieldProtocol) {
+    func configure(submitField: SubmitFieldProtocol) {
         self.submitField = submitField
         submitFieldGuideView.addSubview(submitField.contentView)
         NSLayoutConstraint.activate([
