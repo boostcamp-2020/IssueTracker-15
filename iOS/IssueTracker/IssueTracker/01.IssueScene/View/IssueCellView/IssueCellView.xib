@@ -10,22 +10,22 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="IssueCellView" customModule="IssueTracker" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="2531" height="1422"/>
+            <rect key="frame" x="0.0" y="0.0" width="1845" height="634"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="2531" height="1422"/>
+                <rect key="frame" x="0.0" y="0.0" width="1845" height="634"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YEo-pC-kZI">
-                        <rect key="frame" x="0.0" y="0.0" width="2531" height="1422"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1845" height="634"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIv-qe-DsP">
-                                <rect key="frame" x="0.0" y="0.0" width="5944" height="1422"/>
+                                <rect key="frame" x="0.0" y="0.0" width="3366.5" height="634"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xnl-RV-xeJ" userLabel="checkBoxGuide">
-                                        <rect key="frame" x="0.0" y="0.0" width="569" height="1422"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="253.5" height="634"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAN-XX-dal">
-                                                <rect key="frame" x="0.0" y="0.0" width="569" height="1422"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="253.5" height="634"/>
                                                 <state key="normal" image="circle" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                 </state>
@@ -44,28 +44,28 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8Z-t0-U66" userLabel="mainContent">
-                                        <rect key="frame" x="569" y="0.0" width="2531" height="1422"/>
+                                        <rect key="frame" x="253.5" y="0.0" width="1845" height="634"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-pc-tFP" userLabel="title">
-                                                <rect key="frame" x="10" y="10" width="1265.5" height="426.5"/>
+                                                <rect key="frame" x="15" y="10" width="922.5" height="190"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="63W-Xg-or6" userLabel="description">
-                                                <rect key="frame" x="10" y="446.5" width="1518.5" height="569"/>
+                                                <rect key="frame" x="15" y="210" width="1107" height="254"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ig-WN-dKN" userLabel="milestone" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
-                                                <rect key="frame" x="2479" y="45.5" width="42" height="355.5"/>
+                                                <rect key="frame" x="1788" y="41.5" width="42" height="127"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcI-jT-XvJ" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
-                                                <rect key="frame" x="2479" y="411" width="42" height="355.5"/>
+                                                <rect key="frame" x="1788" y="178.5" width="42" height="127"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -73,27 +73,27 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="VcI-jT-XvJ" secondAttribute="trailing" constant="10" id="187-Q3-nTz"/>
+                                            <constraint firstAttribute="trailing" secondItem="VcI-jT-XvJ" secondAttribute="trailing" constant="15" id="187-Q3-nTz"/>
                                             <constraint firstItem="VcI-jT-XvJ" firstAttribute="top" secondItem="0Ig-WN-dKN" secondAttribute="bottom" constant="10" id="5nB-Yq-zE9"/>
-                                            <constraint firstItem="VcI-jT-XvJ" firstAttribute="height" secondItem="R8Z-t0-U66" secondAttribute="height" multiplier="0.25" id="6hi-X6-AvZ"/>
+                                            <constraint firstItem="VcI-jT-XvJ" firstAttribute="height" secondItem="R8Z-t0-U66" secondAttribute="height" multiplier="0.2" id="6hi-X6-AvZ"/>
                                             <constraint firstItem="0Ig-WN-dKN" firstAttribute="centerY" secondItem="Ikc-pc-tFP" secondAttribute="centerY" id="AZv-ZN-uPG"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="width" secondItem="R8Z-t0-U66" secondAttribute="width" multiplier="0.5" id="BBv-yf-eXw"/>
                                             <constraint firstItem="63W-Xg-or6" firstAttribute="height" secondItem="R8Z-t0-U66" secondAttribute="height" multiplier="0.4" id="JyG-vr-gP2"/>
-                                            <constraint firstItem="Ikc-pc-tFP" firstAttribute="leading" secondItem="R8Z-t0-U66" secondAttribute="leading" constant="10" id="MZD-b8-cTd"/>
+                                            <constraint firstItem="Ikc-pc-tFP" firstAttribute="leading" secondItem="R8Z-t0-U66" secondAttribute="leading" constant="15" id="MZD-b8-cTd"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="height" secondItem="R8Z-t0-U66" secondAttribute="height" multiplier="0.3" id="XnN-5a-qFz"/>
                                             <constraint firstItem="63W-Xg-or6" firstAttribute="width" secondItem="R8Z-t0-U66" secondAttribute="width" multiplier="0.6" id="cDe-zE-O2a"/>
                                             <constraint firstItem="63W-Xg-or6" firstAttribute="top" secondItem="Ikc-pc-tFP" secondAttribute="bottom" constant="10" id="d6B-Hc-csr"/>
-                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="height" secondItem="R8Z-t0-U66" secondAttribute="height" multiplier="0.25" id="fPI-ab-CRu"/>
-                                            <constraint firstAttribute="trailing" secondItem="0Ig-WN-dKN" secondAttribute="trailing" constant="10" id="gpr-1e-lf0"/>
+                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="height" secondItem="R8Z-t0-U66" secondAttribute="height" multiplier="0.2" id="fPI-ab-CRu"/>
+                                            <constraint firstAttribute="trailing" secondItem="0Ig-WN-dKN" secondAttribute="trailing" constant="15" id="gpr-1e-lf0"/>
                                             <constraint firstItem="63W-Xg-or6" firstAttribute="leading" secondItem="Ikc-pc-tFP" secondAttribute="leading" id="oEq-5q-UXw"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="top" secondItem="R8Z-t0-U66" secondAttribute="top" constant="10" id="zfI-bt-iTJ"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-PE-geQ" userLabel="CloseBoxGuide">
-                                        <rect key="frame" x="3100" y="0.0" width="1422" height="1422"/>
+                                        <rect key="frame" x="2098.5" y="0.0" width="634" height="634"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSs-W9-8Rt">
-                                                <rect key="frame" x="0.0" y="0.0" width="1422" height="1422"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="634" height="634"/>
                                                 <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Close">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -113,10 +113,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xNn-Jb-haT" userLabel="DeleteBoxGuide">
-                                        <rect key="frame" x="4522" y="0.0" width="1422" height="1422"/>
+                                        <rect key="frame" x="2732.5" y="0.0" width="634" height="634"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8u4-5P-XF4">
-                                                <rect key="frame" x="0.0" y="0.0" width="1422" height="1422"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="634" height="634"/>
                                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Delete">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -163,7 +163,7 @@
                 <constraint firstAttribute="bottom" secondItem="YEo-pC-kZI" secondAttribute="bottom" id="uop-9k-mRr"/>
                 <constraint firstItem="YEo-pC-kZI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="xBF-Sf-XJo"/>
             </constraints>
-            <size key="customSize" width="2531" height="1422"/>
+            <size key="customSize" width="1845" height="634"/>
             <connections>
                 <outlet property="cellHorizontalScrollView" destination="YEo-pC-kZI" id="FTZ-IO-Xjq"/>
                 <outlet property="checkBoxGuideView" destination="Xnl-RV-xeJ" id="pM6-Gc-qd3"/>
@@ -175,7 +175,7 @@
                 <outlet property="milestoneBadge" destination="0Ig-WN-dKN" id="3Et-lC-TC8"/>
                 <outlet property="titleLabel" destination="Ikc-pc-tFP" id="TxB-o0-gHO"/>
             </connections>
-            <point key="canvasLocation" x="676.08695652173924" y="675"/>
+            <point key="canvasLocation" x="178.98550724637681" y="411.16071428571428"/>
         </collectionViewCell>
     </objects>
     <resources>

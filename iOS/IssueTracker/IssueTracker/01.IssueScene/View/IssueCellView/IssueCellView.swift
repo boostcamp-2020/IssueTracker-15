@@ -39,13 +39,17 @@ class IssueCellView: UICollectionViewCell {
     
     func configure() {
         // TODO : IssueViewModel에 따라 Configure
+        labelBadge.text = "Feature"
         labelBadge.setBackgroundColor(UIColor.cyan.cgColor)
         labelBadge.cornerRadiusRatio = 0.5
         labelBadge.setPadding(top: 3, left: 5, bottom: 3, right: 5)
+        
+        milestoneBadge.text = "스프린트2"
         milestoneBadge.setBorder(width: 1, color: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1))
         milestoneBadge.cornerRadiusRatio = 0.5
         milestoneBadge.setPadding(top: 5, left: 5, bottom: 5, right: 5)
         
+        titleLabel.text = "레이블 목록 보기 구현"
         descriptionLabel.numberOfLines = 2
         descriptionLabel.text = "레이블 전체 목록을 볼 수 있어야 한다. 2줄까지 보입니다.ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
