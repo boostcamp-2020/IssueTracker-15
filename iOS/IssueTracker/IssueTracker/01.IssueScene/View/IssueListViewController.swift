@@ -49,7 +49,7 @@ class IssueListViewController: UIViewController {
     
 }
 
-// MARK : - UICollectionViewDataSource Implementation
+// MARK: - UICollectionViewDataSource Implementation
 extension IssueListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
