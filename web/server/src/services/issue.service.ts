@@ -49,6 +49,17 @@ const IssueService = {
     return;
   },
 
+  addMilestoneToIssue : async(issueId : number, milestoneId : number)=>{
+    const issueRepository = getRepository(IssueEntity);
+    const issue = await IssueService.getIssueById(issueId);
+    if (!issue) throw new Error("issue dose not exist");
+
+    const updatedIssue = issueRepository.merge(issue, {milestoneId});
+    await issueRepository.save(updatedIssue);
+
+    return;
+  },
+
   updateIssueContent: async (issueId: number, content: UpdateIssueContent) => {
     const issueRepository = getRepository(IssueEntity);
     const issue = await IssueService.getIssueById(issueId);
