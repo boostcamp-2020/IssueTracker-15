@@ -36,10 +36,10 @@ class SubmitFormView: UIView {
         configureTapGesture()
     }
     
-    private func configureTapGesture() {
-        formView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(formViewTapped)))
-        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
-    }
+}
+
+// MARK: - Action
+extension SubmitFormView {
     
     @IBAction func closeButtonTapped(_ sender: Any) {
         removeFromSuperview()
@@ -64,6 +64,22 @@ class SubmitFormView: UIView {
         
     }
     
+    @objc func keyboardWillShowOrHide(notification: NSNotification) {
+        if let userInfo = notification.userInfo,
+            let keyboardValue = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
+            
+            guard formViewEndPoint == nil else { return }
+            
+            let newEndPoint = self.formView.frame.origin.y + self.formView.frame.height
+            formViewEndPoint = newEndPoint
+            
+            moveUpward = newEndPoint - keyboardValue.origin.y
+            if newEndPoint > keyboardValue.origin.y {
+                formView.frame.origin.y -= moveUpward
+            }
+        }
+    }
+    
     @objc func formViewTapped() {
         self.endEditing(true)
         self.formViewEndPoint = nil
@@ -76,11 +92,30 @@ class SubmitFormView: UIView {
         self.removeFromSuperview()
     }
     
-    func moveFormViewUpward() {
+}
+
+// MARK: - Private Function
+extension SubmitFormView {
+    
+    private func configureTapGesture() {
+        formView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(formViewTapped)))
+        backgroundView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(backgroundTapped)))
+    }
+    
+    private func subscribeNotifications() {
+        self.subscribe(UIResponder.keyboardWillShowNotification, selector: #selector(keyboardWillShowOrHide))
+        self.subscribe(UIResponder.keyboardWillHideNotification, selector: #selector(keyboardWillShowOrHide))
+    }
+    
+    private func subscribe(_ notification: NSNotification.Name, selector: Selector) {
+        NotificationCenter.default.addObserver(self, selector: selector, name: notification, object: nil)
+    }
+    
+    private func moveFormViewUpward() {
         formView.frame.origin.y -= moveUpward
     }
     
-    func moveFormViewDownward() {
+    private func moveFormViewDownward() {
         formView.frame.origin.y += moveUpward
     }
     
