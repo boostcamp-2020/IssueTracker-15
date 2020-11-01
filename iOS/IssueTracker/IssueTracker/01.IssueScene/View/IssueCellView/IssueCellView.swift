@@ -79,11 +79,11 @@ extension IssueCellView: UIScrollViewDelegate {
     
     private func pagingTargetOffset(contentOffset: CGPoint) -> CGPoint {
         
-        if contentOffset.x > 0 && contentOffset.x < closeBoxGuide.bounds.width / 2 {
+        if contentOffset.x >= 0 && contentOffset.x < closeBoxGuide.bounds.width / 2 {
             return CGPoint.zero
         }
         
-        if contentOffset.x > closeBoxGuide.bounds.width / 2 &&
+        if contentOffset.x >= closeBoxGuide.bounds.width / 2 &&
             contentOffset.x < closeBoxGuide.bounds.width + deleteBoxGuide.bounds.width / 2 {
             return CGPoint(x: closeBoxGuide.bounds.width, y: 0)
         }
