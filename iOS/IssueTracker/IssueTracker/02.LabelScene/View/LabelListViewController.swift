@@ -17,6 +17,7 @@ class LabelListViewController: UIViewController {
         configureCollectionView()
         configureLabelListViewModel()
         labelListViewModel?.needFetchItems()
+        title = "레이블"
     }
     
     private func configureLabelListViewModel() {
@@ -36,7 +37,6 @@ class LabelListViewController: UIViewController {
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 10)
-        layout.headerReferenceSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 12)
         layout.minimumLineSpacing = 1
         layout.sectionHeadersPinToVisibleBounds = true
         collectionView.setCollectionViewLayout(layout, animated: false)
@@ -87,15 +87,4 @@ extension LabelListViewController: UICollectionViewDataSource, UICollectionViewD
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = HeaderView.dequeue(from: collectionView, for: indexPath) else { return UICollectionReusableView() }
-        
-        header.configure(title: "레이블")
-        
-        return header
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
 }
