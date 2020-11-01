@@ -41,6 +41,18 @@ const IssueService = {
     return;
   },
 
+  deleteAssigneesToIssue: async (issueId: number, userId: number) => {
+    const assigneesRepository = getRepository(AssigneesEntity);
+    const assignees = await assigneesRepository.findOne({
+      where: { issueId, userId },
+    });
+    if (!assignees) throw new Error("assignees does not exists");
+
+    await assigneesRepository.delete({ issueId, userId });
+
+    return;
+  },
+
   addLabelToIssue: async (issueId: number, labelId: number) => {
     const issueHasLabelRepository = getRepository(IssueHasLabelEntity);
     const newIssueHasLabel = issueHasLabelRepository.create({

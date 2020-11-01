@@ -23,6 +23,20 @@ IssueRouter.post(
   }
 );
 
+IssueRouter.delete(
+  "/:issueId/assignees/:userId",
+  async (req: Request, res: Response) => {
+    const issueId = Number(req.params.issueId);
+    const userId = Number(req.params.userId);
+    try {
+      await IssueService.deleteAssigneesToIssue(issueId, userId);
+      res.json({ result: "success" });
+    } catch (e) {
+      res.status(400);
+    }
+  }
+);
+
 IssueRouter.post(
   "/:issueId/milestone/:milestoneId",
   async (req: Request, res: Response) => {
