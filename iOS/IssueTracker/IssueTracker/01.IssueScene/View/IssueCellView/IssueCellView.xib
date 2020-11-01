@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -167,11 +166,11 @@
                 <outlet property="cellHorizontalScrollView" destination="YEo-pC-kZI" id="FTZ-IO-Xjq"/>
                 <outlet property="checkBoxButton" destination="AAN-XX-dal" id="QHJ-gC-vfP"/>
                 <outlet property="checkBoxGuideView" destination="Xnl-RV-xeJ" id="pM6-Gc-qd3"/>
-                <outlet property="closeBoxGuide" destination="XRe-PE-geQ" id="8FI-B3-OQw"/>
-                <outlet property="deleteBoxGuide" destination="xNn-Jb-haT" id="Bqy-iT-38k"/>
+                <outlet property="closeBoxGuideView" destination="XRe-PE-geQ" id="8FI-B3-OQw"/>
+                <outlet property="deleteBoxGuideView" destination="xNn-Jb-haT" id="Bqy-iT-38k"/>
                 <outlet property="descriptionLabel" destination="63W-Xg-or6" id="bGB-ic-bXm"/>
                 <outlet property="labelBadge" destination="VcI-jT-XvJ" id="e9u-Xy-9ir"/>
-                <outlet property="mainContentGuide" destination="R8Z-t0-U66" id="6V4-E2-2eB"/>
+                <outlet property="mainContentGuideView" destination="R8Z-t0-U66" id="6V4-E2-2eB"/>
                 <outlet property="milestoneBadge" destination="0Ig-WN-dKN" id="3Et-lC-TC8"/>
                 <outlet property="titleLabel" destination="Ikc-pc-tFP" id="TxB-o0-gHO"/>
             </connections>
