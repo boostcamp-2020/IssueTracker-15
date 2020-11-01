@@ -17,7 +17,6 @@ class IssueListViewController: UIViewController {
         title = "이슈"
         configureSearchBar()
         configureCollectionView()
-        // Do any additional setup after loading the view.
     }
     
     private func configureSearchBar() {
@@ -38,6 +37,7 @@ class IssueListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
+    // TODO: editMode 클릭시 테스트용 변수 -> EditMode 액션과 연결 필요
     var editmode: Bool = false
     @IBAction func editButtonTapped(_ sender: Any) {
         editmode = !editmode
@@ -49,6 +49,7 @@ class IssueListViewController: UIViewController {
     
 }
 
+// MARK : - UICollectionViewDataSource Implementation
 extension IssueListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

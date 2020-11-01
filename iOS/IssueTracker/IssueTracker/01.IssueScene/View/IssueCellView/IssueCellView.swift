@@ -57,15 +57,10 @@ class IssueCellView: UICollectionViewCell {
         descriptionLabel.autoResizeFontWithHeight()
     }
     
-    func showCheckBox(show: Bool) {
-        cellHorizontalScrollView.contentOffset = CGPoint.zero
-        cellHorizontalScrollView.isScrollEnabled = !show
-        checkBoxGuideWidthConstraint.constant = show ? checkBoxGuideView.bounds.height * 0.5 : 0
-        UIView.animate(withDuration: 0.5) {
-            self.layoutIfNeeded()
-            self.checkBoxButton.isHidden = !show
-        }
-    }
+}
+
+// MARK: - Action
+extension IssueCellView {
     
     @IBAction func checkBoxButtonTapped(_ sender: Any) {
     }
@@ -78,8 +73,19 @@ class IssueCellView: UICollectionViewCell {
         
     }
     
+    func showCheckBox(show: Bool) {
+        cellHorizontalScrollView.contentOffset = CGPoint.zero
+        cellHorizontalScrollView.isScrollEnabled = !show
+        checkBoxGuideWidthConstraint.constant = show ? checkBoxGuideView.bounds.height * 0.5 : 0
+        UIView.animate(withDuration: 0.5) {
+            self.layoutIfNeeded()
+            self.checkBoxButton.isHidden = !show
+        }
+    }
+    
 }
 
+// MARK: - UIScrollViewDelegate Implementation
 extension IssueCellView: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -102,6 +108,7 @@ extension IssueCellView: UIScrollViewDelegate {
     
 }
 
+// MARK: - UICollectionViewRegisterable Implementation
 extension IssueCellView: UICollectionViewRegisterable {
     static var cellIdentifier: String {
         "IssueCellView"
