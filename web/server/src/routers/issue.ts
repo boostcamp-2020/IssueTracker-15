@@ -6,7 +6,6 @@ import { createIssue } from "../types/issue.types";
 const IssueRouter = express.Router();
 IssueRouter.post("/", async (req: Request, res: Response) => {
   const newIssueData: createIssue = req.body;
-  console.log(typeof newIssueData.authorId);
   try {
     const newIssue: IssueEntity = await IssueService.createIssue(newIssueData);
     res.json(newIssue);
