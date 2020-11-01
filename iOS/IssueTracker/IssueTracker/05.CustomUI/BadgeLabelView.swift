@@ -44,7 +44,7 @@ class BadgeLabelView: UILabel {
     override func layoutSubviews() {
         super.layoutSubviews()
         layer.cornerRadius = bounds.height / 2 * cornerRadiusRatio
-        self.autoResizeFontWithHeight()
+        font = font.withSize(bounds.height - contentInsets.top - contentInsets.bottom)
         invalidateIntrinsicContentSize()
     }
 
