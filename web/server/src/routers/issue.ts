@@ -23,6 +23,20 @@ IssueRouter.post(
   }
 );
 
+IssueRouter.delete(
+  "/:issueId/milestone/:milestoneId",
+  async (req: Request, res: Response) => {
+    const issueId = Number(req.params.issueId);
+    const milestoneId = Number(req.params.milestoneId);
+    try {
+      await IssueService.deleteMilestoneAtIssue(issueId);
+      res.json({ result: "success" });
+    } catch (e) {
+      res.status(400);
+    }
+  }
+);
+
 IssueRouter.post(
   "/:issueId/label/:labelId",
   async (req: Request, res: Response) => {

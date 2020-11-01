@@ -49,13 +49,26 @@ const IssueService = {
     return;
   },
 
-  addMilestoneToIssue : async(issueId : number, milestoneId : number)=>{
+  addMilestoneToIssue: async (issueId: number, milestoneId: number) => {
     const issueRepository = getRepository(IssueEntity);
     const issue = await IssueService.getIssueById(issueId);
     if (!issue) throw new Error("issue dose not exist");
 
-    const updatedIssue = issueRepository.merge(issue, {milestoneId});
+    const updatedIssue = issueRepository.merge(issue, { milestoneId });
     await issueRepository.save(updatedIssue);
+
+    return;
+  },
+
+  deleteMilestoneAtIssue: async (issueId: number) => {
+    const issueRepository = getRepository(IssueEntity);
+    const issue = await IssueService.getIssueById(issueId);
+    if (!issue) throw new Error("issue dose not exist");
+
+    await issueRepository.query(
+      "UPDATE Issue SET milestoneId = ? WHERE id = ?",
+      [null, issueId]
+    );
 
     return;
   },
