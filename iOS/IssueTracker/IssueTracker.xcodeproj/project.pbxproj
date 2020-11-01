@@ -68,7 +68,7 @@
 		96A58F46254A6F4100248F1E /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F3C254A6A3300248F1E /* DateFormatter+.swift */; };
 		96A58F47254A6F4100248F1E /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F3E254A6C2500248F1E /* Date+.swift */; };
 		96A58F48254A6F4500248F1E /* Array+SafeAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966DD02A254A259F00A44FBA /* Array+SafeAccess.swift */; };
-		96A58F53254A91AC00248F1E /* String+ContainRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F52254A91AC00248F1E /* String+ContainRegex.swift */; };
+		96A58F53254A91AC00248F1E /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F52254A91AC00248F1E /* String+Regex.swift */; };
 		96A58F55254AA5BC00248F1E /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F54254AA5BC00248F1E /* String+Date.swift */; };
 		96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */; };
 		96C734D52549452600DEC9A4 /* LabelItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D42549452600DEC9A4 /* LabelItemViewModel.swift */; };
@@ -143,7 +143,7 @@
 		96A58F3C254A6A3300248F1E /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DateFormatter+.swift"; path = "IssueTracker/06.Extensions/DateFormatter+.swift"; sourceTree = SOURCE_ROOT; };
 		96A58F3E254A6C2500248F1E /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		96A58F42254A6E6000248F1E /* MilestoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTests.swift; sourceTree = "<group>"; };
-		96A58F52254A91AC00248F1E /* String+ContainRegex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ContainRegex.swift"; sourceTree = "<group>"; };
+		96A58F52254A91AC00248F1E /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
 		96A58F54254AA5BC00248F1E /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
 		96C734D42549452600DEC9A4 /* LabelItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelItemViewModel.swift; sourceTree = "<group>"; };
@@ -205,7 +205,7 @@
 				966DD02A254A259F00A44FBA /* Array+SafeAccess.swift */,
 				96A58F3E254A6C2500248F1E /* Date+.swift */,
 				950EB00E254A94D0004857C2 /* UILabel+FontSize.swift */,
-				96A58F52254A91AC00248F1E /* String+ContainRegex.swift */,
+				96A58F52254A91AC00248F1E /* String+Regex.swift */,
 				9505446E254AA6E0007767C6 /* UIView+ShowAlert.swift */,
 				95054472254AAC0D007767C6 /* CollectionView+.swift */,
 				96A58F54254AA5BC00248F1E /* String+Date.swift */,
@@ -676,8 +676,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96F95C07254EA70B00EC00C6 /* IssueCellView.swift in Sources */,
-				96A58F51254A8C3500248F1E /* MilestoneSubmitForm+NibLoad.swift in Sources */,
-				96A58F53254A91AC00248F1E /* String+ContainRegex.swift in Sources */,
+				96A58F53254A91AC00248F1E /* String+Regex.swift in Sources */,
 				95C36592254A76BB008ACCB5 /* MilestoneCellView.swift in Sources */,
 				96A58F3F254A6C2500248F1E /* Date+.swift in Sources */,
 				950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */,
@@ -696,7 +695,6 @@
 				96A58F55254AA5BC00248F1E /* String+Date.swift in Sources */,
 				950EA05C2547FFA0005BE133 /* LabelCellView.swift in Sources */,
 				96F95C02254E891E00EC00C6 /* Int+Clamp.swift in Sources */,
-				96C734D02549420000DEC9A4 /* LabelSubmitFormView.swift in Sources */,
 				950EB00F254A94D0004857C2 /* UILabel+FontSize.swift in Sources */,
 				9679DFB6254D767400550BE4 /* SubmitFormView.swift in Sources */,
 				95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */,
@@ -709,7 +707,6 @@
 				95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */,
 				9679DFBD254D78D000550BE4 /* SubmitFieldProtocol.swift in Sources */,
 				952FF3D5254805EE0042A96F /* Header+CollectionView.swift in Sources */,
-				95C97282254957E40056ACA1 /* LableSubmitForm+Nibload.swift in Sources */,
 				96F95BFA254E6C4A00EC00C6 /* IssueListViewController.swift in Sources */,
 				966ADAE5254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift in Sources */,
 				95054473254AAC0D007767C6 /* CollectionView+.swift in Sources */,

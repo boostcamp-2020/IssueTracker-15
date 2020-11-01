@@ -47,7 +47,7 @@ class IssueCellView: UICollectionViewCell {
         
         titleLabel.text = "레이블 목록 보기 구현"
         descriptionLabel.numberOfLines = 2
-        descriptionLabel.text = "레이블 전체 목록을 볼 수 있어야 한다. 2줄까지 보입니다.ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+        descriptionLabel.text = "레이블 전체 목록을 볼 수 있어야 한다.\n2줄까지 보입니다.\nABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n"
 
     }
     

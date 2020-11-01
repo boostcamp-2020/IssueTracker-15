@@ -16,8 +16,9 @@ extension UILabel {
     func adjustedFontSizeWithHeight() -> CGFloat {
         guard let textSize = text?.size(withAttributes: [.font: font!]) else { return font.pointSize }
         
+        let numOfLinesInText = CGFloat(text?.numberOfMatches(of: "\n") ?? 0) + 1
         let numOfLines = numberOfLines > 0 ? CGFloat(numberOfLines) : 1
-        let scale = bounds.height / (textSize.height * numOfLines)
+        let scale = (bounds.height * numOfLinesInText) / (textSize.height * numOfLines)
         let actualFontSize = scale * font.pointSize
         
         return actualFontSize
