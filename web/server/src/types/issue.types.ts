@@ -3,15 +3,27 @@ import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 export class CreateIssue {
   @IsString()
   @IsNotEmpty()
-  title! : string;
+  title!: string;
 
   @IsString()
   @IsNotEmpty()
-  description! : string;
+  description!: string;
 
   @IsNumber()
-  milesotneId? : number;
+  milesotneId?: number;
 
   @IsNumber()
-  authorId! : number;
+  authorId!: number;
+}
+
+export class UpdateIssueTitle {
+  @IsString()
+  @IsNotEmpty()
+  title!: string;
+}
+
+export class UpdateIssueContent {
+  @IsString()
+  @IsNotEmpty()
+  description!: string;
 }
