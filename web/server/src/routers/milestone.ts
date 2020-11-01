@@ -10,7 +10,7 @@ MilestoneRouter.post("/", async (req: Request, res: Response) => {
     await MilestoneService.createMilestone(newMilestoneData);
     return res.status(200);
   } catch (e) {
-    return res.status(400);
+    return res.status(400).json(e.message);
   }
 });
 export default MilestoneRouter;
