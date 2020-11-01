@@ -16,7 +16,6 @@ class LabelCellView: UICollectionViewCell {
     func configure(with currentItem: LabelItemViewModel) {
         configureTitle(text: currentItem.title, color: currentItem.hexColor.color)
         configureDescription(with: currentItem.description)
-        layoutIfNeeded()
     }
     
     func configureTitle(text: String, color: CGColor) {

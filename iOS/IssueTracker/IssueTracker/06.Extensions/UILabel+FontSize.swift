@@ -18,8 +18,8 @@ extension UILabel {
         
         let numOfLinesInText = CGFloat(text?.numberOfMatches(of: "\n") ?? 0) + 1
         let numOfLines = numberOfLines > 0 ? CGFloat(numberOfLines) : 1
-        let scale = (bounds.height * numOfLinesInText) / (textSize.height * numOfLines)
-        let actualFontSize = scale * font.pointSize
+        let scale = bounds.height / (textSize.height / numOfLinesInText * numOfLines)
+        let actualFontSize = (scale * font.pointSize - 0.5)
         
         return actualFontSize
     }

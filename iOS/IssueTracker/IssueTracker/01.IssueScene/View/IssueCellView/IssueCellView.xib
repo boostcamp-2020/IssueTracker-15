@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -81,7 +82,7 @@
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="height" secondItem="R8Z-t0-U66" secondAttribute="height" multiplier="0.3" id="XnN-5a-qFz"/>
                                             <constraint firstItem="63W-Xg-or6" firstAttribute="width" secondItem="R8Z-t0-U66" secondAttribute="width" multiplier="0.55" id="cDe-zE-O2a"/>
                                             <constraint firstItem="63W-Xg-or6" firstAttribute="top" secondItem="Ikc-pc-tFP" secondAttribute="bottom" constant="10" id="d6B-Hc-csr"/>
-                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="height" secondItem="R8Z-t0-U66" secondAttribute="height" multiplier="0.2" id="fPI-ab-CRu"/>
+                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="height" secondItem="R8Z-t0-U66" secondAttribute="height" multiplier="0.25" id="fPI-ab-CRu"/>
                                             <constraint firstAttribute="trailing" secondItem="0Ig-WN-dKN" secondAttribute="trailing" constant="15" id="gpr-1e-lf0"/>
                                             <constraint firstItem="63W-Xg-or6" firstAttribute="leading" secondItem="Ikc-pc-tFP" secondAttribute="leading" id="oEq-5q-UXw"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="top" secondItem="R8Z-t0-U66" secondAttribute="top" constant="10" id="zfI-bt-iTJ"/>
