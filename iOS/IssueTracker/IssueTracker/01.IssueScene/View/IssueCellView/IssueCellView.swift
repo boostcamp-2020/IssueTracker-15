@@ -55,7 +55,6 @@ class IssueCellView: UICollectionViewCell {
         super.layoutSubviews()
         titleLabel.autoResizeFontWithHeight()
         descriptionLabel.autoResizeFontWithHeight()
-        
     }
     
     func showCheckBox(show: Bool) {
