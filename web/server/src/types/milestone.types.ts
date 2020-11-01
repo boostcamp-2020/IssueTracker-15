@@ -1,5 +1,5 @@
-export interface createMilestone {
-  title: string;
+export interface Milestone {
+  title?: string;
   description?: string;
   dueDate?: Date;
 }

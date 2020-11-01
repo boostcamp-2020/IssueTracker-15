@@ -1,9 +1,9 @@
 import { getRepository, Repository } from "typeorm";
 import MilestoneEntity from "../entity/milestone.entity";
-import { createMilestone } from "../types/milestone.types";
+import { Milestone } from "../types/milestone.types";
 
 const MilestoneService = {
-  createMilestone: async (milestoneData: createMilestone): Promise<void> => {
+  createMilestone: async (milestoneData: Milestone): Promise<void> => {
     const milestoneRepository: Repository<MilestoneEntity> = getRepository(
       MilestoneEntity
     );
@@ -23,6 +23,21 @@ const MilestoneService = {
     if (!milestoneToRemove)
       throw new Error(`can't find milestone id ${milestoneId}`);
     await milestoneRepository.remove(milestoneToRemove);
+  },
+
+  updateMilestone: async (
+    milestoneId: number,
+    milestoneData: Milestone
+  ): Promise<void> => {
+    const milestoneRepository: Repository<MilestoneEntity> = getRepository(
+      MilestoneEntity
+    );
+    const milestoneToUpdate:
+      | MilestoneEntity
+      | undefined = await milestoneRepository.findOne(milestoneId);
+    if (!milestoneToUpdate)
+      throw new Error(`can't find milestone id ${milestoneId}`);
+    await milestoneRepository.update(milestoneToUpdate, milestoneData);
   },
 };
 export default MilestoneService;
