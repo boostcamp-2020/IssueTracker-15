@@ -1,4 +1,5 @@
 import { getRepository } from "typeorm";
+import IssueHasLabelEntity from "../entity/issue-label.entity";
 import IssueEntity from "../entity/issue.entity";
 import {
   CreateIssue,
@@ -26,6 +27,17 @@ const IssueService = {
     const issue = await issueRepository.findOne({ where: { id: issueId } });
 
     return issue;
+  },
+
+  addLabelToIssue: async (issueId: number, labelId: number) => {
+    const issueHasLabelRepository = getRepository(IssueHasLabelEntity);
+    const newIssueHasLabel = issueHasLabelRepository.create({
+      issueId,
+      labelId,
+    });
+    await issueHasLabelRepository.save(newIssueHasLabel);
+
+    return;
   },
 
   updateIssueContent: async (issueId: number, content: UpdateIssueContent) => {
