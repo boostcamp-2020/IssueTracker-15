@@ -13,9 +13,9 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var cellHorizontalScrollView: UIScrollView!
     
     @IBOutlet weak var checkBoxGuideView: UIView!
-    @IBOutlet weak var mainContentGuide: UIView!
-    @IBOutlet weak var closeBoxGuide: UIView!
-    @IBOutlet weak var deleteBoxGuide: UIView!
+    @IBOutlet weak var mainContentGuideView: UIView!
+    @IBOutlet weak var closeBoxGuideView: UIView!
+    @IBOutlet weak var deleteBoxGuideView: UIView!
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -55,7 +55,6 @@ class IssueCellView: UICollectionViewCell {
         super.layoutSubviews()
         titleLabel.autoResizeFontWithHeight()
         descriptionLabel.autoResizeFontWithHeight()
-        
     }
     
     func showCheckBox(show: Bool) {
@@ -89,16 +88,16 @@ extension IssueCellView: UIScrollViewDelegate {
     
     private func pagingTargetOffset(contentOffset: CGPoint) -> CGPoint {
         
-        if contentOffset.x >= 0 && contentOffset.x < closeBoxGuide.bounds.width / 2 {
+        if contentOffset.x >= 0 && contentOffset.x < closeBoxGuideView.bounds.width / 2 {
             return CGPoint.zero
         }
         
-        if contentOffset.x >= closeBoxGuide.bounds.width / 2 &&
-            contentOffset.x < closeBoxGuide.bounds.width + deleteBoxGuide.bounds.width / 2 {
-            return CGPoint(x: closeBoxGuide.bounds.width, y: 0)
+        if contentOffset.x >= closeBoxGuideView.bounds.width / 2 &&
+            contentOffset.x < closeBoxGuideView.bounds.width + deleteBoxGuideView.bounds.width / 2 {
+            return CGPoint(x: closeBoxGuideView.bounds.width, y: 0)
         }
         
-        return CGPoint(x: closeBoxGuide.bounds.width + deleteBoxGuide.bounds.width, y: 0)
+        return CGPoint(x: closeBoxGuideView.bounds.width + deleteBoxGuideView.bounds.width, y: 0)
     }
     
 }
