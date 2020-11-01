@@ -1,10 +1,12 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import APIRouter from "../routers";
 import createDBConnection from "./database";
 
-export default async ({ app }: { app: express.Application }): Promise<void> => {
+const app = express();
+
+export default async ({ app }: { app: express.Application }) => {
   await createDBConnection();
 
   app.use(cors());
@@ -12,7 +14,7 @@ export default async ({ app }: { app: express.Application }): Promise<void> => {
 
   app.use("/api", APIRouter);
 
-  app.use("/", (req: Request, res: Response) => {
+  app.use("/", (req: Request, res: Response, next: NextFunction) => {
     res.send("hello");
   });
 };
