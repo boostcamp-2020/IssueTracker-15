@@ -49,18 +49,18 @@ class LabelListViewController: UIViewController {
     private func showSubmitFormView(indexPath: IndexPath? = nil) {
         guard let tabBarController = self.tabBarController,
             let formView = SubmitFormView.createView(),
-            let labelFormFieldView = LabelSubmitFieldsView.createView()
+            let labelSubmitFieldsView = LabelSubmitFieldsView.createView()
             else { return }
         
-        formView.configure(submitField: labelFormFieldView)
+        formView.configure(submitField: labelSubmitFieldsView)
         
         if let indexPath = indexPath {
-            labelFormFieldView.configure(labelViewModel: labelListViewModel?.cellForItemAt(path: indexPath))
-            labelFormFieldView.onSaveButtonTapped = { (title, desc, colorCode) in
+            labelSubmitFieldsView.configure(labelViewModel: labelListViewModel?.cellForItemAt(path: indexPath))
+            labelSubmitFieldsView.onSaveButtonTapped = { (title, desc, colorCode) in
                 self.labelListViewModel?.editLabel(at: indexPath, title: title, desc: desc, hexColor: colorCode)
             }
         } else {
-            labelFormFieldView.onSaveButtonTapped = labelListViewModel?.addNewLabel
+            labelSubmitFieldsView.onSaveButtonTapped = labelListViewModel?.addNewLabel
         }
         
         tabBarController.view.addSubview(formView)
