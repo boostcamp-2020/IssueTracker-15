@@ -38,10 +38,12 @@ class IssueListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
+    var editmode: Bool = false
     @IBAction func editButtonTapped(_ sender: Any) {
+        editmode = !editmode
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
-            cell.showSelectBox = !cell.showSelectBox
+            cell.showCheckBox(show: editmode)
         }
     }
     

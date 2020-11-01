@@ -19,13 +19,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="1845" height="634"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIv-qe-DsP">
-                                <rect key="frame" x="0.0" y="0.0" width="3366.5" height="634"/>
+                                <rect key="frame" x="0.0" y="0.0" width="3113" height="634"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xnl-RV-xeJ" userLabel="checkBoxGuide">
-                                        <rect key="frame" x="0.0" y="0.0" width="253.5" height="634"/>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xnl-RV-xeJ" userLabel="checkBoxGuide">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="634"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAN-XX-dal">
-                                                <rect key="frame" x="0.0" y="0.0" width="253.5" height="634"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAN-XX-dal">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="634"/>
                                                 <state key="normal" image="circle" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                 </state>
@@ -34,17 +34,16 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="AAN-XX-dal" secondAttribute="trailing" id="0nk-h7-CnY"/>
                                             <constraint firstAttribute="bottom" secondItem="AAN-XX-dal" secondAttribute="bottom" id="BHa-Vz-vzZ"/>
                                             <constraint firstItem="AAN-XX-dal" firstAttribute="top" secondItem="Xnl-RV-xeJ" secondAttribute="top" id="Ifv-Za-2Wr"/>
                                             <constraint firstItem="AAN-XX-dal" firstAttribute="leading" secondItem="Xnl-RV-xeJ" secondAttribute="leading" id="Xss-VE-CMJ"/>
-                                            <constraint firstAttribute="width" secondItem="Xnl-RV-xeJ" secondAttribute="height" multiplier="1:2.5" id="mCk-T0-ptI"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8Z-t0-U66" userLabel="mainContent">
-                                        <rect key="frame" x="253.5" y="0.0" width="1845" height="634"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="1845" height="634"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-pc-tFP" userLabel="title">
                                                 <rect key="frame" x="15" y="10" width="922.5" height="190"/>
@@ -58,14 +57,14 @@
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ig-WN-dKN" userLabel="milestone" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
-                                                <rect key="frame" x="1788" y="41.5" width="42" height="127"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ig-WN-dKN" userLabel="milestone" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
+                                                <rect key="frame" x="1630" y="42" width="200" height="127"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcI-jT-XvJ" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
-                                                <rect key="frame" x="1788" y="178.5" width="42" height="127"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcI-jT-XvJ" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
+                                                <rect key="frame" x="1630" y="179" width="200" height="127"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -90,7 +89,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-PE-geQ" userLabel="CloseBoxGuide">
-                                        <rect key="frame" x="2098.5" y="0.0" width="634" height="634"/>
+                                        <rect key="frame" x="1845" y="0.0" width="634" height="634"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSs-W9-8Rt">
                                                 <rect key="frame" x="0.0" y="0.0" width="634" height="634"/>
@@ -113,7 +112,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xNn-Jb-haT" userLabel="DeleteBoxGuide">
-                                        <rect key="frame" x="2732.5" y="0.0" width="634" height="634"/>
+                                        <rect key="frame" x="2479" y="0.0" width="634" height="634"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8u4-5P-XF4">
                                                 <rect key="frame" x="0.0" y="0.0" width="634" height="634"/>
@@ -166,6 +165,7 @@
             <size key="customSize" width="1845" height="634"/>
             <connections>
                 <outlet property="cellHorizontalScrollView" destination="YEo-pC-kZI" id="FTZ-IO-Xjq"/>
+                <outlet property="checkBoxButton" destination="AAN-XX-dal" id="QHJ-gC-vfP"/>
                 <outlet property="checkBoxGuideView" destination="Xnl-RV-xeJ" id="pM6-Gc-qd3"/>
                 <outlet property="closeBoxGuide" destination="XRe-PE-geQ" id="8FI-B3-OQw"/>
                 <outlet property="deleteBoxGuide" destination="xNn-Jb-haT" id="Bqy-iT-38k"/>

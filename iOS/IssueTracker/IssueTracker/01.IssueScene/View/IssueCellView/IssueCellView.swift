@@ -21,20 +21,16 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var milestoneBadge: BadgeLabelView!
     @IBOutlet weak var labelBadge: BadgeLabelView!
+    @IBOutlet weak var checkBoxButton: UIButton!
     
-    var showSelectBox: Bool = false {
-        didSet {
-            checkBoxGuideView.isHidden = !showSelectBox
-            cellHorizontalScrollView.contentOffset = CGPoint.zero
-            cellHorizontalScrollView.isScrollEnabled = !showSelectBox
-        }
-    }
+    private lazy var checkBoxGuideWidthConstraint = checkBoxGuideView.widthAnchor.constraint(equalToConstant: 0)
     
     override func awakeFromNib() {
         super.awakeFromNib()
         cellHorizontalScrollView.delegate = self
         cellHorizontalScrollView.decelerationRate = .fast
-        showSelectBox = false
+        checkBoxGuideWidthConstraint.isActive = true
+        checkBoxGuideView.isHidden = false
     }
     
     func configure() {
@@ -60,6 +56,16 @@ class IssueCellView: UICollectionViewCell {
         titleLabel.autoResizeFontWithHeight()
         descriptionLabel.autoResizeFontWithHeight()
         
+    }
+    
+    func showCheckBox(show: Bool) {
+        cellHorizontalScrollView.contentOffset = CGPoint.zero
+        cellHorizontalScrollView.isScrollEnabled = !show
+        checkBoxGuideWidthConstraint.constant = show ? checkBoxGuideView.bounds.height * 0.5 : 0
+        UIView.animate(withDuration: 0.5) {
+            self.layoutIfNeeded()
+            self.checkBoxButton.isHidden = !show
+        }
     }
     
     @IBAction func checkBoxButtonTapped(_ sender: Any) {
