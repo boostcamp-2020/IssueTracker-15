@@ -48,20 +48,24 @@ class MilestoneListViewController: UIViewController {
     }
     
     private func showSubmitFormView(indexPath: IndexPath? = nil) {
-        guard let tabBarController = self.tabBarController, let milestoneSubmitFormView = MilestoneSubmitFormView.createView() else { return }
+        guard let tabBarController = self.tabBarController,
+            let formView = SubmitFormView.createView(),
+            let milestoneSubmitFieldsView = MilestoneSubmitFieldsView.createView()
+            else { return }
+        
+        formView.configure(submitField: milestoneSubmitFieldsView)
         
         if let indexPath = indexPath {
-            milestoneSubmitFormView.configure(milestoneItemViewModel: milestoneListViewModel?.cellForItemAt(path: indexPath))
-            milestoneSubmitFormView.saveButtonTapped = { (title, description, dueDate) in
-                self.milestoneListViewModel?.editMileStone(at: indexPath, title: title, description: description, dueDate: dueDate)
+            milestoneSubmitFieldsView.configure(milestoneItemViewModel: milestoneListViewModel?.cellForItemAt(path: indexPath))
+            milestoneSubmitFieldsView.onSaveButtonTapped = { (title, dueDate, desc) in
+                self.milestoneListViewModel?.editMileStone(at: indexPath, title: title, description: desc, dueDate: dueDate)
             }
         } else {
-            milestoneSubmitFormView.configure()
-            milestoneSubmitFormView.saveButtonTapped = self.milestoneListViewModel?.addNewMileStone
+            milestoneSubmitFieldsView.onSaveButtonTapped = milestoneListViewModel?.addNewMileStone
         }
         
-        tabBarController.view.addSubview(milestoneSubmitFormView)
-        milestoneSubmitFormView.frame = tabBarController.view.frame
+        tabBarController.view.addSubview(formView)
+        formView.frame = tabBarController.view.frame
     }
     
 }
