@@ -23,6 +23,20 @@ IssueRouter.post(
   }
 );
 
+IssueRouter.delete(
+  "/:issueId/label/:labelId",
+  async (req: Request, res: Response) => {
+    const issueId = Number(req.params.issueId);
+    const labelId = Number(req.params.labelId);
+    try {
+      await IssueService.deleteLabelAtIssue(issueId, labelId);
+      res.json({ result: "success" });
+    } catch (e) {
+      res.status(400);
+    }
+  }
+);
+
 IssueRouter.patch("/:issueId/title", async (req: Request, res: Response) => {
   const issueId = Number(req.params.issueId);
   try {

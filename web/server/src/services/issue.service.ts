@@ -40,6 +40,15 @@ const IssueService = {
     return;
   },
 
+  deleteLabelAtIssue: async (issueId: number, labelId: number) => {
+    const issueHasLabelRepository = getRepository(IssueHasLabelEntity);
+    const issueHasLabel = issueHasLabelRepository.findOne({ issueId, labelId });
+    if (!issueHasLabel) throw new Error("issueHasLabel dose not exist");
+    await issueHasLabelRepository.delete({ issueId, labelId });
+
+    return;
+  },
+
   updateIssueContent: async (issueId: number, content: UpdateIssueContent) => {
     const issueRepository = getRepository(IssueEntity);
     const issue = await IssueService.getIssueById(issueId);
