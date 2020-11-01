@@ -12,8 +12,6 @@ class IssueListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let dataSource = ["A","B","C"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "이슈"
@@ -58,7 +56,7 @@ extension IssueListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        return 11
     }
     
 }

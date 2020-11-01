@@ -77,9 +77,9 @@
 		96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */; };
 		96F95BFA254E6C4A00EC00C6 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */; };
 		96F95BFC254E6E4C00EC00C6 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95BFB254E6E4C00EC00C6 /* Issue.swift */; };
-		96F95BFF254E74E500EC00C6 /* IssueCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95BFD254E74E500EC00C6 /* IssueCellView.swift */; };
-		96F95C00254E74E500EC00C6 /* IssueCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96F95BFE254E74E500EC00C6 /* IssueCellView.xib */; };
 		96F95C02254E891E00EC00C6 /* Int+Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95C01254E891E00EC00C6 /* Int+Clamp.swift */; };
+		96F95C07254EA70B00EC00C6 /* IssueCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95C05254EA70B00EC00C6 /* IssueCellView.swift */; };
+		96F95C08254EA70B00EC00C6 /* IssueCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96F95C06254EA70B00EC00C6 /* IssueCellView.xib */; };
 		D2C7CE68FC3C8579A64346BE /* Pods_IssueTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0109B64F210AD3E237D228DA /* Pods_IssueTrackerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -150,9 +150,9 @@
 		96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabelView.swift; sourceTree = "<group>"; };
 		96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		96F95BFB254E6E4C00EC00C6 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
-		96F95BFD254E74E500EC00C6 /* IssueCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCellView.swift; sourceTree = "<group>"; };
-		96F95BFE254E74E500EC00C6 /* IssueCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCellView.xib; sourceTree = "<group>"; };
 		96F95C01254E891E00EC00C6 /* Int+Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Clamp.swift"; sourceTree = "<group>"; };
+		96F95C05254EA70B00EC00C6 /* IssueCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCellView.swift; sourceTree = "<group>"; };
+		96F95C06254EA70B00EC00C6 /* IssueCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueCellView.xib; sourceTree = "<group>"; };
 		B9280E9634EEE3C0BADC1EBF /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		EF5A0B739C1DAF0771E82345 /* Pods_IssueTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IssueTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1A7FBAD0CB05FF3BD8DEF4A /* Pods-IssueTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -445,9 +445,8 @@
 		96F95BF7254E692F00EC00C6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96F95C03254EA6D000EC00C6 /* IssueCellView */,
 				96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */,
-				96F95BFD254E74E500EC00C6 /* IssueCellView.swift */,
-				96F95BFE254E74E500EC00C6 /* IssueCellView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -458,6 +457,15 @@
 				96F95BFB254E6E4C00EC00C6 /* Issue.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		96F95C03254EA6D000EC00C6 /* IssueCellView */ = {
+			isa = PBXGroup;
+			children = (
+				96F95C05254EA70B00EC00C6 /* IssueCellView.swift */,
+				96F95C06254EA70B00EC00C6 /* IssueCellView.xib */,
+			);
+			path = IssueCellView;
 			sourceTree = "<group>";
 		};
 		9E2F3F721E0479B9F088C18C /* Pods */ = {
@@ -559,9 +567,9 @@
 				9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */,
 				95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */,
 				950EA0612547FFF9005BE133 /* HeaderView.xib in Resources */,
-				96F95C00254E74E500EC00C6 /* IssueCellView.xib in Resources */,
 				95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */,
 				95E9F5832546EC07001FBA0D /* Main.storyboard in Resources */,
+				96F95C08254EA70B00EC00C6 /* IssueCellView.xib in Resources */,
 				950EA05D2547FFA0005BE133 /* LabelCellView.xib in Resources */,
 				96C734CF2549420000DEC9A4 /* LabelSubmitFormView.xib in Resources */,
 				96A58F4B254A86EB00248F1E /* MilestoneSubmitFormView.xib in Resources */,
@@ -649,9 +657,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96F95C07254EA70B00EC00C6 /* IssueCellView.swift in Sources */,
 				96A58F51254A8C3500248F1E /* MilestoneSubmitForm+NibLoad.swift in Sources */,
 				96A58F53254A91AC00248F1E /* String+ContainRegex.swift in Sources */,
-				96F95BFF254E74E500EC00C6 /* IssueCellView.swift in Sources */,
 				95C36592254A76BB008ACCB5 /* MilestoneCellView.swift in Sources */,
 				96A58F3F254A6C2500248F1E /* Date+.swift in Sources */,
 				950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */,
