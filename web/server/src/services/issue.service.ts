@@ -1,6 +1,10 @@
 import { getRepository } from "typeorm";
 import IssueEntity from "../entity/issue.entity";
-import { CreateIssue, UpdateIssueTitle } from "../types/issue.types";
+import {
+  CreateIssue,
+  UpdateIssueContent,
+  UpdateIssueTitle,
+} from "../types/issue.types";
 
 const IssueService = {
   createIssue: async (issueData: CreateIssue): Promise<IssueEntity> => {
@@ -17,14 +21,32 @@ const IssueService = {
     return issues;
   },
 
-  updateIssue: async (issueId: number, title: UpdateIssueTitle) => {
+  getIssueById: async (issueId: number) => {
     const issueRepository = getRepository(IssueEntity);
     const issue = await issueRepository.findOne({ where: { id: issueId } });
 
+    return issue;
+  },
+
+  updateIssueContent: async (issueId: number, content: UpdateIssueContent) => {
+    const issueRepository = getRepository(IssueEntity);
+    const issue = await IssueService.getIssueById(issueId);
     if (!issue) throw new Error("issue dose not exist ");
 
-    const newIssue = issueRepository.merge(issue, title);
-    await issueRepository.save(newIssue);
+    const updatedIssue = issueRepository.merge(issue, content);
+    await issueRepository.save(updatedIssue);
+
+    return;
+  },
+
+  updateIssueTitle: async (issueId: number, title: UpdateIssueTitle) => {
+    const issueRepository = getRepository(IssueEntity);
+    const issue = await IssueService.getIssueById(issueId);
+
+    if (!issue) throw new Error("issue dose not exist ");
+
+    const updatedIssue = issueRepository.merge(issue, title);
+    await issueRepository.save(updatedIssue);
 
     return;
   },

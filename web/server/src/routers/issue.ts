@@ -1,7 +1,11 @@
 import express, { Request, Response } from "express";
 import IssueEntity from "../entity/issue.entity";
 import IssueService from "../services/issue.service";
-import { CreateIssue, UpdateIssueTitle } from "../types/issue.types";
+import {
+  CreateIssue,
+  UpdateIssueContent,
+  UpdateIssueTitle,
+} from "../types/issue.types";
 
 const IssueRouter = express.Router();
 
@@ -18,7 +22,18 @@ IssueRouter.patch("/:issueId/title", async (req: Request, res: Response) => {
   const issueId = Number(req.params.issueId);
   try {
     const newTitle: UpdateIssueTitle = req.body;
-    await IssueService.updateIssue(issueId, newTitle);
+    await IssueService.updateIssueTitle(issueId, newTitle);
+    res.json({ result: "success" });
+  } catch (e) {
+    res.status(400);
+  }
+});
+
+IssueRouter.patch("/:issueId", async (req: Request, res: Response) => {
+  const issueId = Number(req.params.issueId);
+  try {
+    const newDiscription: UpdateIssueContent = req.body;
+    await IssueService.updateIssueContent(issueId, newDiscription);
     res.json({ result: "success" });
   } catch (e) {
     res.status(400);
