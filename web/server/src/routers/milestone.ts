@@ -3,12 +3,24 @@ import MilestoneService from "../services/milestone.service";
 import { Milestone } from "../types/milestone.types";
 
 const MilestoneRouter = express.Router();
+MilestoneRouter.get("/", async (req: Request, res: Response) => {
+  try {
+    const result = await MilestoneService.getMilestones();
+    return res.json(result);
+  } catch (e) {
+    return res.status(400).json(e.message);
+  }
+});
+
 MilestoneRouter.post("/", async (req: Request, res: Response) => {
   const newMilestoneData: Milestone = req.body;
 
   try {
-    await MilestoneService.createMilestone(newMilestoneData);
-    return res.status(200);
+    const milestoneId: Record<
+      string,
+      number
+    > = await MilestoneService.createMilestone(newMilestoneData);
+    return res.status(200).json(milestoneId);
   } catch (e) {
     return res.status(400).json(e.message);
   }
