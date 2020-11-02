@@ -20,7 +20,6 @@ class LabelConditionCellView: ConditionCellView {
         labelBadge.setBackgroundColor(UIColor.cyan.cgColor)
         labelBadge.cornerRadiusRatio = 0.3
         labelBadge.setPadding(top: 5, left: 10, bottom: 5, right: 10)
-        layoutIfNeeded()
      }
     
 }

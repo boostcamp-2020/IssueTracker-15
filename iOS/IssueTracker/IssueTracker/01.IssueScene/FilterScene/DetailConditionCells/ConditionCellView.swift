@@ -10,7 +10,7 @@ import UIKit
 
 class ConditionCellView: UITableViewCell {
     
-    var choosen: Bool = false
+    private var checked: Bool = false
     @IBOutlet weak var checkImage: UIImageView!
     
     enum Constant {
@@ -24,14 +24,9 @@ class ConditionCellView: UITableViewCell {
         selectionStyle = .none
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0))
-    }
-    
-    func setChoosen(_ choose: Bool) {
-        choosen = choose
-        checkImage.image = choose ? Constant.imageChecked : Constant.imageUnchecked
-        checkImage.tintColor = choose ? Constant.colorChecked : Constant.colorUnChecked
+    func setCheck(_ check: Bool) {
+        checked = check
+        checkImage.image = checked ? Constant.imageChecked : Constant.imageUnchecked
+        checkImage.tintColor = checked ? Constant.colorChecked : Constant.colorUnChecked
     }
 }

@@ -93,7 +93,7 @@ extension DetailConditionFilterViewController: UITableViewDelegate {
         }
         
         tableView.moveRow(at: indexPathFrom, to: indexPathTo)
-        cell?.setChoosen(choosen)
+        cell?.setCheck(choosen)
     }
     
 }
@@ -132,7 +132,7 @@ extension DetailConditionFilterViewController: UITableViewDataSource {
                                                  for: indexPath) as? ConditionCellView
         }
         cell?.configure()
-        cell?.setChoosen(indexPath.section == 0)
+        cell?.setCheck(indexPath.section == 0)
         return cell ?? UITableViewCell()
     }
     
