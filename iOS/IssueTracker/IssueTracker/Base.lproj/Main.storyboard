@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Im-NR-0j4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Im-NR-0j4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -36,11 +36,23 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QI6-BQ-1wA">
+                                <rect key="frame" x="332" y="731" width="62" height="62"/>
+                                <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="QI6-BQ-1wA" secondAttribute="height" multiplier="1:1" id="Hau-wi-i8r"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="plus" catalog="system"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="GLk-Jp-VZv" firstAttribute="top" secondItem="H30-KX-izY" secondAttribute="top" id="4Gw-jh-rwr"/>
+                            <constraint firstItem="H30-KX-izY" firstAttribute="trailing" secondItem="QI6-BQ-1wA" secondAttribute="trailing" constant="20" id="AAW-49-YWr"/>
+                            <constraint firstItem="QI6-BQ-1wA" firstAttribute="width" secondItem="H30-KX-izY" secondAttribute="width" multiplier="0.15" id="SYn-Bz-Y9u"/>
                             <constraint firstItem="H30-KX-izY" firstAttribute="trailing" secondItem="GLk-Jp-VZv" secondAttribute="trailing" id="Tpl-yn-WEI"/>
+                            <constraint firstItem="H30-KX-izY" firstAttribute="bottom" secondItem="QI6-BQ-1wA" secondAttribute="bottom" constant="20" id="gaN-Bw-co5"/>
                             <constraint firstItem="H30-KX-izY" firstAttribute="bottom" secondItem="GLk-Jp-VZv" secondAttribute="bottom" id="jKc-VU-vQF"/>
                             <constraint firstItem="GLk-Jp-VZv" firstAttribute="leading" secondItem="H30-KX-izY" secondAttribute="leading" id="tSa-cm-dR4"/>
                         </constraints>
@@ -66,6 +78,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addIssueButton" destination="QI6-BQ-1wA" id="Z6H-B4-5dr"/>
                         <outlet property="collectionView" destination="GLk-Jp-VZv" id="WIq-9W-NmX"/>
                     </connections>
                 </viewController>

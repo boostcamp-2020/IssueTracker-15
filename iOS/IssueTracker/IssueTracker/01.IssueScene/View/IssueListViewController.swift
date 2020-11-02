@@ -9,14 +9,15 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-    
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var addIssueButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "이슈"
         configureSearchBar()
         configureCollectionView()
+        configureAddIssueButton()
     }
     
     private func configureSearchBar() {
@@ -37,6 +38,10 @@ class IssueListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
+    private func configureAddIssueButton() {
+        addIssueButton.layer.cornerRadius = addIssueButton.frame.size.width * 0.5
+    }
+
     // TODO: editMode 클릭시 테스트용 변수 -> EditMode 액션과 연결 필요
     var editmode: Bool = false
     @IBAction func editButtonTapped(_ sender: Any) {
