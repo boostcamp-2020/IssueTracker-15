@@ -49,6 +49,16 @@
                ReferencedContainer = "container:IssueTracker.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9521FCB7254FE7FE00FC0220"
+               BuildableName = "NetworkFrameworkTests.xctest"
+               BlueprintName = "NetworkFrameworkTests"
+               ReferencedContainer = "container:IssueTracker.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
