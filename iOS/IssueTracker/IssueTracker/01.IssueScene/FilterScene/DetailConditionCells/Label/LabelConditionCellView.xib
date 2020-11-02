@@ -15,9 +15,38 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGB-BK-tTj" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
+                        <rect key="frame" x="16" y="4.5" width="42" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="x.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ox6-6F-0Qc">
+                        <rect key="frame" x="280" y="12.5" width="20" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Ox6-6F-0Qc" secondAttribute="height" multiplier="1:1" id="LRF-Jo-bfi"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="MGB-BK-tTj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="017-cQ-uhU"/>
+                    <constraint firstItem="Ox6-6F-0Qc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="J3u-11-kUd"/>
+                    <constraint firstItem="MGB-BK-tTj" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.8" id="O02-9v-2bC"/>
+                    <constraint firstAttribute="trailing" secondItem="Ox6-6F-0Qc" secondAttribute="trailing" constant="20" id="jGV-9h-WDL"/>
+                    <constraint firstItem="MGB-BK-tTj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="pCB-Nf-3u3"/>
+                    <constraint firstItem="Ox6-6F-0Qc" firstAttribute="width" secondItem="Ox6-6F-0Qc" secondAttribute="height" multiplier="1:1" id="rSC-Pm-rgW"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="accessoryImage" destination="Ox6-6F-0Qc" id="EfF-sm-1nN"/>
+                <outlet property="labelBadge" destination="MGB-BK-tTj" id="t5H-Og-fZq"/>
+            </connections>
             <point key="canvasLocation" x="139" y="143"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="x.circle.fill" catalog="system" width="128" height="121"/>
+    </resources>
 </document>
