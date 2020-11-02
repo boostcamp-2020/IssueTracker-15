@@ -16,6 +16,7 @@ class DetailConditionFilterViewController: UIViewController {
         case label
     }
     
+    @IBOutlet weak var titleNavItem: UINavigationItem!
     
     // TODO: Dependency Injection for ContentMode
     private var contentMode: ContentMode? = .label//nil
@@ -35,6 +36,7 @@ class DetailConditionFilterViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         configureTableView()
+        titleNavItem.title = title
         // Do any additional setup after loading the view.
     }
     
@@ -142,9 +144,10 @@ extension DetailConditionFilterViewController {
     static let nibName = "DetailConditionFilterViewController"
     
     // TODO: Dependency Injection ( ViewModels )
-    static func createViewController(contentMode: ContentMode) -> DetailConditionFilterViewController {
+    static func createViewController(contentMode: ContentMode, title: String) -> DetailConditionFilterViewController {
         let vc = DetailConditionFilterViewController(nibName: nibName, bundle: Bundle.main)
         vc.contentMode = contentMode
+        vc.title = title
         return vc
     }
     

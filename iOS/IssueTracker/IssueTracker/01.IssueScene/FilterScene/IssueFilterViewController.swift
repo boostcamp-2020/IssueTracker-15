@@ -96,13 +96,13 @@ extension IssueFilterViewController {
             let vc: DetailConditionFilterViewController
             switch detailMode {
             case .assignee:
-                vc = DetailConditionFilterViewController.createViewController(contentMode: .userInfo)
+                vc = DetailConditionFilterViewController.createViewController(contentMode: .userInfo, title: "담당자")
             case .label:
-                vc = DetailConditionFilterViewController.createViewController(contentMode: .label)
+                vc = DetailConditionFilterViewController.createViewController(contentMode: .label, title: "레이블")
             case .milestone:
-                vc = DetailConditionFilterViewController.createViewController(contentMode: .milestone)
+                vc = DetailConditionFilterViewController.createViewController(contentMode: .milestone, title: "마일스톤")
             case .writer:
-                vc = DetailConditionFilterViewController.createViewController(contentMode: .userInfo)
+                vc = DetailConditionFilterViewController.createViewController(contentMode: .userInfo, title: "작성자")
             }
             present(vc, animated: true)
         }

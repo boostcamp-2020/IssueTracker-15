@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailConditionFilterViewController" customModule="IssueTracker" customModuleProvider="target">
             <connections>
                 <outlet property="tableView" destination="KK4-3J-bma" id="sYB-gg-iVs"/>
+                <outlet property="titleNavItem" destination="hzt-o1-LlN" id="DnO-CE-dfp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
