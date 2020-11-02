@@ -17,16 +17,25 @@ class UserConditionCellView: UITableViewCell {
         static let colorOutSelected = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
     }
     
+    @IBOutlet weak var userImageLabel: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var accessoryImage: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+   // TODO: UserInfo
+    func configure() {
+        // 임시
+        userNameLabel.text = "SHIVVVPP"
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    override func layoutSubviews() {
+        userNameLabel.autoResizeFontWithHeight()
+    }
+    
+    var select : Bool = false {
+        didSet {
+            accessoryImage.image = isSelected ? Constant.imageOnSelected : Constant.imageOutSelected
+            accessoryImage.tintColor = isSelected ? Constant.colorOnSelected : Constant.colorOutSelected
+        }
     }
     
 }
