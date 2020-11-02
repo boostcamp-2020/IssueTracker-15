@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailConditionFilterViewController" customModule="IssueTracker" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="KK4-3J-bma" id="sYB-gg-iVs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,13 +22,24 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                     <items>
                         <navigationItem title="Title" id="hzt-o1-LlN">
-                            <barButtonItem key="leftBarButtonItem" title="Cancle" id="aNJ-J3-UqK"/>
-                            <barButtonItem key="rightBarButtonItem" title="Done" id="grj-UR-Tfz"/>
+                            <barButtonItem key="leftBarButtonItem" title="Cancle" id="aNJ-J3-UqK">
+                                <connections>
+                                    <action selector="cancleButtonTapped:" destination="-1" id="iKH-gY-9HE"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" title="Done" id="grj-UR-Tfz">
+                                <connections>
+                                    <action selector="doneButtonTapped:" destination="-1" id="a2a-UJ-eeb"/>
+                                </connections>
+                            </barButtonItem>
                         </navigationItem>
                     </items>
                 </navigationBar>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" style="plain" sectionIndexMinimumDisplayRowCount="2" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KK4-3J-bma">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" style="grouped" sectionIndexMinimumDisplayRowCount="2" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="KK4-3J-bma">
                     <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                    <color key="backgroundColor" systemColor="systemGray3Color" red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="separatorColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

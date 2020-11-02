@@ -51,7 +51,6 @@
             <connections>
                 <outlet property="accessoryImage" destination="V74-0y-bJG" id="nRp-mS-6pG"/>
                 <outlet property="dueDateLabel" destination="wLW-Kz-GEb" id="VCa-vT-DPg"/>
-                <outlet property="milestoneBadge" destination="qTK-k4-beH" id="qqo-uP-1bT"/>
                 <outlet property="milestoneLabel" destination="qTK-k4-beH" id="tPa-vQ-5Rz"/>
             </connections>
             <point key="canvasLocation" x="139" y="143"/>

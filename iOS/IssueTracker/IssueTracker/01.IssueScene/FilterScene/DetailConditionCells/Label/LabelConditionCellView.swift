@@ -23,10 +23,14 @@ class LabelConditionCellView: UITableViewCell {
     // TODO: LabelViewModel
      func configure() {
          // 임시
-         labelBadge.text = "Feature"
+        labelBadge.text = "Feature"
+        labelBadge.setBackgroundColor(UIColor.cyan.cgColor)
+        labelBadge.cornerRadiusRatio = 0.3
+        labelBadge.setPadding(top: 5, left: 10, bottom: 5, right: 10)
+        selectionStyle = .none
      }
      
-     var select : Bool = false {
+     var isChoosen : Bool = false {
          didSet {
              accessoryImage.image = isSelected ? Constant.imageOnSelected : Constant.imageOutSelected
              accessoryImage.tintColor = isSelected ? Constant.colorOnSelected : Constant.colorOutSelected

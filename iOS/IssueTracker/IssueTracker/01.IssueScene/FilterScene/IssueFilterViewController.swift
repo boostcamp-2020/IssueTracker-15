@@ -86,8 +86,20 @@ extension IssueFilterViewController {
             selected[indexPath.row] = !isSelected
             cell.accessoryType = selected[indexPath.row] ? .checkmark : .none
         case .detailCondition:
+            guard let detailMode = DetailCondition(rawValue: indexPath.row) else { return }
+            let vc: DetailConditionFilterViewController
+            switch detailMode {
+            case .assignee:
+                vc = DetailConditionFilterViewController.createViewController(contentMode: .userInfo)
+            case .label:
+                vc = DetailConditionFilterViewController.createViewController(contentMode: .label)
+            case .milestone:
+                vc = DetailConditionFilterViewController.createViewController(contentMode: .milestone)
+            case .writer:
+                vc = DetailConditionFilterViewController.createViewController(contentMode: .userInfo)
+            }
             
-            break
+            present(vc, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: false)
     }

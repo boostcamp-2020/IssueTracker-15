@@ -25,13 +25,14 @@ class UserConditionCellView: UITableViewCell {
     func configure() {
         // 임시
         userNameLabel.text = "SHIVVVPP"
+        selectionStyle = .none
     }
     
     override func layoutSubviews() {
         userNameLabel.autoResizeFontWithHeight()
     }
     
-    var select : Bool = false {
+    var isChoosen : Bool = false {
         didSet {
             accessoryImage.image = isSelected ? Constant.imageOnSelected : Constant.imageOutSelected
             accessoryImage.tintColor = isSelected ? Constant.colorOnSelected : Constant.colorOutSelected

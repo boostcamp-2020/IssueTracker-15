@@ -26,6 +26,7 @@ class MilestoneConditionCellView: UITableViewCell {
         // 임시
         milestoneLabel.text = "스프린트 2"
         dueDateLabel.text = "Due by November 5, 2020"
+        selectionStyle = .none
     }
     
     override func layoutSubviews() {
@@ -33,7 +34,7 @@ class MilestoneConditionCellView: UITableViewCell {
         dueDateLabel.autoResizeFontWithHeight()
     }
     
-    var select : Bool = false {
+    var isChoosen : Bool = false {
         didSet {
             accessoryImage.image = isSelected ? Constant.imageOnSelected : Constant.imageOutSelected
             accessoryImage.tintColor = isSelected ? Constant.colorOnSelected : Constant.colorOutSelected
