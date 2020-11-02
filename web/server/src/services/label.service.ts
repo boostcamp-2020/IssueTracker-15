@@ -9,6 +9,13 @@ const LabelService = {
     const results: LabelEntity = await labelRepository.save(label);
     return results;
   },
+
+  getLabels: async (): Promise<LabelEntity[]> => {
+    const labelRepository = getRepository(LabelEntity);
+    const labels: LabelEntity[] = await labelRepository.find();
+
+    return labels;
+  }
 };
 
 export default LabelService;

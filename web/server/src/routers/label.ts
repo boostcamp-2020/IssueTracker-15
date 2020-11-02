@@ -16,4 +16,20 @@ LabelRouter.post("/", async (req: Request, res: Response) => {
   }
 });
 
+LabelRouter.get('/', async (req: Request, res: Response) => {
+  const { LabelService } = Services;
+  try {
+    const result = await LabelService.getLabels();
+    return res.status(200).json({
+      "message": 'OK',
+      "status": 200,
+      "data": {
+        "labels": result
+      }
+    });
+  } catch (e) {
+    return res.status(400).json(e);
+  }
+});
+
 export default LabelRouter;
