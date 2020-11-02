@@ -18,6 +18,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var rightNavButton: UIButton!
     @IBOutlet weak var leftNavButton: UIButton!
+    @IBOutlet weak var bottomToolBar: UIToolbar!
     
     private var viewingMode: ViewingMode = .general
     
@@ -66,6 +67,7 @@ extension IssueListViewController {
         case .general:
             performSegue(withIdentifier: "createIssueFilterViewController", sender: self)
         case .edit:
+            // TODO: SelectAll
             break
         }
     }
@@ -77,10 +79,16 @@ extension IssueListViewController {
         return vc
     }
     
+    @IBAction func closeAllSelectedIssueButtonTapped(_ sender: Any) {
+    
+    }
+    
     private func toEditMode() {
         viewingMode = .edit
         rightNavButton.setTitle("Cancle", for: .normal)
         leftNavButton.setTitle("Select All", for: .normal)
+        bottomToolBar.isHidden = false
+        tabBarController?.tabBar.isHidden = true
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: true, animation: true)
@@ -91,6 +99,8 @@ extension IssueListViewController {
         viewingMode = .general
         rightNavButton.setTitle("Edit", for: .normal)
         leftNavButton.setTitle("Filter", for: .normal)
+        bottomToolBar.isHidden = true
+        tabBarController?.tabBar.isHidden = false
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: false, animation: true)

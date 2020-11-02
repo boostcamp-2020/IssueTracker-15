@@ -36,6 +36,18 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vxu-uE-83u">
+                                <rect key="frame" x="0.0" y="813" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem width="278" style="plain" systemItem="fixedSpace" id="uGA-XZ-w4V"/>
+                                    <barButtonItem title="선택 이슈 닫기" id="0W1-3w-fAd">
+                                        <connections>
+                                            <action selector="closeAllSelectedIssueButtonTapped:" destination="reG-4P-boI" id="nY8-Jj-nDg"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -69,6 +81,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomToolBar" destination="vxu-uE-83u" id="pBP-Gk-NKi"/>
                         <outlet property="collectionView" destination="GLk-Jp-VZv" id="WIq-9W-NmX"/>
                         <outlet property="leftNavButton" destination="EwP-TN-DZv" id="wKq-yh-VJa"/>
                         <outlet property="rightNavButton" destination="9FY-Nz-Jhv" id="dow-bL-5Hn"/>
