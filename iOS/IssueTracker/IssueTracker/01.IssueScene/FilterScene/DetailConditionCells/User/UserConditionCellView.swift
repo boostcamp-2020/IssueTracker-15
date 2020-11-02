@@ -26,6 +26,7 @@ class UserConditionCellView: UITableViewCell {
         // 임시
         userNameLabel.text = "SHIVVVPP"
         selectionStyle = .none
+        layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
     }
     
     override func layoutSubviews() {

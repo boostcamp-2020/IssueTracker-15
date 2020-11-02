@@ -70,8 +70,6 @@ extension DetailConditionFilterViewController {
 // MARK: - UITableViewDelegate Implementation
 extension DetailConditionFilterViewController: UITableViewDelegate {
     
-    
-    
 }
 
 // MARK: - UITableViewDataSource Implementation
@@ -85,9 +83,9 @@ extension DetailConditionFilterViewController: UITableViewDataSource {
         return section == 0 ? "selected" : ""
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.bounds.height / 12
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return view.bounds.height / 14
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return section == 0 ? choosenDatas.count : unchoosenDatas.count

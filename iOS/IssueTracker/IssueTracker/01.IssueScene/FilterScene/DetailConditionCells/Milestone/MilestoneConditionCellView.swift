@@ -27,6 +27,7 @@ class MilestoneConditionCellView: UITableViewCell {
         milestoneLabel.text = "스프린트 2"
         dueDateLabel.text = "Due by November 5, 2020"
         selectionStyle = .none
+        layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
     }
     
     override func layoutSubviews() {

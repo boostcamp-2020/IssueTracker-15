@@ -17,13 +17,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGB-BK-tTj" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
-                        <rect key="frame" x="16" y="4.5" width="42" height="35"/>
+                        <rect key="frame" x="16" y="9" width="42" height="26"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="x.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ox6-6F-0Qc">
-                        <rect key="frame" x="280" y="12.5" width="20" height="19"/>
+                        <rect key="frame" x="273.5" y="9.5" width="26.5" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Ox6-6F-0Qc" secondAttribute="height" multiplier="1:1" id="LRF-Jo-bfi"/>
                         </constraints>
@@ -32,10 +32,10 @@
                 <constraints>
                     <constraint firstItem="MGB-BK-tTj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="017-cQ-uhU"/>
                     <constraint firstItem="Ox6-6F-0Qc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="J3u-11-kUd"/>
-                    <constraint firstItem="MGB-BK-tTj" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.8" id="O02-9v-2bC"/>
+                    <constraint firstItem="MGB-BK-tTj" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.6" id="O02-9v-2bC"/>
                     <constraint firstAttribute="trailing" secondItem="Ox6-6F-0Qc" secondAttribute="trailing" constant="20" id="jGV-9h-WDL"/>
                     <constraint firstItem="MGB-BK-tTj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="pCB-Nf-3u3"/>
-                    <constraint firstItem="Ox6-6F-0Qc" firstAttribute="width" secondItem="Ox6-6F-0Qc" secondAttribute="height" multiplier="1:1" id="rSC-Pm-rgW"/>
+                    <constraint firstItem="Ox6-6F-0Qc" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.6" id="uIO-aK-ae4"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
