@@ -111,6 +111,10 @@ extension DetailConditionFilterViewController: UITableViewDataSource {
         return section == 0 ? choosenDatas.count : unchoosenDatas.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.bounds.height / 14
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let contentMode = contentMode else { return UITableViewCell() }
         let cell: ConditionCellView?

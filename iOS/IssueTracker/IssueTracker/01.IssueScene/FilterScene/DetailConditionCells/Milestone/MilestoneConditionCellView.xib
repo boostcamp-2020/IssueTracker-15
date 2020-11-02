@@ -17,13 +17,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTK-k4-beH" userLabel="milestoneBadge">
-                        <rect key="frame" x="16" y="4.5" width="42" height="22"/>
+                        <rect key="frame" x="16" y="4.5" width="42" height="17.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLW-Kz-GEb" userLabel="DueDate">
-                        <rect key="frame" x="16" y="23.5" width="42" height="15.5"/>
+                        <rect key="frame" x="16" y="21" width="42" height="13"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -38,11 +38,11 @@
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="V74-0y-bJG" firstAttribute="centerY" secondItem="PUs-Qu-bBC" secondAttribute="centerY" id="Eoo-H1-XRS"/>
-                    <constraint firstItem="wLW-Kz-GEb" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.35" id="Xhp-4V-Kpw"/>
-                    <constraint firstItem="PUs-Qu-bBC" firstAttribute="bottom" secondItem="wLW-Kz-GEb" secondAttribute="bottom" constant="5" id="cRL-0C-Ylj"/>
+                    <constraint firstItem="wLW-Kz-GEb" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.3" id="Xhp-4V-Kpw"/>
+                    <constraint firstItem="PUs-Qu-bBC" firstAttribute="bottom" secondItem="wLW-Kz-GEb" secondAttribute="bottom" constant="10" id="cRL-0C-Ylj"/>
                     <constraint firstItem="PUs-Qu-bBC" firstAttribute="trailing" secondItem="V74-0y-bJG" secondAttribute="trailing" constant="20" id="gck-Zy-CHa"/>
                     <constraint firstItem="qTK-k4-beH" firstAttribute="top" secondItem="PUs-Qu-bBC" secondAttribute="top" constant="4.5" id="gej-Gj-OHq"/>
-                    <constraint firstItem="qTK-k4-beH" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.5" id="hQy-4k-mLs"/>
+                    <constraint firstItem="qTK-k4-beH" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.4" id="hQy-4k-mLs"/>
                     <constraint firstItem="qTK-k4-beH" firstAttribute="leading" secondItem="PUs-Qu-bBC" secondAttribute="leading" constant="16" id="lZD-ZB-TJu"/>
                     <constraint firstItem="V74-0y-bJG" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.5" id="p9j-RG-SJe"/>
                     <constraint firstItem="wLW-Kz-GEb" firstAttribute="leading" secondItem="PUs-Qu-bBC" secondAttribute="leading" constant="16" id="zdb-XU-O7o"/>

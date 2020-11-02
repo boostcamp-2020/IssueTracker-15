@@ -19,6 +19,7 @@ class MilestoneConditionCellView: ConditionCellView {
         // 임시
         milestoneLabel.text = "스프린트 2"
         dueDateLabel.text = "Due by November 5, 2020"
+        layoutIfNeeded()
     }
     
     override func layoutSubviews() {

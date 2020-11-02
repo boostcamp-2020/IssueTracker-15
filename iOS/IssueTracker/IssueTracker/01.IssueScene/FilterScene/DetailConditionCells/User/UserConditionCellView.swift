@@ -18,6 +18,7 @@ class UserConditionCellView: ConditionCellView {
         super.configure()
         // 임시
         userNameLabel.text = "SHIVVVPP"
+        layoutIfNeeded()
     }
     
     override func layoutSubviews() {
