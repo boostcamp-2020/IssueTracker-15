@@ -41,7 +41,7 @@ class IssueListViewController: UIViewController {
     private func configureAddIssueButton() {
         addIssueButton.layer.cornerRadius = addIssueButton.frame.size.width * 0.5
     }
-
+    
     // TODO: editMode 클릭시 테스트용 변수 -> EditMode 액션과 연결 필요
     var editmode: Bool = false
     @IBAction func editButtonTapped(_ sender: Any) {
