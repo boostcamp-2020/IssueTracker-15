@@ -63,6 +63,7 @@ class IssueCellView: UICollectionViewCell {
 extension IssueCellView {
     
     @IBAction func checkBoxButtonTapped(_ sender: Any) {
+        checkBoxButton.isSelected.toggle()
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {

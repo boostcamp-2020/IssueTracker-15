@@ -10,7 +10,14 @@ import UIKit
 
 class IssueListViewController: UIViewController {
     
+    enum ViewingMode {
+        case general
+        case edit
+    }
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    private var viewingMode: ViewingMode = .general
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +26,7 @@ class IssueListViewController: UIViewController {
         configureCollectionView()
     }
     
+    // TODO: SerachBar Configure
     private func configureSearchBar() {
         navigationItem.searchController = UISearchController(searchResultsController: nil)
     }
@@ -37,27 +45,47 @@ class IssueListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
-    // TODO: editMode 클릭시 테스트용 변수 -> EditMode 액션과 연결 필요
-    var editmode: Bool = false
 }
 
 // MARK: - Actions
 extension IssueListViewController {
     
-    @IBAction func editButtonTapped(_ sender: Any) {
-        editmode = !editmode
-        collectionView.visibleCells.forEach {
-            guard let cell = $0 as? IssueCellView else { return }
-            cell.showCheckBox(show: editmode, animation: true)
+    @IBAction func rightNavButtonTapped(_ sender: Any) {
+        switch viewingMode {
+        case .general:
+            toEditMode()
+        case .edit:
+            toGeneralMode()
         }
     }
     
+    @IBAction func leftNavButtonTapped(_ sender: Any) {
+        if viewingMode == .general { return }
+        
+    }
+    
     @IBSegueAction func createIssueFilterViewController(_ coder: NSCoder) -> IssueFilterViewController? {
+        if viewingMode == .edit { return nil }
         let vc = IssueFilterViewController(coder: coder)
         
         return vc
     }
     
+    private func toEditMode() {
+        viewingMode = .edit
+        collectionView.visibleCells.forEach {
+            guard let cell = $0 as? IssueCellView else { return }
+            cell.showCheckBox(show: true, animation: true)
+        }
+    }
+    
+    private func toGeneralMode() {
+        viewingMode = .general
+        collectionView.visibleCells.forEach {
+            guard let cell = $0 as? IssueCellView else { return }
+            cell.showCheckBox(show: false, animation: true)
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource Implementation
@@ -66,7 +94,7 @@ extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return UICollectionViewCell() }
         cellView.configure()
-        cellView.showCheckBox(show: editmode, animation: false)
+        cellView.showCheckBox(show: viewingMode == .edit , animation: false)
         return cellView
     }
     

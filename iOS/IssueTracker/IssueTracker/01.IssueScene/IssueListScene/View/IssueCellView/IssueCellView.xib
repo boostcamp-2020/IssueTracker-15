@@ -29,6 +29,7 @@
                                                 <state key="normal" image="circle" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                 </state>
+                                                <state key="selected" image="checkmark.circle.fill" catalog="system"/>
                                                 <connections>
                                                     <action selector="checkBoxButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ltS-j8-8kn"/>
                                                 </connections>
@@ -180,6 +181,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>
