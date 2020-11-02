@@ -9,5 +9,17 @@ const MilestoneService = {
     );
     await milestoneRepository.insert(milestoneData);
   },
+
+  deleteMilestone: async (milestoneId: number): Promise<void> => {
+    const milestoneRepository: Repository<MilestoneEntity> = getRepository(
+      MilestoneEntity
+    );
+    const milestoneToRemove:
+      | MilestoneEntity
+      | undefined = await milestoneRepository.findOne(milestoneId);
+    if (!milestoneToRemove)
+      throw new Error(`can't find milestone id ${milestoneId}`);
+    await milestoneRepository.remove(milestoneToRemove);
+  },
 };
 export default MilestoneService;
