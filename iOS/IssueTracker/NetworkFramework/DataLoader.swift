@@ -11,18 +11,29 @@ import Foundation
 public class DataLoader<T: Decodable> {
     private let session: URLSession
     
-    init(session: URLSession) {
+    public init(session: URLSession) {
         self.session = session
     }
     
-    public func perform(with urlRequest: URLRequest, completionHandler: @escaping (_ response: T?) -> Void) {
+    public func reqeust(endpoint: EndPoint, completion: @escaping (_ response: T?) -> Void) {
+        var components = URLComponents()
+        components.scheme = endpoint.scheme
+        components.host = endpoint.baseURL
+        components.path = endpoint.path
+        
+        guard let url = components.url else { return }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = endpoint.method.rawValue
+        urlRequest.httpBody = endpoint.httpBody
+        
         session.dataTask(with: urlRequest) { (data, response, error) in
             guard error == nil else { return }
             if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
                 do {
-                    completionHandler(try JSONDecoder().decode(T.self, from: data))
+                    completion(try JSONDecoder().decode(T.self, from: data))
                 } catch {
-                    print(error.localizedDescription)
+                    print(NetworkError.decodingError("\(T.Type.self)"))
                 }
             }
         }.resume()
@@ -67,6 +78,7 @@ extension String: URLConvertible {
 
 enum NetworkError: Error {
     case invalidURL(String)
+    case decodingError(String)
 }
 
 public enum HTTPMethod: String {
@@ -74,4 +86,12 @@ public enum HTTPMethod: String {
     case post = "POST"
     case patch = "PATCH"
     case delete = "DELETE"
+}
+
+public protocol EndPoint {
+    var scheme: String { get }
+    var baseURL: String { get }
+    var path: String { get }
+    var method: HTTPMethod { get }
+    var httpBody: Data? { get }
 }
