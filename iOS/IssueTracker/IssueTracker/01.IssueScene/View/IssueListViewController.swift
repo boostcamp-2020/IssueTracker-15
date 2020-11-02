@@ -48,7 +48,7 @@ extension IssueListViewController {
         editmode = !editmode
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
-            cell.showCheckBox(show: editmode)
+            cell.showCheckBox(show: editmode, animation: true)
         }
     }
     
@@ -66,6 +66,7 @@ extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return UICollectionViewCell() }
         cellView.configure()
+        cellView.showCheckBox(show: editmode, animation: false)
         return cellView
     }
     
