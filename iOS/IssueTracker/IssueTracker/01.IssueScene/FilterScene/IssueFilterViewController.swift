@@ -47,7 +47,6 @@ class IssueFilterViewController: UITableViewController {
         let appearance = UINavigationBarAppearance()
         appearance.shadowColor = .gray
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        let upperAppearance = UINavigationBarAppearance()
     }
     
     private func configureConditionCells() {
@@ -98,7 +97,6 @@ extension IssueFilterViewController {
             case .writer:
                 vc = DetailConditionFilterViewController.createViewController(contentMode: .userInfo)
             }
-            
             present(vc, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: false)

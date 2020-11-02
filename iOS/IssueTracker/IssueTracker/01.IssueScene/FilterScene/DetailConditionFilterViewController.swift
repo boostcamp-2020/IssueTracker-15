@@ -70,6 +70,30 @@ extension DetailConditionFilterViewController {
 // MARK: - UITableViewDelegate Implementation
 extension DetailConditionFilterViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexPathFrom = indexPath
+        let indexPathTo: IndexPath
+        let cell: ConditionCellView?
+        let choosen: Bool
+        
+        if indexPath.section == 0 {
+            cell = tableView.cellForRow(at: indexPath) as? ConditionCellView
+            let data = choosenDatas.remove(at: indexPath.row)
+            unchoosenDatas.append(data)
+            indexPathTo = IndexPath(row: 0, section: 1)
+            choosen = false
+        } else {
+            cell = tableView.cellForRow(at: indexPath) as? ConditionCellView
+            let data = unchoosenDatas.remove(at: indexPath.row)
+            choosenDatas.insert(data, at: 0)
+            indexPathTo = IndexPath(row: choosenDatas.count - 1, section: 0)
+            choosen = true
+        }
+        
+        tableView.moveRow(at: indexPathFrom, to: indexPathTo)
+        cell?.setChoosen(choosen)
+    }
+    
 }
 
 // MARK: - UITableViewDataSource Implementation
@@ -82,10 +106,6 @@ extension DetailConditionFilterViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return section == 0 ? "selected" : ""
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return view.bounds.height / 14
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return section == 0 ? choosenDatas.count : unchoosenDatas.count
