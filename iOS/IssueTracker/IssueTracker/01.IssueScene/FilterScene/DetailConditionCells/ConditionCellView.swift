@@ -16,8 +16,8 @@ class ConditionCellView: UITableViewCell {
     enum Constant {
         static let imageChecked = UIImage(systemName: "x.circle.fill")
         static let imageUnchecked = UIImage(systemName: "plus.circle")
-        static let colorChecked = UIColor.link
-        static let colorUnChecked = UIColor.gray
+        static let colorChecked = UIColor.gray
+        static let colorUnChecked = UIColor.link
     }
     
     func configure() {
