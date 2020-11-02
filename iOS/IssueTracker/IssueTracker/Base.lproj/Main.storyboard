@@ -490,13 +490,13 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="93E-1R-yKt" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="zO9-t7-V61">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="116.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="4Hm-Rr-dWX" kind="relationship" relationship="rootViewController" id="wYN-U1-BoB"/>
+                        <segue destination="4Hm-Rr-dWX" kind="relationship" relationship="rootViewController" destinationCreationSelector="createIssueFilterViewController:" id="wYN-U1-BoB"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0q-Ph-9XO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

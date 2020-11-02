@@ -32,6 +32,13 @@ class IssueFilterViewController: UITableViewController {
     
     var selected = [Bool](repeating: false, count: 5)
     
+    // TODO: Dependency  FilterStatus, (IssueService, MilestoneService, LabelService, CommentService) for DetailCondition
+    //init(coder: NSCoder, )
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //title = "필터 선택"

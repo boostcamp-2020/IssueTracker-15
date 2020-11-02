@@ -39,12 +39,23 @@ class IssueListViewController: UIViewController {
     
     // TODO: editMode 클릭시 테스트용 변수 -> EditMode 액션과 연결 필요
     var editmode: Bool = false
+}
+
+// MARK: - Actions
+extension IssueListViewController {
+    
     @IBAction func editButtonTapped(_ sender: Any) {
         editmode = !editmode
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: editmode)
         }
+    }
+    
+    @IBSegueAction func createIssueFilterViewController(_ coder: NSCoder) -> IssueFilterViewController? {
+        let vc = IssueFilterViewController(coder: coder)
+        
+        return vc
     }
     
 }
