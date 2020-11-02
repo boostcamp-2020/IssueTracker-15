@@ -515,13 +515,21 @@
 			path = 05.CustomUI;
 			sourceTree = "<group>";
 		};
+		96DFA30125509C7200F82CCD /* IssueListScene */ = {
+			isa = PBXGroup;
+			children = (
+				96F95BF7254E692F00EC00C6 /* View */,
+				96F95BF6254E692800EC00C6 /* ViewModel */,
+			);
+			path = IssueListScene;
+			sourceTree = "<group>";
+		};
 		96F95BF5254E691500EC00C6 /* 01.IssueScene */ = {
 			isa = PBXGroup;
 			children = (
+				96DFA30125509C7200F82CCD /* IssueListScene */,
 				965F09752550589F00B3A248 /* FilterScene */,
 				96F95BF8254E693500EC00C6 /* Model */,
-				96F95BF7254E692F00EC00C6 /* View */,
-				96F95BF6254E692800EC00C6 /* ViewModel */,
 			);
 			path = 01.IssueScene;
 			sourceTree = "<group>";
