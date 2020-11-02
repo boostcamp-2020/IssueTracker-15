@@ -8,39 +8,24 @@
 
 import UIKit
 
-class LabelConditionCellView: UITableViewCell {
+class LabelConditionCellView: ConditionCellView {
     
-    enum Constant {
-        static let imageOnSelected = UIImage(systemName: "plus.circle")
-        static let imageOutSelected = UIImage(systemName: "x.circle.fill")
-        static let colorOnSelected = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        static let colorOutSelected = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-    }
-
     @IBOutlet weak var labelBadge: BadgeLabelView!
-    @IBOutlet weak var accessoryImage: UIImageView!
     
-    var isChoosen: Bool = false {
-        didSet {
-            accessoryImage.image = isSelected ? Constant.imageOnSelected : Constant.imageOutSelected
-            accessoryImage.tintColor = isSelected ? Constant.colorOnSelected : Constant.colorOutSelected
-        }
-    }
-
     // TODO: LabelViewModel
-     func configure() {
+     override func configure() {
+        super.configure()
          // 임시
         labelBadge.text = "Feature"
         labelBadge.setBackgroundColor(UIColor.cyan.cgColor)
         labelBadge.cornerRadiusRatio = 0.3
         labelBadge.setPadding(top: 5, left: 10, bottom: 5, right: 10)
-        selectionStyle = .none
      }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0))
     }
+    
 }
 
 // MARK: - UITableViewRegistable Implementation

@@ -93,24 +93,21 @@ extension DetailConditionFilterViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let contentMode = contentMode else { return UITableViewCell() }
-        let selected = indexPath.section == 0
+        let cell: ConditionCellView?
         switch contentMode {
         case .userInfo:
-            guard let cell: UserConditionCellView = tableView.dequeueCell(at: indexPath) else { return UITableViewCell() }
-            cell.isChoosen = selected
-            cell.configure()
-            return cell
+            cell = tableView.dequeueReusableCell(withIdentifier: UserConditionCellView.cellIdentifier,
+                                                 for: indexPath) as? ConditionCellView
         case .milestone:
-            guard let cell: MilestoneConditionCellView = tableView.dequeueCell(at: indexPath) else { return UITableViewCell() }
-            cell.isChoosen = selected
-            cell.configure()
-            return cell
+            cell = tableView.dequeueReusableCell(withIdentifier: MilestoneConditionCellView.cellIdentifier,
+                                                 for: indexPath) as? ConditionCellView
         case .label:
-            guard let cell: LabelConditionCellView = tableView.dequeueCell(at: indexPath) else { return UITableViewCell() }
-            cell.isChoosen = selected
-            cell.configure()
-            return cell
+            cell = tableView.dequeueReusableCell(withIdentifier: LabelConditionCellView.cellIdentifier,
+                                                 for: indexPath) as? ConditionCellView
         }
+        cell?.configure()
+        cell?.setChoosen(indexPath.section == 0)
+        return cell ?? UITableViewCell()
     }
     
 }

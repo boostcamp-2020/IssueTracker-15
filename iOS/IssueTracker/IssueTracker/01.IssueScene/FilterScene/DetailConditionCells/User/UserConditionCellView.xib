@@ -51,7 +51,7 @@
             <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="accessoryImage" destination="xvd-c2-nwV" id="y29-WE-jtX"/>
+                <outlet property="checkImage" destination="xvd-c2-nwV" id="l6w-Yy-Xxe"/>
                 <outlet property="userImageLabel" destination="o6A-vh-rVg" id="mRz-zO-gqJ"/>
                 <outlet property="userNameLabel" destination="Slh-6u-bPz" id="tKV-jh-sRq"/>
             </connections>

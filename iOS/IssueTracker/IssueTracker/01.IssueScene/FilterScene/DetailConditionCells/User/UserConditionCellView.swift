@@ -8,36 +8,21 @@
 
 import UIKit
 
-class UserConditionCellView: UITableViewCell {
+class UserConditionCellView: ConditionCellView {
 
-    enum Constant {
-        static let imageOnSelected = UIImage(systemName: "plus.circle")
-        static let imageOutSelected = UIImage(systemName: "x.circle.fill")
-        static let colorOnSelected = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        static let colorOutSelected = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-    }
-    
     @IBOutlet weak var userImageLabel: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var accessoryImage: UIImageView!
     
-    var isChoosen : Bool = false {
-        didSet {
-            accessoryImage.image = isSelected ? Constant.imageOnSelected : Constant.imageOutSelected
-            accessoryImage.tintColor = isSelected ? Constant.colorOnSelected : Constant.colorOutSelected
-        }
-    }
-    
-   // TODO: UserInfo
-    func configure() {
+    // TODO: UserInfo
+    override func configure() {
+        super.configure()
         // 임시
         userNameLabel.text = "SHIVVVPP"
-        selectionStyle = .none
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         userNameLabel.autoResizeFontWithHeight()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0))
     }
     
 }

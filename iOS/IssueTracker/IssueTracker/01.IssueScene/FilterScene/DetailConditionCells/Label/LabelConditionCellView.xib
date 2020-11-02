@@ -23,7 +23,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="x.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ox6-6F-0Qc">
-                        <rect key="frame" x="273.5" y="9.5" width="26.5" height="25"/>
+                        <rect key="frame" x="278" y="11.5" width="22" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="Ox6-6F-0Qc" secondAttribute="height" multiplier="1:1" id="LRF-Jo-bfi"/>
                         </constraints>
@@ -36,13 +36,13 @@
                     <constraint firstItem="MGB-BK-tTj" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.6" id="O02-9v-2bC"/>
                     <constraint firstAttribute="trailing" secondItem="Ox6-6F-0Qc" secondAttribute="trailing" constant="20" id="jGV-9h-WDL"/>
                     <constraint firstItem="MGB-BK-tTj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="pCB-Nf-3u3"/>
-                    <constraint firstItem="Ox6-6F-0Qc" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.6" id="uIO-aK-ae4"/>
+                    <constraint firstItem="Ox6-6F-0Qc" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.5" id="uIO-aK-ae4"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="accessoryImage" destination="Ox6-6F-0Qc" id="EfF-sm-1nN"/>
+                <outlet property="checkImage" destination="Ox6-6F-0Qc" id="xdl-4o-taI"/>
                 <outlet property="labelBadge" destination="MGB-BK-tTj" id="t5H-Og-fZq"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="142.63392857142856"/>
