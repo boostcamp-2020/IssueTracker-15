@@ -1,17 +1,16 @@
-import { getRepository, Repository, InsertResult } from "typeorm";
+import { getRepository, Repository } from "typeorm";
 import MilestoneEntity from "../entity/milestone.entity";
-import IssueEntity from "../entity/issue.entity";
 import { Milestone } from "../types/milestone.types";
 
 const MilestoneService = {
-  getMilestones: async (): Promise<any> => {
-    const issueRepository: Repository<IssueEntity> = getRepository(IssueEntity);
-    /* const result = await issueRepository.query(
-      `SELECT "milestoneId","isOpened", count(*) AS "productCount" FROM "product" WHERE "deleted" = false AND "isPublished" = false GROUP BY "releaseDate"`
-    ); 
-
-    console.log(result);
-    return result; */
+  getMilestones: async (): Promise<Record<string, string>> => {
+    const milestoneRepository: Repository<MilestoneEntity> = getRepository(
+      MilestoneEntity
+    );
+    const result = await milestoneRepository.query(
+      `SELECT count(if(Issue.isOpend,1,null)) as openedIssueNum,count(if(Issue.isOpend=0,1,null)) as closedIssueNum,  Milestone.* FROM Issue RIGHT OUTER JOIN Milestone ON Issue.milestoneId=Milestone.id group by Milestone.id`
+    );
+    return result;
   },
   createMilestone: async (
     milestoneData: Milestone
