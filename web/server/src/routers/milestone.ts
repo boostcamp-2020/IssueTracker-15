@@ -6,7 +6,7 @@ const MilestoneRouter = express.Router();
 MilestoneRouter.get("/", async (req: Request, res: Response) => {
   try {
     const result = await MilestoneService.getMilestones();
-    return res.status(200).json(result);
+    return res.json(result);
   } catch (e) {
     return res.status(400).json(e.message);
   }
