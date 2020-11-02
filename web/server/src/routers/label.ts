@@ -32,4 +32,18 @@ LabelRouter.get('/', async (req: Request, res: Response) => {
   }
 });
 
+LabelRouter.delete('/:id', async (req: Request, res: Response) => {
+  const { id } = req.params
+  const { LabelService } = Services;
+  try {
+    await LabelService.delete(parseInt(id));
+    return res.status(200).json({
+      "message": 'OK',
+      "status": 200
+    });
+  } catch (e) {
+    return res.status(400).json(e);
+  }
+});
+
 export default LabelRouter;
