@@ -19,6 +19,13 @@ class LabelConditionCellView: UITableViewCell {
 
     @IBOutlet weak var labelBadge: BadgeLabelView!
     @IBOutlet weak var accessoryImage: UIImageView!
+    
+    var isChoosen: Bool = false {
+        didSet {
+            accessoryImage.image = isSelected ? Constant.imageOnSelected : Constant.imageOutSelected
+            accessoryImage.tintColor = isSelected ? Constant.colorOnSelected : Constant.colorOutSelected
+        }
+    }
 
     // TODO: LabelViewModel
      func configure() {
@@ -29,14 +36,11 @@ class LabelConditionCellView: UITableViewCell {
         labelBadge.setPadding(top: 5, left: 10, bottom: 5, right: 10)
         selectionStyle = .none
      }
-     
-     var isChoosen : Bool = false {
-         didSet {
-             accessoryImage.image = isSelected ? Constant.imageOnSelected : Constant.imageOutSelected
-             accessoryImage.tintColor = isSelected ? Constant.colorOnSelected : Constant.colorOutSelected
-         }
-     }
-     
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0))
+    }
 }
 
 // MARK: - UITableViewRegistable Implementation

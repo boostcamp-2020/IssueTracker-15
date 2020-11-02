@@ -21,23 +21,23 @@ class UserConditionCellView: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var accessoryImage: UIImageView!
     
-   // TODO: UserInfo
-    func configure() {
-        // 임시
-        userNameLabel.text = "SHIVVVPP"
-        selectionStyle = .none
-        layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
-    }
-    
-    override func layoutSubviews() {
-        userNameLabel.autoResizeFontWithHeight()
-    }
-    
     var isChoosen : Bool = false {
         didSet {
             accessoryImage.image = isSelected ? Constant.imageOnSelected : Constant.imageOutSelected
             accessoryImage.tintColor = isSelected ? Constant.colorOnSelected : Constant.colorOutSelected
         }
+    }
+    
+   // TODO: UserInfo
+    func configure() {
+        // 임시
+        userNameLabel.text = "SHIVVVPP"
+        selectionStyle = .none
+    }
+    
+    override func layoutSubviews() {
+        userNameLabel.autoResizeFontWithHeight()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0))
     }
     
 }

@@ -29,6 +29,7 @@
                         </constraints>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="MGB-BK-tTj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="017-cQ-uhU"/>
                     <constraint firstItem="Ox6-6F-0Qc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="J3u-11-kUd"/>
@@ -38,12 +39,13 @@
                     <constraint firstItem="Ox6-6F-0Qc" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.6" id="uIO-aK-ae4"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="accessoryImage" destination="Ox6-6F-0Qc" id="EfF-sm-1nN"/>
                 <outlet property="labelBadge" destination="MGB-BK-tTj" id="t5H-Og-fZq"/>
             </connections>
-            <point key="canvasLocation" x="139" y="143"/>
+            <point key="canvasLocation" x="137.68115942028987" y="142.63392857142856"/>
         </tableViewCell>
     </objects>
     <resources>

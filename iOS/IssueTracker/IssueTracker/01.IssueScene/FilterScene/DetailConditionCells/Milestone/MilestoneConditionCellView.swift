@@ -21,25 +21,25 @@ class MilestoneConditionCellView: UITableViewCell {
     @IBOutlet weak var dueDateLabel: UILabel!
     @IBOutlet weak var accessoryImage: UIImageView!
     
+    var isChoosen: Bool = false {
+        didSet {
+            accessoryImage.image = isSelected ? Constant.imageOnSelected : Constant.imageOutSelected
+            accessoryImage.tintColor = isSelected ? Constant.colorOnSelected : Constant.colorOutSelected
+        }
+    }
+    
     // TODO: MilestoneViewModel
     func configure() {
         // 임시
         milestoneLabel.text = "스프린트 2"
         dueDateLabel.text = "Due by November 5, 2020"
         selectionStyle = .none
-        layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0)
     }
     
     override func layoutSubviews() {
         milestoneLabel.autoResizeFontWithHeight()
         dueDateLabel.autoResizeFontWithHeight()
-    }
-    
-    var isChoosen : Bool = false {
-        didSet {
-            accessoryImage.image = isSelected ? Constant.imageOnSelected : Constant.imageOutSelected
-            accessoryImage.tintColor = isSelected ? Constant.colorOnSelected : Constant.colorOutSelected
-        }
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 1, right: 0))
     }
     
 }

@@ -35,6 +35,7 @@
                         </constraints>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="V74-0y-bJG" firstAttribute="centerY" secondItem="PUs-Qu-bBC" secondAttribute="centerY" id="Eoo-H1-XRS"/>
                     <constraint firstItem="wLW-Kz-GEb" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.35" id="Xhp-4V-Kpw"/>
@@ -47,6 +48,7 @@
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="PUs-Qu-bBC"/>
             </tableViewCellContentView>
+            <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="accessoryImage" destination="V74-0y-bJG" id="nRp-mS-6pG"/>
