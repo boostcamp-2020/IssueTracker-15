@@ -21,4 +21,10 @@ extension String {
         return regex.firstMatch(in: self, options: [], range: nsRange) != nil
     }
     
+    func numberOfMatches(of str: String) -> Int {
+        guard let regex = try? NSRegularExpression(pattern: str, options: .caseInsensitive) else { return 0 }
+        let nsRange = NSRange(location: 0, length: self.utf16.count)
+        return regex.numberOfMatches(in: self, range: nsRange)
+    }
+    
 }
