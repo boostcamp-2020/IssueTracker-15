@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MilestoneConditionCellView" customModule="IssueTracker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTK-k4-beH" userLabel="milestoneBadge">
+                        <rect key="frame" x="16" y="4" width="42" height="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLW-Kz-GEb" userLabel="DueDate">
+                        <rect key="frame" x="16" y="22" width="42" height="11"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="x.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="V74-0y-bJG">
+                        <rect key="frame" x="278" y="11.5" width="22" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="V74-0y-bJG" secondAttribute="height" multiplier="1:1" id="C2i-ZG-JxG"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="qTK-k4-beH" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-5" id="1Jz-fG-ebT"/>
+                    <constraint firstItem="qTK-k4-beH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="JAR-sI-CfB"/>
+                    <constraint firstItem="V74-0y-bJG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="N4J-ku-bBK"/>
+                    <constraint firstItem="V74-0y-bJG" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.5" id="SPr-tU-hiK"/>
+                    <constraint firstItem="wLW-Kz-GEb" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.25" id="VMV-Ua-jno"/>
+                    <constraint firstItem="wLW-Kz-GEb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="dOC-yr-Vu2"/>
+                    <constraint firstItem="qTK-k4-beH" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" multiplier="0.3" id="mWp-lV-bsW"/>
+                    <constraint firstAttribute="trailing" secondItem="V74-0y-bJG" secondAttribute="trailing" constant="20" id="n1W-Vs-nig"/>
+                    <constraint firstItem="wLW-Kz-GEb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="t6W-XQ-hQK"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="accessoryImage" destination="V74-0y-bJG" id="nRp-mS-6pG"/>
+                <outlet property="dueDateLabel" destination="wLW-Kz-GEb" id="VCa-vT-DPg"/>
+                <outlet property="milestoneBadge" destination="qTK-k4-beH" id="qqo-uP-1bT"/>
+                <outlet property="milestoneLabel" destination="qTK-k4-beH" id="tPa-vQ-5Rz"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="143"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="x.circle.fill" catalog="system" width="128" height="121"/>
+    </resources>
+</document>
