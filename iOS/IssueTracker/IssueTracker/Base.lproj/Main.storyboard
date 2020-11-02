@@ -54,7 +54,6 @@
                                 <state key="normal" title="Filter"/>
                                 <connections>
                                     <action selector="leftNavButtonTapped:" destination="reG-4P-boI" eventType="touchUpInside" id="Bsn-rt-Qbf"/>
-                                    <segue destination="93E-1R-yKt" kind="presentation" id="R8r-eL-lcA"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -71,6 +70,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="GLk-Jp-VZv" id="WIq-9W-NmX"/>
+                        <outlet property="leftNavButton" destination="EwP-TN-DZv" id="wKq-yh-VJa"/>
+                        <outlet property="rightNavButton" destination="9FY-Nz-Jhv" id="dow-bL-5Hn"/>
+                        <segue destination="93E-1R-yKt" kind="presentation" identifier="createIssueFilterViewController" id="AbB-4W-QI1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H7j-e0-wEm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -488,10 +490,11 @@
         <!--Navigation Controller-->
         <scene sceneID="eXM-ep-4ei">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q0q-Ph-9XO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="93E-1R-yKt" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="zO9-t7-V61">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="116.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
@@ -500,7 +503,6 @@
                         <segue destination="4Hm-Rr-dWX" kind="relationship" relationship="rootViewController" destinationCreationSelector="createIssueFilterViewController:" id="wYN-U1-BoB"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="q0q-Ph-9XO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2901" y="-597"/>
         </scene>

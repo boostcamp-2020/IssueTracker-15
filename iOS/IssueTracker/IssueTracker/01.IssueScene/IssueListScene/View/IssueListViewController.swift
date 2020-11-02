@@ -16,6 +16,8 @@ class IssueListViewController: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var rightNavButton: UIButton!
+    @IBOutlet weak var leftNavButton: UIButton!
     
     private var viewingMode: ViewingMode = .general
     
@@ -60,19 +62,25 @@ extension IssueListViewController {
     }
     
     @IBAction func leftNavButtonTapped(_ sender: Any) {
-        if viewingMode == .general { return }
-        
+        switch viewingMode {
+        case .general:
+            performSegue(withIdentifier: "createIssueFilterViewController", sender: self)
+        case .edit:
+            break
+        }
     }
     
     @IBSegueAction func createIssueFilterViewController(_ coder: NSCoder) -> IssueFilterViewController? {
         if viewingMode == .edit { return nil }
         let vc = IssueFilterViewController(coder: coder)
-        
+        // TODO: Dependency Injection to IssueFilterViewController
         return vc
     }
     
     private func toEditMode() {
         viewingMode = .edit
+        rightNavButton.setTitle("Cancle", for: .normal)
+        leftNavButton.setTitle("Select All", for: .normal)
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: true, animation: true)
@@ -81,6 +89,8 @@ extension IssueListViewController {
     
     private func toGeneralMode() {
         viewingMode = .general
+        rightNavButton.setTitle("Edit", for: .normal)
+        leftNavButton.setTitle("Filter", for: .normal)
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: false, animation: true)
