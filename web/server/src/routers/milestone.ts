@@ -13,4 +13,15 @@ MilestoneRouter.post("/", async (req: Request, res: Response) => {
     return res.status(400).json(e.message);
   }
 });
+
+MilestoneRouter.delete("/:id", async (req: Request, res: Response) => {
+  const milestoneId = parseInt(req.params.id, 10);
+
+  try {
+    await MilestoneService.deleteMilestone(milestoneId);
+    return res.status(200);
+  } catch (e) {
+    return res.status(400).json(e.message);
+  }
+});
 export default MilestoneRouter;
