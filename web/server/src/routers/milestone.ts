@@ -30,7 +30,7 @@ MilestoneRouter.delete("/:id", async (req: Request, res: Response) => {
 
   try {
     await MilestoneService.deleteMilestone(milestoneId);
-    return res.status(204);
+    return res.status(204).json();
   } catch (e) {
     return res.status(400).json(e.message);
   }
@@ -42,7 +42,7 @@ MilestoneRouter.patch("/:id", async (req: Request, res: Response) => {
 
   try {
     await MilestoneService.updateMilestone(milestoneId, newMilestoneData);
-    return res.status(201);
+    return res.status(201).json();
   } catch (e) {
     return res.status(400).json(e.message);
   }
