@@ -28,11 +28,23 @@ const LabelService = {
   delete: async (id: number): Promise<void> => {
 
     const label = await LabelService.getLabel(id);
+    if (!label) throw new Error("label does not exist");
 
-    if (!label) throw new Error("id is not exist");
 
     const labelRepository = getRepository(LabelEntity);
     await labelRepository.delete({ id })
+  },
+
+
+
+  update: async (id: number, body: any): Promise<void> => {
+    console.log(body);
+    const labelRepository = getRepository(LabelEntity);
+    const label = await LabelService.getLabel(id);
+
+    if (!label) throw new Error("label does not exist");
+
+    await labelRepository.update(label, body);
   }
 };
 
