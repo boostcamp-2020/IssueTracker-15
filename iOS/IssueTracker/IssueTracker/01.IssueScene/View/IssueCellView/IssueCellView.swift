@@ -74,7 +74,7 @@ extension IssueCellView {
         
     }
     
-    func showCheckBox(show: Bool,animation: Bool) {
+    func showCheckBox(show: Bool, animation: Bool) {
         cellHorizontalScrollView.contentOffset = CGPoint.zero
         cellHorizontalScrollView.isScrollEnabled = !show
         checkBoxGuideWidthConstraint.constant = show ? checkBoxGuideView.bounds.height * 0.5 : 0
