@@ -91,27 +91,18 @@ extension DetailConditionFilterViewController {
 extension DetailConditionFilterViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? ConditionCellView
         let indexPathFrom = indexPath
         let indexPathTo: IndexPath
-        let cell: ConditionCellView?
-        let choosen: Bool
         
-        if indexPath.section == 0 {
-            cell = tableView.cellForRow(at: indexPath) as? ConditionCellView
-            let data = viewModelDataSource[0].remove(at: indexPath.row)
-            viewModelDataSource[1].append(data)
-            indexPathTo = IndexPath(row: 0, section: 1)
-            choosen = false
-        } else {
-            cell = tableView.cellForRow(at: indexPath) as? ConditionCellView
-            let data = viewModelDataSource[1].remove(at: indexPath.row)
-            viewModelDataSource[0].insert(data, at: 0)
-            indexPathTo = IndexPath(row: viewModelDataSource[0].count - 1, section: 0)
-            choosen = true
-        }
+        let source = indexPath.section
+        let dest = source == 0 ? 1 : 0
+        let data = viewModelDataSource[source].remove(at: indexPath.row)
+        viewModelDataSource[dest].append(data)
+        indexPathTo = IndexPath(row:dest == 1 ? 0 : viewModelDataSource[dest].count - 1,section: dest)
         
         tableView.moveRow(at: indexPathFrom, to: indexPathTo)
-        cell?.setCheck(choosen)
+        cell?.setCheck(dest == 0)
     }
     
 }
