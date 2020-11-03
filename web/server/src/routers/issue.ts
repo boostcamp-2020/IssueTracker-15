@@ -98,7 +98,7 @@ IssueRouter.patch("/:issueId/title", async (req: Request, res: Response) => {
   try {
     const newTitle: UpdateIssueTitle = req.body;
     await IssueService.updateIssueTitle(issueId, newTitle);
-    res.status(200).json();
+    res.json();
   } catch (e) {
     res.status(400).json({ message: e.message });
   }
@@ -129,7 +129,7 @@ IssueRouter.delete("/:issueId", async (req: Request, res: Response) => {
   const issueId = Number(req.params.issueId);
   try {
     await IssueService.deleteIssue(issueId);
-    res.status(204);
+    res.status(204).json();
   } catch (e) {
     res.status(400).json({ message: e.message });
   }
