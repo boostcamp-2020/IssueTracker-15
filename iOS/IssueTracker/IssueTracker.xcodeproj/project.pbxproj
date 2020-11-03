@@ -24,9 +24,9 @@
 		9521FCCF254FE84D00FC0220 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521FCCE254FE84D00FC0220 /* DataLoader.swift */; };
 		9521FCD1255007DC00FC0220 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521FCCE254FE84D00FC0220 /* DataLoader.swift */; };
 		952FF3D5254805EE0042A96F /* Header+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF3D4254805EE0042A96F /* Header+CollectionView.swift */; };
-		957D8222255060DA0033484F /* AddNewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D8220255060DA0033484F /* AddNewIssueViewController.swift */; };
 		956B5D0525503D20001CBAA9 /* MilestoneEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B5D0425503D20001CBAA9 /* MilestoneEndPoint.swift */; };
 		956B5D0725503E8A001CBAA9 /* LabelEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B5D0625503E8A001CBAA9 /* LabelEndPoint.swift */; };
+		957D8222255060DA0033484F /* AddNewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D8220255060DA0033484F /* AddNewIssueViewController.swift */; };
 		95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
 		95C2F8982547EDC7006B3BC6 /* ColorConvertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */; };
 		95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F89B2547EF47006B3BC6 /* String+Color.swift */; };
@@ -58,6 +58,7 @@
 		963971F22549BC5F005BB4FA /* LabelListViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963971F12549BC5F005BB4FA /* LabelListViewModelMock.swift */; };
 		963971F52549D5AF005BB4FA /* LabelCellViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963971F42549D5AF005BB4FA /* LabelCellViewTest.swift */; };
 		963971F92549D9B6005BB4FA /* LabelSubmitFormViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963971F82549D9B6005BB4FA /* LabelSubmitFormViewTests.swift */; };
+		965F09712550299A00B3A248 /* JSONDecoder+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */; };
 		965F09742550425A00B3A248 /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09732550425A00B3A248 /* IssueFilterViewController.swift */; };
 		965F097D25505A1200B3A248 /* DetailConditionFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F097B25505A1200B3A248 /* DetailConditionFilterViewController.swift */; };
 		965F097E25505A1200B3A248 /* DetailConditionFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F097C25505A1200B3A248 /* DetailConditionFilterViewController.xib */; };
@@ -67,7 +68,6 @@
 		965F098925505B9D00B3A248 /* UserConditionCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F098725505B9D00B3A248 /* UserConditionCellView.xib */; };
 		965F098D25505C0200B3A248 /* MilestoneConditionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F098B25505C0200B3A248 /* MilestoneConditionCellView.swift */; };
 		965F098E25505C0200B3A248 /* MilestoneConditionCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F098C25505C0200B3A248 /* MilestoneConditionCellView.xib */; };
-		965F09712550299A00B3A248 /* JSONDecoder+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */; };
 		966ADAE3254D8B0800A480DD /* SubmitFormView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ADAE2254D8B0800A480DD /* SubmitFormView+LoadFromNib.swift */; };
 		966ADAE5254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ADAE4254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift */; };
 		966ADAE8254D9BD400A480DD /* LabelSubmitFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ADAE7254D9BD400A480DD /* LabelSubmitFieldsView.swift */; };
@@ -169,9 +169,9 @@
 		9521FCC1254FE7FE00FC0220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9521FCCE254FE84D00FC0220 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		952FF3D4254805EE0042A96F /* Header+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Header+CollectionView.swift"; sourceTree = "<group>"; };
-		957D8220255060DA0033484F /* AddNewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewIssueViewController.swift; sourceTree = "<group>"; };
 		956B5D0425503D20001CBAA9 /* MilestoneEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneEndPoint.swift; sourceTree = "<group>"; };
 		956B5D0625503E8A001CBAA9 /* LabelEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelEndPoint.swift; sourceTree = "<group>"; };
+		957D8220255060DA0033484F /* AddNewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewIssueViewController.swift; sourceTree = "<group>"; };
 		95C2F8942547EBE0006B3BC6 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConvertTests.swift; sourceTree = "<group>"; };
 		95C2F89B2547EF47006B3BC6 /* String+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Color.swift"; sourceTree = "<group>"; };
@@ -196,6 +196,7 @@
 		963971F12549BC5F005BB4FA /* LabelListViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModelMock.swift; sourceTree = "<group>"; };
 		963971F42549D5AF005BB4FA /* LabelCellViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCellViewTest.swift; sourceTree = "<group>"; };
 		963971F82549D9B6005BB4FA /* LabelSubmitFormViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSubmitFormViewTests.swift; sourceTree = "<group>"; };
+		965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Decode.swift"; sourceTree = "<group>"; };
 		965F09732550425A00B3A248 /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
 		965F097B25505A1200B3A248 /* DetailConditionFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionFilterViewController.swift; sourceTree = "<group>"; };
 		965F097C25505A1200B3A248 /* DetailConditionFilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailConditionFilterViewController.xib; sourceTree = "<group>"; };
@@ -205,7 +206,6 @@
 		965F098725505B9D00B3A248 /* UserConditionCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserConditionCellView.xib; sourceTree = "<group>"; };
 		965F098B25505C0200B3A248 /* MilestoneConditionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneConditionCellView.swift; sourceTree = "<group>"; };
 		965F098C25505C0200B3A248 /* MilestoneConditionCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MilestoneConditionCellView.xib; sourceTree = "<group>"; };
-		965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Decode.swift"; sourceTree = "<group>"; };
 		966ADAE2254D8B0800A480DD /* SubmitFormView+LoadFromNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubmitFormView+LoadFromNib.swift"; sourceTree = "<group>"; };
 		966ADAE4254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MilestoneSubmitFieldsView+LoadFromNib.swift"; sourceTree = "<group>"; };
 		966ADAE7254D9BD400A480DD /* LabelSubmitFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSubmitFieldsView.swift; sourceTree = "<group>"; };
@@ -325,7 +325,6 @@
 				9505446E254AA6E0007767C6 /* UIView+ShowAlert.swift */,
 				95054472254AAC0D007767C6 /* CollectionView+.swift */,
 				96A58F54254AA5BC00248F1E /* String+Date.swift */,
-
 				9627A5A725506985000BFF4D /* UITableView+.swift */,
 				96F95C01254E891E00EC00C6 /* CGFloat+Clamp.swift */,
 				965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */,
@@ -633,7 +632,6 @@
 				965F09752550589F00B3A248 /* FilterScene */,
 				96F95BF7254E692F00EC00C6 /* View */,
 				96F95BF6254E692800EC00C6 /* ViewModel */,
-				96F95BF8254E693500EC00C6 /* Model */,
 			);
 			path = 01.IssueScene;
 			sourceTree = "<group>";
@@ -736,6 +734,7 @@
 				95E9F5762546EC06001FBA0D /* Resources */,
 				9613C12C2547B1F5005EF13C /* ShellScript */,
 				9521FCCA254FE7FE00FC0220 /* Embed Frameworks */,
+				C5283FC93468C6E8307E3A68 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -923,6 +922,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# SwiftLint\n${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+		C5283FC93468C6E8307E3A68 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IssueTracker/Pods-IssueTracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IssueTracker/Pods-IssueTracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IssueTracker/Pods-IssueTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
