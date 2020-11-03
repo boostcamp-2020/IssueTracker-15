@@ -23,6 +23,20 @@ const IssueService = {
     return issues;
   },
 
+  getIssuesByCount: async (count: number) => {
+    const issueRepository = getRepository(IssueEntity);
+    const issues: IssueEntity[] = await issueRepository.find({
+      take: 10,
+      skip: 5,
+    });
+
+    return issues;
+  },
+
+  getDetailIssueById: async (issueId: number) => {
+    const issueRepository = getRepository(IssueEntity);
+  },
+
   getIssueById: async (issueId: number) => {
     const issueRepository = getRepository(IssueEntity);
     const issue = await issueRepository.findOne({ where: { id: issueId } });
