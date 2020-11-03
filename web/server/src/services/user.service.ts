@@ -2,7 +2,7 @@ import { getRepository } from 'typeorm';
 import Encryption from '../lib/encryption';
 import UserEntity from '../entity/user.entity';
 
-const SignUpService = {
+const UserService = {
   create: async (
     email: string,
     password: string,
@@ -23,4 +23,4 @@ const SignUpService = {
   },
 };
 
-export default SignUpService;
+export default UserService;
