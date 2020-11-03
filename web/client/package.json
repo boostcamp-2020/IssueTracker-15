@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack-dev-server --open --mode development"
+    "build": "npm run type-check && webpack --mode production",
+    "dev": "webpack-dev-server --open --mode development",
+    "type-check": "tsc"
   },
   "keywords": [],
   "author": "",
