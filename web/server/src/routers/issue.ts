@@ -147,7 +147,6 @@ IssueRouter.get("/count", async (req: Request, res: Response) => {
 IssueRouter.get("/", async (req: Request, res: Response) => {
   try {
     const isOpened = req.query.isOpened === "true" ? true : false;
-
     const Issues = await IssueService.getIssues(isOpened);
 
     res.json(Issues);

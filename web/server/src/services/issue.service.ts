@@ -2,7 +2,10 @@ import { getRepository } from "typeorm";
 import AssigneesEntity from "../entity/assignees.entity";
 import IssueHasLabelEntity from "../entity/issue-label.entity";
 import IssueEntity from "../entity/issue.entity";
-import makeIssueTemplate from "../lib/make-issue-template";
+import {
+  makeIssuesTemplate,
+  makeIssueTemplate,
+} from "../lib/make-issue-template";
 import {
   CreateIssue,
   UpdateIssueContent,
@@ -36,13 +39,34 @@ const IssueService = {
       ])
       .getMany();
 
-    const issues = await makeIssueTemplate(issueList);
+    const issues = await makeIssuesTemplate(issueList);
 
     return issues;
   },
 
   getDetailIssueById: async (issueId: number) => {
     const issueRepository = getRepository(IssueEntity);
+    const issue = (await issueRepository
+      .createQueryBuilder("Issue")
+      .leftJoin("Issue.milestone", "Milestone")
+      .innerJoin("Issue.author", "User")
+      .where("Issue.id = :issueId", { issueId })
+      .select([
+        "Issue.id",
+        "Issue.title",
+        "Issue.createAt",
+        "Issue.isOpened",
+        "Issue.milestoneId",
+        "User.userName",
+        "Milestone.title",
+      ])
+      .getOne()) as IssueEntity;
+
+    if (!issue) throw new Error("issue does not exists");
+
+    const detailIssue = await makeIssueTemplate(issue);
+
+    return detailIssue;
   },
 
   getIssuesByCount: async (count: number) => {
