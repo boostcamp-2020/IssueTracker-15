@@ -32,6 +32,7 @@ const IssueService = {
         "Issue.id",
         "Issue.title",
         "Issue.createAt",
+        "Issue.updateAt",
         "Issue.isOpened",
         "Issue.milestoneId",
         "User.userName",
@@ -54,7 +55,9 @@ const IssueService = {
       .select([
         "Issue.id",
         "Issue.title",
+        "Issue.description",
         "Issue.createAt",
+        "Issue.updateAt",
         "Issue.isOpened",
         "Issue.milestoneId",
         "User.userName",
