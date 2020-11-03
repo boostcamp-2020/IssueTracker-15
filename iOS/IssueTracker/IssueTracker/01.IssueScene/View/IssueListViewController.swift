@@ -9,7 +9,7 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-    
+
     enum ViewingMode {
         case general
         case edit
@@ -19,14 +19,17 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var rightNavButton: UIButton!
     @IBOutlet weak var leftNavButton: UIButton!
     @IBOutlet weak var bottomToolBar: UIToolbar!
+    @IBOutlet weak var addIssueButton: UIButton!
     
     private var viewingMode: ViewingMode = .general
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "이슈"
         configureSearchBar()
         configureCollectionView()
+        addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
     }
     
     // TODO: SerachBar Configure
@@ -105,6 +108,11 @@ extension IssueListViewController {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: false, animation: true)
         }
+
+    @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
+        let addIssueViewController = AddNewIssueViewController(coder: coder)
+        // addIssueVC의 doneButtonTapped 주입
+        return addIssueViewController
     }
 }
 

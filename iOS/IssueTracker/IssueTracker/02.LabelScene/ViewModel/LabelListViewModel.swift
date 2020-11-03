@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import NetworkFramework
 
 protocol LabelListViewModelProtocol: AnyObject {
     var didFetch: (() -> Void)? { get set }
@@ -36,19 +37,25 @@ class LabelListViewModel: LabelListViewModelProtocol {
     }
     
     func needFetchItems() {
-        labels = [Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879")]
-        didFetch?()
+        // 네트워크 통신으로 fetch
+        let labelFetchEndPoint = LabelEndPoint(requestType: .fetch)
+        let session = URLSession.init(configuration: .default, delegate: nil, delegateQueue: nil)
+        let dataLoader = DataLoader<[Label]>(session: session)
+        dataLoader.reqeust(endpoint: labelFetchEndPoint) { [weak self] (response) in
+            switch response {
+            case .success(let data):
+                guard let data = data else { return }
+                self?.labels = data
+                DispatchQueue.main.async {
+                    self?.didFetch?()
+                }
+            case .failure(let error):
+                switch error {
+                case .decodingError(let message), .invalidURL(let message), .responseError(let message):
+                    print(message)
+                }
+            }
+        }
     }
     
     func cellForItemAt(path: IndexPath) -> LabelItemViewModel {
