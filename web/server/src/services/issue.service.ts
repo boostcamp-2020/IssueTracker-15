@@ -2,6 +2,7 @@ import { getRepository } from "typeorm";
 import AssigneesEntity from "../entity/assignees.entity";
 import IssueHasLabelEntity from "../entity/issue-label.entity";
 import IssueEntity from "../entity/issue.entity";
+import makeIssueTemplate from "../lib/make-issue-template";
 import {
   CreateIssue,
   UpdateIssueContent,
@@ -17,11 +18,40 @@ const IssueService = {
     return newIssue;
   },
 
-  getIssues: async () => {
+  getOpendIssues: async () => {
     const issueRepository = getRepository(IssueEntity);
-    const issues: IssueEntity[] = await issueRepository.find();
+    const issueList: IssueEntity[] = await issueRepository
+      .createQueryBuilder("Issue")
+      .leftJoin("Issue.milestone", "Milestone")
+      .innerJoin("Issue.author", "User")
+      .select([
+        "Issue.id",
+        "Issue.title",
+        "Issue.createAt",
+        "Issue.isOpened",
+        "Issue.milestoneId",
+        "User.userName",
+        "Milestone.title",
+      ])
+      .getMany();
+
+    const issues = await makeIssueTemplate(issueList);
 
     return issues;
+  },
+
+  getClosedIssues: async () => {
+    const issueRepository = getRepository(IssueEntity);
+    const issueList: IssueEntity[] = await issueRepository.find({
+      where: { isOpened: false },
+    });
+
+    const issues = await makeIssueTemplate(issueList);
+    return issueList;
+  },
+
+  getDetailIssueById: async (issueId: number) => {
+    const issueRepository = getRepository(IssueEntity);
   },
 
   getIssuesByCount: async (count: number) => {
@@ -45,10 +75,6 @@ const IssueService = {
 
     const issueCount = { ...openedIssueCount[0], ...closedIssueCount[0] };
     return issueCount;
-  },
-
-  getDetailIssueById: async (issueId: number) => {
-    const issueRepository = getRepository(IssueEntity);
   },
 
   getIssueById: async (issueId: number) => {

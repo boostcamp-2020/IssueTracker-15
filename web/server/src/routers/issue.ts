@@ -135,16 +135,28 @@ IssueRouter.delete("/:issueId", async (req: Request, res: Response) => {
   }
 });
 
-// IssueRouter.get("/", async (req: Request, res: Response) => {
-//   try {
-//     let { count, isOpend, lastId } = req.query;
-//     count = Number(count);
-//     const issues = await IssueService.getIssuesByCount(count);
-//     res.json(issues);
-//   } catch (e) {
-//     res.status(404);
-//   }
-// });
+IssueRouter.get("/count", async (req: Request, res: Response) => {
+  try {
+    const issueCount = await IssueService.getIssueOverAllCount();
+    res.json(issueCount);
+  } catch (e) {
+    res.status(404).json({ message: e.message });
+  }
+});
+
+IssueRouter.get("/", async (req: Request, res: Response) => {
+  try {
+    const isOpened = Boolean(req.query.isOpened);
+    if (isOpened) {
+      const opendIssues = await IssueService.getOpendIssues();
+      return res.json(opendIssues);
+    }
+    const closedIssues = await IssueService.getClosedIssues();
+    res.json(closedIssues);
+  } catch (e) {
+    res.status(404).json({ message: e.message });
+  }
+});
 
 IssueRouter.post("/", async (req: Request, res: Response) => {
   const newIssueData: CreateIssue = req.body;
