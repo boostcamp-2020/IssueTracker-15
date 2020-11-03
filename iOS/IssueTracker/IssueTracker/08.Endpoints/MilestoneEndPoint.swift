@@ -30,36 +30,40 @@ struct MilestoneEndPoint: EndPoint {
         case create
         case edit
         case delete
-        case test
     }
     
     var scheme: String {
         switch self {
         default:
-            #warning("실제 서버는 http")
-            return "https"
+            return "http"
         }
     }
     
     var baseURL: String {
         switch self {
         default:
-            return "h3rb9c0ugl.execute-api.ap-northeast-2.amazonaws.com"
+            return "118.67.134.194"
+        }
+    }
+    
+    var port: Int {
+        switch self {
+        default:
+            return 3000
         }
     }
     
     var path: String {
         switch requestType {
         case .fetch:
-            return "/api/milestones"
+            return "/api/milestone"
         case .create:
             return "/api/milestone"
         case .edit:
             return "/api/milestone/" + parameter
         case .delete:
             return "/api/milestone/" + parameter
-        case .test:
-            return "/develop/baminchan/" + parameter
+
         }
     }
     
@@ -73,8 +77,17 @@ struct MilestoneEndPoint: EndPoint {
             return .patch
         case .delete:
             return .delete
-        case .test:
-            return .get
+        }
+    }
+    
+    var statusCode: Int {
+        switch requestType {
+        case .fetch, .edit:
+            return 200
+        case .create:
+            return 201
+        case .delete:
+            return 204
         }
     }
 }

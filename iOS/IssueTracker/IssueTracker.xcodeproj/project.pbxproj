@@ -310,7 +310,6 @@
 			children = (
 				96C734D1254943BF00DEC9A4 /* ViewModel */,
 				950EA0592547FF74005BE133 /* View */,
-				95C2F8932547EBD1006B3BC6 /* Model */,
 			);
 			path = 02.LabelScene;
 			sourceTree = "<group>";
@@ -353,12 +352,14 @@
 			path = 08.Endpoints;
 			sourceTree = "<group>";
 		};
-		95C2F8932547EBD1006B3BC6 /* Model */ = {
+		957DBF9A25513FA80051123C /* 04.Models */ = {
 			isa = PBXGroup;
 			children = (
+				96F95BFB254E6E4C00EC00C6 /* Issue.swift */,
 				95C2F8942547EBE0006B3BC6 /* Label.swift */,
+				966DD038254A5B1600A44FBA /* Milestone.swift */,
 			);
-			path = Model;
+			path = 04.Models;
 			sourceTree = "<group>";
 		};
 		95C36589254A7415008ACCB5 /* MilestoneCell */ = {
@@ -405,6 +406,7 @@
 				96F95BF5254E691500EC00C6 /* 01.IssueScene */,
 				952FF3D7254813F50042A96F /* 02.LabelScene */,
 				966DD034254A5ADF00A44FBA /* 03.MilestoneScene */,
+				957DBF9A25513FA80051123C /* 04.Models */,
 				96C8357325490EFF0086A6E6 /* 05.CustomUI */,
 				952FF3DA254814650042A96F /* 07.Supports */,
 				952FF3D1254804120042A96F /* 06.Extensions */,
@@ -458,7 +460,6 @@
 		966DD034254A5ADF00A44FBA /* 03.MilestoneScene */ = {
 			isa = PBXGroup;
 			children = (
-				966DD037254A5B0100A44FBA /* Model */,
 				966DD035254A5AF300A44FBA /* ViewModel */,
 				966DD036254A5AFA00A44FBA /* View */,
 			);
@@ -482,14 +483,6 @@
 				95C36589254A7415008ACCB5 /* MilestoneCell */,
 			);
 			name = View;
-			sourceTree = "<group>";
-		};
-		966DD037254A5B0100A44FBA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				966DD038254A5B1600A44FBA /* Milestone.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		9670B37D2549E9B80026B0C9 /* 00.MainTabBarScene */ = {
@@ -551,7 +544,6 @@
 		96F95BF5254E691500EC00C6 /* 01.IssueScene */ = {
 			isa = PBXGroup;
 			children = (
-				96F95BF8254E693500EC00C6 /* Model */,
 				96F95BF7254E692F00EC00C6 /* View */,
 				96F95BF6254E692800EC00C6 /* ViewModel */,
 			);
@@ -572,14 +564,6 @@
 				96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		96F95BF8254E693500EC00C6 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				96F95BFB254E6E4C00EC00C6 /* Issue.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		96F95C03254EA6D000EC00C6 /* IssueCellView */ = {

@@ -14,8 +14,8 @@ struct Label: Codable {
     let description: String
     let hexColor: String
     
-    init(id: Int, title: String, description: String, hexColor: String) {
-        self.id = id
+    init(title: String, description: String, hexColor: String) {
+        self.id = -1
         self.title = title
         self.description = description
         self.hexColor = hexColor
@@ -37,14 +37,14 @@ struct Label: Codable {
     }
     
     enum EnCodingKeys: String, CodingKey {
-        case title = "name"
+        case title
         case description
         case hexColor = "color"
     }
     
     enum DeCodingKeys: String, CodingKey {
         case id
-        case title = "name"
+        case title
         case description
         case hexColor = "color"
     }

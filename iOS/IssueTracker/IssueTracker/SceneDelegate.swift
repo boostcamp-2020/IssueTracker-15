@@ -9,23 +9,6 @@
 import UIKit
 import NetworkFramework
 
-struct FoodListResponse: Codable {
-    var statusCode: Int
-    var body: [StoreItem] = [StoreItem]()
-}
-
-struct StoreItem: Codable {
-    var detail_hash: String
-    var image: String
-    var alt: String
-    var delivery_type: [String]
-    var title: String
-    var description: String
-    var n_price: String?
-    var s_price: String
-    var badge: [String]?
-}
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -36,14 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         else { return }
         // TODO:- Network, Cache, AuthService 초기화 및 로그인 여부 검증 -> AppDelegate로??
         mainTabVC.setupSubViewControllers()
-        
-        let milestoneEndPoint = MilestoneEndPoint(requestType: .test, parameter: "main")
-        let session = URLSession.init(configuration: .default, delegate: nil, delegateQueue: nil)
-        let dataLoader = DataLoader<StoreItem>(session: session)
-        dataLoader.reqeust(endpoint: milestoneEndPoint) { (response) in
-            print(response!)
-        }
-
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

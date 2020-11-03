@@ -12,11 +12,11 @@ struct Milestone: Codable {
     let id: Int
     let title: String
     let description: String
-    let openIssuesLength: Int
-    let closeIssueLength: Int
+    let openIssuesLength: String
+    let closeIssueLength: String
     let dueDate: String
     
-    init(id: Int, title: String, description: String, dueDate: String, openIssuesLength: Int, closeIssueLength: Int) {
+    init(id: Int, title: String, description: String, dueDate: String, openIssuesLength: String, closeIssueLength: String) {
         self.id = id
         self.title = title
         self.description = description
@@ -25,8 +25,8 @@ struct Milestone: Codable {
         self.closeIssueLength = closeIssueLength
     }
     
-    init(id: Int, title: String,description: String, dueDate: String) {
-        self.init(id: id, title: title, description: description, dueDate: dueDate, openIssuesLength: 10, closeIssueLength: 10)
+    init(id: Int, title: String, description: String, dueDate: String) {
+        self.init(id: id, title: title, description: description, dueDate: dueDate, openIssuesLength: "0", closeIssueLength: "0")
     }
     
     init(from decoder: Decoder) throws {
@@ -34,8 +34,8 @@ struct Milestone: Codable {
         id = try container.decode(Int.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title)
         description = try container.decode(String.self, forKey: .description)
-        openIssuesLength = try container.decode(Int.self, forKey: .openIssueLength)
-        closeIssueLength = try container.decode(Int.self, forKey: .closeIssueLength)
+        openIssuesLength = try container.decode(String.self, forKey: .openIssueLength)
+        closeIssueLength = try container.decode(String.self, forKey: .closeIssueLength)
         dueDate = try container.decode(String.self, forKey: .dueDate)
     }
     

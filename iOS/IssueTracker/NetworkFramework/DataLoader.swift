@@ -9,16 +9,19 @@
 import Foundation
 
 public class DataLoader<T: Decodable> {
+    public typealias RequestResult<T> = Result<T?, NetworkError>
+    
     private let session: URLSession
     
     public init(session: URLSession) {
         self.session = session
     }
     
-    public func reqeust(endpoint: EndPoint, completion: @escaping (_ response: T?) -> Void) {
+    public func reqeust(endpoint: EndPoint, completion: @escaping (RequestResult<T>) -> Void) {
         var components = URLComponents()
         components.scheme = endpoint.scheme
         components.host = endpoint.baseURL
+        components.port = endpoint.port
         components.path = endpoint.path
         
         guard let url = components.url else { return }
@@ -26,12 +29,27 @@ public class DataLoader<T: Decodable> {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endpoint.method.rawValue
         urlRequest.httpBody = endpoint.httpBody
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         session.dataTask(with: urlRequest) { (data, response, error) in
+            
             guard error == nil else { return }
-            if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
+            guard let response = response as? HTTPURLResponse, response.statusCode == endpoint.statusCode else {
+                completion(.failure(.responseError("요청에 실패했습니다.")))
+                return
+            }
+            
+            if let data = data {
                 do {
-                    completion(try JSONDecoder().decode(T.self, from: data))
+                    // let dataString = String(data: data, encoding: .utf8)
+                    // print("data string : \(dataString!)")
+                    // print("response status code : \(response.statusCode)")
+                    
+                    if endpoint.method == .delete {
+                        completion(.success(nil))
+                    } else {
+                        completion(.success(try JSONDecoder().decode(T.self, from: data)))
+                    }
                 } catch {
                     print(NetworkError.decodingError("\(T.Type.self)"))
                 }
@@ -76,9 +94,10 @@ extension String: URLConvertible {
     }
 }
 
-enum NetworkError: Error {
+public enum NetworkError: Error {
     case invalidURL(String)
     case decodingError(String)
+    case responseError(String)
 }
 
 public enum HTTPMethod: String {
@@ -94,4 +113,6 @@ public protocol EndPoint {
     var path: String { get }
     var method: HTTPMethod { get }
     var httpBody: Data? { get }
+    var port: Int { get }
+    var statusCode: Int { get }
 }

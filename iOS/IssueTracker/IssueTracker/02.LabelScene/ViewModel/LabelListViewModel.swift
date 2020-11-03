@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import NetworkFramework
 
 protocol LabelListViewModelProtocol {
     var didFetch: (() -> Void)? { get set }
@@ -23,32 +24,38 @@ class LabelListViewModel: LabelListViewModelProtocol {
     private var labels = [Label]()
     
     func editLabel(at indexPath: IndexPath, title: String, desc: String, hexColor: String) {
-        labels[indexPath.row] = Label(id: 0, title: title, description: desc, hexColor: hexColor)
+        labels[indexPath.row] = Label(title: title, description: desc, hexColor: hexColor)
         
         didFetch?()
     }
     
     func addNewLabel(title: String, desc: String, hexColor: String) {
-        let newLabel: Label = Label(id: 0, title: title, description: desc, hexColor: hexColor)
+        let newLabel: Label = Label(title: title, description: desc, hexColor: hexColor)
         labels.insert(newLabel, at: 0)
         
         didFetch?()
     }
     
     func needFetchItems() {
-        labels = [Label(id: 0, title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(id: 0, title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(id: 0, title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(id: 0, title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(id: 0, title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(id: 0, title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(id: 0, title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(id: 0, title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(id: 0, title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(id: 0, title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879"),
-                  Label(id: 0, title: "feature", description: "기능에 대한 레이블입니다.", hexColor: "#FF5D5D"),
-                  Label(id: 0, title: "bug", description: "수정할 버그에 대한 레이블입니다.", hexColor: "#96F879")]
-        didFetch?()
+        // 네트워크 통신으로 fetch
+        let labelFetchEndPoint = LabelEndPoint(requestType: .fetch)
+        let session = URLSession.init(configuration: .default, delegate: nil, delegateQueue: nil)
+        let dataLoader = DataLoader<[Label]>(session: session)
+        dataLoader.reqeust(endpoint: labelFetchEndPoint) { [weak self] (response) in
+            switch response {
+            case .success(let data):
+                guard let data = data else { return }
+                self?.labels = data
+                DispatchQueue.main.async {
+                    self?.didFetch?()
+                }
+            case .failure(let error):
+                switch error {
+                case .decodingError(let message), .invalidURL(let message), .responseError(let message):
+                    print(message)
+                }
+            }
+        }
     }
     
     func cellForItemAt(path: IndexPath) -> LabelItemViewModel {
