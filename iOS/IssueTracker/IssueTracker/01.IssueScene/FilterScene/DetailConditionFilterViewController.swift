@@ -19,20 +19,9 @@ class DetailConditionFilterViewController: UIViewController {
     @IBOutlet weak var titleNavItem: UINavigationItem!
     
     // TODO: Dependency Injection for ContentMode
-    private var contentMode: ContentMode//nil
-    
+    private var contentMode: ContentMode
     
     // TODO: Dummy Data to ViewModelProtocol
-    //    private var viewModelDataSource: [[ConditionCellViewModel]] = [ [],
-    //        [
-    //        ConditionCellViewModel(title: "타이틀1", element: "#123456"),
-    //        ConditionCellViewModel(title: "타이틀2", element: "#123456"),
-    //        ConditionCellViewModel(title: "타이틀3", element: "#345677"),
-    //        ConditionCellViewModel(title: "타이틀4", element: "#ABCDEF"),
-    //        ConditionCellViewModel(title: "타이틀5", element: "#ABDDEE"),
-    //        ConditionCellViewModel(title: "타이틀5", element: "#ABDDFF")
-    //        ]
-    //    ]
     private var viewModelDataSource: [[ConditionCellViewModel]] = [ [],
                                                                     [
                                                                         ConditionCellViewModel(title: "마일스톤 1", element: "2020-10-11 00:00:00"),
@@ -59,7 +48,7 @@ class DetailConditionFilterViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         self.contentMode = .userInfo
-        viewModelDataSource = [[],[]]
+        viewModelDataSource = [[], []]
         super.init(coder: coder)
     }
     
@@ -69,7 +58,6 @@ class DetailConditionFilterViewController: UIViewController {
         tableView.dataSource = self
         configureTableView()
         titleNavItem.title = title
-        // Do any additional setup after loading the view.
     }
     
     private func configureTableView() {
