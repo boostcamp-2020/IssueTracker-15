@@ -12,8 +12,9 @@ const IssueService = {
   createIssue: async (issueData: CreateIssue): Promise<IssueEntity> => {
     const issueRepository = getRepository(IssueEntity);
     const issue: IssueEntity = await issueRepository.create(issueData);
-    const results: IssueEntity = await issueRepository.save(issue);
-    return results;
+    const newIssue: IssueEntity = await issueRepository.save(issue);
+
+    return newIssue;
   },
 
   getIssues: async () => {
@@ -51,6 +52,8 @@ const IssueService = {
       userId,
     });
     await assigneesRepository.save(newAssignees);
+
+    return;
   },
 
   deleteAssigneesToIssue: async (issueId: number, userId: number) => {
@@ -59,8 +62,9 @@ const IssueService = {
       where: { issueId, userId },
     });
     if (!assignees) throw new Error("assignees does not exists");
-
     await assigneesRepository.delete({ issueId, userId });
+
+    return;
   },
 
   addLabelToIssue: async (issueId: number, labelId: number) => {
@@ -70,6 +74,8 @@ const IssueService = {
       labelId,
     });
     await issueHasLabelRepository.save(newIssueHasLabel);
+
+    return;
   },
 
   deleteLabelAtIssue: async (issueId: number, labelId: number) => {
@@ -77,6 +83,8 @@ const IssueService = {
     const issueHasLabel = issueHasLabelRepository.findOne({ issueId, labelId });
     if (!issueHasLabel) throw new Error("issueHasLabel dose not exist");
     await issueHasLabelRepository.delete({ issueId, labelId });
+
+    return;
   },
 
   addMilestoneToIssue: async (issueId: number, milestoneId: number) => {
@@ -86,6 +94,8 @@ const IssueService = {
 
     const updatedIssue = issueRepository.merge(issue, { milestoneId });
     await issueRepository.save(updatedIssue);
+
+    return;
   },
 
   deleteMilestoneAtIssue: async (issueId: number) => {
@@ -97,25 +107,29 @@ const IssueService = {
       "UPDATE Issue SET milestoneId = ? WHERE id = ?",
       [null, issueId]
     );
+
+    return;
   },
 
   updateIssueContent: async (issueId: number, content: UpdateIssueContent) => {
     const issueRepository = getRepository(IssueEntity);
-    const issue = await IssueService.getIssueById(issueId);
-    if (!issue) throw new Error("issue dose not exist");
+    const issueToUpdate = await IssueService.getIssueById(issueId);
+    if (!issueToUpdate) throw new Error("issue dose not exist");
 
-    const updatedIssue = issueRepository.merge(issue, content);
-    await issueRepository.save(updatedIssue);
+    await issueRepository.update(issueToUpdate, content);
+
+    return;
   },
 
   updateIssueTitle: async (issueId: number, title: UpdateIssueTitle) => {
     const issueRepository = getRepository(IssueEntity);
-    const issue = await IssueService.getIssueById(issueId);
+    const issueToUpdate = await IssueService.getIssueById(issueId);
 
-    if (!issue) throw new Error("issue dose not exist");
+    if (!issueToUpdate) throw new Error("issue dose not exist");
 
-    const updatedIssue = issueRepository.merge(issue, title);
-    await issueRepository.save(updatedIssue);
+    await issueRepository.update(issueToUpdate, title);
+
+    return;
   },
 
   deleteIssue: async (issueId: number) => {
@@ -124,6 +138,8 @@ const IssueService = {
     if (!issue) throw new Error("issue dose not exist");
 
     await issueRepository.delete({ id: issueId });
+
+    return;
   },
 };
 
