@@ -9,7 +9,7 @@ CommentRouter.post('/', async (req: Request, res: Response) => {
   try {
     const { body } = req;
     const newComment = await CommentService.create(body);
-    res.status(200).json({ comment: newComment });
+    res.status(200).json(newComment);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
