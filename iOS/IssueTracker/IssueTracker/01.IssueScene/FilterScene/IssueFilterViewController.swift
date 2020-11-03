@@ -15,6 +15,7 @@ class IssueFilterViewController: UITableViewController {
         case detailCondition = 1
     }
     
+    // TODO: Condition/ DetailCondition To Filter Model Data
     enum Condition: Int {
         case issueOpened = 0
         case issueFromMe = 1
@@ -33,7 +34,6 @@ class IssueFilterViewController: UITableViewController {
     var selected = [Bool](repeating: false, count: 5)
     
     // TODO: Dependency  FilterStatus, (IssueService, MilestoneService, LabelService, CommentService) for DetailCondition
-    //init(coder: NSCoder, )
     // 이후에 적절한 Dependency를 받을 것! ( ex: milestoneProvider, labelProvider, userInfoProvider ...)
     private weak var milestoneListViewModel: MilestoneListViewModelProtocol?
     private weak var labelListViewModel: LabelListViewModelProtocol?
