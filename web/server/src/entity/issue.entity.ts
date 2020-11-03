@@ -32,7 +32,7 @@ class IssueEntity {
   updateAt?: Date;
 
   @Column({ type: "boolean", nullable: false, default: true })
-  isOpend!: boolean;
+  isOpened!: boolean;
 
   @Column({ type: "number", nullable: true })
   milestoneId?: number;

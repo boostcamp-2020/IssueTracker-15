@@ -8,7 +8,7 @@ const MilestoneService = {
       MilestoneEntity
     );
     const newMilestones = await milestoneRepository.query(
-      `SELECT count(if(Issue.isOpend,1,null)) as openedIssueNum,count(if(Issue.isOpend=0,1,null)) as closedIssueNum,  Milestone.* FROM Issue RIGHT OUTER JOIN Milestone ON Issue.milestoneId=Milestone.id group by Milestone.id`
+      `SELECT count(if(Issue.isOpened,1,null)) as openedIssueNum,count(if(Issue.isOpened=0,1,null)) as closedIssueNum,  Milestone.* FROM Issue RIGHT OUTER JOIN Milestone ON Issue.milestoneId=Milestone.id group by Milestone.id`
     );
     return newMilestones;
   },

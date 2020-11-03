@@ -137,7 +137,7 @@ IssueRouter.delete("/:issueId", async (req: Request, res: Response) => {
 
 // IssueRouter.get("/", async (req: Request, res: Response) => {
 //   try {
-//     let {count, isOpend, lastId} = req.query;
+//     let { count, isOpend, lastId } = req.query;
 //     count = Number(count);
 //     const issues = await IssueService.getIssuesByCount(count);
 //     res.json(issues);
