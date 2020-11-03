@@ -108,6 +108,7 @@ extension IssueListViewController {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: false, animation: true)
         }
+    }
 
     @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
         let addIssueViewController = AddNewIssueViewController(coder: coder)
