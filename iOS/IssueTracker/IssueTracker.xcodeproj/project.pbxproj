@@ -24,6 +24,7 @@
 		9521FCCF254FE84D00FC0220 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521FCCE254FE84D00FC0220 /* DataLoader.swift */; };
 		9521FCD1255007DC00FC0220 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521FCCE254FE84D00FC0220 /* DataLoader.swift */; };
 		952FF3D5254805EE0042A96F /* Header+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF3D4254805EE0042A96F /* Header+CollectionView.swift */; };
+		957D8222255060DA0033484F /* AddNewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D8220255060DA0033484F /* AddNewIssueViewController.swift */; };
 		956B5D0525503D20001CBAA9 /* MilestoneEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B5D0425503D20001CBAA9 /* MilestoneEndPoint.swift */; };
 		956B5D0725503E8A001CBAA9 /* LabelEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B5D0625503E8A001CBAA9 /* LabelEndPoint.swift */; };
 		95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
@@ -156,6 +157,7 @@
 		9521FCC1254FE7FE00FC0220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9521FCCE254FE84D00FC0220 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		952FF3D4254805EE0042A96F /* Header+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Header+CollectionView.swift"; sourceTree = "<group>"; };
+		957D8220255060DA0033484F /* AddNewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewIssueViewController.swift; sourceTree = "<group>"; };
 		956B5D0425503D20001CBAA9 /* MilestoneEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneEndPoint.swift; sourceTree = "<group>"; };
 		956B5D0625503E8A001CBAA9 /* LabelEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelEndPoint.swift; sourceTree = "<group>"; };
 		95C2F8942547EBE0006B3BC6 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 			children = (
 				96F95C03254EA6D000EC00C6 /* IssueCellView */,
 				96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */,
+				957D8220255060DA0033484F /* AddNewIssueViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -883,6 +886,7 @@
 				956B5D0525503D20001CBAA9 /* MilestoneEndPoint.swift in Sources */,
 				966ADAE3254D8B0800A480DD /* SubmitFormView+LoadFromNib.swift in Sources */,
 				9679DFBF254D7A0E00550BE4 /* MilestoneSubmitFieldsView.swift in Sources */,
+				957D8222255060DA0033484F /* AddNewIssueViewController.swift in Sources */,
 				95C36581254A6F80008ACCB5 /* MilestoneListViewController.swift in Sources */,
 				96F95BFC254E6E4C00EC00C6 /* Issue.swift in Sources */,
 				9670B37F2549E9E10026B0C9 /* MainTabBarController.swift in Sources */,

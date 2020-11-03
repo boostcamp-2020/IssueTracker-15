@@ -9,14 +9,15 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-    
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var addIssueButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "이슈"
         configureSearchBar()
         configureCollectionView()
+        addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
     }
     
     private func configureSearchBar() {
@@ -46,7 +47,12 @@ class IssueListViewController: UIViewController {
             cell.showCheckBox(show: editmode)
         }
     }
-    
+
+    @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
+        let addIssueViewController = AddNewIssueViewController(coder: coder)
+        // addIssueVC의 doneButtonTapped 주입
+        return addIssueViewController
+    }
 }
 
 // MARK: - UICollectionViewDataSource Implementation
