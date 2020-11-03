@@ -34,6 +34,19 @@ const IssueService = {
     return issues;
   },
 
+  getIssueOverAllCount: async () => {
+    const issueRepository = getRepository(IssueEntity);
+    const openedIssueCount: Object[] = await issueRepository.query(
+      `SELECT COUNT(*) as opendIssueCount FROM Issue where isOpened = 1`
+    );
+    const closedIssueCount: Object[] = await issueRepository.query(
+      `SELECT COUNT(*) as closedIssueCount FROM Issue where isOpened = 0`
+    );
+
+    const issueCount = { ...openedIssueCount[0], ...closedIssueCount[0] };
+    return issueCount;
+  },
+
   getDetailIssueById: async (issueId: number) => {
     const issueRepository = getRepository(IssueEntity);
   },
