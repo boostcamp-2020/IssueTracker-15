@@ -18,12 +18,13 @@ const IssueService = {
     return newIssue;
   },
 
-  getOpendIssues: async () => {
+  getIssues: async (isOpened: boolean) => {
     const issueRepository = getRepository(IssueEntity);
     const issueList: IssueEntity[] = await issueRepository
       .createQueryBuilder("Issue")
       .leftJoin("Issue.milestone", "Milestone")
       .innerJoin("Issue.author", "User")
+      .where("Issue.isOpened = :isOpened", { isOpened })
       .select([
         "Issue.id",
         "Issue.title",
@@ -38,16 +39,6 @@ const IssueService = {
     const issues = await makeIssueTemplate(issueList);
 
     return issues;
-  },
-
-  getClosedIssues: async () => {
-    const issueRepository = getRepository(IssueEntity);
-    const issueList: IssueEntity[] = await issueRepository.find({
-      where: { isOpened: false },
-    });
-
-    const issues = await makeIssueTemplate(issueList);
-    return issueList;
   },
 
   getDetailIssueById: async (issueId: number) => {
