@@ -10,9 +10,9 @@ SignInRouter.post(
   async (req: Request, res: Response) => {
     try {
       const user = req.user;
-      const result = await AuthService.signIn(user);
+      const loginData = await AuthService.signIn(user);
 
-      return res.status(200).json(result);
+      return res.json(loginData);
     } catch (err) {
       return res.status(400).json({ message: err.message });
     }
