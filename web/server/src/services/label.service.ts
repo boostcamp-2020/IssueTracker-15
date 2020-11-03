@@ -6,8 +6,8 @@ const LabelService = {
   create: async (labelData: Label): Promise<LabelEntity> => {
     const labelRepository = getRepository(LabelEntity);
     const label: LabelEntity = await labelRepository.create(labelData);
-    const results: LabelEntity = await labelRepository.save(label);
-    return results;
+    const newLabel: LabelEntity = await labelRepository.save(label);
+    return newLabel;
   },
 
   getLabel: async (id: number): Promise<LabelEntity | null> => {
@@ -26,16 +26,12 @@ const LabelService = {
   },
 
   delete: async (id: number): Promise<void> => {
-
     const label = await LabelService.getLabel(id);
     if (!label) throw new Error("label does not exist");
-
 
     const labelRepository = getRepository(LabelEntity);
     await labelRepository.delete({ id })
   },
-
-
 
   update: async (id: number, body: any): Promise<void> => {
     console.log(body);
