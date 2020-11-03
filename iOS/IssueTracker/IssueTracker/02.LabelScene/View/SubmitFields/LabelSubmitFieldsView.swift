@@ -10,6 +10,11 @@ import UIKit
 
 class LabelSubmitFieldsView: UIStackView {
     
+    enum SubmitFieldType {
+        case add
+        case edit(IndexPath)
+    }
+    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descTextField: UITextField!
     @IBOutlet weak var colorTextField: UITextField!
@@ -31,6 +36,11 @@ class LabelSubmitFieldsView: UIStackView {
         colorTextField.addTarget(self, action: #selector(colorFieldOnEditing), for: .editingChanged)
     }
     
+}
+
+// MARK: - Action
+extension LabelSubmitFieldsView {
+    
     @IBAction func refreshColorButtonTapped(_ sender: Any) {
         titleTextField.text = ""
         descTextField.text = ""
@@ -44,6 +54,7 @@ class LabelSubmitFieldsView: UIStackView {
     
 }
 
+// MARK: - SubmitFieldProtocol Implementation
 extension LabelSubmitFieldsView: SubmitFieldProtocol {
     
     var contentView: UIView { self }

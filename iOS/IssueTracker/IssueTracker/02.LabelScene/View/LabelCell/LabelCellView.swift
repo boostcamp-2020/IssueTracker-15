@@ -9,7 +9,7 @@
 import UIKit
 
 class LabelCellView: UICollectionViewCell {
-    var nextButtonTapped: (() -> Void)?
+
     @IBOutlet weak var titleLabel: BadgeLabelView!
     @IBOutlet weak var descriptionLabel: UILabel!
     
@@ -30,11 +30,9 @@ class LabelCellView: UICollectionViewCell {
         descriptionLabel.textColor = UIColor.lightGray
     }
     
-    @IBAction func nextButtonTapped(_ sender: Any) {
-        nextButtonTapped?()
-    }
 }
 
+// MARK: - UICollectionViewRegisterable Implementation
 extension LabelCellView: UICollectionViewRegisterable {
     static var cellIdentifier: String {
         return "LabelCellView"
