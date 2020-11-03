@@ -313,18 +313,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cYP-py-DgA">
-                                <rect key="frame" x="20" y="144" width="374" height="34"/>
+                                <rect key="frame" x="20" y="144" width="374" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNE-Xl-7zb">
-                                <rect key="frame" x="20" y="118" width="29.5" height="21"/>
+                                <rect key="frame" x="20" y="118" width="374" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ffC-xq-HP2">
-                                <rect key="frame" x="20" y="188" width="374" height="32"/>
+                                <rect key="frame" x="20" y="196" width="374" height="35"/>
                                 <segments>
                                     <segment title="마크다운"/>
                                     <segment title="미리보기"/>
@@ -333,24 +333,19 @@
                                     <action selector="segmentDidChange:" destination="Y8p-ie-OWu" eventType="valueChanged" id="C00-0y-5e3"/>
                                 </connections>
                             </segmentedControl>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZ3-Tj-OPR">
-                                <rect key="frame" x="20" y="229" width="374" height="569"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="XOH-zx-EwI" firstAttribute="trailing" secondItem="cYP-py-DgA" secondAttribute="trailing" constant="20" id="4Xv-Fb-wWv"/>
+                            <constraint firstItem="XOH-zx-EwI" firstAttribute="trailing" secondItem="uNE-Xl-7zb" secondAttribute="trailing" constant="20" id="D8v-ke-tlR"/>
                             <constraint firstItem="uNE-Xl-7zb" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="HoI-7x-9vz"/>
-                            <constraint firstItem="XOH-zx-EwI" firstAttribute="trailing" secondItem="OZ3-Tj-OPR" secondAttribute="trailing" constant="20" id="KCD-Gi-YKc"/>
                             <constraint firstItem="ffC-xq-HP2" firstAttribute="top" secondItem="cYP-py-DgA" secondAttribute="bottom" constant="10" id="OAl-zB-1Ot"/>
                             <constraint firstItem="cYP-py-DgA" firstAttribute="top" secondItem="uNE-Xl-7zb" secondAttribute="bottom" constant="5" id="OG0-ez-xPR"/>
                             <constraint firstItem="cYP-py-DgA" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="Tdg-Gy-kN4"/>
+                            <constraint firstItem="cYP-py-DgA" firstAttribute="height" secondItem="iVE-nq-huQ" secondAttribute="height" multiplier="0.05" id="Tjy-6E-9hD"/>
+                            <constraint firstItem="ffC-xq-HP2" firstAttribute="height" secondItem="iVE-nq-huQ" secondAttribute="height" multiplier="0.04" id="ZKM-fv-ofD"/>
                             <constraint firstItem="uNE-Xl-7zb" firstAttribute="top" secondItem="XOH-zx-EwI" secondAttribute="top" constant="10" id="b7o-ff-RG4"/>
-                            <constraint firstItem="OZ3-Tj-OPR" firstAttribute="top" secondItem="ffC-xq-HP2" secondAttribute="bottom" constant="10" id="dl7-KE-2Hu"/>
                             <constraint firstItem="ffC-xq-HP2" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="dqL-DH-JUs"/>
-                            <constraint firstItem="OZ3-Tj-OPR" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="kwk-PM-tmM"/>
-                            <constraint firstItem="XOH-zx-EwI" firstAttribute="bottom" secondItem="OZ3-Tj-OPR" secondAttribute="bottom" constant="10" id="lPb-OG-VWw"/>
                             <constraint firstItem="XOH-zx-EwI" firstAttribute="trailing" secondItem="ffC-xq-HP2" secondAttribute="trailing" constant="20" id="slE-d5-DSA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XOH-zx-EwI"/>
@@ -378,7 +373,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="commonView" destination="OZ3-Tj-OPR" id="Dse-Rh-ZjU"/>
+                        <outlet property="segmentedControl" destination="ffC-xq-HP2" id="THk-Jf-wsn"/>
                         <outlet property="titleTextField" destination="cYP-py-DgA" id="uv5-n6-lP9"/>
                     </connections>
                 </viewController>

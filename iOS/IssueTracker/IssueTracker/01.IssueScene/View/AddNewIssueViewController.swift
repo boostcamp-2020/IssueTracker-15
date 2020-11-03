@@ -10,11 +10,12 @@ import UIKit
 
 class AddNewIssueViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
-    private var previewLabelView = UITextView()
+    private var previewTextView: UITextView = UITextView()
     private var commentTextView: UITextView = UITextView()
-    @IBOutlet weak var commonView: UIView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     private let textViewPlaceholder = "코멘트는 여기에 작성하세요"
+    private let previewPlaceholder = "입력된 내용이 없습니다"
     var doneButtonTapped: (() -> Void)?
     
     override func viewDidLoad() {
@@ -51,22 +52,32 @@ class AddNewIssueViewController: UIViewController {
     private func configureCommentTextView() {
         commentTextView.delegate = self
         commentTextView.translatesAutoresizingMaskIntoConstraints = false
-        commonView.addSubview(commentTextView)
-        commentTextView.leadingAnchor.constraint(equalTo: commonView.leadingAnchor).isActive = true
-        commentTextView.topAnchor.constraint(equalTo: commonView.topAnchor).isActive = true
-        commentTextView.trailingAnchor.constraint(equalTo: commonView.trailingAnchor).isActive = true
-        commentTextView.bottomAnchor.constraint(equalTo: commonView.bottomAnchor).isActive = true
+        self.view.addSubview(commentTextView)
+        commentTextView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
+        commentTextView.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 10).isActive = true
+        commentTextView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.95).isActive = true
+        commentTextView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 10).isActive = true
         initTextViewPlaceholder()
     }
     
     private func configurePreviewLabelView() {
-        previewLabelView.backgroundColor = .red
-        previewLabelView.translatesAutoresizingMaskIntoConstraints = false
-        commonView.addSubview(previewLabelView)
-        previewLabelView.leadingAnchor.constraint(equalTo: commonView.leadingAnchor).isActive = true
-        previewLabelView.topAnchor.constraint(equalTo: commonView.topAnchor).isActive = true
-        previewLabelView.trailingAnchor.constraint(equalTo: commonView.trailingAnchor).isActive = true
-        previewLabelView.bottomAnchor.constraint(equalTo: commonView.bottomAnchor).isActive = true
+        previewTextView.isEditable = false
+        
+        if commentTextView.text == textViewPlaceholder {
+            previewTextView.text = previewPlaceholder
+            previewTextView.textColor = .lightGray
+        } else {
+            previewTextView.text = commentTextView.text
+            previewTextView.textColor = .black
+        }
+
+        previewTextView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(previewTextView)
+        
+        previewTextView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
+        previewTextView.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 10).isActive = true
+        previewTextView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 10).isActive = true
+        previewTextView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.95).isActive = true
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -126,14 +137,10 @@ class AddNewIssueViewController: UIViewController {
     @IBAction func segmentDidChange(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            print("마크다운")
-            previewLabelView.removeFromSuperview()
-            commonView.addSubview(commentTextView)
+            previewTextView.removeFromSuperview()
             configureCommentTextView()
         case 1:
-            print("미리보기")
             commentTextView.removeFromSuperview()
-            commonView.addSubview(previewLabelView)
             configurePreviewLabelView()
         default:
             return
