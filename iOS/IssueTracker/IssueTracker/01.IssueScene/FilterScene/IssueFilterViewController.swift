@@ -81,6 +81,7 @@ extension IssueFilterViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
+        // TODO: delegate or closure를 통해 filter 내용 전달
         dismiss(animated: true, completion: nil)
     }
     
