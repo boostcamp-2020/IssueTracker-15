@@ -28,7 +28,7 @@ class IssueCellView: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         cellHorizontalScrollView.delegate = self
-        cellHorizontalScrollView.decelerationRate = .fast
+        cellHorizontalScrollView.decelerationRate = .init(rawValue: 0.99999)
         checkBoxGuideWidthConstraint.isActive = true
         checkBoxGuideView.isHidden = false
     }
@@ -48,7 +48,7 @@ class IssueCellView: UICollectionViewCell {
         titleLabel.text = "레이블 목록 보기 구현"
         descriptionLabel.numberOfLines = 2
         descriptionLabel.text = "레이블 전체 목록을 볼 수 있어야 한다.\n2줄까지 보입니다.\nABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\n"
-
+        layoutIfNeeded()
     }
     
     override func layoutSubviews() {
@@ -63,6 +63,7 @@ class IssueCellView: UICollectionViewCell {
 extension IssueCellView {
     
     @IBAction func checkBoxButtonTapped(_ sender: Any) {
+        checkBoxButton.isSelected.toggle()
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
@@ -73,13 +74,14 @@ extension IssueCellView {
         
     }
     
-    func showCheckBox(show: Bool) {
+    func showCheckBox(show: Bool, animation: Bool) {
         cellHorizontalScrollView.contentOffset = CGPoint.zero
         cellHorizontalScrollView.isScrollEnabled = !show
         checkBoxGuideWidthConstraint.constant = show ? checkBoxGuideView.bounds.height * 0.5 : 0
-        UIView.animate(withDuration: 0.5) {
-            self.layoutIfNeeded()
-            self.checkBoxButton.isHidden = !show
+        if animation {
+            UIView.animate(withDuration: 0.5) {
+                self.layoutIfNeeded()
+            }
         }
     }
     

@@ -29,4 +29,9 @@ extension DateFormatter {
         return formatter
     }()
     
+    static let dateForConditionCell: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM dd, yyyy"
+        return formatter
+    }()
 }

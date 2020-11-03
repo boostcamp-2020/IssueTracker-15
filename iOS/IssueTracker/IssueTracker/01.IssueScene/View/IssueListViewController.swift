@@ -9,9 +9,21 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
+
+    enum ViewingMode {
+        case general
+        case edit
+    }
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var rightNavButton: UIButton!
+    @IBOutlet weak var leftNavButton: UIButton!
+    @IBOutlet weak var bottomToolBar: UIToolbar!
     @IBOutlet weak var addIssueButton: UIButton!
     
+    private var viewingMode: ViewingMode = .general
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "이슈"
@@ -20,6 +32,7 @@ class IssueListViewController: UIViewController {
         addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
     }
     
+    // TODO: SerachBar Configure
     private func configureSearchBar() {
         navigationItem.searchController = UISearchController(searchResultsController: nil)
     }
@@ -38,13 +51,62 @@ class IssueListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
-    // TODO: editMode 클릭시 테스트용 변수 -> EditMode 액션과 연결 필요
-    var editmode: Bool = false
-    @IBAction func editButtonTapped(_ sender: Any) {
-        editmode = !editmode
+}
+
+// MARK: - Actions
+extension IssueListViewController {
+    
+    @IBAction func rightNavButtonTapped(_ sender: Any) {
+        switch viewingMode {
+        case .general:
+            toEditMode()
+        case .edit:
+            toGeneralMode()
+        }
+    }
+    
+    @IBAction func leftNavButtonTapped(_ sender: Any) {
+        switch viewingMode {
+        case .general:
+            performSegue(withIdentifier: "createIssueFilterViewController", sender: self)
+        case .edit:
+            // TODO: SelectAll
+            break
+        }
+    }
+    
+    @IBSegueAction func createIssueFilterViewController(_ coder: NSCoder) -> IssueFilterViewController? {
+        if viewingMode == .edit { return nil }
+        let vc = IssueFilterViewController(coder: coder)
+        // TODO: Dependency Injection to IssueFilterViewController
+        return vc
+    }
+    
+    @IBAction func closeAllSelectedIssueButtonTapped(_ sender: Any) {
+    
+    }
+    
+    private func toEditMode() {
+        viewingMode = .edit
+        rightNavButton.setTitle("Cancle", for: .normal)
+        leftNavButton.setTitle("Select All", for: .normal)
+        bottomToolBar.isHidden = false
+        tabBarController?.tabBar.isHidden = true
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
-            cell.showCheckBox(show: editmode)
+            cell.showCheckBox(show: true, animation: true)
+        }
+    }
+    
+    private func toGeneralMode() {
+        viewingMode = .general
+        rightNavButton.setTitle("Edit", for: .normal)
+        leftNavButton.setTitle("Filter", for: .normal)
+        bottomToolBar.isHidden = true
+        tabBarController?.tabBar.isHidden = false
+        collectionView.visibleCells.forEach {
+            guard let cell = $0 as? IssueCellView else { return }
+            cell.showCheckBox(show: false, animation: true)
         }
     }
 
@@ -61,6 +123,7 @@ extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return UICollectionViewCell() }
         cellView.configure()
+        cellView.showCheckBox(show: viewingMode == .edit, animation: false)
         return cellView
     }
     

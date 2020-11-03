@@ -41,6 +41,8 @@
 		95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5862546EC0C001FBA0D /* LaunchScreen.storyboard */; };
 		95E9F5932546EC0C001FBA0D /* LabelModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */; };
 		9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9613C12D2547B265005EF13C /* .swiftlint.yml */; };
+		9627A5A825506985000BFF4D /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5A725506985000BFF4D /* UITableView+.swift */; };
+		9627A5AC255087FF000BFF4D /* ConditionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5AB255087FF000BFF4D /* ConditionCellView.swift */; };
 		963971DE2549BB83005BB4FA /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */; };
 		963971DF2549BB83005BB4FA /* LabelItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D42549452600DEC9A4 /* LabelItemViewModel.swift */; };
 		963971E02549BB83005BB4FA /* LabelListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F57F2546EC07001FBA0D /* LabelListViewController.swift */; };
@@ -56,6 +58,15 @@
 		963971F22549BC5F005BB4FA /* LabelListViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963971F12549BC5F005BB4FA /* LabelListViewModelMock.swift */; };
 		963971F52549D5AF005BB4FA /* LabelCellViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963971F42549D5AF005BB4FA /* LabelCellViewTest.swift */; };
 		963971F92549D9B6005BB4FA /* LabelSubmitFormViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963971F82549D9B6005BB4FA /* LabelSubmitFormViewTests.swift */; };
+		965F09742550425A00B3A248 /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09732550425A00B3A248 /* IssueFilterViewController.swift */; };
+		965F097D25505A1200B3A248 /* DetailConditionFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F097B25505A1200B3A248 /* DetailConditionFilterViewController.swift */; };
+		965F097E25505A1200B3A248 /* DetailConditionFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F097C25505A1200B3A248 /* DetailConditionFilterViewController.xib */; };
+		965F098225505B7800B3A248 /* LabelConditionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F098025505B7800B3A248 /* LabelConditionCellView.swift */; };
+		965F098325505B7800B3A248 /* LabelConditionCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F098125505B7800B3A248 /* LabelConditionCellView.xib */; };
+		965F098825505B9D00B3A248 /* UserConditionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F098625505B9D00B3A248 /* UserConditionCellView.swift */; };
+		965F098925505B9D00B3A248 /* UserConditionCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F098725505B9D00B3A248 /* UserConditionCellView.xib */; };
+		965F098D25505C0200B3A248 /* MilestoneConditionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F098B25505C0200B3A248 /* MilestoneConditionCellView.swift */; };
+		965F098E25505C0200B3A248 /* MilestoneConditionCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F098C25505C0200B3A248 /* MilestoneConditionCellView.xib */; };
 		965F09712550299A00B3A248 /* JSONDecoder+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */; };
 		966ADAE3254D8B0800A480DD /* SubmitFormView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ADAE2254D8B0800A480DD /* SubmitFormView+LoadFromNib.swift */; };
 		966ADAE5254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ADAE4254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift */; };
@@ -84,6 +95,7 @@
 		96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */; };
 		96C734D52549452600DEC9A4 /* LabelItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D42549452600DEC9A4 /* LabelItemViewModel.swift */; };
 		96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */; };
+		96DD118B2550F3930065F44A /* ConditionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DD118A2550F3930065F44A /* ConditionCellViewModel.swift */; };
 		96F95BFA254E6C4A00EC00C6 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */; };
 		96F95BFC254E6E4C00EC00C6 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95BFB254E6E4C00EC00C6 /* Issue.swift */; };
 		96F95C02254E891E00EC00C6 /* CGFloat+Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95C01254E891E00EC00C6 /* CGFloat+Clamp.swift */; };
@@ -178,10 +190,21 @@
 		95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelModelTests.swift; sourceTree = "<group>"; };
 		95E9F5942546EC0C001FBA0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9613C12D2547B265005EF13C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		9627A5A725506985000BFF4D /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
+		9627A5AB255087FF000BFF4D /* ConditionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCellView.swift; sourceTree = "<group>"; };
 		963971EF2549BC45005BB4FA /* LabelListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewControllerTests.swift; sourceTree = "<group>"; };
 		963971F12549BC5F005BB4FA /* LabelListViewModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModelMock.swift; sourceTree = "<group>"; };
 		963971F42549D5AF005BB4FA /* LabelCellViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCellViewTest.swift; sourceTree = "<group>"; };
 		963971F82549D9B6005BB4FA /* LabelSubmitFormViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSubmitFormViewTests.swift; sourceTree = "<group>"; };
+		965F09732550425A00B3A248 /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
+		965F097B25505A1200B3A248 /* DetailConditionFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionFilterViewController.swift; sourceTree = "<group>"; };
+		965F097C25505A1200B3A248 /* DetailConditionFilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailConditionFilterViewController.xib; sourceTree = "<group>"; };
+		965F098025505B7800B3A248 /* LabelConditionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelConditionCellView.swift; sourceTree = "<group>"; };
+		965F098125505B7800B3A248 /* LabelConditionCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelConditionCellView.xib; sourceTree = "<group>"; };
+		965F098625505B9D00B3A248 /* UserConditionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConditionCellView.swift; sourceTree = "<group>"; };
+		965F098725505B9D00B3A248 /* UserConditionCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserConditionCellView.xib; sourceTree = "<group>"; };
+		965F098B25505C0200B3A248 /* MilestoneConditionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneConditionCellView.swift; sourceTree = "<group>"; };
+		965F098C25505C0200B3A248 /* MilestoneConditionCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MilestoneConditionCellView.xib; sourceTree = "<group>"; };
 		965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Decode.swift"; sourceTree = "<group>"; };
 		966ADAE2254D8B0800A480DD /* SubmitFormView+LoadFromNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubmitFormView+LoadFromNib.swift"; sourceTree = "<group>"; };
 		966ADAE4254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MilestoneSubmitFieldsView+LoadFromNib.swift"; sourceTree = "<group>"; };
@@ -205,6 +228,7 @@
 		96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
 		96C734D42549452600DEC9A4 /* LabelItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelItemViewModel.swift; sourceTree = "<group>"; };
 		96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabelView.swift; sourceTree = "<group>"; };
+		96DD118A2550F3930065F44A /* ConditionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCellViewModel.swift; sourceTree = "<group>"; };
 		96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		96F95BFB254E6E4C00EC00C6 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		96F95C01254E891E00EC00C6 /* CGFloat+Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Clamp.swift"; sourceTree = "<group>"; };
@@ -301,6 +325,8 @@
 				9505446E254AA6E0007767C6 /* UIView+ShowAlert.swift */,
 				95054472254AAC0D007767C6 /* CollectionView+.swift */,
 				96A58F54254AA5BC00248F1E /* String+Date.swift */,
+
+				9627A5A725506985000BFF4D /* UITableView+.swift */,
 				96F95C01254E891E00EC00C6 /* CGFloat+Clamp.swift */,
 				965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */,
 			);
@@ -449,6 +475,56 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		965F09752550589F00B3A248 /* FilterScene */ = {
+			isa = PBXGroup;
+			children = (
+				96DD118C2550F79A0065F44A /* ViewModel */,
+				965F097F25505B5400B3A248 /* DetailConditionCells */,
+				965F09732550425A00B3A248 /* IssueFilterViewController.swift */,
+				965F097B25505A1200B3A248 /* DetailConditionFilterViewController.swift */,
+				965F097C25505A1200B3A248 /* DetailConditionFilterViewController.xib */,
+			);
+			path = FilterScene;
+			sourceTree = "<group>";
+		};
+		965F097F25505B5400B3A248 /* DetailConditionCells */ = {
+			isa = PBXGroup;
+			children = (
+				965F098A25505BA800B3A248 /* Milestone */,
+				965F098525505B8600B3A248 /* User */,
+				965F098425505B7D00B3A248 /* Label */,
+				9627A5AB255087FF000BFF4D /* ConditionCellView.swift */,
+			);
+			path = DetailConditionCells;
+			sourceTree = "<group>";
+		};
+		965F098425505B7D00B3A248 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				965F098025505B7800B3A248 /* LabelConditionCellView.swift */,
+				965F098125505B7800B3A248 /* LabelConditionCellView.xib */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		965F098525505B8600B3A248 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				965F098625505B9D00B3A248 /* UserConditionCellView.swift */,
+				965F098725505B9D00B3A248 /* UserConditionCellView.xib */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		965F098A25505BA800B3A248 /* Milestone */ = {
+			isa = PBXGroup;
+			children = (
+				965F098B25505C0200B3A248 /* MilestoneConditionCellView.swift */,
+				965F098C25505C0200B3A248 /* MilestoneConditionCellView.xib */,
+			);
+			path = Milestone;
+			sourceTree = "<group>";
+		};
 		966ADAE6254D9BB300A480DD /* SubmitFields */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,11 +619,21 @@
 			path = 05.CustomUI;
 			sourceTree = "<group>";
 		};
+		96DD118C2550F79A0065F44A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				96DD118A2550F3930065F44A /* ConditionCellViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		96F95BF5254E691500EC00C6 /* 01.IssueScene */ = {
 			isa = PBXGroup;
 			children = (
+				965F09752550589F00B3A248 /* FilterScene */,
 				96F95BF7254E692F00EC00C6 /* View */,
 				96F95BF6254E692800EC00C6 /* ViewModel */,
+				96F95BF8254E693500EC00C6 /* Model */,
 			);
 			path = 01.IssueScene;
 			sourceTree = "<group>";
@@ -750,14 +836,18 @@
 				95C36593254A76BB008ACCB5 /* MilestoneCellView.xib in Resources */,
 				9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */,
 				95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */,
+				965F097E25505A1200B3A248 /* DetailConditionFilterViewController.xib in Resources */,
 				9679DFC1254D7ADC00550BE4 /* MilestoneSubmitFieldsView.xib in Resources */,
 				966ADAEA254D9BE900A480DD /* LabelSubmitFieldsView.xib in Resources */,
 				950EA0612547FFF9005BE133 /* HeaderView.xib in Resources */,
+				965F098325505B7800B3A248 /* LabelConditionCellView.xib in Resources */,
 				95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */,
+				965F098925505B9D00B3A248 /* UserConditionCellView.xib in Resources */,
 				95E9F5832546EC07001FBA0D /* Main.storyboard in Resources */,
 				96F95C08254EA70B00EC00C6 /* IssueCellView.xib in Resources */,
 				9679DFB9254D768C00550BE4 /* SubmitFormView.xib in Resources */,
 				950EA05D2547FFA0005BE133 /* LabelCellView.xib in Resources */,
+				965F098E25505C0200B3A248 /* MilestoneConditionCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,11 +948,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				965F098D25505C0200B3A248 /* MilestoneConditionCellView.swift in Sources */,
 				96F95C07254EA70B00EC00C6 /* IssueCellView.swift in Sources */,
 				96A58F53254A91AC00248F1E /* String+Regex.swift in Sources */,
+				9627A5A825506985000BFF4D /* UITableView+.swift in Sources */,
+				9627A5AC255087FF000BFF4D /* ConditionCellView.swift in Sources */,
 				95C36592254A76BB008ACCB5 /* MilestoneCellView.swift in Sources */,
+				96DD118B2550F3930065F44A /* ConditionCellViewModel.swift in Sources */,
 				96A58F3F254A6C2500248F1E /* Date+.swift in Sources */,
 				950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */,
+				965F098225505B7800B3A248 /* LabelConditionCellView.swift in Sources */,
 				966ADAEC254D9DDD00A480DD /* LabelSubmitFieldsView+LoadFromNib.swift in Sources */,
 				96A58F3B254A629500248F1E /* MilestoneItemViewModel.swift in Sources */,
 				966DD039254A5B1600A44FBA /* Milestone.swift in Sources */,
@@ -872,6 +967,7 @@
 				96A58F3D254A6A3300248F1E /* DateFormatter+.swift in Sources */,
 				95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */,
 				95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */,
+				965F098825505B9D00B3A248 /* UserConditionCellView.swift in Sources */,
 				966DD02B254A259F00A44FBA /* Array+SafeAccess.swift in Sources */,
 				9505446F254AA6E0007767C6 /* UIView+ShowAlert.swift in Sources */,
 				95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */,
@@ -896,8 +992,10 @@
 				952FF3D5254805EE0042A96F /* Header+CollectionView.swift in Sources */,
 				96F95BFA254E6C4A00EC00C6 /* IssueListViewController.swift in Sources */,
 				966ADAE5254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift in Sources */,
+				965F09742550425A00B3A248 /* IssueFilterViewController.swift in Sources */,
 				95054473254AAC0D007767C6 /* CollectionView+.swift in Sources */,
 				96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */,
+				965F097D25505A1200B3A248 /* DetailConditionFilterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

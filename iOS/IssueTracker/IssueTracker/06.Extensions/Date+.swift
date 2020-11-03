@@ -18,4 +18,8 @@ extension Date {
         DateFormatter.dateForSubmitForm.string(from: self)
     }
     
+    var stringForConditionCell: String {
+        DateFormatter.dateForConditionCell.string(from: self)
+    }
+    
 }

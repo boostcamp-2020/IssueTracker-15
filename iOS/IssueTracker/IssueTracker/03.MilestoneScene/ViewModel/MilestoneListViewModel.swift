@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MilestoneListViewModelProtocol {
+protocol MilestoneListViewModelProtocol: AnyObject {
     var didFetch: (() -> Void)? { get set }
     func needFetchItems()
     func cellForItemAt(path: IndexPath) -> MilestoneItemViewModel
