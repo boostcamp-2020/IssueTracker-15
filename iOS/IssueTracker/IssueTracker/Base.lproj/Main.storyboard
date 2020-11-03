@@ -36,30 +36,30 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QI6-BQ-1wA">
-                                <rect key="frame" x="352.5" y="751.5" width="41.5" height="41.5"/>
-                                <color key="backgroundColor" red="0.28235294117647058" green="0.52156862745098043" blue="0.76470588235294112" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uf-dk-ieS" userLabel="addIssueButton">
+                                <rect key="frame" x="362.5" y="761.5" width="41.5" height="41.5"/>
+                                <color key="backgroundColor" red="0.28235294119999998" green="0.52156862749999999" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="QI6-BQ-1wA" secondAttribute="height" multiplier="1:1" id="Hau-wi-i8r"/>
+                                    <constraint firstAttribute="width" secondItem="4uf-dk-ieS" secondAttribute="height" multiplier="1:1" id="chX-d9-dj7"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="plus" catalog="system">
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="heavy"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
                                 </state>
                                 <connections>
-                                    <segue destination="24V-yA-fcF" kind="presentation" id="akw-dY-kBv"/>
+                                    <segue destination="24V-yA-fcF" kind="presentation" id="V9m-AE-YrN"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="GLk-Jp-VZv" firstAttribute="top" secondItem="H30-KX-izY" secondAttribute="top" id="4Gw-jh-rwr"/>
-                            <constraint firstItem="H30-KX-izY" firstAttribute="trailing" secondItem="QI6-BQ-1wA" secondAttribute="trailing" constant="20" id="AAW-49-YWr"/>
-                            <constraint firstItem="QI6-BQ-1wA" firstAttribute="width" secondItem="H30-KX-izY" secondAttribute="width" multiplier="0.1" id="SYn-Bz-Y9u"/>
                             <constraint firstItem="H30-KX-izY" firstAttribute="trailing" secondItem="GLk-Jp-VZv" secondAttribute="trailing" id="Tpl-yn-WEI"/>
-                            <constraint firstItem="H30-KX-izY" firstAttribute="bottom" secondItem="QI6-BQ-1wA" secondAttribute="bottom" constant="20" id="gaN-Bw-co5"/>
+                            <constraint firstItem="4uf-dk-ieS" firstAttribute="width" secondItem="H30-KX-izY" secondAttribute="width" multiplier="0.1" id="f87-8S-auL"/>
                             <constraint firstItem="H30-KX-izY" firstAttribute="bottom" secondItem="GLk-Jp-VZv" secondAttribute="bottom" id="jKc-VU-vQF"/>
+                            <constraint firstItem="H30-KX-izY" firstAttribute="trailing" secondItem="4uf-dk-ieS" secondAttribute="trailing" constant="10" id="m8W-vm-4P7"/>
                             <constraint firstItem="GLk-Jp-VZv" firstAttribute="leading" secondItem="H30-KX-izY" secondAttribute="leading" id="tSa-cm-dR4"/>
+                            <constraint firstItem="H30-KX-izY" firstAttribute="bottom" secondItem="4uf-dk-ieS" secondAttribute="bottom" constant="10" id="ts3-cz-JO8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="H30-KX-izY"/>
                     </view>
@@ -83,7 +83,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addIssueButton" destination="QI6-BQ-1wA" id="Z6H-B4-5dr"/>
+                        <outlet property="addIssueButton" destination="4uf-dk-ieS" id="eBa-8x-nGb"/>
                         <outlet property="collectionView" destination="GLk-Jp-VZv" id="WIq-9W-NmX"/>
                     </connections>
                 </viewController>
@@ -329,28 +329,28 @@
                                     <segment title="마크다운"/>
                                     <segment title="미리보기"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentDidChange:" destination="Y8p-ie-OWu" eventType="valueChanged" id="C00-0y-5e3"/>
+                                </connections>
                             </segmentedControl>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4GP-r2-pCO">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OZ3-Tj-OPR">
                                 <rect key="frame" x="20" y="229" width="374" height="569"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="XOH-zx-EwI" firstAttribute="trailing" secondItem="cYP-py-DgA" secondAttribute="trailing" constant="20" id="4Xv-Fb-wWv"/>
                             <constraint firstItem="uNE-Xl-7zb" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="HoI-7x-9vz"/>
-                            <constraint firstItem="XOH-zx-EwI" firstAttribute="bottom" secondItem="4GP-r2-pCO" secondAttribute="bottom" constant="10" id="JBl-K7-knf"/>
+                            <constraint firstItem="XOH-zx-EwI" firstAttribute="trailing" secondItem="OZ3-Tj-OPR" secondAttribute="trailing" constant="20" id="KCD-Gi-YKc"/>
                             <constraint firstItem="ffC-xq-HP2" firstAttribute="top" secondItem="cYP-py-DgA" secondAttribute="bottom" constant="10" id="OAl-zB-1Ot"/>
                             <constraint firstItem="cYP-py-DgA" firstAttribute="top" secondItem="uNE-Xl-7zb" secondAttribute="bottom" constant="5" id="OG0-ez-xPR"/>
                             <constraint firstItem="cYP-py-DgA" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="Tdg-Gy-kN4"/>
-                            <constraint firstItem="4GP-r2-pCO" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="U0r-GS-f4N"/>
-                            <constraint firstItem="XOH-zx-EwI" firstAttribute="trailing" secondItem="4GP-r2-pCO" secondAttribute="trailing" constant="20" id="YF2-T2-i5W"/>
                             <constraint firstItem="uNE-Xl-7zb" firstAttribute="top" secondItem="XOH-zx-EwI" secondAttribute="top" constant="10" id="b7o-ff-RG4"/>
+                            <constraint firstItem="OZ3-Tj-OPR" firstAttribute="top" secondItem="ffC-xq-HP2" secondAttribute="bottom" constant="10" id="dl7-KE-2Hu"/>
                             <constraint firstItem="ffC-xq-HP2" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="dqL-DH-JUs"/>
-                            <constraint firstItem="4GP-r2-pCO" firstAttribute="top" secondItem="ffC-xq-HP2" secondAttribute="bottom" constant="10" id="nmf-hf-uga"/>
+                            <constraint firstItem="OZ3-Tj-OPR" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="kwk-PM-tmM"/>
+                            <constraint firstItem="XOH-zx-EwI" firstAttribute="bottom" secondItem="OZ3-Tj-OPR" secondAttribute="bottom" constant="10" id="lPb-OG-VWw"/>
                             <constraint firstItem="XOH-zx-EwI" firstAttribute="trailing" secondItem="ffC-xq-HP2" secondAttribute="trailing" constant="20" id="slE-d5-DSA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="XOH-zx-EwI"/>
@@ -378,7 +378,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="commentTextView" destination="4GP-r2-pCO" id="ezt-IF-2al"/>
+                        <outlet property="commonView" destination="OZ3-Tj-OPR" id="Dse-Rh-ZjU"/>
                         <outlet property="titleTextField" destination="cYP-py-DgA" id="uv5-n6-lP9"/>
                     </connections>
                 </viewController>
@@ -398,7 +398,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Y8p-ie-OWu" kind="relationship" relationship="rootViewController" id="SHT-mG-O5o"/>
+                        <segue destination="Y8p-ie-OWu" kind="relationship" relationship="rootViewController" destinationCreationSelector="addIssueSeguePerformed:" id="SHT-mG-O5o"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gUz-cP-Oom" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

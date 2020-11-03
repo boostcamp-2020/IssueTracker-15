@@ -17,7 +17,7 @@ class IssueListViewController: UIViewController {
         title = "이슈"
         configureSearchBar()
         configureCollectionView()
-        configureAddIssueButton()
+        addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
     }
     
     private func configureSearchBar() {
@@ -38,10 +38,6 @@ class IssueListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
-    private func configureAddIssueButton() {
-        addIssueButton.layer.cornerRadius = addIssueButton.frame.size.width * 0.5
-    }
-    
     // TODO: editMode 클릭시 테스트용 변수 -> EditMode 액션과 연결 필요
     var editmode: Bool = false
     @IBAction func editButtonTapped(_ sender: Any) {
@@ -51,7 +47,12 @@ class IssueListViewController: UIViewController {
             cell.showCheckBox(show: editmode)
         }
     }
-    
+
+    @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
+        let addIssueViewController = AddNewIssueViewController(coder: coder)
+        // addIssueVC의 doneButtonTapped 주입
+        return addIssueViewController
+    }
 }
 
 // MARK: - UICollectionViewDataSource Implementation
