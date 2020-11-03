@@ -1,6 +1,6 @@
-import { getRepository } from "typeorm";
-import { Label } from "../types/label.type";
-import LabelEntity from "../entity/label.entity";
+import { getRepository } from 'typeorm';
+import { Label, LabelUpdateToFix } from '../types/label.type';
+import LabelEntity from '../entity/label.entity';
 
 const LabelService = {
   create: async (labelData: Label): Promise<LabelEntity> => {
@@ -27,21 +27,21 @@ const LabelService = {
 
   delete: async (id: number): Promise<void> => {
     const label = await LabelService.getLabel(id);
-    if (!label) throw new Error("label does not exist");
+    if (!label) throw new Error('label does not exist');
 
     const labelRepository = getRepository(LabelEntity);
-    await labelRepository.delete({ id })
+    await labelRepository.delete({ id });
   },
 
-  update: async (id: number, body: any): Promise<void> => {
+  update: async (id: number, body: LabelUpdateToFix): Promise<void> => {
     console.log(body);
     const labelRepository = getRepository(LabelEntity);
     const label = await LabelService.getLabel(id);
 
-    if (!label) throw new Error("label does not exist");
+    if (!label) throw new Error('label does not exist');
 
     await labelRepository.update(label, body);
-  }
+  },
 };
 
 export default LabelService;
