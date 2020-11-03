@@ -114,7 +114,7 @@ extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return UICollectionViewCell() }
         cellView.configure()
-        cellView.showCheckBox(show: viewingMode == .edit , animation: false)
+        cellView.showCheckBox(show: viewingMode == .edit, animation: false)
         return cellView
     }
     

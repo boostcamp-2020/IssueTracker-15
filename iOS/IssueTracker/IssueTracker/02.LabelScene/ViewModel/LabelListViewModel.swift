@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol LabelListViewModelProtocol {
+protocol LabelListViewModelProtocol: AnyObject {
     var didFetch: (() -> Void)? { get set }
     func needFetchItems()
     func cellForItemAt(path: IndexPath) -> LabelItemViewModel

@@ -34,6 +34,14 @@ class IssueFilterViewController: UITableViewController {
     
     // TODO: Dependency  FilterStatus, (IssueService, MilestoneService, LabelService, CommentService) for DetailCondition
     //init(coder: NSCoder, )
+    // 이후에 적절한 Dependency를 받을 것! ( ex: milestoneProvider, labelProvider, userInfoProvider ...)
+    private weak var milestoneListViewModel: MilestoneListViewModelProtocol?
+    private weak var labelListViewModel: LabelListViewModelProtocol?
+    init?(coder: NSCoder, milestoneListViewModel: MilestoneListViewModelProtocol, labelListViewModel: LabelListViewModelProtocol) {
+        self.milestoneListViewModel = milestoneListViewModel
+        self.labelListViewModel = labelListViewModel
+        super.init(coder: coder)
+    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -73,7 +81,7 @@ extension IssueFilterViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        
+        dismiss(animated: true, completion: nil)
     }
     
 }

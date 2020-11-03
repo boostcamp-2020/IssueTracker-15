@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailConditionFilterViewController: UIViewController {
-
+    
     enum ContentMode {
         case userInfo
         case milestone
@@ -19,18 +19,50 @@ class DetailConditionFilterViewController: UIViewController {
     @IBOutlet weak var titleNavItem: UINavigationItem!
     
     // TODO: Dependency Injection for ContentMode
-    private var contentMode: ContentMode? = .label//nil
+    private var contentMode: ContentMode//nil
+    
     
     // TODO: Dummy Data to ViewModelProtocol
-    private var choosenDatas: [String] = [
-        "feature"
-    ]
-    
-    private var unchoosenDatas: [String] = [
-        "model", "ABCDE", "Inhencement", "SHIVVVPP", "GORILA", "GIRIN", "KIMSHINWOO"
+    //    private var viewModelDataSource: [[ConditionCellViewModel]] = [ [],
+    //        [
+    //        ConditionCellViewModel(title: "타이틀1", element: "#123456"),
+    //        ConditionCellViewModel(title: "타이틀2", element: "#123456"),
+    //        ConditionCellViewModel(title: "타이틀3", element: "#345677"),
+    //        ConditionCellViewModel(title: "타이틀4", element: "#ABCDEF"),
+    //        ConditionCellViewModel(title: "타이틀5", element: "#ABDDEE"),
+    //        ConditionCellViewModel(title: "타이틀5", element: "#ABDDFF")
+    //        ]
+    //    ]
+    private var viewModelDataSource: [[ConditionCellViewModel]] = [ [],
+                                                                    [
+                                                                        ConditionCellViewModel(title: "마일스톤 1", element: "2020-10-11 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마일스톤 2", element: "2020-11-11 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마일스톤 3", element: "2020-12-11 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마일스톤 4", element: "2020-09-11 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마일스톤 5", element: "2020-08-11 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마일스톤 6", element: "2019-01-30 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마일스톤 7", element: "2018-02-21 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마일스톤 8", element: "2020-03-06 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마일스톤 1", element: "2021-12-22 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마일스톤 1", element: "2017-06-03 00:00:00")
+        ]
     ]
     
     @IBOutlet weak var tableView: UITableView!
+    
+    init(nibName: String,
+         bundle: Bundle?,
+         contentMode: ContentMode) {
+        self.contentMode = contentMode
+        super.init(nibName: nibName, bundle: bundle)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.contentMode = .userInfo
+        viewModelDataSource = [[],[]]
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -41,7 +73,6 @@ class DetailConditionFilterViewController: UIViewController {
     }
     
     private func configureTableView() {
-        guard let contentMode = contentMode else { return }
         switch contentMode {
         case .userInfo:
             tableView.register(type: UserConditionCellView.self)
@@ -51,8 +82,6 @@ class DetailConditionFilterViewController: UIViewController {
             tableView.register(type: LabelConditionCellView.self)
         }
     }
-
-    
     
 }
 
@@ -80,15 +109,15 @@ extension DetailConditionFilterViewController: UITableViewDelegate {
         
         if indexPath.section == 0 {
             cell = tableView.cellForRow(at: indexPath) as? ConditionCellView
-            let data = choosenDatas.remove(at: indexPath.row)
-            unchoosenDatas.append(data)
+            let data = viewModelDataSource[0].remove(at: indexPath.row)
+            viewModelDataSource[1].append(data)
             indexPathTo = IndexPath(row: 0, section: 1)
             choosen = false
         } else {
             cell = tableView.cellForRow(at: indexPath) as? ConditionCellView
-            let data = unchoosenDatas.remove(at: indexPath.row)
-            choosenDatas.insert(data, at: 0)
-            indexPathTo = IndexPath(row: choosenDatas.count - 1, section: 0)
+            let data = viewModelDataSource[1].remove(at: indexPath.row)
+            viewModelDataSource[0].insert(data, at: 0)
+            indexPathTo = IndexPath(row: viewModelDataSource[0].count - 1, section: 0)
             choosen = true
         }
         
@@ -106,11 +135,11 @@ extension DetailConditionFilterViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "selected" : ""
+        return section == 0 ? "Choosen" : "Unchoosen"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? choosenDatas.count : unchoosenDatas.count
+        return viewModelDataSource[safe: section]?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -118,20 +147,20 @@ extension DetailConditionFilterViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let contentMode = contentMode else { return UITableViewCell() }
+        guard let cellViewModel = viewModelDataSource[safe: indexPath.section]?[safe: indexPath.row] else { return UITableViewCell() }
         let cell: ConditionCellView?
         switch contentMode {
         case .userInfo:
             cell = tableView.dequeueReusableCell(withIdentifier: UserConditionCellView.cellIdentifier,
-                                                 for: indexPath) as? ConditionCellView
+                                                 for: indexPath) as? UserConditionCellView
         case .milestone:
             cell = tableView.dequeueReusableCell(withIdentifier: MilestoneConditionCellView.cellIdentifier,
-                                                 for: indexPath) as? ConditionCellView
+                                                 for: indexPath) as? MilestoneConditionCellView
         case .label:
             cell = tableView.dequeueReusableCell(withIdentifier: LabelConditionCellView.cellIdentifier,
-                                                 for: indexPath) as? ConditionCellView
+                                                 for: indexPath) as? LabelConditionCellView
         }
-        cell?.configure()
+        cell?.configure(viewModel: cellViewModel)
         cell?.setCheck(indexPath.section == 0)
         return cell ?? UITableViewCell()
     }
@@ -145,8 +174,9 @@ extension DetailConditionFilterViewController {
     
     // TODO: Dependency Injection ( ViewModels )
     static func createViewController(contentMode: ContentMode, title: String) -> DetailConditionFilterViewController {
-        let vc = DetailConditionFilterViewController(nibName: nibName, bundle: Bundle.main)
-        vc.contentMode = contentMode
+        let vc = DetailConditionFilterViewController(nibName: nibName,
+                                                     bundle: Bundle.main,
+                                                     contentMode: contentMode)
         vc.title = title
         return vc
     }

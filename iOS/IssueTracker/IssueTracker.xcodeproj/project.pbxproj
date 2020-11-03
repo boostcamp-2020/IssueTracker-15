@@ -84,6 +84,7 @@
 		96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */; };
 		96C734D52549452600DEC9A4 /* LabelItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D42549452600DEC9A4 /* LabelItemViewModel.swift */; };
 		96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */; };
+		96DD118B2550F3930065F44A /* ConditionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DD118A2550F3930065F44A /* ConditionCellViewModel.swift */; };
 		96F95BFA254E6C4A00EC00C6 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */; };
 		96F95BFC254E6E4C00EC00C6 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95BFB254E6E4C00EC00C6 /* Issue.swift */; };
 		96F95C02254E891E00EC00C6 /* Int+Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95C01254E891E00EC00C6 /* Int+Clamp.swift */; };
@@ -170,6 +171,7 @@
 		96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
 		96C734D42549452600DEC9A4 /* LabelItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelItemViewModel.swift; sourceTree = "<group>"; };
 		96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabelView.swift; sourceTree = "<group>"; };
+		96DD118A2550F3930065F44A /* ConditionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCellViewModel.swift; sourceTree = "<group>"; };
 		96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		96F95BFB254E6E4C00EC00C6 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		96F95C01254E891E00EC00C6 /* Int+Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Clamp.swift"; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 		965F09752550589F00B3A248 /* FilterScene */ = {
 			isa = PBXGroup;
 			children = (
+				96DD118C2550F79A0065F44A /* ViewModel */,
 				965F097F25505B5400B3A248 /* DetailConditionCells */,
 				965F09732550425A00B3A248 /* IssueFilterViewController.swift */,
 				965F097B25505A1200B3A248 /* DetailConditionFilterViewController.swift */,
@@ -513,6 +516,14 @@
 				96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */,
 			);
 			path = 05.CustomUI;
+			sourceTree = "<group>";
+		};
+		96DD118C2550F79A0065F44A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				96DD118A2550F3930065F44A /* ConditionCellViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		96DFA30125509C7200F82CCD /* IssueListScene */ = {
@@ -766,6 +777,7 @@
 				9627A5A825506985000BFF4D /* UITableView+.swift in Sources */,
 				9627A5AC255087FF000BFF4D /* ConditionCellView.swift in Sources */,
 				95C36592254A76BB008ACCB5 /* MilestoneCellView.swift in Sources */,
+				96DD118B2550F3930065F44A /* ConditionCellViewModel.swift in Sources */,
 				96A58F3F254A6C2500248F1E /* Date+.swift in Sources */,
 				950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */,
 				965F098225505B7800B3A248 /* LabelConditionCellView.swift in Sources */,

@@ -9,16 +9,18 @@
 import UIKit
 
 class MilestoneConditionCellView: ConditionCellView {
-
+    
     @IBOutlet weak var milestoneLabel: UILabel!
     @IBOutlet weak var dueDateLabel: UILabel!
     
-    // TODO: MilestoneViewModel
-    override func configure() {
-        super.configure()
-        // 임시
-        milestoneLabel.text = "스프린트 2"
-        dueDateLabel.text = "Due by November 5, 2020"
+    override func configure(viewModel: ConditionCellViewModel) {
+        super.configure(viewModel: viewModel)
+        milestoneLabel.text = viewModel.title
+        if let dateStr = viewModel.element.dateForMilestoneViewModel?.stringForConditionCell {
+            dueDateLabel.text = "Due by " + dateStr
+        } else {
+            dueDateLabel.text = "-"
+        }
     }
     
     override func layoutSubviews() {

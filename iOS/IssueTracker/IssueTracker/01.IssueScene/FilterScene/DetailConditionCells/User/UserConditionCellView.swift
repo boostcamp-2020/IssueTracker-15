@@ -9,15 +9,13 @@
 import UIKit
 
 class UserConditionCellView: ConditionCellView {
-
+    
     @IBOutlet weak var userImageLabel: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     
-    // TODO: UserInfo
-    override func configure() {
-        super.configure()
-        // 임시
-        userNameLabel.text = "SHIVVVPP"
+    override func configure(viewModel: ConditionCellViewModel) {
+        super.configure(viewModel: viewModel)
+        userNameLabel.text = viewModel.title
     }
     
     override func layoutSubviews() {

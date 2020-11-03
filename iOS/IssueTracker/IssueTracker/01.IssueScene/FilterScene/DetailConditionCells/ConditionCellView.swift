@@ -20,7 +20,7 @@ class ConditionCellView: UITableViewCell {
         static let colorUnChecked = UIColor.link
     }
     
-    func configure() {
+    func configure(viewModel: ConditionCellViewModel) {
         selectionStyle = .none
     }
     

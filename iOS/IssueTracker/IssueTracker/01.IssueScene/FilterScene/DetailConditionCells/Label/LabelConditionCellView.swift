@@ -12,15 +12,13 @@ class LabelConditionCellView: ConditionCellView {
     
     @IBOutlet weak var labelBadge: BadgeLabelView!
     
-    // TODO: LabelViewModel
-     override func configure() {
-        super.configure()
-         // 임시
-        labelBadge.text = "Feature"
-        labelBadge.setBackgroundColor(UIColor.cyan.cgColor)
+    override func configure(viewModel: ConditionCellViewModel) {
+        super.configure(viewModel: viewModel)
+        labelBadge.text = viewModel.title
+        labelBadge.setBackgroundColor(viewModel.element.color)
         labelBadge.cornerRadiusRatio = 0.3
         labelBadge.setPadding(top: 5, left: 10, bottom: 5, right: 10)
-     }
+    }
     
 }
 
