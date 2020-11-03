@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: "./src/index.tsx",
+  devtool: "hidden-source-map",
   resolve: {
     extensions: [".js", ".ts", ".tsx"],
   },
