@@ -28,14 +28,17 @@ public class DataLoader: DataLodable {
         components.host = endpoint.baseURL
         components.port = endpoint.port
         components.path = endpoint.path
-        
+        print(components)
         guard let url = components.url else { return }
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endpoint.method.rawValue
         urlRequest.httpBody = endpoint.httpBody
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+        print(urlRequest)
+        print(String(data: urlRequest.httpBody ?? Data() , encoding: .utf8))
+        print(urlRequest.httpMethod)
+        print(urlRequest.allHTTPHeaderFields)
         session.dataTask(with: urlRequest) { (data, response, error) in
             
             guard error == nil else { return }
@@ -46,11 +49,11 @@ public class DataLoader: DataLodable {
             
             if let data = data {
                 do {
-                    // let dataString = String(data: data, encoding: .utf8)
-                    // print("data string : \(dataString!)")
-                    // print("response status code : \(response.statusCode)")
+                     let dataString = String(data: data, encoding: .utf8)
+                     print("data string : \(dataString!)")
+                     print("response status code : \(response.statusCode)")
                     
-                    if endpoint.method == .delete {
+                    if endpoint.method == .delete || endpoint.method == .patch {
                         completion(.success(nil))
                     } else {
                         completion(.success(try JSONDecoder().decode(T.self, from: data)))

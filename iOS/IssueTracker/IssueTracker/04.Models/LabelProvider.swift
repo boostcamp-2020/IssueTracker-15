@@ -9,7 +9,7 @@
 import Foundation
 import NetworkFramework
 
-protocol LabelProvidable {
+protocol LabelProvidable: AnyObject {
     func addLabel(title: String, description: String, color: String, completion:  @escaping (Label?) -> Void )
     func editLabel(id: Int, title: String, description: String, color: String, completion:  @escaping (Label?) -> Void)
     //func deleteLabel(id: Int, completion: (Bool)->Void)
@@ -18,7 +18,7 @@ protocol LabelProvidable {
 
 class LabelProvider: LabelProvidable {
     
-    
+    //private(set) var labels = [Label]()
     private weak var dataLoader: DataLodable?
     
     init(dataLoader: DataLodable) {
@@ -42,7 +42,7 @@ class LabelProvider: LabelProvidable {
     
     func editLabel(id: Int, title: String, description: String, color: String, completion: @escaping (Label?) -> Void) {
         
-        let endPoint = LabelEndPoint(requestType: .edit)
+        let endPoint = LabelEndPoint(requestType: .edit, parameter: String(id))
         endPoint.httpBody = JSONEncoder.encode(data: Label(id: id, title: title, description: description, hexColor: color))
         dataLoader?.request(Label.self, endpoint: endPoint, completion: { (result) in
             switch result {

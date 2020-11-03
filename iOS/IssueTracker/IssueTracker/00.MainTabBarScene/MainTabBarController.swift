@@ -7,10 +7,19 @@
 //
 
 import UIKit
+import NetworkFramework
 
 class MainTabBarController: UITabBarController {
     
-    func setupSubViewControllers() {
+    private var dataLoader: DataLodable?
+    private var labelProvider: LabelProvidable?
+    
+    
+    func setupSubViewControllers(with dataLoader: DataLodable) {
+        
+        let labelProvider = LabelProvider(dataLoader: dataLoader)
+        
+        
         let commonAppearance = UINavigationBarAppearance()
         commonAppearance.backgroundColor = .white
         commonAppearance.shadowColor = .gray
@@ -23,7 +32,8 @@ class MainTabBarController: UITabBarController {
         if let navigationController = self.viewControllers?[safe: 1] as? UINavigationController,
             let labelListViewController = navigationController.topViewController as? LabelListViewController {
             navigationController.navigationBar.scrollEdgeAppearance = commonAppearance
-            labelListViewController.labelListViewModel = LabelListViewModel()
+            
+            labelListViewController.labelListViewModel = LabelListViewModel(with: labelProvider)
         }
         // controllers[2] = MilestoneListViewConroller
         if let navigationController = self.viewControllers?[safe: 2] as? UINavigationController,
@@ -32,6 +42,9 @@ class MainTabBarController: UITabBarController {
             milestoneListViewController.milestoneListViewModel = MilestoneListViewModel()
         }
         // controllers[3] = SettingViewController
+        
+        self.dataLoader = dataLoader
+        self.labelProvider = labelProvider
     }
     
     override func viewDidLoad() {

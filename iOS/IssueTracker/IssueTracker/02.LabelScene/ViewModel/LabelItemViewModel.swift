@@ -9,12 +9,13 @@
 import Foundation
 
 struct LabelItemViewModel {
-    
+    let id: Int
     let title: String
     let description: String
     let hexColor: String
     
     init(label: Label) {
+        id = label.id
         title = label.title
         description = label.description
         hexColor = label.hexColor
