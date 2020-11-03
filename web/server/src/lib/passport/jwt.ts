@@ -1,15 +1,15 @@
 import passport from 'passport';
 
-import { ExtractJwt, Strategy as JWTStrategy } from 'passport-jwt'
+import { ExtractJwt, Strategy as JWTStrategy } from 'passport-jwt';
 import { getRepository } from 'typeorm';
 import UserEntity from '../../entity/user.entity';
 
 const JWTConfig = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-  secretOrKey: process.env.TOKEN_SECRET
-}
+  secretOrKey: process.env.TOKEN_SECRET,
+};
 
-const JWTVerify = async (jwtPayload: any, done: any) => {
+const verifyJWT = async (jwtPayload: any, done: any) => {
   const userRepository = await getRepository(UserEntity);
   try {
     const user = await userRepository.findOne({ email: jwtPayload.email });
@@ -20,12 +20,12 @@ const JWTVerify = async (jwtPayload: any, done: any) => {
 
     done(null, false, { reason: '올바르지 않은 인증정보 입니다.' });
   } catch (err) {
-    console.error(err)
+    console.error(err);
     done(err);
   }
-}
+};
 const jwt = () => {
-  passport.use(new JWTStrategy(JWTConfig, JWTVerify));
-}
+  passport.use(new JWTStrategy(JWTConfig, verifyJWT));
+};
 
 export default jwt;

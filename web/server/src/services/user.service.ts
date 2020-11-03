@@ -1,14 +1,15 @@
 import { getRepository } from 'typeorm';
 import Encryption from '../lib/encryption';
 import UserEntity from '../entity/user.entity';
+import { SignUpInput } from '../types/sign-up.type';
 
 const UserService = {
   create: async (
-    email: string,
-    password: string,
-    userName: string,
+    signUpInput: SignUpInput,
     type: string
   ): Promise<UserEntity> => {
+    const { email, password, userName } = signUpInput;
+
     const hashedPassword = await Encryption.encryptPassword(password);
 
     const userRepository = getRepository(UserEntity);
