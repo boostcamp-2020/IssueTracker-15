@@ -38,24 +38,6 @@ class LabelListViewModel: LabelListViewModelProtocol {
     
     func needFetchItems() {
         // 네트워크 통신으로 fetch
-        let labelFetchEndPoint = LabelEndPoint(requestType: .fetch)
-        let session = URLSession.init(configuration: .default, delegate: nil, delegateQueue: nil)
-        let dataLoader = DataLoader<[Label]>(session: session)
-        dataLoader.reqeust(endpoint: labelFetchEndPoint) { [weak self] (response) in
-            switch response {
-            case .success(let data):
-                guard let data = data else { return }
-                self?.labels = data
-                DispatchQueue.main.async {
-                    self?.didFetch?()
-                }
-            case .failure(let error):
-                switch error {
-                case .decodingError(let message), .invalidURL(let message), .responseError(let message):
-                    print(message)
-                }
-            }
-        }
     }
     
     func cellForItemAt(path: IndexPath) -> LabelItemViewModel {

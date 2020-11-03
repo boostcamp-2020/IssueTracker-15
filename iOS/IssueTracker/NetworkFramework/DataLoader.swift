@@ -8,8 +8,13 @@
 
 import Foundation
 
-public class DataLoader<T: Decodable> {
-    public typealias RequestResult<T> = Result<T?, NetworkError>
+public typealias RequestResult<T> = Result<T?, NetworkError>
+
+public protocol DataLodable: AnyObject {
+    func request<T: Decodable>(_ type: T.Type, endpoint: EndPoint, completion: @escaping (RequestResult<T>) -> Void)
+}
+
+public class DataLoader: DataLodable {
     
     private let session: URLSession
     
@@ -17,7 +22,7 @@ public class DataLoader<T: Decodable> {
         self.session = session
     }
     
-    public func reqeust(endpoint: EndPoint, completion: @escaping (RequestResult<T>) -> Void) {
+    public func request<T>(_ type: T.Type, endpoint: EndPoint, completion: @escaping (RequestResult<T>) -> Void) where T : Decodable {
         var components = URLComponents()
         components.scheme = endpoint.scheme
         components.host = endpoint.baseURL
