@@ -10,7 +10,6 @@ import UIKit
 
 class ConditionCellView: UITableViewCell {
     
-    private var checked: Bool = false
     @IBOutlet weak var checkImage: UIImageView!
     
     enum Constant {
@@ -25,8 +24,7 @@ class ConditionCellView: UITableViewCell {
     }
     
     func setCheck(_ check: Bool) {
-        checked = check
-        checkImage.image = checked ? Constant.imageChecked : Constant.imageUnchecked
-        checkImage.tintColor = checked ? Constant.colorChecked : Constant.colorUnChecked
+        checkImage.image = check ? Constant.imageChecked : Constant.imageUnchecked
+        checkImage.tintColor = check ? Constant.colorChecked : Constant.colorUnChecked
     }
 }
