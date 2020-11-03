@@ -5,8 +5,8 @@ import { Milestone } from "../types/milestone.types";
 const MilestoneRouter = express.Router();
 MilestoneRouter.get("/", async (req: Request, res: Response) => {
   try {
-    const result = await MilestoneService.getMilestones();
-    return res.json(result);
+    const newMilestones = await MilestoneService.getMilestones();
+    return res.json(newMilestones);
   } catch (e) {
     return res.status(400).json(e.message);
   }
@@ -42,7 +42,7 @@ MilestoneRouter.patch("/:id", async (req: Request, res: Response) => {
 
   try {
     await MilestoneService.updateMilestone(milestoneId, newMilestoneData);
-    return res.status(201).json();
+    return res.json();
   } catch (e) {
     return res.status(400).json(e.message);
   }
