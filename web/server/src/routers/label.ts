@@ -23,7 +23,7 @@ LabelRouter.get('/', async (req: Request, res: Response) => {
 
   try {
     const labels = await LabelService.getLabels();
-    return res.status(200).json(labels);
+    return res.json(labels);
   } catch (e) {
     return res.status(400).json({
       message: e.message,
@@ -52,7 +52,7 @@ LabelRouter.patch('/:id', async (req: Request, res: Response) => {
 
   try {
     await LabelService.update(parseInt(id), body);
-    return res.status(200).json();
+    return res.json();
   } catch (e) {
     return res.status(400).json({
       message: e.message,

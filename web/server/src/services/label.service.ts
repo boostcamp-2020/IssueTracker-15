@@ -34,7 +34,6 @@ const LabelService = {
   },
 
   update: async (id: number, body: LabelUpdateToFix): Promise<void> => {
-    console.log(body);
     const labelRepository = getRepository(LabelEntity);
     const label = await LabelService.getLabel(id);
 
