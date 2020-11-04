@@ -10,11 +10,11 @@ import Foundation
 
 public typealias RequestResult<T> = Result<T?, NetworkError>
 
-public protocol DataLodable: AnyObject {
+public protocol DataLoadable: AnyObject {
     func request<T: Decodable>(_ type: T.Type, endpoint: EndPoint, completion: @escaping (RequestResult<T>) -> Void)
 }
 
-public class DataLoader: DataLodable {
+public class DataLoader: DataLoadable {
     
     private let session: URLSession
     
@@ -22,7 +22,7 @@ public class DataLoader: DataLodable {
         self.session = session
     }
     
-    public func request<T>(_ type: T.Type, endpoint: EndPoint, completion: @escaping (RequestResult<T>) -> Void) where T : Decodable {
+    public func request<T>(_ type: T.Type, endpoint: EndPoint, completion: @escaping (RequestResult<T>) -> Void) where T: Decodable {
         var components = URLComponents()
         components.scheme = endpoint.scheme
         components.host = endpoint.baseURL
@@ -36,7 +36,7 @@ public class DataLoader: DataLodable {
         urlRequest.httpBody = endpoint.httpBody
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         print(urlRequest)
-        print(String(data: urlRequest.httpBody ?? Data() , encoding: .utf8))
+        print(String(data: urlRequest.httpBody ?? Data(), encoding: .utf8))
         print(urlRequest.httpMethod)
         print(urlRequest.allHTTPHeaderFields)
         session.dataTask(with: urlRequest) { (data, response, error) in

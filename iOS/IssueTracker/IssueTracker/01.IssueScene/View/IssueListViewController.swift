@@ -23,7 +23,6 @@ class IssueListViewController: UIViewController {
     
     private var viewingMode: ViewingMode = .general
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "이슈"

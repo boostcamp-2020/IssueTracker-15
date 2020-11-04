@@ -99,7 +99,7 @@ extension DetailConditionFilterViewController: UITableViewDelegate {
         let dest = source == 0 ? 1 : 0
         let data = viewModelDataSource[source].remove(at: indexPath.row)
         viewModelDataSource[dest].append(data)
-        indexPathTo = IndexPath(row:dest == 1 ? 0 : viewModelDataSource[dest].count - 1,section: dest)
+        indexPathTo = IndexPath(row: dest == 1 ? 0 : viewModelDataSource[dest].count - 1, section: dest)
         
         tableView.moveRow(at: indexPathFrom, to: indexPathTo)
         cell?.setCheck(dest == 0)

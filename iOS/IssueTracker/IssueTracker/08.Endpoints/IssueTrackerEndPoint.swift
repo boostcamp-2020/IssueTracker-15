@@ -26,7 +26,7 @@ class IssueTrackerEndpoint: EndPoint {
 
     var scheme: String { "http" }
     
-    var httpBody: Data? = nil
+    var httpBody: Data? // = nil
     
     var baseURL: String { "118.67.134.194" }
     

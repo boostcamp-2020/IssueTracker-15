@@ -19,9 +19,9 @@ protocol LabelProvidable: AnyObject {
 class LabelProvider: LabelProvidable {
     
     //private(set) var labels = [Label]()
-    private weak var dataLoader: DataLodable?
+    private weak var dataLoader: DataLoadable?
     
-    init(dataLoader: DataLodable) {
+    init(dataLoader: DataLoadable) {
         self.dataLoader = dataLoader
     }
     

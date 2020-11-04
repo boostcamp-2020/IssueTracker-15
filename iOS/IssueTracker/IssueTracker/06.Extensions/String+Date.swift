@@ -9,7 +9,13 @@
 import Foundation
 
 extension String {
-    var dateForMilestoneViewModel: Date? {
-        DateFormatter.dateFromMileStone.date(from: self)
+    var datdForServer: Date? {
+        print("string formatting : \(self)")
+        return DateFormatter.datdFromServer.date(from: self)
+    }
+    
+    var dateForSubmitForm: Date? {
+        print("string formatting : \(self)")
+        return DateFormatter.dateForSubmitForm.date(from: self)
     }
 }
