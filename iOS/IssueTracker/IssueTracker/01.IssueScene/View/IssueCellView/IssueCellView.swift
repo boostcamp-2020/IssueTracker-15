@@ -56,7 +56,6 @@ class IssueCellView: UICollectionViewCell {
         titleLabel.autoResizeFontWithHeight()
         descriptionLabel.autoResizeFontWithHeight()
     }
-    
 }
 
 // MARK: - Action

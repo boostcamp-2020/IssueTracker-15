@@ -9,7 +9,7 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-
+    
     enum ViewingMode {
         case general
         case edit
@@ -22,7 +22,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var addIssueButton: UIButton!
     
     private var viewingMode: ViewingMode = .general
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "이슈"
@@ -40,6 +40,21 @@ class IssueListViewController: UIViewController {
         setupCollectionViewLayout()
         collectionView.dataSource = self
         collectionView.register(type: IssueCellView.self)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        self.collectionView.addGestureRecognizer(tap)
+        self.collectionView.isUserInteractionEnabled = true
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        if let indexPath = self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let issueDetailVC = storyboard.instantiateViewController(withIdentifier: IssueDetailViewController.identifier) as? IssueDetailViewController
+                else { return }
+
+            // controller.selectedIndex = indexPath.row //pass selected cell index to next view.
+            self.navigationController?.pushViewController(issueDetailVC, animated: true)
+        }
     }
     
     private func setupCollectionViewLayout() {
@@ -82,7 +97,7 @@ extension IssueListViewController {
     }
     
     @IBAction func closeAllSelectedIssueButtonTapped(_ sender: Any) {
-    
+        
     }
     
     private func toEditMode() {
@@ -108,7 +123,7 @@ extension IssueListViewController {
             cell.showCheckBox(show: false, animation: true)
         }
     }
-
+    
     @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
         let addIssueViewController = AddNewIssueViewController(coder: coder)
         // addIssueVC의 doneButtonTapped 주입
@@ -118,7 +133,6 @@ extension IssueListViewController {
 
 // MARK: - UICollectionViewDataSource Implementation
 extension IssueListViewController: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return UICollectionViewCell() }
         cellView.configure()
@@ -129,5 +143,4 @@ extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 11
     }
-    
 }
