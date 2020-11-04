@@ -29,8 +29,8 @@ class LabelListViewController: UIViewController {
     private func configureCollectionView() {
         setupCollectionViewLayout()
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(type: LabelCellView.self)
-        HeaderView.register(in: collectionView)
     }
     
     private func setupCollectionViewLayout() {

@@ -26,7 +26,6 @@ class MilestoneListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(type: MilestoneCellView.self)
-        HeaderView.register(in: collectionView)
     }
     
     private func configureMilestoneListViewModel() {
