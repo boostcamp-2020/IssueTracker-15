@@ -11,17 +11,17 @@
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" customClass="MilestoneComponentView" customModule="IssueTracker" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="136" height="58"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="unc-Yh-koE">
-                    <rect key="frame" x="0.0" y="4.5" width="42" height="49.5"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="unc-Yh-koE">
+                    <rect key="frame" x="0.0" y="4.5" width="42" height="49"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysZ-Mm-tNh" userLabel="milestoneBadge">
-                            <rect key="frame" x="0.0" y="0.0" width="42" height="26"/>
+                            <rect key="frame" x="0.0" y="0.0" width="42" height="29"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbb-nl-cLY" userLabel="DueDate">
-                            <rect key="frame" x="0.0" y="32" width="42" height="17.5"/>
+                            <rect key="frame" x="0.0" y="32" width="42" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -35,7 +35,7 @@
                 <constraint firstItem="Dbb-nl-cLY" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.3" id="TsY-8c-fZZ"/>
                 <constraint firstItem="unc-Yh-koE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="byU-DK-VWy"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="unc-Yh-koE" secondAttribute="trailing" id="i87-nV-Tbu"/>
-                <constraint firstItem="ysZ-Mm-tNh" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.45" id="t9d-fZ-fIc"/>
+                <constraint firstItem="ysZ-Mm-tNh" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.5" id="t9d-fZ-fIc"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
