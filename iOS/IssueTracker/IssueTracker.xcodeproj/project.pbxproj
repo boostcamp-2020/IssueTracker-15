@@ -745,6 +745,7 @@
 				95E9F5762546EC06001FBA0D /* Resources */,
 				9613C12C2547B1F5005EF13C /* ShellScript */,
 				9521FCCA254FE7FE00FC0220 /* Embed Frameworks */,
+				C5283FC93468C6E8307E3A68 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -932,6 +933,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# SwiftLint\n${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+		C5283FC93468C6E8307E3A68 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IssueTracker/Pods-IssueTracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IssueTracker/Pods-IssueTracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IssueTracker/Pods-IssueTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

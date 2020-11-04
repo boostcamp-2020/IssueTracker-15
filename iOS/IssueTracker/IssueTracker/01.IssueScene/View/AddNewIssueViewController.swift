@@ -7,15 +7,15 @@
 //
 
 import UIKit
+import MarkdownView
 
 class AddNewIssueViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
-    private var previewTextView: UITextView = UITextView()
-    private var commentTextView: UITextView = UITextView()
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    private var commentTextView: UITextView = UITextView()
+    private var markdownView: MarkdownView = MarkdownView()
     
     private let textViewPlaceholder = "코멘트는 여기에 작성하세요"
-    private let previewPlaceholder = "입력된 내용이 없습니다"
     var doneButtonTapped: (() -> Void)?
     
     override func viewDidLoad() {
@@ -24,7 +24,6 @@ class AddNewIssueViewController: UIViewController {
         
         configureKeyboardRelated()
         configureNavigationBar()
-        configurePreviewLabelView()
         configureCommentTextView()
     }
     
@@ -55,29 +54,28 @@ class AddNewIssueViewController: UIViewController {
         self.view.addSubview(commentTextView)
         commentTextView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
         commentTextView.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 10).isActive = true
-        commentTextView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.95).isActive = true
+        commentTextView.widthAnchor.constraint(equalTo: self.segmentedControl.widthAnchor, multiplier: 1).isActive = true
         commentTextView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 10).isActive = true
         initTextViewPlaceholder()
     }
     
-    private func configurePreviewLabelView() {
-        previewTextView.isEditable = false
+    private func configureMarkdownView() {
+        // 매번 rendering 하는데 더 효율적인 방법?
+        markdownView = MarkdownView()
         
-        if commentTextView.text == textViewPlaceholder {
-            previewTextView.text = previewPlaceholder
-            previewTextView.textColor = .lightGray
+        if commentTextView.text != textViewPlaceholder {
+            markdownView.load(markdown: commentTextView.text)
         } else {
-            previewTextView.text = commentTextView.text
-            previewTextView.textColor = .black
+            markdownView.load(markdown: "")
         }
-
-        previewTextView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(previewTextView)
         
-        previewTextView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
-        previewTextView.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 10).isActive = true
-        previewTextView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 10).isActive = true
-        previewTextView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.95).isActive = true
+        markdownView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(markdownView)
+        
+        markdownView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
+        markdownView.widthAnchor.constraint(equalTo: self.segmentedControl.widthAnchor, multiplier: 1).isActive = true
+        markdownView.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 10).isActive = true
+        markdownView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 10).isActive = true
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
@@ -137,16 +135,17 @@ class AddNewIssueViewController: UIViewController {
     @IBAction func segmentDidChange(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            previewTextView.removeFromSuperview()
+            // 마크다운 작성
+            markdownView.removeFromSuperview()
             configureCommentTextView()
         case 1:
+            // 미리보기
             commentTextView.removeFromSuperview()
-            configurePreviewLabelView()
+            configureMarkdownView()
         default:
             return
         }
     }
-    
 }
 
 extension AddNewIssueViewController: UITextViewDelegate {

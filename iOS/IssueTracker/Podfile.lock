@@ -1,20 +1,24 @@
 PODS:
+  - MarkdownView (1.7.1)
   - SwiftGen (6.4.0)
   - SwiftLint (0.40.3)
 
 DEPENDENCIES:
+  - MarkdownView
   - SwiftGen (~> 6.0)
   - SwiftLint
 
 SPEC REPOS:
   trunk:
+    - MarkdownView
     - SwiftGen
     - SwiftLint
 
 SPEC CHECKSUMS:
+  MarkdownView: cf30a97ab39b2bce04406adce541972c882363bd
   SwiftGen: 67860cc7c3cfc2ed25b9b74cfd55495fc89f9108
   SwiftLint: dfd554ff0dff17288ee574814ccdd5cea85d76f7
 
-PODFILE CHECKSUM: c4de13deda471860f32f63baa372075efdd9688a
+PODFILE CHECKSUM: 1b919337534d85843504e204ee82abfe6f7ad73c
 
 COCOAPODS: 1.9.3
