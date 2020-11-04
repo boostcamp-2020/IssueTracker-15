@@ -89,19 +89,29 @@ extension DetailFilterViewController {
 extension DetailFilterViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as? ConditionCellView
         let indexPathFrom = indexPath
         let indexPathTo: IndexPath
+        let cell = tableView.cellForRow(at: indexPath) as? ConditionCellView
         
         let source = indexPath.section
         let dest = source == 0 ? 1 : 0
+        indexPathTo = IndexPath(row: viewModelDataSource[dest].count, section: dest)
+        
         let data = viewModelDataSource[source].remove(at: indexPath.row)
         viewModelDataSource[dest].append(data)
-        indexPathTo = IndexPath(row: viewModelDataSource[dest].count - 1,section: dest)
-        
-        
         tableView.moveRow(at: indexPathFrom, to: indexPathTo)
         cell?.setCheck(dest == 0)
+        
+        if viewModelDataSource[0].count > maximumNumSelected {
+            let indexPathFrom = IndexPath(row: 0, section: 0)
+            let indexPathTo = IndexPath(row: viewModelDataSource[1].count, section: 1)
+            let cell = tableView.cellForRow(at: indexPathFrom) as? ConditionCellView
+            
+            let data = viewModelDataSource[0].remove(at: 0)
+            viewModelDataSource[1].append(data)
+            tableView.moveRow(at: indexPathFrom, to: indexPathTo)
+            cell?.setCheck(false)
+        }
     }
     
 }
