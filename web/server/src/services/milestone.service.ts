@@ -12,9 +12,7 @@ const MilestoneService = {
     );
     return newMilestones;
   },
-  createMilestone: async (
-    milestoneData: Milestone
-  ): Promise<MilestoneEntity> => {
+  createMilestone: async (milestoneData: Milestone): Promise<any> => {
     const milestoneRepository: Repository<MilestoneEntity> = getRepository(
       MilestoneEntity
     );
@@ -25,7 +23,7 @@ const MilestoneService = {
       milestone
     );
 
-    return newMilestone;
+    return { openedIssueNum: "0", closedIssueNum: "0", ...newMilestone };
   },
 
   deleteMilestone: async (milestoneId: number): Promise<void> => {
