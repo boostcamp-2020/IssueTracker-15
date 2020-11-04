@@ -74,8 +74,6 @@ extension MilestoneListViewController {
     
 }
 
-
-
 // MARK: - UICollectionViewDelegate Implementation
 extension MilestoneListViewController: UICollectionViewDelegate {
     
