@@ -87,9 +87,10 @@ extension IssueListViewController {
     }
     
     @IBSegueAction func createIssueFilterViewController(_ coder: NSCoder) -> IssueFilterViewController? {
-        if viewingMode == .edit { return nil }
-        let vc = IssueFilterViewController(coder: coder)
-        // TODO: Dependency Injection to IssueFilterViewController
+        guard viewingMode == .general,
+              let filterViewModel  = issueListViewModel?.issueFilterViewModel
+        else { return nil }
+        let vc = IssueFilterViewController(coder: coder, filterViewModel: filterViewModel)
         return vc
     }
     

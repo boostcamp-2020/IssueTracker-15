@@ -10,6 +10,8 @@ import Foundation
 import NetworkFramework
 
 protocol LabelProvidable: AnyObject {
+    var labels: [Label] { get }
+    
     func addLabel(title: String, description: String, color: String, completion:  @escaping (Label?) -> Void )
     func editLabel(id: Int, title: String, description: String, color: String, completion:  @escaping (Label?) -> Void)
     //func deleteLabel(id: Int, completion: (Bool)->Void)
@@ -25,7 +27,7 @@ class LabelProvider: LabelProvidable {
     private var onFetching = false
     // Key, Value(CompletionFunc) 로 관리하고 처리 됬을 경우 삭제해주기!
     // 효율적인 key 관리 기법 생각해보기!
-    private var fetchingCompletionHandlers = [Int:([Label]?)->Void]()
+    private var fetchingCompletionHandlers = [Int: ([Label]?)->Void]()
     
     private(set) var labels = [Label]()
     private weak var dataLoader: DataLoadable?
@@ -82,7 +84,7 @@ class LabelProvider: LabelProvidable {
     }
     
     func fetchLabels(completion: @escaping ([Label]?) -> Void) {
-        if(onFetching) {
+        if onFetching {
             fetchingCompletionHandlers[fetchingCompletionHandlers.count] = completion
             return
         }

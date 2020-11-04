@@ -18,24 +18,18 @@ class DetailConditionSelectViewController: UIViewController {
     var onSelectionComplete: (([ConditionCellViewModel]) -> Void)?
     
     // TODO: Dummy Data to ViewModelProtocol
-    private var viewModelDataSource: [[ConditionCellViewModel]] = [ [],
-                                                                    [
-                                                                        ConditionCellViewModel(title: "마일스톤 5", element: "2020-08-11T00:00:00.000Z"),
-                                                                        ConditionCellViewModel(title: "마일스톤 6", element: "2020-08-11T00:00:00.000Z"),
-                                                                        ConditionCellViewModel(title: "마일스톤 7", element: "2020-08-11T00:00:00.000Z"),
-                                                                        ConditionCellViewModel(title: "마일스톤 8", element: "2020-08-11T00:00:00.000Z"),
-                                                                        ConditionCellViewModel(title: "마일스톤 1", element: "2020-08-11T00:00:00.000Z"),
-                                                                        ConditionCellViewModel(title: "마일스톤 1", element: "2020-08-11T00:00:00.000Z")
-        ]
-    ]
+    private var viewModelDataSource: [[ConditionCellViewModel]]
     
     @IBOutlet weak var tableView: UITableView!
     
     init(nibName: String,
          bundle: Bundle?,
-         contentMode: ComponentStyle, maximuSelected: Int) {
+         contentMode: ComponentStyle,
+         dataSource: [[ConditionCellViewModel]],
+         maximuSelected: Int) {
         self.contentMode = contentMode
         self.maximumNumSelected = maximuSelected
+        self.viewModelDataSource = dataSource
         super.init(nibName: nibName, bundle: bundle)
     }
     
@@ -130,7 +124,7 @@ extension DetailConditionSelectViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cellViewModel = viewModelDataSource[safe: indexPath.section]?[safe: indexPath.row],
-            let cell: DetailConditionSelectCellView = tableView.dequeueCell(at: indexPath)
+              let cell: DetailConditionSelectCellView = tableView.dequeueCell(at: indexPath)
         else { return UITableViewCell() }
         cell.configure(type: contentMode, viewModel: cellViewModel)
         cell.setCheck(indexPath.section == 0)
@@ -146,10 +140,14 @@ extension DetailConditionSelectViewController {
     static let nibName = "DetailConditionSelectViewController"
     
     // TODO: Dependency Injection ( ViewModels )
-    static func createViewController(contentMode: ComponentStyle, title: String, maximumSelected: Int) -> DetailConditionSelectViewController {
+    static func createViewController(contentMode: ComponentStyle,
+                                     title: String,
+                                     dataSource: [[ConditionCellViewModel]],
+                                     maximumSelected: Int) -> DetailConditionSelectViewController {
         let vc = DetailConditionSelectViewController(nibName: nibName,
                                                      bundle: Bundle.main,
                                                      contentMode: contentMode,
+                                                     dataSource: dataSource,
                                                      maximuSelected: maximumSelected)
         vc.title = title
         return vc

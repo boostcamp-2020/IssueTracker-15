@@ -15,31 +15,11 @@ class IssueFilterViewController: UITableViewController {
         case detailCondition = 1
     }
     
-    // TODO: Condition/ DetailCondition To Filter Model Data
-    enum Condition: Int {
-        case issueOpened = 0
-        case issueFromMe = 1
-        case issueAssignedToMe = 2
-        case issueCommentedByMe = 3
-        case issueClosed = 4
-    }
-    
-    enum DetailCondition: Int {
-        case writer = 0
-        case label = 1
-        case milestone = 2
-        case assignee = 3
-    }
-    
+    weak var filterViewModel: IssueFilterViewModelProtocol?
     var selected = [Bool](repeating: false, count: 5)
     
-    // TODO: Dependency  FilterStatus, (IssueService, MilestoneService, LabelService, CommentService) for DetailCondition
-    // 이후에 적절한 Dependency를 받을 것! ( ex: milestoneProvider, labelProvider, userInfoProvider ...)
-    private weak var milestoneListViewModel: MilestoneListViewModelProtocol?
-    private weak var labelListViewModel: LabelListViewModelProtocol?
-    init?(coder: NSCoder, milestoneListViewModel: MilestoneListViewModelProtocol, labelListViewModel: LabelListViewModelProtocol) {
-        self.milestoneListViewModel = milestoneListViewModel
-        self.labelListViewModel = labelListViewModel
+    init?(coder: NSCoder, filterViewModel: IssueFilterViewModelProtocol) {
+        self.filterViewModel = filterViewModel
         super.init(coder: coder)
     }
     
@@ -65,10 +45,7 @@ class IssueFilterViewController: UITableViewController {
     }
     
     private func configureConditionCells() {
-        (0..<5).forEach {
-            guard let cell = self.tableView.cellForRow(at: IndexPath(row: $0, section: 0)) else { return }
-            cell.accessoryType = selected[$0] ? .checkmark : .none
-        }
+        
     }
     
 }
@@ -92,6 +69,43 @@ extension IssueFilterViewController {
 
 extension IssueFilterViewController {
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let sectionType = FilterSection(rawValue: indexPath.section) else { return }
+        
+        switch sectionType {
+        case .condition:
+            guard let type = Condition(rawValue: indexPath.row) else { return }
+            willDisplayConditionCell(at: type, cell: cell)
+        case .detailCondition:
+            guard let type = DetailCondition(rawValue: indexPath.row),
+                  let cell = cell as? DetailFilterCellView
+            else { return }
+            willDisplayDetailConditionCell(at: type, cell: cell)
+        }
+    }
+    
+    private func willDisplayConditionCell(at type: Condition, cell: UITableViewCell) {
+        guard let filterViewModel = filterViewModel else { return }
+        cell.accessoryType = filterViewModel.condition(of: type) ? .checkmark : .none
+    }
+    
+    private func willDisplayDetailConditionCell(at type: DetailCondition, cell: DetailFilterCellView) {
+        guard let filterViewModel = filterViewModel,
+              let cellViewModel = filterViewModel.detailCondition(of: type)
+        else { return }
+
+        let style: ComponentStyle
+        switch type {
+        case .assignee, .writer:
+            style = .userInfo
+        case .label:
+            style = .label
+        case .milestone:
+            style = .milestone
+        }
+        cell.configure(style: style, viewModel: cellViewModel)
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath),
             let sectionType = FilterSection(rawValue: indexPath.section)
@@ -99,44 +113,51 @@ extension IssueFilterViewController {
         
         switch  sectionType {
         case .condition:
-            conditionSelected(at: indexPath, cell: cell)
+            guard let condition = Condition(rawValue: indexPath.row) else { return }
+            conditionSelected(at: condition, cell: cell)
         case .detailCondition:
-            detailConditionSelected(at: indexPath, cell: cell)
+            guard let detailCondition = DetailCondition(rawValue: indexPath.row) else { return }
+            detailConditionSelected(at: detailCondition, cell: cell)
         }
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    private func conditionSelected(at indexPath: IndexPath, cell: UITableViewCell) {
-        let isSelected = selected[indexPath.row]
-        selected[indexPath.row] = !isSelected
-        cell.accessoryType = selected[indexPath.row] ? .checkmark : .none
+    private func conditionSelected(at type: Condition, cell: UITableViewCell) {
+        guard let filterViewModel = filterViewModel else { return }
+        filterViewModel.generalConditionSelected(at: type)
+        cell.accessoryType = filterViewModel.condition(of: type) ? .checkmark : .none
     }
     
-    private func detailConditionSelected(at indexPath: IndexPath, cell: UITableViewCell) {
-        guard let detailMode = DetailCondition(rawValue: indexPath.row),
-        let cell = cell as? DetailFilterCellView
-            else { return }
+    private func detailConditionSelected(at type: DetailCondition, cell: UITableViewCell) {
+        guard let cell = cell as? DetailFilterCellView,
+              let dataSource = filterViewModel?.detailConditionDataSource(of: type) else { return }
         
-        let type: ComponentStyle
+        // TODO: detail Condition Select ViewController 에서 사용할 모델 생각해보기
+        let componentStyle: ComponentStyle
         let title: String
-        switch detailMode {
+        switch type {
         case .assignee:
-            type = .userInfo
+            componentStyle = .userInfo
             title = "담당자"
         case .label:
-            type = .label
+            componentStyle = .label
             title = "레이블"
         case .milestone:
-            type = .milestone
+            componentStyle = .milestone
             title = "마일스톤"
         case .writer:
-            type = .userInfo
+            componentStyle = .userInfo
             title = "작성자"
         }
         
-        let vc = DetailConditionSelectViewController.createViewController(contentMode: type, title: title, maximumSelected: 1)
+        let vc = DetailConditionSelectViewController.createViewController(contentMode: componentStyle,
+                                                                          title: title,
+                                                                          dataSource: dataSource,
+                                                                          maximumSelected: 1)
+        
         vc.onSelectionComplete = { selected in
-            cell.configure(type: type, viewModel: selected[safe: 0])
+            self.filterViewModel?.detailConditionSelected(at: type, id: selected[safe: 0]?.id)
+            cell.configure(style: componentStyle, viewModel: selected[safe: 0])
         }
         present(vc, animated: true)
     }

@@ -31,7 +31,15 @@ class MainTabBarController: UITabBarController {
             let issueListViewController = navigationController.topViewController as? IssueListViewController {
             navigationController.navigationBar.scrollEdgeAppearance = commonAppearance
             
-            issueListViewController.issueListViewModel = IssueListViewModel(labelProvider: labelProvider, milestoneProvider: milestoneProvider, issueProvider: issueProvider)
+            let issueFilterViewModel = IssueFilterViewModel(labelProvider: labelProvider,
+                                                            milestoneProvider: milestoneProvider,
+                                                            issueProvider: issueProvider)
+            let issueListViewModel = IssueListViewModel(labelProvider: labelProvider,
+                                                        milestoneProvider: milestoneProvider,
+                                                        issueProvider: issueProvider)
+            
+            issueListViewModel.issueFilterViewModel = issueFilterViewModel
+            issueListViewController.issueListViewModel = issueListViewModel
         }
         // controllers[1] = LabelListViewController
         if let navigationController = self.viewControllers?[safe: 1] as? UINavigationController,

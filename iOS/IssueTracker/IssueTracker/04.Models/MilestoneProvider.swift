@@ -10,6 +10,8 @@ import Foundation
 import NetworkFramework
 
 protocol MilestoneProvidable: AnyObject {
+    var milestons: [Milestone] { get }
+    
     func addMilestone(title: String, dueDate: String, description: String, completion: @escaping (Milestone?) -> Void)
     func editMilestone(id: Int, title: String, dueDate: String, description: String, openIssuesLength: String, closeIssueLength: String, completion: @escaping (Milestone?) -> Void)
     func fetchMilestones(completion: @escaping ([Milestone]?) -> Void)
@@ -24,7 +26,7 @@ class MilestoneProvider: MilestoneProvidable {
     private var onFetching = false
     // Key, Value(CompletionFunc) 로 관리하고 처리 됬을 경우 삭제해주기!
     // 효율적인 key 관리 기법 생각해보기!
-    private var fetchingCompletionHandlers = [Int:([Milestone]?)->Void]()
+    private var fetchingCompletionHandlers = [Int: ([Milestone]?)->Void]()
     private(set) var milestons = [Milestone]()
     private weak var dataLoader: DataLoadable?
     
@@ -82,7 +84,7 @@ class MilestoneProvider: MilestoneProvidable {
     }
     
     func fetchMilestones(completion: @escaping ([Milestone]?) -> Void) {
-        if(onFetching) {
+        if onFetching {
             fetchingCompletionHandlers[fetchingCompletionHandlers.count] = completion
             return
         }

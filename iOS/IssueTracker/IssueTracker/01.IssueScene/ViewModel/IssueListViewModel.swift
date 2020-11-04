@@ -23,6 +23,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
     private weak var issueProvider: IssueProvidable?
     
     var didFetch: (() -> Void)?
+    var issueFilterViewModel: IssueFilterViewModelProtocol?
     private var issues = [IssueItemViewModel]()
     
     init(labelProvider: LabelProvidable, milestoneProvider: MilestoneProvidable, issueProvider: IssueProvidable) {
