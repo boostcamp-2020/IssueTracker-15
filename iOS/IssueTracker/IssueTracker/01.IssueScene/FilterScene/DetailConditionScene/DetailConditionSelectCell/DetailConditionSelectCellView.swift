@@ -63,7 +63,7 @@ class DetailConditionSelectCellView: UITableViewCell {
 
 extension DetailConditionSelectCellView: UITableViewRegisterable {
     static var cellIdentifier: String {
-        return "ConditionCellView"
+        return "DetailConditionSelectCellView"
     }
     
     static var cellNib: UINib {

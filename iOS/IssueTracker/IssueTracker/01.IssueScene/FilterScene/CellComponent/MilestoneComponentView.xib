@@ -11,29 +11,31 @@
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" customClass="MilestoneComponentView" customModule="IssueTracker" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="136" height="58"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbb-nl-cLY" userLabel="DueDate">
-                    <rect key="frame" x="0.0" y="34.5" width="42" height="17.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysZ-Mm-tNh" userLabel="milestoneBadge">
-                    <rect key="frame" x="0.0" y="5" width="42" height="29"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="unc-Yh-koE">
+                    <rect key="frame" x="0.0" y="4.5" width="42" height="49.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysZ-Mm-tNh" userLabel="milestoneBadge">
+                            <rect key="frame" x="0.0" y="0.0" width="42" height="26"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbb-nl-cLY" userLabel="DueDate">
+                            <rect key="frame" x="0.0" y="32" width="42" height="17.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="Dbb-nl-cLY" firstAttribute="leading" secondItem="ysZ-Mm-tNh" secondAttribute="leading" id="4rq-yf-Dni"/>
-                <constraint firstItem="ysZ-Mm-tNh" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="9ni-g1-3rR"/>
-                <constraint firstItem="ysZ-Mm-tNh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ElI-dX-XbB"/>
-                <constraint firstItem="Dbb-nl-cLY" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.3" id="IJ1-CA-nDk"/>
-                <constraint firstItem="ysZ-Mm-tNh" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.5" id="OEs-Pz-h80"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ysZ-Mm-tNh" secondAttribute="trailing" id="d72-lr-YuP"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Dbb-nl-cLY" secondAttribute="trailing" id="fjV-cB-kEj"/>
-                <constraint firstAttribute="bottom" secondItem="Dbb-nl-cLY" secondAttribute="bottom" constant="6" id="yUL-G2-JEW"/>
+                <constraint firstItem="unc-Yh-koE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="MJ9-nT-Dbs"/>
+                <constraint firstItem="Dbb-nl-cLY" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.3" id="TsY-8c-fZZ"/>
+                <constraint firstItem="unc-Yh-koE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="byU-DK-VWy"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="unc-Yh-koE" secondAttribute="trailing" id="i87-nV-Tbu"/>
+                <constraint firstItem="ysZ-Mm-tNh" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.45" id="t9d-fZ-fIc"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

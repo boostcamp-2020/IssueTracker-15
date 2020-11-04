@@ -40,7 +40,7 @@ class DetailFilterCellView: UITableViewCell {
         addSubview(component.contentView)
         NSLayoutConstraint.activate([
             component.contentView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            component.contentView.rightAnchor.constraint(equalTo: rightAnchor, constant: -40),
+            component.contentView.rightAnchor.constraint(equalTo: rightAnchor, constant: -50),
             component.contentView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])
     }

@@ -147,7 +147,7 @@ extension DetailConditionSelectViewController: UITableViewDataSource {
 
 extension DetailConditionSelectViewController {
     
-    static let nibName = "DetailFilterViewController"
+    static let nibName = "DetailConditionSelectViewController"
     
     // TODO: Dependency Injection ( ViewModels )
     static func createViewController(contentMode: ComponentStyle, title: String, maximumSelected: Int) -> DetailConditionSelectViewController {
