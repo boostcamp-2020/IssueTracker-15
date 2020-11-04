@@ -9,7 +9,7 @@
 import Foundation
 import NetworkFramework
 
-protocol MilestoneProvidable {
+protocol MilestoneProvidable: AnyObject {
     func addMilestone(title: String, dueDate: String, description: String, completion: @escaping (Milestone?) -> Void)
     func editMilestone(id: Int, title: String, dueDate: String, description: String, openIssuesLength: String, closeIssueLength: String, completion: @escaping (Milestone?) -> Void)
     func fetchMilestones(completion: @escaping ([Milestone]?) -> Void)

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import NetworkFramework
 
 protocol LabelListViewModelProtocol: AnyObject {
     var didFetch: (() -> Void)? { get set }
