@@ -13,14 +13,33 @@ protocol MilestoneProvidable: AnyObject {
     func addMilestone(title: String, dueDate: String, description: String, completion: @escaping (Milestone?) -> Void)
     func editMilestone(id: Int, title: String, dueDate: String, description: String, openIssuesLength: String, closeIssueLength: String, completion: @escaping (Milestone?) -> Void)
     func fetchMilestones(completion: @escaping ([Milestone]?) -> Void)
+    
+    func getMilestone(at id: Int, completion: @escaping (Milestone?) -> Void)
 }
 
 class MilestoneProvider: MilestoneProvidable {
     
+    private(set) var milestons = [Milestone]()
     private weak var dataLoader: DataLoadable?
     
     init(dataLoader: DataLoadable) {
         self.dataLoader = dataLoader
+    }
+    
+    func getMilestone(at id: Int, completion: @escaping (Milestone?) -> Void) {
+        if let idx = milestons.firstIndex(where: {$0.id == id}) {
+            completion(milestons[idx])
+            return
+        }
+        
+        // TODO : fetch 함수 분리하기
+        fetchMilestones { [weak self] _ in
+            if let mileston = self?.milestons.first(where: {$0.id == id}) {
+                completion(mileston)
+                return
+            }
+            completion(nil)
+        }
     }
     
     func addMilestone(title: String, dueDate: String, description: String, completion: @escaping (Milestone?) -> Void) {
@@ -62,6 +81,7 @@ class MilestoneProvider: MilestoneProvidable {
         dataLoader?.request([Milestone].self, endpoint: endPoint, completion: { (result) in
             switch result {
             case .success(let data):
+                if let data = data { self.milestons = data }
                 completion(data)
             case .failure:
                 completion(nil)

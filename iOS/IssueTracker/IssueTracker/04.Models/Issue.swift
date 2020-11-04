@@ -40,6 +40,20 @@ struct Issue {
         self.isOpened = true
     }
     
+    // TODO: mock init 삭제할 것!
+    init(id: Int, title: String, description: String, labels: [Int], milestone: Int? = nil) {
+        self.id = id
+        self.title = title
+        self.author = ""
+        self.milestone = milestone
+        self.description = description
+        self.createdAt = ""
+        self.updatedAt = ""
+        self.labels = labels
+        self.assignees = []
+        self.isOpened = true
+    }
+    
     init?(json: [String: Any]) {
         guard let id = json["id"] as? Int,
               let title = json["title"] as? String,

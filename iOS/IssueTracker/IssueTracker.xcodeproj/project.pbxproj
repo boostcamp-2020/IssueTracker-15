@@ -63,6 +63,7 @@
 		965A4DDE2552AFC300A4A7D7 /* IssueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A4DDD2552AFC300A4A7D7 /* IssueProvider.swift */; };
 		965A4DE62552BF1200A4A7D7 /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A4DE52552BF1200A4A7D7 /* IssueListViewModel.swift */; };
 		965A4DEB2552C28300A4A7D7 /* IssueItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A4DEA2552C28300A4A7D7 /* IssueItemViewModel.swift */; };
+		965A4DF02552CDA900A4A7D7 /* IssueEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A4DEF2552CDA900A4A7D7 /* IssueEndPoint.swift */; };
 		965F09712550299A00B3A248 /* JSONDecoder+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */; };
 		965F09742550425A00B3A248 /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09732550425A00B3A248 /* IssueFilterViewController.swift */; };
 		965F097D25505A1200B3A248 /* DetailConditionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F097B25505A1200B3A248 /* DetailConditionSelectViewController.swift */; };
@@ -208,6 +209,7 @@
 		965A4DDD2552AFC300A4A7D7 /* IssueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueProvider.swift; sourceTree = "<group>"; };
 		965A4DE52552BF1200A4A7D7 /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
 		965A4DEA2552C28300A4A7D7 /* IssueItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueItemViewModel.swift; sourceTree = "<group>"; };
+		965A4DEF2552CDA900A4A7D7 /* IssueEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueEndPoint.swift; sourceTree = "<group>"; };
 		965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Decode.swift"; sourceTree = "<group>"; };
 		965F09732550425A00B3A248 /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
 		965F097B25505A1200B3A248 /* DetailConditionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionSelectViewController.swift; sourceTree = "<group>"; };
@@ -378,6 +380,7 @@
 				956B5D0425503D20001CBAA9 /* MilestoneEndPoint.swift */,
 				956B5D0625503E8A001CBAA9 /* LabelEndPoint.swift */,
 				96AD640A2551579D00B16BD3 /* IssueTrackerEndPoint.swift */,
+				965A4DEF2552CDA900A4A7D7 /* IssueEndPoint.swift */,
 			);
 			path = 08.Endpoints;
 			sourceTree = "<group>";
@@ -1016,6 +1019,7 @@
 				9679DFB6254D767400550BE4 /* SubmitFormView.swift in Sources */,
 				95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */,
 				96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */,
+				965A4DF02552CDA900A4A7D7 /* IssueEndPoint.swift in Sources */,
 				956B5D0525503D20001CBAA9 /* MilestoneEndPoint.swift in Sources */,
 				966ADAE3254D8B0800A480DD /* SubmitFormView+LoadFromNib.swift in Sources */,
 				96AD640E2551636C00B16BD3 /* JSONEncoder+encode.swift in Sources */,

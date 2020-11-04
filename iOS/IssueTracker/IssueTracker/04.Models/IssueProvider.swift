@@ -26,7 +26,17 @@ protocol IssueProvidable: AnyObject {
 
 class IssueProvider: IssueProvidable {
     
-    private(set) var issues = [Issue]()
+    //private(set) var issues = [Issue]()
+    // mock data
+    private(set) var issues: [Issue] = [ // labels 9 ~ 17 milestone 19, 22, 23, 24, 25, 28, 36
+        Issue(id: 1, title: "이슈[1]", description: "ABCDEFGH", labels: [9], milestone: 19),
+        Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10], milestone: 22),
+        Issue(id: 3, title: "이슈[3]", description: "ABCDEFGH", labels: [11], milestone: 23),
+        Issue(id: 4, title: "이슈[4]", description: "ABCDEFGH", labels: [12], milestone: 24),
+        Issue(id: 5, title: "이슈[5]", description: "ABCDEFGH", labels: [13], milestone: 25),
+        Issue(id: 6, title: "이슈[6]", description: "ABCDEFGH", labels: [14], milestone: 28),
+        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36)
+    ]
     private weak var dataLoader: DataLoadable?
     
     init(dataLoader: DataLoadable) {

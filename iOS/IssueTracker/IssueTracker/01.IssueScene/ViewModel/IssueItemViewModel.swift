@@ -14,20 +14,32 @@ class IssueItemViewModel {
     let title: String
     let description: String
     
-    let milestoneTitle: String
-    let labelTitle: String
-    let labelColor: String
+    private(set) var milestoneTitle: String = ""
+    private(set) var labelTitle: String = ""
+    private(set) var labelColor: String = ""
+    
+    var didLabelChanged: ((String, String) -> Void)?
+    var didMilestoneChanged: ((String) -> Void)?
     
     var check: Bool = false
     
-    init(issue: Issue, label: Label? = nil, milestone: Milestone? = nil) {
+    init(issue: Issue) {
         id = issue.id
         title = issue.title
         description = issue.description
-        
-        milestoneTitle = milestone?.title ?? ""
-        labelTitle = label?.title ?? ""
-        labelColor = label?.hexColor ?? ""
+    }
+    
+    func setLabel(label: Label?) {
+        guard let label = label else { return }
+        labelTitle = label.title
+        labelColor = label.hexColor
+        didLabelChanged?(labelTitle, labelColor)
+    }
+    
+    func setMilestone(milestone: Milestone?) {
+        guard let milestone = milestone else { return }
+        milestoneTitle = milestone.title
+        didMilestoneChanged?(milestoneTitle)
     }
     
 }

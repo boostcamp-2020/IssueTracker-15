@@ -21,6 +21,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var bottomToolBar: UIToolbar!
     @IBOutlet weak var addIssueButton: UIButton!
     
+    var issueListViewModel: IssueListViewModel?
     private var viewingMode: ViewingMode = .general
 
     override func viewDidLoad() {
@@ -28,7 +29,17 @@ class IssueListViewController: UIViewController {
         title = "이슈"
         configureSearchBar()
         configureCollectionView()
+        configureIssueListViewModel()
         addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
+        
+        // TODO: viewModel 로직 분리할 것
+        issueListViewModel?.needFetchItems()
+    }
+    
+    private func configureIssueListViewModel() {
+        issueListViewModel?.didFetch = { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
     
     // TODO: SerachBar Configure
@@ -53,6 +64,7 @@ class IssueListViewController: UIViewController {
 }
 
 // MARK: - Actions
+
 extension IssueListViewController {
     
     @IBAction func rightNavButtonTapped(_ sender: Any) {
@@ -117,17 +129,19 @@ extension IssueListViewController {
 }
 
 // MARK: - UICollectionViewDataSource Implementation
+
 extension IssueListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return UICollectionViewCell() }
-        cellView.configure()
+        guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath),
+              let cellViewModel = issueListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
+        cellView.configure(issueItemViewModel: cellViewModel)
         cellView.showCheckBox(show: viewingMode == .edit, animation: false)
         return cellView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 11
+        return issueListViewModel?.numberOfItem() ?? 0
     }
     
 }

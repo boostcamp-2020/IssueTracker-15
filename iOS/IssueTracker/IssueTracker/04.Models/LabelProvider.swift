@@ -14,15 +14,33 @@ protocol LabelProvidable: AnyObject {
     func editLabel(id: Int, title: String, description: String, color: String, completion:  @escaping (Label?) -> Void)
     //func deleteLabel(id: Int, completion: (Bool)->Void)
     func fetchLabels(completion: @escaping ([Label]?) -> Void)
+    
+    func getLabel(at id: Int, completion: @escaping (Label?) -> Void)
 }
 
 class LabelProvider: LabelProvidable {
     
-    //private(set) var labels = [Label]()
+    private(set) var labels = [Label]()
     private weak var dataLoader: DataLoadable?
     
     init(dataLoader: DataLoadable) {
         self.dataLoader = dataLoader
+    }
+    
+    func getLabel(at id: Int, completion: @escaping (Label?) -> Void) {
+        if let idx = labels.firstIndex(where: {$0.id == id}) {
+            completion(labels[idx])
+            return
+        }
+        
+        // TODO : fetch 함수 분리하기
+        fetchLabels { [weak self] _ in
+            if let label = self?.labels.first(where: {$0.id == id}) {
+                completion(label)
+                return
+            }
+            completion(nil)
+        }
     }
     
     func addLabel(title: String, description: String, color: String, completion: @escaping (Label?) -> Void) {
@@ -62,6 +80,7 @@ class LabelProvider: LabelProvidable {
         dataLoader?.request([Label].self, endpoint: labelFetchEndPoint, completion: { (result) in
             switch result {
             case .success(let data):
+                if let data = data { self.labels = data }
                 completion(data)
             case .failure:
                 completion(nil)

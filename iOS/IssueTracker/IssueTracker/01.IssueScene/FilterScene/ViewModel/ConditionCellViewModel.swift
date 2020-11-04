@@ -24,7 +24,7 @@ struct ConditionCellViewModel {
     
     init(milestone: Milestone) {
         title = milestone.title
-        element = milestone.dueDate ?? ""
+        element = milestone.dueDate
     }
     
     // TODO:
