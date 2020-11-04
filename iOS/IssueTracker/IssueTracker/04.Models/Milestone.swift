@@ -12,8 +12,8 @@ struct Milestone: Codable {
     let id: Int
     let title: String
     let description: String
-    let openIssuesLength: String
-    let closeIssueLength: String
+    var openedIssueNum: String
+    var closedIssueNum: String
     let dueDate: String
     
     init(id: Int, title: String, description: String, dueDate: String, openIssuesLength: String, closeIssueLength: String) {
@@ -21,12 +21,17 @@ struct Milestone: Codable {
         self.title = title
         self.description = description
         self.dueDate = dueDate
-        self.openIssuesLength = openIssuesLength
-        self.closeIssueLength = closeIssueLength
+        self.openedIssueNum = openIssuesLength
+        self.closedIssueNum = closeIssueLength
     }
     
-    init(id: Int, title: String, description: String, dueDate: String) {
-        self.init(id: id, title: title, description: description, dueDate: dueDate, openIssuesLength: "0", closeIssueLength: "0")
+    init(title: String, description: String, dueDate: String) {
+        self.id = -1
+        self.title = title
+        self.description = description
+        self.dueDate = dueDate
+        self.openedIssueNum = "0"
+        self.closedIssueNum = "0"
     }
     
     init(from decoder: Decoder) throws {
@@ -34,8 +39,8 @@ struct Milestone: Codable {
         id = try container.decode(Int.self, forKey: .id)
         title = try container.decode(String.self, forKey: .title)
         description = try container.decode(String.self, forKey: .description)
-        openIssuesLength = try container.decode(String.self, forKey: .openIssueLength)
-        closeIssueLength = try container.decode(String.self, forKey: .closeIssueLength)
+        openedIssueNum = try container.decode(String.self, forKey: .openedIssueNum)
+        closedIssueNum = try container.decode(String.self, forKey: .closedIssueNum)
         dueDate = try container.decode(String.self, forKey: .dueDate)
     }
     
@@ -52,12 +57,12 @@ struct Milestone: Codable {
         case description
     }
     
-    enum DeCodingKeys: String, CodingKey {
+    enum DeCodingKeys: CodingKey {
         case id
         case title
         case description
-        case openIssueLength = "OpenIssuesLength"
-        case closeIssueLength = "CloseIssuesLength"
+        case openedIssueNum
+        case closedIssueNum
         case dueDate
     }
 }

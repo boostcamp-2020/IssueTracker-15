@@ -21,6 +21,13 @@ struct Label: Codable {
         self.hexColor = hexColor
     }
     
+    init(id: Int, title: String, description: String, hexColor: String) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.hexColor = hexColor
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DeCodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)

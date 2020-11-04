@@ -10,6 +10,11 @@ import UIKit
 
 class LabelSubmitFieldsView: UIStackView {
     
+    enum SubmitFieldType {
+        case add
+        case edit(IndexPath)
+    }
+    
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descTextField: UITextField!
     @IBOutlet weak var colorTextField: UITextField!
@@ -30,12 +35,21 @@ class LabelSubmitFieldsView: UIStackView {
         colorView.layer.backgroundColor = colorTextField.text?.color
         colorTextField.addTarget(self, action: #selector(colorFieldOnEditing), for: .editingChanged)
     }
+  
+    private func getRandomGeneratedString() -> String {
+        let letters = "ABCDEF0123456789"
+        return String((1...6).map { _ in letters.randomElement()! })
+    }
+}
+
+// MARK: - Action
+
+extension LabelSubmitFieldsView {
     
     @IBAction func refreshColorButtonTapped(_ sender: Any) {
-        titleTextField.text = ""
-        descTextField.text = ""
-        colorTextField.text = defaultColorCode
-        colorView.layer.backgroundColor = defaultColorCode.color
+        let newHexColorCode: String = "#" + getRandomGeneratedString()
+        colorTextField.text = newHexColorCode
+        colorView.layer.backgroundColor = colorTextField.text?.color
     }
     
     @objc func colorFieldOnEditing() {
@@ -43,6 +57,8 @@ class LabelSubmitFieldsView: UIStackView {
     }
     
 }
+
+// MARK: - SubmitFieldProtocol Implementation
 
 extension LabelSubmitFieldsView: SubmitFieldProtocol {
     

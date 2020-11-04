@@ -16,7 +16,7 @@ class MilestoneConditionCellView: ConditionCellView {
     override func configure(viewModel: ConditionCellViewModel) {
         super.configure(viewModel: viewModel)
         milestoneLabel.text = viewModel.title
-        if let date = viewModel.element.dateForMilestoneViewModel {
+        if let date = viewModel.element.datdForServer {
             dueDateLabel.text = "Due by " + date.stringForConditionCell
             if date < Date() {
                 dueDateLabel.textColor = .red

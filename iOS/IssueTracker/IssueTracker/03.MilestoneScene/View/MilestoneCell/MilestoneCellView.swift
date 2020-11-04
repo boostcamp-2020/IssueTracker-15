@@ -17,18 +17,11 @@ class MilestoneCellView: UICollectionViewCell {
     @IBOutlet weak var openedIssueLabel: UILabel!
     @IBOutlet weak var closedIssueLabel: UILabel!
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        descriptionLabel.autoResizeFontWithHeight()
-        dateLabel.autoResizeFontWithHeight()
-        openedIssueLabel.autoResizeFontWithHeight()
-        closedIssueLabel.autoResizeFontWithHeight()
-    }
-    
     func configure(with currentItem: MilestoneItemViewModel) {
         configureTitle(text: currentItem.title)
         configureDescription(with: currentItem.description)
         configureDate(with: currentItem.dueDateText)
+        configurePercentage(with: currentItem.percentage)
         configureOpenedIssue(with: currentItem.openIssue)
         configureCloseddIssue(with: currentItem.closedIssue)
     }
@@ -48,6 +41,10 @@ class MilestoneCellView: UICollectionViewCell {
         dateLabel.text = date
     }
     
+    private func configurePercentage(with percentage: String) {
+        percentageLabel.text = percentage
+    }
+    
     private func configureOpenedIssue(with openedIssue: String) {
         openedIssueLabel.text = openedIssue
     }
@@ -55,7 +52,18 @@ class MilestoneCellView: UICollectionViewCell {
     private func configureCloseddIssue(with closedIssue: String) {
         closedIssueLabel.text = closedIssue
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        descriptionLabel.autoResizeFontWithHeight()
+        dateLabel.autoResizeFontWithHeight()
+        openedIssueLabel.autoResizeFontWithHeight()
+        closedIssueLabel.autoResizeFontWithHeight()
+    }
+    
 }
+
+// MAKR: - UICollectionViewRegisterable Implementation
 
 extension MilestoneCellView: UICollectionViewRegisterable {
     static var cellIdentifier: String {
