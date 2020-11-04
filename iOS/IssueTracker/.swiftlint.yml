@@ -7,6 +7,8 @@ excluded:
 disabled_rules:
 - trailing_whitespace
 - identifier_name
+- todo
+- function_parameter_count
 
 force_cast: warning
 line_length: 250
