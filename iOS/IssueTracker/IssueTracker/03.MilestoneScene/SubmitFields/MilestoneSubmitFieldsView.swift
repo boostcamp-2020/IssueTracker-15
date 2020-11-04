@@ -9,6 +9,12 @@
 import UIKit
 
 class MilestoneSubmitFieldsView: UIStackView {
+    
+    enum SubmitFieldType {
+        case add
+        case edit(IndexPath)
+    }
+    
     @IBOutlet weak var dueDateLabel: UILabel!
     @IBOutlet weak var titleTextFieldView: UITextField!
     @IBOutlet weak var dueDateTextFieldView: UITextField!
@@ -24,7 +30,17 @@ class MilestoneSubmitFieldsView: UIStackView {
         }
         dueDateTextFieldView.addTarget(self, action: #selector(dateFieldOnEditing), for: .editingChanged)
     }
+    
+}
 
+// MARK: - Action
+
+extension MilestoneSubmitFieldsView {
+    
+    @objc func dateFieldOnEditing() {
+        dueDateLabel.textColor = checkDateFieldValidation() ? .black : .red
+    }
+    
     private func checkDateFieldValidation() -> Bool {
         guard let text = dueDateTextFieldView.text, !text.isEmpty else {
             dueDateLabel.textColor = .black
@@ -33,11 +49,9 @@ class MilestoneSubmitFieldsView: UIStackView {
         return text.contains(of: String.RegexPattern.milestoneFormDate)
     }
     
-    @objc func dateFieldOnEditing() {
-        dueDateLabel.textColor = checkDateFieldValidation() ? .black : .red
-    }
-    
 }
+
+// MARK: - SubmitFieldProtocol Implementation
 
 extension MilestoneSubmitFieldsView: SubmitFieldProtocol {
     

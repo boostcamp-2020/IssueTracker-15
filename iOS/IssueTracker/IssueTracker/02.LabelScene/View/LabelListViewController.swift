@@ -28,10 +28,9 @@ class LabelListViewController: UIViewController {
     
     private func configureCollectionView() {
         setupCollectionViewLayout()
-        collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.register(type: LabelCellView.self)
-        HeaderView.register(in: collectionView)
     }
     
     private func setupCollectionViewLayout() {
@@ -42,11 +41,17 @@ class LabelListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
-    @IBAction func plusButtonTapped(_ sender: Any) {
-        showSubmitFormView()
-    }
+}
 
-    private func showSubmitFormView(indexPath: IndexPath? = nil) {
+// MARK: - Action
+
+extension LabelListViewController {
+    
+    @IBAction func plusButtonTapped(_ sender: Any) {
+        showSubmitFormView(type: .add)
+    }
+    
+    private func showSubmitFormView(type: LabelSubmitFieldsView.SubmitFieldType) {
         guard let tabBarController = self.tabBarController,
             let formView = SubmitFormView.createView(),
             let labelSubmitFieldsView = LabelSubmitFieldsView.createView()
@@ -54,13 +59,14 @@ class LabelListViewController: UIViewController {
         
         formView.configure(submitField: labelSubmitFieldsView)
         
-        if let indexPath = indexPath {
+        switch type {
+        case .add:
+            labelSubmitFieldsView.onSaveButtonTapped = labelListViewModel?.addNewLabel
+        case .edit(let indexPath):
             labelSubmitFieldsView.configure(labelViewModel: labelListViewModel?.cellForItemAt(path: indexPath))
             labelSubmitFieldsView.onSaveButtonTapped = { (title, desc, colorCode) in
                 self.labelListViewModel?.editLabel(at: indexPath, title: title, desc: desc, hexColor: colorCode)
             }
-        } else {
-            labelSubmitFieldsView.onSaveButtonTapped = labelListViewModel?.addNewLabel
         }
         
         tabBarController.view.addSubview(formView)
@@ -69,7 +75,20 @@ class LabelListViewController: UIViewController {
     
 }
 
-extension LabelListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+// MARK: - UICollectionViewDelegate Implementation
+
+extension LabelListViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showSubmitFormView(type: .edit(indexPath))
+    }
+    
+}
+
+// MARK: - UICollectionViewDataSource Implementation
+
+extension LabelListViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return labelListViewModel?.numberOfItem() ?? 0
     }
@@ -78,12 +97,7 @@ extension LabelListViewController: UICollectionViewDataSource, UICollectionViewD
         guard let cell: LabelCellView = collectionView.dequeueCell(at: indexPath),
             let cellViewModel = labelListViewModel?.cellForItemAt(path: indexPath)
             else { return UICollectionViewCell() }
-        
         cell.configure(with: cellViewModel)
-        cell.nextButtonTapped = { [weak self] in
-            self?.showSubmitFormView(indexPath: indexPath)
-        }
-        
         return cell
     }
     
