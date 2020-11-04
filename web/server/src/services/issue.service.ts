@@ -3,6 +3,10 @@ import AssigneesEntity from "../entity/assignees.entity";
 import IssueHasLabelEntity from "../entity/issue-label.entity";
 import IssueEntity from "../entity/issue.entity";
 import {
+  makeIssuesTemplate,
+  makeIssueTemplate,
+} from "../lib/make-issue-template";
+import {
   CreateIssue,
   UpdateIssueContent,
   UpdateIssueTitle,
@@ -17,11 +21,55 @@ const IssueService = {
     return newIssue;
   },
 
-  getIssues: async () => {
+  getIssues: async (isOpened: boolean) => {
     const issueRepository = getRepository(IssueEntity);
-    const issues: IssueEntity[] = await issueRepository.find();
+    const issueList: IssueEntity[] = await issueRepository
+      .createQueryBuilder("Issue")
+      .leftJoin("Issue.milestone", "Milestone")
+      .innerJoin("Issue.author", "User")
+      .where("Issue.isOpened = :isOpened", { isOpened })
+      .select([
+        "Issue.id",
+        "Issue.title",
+        "Issue.createAt",
+        "Issue.updateAt",
+        "Issue.isOpened",
+        "Issue.milestoneId",
+        "User.userName",
+        "Milestone.title",
+      ])
+      .getMany();
+
+    const issues = await makeIssuesTemplate(issueList);
 
     return issues;
+  },
+
+  getDetailIssueById: async (issueId: number) => {
+    const issueRepository = getRepository(IssueEntity);
+    const issue = (await issueRepository
+      .createQueryBuilder("Issue")
+      .leftJoin("Issue.milestone", "Milestone")
+      .innerJoin("Issue.author", "User")
+      .where("Issue.id = :issueId", { issueId })
+      .select([
+        "Issue.id",
+        "Issue.title",
+        "Issue.description",
+        "Issue.createAt",
+        "Issue.updateAt",
+        "Issue.isOpened",
+        "Issue.milestoneId",
+        "User.userName",
+        "Milestone.title",
+      ])
+      .getOne()) as IssueEntity;
+
+    if (!issue) throw new Error("issue does not exists");
+
+    const detailIssue = await makeIssueTemplate(issue);
+
+    return detailIssue;
   },
 
   getIssuesByCount: async (count: number) => {
@@ -45,10 +93,6 @@ const IssueService = {
 
     const issueCount = { ...openedIssueCount[0], ...closedIssueCount[0] };
     return issueCount;
-  },
-
-  getDetailIssueById: async (issueId: number) => {
-    const issueRepository = getRepository(IssueEntity);
   },
 
   getIssueById: async (issueId: number) => {

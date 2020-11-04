@@ -1,7 +1,7 @@
-import { getRepository } from 'typeorm';
-import Encryption from '../lib/encryption';
-import UserEntity from '../entity/user.entity';
-import { SignUpInput } from '../types/sign-up.type';
+import { getRepository } from "typeorm";
+import Encryption from "../lib/encryption";
+import UserEntity from "../entity/user.entity";
+import { SignUpInput } from "../types/sign-up.type";
 
 const UserService = {
   create: async (
@@ -21,6 +21,18 @@ const UserService = {
     });
     const newUser: UserEntity = await userRepository.save(user);
     return newUser;
+  },
+
+  getAssigneeList: async (issueId: number) => {
+    const userRepository = getRepository(UserEntity);
+    const assignees = await userRepository
+      .createQueryBuilder("User")
+      .innerJoin("User.assignees", "Assignees")
+      .select(["User.userName", "User.imageURL"])
+      .where("Assignees.issueId = :issueId", { issueId })
+      .getMany();
+
+    return assignees;
   },
 };
 

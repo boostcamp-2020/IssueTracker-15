@@ -1,6 +1,7 @@
-import { getRepository } from 'typeorm';
-import { Label, LabelUpdateToFix } from '../types/label.type';
-import LabelEntity from '../entity/label.entity';
+import { getRepository } from "typeorm";
+import { Label, LabelUpdateToFix } from "../types/label.type";
+import LabelEntity from "../entity/label.entity";
+import IssueHasLabelEntity from "../entity/issue-label.entity";
 
 const LabelService = {
   create: async (labelData: Label): Promise<LabelEntity> => {
@@ -25,9 +26,19 @@ const LabelService = {
     return labels;
   },
 
+  getLabelsByIssueId: async (issueId: number) => {
+    const issueHasLabelRepository = getRepository(IssueHasLabelEntity);
+    const labels = await issueHasLabelRepository
+      .createQueryBuilder("IssueHasLabel")
+      .innerJoinAndSelect("IssueHasLabel.label", "Label")
+      .where("IssueHasLabel.issueId = :issueId", { issueId })
+      .getMany();
+    return labels;
+  },
+
   delete: async (id: number): Promise<void> => {
     const label = await LabelService.getLabel(id);
-    if (!label) throw new Error('label does not exist');
+    if (!label) throw new Error("label does not exist");
 
     const labelRepository = getRepository(LabelEntity);
     await labelRepository.delete({ id });
@@ -37,7 +48,7 @@ const LabelService = {
     const labelRepository = getRepository(LabelEntity);
     const label = await LabelService.getLabel(id);
 
-    if (!label) throw new Error('label does not exist');
+    if (!label) throw new Error("label does not exist");
 
     await labelRepository.update(label, body);
   },
