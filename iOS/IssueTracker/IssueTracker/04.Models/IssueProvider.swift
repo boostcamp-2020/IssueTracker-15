@@ -28,6 +28,8 @@ class IssueProvider: IssueProvidable {
     
     //private(set) var issues = [Issue]()
     // mock data
+    // TODO: 같은 Fetch 요청이 여러번 들어왔을 겨우 completion을 배열에 넣어두었다 한 패칭에 Completion을 모두 처리해주는 방식으로!
+    private var onFetching: Bool = false
     private(set) var issues: [Issue] = [ // labels 9 ~ 17 milestone 19, 22, 23, 24, 25, 28, 36
         Issue(id: 1, title: "이슈[1]", description: "ABCDEFGH", labels: [9], milestone: 19),
         Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10], milestone: 22),
@@ -44,7 +46,11 @@ class IssueProvider: IssueProvidable {
     }
     
     func fetchIssues(completion: @escaping ([Issue]?) -> Void) {
+        onFetching = true
+        
         completion(issues)
+        
+        onFetching = false
     }
     
     func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion: @escaping (Issue?) -> Void) {
