@@ -20,16 +20,12 @@ class DetailConditionSelectViewController: UIViewController {
     // TODO: Dummy Data to ViewModelProtocol
     private var viewModelDataSource: [[ConditionCellViewModel]] = [ [],
                                                                     [
-                                                                        ConditionCellViewModel(title: "마일스톤 1", element: "2020-10-11 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마 2", element: "2020-11-11 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마일일일스톤 3", element: "2020-12-11 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마일아아아kkk스톤 4", element: "2020-09-11 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마일스톤 5", element: "2020-08-11 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마일스톤 6", element: "2019-01-30 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마일스톤 7", element: "2018-02-21 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마일스톤 8", element: "2020-03-06 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마일스톤 1", element: "2021-12-22 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마일스톤 1", element: "2017-06-03 00:00:00")
+                                                                        ConditionCellViewModel(title: "마일스톤 5", element: "2020-08-11T00:00:00.000Z"),
+                                                                        ConditionCellViewModel(title: "마일스톤 6", element: "2020-08-11T00:00:00.000Z"),
+                                                                        ConditionCellViewModel(title: "마일스톤 7", element: "2020-08-11T00:00:00.000Z"),
+                                                                        ConditionCellViewModel(title: "마일스톤 8", element: "2020-08-11T00:00:00.000Z"),
+                                                                        ConditionCellViewModel(title: "마일스톤 1", element: "2020-08-11T00:00:00.000Z"),
+                                                                        ConditionCellViewModel(title: "마일스톤 1", element: "2020-08-11T00:00:00.000Z")
         ]
     ]
     
