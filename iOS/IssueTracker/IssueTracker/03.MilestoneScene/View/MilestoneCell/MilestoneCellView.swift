@@ -21,6 +21,7 @@ class MilestoneCellView: UICollectionViewCell {
         configureTitle(text: currentItem.title)
         configureDescription(with: currentItem.description)
         configureDate(with: currentItem.dueDateText)
+        configurePercentage(with: currentItem.percentage)
         configureOpenedIssue(with: currentItem.openIssue)
         configureCloseddIssue(with: currentItem.closedIssue)
     }
@@ -38,6 +39,10 @@ class MilestoneCellView: UICollectionViewCell {
     
     private func configureDate(with date: String) {
         dateLabel.text = date
+    }
+    
+    private func configurePercentage(with percentage: String) {
+        percentageLabel.text = percentage
     }
     
     private func configureOpenedIssue(with openedIssue: String) {
