@@ -9,6 +9,9 @@
 import Foundation
 
 protocol IssueFilterViewModelProtocol: AnyObject {
+    var generalConditions: [Bool] { get }
+    var detailConditions: [Int] { get }
+    
     func generalConditionSelected(at type: Condition)
     func detailConditionSelected(at type: DetailCondition, id: Int?)
     func condition(of type: Condition) -> Bool
@@ -31,11 +34,16 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
         ConditionCellViewModel(title: "maong0927", element: "2020-08-11T00:00:00.000Z")
        ]
     
-    private(set) var generalConditions = [Bool](repeating: false, count: Condition.allCases.count)
-    // [id] -> [-1] = all
-    private(set) var detailConditions = [Int](repeating: -1, count: DetailCondition.allCases.count)
+    private(set) var generalConditions: [Bool]
+    private(set) var detailConditions: [Int]
     
-    init(labelProvider: LabelProvidable, milestoneProvider: MilestoneProvidable, issueProvider: IssueProvidable) {
+    init(labelProvider: LabelProvidable?,
+         milestoneProvider: MilestoneProvidable?,
+         issueProvider: IssueProvidable?,
+         generalConditions: [Bool],
+         detailConditions: [Int] ) {
+        self.generalConditions = generalConditions
+        self.detailConditions = detailConditions
         self.labelProvider = labelProvider
         self.milestoneProvider = milestoneProvider
         self.issueProvider = issueProvider

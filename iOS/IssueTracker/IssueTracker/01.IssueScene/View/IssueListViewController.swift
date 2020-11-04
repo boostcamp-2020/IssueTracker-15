@@ -86,14 +86,6 @@ extension IssueListViewController {
         }
     }
     
-    @IBSegueAction func createIssueFilterViewController(_ coder: NSCoder) -> IssueFilterViewController? {
-        guard viewingMode == .general,
-              let filterViewModel  = issueListViewModel?.issueFilterViewModel
-        else { return nil }
-        let vc = IssueFilterViewController(coder: coder, filterViewModel: filterViewModel)
-        return vc
-    }
-    
     @IBAction func closeAllSelectedIssueButtonTapped(_ sender: Any) {
     
     }
@@ -122,11 +114,32 @@ extension IssueListViewController {
         }
     }
 
+}
+
+// MARK: - Segue Action
+
+extension IssueListViewController {
+    
+    @IBSegueAction func createIssueFilterViewController(_ coder: NSCoder) -> IssueFilterViewController? {
+        guard viewingMode == .general,
+              let issueListViewModel  = issueListViewModel,
+            let filterViewModel = issueListViewModel.filterViewModel
+        else { return nil }
+        let vc = IssueFilterViewController(coder: coder, filterViewModel: filterViewModel)
+        vc?.onSelectionComplete = { (filterViewModel) in
+            let filter = IssueFilter(generalCondition: filterViewModel.generalConditions,
+                                     detailCondition: filterViewModel.detailConditions)
+            issueListViewModel.filter = filter
+        }
+        return vc
+    }
+    
     @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
         let addIssueViewController = AddNewIssueViewController(coder: coder)
         // addIssueVC의 doneButtonTapped 주입
         return addIssueViewController
     }
+    
 }
 
 // MARK: - UICollectionViewDataSource Implementation

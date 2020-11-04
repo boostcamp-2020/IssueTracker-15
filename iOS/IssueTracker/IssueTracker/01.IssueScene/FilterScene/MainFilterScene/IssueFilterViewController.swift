@@ -15,8 +15,8 @@ class IssueFilterViewController: UITableViewController {
         case detailCondition = 1
     }
     
-    weak var filterViewModel: IssueFilterViewModelProtocol?
-    var selected = [Bool](repeating: false, count: 5)
+    var onSelectionComplete: ((IssueFilterViewModelProtocol) -> Void)?
+    var filterViewModel: IssueFilterViewModelProtocol?
     
     init?(coder: NSCoder, filterViewModel: IssueFilterViewModelProtocol) {
         self.filterViewModel = filterViewModel
@@ -29,7 +29,6 @@ class IssueFilterViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //title = "필터 선택"
         configure()
     }
     
@@ -44,10 +43,6 @@ class IssueFilterViewController: UITableViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
-    private func configureConditionCells() {
-        
-    }
-    
 }
 
 // MARK: - Action
@@ -59,8 +54,10 @@ extension IssueFilterViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        // TODO: delegate or closure를 통해 filter 내용 전달
         dismiss(animated: true, completion: nil)
+        if let filterViewModel = filterViewModel {
+            onSelectionComplete?(filterViewModel)
+        }
     }
     
 }
@@ -71,7 +68,6 @@ extension IssueFilterViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let sectionType = FilterSection(rawValue: indexPath.section) else { return }
-        
         switch sectionType {
         case .condition:
             guard let type = Condition(rawValue: indexPath.row) else { return }
@@ -82,18 +78,6 @@ extension IssueFilterViewController {
             else { return }
             willDisplayDetailConditionCell(at: type, cell: cell)
         }
-    }
-    
-    private func willDisplayConditionCell(at type: Condition, cell: UITableViewCell) {
-        guard let filterViewModel = filterViewModel else { return }
-        cell.accessoryType = filterViewModel.condition(of: type) ? .checkmark : .none
-    }
-    
-    private func willDisplayDetailConditionCell(at type: DetailCondition, cell: DetailFilterCellView) {
-        guard let filterViewModel = filterViewModel,
-              let cellViewModel = filterViewModel.detailCondition(of: type)
-        else { return }
-        cell.configure(style: type.cellStyle, viewModel: cellViewModel)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -110,6 +94,24 @@ extension IssueFilterViewController {
             detailConditionSelected(at: detailCondition, cell: cell)
         }
         tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+}
+
+// MARK: - TableView Private Functions
+
+extension IssueFilterViewController {
+    
+    private func willDisplayConditionCell(at type: Condition, cell: UITableViewCell) {
+        guard let filterViewModel = filterViewModel else { return }
+        cell.accessoryType = filterViewModel.condition(of: type) ? .checkmark : .none
+    }
+    
+    private func willDisplayDetailConditionCell(at type: DetailCondition, cell: DetailFilterCellView) {
+        guard let filterViewModel = filterViewModel,
+              let cellViewModel = filterViewModel.detailCondition(of: type)
+        else { return }
+        cell.configure(style: type.cellStyle, viewModel: cellViewModel)
     }
     
     private func conditionSelected(at type: Condition, cell: UITableViewCell) {

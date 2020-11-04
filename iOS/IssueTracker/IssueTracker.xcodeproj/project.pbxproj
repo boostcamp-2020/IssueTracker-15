@@ -39,6 +39,7 @@
 		95E9F5932546EC0C001FBA0D /* LabelModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */; };
 		960205612553140500888394 /* DetailConditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960205602553140500888394 /* DetailConditionViewModel.swift */; };
 		9602056325531E1B00888394 /* FilterConditionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9602056225531E1B00888394 /* FilterConditionType.swift */; };
+		960205652553259D00888394 /* IssueFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960205642553259D00888394 /* IssueFilter.swift */; };
 		9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9613C12D2547B265005EF13C /* .swiftlint.yml */; };
 		9627A5A825506985000BFF4D /* UITableView+Registerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5A725506985000BFF4D /* UITableView+Registerable.swift */; };
 		9627A5AC255087FF000BFF4D /* DetailConditionSelectCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5AB255087FF000BFF4D /* DetailConditionSelectCellView.swift */; };
@@ -196,6 +197,7 @@
 		95E9F5942546EC0C001FBA0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		960205602553140500888394 /* DetailConditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionViewModel.swift; sourceTree = "<group>"; };
 		9602056225531E1B00888394 /* FilterConditionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConditionType.swift; sourceTree = "<group>"; };
+		960205642553259D00888394 /* IssueFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilter.swift; sourceTree = "<group>"; };
 		9613C12D2547B265005EF13C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9627A5A725506985000BFF4D /* UITableView+Registerable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Registerable.swift"; sourceTree = "<group>"; };
 		9627A5AB255087FF000BFF4D /* DetailConditionSelectCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionSelectCellView.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 				96AD640F255164A100B16BD3 /* MilestoneProvider.swift */,
 				96F95BFB254E6E4C00EC00C6 /* Issue.swift */,
 				965A4DDD2552AFC300A4A7D7 /* IssueProvider.swift */,
+				960205642553259D00888394 /* IssueFilter.swift */,
 			);
 			path = 04.Models;
 			sourceTree = "<group>";
@@ -1058,6 +1061,7 @@
 				9670B37F2549E9E10026B0C9 /* MainTabBarController.swift in Sources */,
 				956B5D0725503E8A001CBAA9 /* LabelEndPoint.swift in Sources */,
 				95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */,
+				960205652553259D00888394 /* IssueFilter.swift in Sources */,
 				9679DFBD254D78D000550BE4 /* SubmitFieldProtocol.swift in Sources */,
 				965A4DEB2552C28300A4A7D7 /* IssueItemViewModel.swift in Sources */,
 				96F95BFA254E6C4A00EC00C6 /* IssueListViewController.swift in Sources */,

@@ -9,11 +9,13 @@
 import Foundation
 
 protocol IssueListViewModelProtocol: AnyObject {
+    var filterViewModel: IssueFilterViewModelProtocol? { get }
     var didFetch: (() -> Void)? { get set }
+    var filter: IssueFilterable? { get set }
+    
     func needFetchItems()
     func cellForItemAt(path: IndexPath) -> IssueItemViewModel
     func numberOfItem() -> Int
-    
 }
 
 class IssueListViewModel: IssueListViewModelProtocol {
@@ -22,8 +24,8 @@ class IssueListViewModel: IssueListViewModelProtocol {
     private weak var milestoneProvider: MilestoneProvidable?
     private weak var issueProvider: IssueProvidable?
     
+    var filter: IssueFilterable?
     var didFetch: (() -> Void)?
-    var issueFilterViewModel: IssueFilterViewModelProtocol?
     private var issues = [IssueItemViewModel]()
     
     init(labelProvider: LabelProvidable, milestoneProvider: MilestoneProvidable, issueProvider: IssueProvidable) {
@@ -31,7 +33,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
         self.milestoneProvider = milestoneProvider
         self.issueProvider = issueProvider
     }
-       
+    
     func needFetchItems() {
         issueProvider?.fetchIssues(completion: { [weak self] (datas) in
             guard let `self` = self,
@@ -65,6 +67,18 @@ class IssueListViewModel: IssueListViewModelProtocol {
     
     func numberOfItem() -> Int {
         return issues.count
+    }
+    
+    var filterViewModel: IssueFilterViewModelProtocol? {
+        let generalConditions = filter?.generalConditions ?? [Bool](repeating: false, count: Condition.allCases.count)
+        let detailConditions = filter?.detailConditions ?? [Int](repeating: -1, count: DetailCondition.allCases.count)
+        let viewModel = IssueFilterViewModel(labelProvider: labelProvider,
+                                             milestoneProvider: milestoneProvider,
+                                             issueProvider: issueProvider,
+                                             generalConditions: generalConditions,
+                                             detailConditions: detailConditions)
+        
+        return viewModel
     }
     
 }
