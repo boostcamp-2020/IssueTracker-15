@@ -10,17 +10,12 @@ import UIKit
 
 class DetailFilterViewController: UIViewController {
     
-    enum ContentMode {
-        case userInfo
-        case milestone
-        case label
-    }
-    
     @IBOutlet weak var titleNavItem: UINavigationItem!
     
     // TODO: Dependency Injection for ContentMode
-    private var contentMode: ContentMode
+    private var contentMode: ComponentStyle
     private var maximumNumSelected: Int
+    var onSelectionComplete: (([ConditionCellViewModel]) -> Void)?
     
     // TODO: Dummy Data to ViewModelProtocol
     private var viewModelDataSource: [[ConditionCellViewModel]] = [ [],
@@ -42,7 +37,7 @@ class DetailFilterViewController: UIViewController {
     
     init(nibName: String,
          bundle: Bundle?,
-         contentMode: ContentMode, maximuSelected: Int) {
+         contentMode: ComponentStyle, maximuSelected: Int) {
         self.contentMode = contentMode
         self.maximumNumSelected = maximuSelected
         super.init(nibName: nibName, bundle: bundle)
@@ -80,6 +75,7 @@ extension DetailFilterViewController {
     @IBAction func doneButtonTapped(_ sender: Any) {
         // TODO: 선택된 항목 delegate or closure를 통해 반환
         dismiss(animated: true, completion: nil)
+        onSelectionComplete?(viewModelDataSource[0])
     }
     
 }
@@ -142,23 +138,23 @@ extension DetailFilterViewController: UITableViewDataSource {
         else { return UITableViewCell() }
         cell.configure(type: contentMode, viewModel: cellViewModel)
         cell.setCheck(indexPath.section == 0)
-        return cell ?? UITableViewCell()
+        return cell
     }
     
 }
 
-// MARK: - LoadFromNib
+// MARK: - Load From Nib
 
 extension DetailFilterViewController {
     
     static let nibName = "DetailFilterViewController"
     
     // TODO: Dependency Injection ( ViewModels )
-    static func createViewController(contentMode: ContentMode, title: String, maximumSelected: Int) -> DetailFilterViewController {
+    static func createViewController(contentMode: ComponentStyle, title: String, maximumSelected: Int) -> DetailFilterViewController {
         let vc = DetailFilterViewController(nibName: nibName,
                                                      bundle: Bundle.main,
                                                      contentMode: contentMode,
-                                                     maximuSelected:  maximumSelected)
+                                                     maximuSelected: maximumSelected)
         vc.title = title
         return vc
     }

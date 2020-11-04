@@ -21,7 +21,7 @@ class ConditionCellView: UITableViewCell {
         static let colorUnChecked = UIColor.link
     }
     
-    func configure(type: DetailFilterViewController.ContentMode, viewModel: ConditionCellViewModel) {
+    func configure(type: ComponentStyle, viewModel: ConditionCellViewModel) {
         if component == nil {
             configureComponent(type: type)
         }
@@ -29,7 +29,7 @@ class ConditionCellView: UITableViewCell {
         layoutIfNeeded()
     }
     
-    private func configureComponent(type: DetailFilterViewController.ContentMode) {
+    private func configureComponent(type: ComponentStyle) {
         switch type {
         case .userInfo:
             component = UserInfoComponentView.createView()

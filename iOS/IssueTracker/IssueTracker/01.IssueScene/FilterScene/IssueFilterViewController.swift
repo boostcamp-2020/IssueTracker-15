@@ -99,25 +99,45 @@ extension IssueFilterViewController {
         
         switch  sectionType {
         case .condition:
-            let isSelected = selected[indexPath.row]
-            selected[indexPath.row] = !isSelected
-            cell.accessoryType = selected[indexPath.row] ? .checkmark : .none
+            conditionSelected(at: indexPath, cell: cell)
         case .detailCondition:
-            guard let detailMode = DetailCondition(rawValue: indexPath.row) else { return }
-            let vc: DetailFilterViewController
-            switch detailMode {
-            case .assignee:
-                vc = DetailFilterViewController.createViewController(contentMode: .userInfo, title: "담당자", maximumSelected: 1)
-            case .label:
-                vc = DetailFilterViewController.createViewController(contentMode: .label, title: "레이블", maximumSelected: 1)
-            case .milestone:
-                vc = DetailFilterViewController.createViewController(contentMode: .milestone, title: "마일스톤", maximumSelected: 1)
-            case .writer:
-                vc = DetailFilterViewController.createViewController(contentMode: .userInfo, title: "작성자", maximumSelected: 1)
-            }
-            present(vc, animated: true)
+            detailConditionSelected(at: indexPath, cell: cell)
         }
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
+    private func conditionSelected(at indexPath: IndexPath, cell: UITableViewCell) {
+        let isSelected = selected[indexPath.row]
+        selected[indexPath.row] = !isSelected
+        cell.accessoryType = selected[indexPath.row] ? .checkmark : .none
+    }
+    
+    private func detailConditionSelected(at indexPath: IndexPath, cell: UITableViewCell) {
+        guard let detailMode = DetailCondition(rawValue: indexPath.row),
+        let cell = cell as? DetailFilterCellView
+            else { return }
+        
+        let type: ComponentStyle
+        let title: String
+        switch detailMode {
+        case .assignee:
+            type = .userInfo
+            title = "담당자"
+        case .label:
+            type = .label
+            title = "레이블"
+        case .milestone:
+            type = .milestone
+            title = "마일스톤"
+        case .writer:
+            type = .userInfo
+            title = "작성자"
+        }
+        
+        let vc = DetailFilterViewController.createViewController(contentMode: type, title: title, maximumSelected: 1)
+        vc.onSelectionComplete = { selected in
+            cell.configure(type: type, viewModel: selected[safe: 0])
+        }
+        present(vc, animated: true)
+    }
 }

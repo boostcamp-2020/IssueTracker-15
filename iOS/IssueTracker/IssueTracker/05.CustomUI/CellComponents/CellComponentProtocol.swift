@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum ComponentStyle {
+    case userInfo
+    case milestone
+    case label
+}
+
 protocol CellComponentProtocol {
     var contentView: UIView { get }
     func configure(viewModel: ConditionCellViewModel)
