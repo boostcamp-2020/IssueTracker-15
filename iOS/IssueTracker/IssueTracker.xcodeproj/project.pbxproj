@@ -67,8 +67,8 @@
 		963A1AA225524AEC003E2BBB /* MilestoneComponentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 963A1AA125524AEC003E2BBB /* MilestoneComponentView.xib */; };
 		965F09712550299A00B3A248 /* JSONDecoder+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */; };
 		965F09742550425A00B3A248 /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09732550425A00B3A248 /* IssueFilterViewController.swift */; };
-		965F097D25505A1200B3A248 /* DetailConditionFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F097B25505A1200B3A248 /* DetailConditionFilterViewController.swift */; };
-		965F097E25505A1200B3A248 /* DetailConditionFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F097C25505A1200B3A248 /* DetailConditionFilterViewController.xib */; };
+		965F097D25505A1200B3A248 /* DetailFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F097B25505A1200B3A248 /* DetailFilterViewController.swift */; };
+		965F097E25505A1200B3A248 /* DetailFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F097C25505A1200B3A248 /* DetailFilterViewController.xib */; };
 		965F098925505B9D00B3A248 /* ConditionCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F098725505B9D00B3A248 /* ConditionCellView.xib */; };
 		966ADAE3254D8B0800A480DD /* SubmitFormView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ADAE2254D8B0800A480DD /* SubmitFormView+LoadFromNib.swift */; };
 		966ADAE5254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ADAE4254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift */; };
@@ -207,8 +207,8 @@
 		963A1AA125524AEC003E2BBB /* MilestoneComponentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MilestoneComponentView.xib; sourceTree = "<group>"; };
 		965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Decode.swift"; sourceTree = "<group>"; };
 		965F09732550425A00B3A248 /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
-		965F097B25505A1200B3A248 /* DetailConditionFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionFilterViewController.swift; sourceTree = "<group>"; };
-		965F097C25505A1200B3A248 /* DetailConditionFilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailConditionFilterViewController.xib; sourceTree = "<group>"; };
+		965F097B25505A1200B3A248 /* DetailFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterViewController.swift; sourceTree = "<group>"; };
+		965F097C25505A1200B3A248 /* DetailFilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailFilterViewController.xib; sourceTree = "<group>"; };
 		965F098725505B9D00B3A248 /* ConditionCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConditionCellView.xib; sourceTree = "<group>"; };
 		966ADAE2254D8B0800A480DD /* SubmitFormView+LoadFromNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubmitFormView+LoadFromNib.swift"; sourceTree = "<group>"; };
 		966ADAE4254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MilestoneSubmitFieldsView+LoadFromNib.swift"; sourceTree = "<group>"; };
@@ -506,8 +506,8 @@
 				96DD118C2550F79A0065F44A /* ViewModel */,
 				965F097F25505B5400B3A248 /* DetailConditionCells */,
 				965F09732550425A00B3A248 /* IssueFilterViewController.swift */,
-				965F097B25505A1200B3A248 /* DetailConditionFilterViewController.swift */,
-				965F097C25505A1200B3A248 /* DetailConditionFilterViewController.xib */,
+				965F097B25505A1200B3A248 /* DetailFilterViewController.swift */,
+				965F097C25505A1200B3A248 /* DetailFilterViewController.xib */,
 			);
 			path = FilterScene;
 			sourceTree = "<group>";
@@ -835,7 +835,7 @@
 				95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */,
 				963A1A9E255249BB003E2BBB /* LabelComponentView.xib in Resources */,
 				963A1A9725524160003E2BBB /* UserInfoComponentView.xib in Resources */,
-				965F097E25505A1200B3A248 /* DetailConditionFilterViewController.xib in Resources */,
+				965F097E25505A1200B3A248 /* DetailFilterViewController.xib in Resources */,
 				9679DFC1254D7ADC00550BE4 /* MilestoneSubmitFieldsView.xib in Resources */,
 				966ADAEA254D9BE900A480DD /* LabelSubmitFieldsView.xib in Resources */,
 				950EA0612547FFF9005BE133 /* HeaderView.xib in Resources */,
@@ -993,7 +993,7 @@
 				95054473254AAC0D007767C6 /* CollectionView+.swift in Sources */,
 				963A1AA025524ADF003E2BBB /* MilestoneComponentView.swift in Sources */,
 				96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */,
-				965F097D25505A1200B3A248 /* DetailConditionFilterViewController.swift in Sources */,
+				965F097D25505A1200B3A248 /* DetailFilterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

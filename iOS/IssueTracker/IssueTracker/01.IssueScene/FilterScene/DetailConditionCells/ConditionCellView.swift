@@ -21,28 +21,32 @@ class ConditionCellView: UITableViewCell {
         static let colorUnChecked = UIColor.link
     }
     
-    func configure(type: DetailConditionFilterViewController.ContentMode, viewModel: ConditionCellViewModel) {
+    func configure(type: DetailFilterViewController.ContentMode, viewModel: ConditionCellViewModel) {
         if component == nil {
-            switch type {
-            case .userInfo:
-                component = UserInfoComponentView.createView()
-            case .milestone:
-                component = MilestoneComponentView.createView()
-            case .label:
-                component = LabelComponentView.createView()
-            }
+            configureComponent(type: type)
         }
-        
+        component?.configure(viewModel: viewModel)
+        layoutIfNeeded()
+    }
+    
+    private func configureComponent(type: DetailFilterViewController.ContentMode) {
+        switch type {
+        case .userInfo:
+            component = UserInfoComponentView.createView()
+        case .milestone:
+            component = MilestoneComponentView.createView()
+        case .label:
+            component = LabelComponentView.createView()
+        }
         guard let component = component else { return }
+        
         addSubview(component.contentView)
         NSLayoutConstraint.activate([
             component.contentView.topAnchor.constraint(equalTo: topAnchor),
             component.contentView.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-            component.contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            component.contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            component.contentView.rightAnchor.constraint(lessThanOrEqualTo: checkImage.leftAnchor, constant: -10)
         ])
-        
-        component.configure(viewModel: viewModel)
-        layoutIfNeeded()
     }
     
     override func prepareForReuse() {

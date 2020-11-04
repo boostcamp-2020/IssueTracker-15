@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailConditionFilterViewController: UIViewController {
+class DetailFilterViewController: UIViewController {
     
     enum ContentMode {
         case userInfo
@@ -25,9 +25,9 @@ class DetailConditionFilterViewController: UIViewController {
     private var viewModelDataSource: [[ConditionCellViewModel]] = [ [],
                                                                     [
                                                                         ConditionCellViewModel(title: "마일스톤 1", element: "2020-10-11 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마일스톤 2", element: "2020-11-11 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마일스톤 3", element: "2020-12-11 00:00:00"),
-                                                                        ConditionCellViewModel(title: "마일스톤 4", element: "2020-09-11 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마 2", element: "2020-11-11 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마일일일스톤 3", element: "2020-12-11 00:00:00"),
+                                                                        ConditionCellViewModel(title: "마일아아아kkk스톤 4", element: "2020-09-11 00:00:00"),
                                                                         ConditionCellViewModel(title: "마일스톤 5", element: "2020-08-11 00:00:00"),
                                                                         ConditionCellViewModel(title: "마일스톤 6", element: "2019-01-30 00:00:00"),
                                                                         ConditionCellViewModel(title: "마일스톤 7", element: "2018-02-21 00:00:00"),
@@ -67,7 +67,7 @@ class DetailConditionFilterViewController: UIViewController {
 }
 
 // MARK: - Actions
-extension DetailConditionFilterViewController {
+extension DetailFilterViewController {
     
     @IBAction func cancleButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -81,7 +81,7 @@ extension DetailConditionFilterViewController {
 }
 
 // MARK: - UITableViewDelegate Implementation
-extension DetailConditionFilterViewController: UITableViewDelegate {
+extension DetailFilterViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as? ConditionCellView
@@ -101,7 +101,7 @@ extension DetailConditionFilterViewController: UITableViewDelegate {
 }
 
 // MARK: - UITableViewDataSource Implementation
-extension DetailConditionFilterViewController: UITableViewDataSource {
+extension DetailFilterViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -131,13 +131,13 @@ extension DetailConditionFilterViewController: UITableViewDataSource {
 }
 
 // MARK: - LoadFromNib
-extension DetailConditionFilterViewController {
+extension DetailFilterViewController {
     
-    static let nibName = "DetailConditionFilterViewController"
+    static let nibName = "DetailFilterViewController"
     
     // TODO: Dependency Injection ( ViewModels )
-    static func createViewController(contentMode: ContentMode, title: String) -> DetailConditionFilterViewController {
-        let vc = DetailConditionFilterViewController(nibName: nibName,
+    static func createViewController(contentMode: ContentMode, title: String) -> DetailFilterViewController {
+        let vc = DetailFilterViewController(nibName: nibName,
                                                      bundle: Bundle.main,
                                                      contentMode: contentMode)
         vc.title = title

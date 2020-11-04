@@ -102,16 +102,16 @@ extension IssueFilterViewController {
             cell.accessoryType = selected[indexPath.row] ? .checkmark : .none
         case .detailCondition:
             guard let detailMode = DetailCondition(rawValue: indexPath.row) else { return }
-            let vc: DetailConditionFilterViewController
+            let vc: DetailFilterViewController
             switch detailMode {
             case .assignee:
-                vc = DetailConditionFilterViewController.createViewController(contentMode: .userInfo, title: "담당자")
+                vc = DetailFilterViewController.createViewController(contentMode: .userInfo, title: "담당자")
             case .label:
-                vc = DetailConditionFilterViewController.createViewController(contentMode: .label, title: "레이블")
+                vc = DetailFilterViewController.createViewController(contentMode: .label, title: "레이블")
             case .milestone:
-                vc = DetailConditionFilterViewController.createViewController(contentMode: .milestone, title: "마일스톤")
+                vc = DetailFilterViewController.createViewController(contentMode: .milestone, title: "마일스톤")
             case .writer:
-                vc = DetailConditionFilterViewController.createViewController(contentMode: .userInfo, title: "작성자")
+                vc = DetailFilterViewController.createViewController(contentMode: .userInfo, title: "작성자")
             }
             present(vc, animated: true)
         }
