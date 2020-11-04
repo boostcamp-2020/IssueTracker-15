@@ -27,12 +27,14 @@ const LabelService = {
   },
 
   getLabelsByIssueId: async (issueId: number) => {
-    const issueHasLabelRepository = getRepository(IssueHasLabelEntity);
-    const labels = await issueHasLabelRepository
-      .createQueryBuilder("IssueHasLabel")
-      .innerJoinAndSelect("IssueHasLabel.label", "Label")
+    const labelRepository = getRepository(LabelEntity);
+    const labels = await labelRepository
+      .createQueryBuilder("Label")
+      .innerJoin("Label.issueHasLabels", "IssueHasLabel")
+      .select(["Label.id", "Label.title", "Label.description", "Label.color"])
       .where("IssueHasLabel.issueId = :issueId", { issueId })
       .getMany();
+
     return labels;
   },
 

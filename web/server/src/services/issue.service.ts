@@ -59,8 +59,8 @@ const IssueService = {
         "Issue.createAt",
         "Issue.updateAt",
         "Issue.isOpened",
-        "Issue.milestoneId",
         "User.userName",
+        "Milestone.id",
         "Milestone.title",
       ])
       .getOne()) as IssueEntity;
