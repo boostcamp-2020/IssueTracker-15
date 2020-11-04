@@ -4,24 +4,25 @@ import LabelService from "../services/label.service";
 import UserService from "../services/user.service";
 
 const makeIssuesTemplate = async (issueList: IssueEntity[]) => {
-  const detailIssues = [];
-  for (const issue of issueList) {
-    const labelList = await LabelService.getLabelsByIssueId(issue.id);
-    const assigneeList = await UserService.getAssigneeList(issue.id);
-    detailIssues.push({ ...issue, labels: labelList, assignees: assigneeList });
-  }
+  const detailIssues = await Promise.all(
+    issueList.map(async (issue) => {
+      const labels = await LabelService.getLabelsByIssueId(issue.id);
+      const assignees = await UserService.getAssigneeList(issue.id);
+      return { ...issue, labels, assignees };
+    })
+  );
 
   return detailIssues;
 };
 
 const makeIssueTemplate = async (issue: IssueEntity) => {
-  const labelList = await LabelService.getLabelsByIssueId(issue.id);
-  const assigneeList = await UserService.getAssigneeList(issue.id);
+  const labels = await LabelService.getLabelsByIssueId(issue.id);
+  const assignees = await UserService.getAssigneeList(issue.id);
   const comments = await CommentService.getCommentsByIssueId(issue.id);
   const detailIssue = {
     ...issue,
-    labels: labelList,
-    assignees: assigneeList,
+    labels,
+    assignees,
     comments,
   };
 
