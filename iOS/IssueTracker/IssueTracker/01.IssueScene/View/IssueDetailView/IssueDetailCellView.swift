@@ -9,11 +9,10 @@
 import UIKit
 
 class IssueDetailCellView: UICollectionViewCell {
-    
-    @IBOutlet weak var label: UILabel!
-    
+       
+    @IBOutlet weak var desc: UILabel!
     func configure(with text: String) {
-        label.text = text
+        desc.text = text
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
