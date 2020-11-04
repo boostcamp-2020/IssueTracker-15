@@ -14,7 +14,7 @@ class LabelComponentView: UIView {
     
 }
 
-// MARK: -  CellComponentProtocol Implementation
+// MARK: - CellComponentProtocol Implementation
 
 extension LabelComponentView: CellComponentProtocol {
     

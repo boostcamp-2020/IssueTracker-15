@@ -19,7 +19,7 @@ class UserInfoComponentView: UIView {
     }
 }
 
-// MARK: -  CellComponentProtocol Implementation
+// MARK: - CellComponentProtocol Implementation
 
 extension UserInfoComponentView: CellComponentProtocol {
     

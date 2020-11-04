@@ -16,6 +16,7 @@ class IssueDetailCellView: UICollectionViewCell {
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        super.preferredLayoutAttributesFitting(layoutAttributes)
         setNeedsLayout()
         layoutIfNeeded()
         

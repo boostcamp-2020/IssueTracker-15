@@ -76,7 +76,7 @@
                         <viewLayoutGuide key="safeArea" id="H30-KX-izY"/>
                     </view>
                     <navigationItem key="navigationItem" id="ckC-hN-RTX">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="FnO-s3-Fbz">
+                        <barButtonItem key="leftBarButtonItem" id="FnO-s3-Fbz">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EwP-TN-DZv">
                                 <rect key="frame" x="20" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -86,7 +86,7 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="8t5-bC-b4C">
+                        <barButtonItem key="rightBarButtonItem" id="8t5-bC-b4C">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9FY-Nz-Jhv">
                                 <rect key="frame" x="302" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -149,7 +149,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="NjL-aG-9it">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="7ln-Zd-Fg5">
+                        <barButtonItem key="rightBarButtonItem" id="7ln-Zd-Fg5">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bhF-f7-8uc">
                                 <rect key="frame" x="266" y="0.0" width="128" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -223,7 +223,7 @@
                         <viewLayoutGuide key="safeArea" id="KJZ-wC-3qJ"/>
                     </view>
                     <navigationItem key="navigationItem" id="oYc-WB-dqB">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="aOq-D6-Llh">
+                        <barButtonItem key="rightBarButtonItem" id="aOq-D6-Llh">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lMH-AP-bpd">
                                 <rect key="frame" x="266" y="0.0" width="128" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -527,18 +527,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cYP-py-DgA">
-                                <rect key="frame" x="20" y="144" width="374" height="42"/>
+                                <rect key="frame" x="20" y="152.5" width="374" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNE-Xl-7zb">
-                                <rect key="frame" x="20" y="118" width="374" height="21"/>
+                                <rect key="frame" x="20" y="126.5" width="374" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ffC-xq-HP2">
-                                <rect key="frame" x="20" y="196" width="374" height="35"/>
+                                <rect key="frame" x="20" y="204.5" width="374" height="35"/>
                                 <segments>
                                     <segment title="마크다운"/>
                                     <segment title="미리보기"/>
@@ -575,7 +575,7 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="jJT-Y8-nLZ">
+                        <barButtonItem key="rightBarButtonItem" id="jJT-Y8-nLZ">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mc1-Ta-aaw">
                                 <rect key="frame" x="302" y="13" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -601,7 +601,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="24V-yA-fcF" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="kro-Mr-mzO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="116.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
@@ -673,7 +673,7 @@
                         <viewLayoutGuide key="safeArea" id="gBp-g6-nMt"/>
                     </view>
                     <navigationItem key="navigationItem" id="Vq2-YF-ME7">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="zKf-VU-FdM">
+                        <barButtonItem key="rightBarButtonItem" id="zKf-VU-FdM">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yLl-SN-uqF" userLabel="Edit Button">
                                 <rect key="frame" x="302" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

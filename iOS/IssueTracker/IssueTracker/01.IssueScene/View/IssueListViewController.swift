@@ -47,14 +47,13 @@ class IssueListViewController: UIViewController {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        if let indexPath = self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let issueDetailVC = storyboard.instantiateViewController(withIdentifier: IssueDetailViewController.identifier) as? IssueDetailViewController
-                else { return }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) != nil,
+        let issueDetailVC = storyboard.instantiateViewController(withIdentifier: IssueDetailViewController.identifier) as? IssueDetailViewController
+        else { return }
 
-            // controller.selectedIndex = indexPath.row //pass selected cell index to next view.
-            self.navigationController?.pushViewController(issueDetailVC, animated: true)
-        }
+        self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
     
     private func setupCollectionViewLayout() {
