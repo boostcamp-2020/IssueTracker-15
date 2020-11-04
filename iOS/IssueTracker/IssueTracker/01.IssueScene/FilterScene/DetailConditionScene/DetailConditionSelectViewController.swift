@@ -59,7 +59,7 @@ class DetailConditionSelectViewController: UIViewController {
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(type: ConditionCellView.self)
+        tableView.register(type: DetailConditionSelectCellView.self)
     }
     
 }
@@ -87,7 +87,7 @@ extension DetailConditionSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexPathFrom = indexPath
         let indexPathTo: IndexPath
-        let cell = tableView.cellForRow(at: indexPath) as? ConditionCellView
+        let cell = tableView.cellForRow(at: indexPath) as? DetailConditionSelectCellView
         
         let source = indexPath.section
         let dest = source == 0 ? 1 : 0
@@ -101,7 +101,7 @@ extension DetailConditionSelectViewController: UITableViewDelegate {
         if viewModelDataSource[0].count > maximumNumSelected {
             let indexPathFrom = IndexPath(row: 0, section: 0)
             let indexPathTo = IndexPath(row: viewModelDataSource[1].count, section: 1)
-            let cell = tableView.cellForRow(at: indexPathFrom) as? ConditionCellView
+            let cell = tableView.cellForRow(at: indexPathFrom) as? DetailConditionSelectCellView
             
             let data = viewModelDataSource[0].remove(at: 0)
             viewModelDataSource[1].append(data)
@@ -134,7 +134,7 @@ extension DetailConditionSelectViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cellViewModel = viewModelDataSource[safe: indexPath.section]?[safe: indexPath.row],
-            let cell: ConditionCellView = tableView.dequeueCell(at: indexPath)
+            let cell: DetailConditionSelectCellView = tableView.dequeueCell(at: indexPath)
         else { return UITableViewCell() }
         cell.configure(type: contentMode, viewModel: cellViewModel)
         cell.setCheck(indexPath.section == 0)
