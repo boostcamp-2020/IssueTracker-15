@@ -39,6 +39,7 @@ class LabelSubmitFieldsView: UIStackView {
 }
 
 // MARK: - Action
+
 extension LabelSubmitFieldsView {
     
     @IBAction func refreshColorButtonTapped(_ sender: Any) {
@@ -55,6 +56,7 @@ extension LabelSubmitFieldsView {
 }
 
 // MARK: - SubmitFieldProtocol Implementation
+
 extension LabelSubmitFieldsView: SubmitFieldProtocol {
     
     var contentView: UIView { self }

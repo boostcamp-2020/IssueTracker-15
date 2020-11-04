@@ -64,6 +64,7 @@ class MilestoneCellView: UICollectionViewCell {
 }
 
 // MAKR: - UICollectionViewRegisterable Implementation
+
 extension MilestoneCellView: UICollectionViewRegisterable {
     static var cellIdentifier: String {
         return "MilestoneCellView"

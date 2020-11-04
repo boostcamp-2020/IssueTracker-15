@@ -39,6 +39,7 @@ class SubmitFormView: UIView {
 }
 
 // MARK: - Action
+
 extension SubmitFormView {
     
     @IBAction func closeButtonTapped(_ sender: Any) {
@@ -95,6 +96,7 @@ extension SubmitFormView {
 }
 
 // MARK: - Private Function
+
 extension SubmitFormView {
     
     private func configureTapGesture() {

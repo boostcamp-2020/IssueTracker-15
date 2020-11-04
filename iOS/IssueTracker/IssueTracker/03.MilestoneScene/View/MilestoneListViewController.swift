@@ -44,6 +44,7 @@ class MilestoneListViewController: UIViewController {
 }
 
 // MARK: - Action
+
 extension MilestoneListViewController {
     
     @IBAction func plusButtonTapped(_ sender: Any) {
@@ -75,6 +76,7 @@ extension MilestoneListViewController {
 }
 
 // MARK: - UICollectionViewDelegate Implementation
+
 extension MilestoneListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -84,6 +86,7 @@ extension MilestoneListViewController: UICollectionViewDelegate {
 }
 
 // MARK: - UICollectionViewDataSource Implementation
+
 extension MilestoneListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

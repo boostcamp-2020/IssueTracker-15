@@ -44,6 +44,7 @@ class LabelListViewController: UIViewController {
 }
 
 // MARK: - Action
+
 extension LabelListViewController {
     
     @IBAction func plusButtonTapped(_ sender: Any) {
@@ -75,6 +76,7 @@ extension LabelListViewController {
 }
 
 // MARK: - UICollectionViewDelegate Implementation
+
 extension LabelListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -84,6 +86,7 @@ extension LabelListViewController: UICollectionViewDelegate {
 }
 
 // MARK: - UICollectionViewDataSource Implementation
+
 extension LabelListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -99,4 +102,3 @@ extension LabelListViewController: UICollectionViewDataSource {
     }
     
 }
-

@@ -34,6 +34,7 @@ class MilestoneSubmitFieldsView: UIStackView {
 }
 
 // MARK: - Action
+
 extension MilestoneSubmitFieldsView {
     
     @objc func dateFieldOnEditing() {
@@ -51,6 +52,7 @@ extension MilestoneSubmitFieldsView {
 }
 
 // MARK: - SubmitFieldProtocol Implementation
+
 extension MilestoneSubmitFieldsView: SubmitFieldProtocol {
     
     var contentView: UIView { self }

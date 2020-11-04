@@ -33,6 +33,7 @@ class LabelCellView: UICollectionViewCell {
 }
 
 // MARK: - UICollectionViewRegisterable Implementation
+
 extension LabelCellView: UICollectionViewRegisterable {
     static var cellIdentifier: String {
         return "LabelCellView"
