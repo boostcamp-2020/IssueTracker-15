@@ -54,21 +54,14 @@ class DetailConditionFilterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
         configureTableView()
         titleNavItem.title = title
     }
     
     private func configureTableView() {
-        switch contentMode {
-        case .userInfo:
-            tableView.register(type: UserConditionCellView.self)
-        case .milestone:
-            tableView.register(type: MilestoneConditionCellView.self)
-        case .label:
-            tableView.register(type: LabelConditionCellView.self)
-        }
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(type: ConditionCellView.self)
     }
     
 }
@@ -127,21 +120,11 @@ extension DetailConditionFilterViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cellViewModel = viewModelDataSource[safe: indexPath.section]?[safe: indexPath.row] else { return UITableViewCell() }
-        let cell: ConditionCellView?
-        switch contentMode {
-        case .userInfo:
-            cell = tableView.dequeueReusableCell(withIdentifier: UserConditionCellView.cellIdentifier,
-                                                 for: indexPath) as? UserConditionCellView
-        case .milestone:
-            cell = tableView.dequeueReusableCell(withIdentifier: MilestoneConditionCellView.cellIdentifier,
-                                                 for: indexPath) as? MilestoneConditionCellView
-        case .label:
-            cell = tableView.dequeueReusableCell(withIdentifier: LabelConditionCellView.cellIdentifier,
-                                                 for: indexPath) as? LabelConditionCellView
-        }
-        cell?.configure(viewModel: cellViewModel)
-        cell?.setCheck(indexPath.section == 0)
+        guard let cellViewModel = viewModelDataSource[safe: indexPath.section]?[safe: indexPath.row],
+            let cell: ConditionCellView = tableView.dequeueCell(at: indexPath)
+        else { return UITableViewCell() }
+        cell.configure(type: contentMode, viewModel: cellViewModel)
+        cell.setCheck(indexPath.section == 0)
         return cell ?? UITableViewCell()
     }
     

@@ -12,6 +12,8 @@ class ConditionCellView: UITableViewCell {
     
     @IBOutlet weak var checkImage: UIImageView!
     
+    private var component: CellComponentProtocol?
+    
     enum Constant {
         static let imageChecked = UIImage(systemName: "x.circle.fill")
         static let imageUnchecked = UIImage(systemName: "plus.circle")
@@ -19,12 +21,48 @@ class ConditionCellView: UITableViewCell {
         static let colorUnChecked = UIColor.link
     }
     
-    func configure(viewModel: ConditionCellViewModel) {
-        selectionStyle = .none
+    func configure(type: DetailConditionFilterViewController.ContentMode, viewModel: ConditionCellViewModel) {
+        if component == nil {
+            switch type {
+            case .userInfo:
+                component = UserInfoComponentView.createView()
+            case .milestone:
+                component = MilestoneComponentView.createView()
+            case .label:
+                component = LabelComponentView.createView()
+            }
+        }
+        
+        guard let component = component else { return }
+        addSubview(component.contentView)
+        NSLayoutConstraint.activate([
+            component.contentView.topAnchor.constraint(equalTo: topAnchor),
+            component.contentView.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
+            component.contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
+        component.configure(viewModel: viewModel)
+        layoutIfNeeded()
+    }
+    
+    override func prepareForReuse() {
+        component?.prepareForReuse()
     }
     
     func setCheck(_ check: Bool) {
         checkImage.image = check ? Constant.imageChecked : Constant.imageUnchecked
         checkImage.tintColor = check ? Constant.colorChecked : Constant.colorUnChecked
+    }
+}
+
+// MARK: - UITableViewRegistable Implementation
+
+extension ConditionCellView: UITableViewRegisterable {
+    static var cellIdentifier: String {
+        return "ConditionCellView"
+    }
+    
+    static var cellNib: UINib {
+        return UINib(nibName: cellIdentifier, bundle: nil)
     }
 }
