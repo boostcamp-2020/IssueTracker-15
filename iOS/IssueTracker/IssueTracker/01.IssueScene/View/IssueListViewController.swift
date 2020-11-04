@@ -22,7 +22,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var addIssueButton: UIButton!
     
     private var viewingMode: ViewingMode = .general
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "이슈"
@@ -41,18 +41,18 @@ class IssueListViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(type: IssueCellView.self)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.didSelectCell(_:)))
         self.collectionView.addGestureRecognizer(tap)
         self.collectionView.isUserInteractionEnabled = true
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+    @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         guard self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) != nil,
         let issueDetailVC = storyboard.instantiateViewController(withIdentifier: IssueDetailViewController.identifier) as? IssueDetailViewController
         else { return }
-
+        
         self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
     

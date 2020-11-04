@@ -636,7 +636,6 @@
         <!--Issue Detail View Controller-->
         <scene sceneID="JHX-o1-ap6">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zau-TZ-QYO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="IssueDetailViewController" id="oYN-fe-tCl" customClass="IssueDetailViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U3d-TU-QQW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -685,6 +684,7 @@
                         <outlet property="collectionView" destination="emk-zj-VTs" id="OX4-uC-R8a"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zau-TZ-QYO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1958" y="-1248"/>
         </scene>

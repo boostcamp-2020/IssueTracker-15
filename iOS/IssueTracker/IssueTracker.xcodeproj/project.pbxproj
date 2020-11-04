@@ -19,6 +19,8 @@
 		950EA05D2547FFA0005BE133 /* LabelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950EA05B2547FFA0005BE133 /* LabelCellView.xib */; };
 		950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EB00C254A8DE2004857C2 /* MilestoneListViewModel.swift */; };
 		950EB00F254A94D0004857C2 /* UILabel+FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EB00E254A94D0004857C2 /* UILabel+FontSize.swift */; };
+		951341C22553026600EDFB83 /* AddCommentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 951341C02553026600EDFB83 /* AddCommentViewController.xib */; };
+		951341C4255302A200EDFB83 /* AddCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951341C3255302A200EDFB83 /* AddCommentViewController.swift */; };
 		9521FCB9254FE7FE00FC0220 /* NetworkFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9521FCB0254FE7FD00FC0220 /* NetworkFramework.framework */; };
 		9521FCC0254FE7FE00FC0220 /* NetworkFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521FCBF254FE7FE00FC0220 /* NetworkFrameworkTests.swift */; };
 		9521FCC2254FE7FE00FC0220 /* NetworkFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 9521FCB2254FE7FD00FC0220 /* NetworkFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -170,6 +172,8 @@
 		950EA05B2547FFA0005BE133 /* LabelCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCellView.xib; sourceTree = "<group>"; };
 		950EB00C254A8DE2004857C2 /* MilestoneListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneListViewModel.swift; sourceTree = "<group>"; };
 		950EB00E254A94D0004857C2 /* UILabel+FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+FontSize.swift"; sourceTree = "<group>"; };
+		951341C02553026600EDFB83 /* AddCommentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCommentViewController.xib; sourceTree = "<group>"; };
+		951341C3255302A200EDFB83 /* AddCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentViewController.swift; sourceTree = "<group>"; };
 		9521FCB0254FE7FD00FC0220 /* NetworkFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9521FCB2254FE7FD00FC0220 /* NetworkFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkFramework.h; sourceTree = "<group>"; };
 		9521FCB3254FE7FD00FC0220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -310,6 +314,15 @@
 			path = IssueDetailView;
 			sourceTree = "<group>";
 		};
+		9508B8262552DB980015C636 /* AddCommentView */ = {
+			isa = PBXGroup;
+			children = (
+				951341C02553026600EDFB83 /* AddCommentViewController.xib */,
+				951341C3255302A200EDFB83 /* AddCommentViewController.swift */,
+			);
+			path = AddCommentView;
+			sourceTree = "<group>";
+		};
 		950EA0592547FF74005BE133 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,6 +437,7 @@
 			children = (
 				9613C12D2547B265005EF13C /* .swiftlint.yml */,
 				95E9F57A2546EC06001FBA0D /* IssueTracker */,
+				95E9F5812546EC07001FBA0D /* Main.storyboard */,
 				95E9F5912546EC0C001FBA0D /* IssueTrackerTests */,
 				9521FCB1254FE7FD00FC0220 /* NetworkFramework */,
 				9521FCBE254FE7FE00FC0220 /* NetworkFrameworkTests */,
@@ -455,9 +469,8 @@
 				966DD034254A5ADF00A44FBA /* 03.MilestoneScene */,
 				957DBF9A25513FA80051123C /* 04.Models */,
 				96C8357325490EFF0086A6E6 /* 05.CustomUI */,
-				952FF3DA254814650042A96F /* 07.Supports */,
 				952FF3D1254804120042A96F /* 06.Extensions */,
-				95E9F5812546EC07001FBA0D /* Main.storyboard */,
+				952FF3DA254814650042A96F /* 07.Supports */,
 				956B5D0325503D06001CBAA9 /* 08.Endpoints */,
 			);
 			path = IssueTracker;
@@ -676,6 +689,7 @@
 		96F95BF7254E692F00EC00C6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9508B8262552DB980015C636 /* AddCommentView */,
 				9508B81D2552A33B0015C636 /* IssueDetailView */,
 				96F95C03254EA6D000EC00C6 /* IssueCellView */,
 				96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */,
@@ -876,6 +890,7 @@
 				966ADAEA254D9BE900A480DD /* LabelSubmitFieldsView.xib in Resources */,
 				95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */,
 				9508B8212552A3620015C636 /* IssueDetailHeaderView.xib in Resources */,
+				951341C22553026600EDFB83 /* AddCommentViewController.xib in Resources */,
 				965F098925505B9D00B3A248 /* DetailConditionSelectCellView.xib in Resources */,
 				95E9F5832546EC07001FBA0D /* Main.storyboard in Resources */,
 				96F95C08254EA70B00EC00C6 /* IssueCellView.xib in Resources */,
@@ -1010,6 +1025,7 @@
 				950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */,
 				966ADAEC254D9DDD00A480DD /* LabelSubmitFieldsView+LoadFromNib.swift in Sources */,
 				96A58F3B254A629500248F1E /* MilestoneItemViewModel.swift in Sources */,
+				951341C4255302A200EDFB83 /* AddCommentViewController.swift in Sources */,
 				966DD039254A5B1600A44FBA /* Milestone.swift in Sources */,
 				96C734D52549452600DEC9A4 /* LabelItemViewModel.swift in Sources */,
 				963A1A9A25524634003E2BBB /* CellComponentProtocol.swift in Sources */,
