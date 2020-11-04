@@ -74,6 +74,7 @@ class IssueFilterViewController: UITableViewController {
 }
 
 // MARK: - Action
+
 extension IssueFilterViewController {
     
     @IBAction func cancleButtonTapped(_ sender: Any) {
@@ -88,6 +89,7 @@ extension IssueFilterViewController {
 }
 
 // MARK: - TableView Implementation
+
 extension IssueFilterViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -105,13 +107,13 @@ extension IssueFilterViewController {
             let vc: DetailFilterViewController
             switch detailMode {
             case .assignee:
-                vc = DetailFilterViewController.createViewController(contentMode: .userInfo, title: "담당자")
+                vc = DetailFilterViewController.createViewController(contentMode: .userInfo, title: "담당자", maximumSelected: 1)
             case .label:
-                vc = DetailFilterViewController.createViewController(contentMode: .label, title: "레이블")
+                vc = DetailFilterViewController.createViewController(contentMode: .label, title: "레이블", maximumSelected: 1)
             case .milestone:
-                vc = DetailFilterViewController.createViewController(contentMode: .milestone, title: "마일스톤")
+                vc = DetailFilterViewController.createViewController(contentMode: .milestone, title: "마일스톤", maximumSelected: 1)
             case .writer:
-                vc = DetailFilterViewController.createViewController(contentMode: .userInfo, title: "작성자")
+                vc = DetailFilterViewController.createViewController(contentMode: .userInfo, title: "작성자", maximumSelected: 1)
             }
             present(vc, animated: true)
         }

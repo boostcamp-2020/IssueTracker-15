@@ -20,6 +20,7 @@ class DetailFilterViewController: UIViewController {
     
     // TODO: Dependency Injection for ContentMode
     private var contentMode: ContentMode
+    private var maximumNumSelected: Int
     
     // TODO: Dummy Data to ViewModelProtocol
     private var viewModelDataSource: [[ConditionCellViewModel]] = [ [],
@@ -41,14 +42,16 @@ class DetailFilterViewController: UIViewController {
     
     init(nibName: String,
          bundle: Bundle?,
-         contentMode: ContentMode) {
+         contentMode: ContentMode, maximuSelected: Int) {
         self.contentMode = contentMode
+        self.maximumNumSelected = maximuSelected
         super.init(nibName: nibName, bundle: bundle)
     }
     
     required init?(coder: NSCoder) {
         self.contentMode = .userInfo
         viewModelDataSource = [[], []]
+        self.maximumNumSelected = 1
         super.init(coder: coder)
     }
     
@@ -67,6 +70,7 @@ class DetailFilterViewController: UIViewController {
 }
 
 // MARK: - Actions
+
 extension DetailFilterViewController {
     
     @IBAction func cancleButtonTapped(_ sender: Any) {
@@ -81,6 +85,7 @@ extension DetailFilterViewController {
 }
 
 // MARK: - UITableViewDelegate Implementation
+
 extension DetailFilterViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -92,7 +97,8 @@ extension DetailFilterViewController: UITableViewDelegate {
         let dest = source == 0 ? 1 : 0
         let data = viewModelDataSource[source].remove(at: indexPath.row)
         viewModelDataSource[dest].append(data)
-        indexPathTo = IndexPath(row:dest == 1 ? 0 : viewModelDataSource[dest].count - 1,section: dest)
+        indexPathTo = IndexPath(row: viewModelDataSource[dest].count - 1,section: dest)
+        
         
         tableView.moveRow(at: indexPathFrom, to: indexPathTo)
         cell?.setCheck(dest == 0)
@@ -101,6 +107,7 @@ extension DetailFilterViewController: UITableViewDelegate {
 }
 
 // MARK: - UITableViewDataSource Implementation
+
 extension DetailFilterViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -108,7 +115,7 @@ extension DetailFilterViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Choosen" : "Unchoosen"
+        return section == 0 ? "Choosen (max: \(maximumNumSelected))" : "Unchoosen"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -131,15 +138,17 @@ extension DetailFilterViewController: UITableViewDataSource {
 }
 
 // MARK: - LoadFromNib
+
 extension DetailFilterViewController {
     
     static let nibName = "DetailFilterViewController"
     
     // TODO: Dependency Injection ( ViewModels )
-    static func createViewController(contentMode: ContentMode, title: String) -> DetailFilterViewController {
+    static func createViewController(contentMode: ContentMode, title: String, maximumSelected: Int) -> DetailFilterViewController {
         let vc = DetailFilterViewController(nibName: nibName,
                                                      bundle: Bundle.main,
-                                                     contentMode: contentMode)
+                                                     contentMode: contentMode,
+                                                     maximuSelected:  maximumSelected)
         vc.title = title
         return vc
     }
