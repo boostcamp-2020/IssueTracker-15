@@ -28,14 +28,11 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78q-8a-ZQH" userLabel="nextButton">
-                        <rect key="frame" x="378" y="42.5" width="28" height="28"/>
+                        <rect key="frame" x="368" y="42.5" width="28" height="28"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="78q-8a-ZQH" secondAttribute="height" multiplier="1:1" id="c3q-OO-tAl"/>
                         </constraints>
                         <state key="normal" image="chevron.right" catalog="system"/>
-                        <connections>
-                            <action selector="nextButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="i7D-gb-NLW"/>
-                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEG-Rb-vZI" userLabel="descriptionLabel">
                         <rect key="frame" x="10" y="61.5" width="42" height="34"/>
@@ -51,7 +48,7 @@
                 <constraint firstItem="OAl-ag-6SQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="C47-Xn-ZwW"/>
                 <constraint firstItem="EEG-Rb-vZI" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.3" id="CHW-sW-hvI"/>
                 <constraint firstItem="EEG-Rb-vZI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="KTQ-VZ-SVl"/>
-                <constraint firstAttribute="trailing" secondItem="78q-8a-ZQH" secondAttribute="trailing" constant="5" id="OwT-Nr-6Af"/>
+                <constraint firstAttribute="trailing" secondItem="78q-8a-ZQH" secondAttribute="trailing" constant="15" id="OwT-Nr-6Af"/>
                 <constraint firstAttribute="centerY" secondItem="OAl-ag-6SQ" secondAttribute="bottom" constant="5" id="Rf6-p8-rYP"/>
                 <constraint firstItem="EEG-Rb-vZI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="5" id="jeP-cR-hmX"/>
                 <constraint firstItem="78q-8a-ZQH" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.25" id="lQB-Qs-heh"/>
