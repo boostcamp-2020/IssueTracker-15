@@ -1,9 +1,9 @@
-import express, { Request, Response } from "express";
-import MilestoneService from "../services/milestone.service";
-import { Milestone } from "../types/milestone.types";
+import express, { Request, Response } from 'express';
+import MilestoneService from '../services/milestone.service';
+import { Milestone } from '../types/milestone.types';
 
 const MilestoneRouter = express.Router();
-MilestoneRouter.get("/", async (req: Request, res: Response) => {
+MilestoneRouter.get('/', async (req: Request, res: Response) => {
   try {
     const newMilestones = await MilestoneService.getMilestones();
     return res.json(newMilestones);
@@ -12,7 +12,23 @@ MilestoneRouter.get("/", async (req: Request, res: Response) => {
   }
 });
 
-MilestoneRouter.post("/", async (req: Request, res: Response) => {
+MilestoneRouter.get('/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const milestone = await MilestoneService.getMilestonesById(parseInt(id));
+
+    if (!milestone)
+      return res
+        .status(404)
+        .json({ message: `there is no milestone id = ${id}` });
+
+    return res.json(milestone);
+  } catch (e) {
+    return res.status(400).json(e.message);
+  }
+});
+
+MilestoneRouter.post('/', async (req: Request, res: Response) => {
   const newMilestoneData: Milestone = req.body;
 
   try {
@@ -25,7 +41,7 @@ MilestoneRouter.post("/", async (req: Request, res: Response) => {
   }
 });
 
-MilestoneRouter.delete("/:id", async (req: Request, res: Response) => {
+MilestoneRouter.delete('/:id', async (req: Request, res: Response) => {
   const milestoneId = parseInt(req.params.id, 10);
 
   try {
@@ -36,7 +52,7 @@ MilestoneRouter.delete("/:id", async (req: Request, res: Response) => {
   }
 });
 
-MilestoneRouter.patch("/:id", async (req: Request, res: Response) => {
+MilestoneRouter.patch('/:id', async (req: Request, res: Response) => {
   const milestoneId = parseInt(req.params.id, 10);
   const newMilestoneData: Milestone = req.body;
 
