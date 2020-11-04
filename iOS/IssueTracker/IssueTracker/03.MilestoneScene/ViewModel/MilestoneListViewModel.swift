@@ -13,43 +13,62 @@ protocol MilestoneListViewModelProtocol: AnyObject {
     func needFetchItems()
     func cellForItemAt(path: IndexPath) -> MilestoneItemViewModel
     func numberOfItem() -> Int
-    func addNewMileStone(title: String, description: String, dueDate: String)
+    func addNewMileStone(title: String, dueDate: String, description: String)
     func editMileStone(at indexPath: IndexPath, title: String, description: String, dueDate: String)
 }
 
 class MilestoneListViewModel: MilestoneListViewModelProtocol {
     var didFetch: (() -> Void)?
-    private var milestones = [Milestone]()
+    private var milestones = [MilestoneItemViewModel]()
+    private var milestoneProvider: MilestoneProvidable?
     
-    func addNewMileStone(title: String, description: String, dueDate: String) {
-        let newMilestone = Milestone(id: 1, title: title, description: description, dueDate: dueDate + " 00:00:00")
-        milestones.insert(newMilestone, at: 0)
+    init(with milestoneProvider: MilestoneProvidable) {
+        self.milestoneProvider = milestoneProvider
+    }
+    
+    func addNewMileStone(title: String, dueDate: String, description: String) {
         
-        didFetch?()
+        milestoneProvider?.addMilestone(title: title, dueDate: dueDate, description: description, completion: { [weak self] (milestone) in
+            guard let `self` = self,
+            let milestone = milestone
+                else { return }
+            self.milestones.insert(MilestoneItemViewModel(milestone: milestone, from: .fromServer), at: 0)
+            DispatchQueue.main.async {
+                self.didFetch?()
+            }
+        })
     }
     
     func editMileStone(at indexPath: IndexPath, title: String, description: String, dueDate: String) {
-        milestones[indexPath.row] = Milestone(id: milestones[indexPath.row].id, title: title, description: description, dueDate: dueDate + " 00:00:00")
-        didFetch?()
+        let currentMilestone: MilestoneItemViewModel = milestones[indexPath.row]
+        
+        milestoneProvider?.editMilestone(id: currentMilestone.id, title: title, dueDate: dueDate, description: description, openIssuesLength: currentMilestone.openIssue, closeIssueLength: currentMilestone.closedIssue) { [weak self] (milestone) in
+            guard let `self` = self,
+                let milestone = milestone
+                else { return }
+            print("listviewModel completion: \(milestone)")
+            self.milestones[indexPath.row] = MilestoneItemViewModel(milestone: milestone, from: .fromSubmitView)
+            DispatchQueue.main.async {
+                self.didFetch?()
+            }
+        }
     }
     
     func needFetchItems() {
-        milestones = [Milestone(id: 0, title: "스프린트2", description: "이번 배포를 위한 스프린트", dueDate: "2020-06-19 12:34:55"),
-                      Milestone(id: 1, title: "스프린트 15", description: "다음 배포를 위한 스프린트", dueDate: "2020-06-26 11:20:33"),
-                      Milestone(id: 1, title: "스프린트", description: "다음 배포를 위한 스프린트", dueDate: "2020-06-26 11:20:33"),
-                      Milestone(id: 1, title: "스프린트 1", description: "다음 배포를 위한 스프린트", dueDate: "2020-06-26 11:20:33"),
-                      Milestone(id: 1, title: "스프린트1", description: "다음 배포를 위한 스프린트", dueDate: "2020-06-26 11:20:33"),
-                      Milestone(id: 1, title: "스프린", description: "다음 배포를 위한 스프린트", dueDate: "2020-06-26 11:20:33"),
-                      Milestone(id: 1, title: "스프", description: "다음 배포를 위한 스프린트", dueDate: "2020-06-26 11:20:33"),
-                      Milestone(id: 1, title: "스", description: "다음 배포를 위한 스프린트", dueDate: "2020-06-26 11:20:33"),
-                      Milestone(id: 1, title: "스프린트3", description: "다음 배포를 위한 스프린트", dueDate: "2020-06-26 11:20:33"),
-                      Milestone(id: 1, title: "스프린트3", description: "다음 배포를 위한 스프린트", dueDate: "2020-06-26 11:20:33")]
-        
-        didFetch?()
+        milestoneProvider?.fetchMilestones { [weak self] (milestones) in
+            guard let `self` = self,
+                let milestones = milestones
+                else { return }
+            milestones.forEach { self.milestones.append(MilestoneItemViewModel(milestone: $0, from: .fromServer)) }
+            DispatchQueue.main.async {
+                print("datasource: \(self.milestones)")
+                self.didFetch?()
+            }
+        }
     }
     
     func cellForItemAt(path: IndexPath) -> MilestoneItemViewModel {
-        return MilestoneItemViewModel(milestone: milestones[path.row])
+        return milestones[path.row]
     }
     
     func numberOfItem() -> Int {

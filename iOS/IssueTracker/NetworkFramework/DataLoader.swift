@@ -8,8 +8,13 @@
 
 import Foundation
 
-public class DataLoader<T: Decodable> {
-    public typealias RequestResult<T> = Result<T?, NetworkError>
+public typealias RequestResult<T> = Result<T?, NetworkError>
+
+public protocol DataLoadable: AnyObject {
+    func request<T: Decodable>(_ type: T.Type, endpoint: EndPoint, completion: @escaping (RequestResult<T>) -> Void)
+}
+
+public class DataLoader: DataLoadable {
     
     private let session: URLSession
     
@@ -17,20 +22,23 @@ public class DataLoader<T: Decodable> {
         self.session = session
     }
     
-    public func reqeust(endpoint: EndPoint, completion: @escaping (RequestResult<T>) -> Void) {
+    public func request<T>(_ type: T.Type, endpoint: EndPoint, completion: @escaping (RequestResult<T>) -> Void) where T: Decodable {
         var components = URLComponents()
         components.scheme = endpoint.scheme
         components.host = endpoint.baseURL
         components.port = endpoint.port
         components.path = endpoint.path
-        
+        print(components)
         guard let url = components.url else { return }
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endpoint.method.rawValue
         urlRequest.httpBody = endpoint.httpBody
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+        print(urlRequest)
+        print(String(data: urlRequest.httpBody ?? Data(), encoding: .utf8))
+        print(urlRequest.httpMethod)
+        print(urlRequest.allHTTPHeaderFields)
         session.dataTask(with: urlRequest) { (data, response, error) in
             
             guard error == nil else { return }
@@ -41,11 +49,11 @@ public class DataLoader<T: Decodable> {
             
             if let data = data {
                 do {
-                    // let dataString = String(data: data, encoding: .utf8)
-                    // print("data string : \(dataString!)")
-                    // print("response status code : \(response.statusCode)")
+                     let dataString = String(data: data, encoding: .utf8)
+                     print("data string : \(dataString!)")
+                     print("response status code : \(response.statusCode)")
                     
-                    if endpoint.method == .delete {
+                    if endpoint.method == .delete || endpoint.method == .patch {
                         completion(.success(nil))
                     } else {
                         completion(.success(try JSONDecoder().decode(T.self, from: data)))
