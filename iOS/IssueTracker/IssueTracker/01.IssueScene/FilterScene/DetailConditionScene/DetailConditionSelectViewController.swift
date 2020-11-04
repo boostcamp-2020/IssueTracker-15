@@ -11,32 +11,20 @@ import UIKit
 class DetailConditionSelectViewController: UIViewController {
     
     @IBOutlet weak var titleNavItem: UINavigationItem!
-    
-    // TODO: Dependency Injection for ContentMode
-    private var contentMode: ComponentStyle
-    private var maximumNumSelected: Int
+
     var onSelectionComplete: (([ConditionCellViewModel]) -> Void)?
     
     // TODO: Dummy Data to ViewModelProtocol
-    private var viewModelDataSource: [[ConditionCellViewModel]]
+    private var viewModel: DetailConditionViewModelProtocol?
     
     @IBOutlet weak var tableView: UITableView!
     
-    init(nibName: String,
-         bundle: Bundle?,
-         contentMode: ComponentStyle,
-         dataSource: [[ConditionCellViewModel]],
-         maximuSelected: Int) {
-        self.contentMode = contentMode
-        self.maximumNumSelected = maximuSelected
-        self.viewModelDataSource = dataSource
+    init(nibName: String, bundle: Bundle?, viewModel: DetailConditionViewModelProtocol) {
+        self.viewModel = viewModel
         super.init(nibName: nibName, bundle: bundle)
     }
     
     required init?(coder: NSCoder) {
-        self.contentMode = .userInfo
-        viewModelDataSource = [[], []]
-        self.maximumNumSelected = 1
         super.init(coder: coder)
     }
     
@@ -44,6 +32,11 @@ class DetailConditionSelectViewController: UIViewController {
         super.viewDidLoad()
         configureTableView()
         titleNavItem.title = title
+        viewModel?.didChanged = { (from, to) in
+            guard let cell = self.tableView.cellForRow(at: from) as? DetailConditionSelectCellView else { return }
+            self.tableView.moveRow(at: from, to: to)
+            cell.setCheck(to.section == 0)
+        }
     }
     
     private func configureTableView() {
@@ -63,9 +56,8 @@ extension DetailConditionSelectViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        // TODO: 선택된 항목 delegate or closure를 통해 반환
         dismiss(animated: true, completion: nil)
-        onSelectionComplete?(viewModelDataSource[0])
+        onSelectionComplete?(viewModel?.result ?? [])
     }
     
 }
@@ -75,29 +67,7 @@ extension DetailConditionSelectViewController {
 extension DetailConditionSelectViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let indexPathFrom = indexPath
-        let indexPathTo: IndexPath
-        let cell = tableView.cellForRow(at: indexPath) as? DetailConditionSelectCellView
-        
-        let source = indexPath.section
-        let dest = source == 0 ? 1 : 0
-        indexPathTo = IndexPath(row: viewModelDataSource[dest].count, section: dest)
-        
-        let data = viewModelDataSource[source].remove(at: indexPath.row)
-        viewModelDataSource[dest].append(data)
-        tableView.moveRow(at: indexPathFrom, to: indexPathTo)
-        cell?.setCheck(dest == 0)
-        
-        if viewModelDataSource[0].count > maximumNumSelected {
-            let indexPathFrom = IndexPath(row: 0, section: 0)
-            let indexPathTo = IndexPath(row: viewModelDataSource[1].count, section: 1)
-            let cell = tableView.cellForRow(at: indexPathFrom) as? DetailConditionSelectCellView
-            
-            let data = viewModelDataSource[0].remove(at: 0)
-            viewModelDataSource[1].append(data)
-            tableView.moveRow(at: indexPathFrom, to: indexPathTo)
-            cell?.setCheck(false)
-        }
+        viewModel?.select(at: indexPath)
     }
     
 }
@@ -111,11 +81,11 @@ extension DetailConditionSelectViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Choosen (max: \(maximumNumSelected))" : "Unchoosen"
+        return section == 0 ? "Choosen" : "Unchoosen"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModelDataSource[safe: section]?.count ?? 0
+        return viewModel?.numberOfDatas(at: section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -123,10 +93,10 @@ extension DetailConditionSelectViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cellViewModel = viewModelDataSource[safe: indexPath.section]?[safe: indexPath.row],
+        guard let viewModel = viewModel,
               let cell: DetailConditionSelectCellView = tableView.dequeueCell(at: indexPath)
         else { return UITableViewCell() }
-        cell.configure(type: contentMode, viewModel: cellViewModel)
+        cell.configure(type: viewModel.detailCondition.cellStyle, viewModel: viewModel.cellForRow(at: indexPath))
         cell.setCheck(indexPath.section == 0)
         return cell
     }
@@ -140,16 +110,8 @@ extension DetailConditionSelectViewController {
     static let nibName = "DetailConditionSelectViewController"
     
     // TODO: Dependency Injection ( ViewModels )
-    static func createViewController(contentMode: ComponentStyle,
-                                     title: String,
-                                     dataSource: [[ConditionCellViewModel]],
-                                     maximumSelected: Int) -> DetailConditionSelectViewController {
-        let vc = DetailConditionSelectViewController(nibName: nibName,
-                                                     bundle: Bundle.main,
-                                                     contentMode: contentMode,
-                                                     dataSource: dataSource,
-                                                     maximuSelected: maximumSelected)
-        vc.title = title
+    static func createViewController(with viewModel: DetailConditionViewModelProtocol) -> DetailConditionSelectViewController {
+        let vc = DetailConditionSelectViewController(nibName: nibName, bundle: Bundle.main, viewModel: viewModel)
         return vc
     }
     

@@ -16,21 +16,6 @@ protocol IssueFilterViewModelProtocol: AnyObject {
     func detailConditionDataSource(of type: DetailCondition) -> [[ConditionCellViewModel]]
 }
 
-enum Condition: Int, CaseIterable {
-    case issueOpened = 0
-    case issueFromMe = 1
-    case issueAssignedToMe = 2
-    case issueCommentedByMe = 3
-    case issueClosed = 4
-}
-
-enum DetailCondition: Int, CaseIterable {
-    case writer = 0
-    case label = 1
-    case milestone = 2
-    case assignee = 3
-}
-
 class IssueFilterViewModel: IssueFilterViewModelProtocol {
     
     private weak var labelProvider: LabelProvidable?

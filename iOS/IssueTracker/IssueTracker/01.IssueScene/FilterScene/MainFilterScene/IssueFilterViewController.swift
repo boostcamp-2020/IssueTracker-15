@@ -93,17 +93,7 @@ extension IssueFilterViewController {
         guard let filterViewModel = filterViewModel,
               let cellViewModel = filterViewModel.detailCondition(of: type)
         else { return }
-
-        let style: ComponentStyle
-        switch type {
-        case .assignee, .writer:
-            style = .userInfo
-        case .label:
-            style = .label
-        case .milestone:
-            style = .milestone
-        }
-        cell.configure(style: style, viewModel: cellViewModel)
+        cell.configure(style: type.cellStyle, viewModel: cellViewModel)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -132,33 +122,14 @@ extension IssueFilterViewController {
         guard let cell = cell as? DetailFilterCellView,
               let dataSource = filterViewModel?.detailConditionDataSource(of: type) else { return }
         
-        // TODO: detail Condition Select ViewController 에서 사용할 모델 생각해보기
-        let componentStyle: ComponentStyle
-        let title: String
-        switch type {
-        case .assignee:
-            componentStyle = .userInfo
-            title = "담당자"
-        case .label:
-            componentStyle = .label
-            title = "레이블"
-        case .milestone:
-            componentStyle = .milestone
-            title = "마일스톤"
-        case .writer:
-            componentStyle = .userInfo
-            title = "작성자"
-        }
-        
-        let vc = DetailConditionSelectViewController.createViewController(contentMode: componentStyle,
-                                                                          title: title,
-                                                                          dataSource: dataSource,
-                                                                          maximumSelected: 1)
+        let viewModel = DetailConditionViewModel(detailCondition: type, viewModelDataSource: dataSource, maxSelection: 1)
+        let vc = DetailConditionSelectViewController.createViewController(with: viewModel)
         
         vc.onSelectionComplete = { selected in
             self.filterViewModel?.detailConditionSelected(at: type, id: selected[safe: 0]?.id)
-            cell.configure(style: componentStyle, viewModel: selected[safe: 0])
+            cell.configure(style: type.cellStyle, viewModel: selected[safe: 0])
         }
         present(vc, animated: true)
     }
+    
 }
