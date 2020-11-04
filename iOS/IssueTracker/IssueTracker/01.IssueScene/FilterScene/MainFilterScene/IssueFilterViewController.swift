@@ -134,7 +134,7 @@ extension IssueFilterViewController {
             title = "작성자"
         }
         
-        let vc = DetailFilterViewController.createViewController(contentMode: type, title: title, maximumSelected: 1)
+        let vc = DetailConditionSelectViewController.createViewController(contentMode: type, title: title, maximumSelected: 1)
         vc.onSelectionComplete = { selected in
             cell.configure(type: type, viewModel: selected[safe: 0])
         }

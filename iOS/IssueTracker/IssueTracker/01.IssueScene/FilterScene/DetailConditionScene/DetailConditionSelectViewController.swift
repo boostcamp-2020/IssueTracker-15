@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailFilterViewController: UIViewController {
+class DetailConditionSelectViewController: UIViewController {
     
     @IBOutlet weak var titleNavItem: UINavigationItem!
     
@@ -66,7 +66,7 @@ class DetailFilterViewController: UIViewController {
 
 // MARK: - Actions
 
-extension DetailFilterViewController {
+extension DetailConditionSelectViewController {
     
     @IBAction func cancleButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -82,7 +82,7 @@ extension DetailFilterViewController {
 
 // MARK: - UITableViewDelegate Implementation
 
-extension DetailFilterViewController: UITableViewDelegate {
+extension DetailConditionSelectViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexPathFrom = indexPath
@@ -114,7 +114,7 @@ extension DetailFilterViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource Implementation
 
-extension DetailFilterViewController: UITableViewDataSource {
+extension DetailConditionSelectViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -145,13 +145,13 @@ extension DetailFilterViewController: UITableViewDataSource {
 
 // MARK: - Load From Nib
 
-extension DetailFilterViewController {
+extension DetailConditionSelectViewController {
     
     static let nibName = "DetailFilterViewController"
     
     // TODO: Dependency Injection ( ViewModels )
-    static func createViewController(contentMode: ComponentStyle, title: String, maximumSelected: Int) -> DetailFilterViewController {
-        let vc = DetailFilterViewController(nibName: nibName,
+    static func createViewController(contentMode: ComponentStyle, title: String, maximumSelected: Int) -> DetailConditionSelectViewController {
+        let vc = DetailConditionSelectViewController(nibName: nibName,
                                                      bundle: Bundle.main,
                                                      contentMode: contentMode,
                                                      maximuSelected: maximumSelected)

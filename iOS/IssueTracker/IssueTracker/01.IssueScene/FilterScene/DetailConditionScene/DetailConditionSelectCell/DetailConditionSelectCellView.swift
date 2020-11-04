@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConditionCellView: UITableViewCell {
+class DetailConditionSelectCellView: UITableViewCell {
     
     @IBOutlet weak var checkImage: UIImageView!
     
@@ -61,7 +61,7 @@ class ConditionCellView: UITableViewCell {
 
 // MARK: - UITableViewRegistable Implementation
 
-extension ConditionCellView: UITableViewRegisterable {
+extension DetailConditionSelectCellView: UITableViewRegisterable {
     static var cellIdentifier: String {
         return "ConditionCellView"
     }
