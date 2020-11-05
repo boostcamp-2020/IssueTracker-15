@@ -21,13 +21,16 @@
     "@types/react-dom": "^16.9.9",
     "babel-loader": "^8.1.0",
     "html-webpack-plugin": "^4.5.0",
+    "styled-components": "^5.2.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@types/styled-components": "^5.1.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "styled-reset": "^4.3.0"
   }
 }

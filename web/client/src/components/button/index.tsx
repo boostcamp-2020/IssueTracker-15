@@ -5,12 +5,10 @@ interface ButtonProps {
   value: string;
   color: string;
 }
-const Button: React.FC<ButtonProps> = ({ value, color }) => {
+export default function Button({ value, color }: ButtonProps) {
   return (
     <>
       <S.CustomButton color={color}>{value}</S.CustomButton>
     </>
   );
-};
-
-export default Button;
+}

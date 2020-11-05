@@ -3,7 +3,7 @@ import * as S from "./style";
 
 interface HeaderProps {}
 
-const Header: React.FC<HeaderProps> = () => {
+export default function Header() {
   return (
     <>
       <S.Header>
@@ -19,6 +19,4 @@ const Header: React.FC<HeaderProps> = () => {
       </S.Header>
     </>
   );
-};
-
-export default Header;
+}
