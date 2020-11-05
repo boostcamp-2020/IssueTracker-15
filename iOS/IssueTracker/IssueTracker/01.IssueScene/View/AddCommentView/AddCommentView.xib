@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="AddCommentView" id="i5M-Pr-FkT" customClass="AddCommentView" customModule="IssueTracker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qKZ-un-zM2" userLabel="Bar">
+                    <rect key="frame" x="165.5" y="54" width="83" height="5"/>
+                    <color key="backgroundColor" red="0.7882803679" green="0.79212182760000005" blue="0.80783921479999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="5" id="xX3-O3-ymI"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foy-rZ-nQ4" userLabel="Add Comment Button">
+                    <rect key="frame" x="10" y="69" width="291" height="41.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="댓글 추가"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="addCommentButtonTapped:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="wkv-AM-D0j"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nE5-uG-pPY" userLabel="Down Button">
+                    <rect key="frame" x="352.5" y="69" width="41.5" height="41.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="nE5-uG-pPY" secondAttribute="height" multiplier="1:1" id="syK-IR-eMi"/>
+                    </constraints>
+                    <state key="normal" image="chevron.down" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="downButtonTapped:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="1aS-1z-Rzb"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ga9-Pf-fmR" userLabel="Up Button">
+                    <rect key="frame" x="311" y="69" width="41.5" height="41.5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ga9-Pf-fmR" secondAttribute="height" multiplier="1:1" id="bdq-vY-lFv"/>
+                    </constraints>
+                    <state key="normal" image="chevron.up" catalog="system"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="upButtonTapped:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="39G-2K-t9n"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0CJ-Kj-Z3G" userLabel="Close Button">
+                    <rect key="frame" x="10" y="712" width="394" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <state key="normal" title="Close Issue">
+                        <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.96865135430000004" green="0.96860426659999999" blue="0.97646409270000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="0CJ-Kj-Z3G" secondAttribute="bottom" constant="120" id="1lE-P3-rpM"/>
+                <constraint firstItem="qKZ-un-zM2" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="4Hm-pt-yY1"/>
+                <constraint firstItem="nE5-uG-pPY" firstAttribute="leading" secondItem="ga9-Pf-fmR" secondAttribute="trailing" id="4L3-5w-B6B"/>
+                <constraint firstItem="nE5-uG-pPY" firstAttribute="top" secondItem="qKZ-un-zM2" secondAttribute="bottom" constant="10" id="BhO-7n-lSb"/>
+                <constraint firstItem="foy-rZ-nQ4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="EJ9-kD-pL9"/>
+                <constraint firstItem="nE5-uG-pPY" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.1" id="Il6-Ib-mnI"/>
+                <constraint firstItem="0CJ-Kj-Z3G" firstAttribute="height" secondItem="foy-rZ-nQ4" secondAttribute="height" multiplier="0.722892" id="Kxg-Kj-P3f"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nE5-uG-pPY" secondAttribute="trailing" constant="20" id="ekq-va-WWX"/>
+                <constraint firstItem="ga9-Pf-fmR" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.1" id="fLa-7e-Mnd"/>
+                <constraint firstItem="foy-rZ-nQ4" firstAttribute="height" secondItem="ga9-Pf-fmR" secondAttribute="height" id="g2f-gG-z7I"/>
+                <constraint firstItem="qKZ-un-zM2" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.2" id="hKR-bv-lij"/>
+                <constraint firstItem="nE5-uG-pPY" firstAttribute="centerY" secondItem="foy-rZ-nQ4" secondAttribute="centerY" id="kL6-Ym-C40"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0CJ-Kj-Z3G" secondAttribute="trailing" constant="10" id="mjf-Nu-dgW"/>
+                <constraint firstItem="ga9-Pf-fmR" firstAttribute="leading" secondItem="foy-rZ-nQ4" secondAttribute="trailing" constant="10" id="u7i-sw-xAM"/>
+                <constraint firstItem="qKZ-un-zM2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vt5-FA-im6"/>
+                <constraint firstItem="ga9-Pf-fmR" firstAttribute="centerY" secondItem="foy-rZ-nQ4" secondAttribute="centerY" id="wgc-HK-fAP"/>
+                <constraint firstItem="0CJ-Kj-Z3G" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="z5Q-nH-xEi"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="5"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="addCommentButton" destination="foy-rZ-nQ4" id="JLI-gG-rsJ"/>
+                <outlet property="barView" destination="qKZ-un-zM2" id="2jp-qV-VxV"/>
+                <outlet property="downButton" destination="nE5-uG-pPY" id="Zl2-kJ-j9N"/>
+                <outlet property="upButton" destination="ga9-Pf-fmR" id="xae-FJ-T5g"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="152.67857142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="chevron.up" catalog="system" width="128" height="72"/>
+    </resources>
+</document>

@@ -30,7 +30,7 @@ class LabelListViewController: UIViewController {
         setupCollectionViewLayout()
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(type: LabelCellView.self)
+        collectionView.registerCell(type: LabelCellView.self)
     }
     
     private func setupCollectionViewLayout() {

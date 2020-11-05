@@ -9,7 +9,7 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-
+    
     enum ViewingMode {
         case general
         case edit
@@ -23,7 +23,7 @@ class IssueListViewController: UIViewController {
     
     var issueListViewModel: IssueListViewModel?
     private var viewingMode: ViewingMode = .general
-
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "이슈"
@@ -50,7 +50,11 @@ class IssueListViewController: UIViewController {
     private func configureCollectionView() {
         setupCollectionViewLayout()
         collectionView.dataSource = self
-        collectionView.register(type: IssueCellView.self)
+        collectionView.registerCell(type: IssueCellView.self)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.didSelectCell(_:)))
+        self.collectionView.addGestureRecognizer(tap)
+        self.collectionView.isUserInteractionEnabled = true
     }
     
     private func setupCollectionViewLayout() {
@@ -66,6 +70,11 @@ class IssueListViewController: UIViewController {
 // MARK: - Actions
 
 extension IssueListViewController {
+    @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
+        guard self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) != nil else { return }
+        let issueDetailVC = IssueDetailViewController.createViewController()
+        self.navigationController?.pushViewController(issueDetailVC, animated: true)
+    }
     
     @IBAction func rightNavButtonTapped(_ sender: Any) {
         switch viewingMode {
@@ -87,7 +96,7 @@ extension IssueListViewController {
     }
     
     @IBAction func closeAllSelectedIssueButtonTapped(_ sender: Any) {
-    
+        
     }
     
     private func toEditMode() {
@@ -113,7 +122,6 @@ extension IssueListViewController {
             cell.showCheckBox(show: false, animation: true)
         }
     }
-
 }
 
 // MARK: - Segue Action
@@ -145,7 +153,6 @@ extension IssueListViewController {
 // MARK: - UICollectionViewDataSource Implementation
 
 extension IssueListViewController: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath),
               let cellViewModel = issueListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
@@ -157,5 +164,4 @@ extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return issueListViewModel?.numberOfItem() ?? 0
     }
-    
 }

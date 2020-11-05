@@ -70,7 +70,6 @@ class MilestoneProvider: MilestoneProvidable {
         
         let endPoint = MilestoneEndPoint(requestType: .edit, parameter: String(id))
         let editingMilestone = Milestone(id: id, title: title, description: description, dueDate: dueDate, openIssuesLength: openIssuesLength, closeIssueLength: closeIssueLength)
-        print("editing : \(editingMilestone)")
         endPoint.httpBody = JSONEncoder.encode(data: editingMilestone)
         
         dataLoader?.request(Milestone.self, endpoint: endPoint, completion: { (result) in

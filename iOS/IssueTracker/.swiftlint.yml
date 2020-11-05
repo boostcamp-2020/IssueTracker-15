@@ -9,6 +9,8 @@ disabled_rules:
 - identifier_name
 - todo
 - function_parameter_count
+- line_length
+- type_name
 
 force_cast: warning
 line_length: 250
