@@ -12,18 +12,15 @@ import MilestonePage from './views/milestone';
 
 const App = () => {
   return (
-    <>
-      <Reset />
-      <Switch>
-        <Route path="/milestone/new" component={CreateMilestonePage} />
-        <Route path="/milestone" component={MilestonePage} />
-        <Route path="/label" component={LabelPage} />
-        <Route path="/issue/new" exact={true} component={CreateIssuePage} />
-        <Route path="/issue/:id" component={DetailIssuePage} />
-        <Route path="/issue" exact={true} component={IssuePage} />
-        <Redirect from="*" to="/issue" />
-      </Switch>
-    </>
+    <Switch>
+      <Route path="/milestone/new" component={CreateMilestonePage} />
+      <Route path="/milestone" component={MilestonePage} />
+      <Route path="/label" component={LabelPage} />
+      <Route path="/issue/new" component={CreateIssuePage} />
+      <Route path="/issue/:id" component={DetailIssuePage} />
+      <Route path="/issue" component={IssuePage} />
+      <Redirect from="*" to="/issue" />
+    </Switch>
   );
 };
 
