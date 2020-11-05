@@ -18,7 +18,10 @@ class IssueDetailViewController: UIViewController {
     ]
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var addCommentView: AddCommentView?
+    private var addCommentView: AddCommentView?
+    private var issueDetailViewModel: IssueDetailViewModel?
+    private var currentIssueId: Int = -1
+    private var didFetchDetails: Bool = false
     
     private var currentIndexPath: IndexPath? {
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.frame.size)
@@ -30,20 +33,25 @@ class IssueDetailViewController: UIViewController {
         }
     }
     
+    init(currentIssueId: Int, issueDetailViewModel: IssueDetailViewModel) {
+        self.currentIssueId = currentIssueId
+        self.issueDetailViewModel = issueDetailViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        hidesBottomBarWhenPushed = true
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        hidesBottomBarWhenPushed = true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = false
         configureNavigationBarButtons()
+        configureIssueDetailViewModel()
     }
     
     override func viewDidLayoutSubviews() {
@@ -53,6 +61,12 @@ class IssueDetailViewController: UIViewController {
     private func configureNavigationBarButtons() {
         configureBackButton()
         configureEditButton()
+    }
+    
+    private func configureIssueDetailViewModel() {
+        issueDetailViewModel?.didFetch = { [weak self] in
+            self?.didFetchDetails = true
+        }
     }
     
     private func configureBackButton() {
@@ -67,8 +81,9 @@ class IssueDetailViewController: UIViewController {
     }
     
     @objc func backButtonTapped(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.popViewController(animated: true)
     }
     
     private func configureCollectionView() {
@@ -88,6 +103,7 @@ class IssueDetailViewController: UIViewController {
     }
     
     private func configureBottomSheetView() {
+        self.tabBarController?.tabBar.isHidden = true
         addCommentView = AddCommentView.createView()
         let height = view.frame.height
         let width  = view.frame.width
@@ -152,7 +168,17 @@ extension IssueDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        guard let header: IssueDetailHeaderView = collectionView.dequeueHeader(at: indexPath) else { return UICollectionReusableView() }
+        guard let header: IssueDetailHeaderView = collectionView.dequeueHeader(at: indexPath),
+            let issueDetailViewModel = issueDetailViewModel
+            else { return UICollectionReusableView() }
+        
+        if didFetchDetails {
+            header.configure(with: issueDetailViewModel)
+        } else {
+            issueDetailViewModel.needFetchDetails(with: currentIssueId)
+            header.configure(with: issueDetailViewModel)
+        }
+        
         return header
     }
     
@@ -164,8 +190,8 @@ extension IssueDetailViewController: UICollectionViewDataSource {
 extension IssueDetailViewController {
     static let nibName = "IssueDetailViewController"
     
-    static func createViewController() -> IssueDetailViewController {
-        let vc = IssueDetailViewController(nibName: nibName, bundle: Bundle.main)
+    static func createViewController(currentIssueId: Int, issueDetailViewModel: IssueDetailViewModel) -> IssueDetailViewController {
+        let vc = IssueDetailViewController(currentIssueId: currentIssueId, issueDetailViewModel: issueDetailViewModel)
         return vc
     }
 }

@@ -13,8 +13,8 @@
             <rect key="frame" x="0.0" y="0.0" width="470" height="257"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swF-Ki-5s6" userLabel="Issue Assignee">
-                    <rect key="frame" x="67" y="15" width="20" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swF-Ki-5s6" userLabel="Issue Author">
+                    <rect key="frame" x="67" y="28" width="20" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -62,11 +62,17 @@
                 <constraint firstItem="TIo-KR-UoL" firstAttribute="width" secondItem="U6b-Vx-4bR" secondAttribute="width" multiplier="0.1" id="PiH-iV-Ohw"/>
                 <constraint firstItem="DQ8-pu-lg7" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="10" id="WAA-3O-h6x"/>
                 <constraint firstAttribute="trailing" secondItem="ffa-ud-S2G" secondAttribute="trailing" constant="10" id="Xgc-wV-seR"/>
-                <constraint firstItem="swF-Ki-5s6" firstAttribute="top" secondItem="TIo-KR-UoL" secondAttribute="top" id="hgz-MF-OeM"/>
+                <constraint firstItem="swF-Ki-5s6" firstAttribute="centerY" secondItem="TIo-KR-UoL" secondAttribute="centerY" id="fOd-32-NHJ"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="DQ8-pu-lg7" secondAttribute="bottom" constant="10" id="kTm-Da-SNT"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="gDF-Uv-gPE" secondAttribute="trailing" constant="10" id="orJ-Pp-aIX"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="issueAuthor" destination="swF-Ki-5s6" id="Mzn-xQ-ytJ"/>
+                <outlet property="issueBadge" destination="DQ8-pu-lg7" id="NrX-gL-iHv"/>
+                <outlet property="issueNumber" destination="ffa-ud-S2G" id="XOL-O6-W0t"/>
+                <outlet property="issueTitle" destination="gDF-Uv-gPE" id="rkM-l9-FHb"/>
+            </connections>
             <point key="canvasLocation" x="240.57971014492756" y="213.95089285714286"/>
         </collectionReusableView>
     </objects>
