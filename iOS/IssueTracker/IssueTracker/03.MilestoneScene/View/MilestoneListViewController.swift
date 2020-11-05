@@ -11,12 +11,18 @@ import UIKit
 class MilestoneListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var milestoneListViewModel: MilestoneListViewModelProtocol?
+    
+    var milestoneListViewModel: MilestoneListViewModelProtocol? {
+        didSet {
+            milestoneListViewModel?.didFetch = { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        configureMilestoneListViewModel()
         milestoneListViewModel?.needFetchItems()
         title = "마일스톤"
     }
@@ -26,12 +32,6 @@ class MilestoneListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerCell(type: MilestoneCellView.self)
-    }
-    
-    private func configureMilestoneListViewModel() {
-        milestoneListViewModel?.didFetch = { [weak self] in
-            self?.collectionView.reloadData()
-        }
     }
     
     private func setupCollectionViewLayout() {
