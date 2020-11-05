@@ -15,16 +15,26 @@ class DetailConditionSelectViewController: UIViewController {
     var onSelectionComplete: (([CellComponentViewModel]) -> Void)?
     
     // TODO: Dummy Data to ViewModelProtocol
-    private var viewModel: DetailConditionViewModelProtocol?
+    private var viewModel: DetailConditionViewModelProtocol
     
     @IBOutlet weak var tableView: UITableView!
     
     init(nibName: String, bundle: Bundle?, viewModel: DetailConditionViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nibName, bundle: bundle)
+        configureViewModel()
+    }
+    
+    private func configureViewModel() {
+        viewModel.didChanged = { (from, to) in
+            guard let cell = self.tableView.cellForRow(at: from) as? DetailConditionSelectCellView else { return }
+            self.tableView.moveRow(at: from, to: to)
+            cell.setCheck(to.section == 0)
+        }
     }
     
     required init?(coder: NSCoder) {
+        self.viewModel = DetailConditionViewModel(detailCondition: .writer, viewModelDataSource: [[], []], maxSelection: 0)
         super.init(coder: coder)
     }
     
@@ -32,11 +42,6 @@ class DetailConditionSelectViewController: UIViewController {
         super.viewDidLoad()
         configureTableView()
         titleNavItem.title = title
-        viewModel?.didChanged = { (from, to) in
-            guard let cell = self.tableView.cellForRow(at: from) as? DetailConditionSelectCellView else { return }
-            self.tableView.moveRow(at: from, to: to)
-            cell.setCheck(to.section == 0)
-        }
     }
     
     private func configureTableView() {
@@ -57,7 +62,7 @@ extension DetailConditionSelectViewController {
     
     @IBAction func doneButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-        onSelectionComplete?(viewModel?.result ?? [])
+        onSelectionComplete?(viewModel.result)
     }
     
 }
@@ -67,7 +72,7 @@ extension DetailConditionSelectViewController {
 extension DetailConditionSelectViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel?.select(at: indexPath)
+        viewModel.select(at: indexPath)
     }
     
 }
@@ -85,7 +90,7 @@ extension DetailConditionSelectViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.numberOfDatas(at: section) ?? 0
+        return viewModel.numberOfDatas(at: section)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -93,8 +98,7 @@ extension DetailConditionSelectViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let viewModel = viewModel,
-              let cell: DetailConditionSelectCellView = tableView.dequeueCell(at: indexPath)
+        guard let cell: DetailConditionSelectCellView = tableView.dequeueCell(at: indexPath)
         else { return UITableViewCell() }
         cell.configure(type: viewModel.detailCondition.cellStyle, viewModel: viewModel.cellForRow(at: indexPath))
         cell.setCheck(indexPath.section == 0)
