@@ -21,7 +21,6 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var bottomToolBar: UIToolbar!
     @IBOutlet weak var addIssueButton: UIButton!
     
-    var issueListViewModel: IssueListViewModel?
     var issueDetailViewModel: IssueDetailViewModel?
     private var viewingMode: ViewingMode = .general
     var issueListViewModel: IssueListViewModel? {
