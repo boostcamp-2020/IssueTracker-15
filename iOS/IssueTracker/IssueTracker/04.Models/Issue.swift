@@ -41,10 +41,10 @@ struct Issue {
     }
     
     // TODO: mock init 삭제할 것!
-    init(id: Int, title: String, description: String, labels: [Int], milestone: Int? = nil) {
+    init(id: Int, title: String, description: String, labels: [Int], milestone: Int? = nil, author: String) {
         self.id = id
         self.title = title
-        self.author = ""
+        self.author = author
         self.milestone = milestone
         self.description = description
         self.createdAt = ""

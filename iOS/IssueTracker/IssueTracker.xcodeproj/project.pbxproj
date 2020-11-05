@@ -18,6 +18,7 @@
 		950EA05D2547FFA0005BE133 /* LabelCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 950EA05B2547FFA0005BE133 /* LabelCellView.xib */; };
 		950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EB00C254A8DE2004857C2 /* MilestoneListViewModel.swift */; };
 		950EB00F254A94D0004857C2 /* UILabel+FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EB00E254A94D0004857C2 /* UILabel+FontSize.swift */; };
+		950F750A2553EB7400F5A43C /* IssueDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F75092553EB7400F5A43C /* IssueDetailViewModel.swift */; };
 		951341C22553026600EDFB83 /* AddCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 951341C02553026600EDFB83 /* AddCommentView.xib */; };
 		9521FCB9254FE7FE00FC0220 /* NetworkFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9521FCB0254FE7FD00FC0220 /* NetworkFramework.framework */; };
 		9521FCC0254FE7FE00FC0220 /* NetworkFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521FCBF254FE7FE00FC0220 /* NetworkFrameworkTests.swift */; };
@@ -180,6 +181,7 @@
 		950EA05B2547FFA0005BE133 /* LabelCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelCellView.xib; sourceTree = "<group>"; };
 		950EB00C254A8DE2004857C2 /* MilestoneListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneListViewModel.swift; sourceTree = "<group>"; };
 		950EB00E254A94D0004857C2 /* UILabel+FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+FontSize.swift"; sourceTree = "<group>"; };
+		950F75092553EB7400F5A43C /* IssueDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewModel.swift; sourceTree = "<group>"; };
 		951341C02553026600EDFB83 /* AddCommentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCommentView.xib; sourceTree = "<group>"; };
 		9521FCB0254FE7FD00FC0220 /* NetworkFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9521FCB2254FE7FD00FC0220 /* NetworkFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkFramework.h; sourceTree = "<group>"; };
@@ -328,8 +330,6 @@
 				9508B81F2552A3620015C636 /* IssueDetailHeaderView.xib */,
 				9508B8222552A71A0015C636 /* IssueDetailCellView.swift */,
 				9508B8232552A71A0015C636 /* IssueDetailCellView.xib */,
-				955CB16E2553C2B200B99093 /* IssueDetailViewController.swift */,
-				955CB16F2553C2B200B99093 /* IssueDetailViewController.xib */,
 			);
 			path = IssueDetailView;
 			sourceTree = "<group>";
@@ -351,6 +351,34 @@
 				952FF3D82548142E0042A96F /* LabelCell */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		950F750B2553FD1A00F5A43C /* IssueDetailScene */ = {
+			isa = PBXGroup;
+			children = (
+				955CB16E2553C2B200B99093 /* IssueDetailViewController.swift */,
+				955CB16F2553C2B200B99093 /* IssueDetailViewController.xib */,
+				9508B8262552DB980015C636 /* AddCommentView */,
+				9508B81D2552A33B0015C636 /* IssueDetailView */,
+			);
+			path = IssueDetailScene;
+			sourceTree = "<group>";
+		};
+		950F750C2553FD4500F5A43C /* IssueListScene */ = {
+			isa = PBXGroup;
+			children = (
+				96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */,
+				96F95C03254EA6D000EC00C6 /* IssueCellView */,
+			);
+			path = IssueListScene;
+			sourceTree = "<group>";
+		};
+		950F750D2553FD5100F5A43C /* IssueEditScene */ = {
+			isa = PBXGroup;
+			children = (
+				957D8220255060DA0033484F /* AddNewIssueViewController.swift */,
+			);
+			path = IssueEditScene;
 			sourceTree = "<group>";
 		};
 		9521FCB1254FE7FD00FC0220 /* NetworkFramework */ = {
@@ -722,8 +750,10 @@
 		96F95BF5254E691500EC00C6 /* 01.IssueScene */ = {
 			isa = PBXGroup;
 			children = (
+				950F750D2553FD5100F5A43C /* IssueEditScene */,
+				950F750C2553FD4500F5A43C /* IssueListScene */,
+				950F750B2553FD1A00F5A43C /* IssueDetailScene */,
 				965F09752550589F00B3A248 /* FilterScene */,
-				96F95BF7254E692F00EC00C6 /* View */,
 				96F95BF6254E692800EC00C6 /* ViewModel */,
 			);
 			path = 01.IssueScene;
@@ -734,20 +764,9 @@
 			children = (
 				965A4DE52552BF1200A4A7D7 /* IssueListViewModel.swift */,
 				965A4DEA2552C28300A4A7D7 /* IssueItemViewModel.swift */,
+				950F75092553EB7400F5A43C /* IssueDetailViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		96F95BF7254E692F00EC00C6 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				9508B8262552DB980015C636 /* AddCommentView */,
-				9508B81D2552A33B0015C636 /* IssueDetailView */,
-				96F95C03254EA6D000EC00C6 /* IssueCellView */,
-				96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */,
-				957D8220255060DA0033484F /* AddNewIssueViewController.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		96F95C03254EA6D000EC00C6 /* IssueCellView */ = {
@@ -1071,7 +1090,6 @@
 				965A4DDE2552AFC300A4A7D7 /* IssueProvider.swift in Sources */,
 				96AD640B2551579D00B16BD3 /* IssueTrackerEndPoint.swift in Sources */,
 				9627A5A825506985000BFF4D /* UITableView+Registerable.swift in Sources */,
-				9627A5AC255087FF000BFF4D /* DetailConditionSelectCellView.swift in Sources */,
 				95C36592254A76BB008ACCB5 /* MilestoneCellView.swift in Sources */,
 				96DD118B2550F3930065F44A /* CellComponentViewModel.swift in Sources */,
 				96A58F3F254A6C2500248F1E /* Date+.swift in Sources */,
@@ -1084,6 +1102,7 @@
 				963A1A9A25524634003E2BBB /* CellComponentProtocol.swift in Sources */,
 				966ADAE8254D9BD400A480DD /* LabelSubmitFieldsView.swift in Sources */,
 				96A519BE255151AB00A162B0 /* LabelProvider.swift in Sources */,
+				950F750A2553EB7400F5A43C /* IssueDetailViewModel.swift in Sources */,
 				96A58F3D254A6A3300248F1E /* DateFormatter+.swift in Sources */,
 				95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */,
 				95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */,
