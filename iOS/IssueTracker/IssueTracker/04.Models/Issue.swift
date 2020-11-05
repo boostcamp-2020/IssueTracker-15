@@ -52,6 +52,7 @@ struct Issue {
         self.labels = labels
         self.assignees = []
         self.isOpened = true
+        
     }
     
     init?(json: [String: Any]) {

@@ -81,7 +81,7 @@ extension DetailConditionSelectViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Choosen" : "Unchoosen"
+        return section == 0 ? "chosen" : "unchosen"
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
