@@ -12,14 +12,14 @@ class DetailFilterCellView: UITableViewCell {
     
     private var component: CellComponentProtocol?
     
-    func configure(type: ComponentStyle, viewModel: ConditionCellViewModel?) {
+    func configure(style: ComponentStyle, viewModel: ConditionCellViewModel?) {
         guard let viewModel = viewModel else {
             component?.contentView.removeFromSuperview()
             return
         }
         
         if component == nil {
-            configureComponent(type: type)
+            configureComponent(type: style)
         }
         
         component?.configure(viewModel: viewModel)

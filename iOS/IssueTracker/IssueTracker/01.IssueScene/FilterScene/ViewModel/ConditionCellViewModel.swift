@@ -9,22 +9,26 @@
 import UIKit
 
 struct ConditionCellViewModel {
+    let id: Int
     let title: String
     let element: String
     
     init(title: String, element: String) {
+        self.id = 0
         self.title = title
         self.element = element
     }
     
     init(label: Label) {
+        id = label.id
         title = label.title
         element = label.hexColor
     }
     
     init(milestone: Milestone) {
+        id = milestone.id
         title = milestone.title
-        element = milestone.dueDate ?? ""
+        element = milestone.dueDate
     }
     
     // TODO:
