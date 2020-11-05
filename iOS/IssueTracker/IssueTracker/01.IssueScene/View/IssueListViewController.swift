@@ -46,16 +46,6 @@ class IssueListViewController: UIViewController {
         self.collectionView.isUserInteractionEnabled = true
     }
     
-    @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        guard self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) != nil,
-        let issueDetailVC = storyboard.instantiateViewController(withIdentifier: IssueDetailViewController.identifier) as? IssueDetailViewController
-        else { return }
-        
-        self.navigationController?.pushViewController(issueDetailVC, animated: true)
-    }
-    
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
         let cellHeight = self.view.bounds.height / 10
@@ -68,6 +58,15 @@ class IssueListViewController: UIViewController {
 
 // MARK: - Actions
 extension IssueListViewController {
+    @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        guard self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) != nil,
+        let issueDetailVC = storyboard.instantiateViewController(withIdentifier: IssueDetailViewController.identifier) as? IssueDetailViewController
+        else { return }
+        
+        self.navigationController?.pushViewController(issueDetailVC, animated: true)
+    }
     
     @IBAction func rightNavButtonTapped(_ sender: Any) {
         switch viewingMode {

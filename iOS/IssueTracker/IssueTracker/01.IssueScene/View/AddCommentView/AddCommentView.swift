@@ -1,5 +1,5 @@
 //
-//  AddCommentViewController.swift
+//  AddCommentView.swift
 //  IssueTracker
 //
 //  Created by sihyung you on 2020/11/05.
@@ -8,8 +8,7 @@
 
 import UIKit
 
-class AddCommentViewController: UIViewController {
-    static let identifier = "AddCommentViewController"
+class AddCommentView: UIView {
     var upButtonTapped: (() -> Void)?
     var downButtonTapped: (() -> Void)?
     @IBOutlet weak var barView: UIView!
@@ -18,32 +17,38 @@ class AddCommentViewController: UIViewController {
     @IBOutlet weak var downButton: UIButton!
     var fullView: CGFloat = 100
     var partialView: CGFloat {
-        return UIScreen.main.bounds.height - (addCommentButton.frame.maxY + (view.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0))
+        return UIScreen.main.bounds.height - (addCommentButton.frame.maxY + (self.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0))
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func awakeFromNib() {
+        super.awakeFromNib()
         configureGesture()
-        configureLayer()
     }
     
     private func configureGesture() {
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(self.panGesture))
-        view.addGestureRecognizer(gesture)
+        self.addGestureRecognizer(gesture)
     }
-    
-    private func configureLayer() {
-        self.view.layer.cornerRadius = self.view.frame.width * 0.05
+}
+
+// MARK: - loadNIB extension
+extension AddCommentView {
+    static let identifier = "AddCommentView"
+    static func createView() -> AddCommentView? {
+        return Bundle.main.loadNibNamed(AddCommentView.identifier, owner: self, options: nil)?.last as? AddCommentView
     }
-    
+}
+
+// MARK: - Action
+extension AddCommentView {
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
-        let translation = recognizer.translation(in: self.view)
-        let velocity = recognizer.velocity(in: self.view)
-        let y = self.view.frame.minY
+        let translation = recognizer.translation(in: self)
+        let velocity = recognizer.velocity(in: self)
+        let y = self.frame.minY
         
         if ( y + translation.y >= fullView) && (y + translation.y <= partialView ) {
-            self.view.frame = CGRect(x: 0, y: y + translation.y, width: view.frame.width, height: view.frame.height)
-            recognizer.setTranslation(CGPoint.zero, in: self.view)
+            self.frame = CGRect(x: 0, y: y + translation.y, width: self.frame.width, height: self.frame.height)
+            recognizer.setTranslation(CGPoint.zero, in: self)
         }
         
         if recognizer.state == .ended {
@@ -53,9 +58,9 @@ class AddCommentViewController: UIViewController {
             
             UIView.animate(withDuration: duration, delay: 0.0, options: [.allowUserInteraction], animations: {
                 if velocity.y >= 0 {
-                    self.view.frame = CGRect(x: 0, y: self.partialView, width: self.view.frame.width, height: self.view.frame.height)
+                    self.frame = CGRect(x: 0, y: self.partialView, width: self.frame.width, height: self.frame.height)
                 } else {
-                    self.view.frame = CGRect(x: 0, y: self.fullView, width: self.view.frame.width, height: self.view.frame.height)
+                    self.frame = CGRect(x: 0, y: self.fullView, width: self.frame.width, height: self.frame.height)
                 }
                 
             }, completion: nil)
@@ -64,11 +69,11 @@ class AddCommentViewController: UIViewController {
     
     @IBAction func addCommentButtonTapped(_ sender: Any) {
     }
-    
+
     @IBAction func upButtonTapped(_ sender: Any) {
         upButtonTapped?()
     }
-    
+
     @IBAction func downButtonTapped(_ sender: Any) {
         downButtonTapped?()
     }

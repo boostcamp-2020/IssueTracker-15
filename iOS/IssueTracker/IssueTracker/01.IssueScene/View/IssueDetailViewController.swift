@@ -8,7 +8,7 @@
 
 import UIKit
 
-class IssueDetailViewController: UIViewController, UICollectionViewDelegate {
+class IssueDetailViewController: UIViewController {
     static let identifier = "IssueDetailViewController"
     private var cellData = [
         "레이블 전체 목록을 볼 수 있는게 어떨까요 전체 설명이 보여야 선택할 수 있으니까 마크다운 문법을 지원하고 HTML 형태로 보여줘야 할까요",
@@ -18,7 +18,10 @@ class IssueDetailViewController: UIViewController, UICollectionViewDelegate {
     ]
     
     @IBOutlet weak var collectionView: UICollectionView!
-    let addCommentViewController = AddCommentViewController()
+    lazy var addCommentView: AddCommentView? = {
+        return AddCommentView.createView()
+    }()
+    
     private var currentIndexPath: IndexPath? {
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
@@ -63,15 +66,17 @@ class IssueDetailViewController: UIViewController, UICollectionViewDelegate {
     }
     
     private func addBottomSheetView() {
-        addCommentViewController.upButtonTapped = { [weak self] in
+        guard let addCommentView = addCommentView else { return }
+        
+        addCommentView.upButtonTapped = { [weak self] in
             guard let `self` = self,
                 let currentIndexPath = self.currentIndexPath,
                 currentIndexPath.item > 0
                 else { return }
             self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item - 1, section: 0), at: .centeredVertically, animated: true)
         }
-        
-        addCommentViewController.downButtonTapped = { [weak self] in
+
+        addCommentView.downButtonTapped = { [weak self] in
             guard let `self` = self,
                 let currentIndexPath = self.currentIndexPath,
                 currentIndexPath.item < self.cellData.count - 1
@@ -79,10 +84,10 @@ class IssueDetailViewController: UIViewController, UICollectionViewDelegate {
             self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item + 1, section: 0), at: .centeredVertically, animated: true)
         }
         
-        self.view.addSubview(addCommentViewController.view)
+        self.view.addSubview(addCommentView)
         let height = view.frame.height
         let width  = view.frame.width
-        addCommentViewController.view.frame = CGRect(x: 0, y: self.view.frame.maxY * 0.85, width: width, height: height)
+        addCommentView.frame = CGRect(x: 0, y: self.view.frame.maxY * 0.85, width: width, height: height)
     }
     
     private func setupCollectionViewLayout() {
