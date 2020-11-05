@@ -8,13 +8,29 @@
 
 import UIKit
 
+protocol UICollectionViewHeaderRegisterable {
+    static var headerIdentifier: String { get }
+    static var headerNib: UINib { get }
+}
+
 protocol UICollectionViewRegisterable {
     static var cellIdentifier: String { get }
     static var cellNib: UINib { get }
 }
 
 extension UICollectionView {
-    func register(type: UICollectionViewRegisterable.Type) {
+    func registerHeader(type: UICollectionViewHeaderRegisterable.Type) {
+        register(type.headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: type.headerIdentifier)
+    }
+    
+    func dequeueHeader<HeaderType: UICollectionViewHeaderRegisterable>(at indexPath: IndexPath) -> HeaderType? {
+        guard let header = dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderType.headerIdentifier, for: indexPath) as? HeaderType else {
+            return nil
+        }
+        return header
+    }
+    
+    func registerCell(type: UICollectionViewRegisterable.Type) {
         register(type.cellNib, forCellWithReuseIdentifier: type.cellIdentifier)
     }
 

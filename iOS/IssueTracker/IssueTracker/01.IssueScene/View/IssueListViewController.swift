@@ -39,7 +39,7 @@ class IssueListViewController: UIViewController {
     private func configureCollectionView() {
         setupCollectionViewLayout()
         collectionView.dataSource = self
-        collectionView.register(type: IssueCellView.self)
+        collectionView.registerCell(type: IssueCellView.self)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didSelectCell(_:)))
         self.collectionView.addGestureRecognizer(tap)

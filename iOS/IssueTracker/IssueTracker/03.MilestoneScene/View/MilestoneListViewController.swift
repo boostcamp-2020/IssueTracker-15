@@ -25,7 +25,7 @@ class MilestoneListViewController: UIViewController {
         setupCollectionViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(type: MilestoneCellView.self)
+        collectionView.registerCell(type: MilestoneCellView.self)
     }
     
     private func configureMilestoneListViewModel() {

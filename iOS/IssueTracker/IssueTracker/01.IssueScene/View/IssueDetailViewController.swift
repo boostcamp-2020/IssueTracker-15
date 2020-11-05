@@ -61,8 +61,8 @@ class IssueDetailViewController: UIViewController {
     private func configureCollectionView() {
         setupCollectionViewLayout()
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: IssueDetailHeaderView.identifier, bundle: .main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: IssueDetailHeaderView.identifier)
-        collectionView.register(type: IssueDetailCellView.self)
+        collectionView.registerHeader(type: IssueDetailHeaderView.self)
+        collectionView.registerCell(type: IssueDetailCellView.self)
     }
     
     private func addBottomSheetView() {
@@ -102,6 +102,7 @@ class IssueDetailViewController: UIViewController {
         collectionView.collectionViewLayout = flowLayout
     }
 }
+
 // MARK: - UICollectionViewDataSource implementation
 
 extension IssueDetailViewController: UICollectionViewDataSource {
@@ -116,8 +117,8 @@ extension IssueDetailViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: IssueDetailHeaderView.identifier, for: indexPath) as? IssueDetailHeaderView else { return UICollectionReusableView() }
         
+        guard let header: IssueDetailHeaderView = collectionView.dequeueHeader(at: indexPath) else { return UICollectionReusableView() }
         return header
     }
     
