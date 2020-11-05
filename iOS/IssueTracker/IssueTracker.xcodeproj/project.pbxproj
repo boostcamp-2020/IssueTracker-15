@@ -538,22 +538,13 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
-		963A1A93255240E5003E2BBB /* CellComponent */ = {
-			isa = PBXGroup;
-			children = (
-				963A1A9425524150003E2BBB /* UserInfoComponentView.swift */,
-				963A1A9625524160003E2BBB /* UserInfoComponentView.xib */,
-				963A1A9B255249AB003E2BBB /* LabelComponentView.swift */,
-				963A1A9D255249BB003E2BBB /* LabelComponentView.xib */,
-				963A1A9F25524ADF003E2BBB /* MilestoneComponentView.swift */,
-				963A1AA125524AEC003E2BBB /* MilestoneComponentView.xib */,
-			);
-			path = CellComponent;
-			sourceTree = "<group>";
-		};
 		963A1A9825524618003E2BBB /* CellComponents */ = {
 			isa = PBXGroup;
 			children = (
+				96CB17392553ECEC002954FE /* Milestone */,
+				96CB17382553ECCE002954FE /* Label */,
+				96CB17372553ECC2002954FE /* UserInfo */,
+				96DD118A2550F3930065F44A /* ConditionCellViewModel.swift */,
 				963A1A9925524634003E2BBB /* CellComponentProtocol.swift */,
 			);
 			path = CellComponents;
@@ -591,8 +582,6 @@
 		965F09752550589F00B3A248 /* FilterScene */ = {
 			isa = PBXGroup;
 			children = (
-				96DD118C2550F79A0065F44A /* ViewModel */,
-				963A1A93255240E5003E2BBB /* CellComponent */,
 				963A1AA925526E2F003E2BBB /* DetailConditionScene */,
 				963A1AA825526E24003E2BBB /* MainFilterScene */,
 				9602056225531E1B00888394 /* FilterConditionType.swift */,
@@ -703,12 +692,31 @@
 			path = 05.CustomUI;
 			sourceTree = "<group>";
 		};
-		96DD118C2550F79A0065F44A /* ViewModel */ = {
+		96CB17372553ECC2002954FE /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
-				96DD118A2550F3930065F44A /* ConditionCellViewModel.swift */,
+				963A1A9425524150003E2BBB /* UserInfoComponentView.swift */,
+				963A1A9625524160003E2BBB /* UserInfoComponentView.xib */,
 			);
-			path = ViewModel;
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		96CB17382553ECCE002954FE /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				963A1A9B255249AB003E2BBB /* LabelComponentView.swift */,
+				963A1A9D255249BB003E2BBB /* LabelComponentView.xib */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		96CB17392553ECEC002954FE /* Milestone */ = {
+			isa = PBXGroup;
+			children = (
+				963A1A9F25524ADF003E2BBB /* MilestoneComponentView.swift */,
+				963A1AA125524AEC003E2BBB /* MilestoneComponentView.xib */,
+			);
+			path = Milestone;
 			sourceTree = "<group>";
 		};
 		96F95BF5254E691500EC00C6 /* 01.IssueScene */ = {
