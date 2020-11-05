@@ -1,4 +1,6 @@
 import React from "react";
+import Modal from "../components/modal";
+import Login from "../components/auth/login";
 
 const IssuePage = () => {
   return (
