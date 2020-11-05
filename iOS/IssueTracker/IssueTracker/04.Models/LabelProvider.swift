@@ -96,6 +96,7 @@ class LabelProvider: LabelProvidable {
             switch result {
             case .success(let data):
                 if let data = data { self.labels = data }
+                print("num fetchingCompletionHandlers: \(self.fetchingCompletionHandlers.count)")
                 self.fetchingCompletionHandlers.forEach {
                     $0.value(data)
                 }
