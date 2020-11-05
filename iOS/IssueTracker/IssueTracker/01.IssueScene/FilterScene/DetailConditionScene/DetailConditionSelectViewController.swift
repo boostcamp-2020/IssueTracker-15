@@ -12,7 +12,7 @@ class DetailConditionSelectViewController: UIViewController {
     
     @IBOutlet weak var titleNavItem: UINavigationItem!
 
-    var onSelectionComplete: (([ConditionCellViewModel]) -> Void)?
+    var onSelectionComplete: (([CellComponentViewModel]) -> Void)?
     
     // TODO: Dummy Data to ViewModelProtocol
     private var viewModel: DetailConditionViewModelProtocol?

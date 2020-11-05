@@ -20,7 +20,7 @@ extension LabelComponentView: CellComponentProtocol {
     
     var contentView: UIView { self }
     
-    func configure(viewModel: ConditionCellViewModel) {
+    func configure(viewModel: CellComponentViewModel) {
         labelBadge.text = viewModel.title
         labelBadge.setBackgroundColor(viewModel.element.color)
         labelBadge.cornerRadiusRatio = 0.3

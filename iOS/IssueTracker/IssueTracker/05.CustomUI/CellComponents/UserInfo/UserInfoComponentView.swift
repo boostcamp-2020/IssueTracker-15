@@ -25,7 +25,7 @@ extension UserInfoComponentView: CellComponentProtocol {
     
     var contentView: UIView { self }
     
-    func configure(viewModel: ConditionCellViewModel) {
+    func configure(viewModel: CellComponentViewModel) {
         // TODO: configure UserInfo
         userNameLabel.text = viewModel.title
         layoutIfNeeded()

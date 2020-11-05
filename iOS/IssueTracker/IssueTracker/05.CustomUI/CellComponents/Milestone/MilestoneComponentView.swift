@@ -27,7 +27,7 @@ extension MilestoneComponentView: CellComponentProtocol {
     
     var contentView: UIView { self }
     
-    func configure(viewModel: ConditionCellViewModel) {
+    func configure(viewModel: CellComponentViewModel) {
         titleLabel.text = viewModel.title
         if let date = viewModel.element.datdForServer {
             dueDateLabel.text = "Due by " + date.stringForConditionCell
