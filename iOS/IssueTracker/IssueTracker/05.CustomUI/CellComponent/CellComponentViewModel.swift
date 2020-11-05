@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ConditionCellViewModel {
+struct CellComponentViewModel {
     let id: Int
     let title: String
     let element: String

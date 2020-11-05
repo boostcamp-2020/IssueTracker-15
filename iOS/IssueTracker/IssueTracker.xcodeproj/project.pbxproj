@@ -104,7 +104,7 @@
 		96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */; };
 		96C734D52549452600DEC9A4 /* LabelItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C734D42549452600DEC9A4 /* LabelItemViewModel.swift */; };
 		96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */; };
-		96DD118B2550F3930065F44A /* ConditionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DD118A2550F3930065F44A /* ConditionCellViewModel.swift */; };
+		96DD118B2550F3930065F44A /* CellComponentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DD118A2550F3930065F44A /* CellComponentViewModel.swift */; };
 		96F95BFA254E6C4A00EC00C6 /* IssueListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */; };
 		96F95BFC254E6E4C00EC00C6 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95BFB254E6E4C00EC00C6 /* Issue.swift */; };
 		96F95C02254E891E00EC00C6 /* CGFloat+Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F95C01254E891E00EC00C6 /* CGFloat+Clamp.swift */; };
@@ -249,7 +249,7 @@
 		96C734D22549444E00DEC9A4 /* LabelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelListViewModel.swift; sourceTree = "<group>"; };
 		96C734D42549452600DEC9A4 /* LabelItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelItemViewModel.swift; sourceTree = "<group>"; };
 		96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeLabelView.swift; sourceTree = "<group>"; };
-		96DD118A2550F3930065F44A /* ConditionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCellViewModel.swift; sourceTree = "<group>"; };
+		96DD118A2550F3930065F44A /* CellComponentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellComponentViewModel.swift; sourceTree = "<group>"; };
 		96F95BF9254E6C4A00EC00C6 /* IssueListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewController.swift; sourceTree = "<group>"; };
 		96F95BFB254E6E4C00EC00C6 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		96F95C01254E891E00EC00C6 /* CGFloat+Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Clamp.swift"; sourceTree = "<group>"; };
@@ -503,22 +503,13 @@
 		963A1A93255240E5003E2BBB /* CellComponent */ = {
 			isa = PBXGroup;
 			children = (
-				963A1A9425524150003E2BBB /* UserInfoComponentView.swift */,
-				963A1A9625524160003E2BBB /* UserInfoComponentView.xib */,
-				963A1A9B255249AB003E2BBB /* LabelComponentView.swift */,
-				963A1A9D255249BB003E2BBB /* LabelComponentView.xib */,
-				963A1A9F25524ADF003E2BBB /* MilestoneComponentView.swift */,
-				963A1AA125524AEC003E2BBB /* MilestoneComponentView.xib */,
-			);
-			path = CellComponent;
-			sourceTree = "<group>";
-		};
-		963A1A9825524618003E2BBB /* CellComponents */ = {
-			isa = PBXGroup;
-			children = (
+				96CB17362553B84F002954FE /* Milestone */,
+				96CB17352553B849002954FE /* Label */,
+				96CB17342553B842002954FE /* UserInfo */,
+				96DD118A2550F3930065F44A /* CellComponentViewModel.swift */,
 				963A1A9925524634003E2BBB /* CellComponentProtocol.swift */,
 			);
-			path = CellComponents;
+			path = CellComponent;
 			sourceTree = "<group>";
 		};
 		963A1AA825526E24003E2BBB /* MainFilterScene */ = {
@@ -531,7 +522,7 @@
 			path = MainFilterScene;
 			sourceTree = "<group>";
 		};
-		963A1AA925526E2F003E2BBB /* DetailConditionScene */ = {
+		963A1AA925526E2F003E2BBB /* SelectDetailConditionScene */ = {
 			isa = PBXGroup;
 			children = (
 				9602055F255313EC00888394 /* ViewModel */,
@@ -539,7 +530,7 @@
 				965F097C25505A1200B3A248 /* DetailConditionSelectViewController.xib */,
 				965F097F25505B5400B3A248 /* DetailConditionSelectCell */,
 			);
-			path = DetailConditionScene;
+			path = SelectDetailConditionScene;
 			sourceTree = "<group>";
 		};
 		965A4DF42552E86600A4A7D7 /* IssueFilterViewModel */ = {
@@ -553,9 +544,7 @@
 		965F09752550589F00B3A248 /* FilterScene */ = {
 			isa = PBXGroup;
 			children = (
-				96DD118C2550F79A0065F44A /* ViewModel */,
-				963A1A93255240E5003E2BBB /* CellComponent */,
-				963A1AA925526E2F003E2BBB /* DetailConditionScene */,
+				963A1AA925526E2F003E2BBB /* SelectDetailConditionScene */,
 				963A1AA825526E24003E2BBB /* MainFilterScene */,
 				9602056225531E1B00888394 /* FilterConditionType.swift */,
 			);
@@ -657,7 +646,7 @@
 		96C8357325490EFF0086A6E6 /* 05.CustomUI */ = {
 			isa = PBXGroup;
 			children = (
-				963A1A9825524618003E2BBB /* CellComponents */,
+				963A1A93255240E5003E2BBB /* CellComponent */,
 				9679DFBA254D786600550BE4 /* SubmitFields */,
 				9679DFB7254D767800550BE4 /* SubmitForm */,
 				96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */,
@@ -665,12 +654,31 @@
 			path = 05.CustomUI;
 			sourceTree = "<group>";
 		};
-		96DD118C2550F79A0065F44A /* ViewModel */ = {
+		96CB17342553B842002954FE /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
-				96DD118A2550F3930065F44A /* ConditionCellViewModel.swift */,
+				963A1A9425524150003E2BBB /* UserInfoComponentView.swift */,
+				963A1A9625524160003E2BBB /* UserInfoComponentView.xib */,
 			);
-			path = ViewModel;
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
+		96CB17352553B849002954FE /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				963A1A9B255249AB003E2BBB /* LabelComponentView.swift */,
+				963A1A9D255249BB003E2BBB /* LabelComponentView.xib */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		96CB17362553B84F002954FE /* Milestone */ = {
+			isa = PBXGroup;
+			children = (
+				963A1A9F25524ADF003E2BBB /* MilestoneComponentView.swift */,
+				963A1AA125524AEC003E2BBB /* MilestoneComponentView.xib */,
+			);
+			path = Milestone;
 			sourceTree = "<group>";
 		};
 		96F95BF5254E691500EC00C6 /* 01.IssueScene */ = {
@@ -1021,7 +1029,7 @@
 				9627A5A825506985000BFF4D /* UITableView+Registerable.swift in Sources */,
 				9627A5AC255087FF000BFF4D /* DetailConditionSelectCellView.swift in Sources */,
 				95C36592254A76BB008ACCB5 /* MilestoneCellView.swift in Sources */,
-				96DD118B2550F3930065F44A /* ConditionCellViewModel.swift in Sources */,
+				96DD118B2550F3930065F44A /* CellComponentViewModel.swift in Sources */,
 				96A58F3F254A6C2500248F1E /* Date+.swift in Sources */,
 				950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */,
 				966ADAEC254D9DDD00A480DD /* LabelSubmitFieldsView+LoadFromNib.swift in Sources */,
