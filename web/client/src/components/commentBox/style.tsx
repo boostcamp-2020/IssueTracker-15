@@ -1,11 +1,13 @@
-import React from 'react';
 import styled from 'styled-components';
-
-import Palette from '../../lib/palette';
+import Palette from '../../../assets/palette';
 
 const { color } = Palette;
 
-const CommentBoxTitle = styled.div<{ isAuthor: boolean }>`
+export const CommentBoxWrapper = styled.div`
+  margin-left: 30px;
+`;
+
+export const CommentBoxTitle = styled.div<{ isAuthor: boolean }>`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -52,27 +54,27 @@ const CommentBoxTitle = styled.div<{ isAuthor: boolean }>`
   }
 `;
 
-const TitleLeft = styled.div`
+export const TitleLeft = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const UserID = styled.span`
+export const UserID = styled.span`
   display: block;
   font-weight: 700;
 `;
 
-const WriteTime = styled.div`
+export const WriteTime = styled.div`
   margin-left: 10px;
   color: #656c76;
 `;
 
-const TitleRight = styled.div<{ isAuthor: boolean }>`
+export const TitleRight = styled.div<{ isAuthor: boolean }>`
   display: ${(props) => (props.isAuthor ? 'flex' : 'none')};
   align-items: center;
 `;
 
-const UserBox = styled.div`
+export const UserBox = styled.div`
   padding: 2px 5px;
 
   border: 1px solid #ccc;
@@ -83,14 +85,14 @@ const UserBox = styled.div`
   text-align: center;
 `;
 
-const Edit = styled.div`
+export const Edit = styled.div`
   margin-left: 10px;
   color: #656c76;
 
   cursor: pointer;
 `;
 
-const CommentBoxBody = styled.div<{ isAuthor: boolean }>`
+export const CommentBoxBody = styled.div<{ isAuthor: boolean }>`
   padding: 16px 20px;
 
   border: 1px solid
@@ -103,31 +105,3 @@ const CommentBoxBody = styled.div<{ isAuthor: boolean }>`
 
   line-height: 1.3;
 `;
-
-interface CommentBoxPropsType {
-  isAuthor: boolean;
-}
-
-export default function CommentBox({ isAuthor }: CommentBoxPropsType) {
-  return (
-    <>
-      <CommentBoxTitle isAuthor={isAuthor}>
-        <TitleLeft>
-          <UserID>moaikang</UserID>
-          <WriteTime>commented 3 days ago</WriteTime>
-        </TitleLeft>
-
-        <TitleRight isAuthor={isAuthor}>
-          <UserBox>Owner</UserBox>
-          <Edit>Edit</Edit>
-        </TitleRight>
-      </CommentBoxTitle>
-      <CommentBoxBody isAuthor={isAuthor}>
-        <div>
-          딱대시는것이 <br />
-          좋을거 같아요
-        </div>
-      </CommentBoxBody>
-    </>
-  );
-}
