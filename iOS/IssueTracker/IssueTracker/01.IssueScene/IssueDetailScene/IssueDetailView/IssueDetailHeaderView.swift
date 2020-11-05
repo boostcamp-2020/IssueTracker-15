@@ -30,7 +30,7 @@ class IssueDetailHeaderView: UICollectionReusableView {
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         super.preferredLayoutAttributesFitting(layoutAttributes)
         layoutIfNeeded()
-
+        
         let size = self.systemLayoutSizeFitting(layoutAttributes.size)
 
         var frame = layoutAttributes.frame

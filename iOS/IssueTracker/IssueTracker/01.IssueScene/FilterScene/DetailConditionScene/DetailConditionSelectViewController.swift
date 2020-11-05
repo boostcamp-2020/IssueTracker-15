@@ -56,7 +56,7 @@ class DetailConditionSelectViewController: UIViewController {
 
 extension DetailConditionSelectViewController {
     
-    @IBAction func cancleButtonTapped(_ sender: Any) {
+    @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
