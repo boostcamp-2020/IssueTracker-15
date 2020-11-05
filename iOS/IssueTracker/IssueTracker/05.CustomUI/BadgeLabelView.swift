@@ -10,11 +10,20 @@ import UIKit
 
 class BadgeLabelView: UILabel {
 
-    var padding: UIEdgeInsets = UIEdgeInsets.zero
-    var cornerRadiusRatio: CGFloat = 0
+    var contentInsets: UIEdgeInsets = .zero {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+
+    var cornerRadiusRatio: CGFloat = 0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
     
     func setPadding(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {
-        padding = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+        contentInsets = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
     }
     
     func setBackgroundColor(_ color: CGColor) {
@@ -28,17 +37,15 @@ class BadgeLabelView: UILabel {
     
     override var intrinsicContentSize: CGSize {
         let contentSize = super.intrinsicContentSize
-        let contentWidth = contentSize.width + padding.left + padding.right
-        return CGSize(width: contentWidth, height: contentSize.height )
+        let contentWidth = contentSize.width + contentInsets.left + contentInsets.right
+        return CGSize(width: contentWidth, height: contentSize.height)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let boundOrigin = bounds.origin
-        let boundSize = CGSize(width: intrinsicContentSize.width, height: bounds.height)
-        bounds = CGRect(origin: boundOrigin, size: boundSize)
         layer.cornerRadius = bounds.height / 2 * cornerRadiusRatio
-        font = font.withSize(boundSize.height - padding.top - padding.bottom)
+        font = font.withSize(bounds.height - contentInsets.top - contentInsets.bottom)
+        invalidateIntrinsicContentSize()
     }
 
 }
