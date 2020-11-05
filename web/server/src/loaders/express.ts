@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import APIRouter from "../routers";
@@ -12,7 +12,8 @@ export default async ({ app }: { app: express.Application }): Promise<void> => {
 
   app.use("/api", APIRouter);
 
-  app.use("/", (req: Request, res: Response) => {
-    res.send("hello");
+  app.use((error: any, req: Request, res: Response, next: NextFunction) => {
+    console.error(error);
+    return res.status(400).json({ message: error });
   });
 };
