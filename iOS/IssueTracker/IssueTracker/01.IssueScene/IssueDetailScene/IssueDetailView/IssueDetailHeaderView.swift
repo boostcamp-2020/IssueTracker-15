@@ -24,14 +24,29 @@ class IssueDetailHeaderView: UICollectionReusableView {
         self.issueAuthor.text = issueDetailViewModel.author
         self.issueTitle.text = issueDetailViewModel.title
         self.issueNumber.text = "#" + String(issueDetailViewModel.issueNumber)
-        configureIssueBadge(text: issueDetailViewModel.badge, isOpened: issueDetailViewModel.isOpened)
+        configureIssueBadge(isOpened: issueDetailViewModel.isOpened)
     }
     
-    private func configureIssueBadge(text: String, isOpened: Bool) {
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        super.preferredLayoutAttributesFitting(layoutAttributes)
+        layoutIfNeeded()
+
+        let size = self.systemLayoutSizeFitting(layoutAttributes.size)
+
+        var frame = layoutAttributes.frame
+        frame.size.height = ceil(size.height)
+        layoutAttributes.frame = frame
+
+        return layoutAttributes
+    }
+    
+    private func configureIssueBadge(isOpened: Bool) {
         var badgeColor: UIColor
+        var badgeText: String
         badgeColor = isOpened ? UIColor(named: IssueBadgeColor.open.rawValue) ?? UIColor.green : UIColor(named: IssueBadgeColor.closed.rawValue) ?? UIColor.red
+        badgeText = isOpened ? "Open" : "Closed"
         
-        issueBadge.convertToIssueBadge(text: text, textColor: .white, backgroundColor: badgeColor)
+        issueBadge.convertToIssueBadge(text: badgeText, textColor: .white, backgroundColor: badgeColor)
     }
 }
 

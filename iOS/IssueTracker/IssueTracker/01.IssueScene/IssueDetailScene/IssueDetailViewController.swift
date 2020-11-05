@@ -146,7 +146,9 @@ class IssueDetailViewController: UIViewController {
         
         flowLayout.itemSize.width = width
         flowLayout.estimatedItemSize = CGSize(width: width, height: headerHeight)
+        
         flowLayout.headerReferenceSize = CGSize(width: width, height: headerHeight)
+        
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         
         collectionView.collectionViewLayout = flowLayout

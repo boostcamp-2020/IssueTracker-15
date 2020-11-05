@@ -20,7 +20,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="이슈 타이틀" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDF-Uv-gPE" userLabel="Issue Title">
-                    <rect key="frame" x="10" y="72" width="450" height="24"/>
+                    <rect key="frame" x="10" y="72" width="450" height="25.5"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -38,7 +38,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6Y-oR-4KN" userLabel="Badge">
-                    <rect key="frame" x="10" y="106" width="42" height="20.5"/>
+                    <rect key="frame" x="10" y="107.5" width="42" height="20.5"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
@@ -59,6 +59,7 @@
                 <constraint firstItem="gDF-Uv-gPE" firstAttribute="top" secondItem="TIo-KR-UoL" secondAttribute="bottom" constant="10" id="Pht-md-1HC"/>
                 <constraint firstItem="TIo-KR-UoL" firstAttribute="width" secondItem="U6b-Vx-4bR" secondAttribute="width" multiplier="0.1" id="PiH-iV-Ohw"/>
                 <constraint firstAttribute="trailing" secondItem="ffa-ud-S2G" secondAttribute="trailing" constant="10" id="Xgc-wV-seR"/>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="r6Y-oR-4KN" secondAttribute="bottom" constant="10" id="a17-Wz-8q6"/>
                 <constraint firstItem="swF-Ki-5s6" firstAttribute="centerY" secondItem="TIo-KR-UoL" secondAttribute="centerY" id="fOd-32-NHJ"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="gDF-Uv-gPE" secondAttribute="trailing" constant="10" id="orJ-Pp-aIX"/>
                 <constraint firstItem="r6Y-oR-4KN" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="10" id="ytT-fj-OlG"/>

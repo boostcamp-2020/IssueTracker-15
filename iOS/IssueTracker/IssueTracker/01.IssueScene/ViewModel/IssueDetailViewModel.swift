@@ -14,7 +14,6 @@ class IssueDetailViewModel {
     var title: String = ""
     var description: String = ""
     var author: String = ""
-    var badge: String = ""
     var didFetch: (() -> Void)?
     var isOpened: Bool = false
     private weak var issueProvider: IssueProvidable?
@@ -32,7 +31,6 @@ class IssueDetailViewModel {
             self.issueNumber = currentIssue.id
             self.title = currentIssue.title
             self.isOpened = currentIssue.isOpened
-            self.badge = self.isOpened ? "Open" : "Closed"
             self.description = currentIssue.description
             self.author = currentIssue.author
             self.didFetch?()
