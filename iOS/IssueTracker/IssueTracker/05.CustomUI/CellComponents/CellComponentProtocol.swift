@@ -16,7 +16,7 @@ enum ComponentStyle {
 
 protocol CellComponentProtocol {
     var contentView: UIView { get }
-    func configure(viewModel: ConditionCellViewModel)
+    func configure(viewModel: CellComponentViewModel)
     func prepareForReuse()
 }
 

@@ -15,8 +15,8 @@ protocol IssueFilterViewModelProtocol: AnyObject {
     func generalConditionSelected(at type: Condition)
     func detailConditionSelected(at type: DetailCondition, id: Int?)
     func condition(of type: Condition) -> Bool
-    func detailCondition(of type: DetailCondition) -> ConditionCellViewModel?
-    func detailConditionDataSource(of type: DetailCondition) -> [[ConditionCellViewModel]]
+    func detailCondition(of type: DetailCondition) -> CellComponentViewModel?
+    func detailConditionDataSource(of type: DetailCondition) -> [[CellComponentViewModel]]
 }
 
 class IssueFilterViewModel: IssueFilterViewModelProtocol {
@@ -27,11 +27,11 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
     
     // TODO: UserInfoProvider
     private var mockUserInfo = [
-        ConditionCellViewModel(title: "SHIVVVPP", element: "2020-08-11T00:00:00.000Z"),
-        ConditionCellViewModel(title: "유시형", element: "2020-08-11T00:00:00.000Z"),
-        ConditionCellViewModel(title: "namda-on", element: "2020-08-11T00:00:00.000Z"),
-        ConditionCellViewModel(title: "moaikang", element: "2020-08-11T00:00:00.000Z"),
-        ConditionCellViewModel(title: "maong0927", element: "2020-08-11T00:00:00.000Z")
+        CellComponentViewModel(title: "SHIVVVPP", element: "2020-08-11T00:00:00.000Z"),
+        CellComponentViewModel(title: "유시형", element: "2020-08-11T00:00:00.000Z"),
+        CellComponentViewModel(title: "namda-on", element: "2020-08-11T00:00:00.000Z"),
+        CellComponentViewModel(title: "moaikang", element: "2020-08-11T00:00:00.000Z"),
+        CellComponentViewModel(title: "maong0927", element: "2020-08-11T00:00:00.000Z")
        ]
     
     private(set) var generalConditions: [Bool]
@@ -61,7 +61,7 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
         return generalConditions[type.rawValue]
     }
     
-    func detailCondition(of type: DetailCondition) -> ConditionCellViewModel? {
+    func detailCondition(of type: DetailCondition) -> CellComponentViewModel? {
         let id = detailConditions[type.rawValue]
         if id == -1 { return nil }
         
@@ -70,22 +70,22 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
             return mockUserInfo.first(where: {$0.id == id})
         case .label:
             guard let label = labelProvider?.labels.first(where: {$0.id == id}) else { return nil }
-            return ConditionCellViewModel(label: label)
+            return CellComponentViewModel(label: label)
         case .milestone:
             guard let milestone = milestoneProvider?.milestons.first(where: {$0.id == id}) else { return nil }
-            return ConditionCellViewModel(milestone: milestone)
+            return CellComponentViewModel(milestone: milestone)
         }
     }
     
-    func detailConditionDataSource(of type: DetailCondition) -> [[ConditionCellViewModel]] {
-        var viewModels: [[ConditionCellViewModel]] = [[], []]
+    func detailConditionDataSource(of type: DetailCondition) -> [[CellComponentViewModel]] {
+        var viewModels: [[CellComponentViewModel]] = [[], []]
         switch type {
         case .assignee, .writer:
             // TODO: UserInfoProvider 구현
             viewModels = [ [], mockUserInfo  ]
         case .label:
             labelProvider?.labels.forEach {
-                let viewModel = ConditionCellViewModel(label: $0)
+                let viewModel = CellComponentViewModel(label: $0)
                 if $0.id == detailConditions[type.rawValue] {
                     viewModels[0].append(viewModel)
                 } else {
@@ -94,7 +94,7 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
             }
         case .milestone:
             milestoneProvider?.milestons.forEach {
-                let viewModel = ConditionCellViewModel(milestone: $0)
+                let viewModel = CellComponentViewModel(milestone: $0)
                 if $0.id == detailConditions[type.rawValue] {
                     viewModels[0].append(viewModel)
                 } else {

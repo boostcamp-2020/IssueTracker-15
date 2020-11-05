@@ -21,26 +21,24 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var bottomToolBar: UIToolbar!
     @IBOutlet weak var addIssueButton: UIButton!
     
-    var issueListViewModel: IssueListViewModel?
     var issueDetailViewModel: IssueDetailViewModel?
     private var viewingMode: ViewingMode = .general
-        
+    var issueListViewModel: IssueListViewModel? {
+        didSet {
+            issueListViewModel?.didFetch = { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "이슈"
         configureSearchBar()
         configureCollectionView()
-        configureIssueListViewModel()
         addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
         
-        // TODO: viewModel 로직 분리할 것
         issueListViewModel?.needFetchItems()
-    }
-    
-    private func configureIssueListViewModel() {
-        issueListViewModel?.didFetch = { [weak self] in
-            self?.collectionView.reloadData()
-        }
     }
     
     // TODO: SerachBar Configure

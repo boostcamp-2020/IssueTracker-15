@@ -21,7 +21,7 @@ class DetailConditionSelectCellView: UITableViewCell {
         static let colorUnChecked = UIColor.link
     }
     
-    func configure(type: ComponentStyle, viewModel: ConditionCellViewModel) {
+    func configure(type: ComponentStyle, viewModel: CellComponentViewModel) {
         if component == nil {
             configureComponent(type: type)
         }

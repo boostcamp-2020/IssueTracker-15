@@ -46,21 +46,41 @@ class IssueCellView: UICollectionViewCell {
         
         titleLabel.text = issueItemViewModel.title
         descriptionLabel.text = issueItemViewModel.description
+        setLabel(title: issueItemViewModel.labelTitle, colorCode: issueItemViewModel.labelColor)
+        setMilestone(title: issueItemViewModel.milestoneTitle)
         
         issueItemViewModel.didMilestoneChanged = { [weak self] milestone in
             DispatchQueue.main.async {
-                self?.milestoneBadge.text = milestone
+                self?.setMilestone(title: milestone)
             }
         }
         
         issueItemViewModel.didLabelChanged = { [weak self] (text, colorCode) in
             DispatchQueue.main.async {
-                self?.labelBadge.text = text
-                self?.labelBadge.setBackgroundColor(colorCode.color)
+                self?.setLabel(title: text, colorCode: colorCode)
             }
         }
         
         layoutIfNeeded()
+    }
+    
+    private func setLabel(title: String, colorCode: String) {
+        if title.isEmpty {
+            labelBadge.isHidden = true
+        } else {
+            labelBadge.isHidden = false
+            labelBadge.text = title
+            labelBadge.setBackgroundColor(colorCode.color)
+        }
+    }
+    
+    private func setMilestone(title: String) {
+        if title.isEmpty {
+            milestoneBadge.isHidden = true
+        } else {
+            milestoneBadge.isHidden = false
+            milestoneBadge.text = title
+        }
     }
     
     override func layoutSubviews() {

@@ -16,7 +16,7 @@ class IssueFilterViewController: UITableViewController {
     }
     
     var onSelectionComplete: ((IssueFilterViewModelProtocol) -> Void)?
-    var filterViewModel: IssueFilterViewModelProtocol?
+    var filterViewModel: IssueFilterViewModelProtocol
     
     init?(coder: NSCoder, filterViewModel: IssueFilterViewModelProtocol) {
         self.filterViewModel = filterViewModel
@@ -24,6 +24,7 @@ class IssueFilterViewController: UITableViewController {
     }
     
     required init?(coder: NSCoder) {
+        self.filterViewModel = IssueFilterViewModel(labelProvider: nil, milestoneProvider: nil, issueProvider: nil, generalConditions: [], detailConditions: [])
         super.init(coder: coder)
     }
     
@@ -55,9 +56,7 @@ extension IssueFilterViewController {
     
     @IBAction func doneButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-        if let filterViewModel = filterViewModel {
-            onSelectionComplete?(filterViewModel)
-        }
+        onSelectionComplete?(filterViewModel)
     }
     
 }
@@ -103,32 +102,28 @@ extension IssueFilterViewController {
 extension IssueFilterViewController {
     
     private func willDisplayConditionCell(at type: Condition, cell: UITableViewCell) {
-        guard let filterViewModel = filterViewModel else { return }
         cell.accessoryType = filterViewModel.condition(of: type) ? .checkmark : .none
     }
     
     private func willDisplayDetailConditionCell(at type: DetailCondition, cell: DetailFilterCellView) {
-        guard let filterViewModel = filterViewModel,
-              let cellViewModel = filterViewModel.detailCondition(of: type)
-        else { return }
+        guard let cellViewModel = filterViewModel.detailCondition(of: type) else { return }
         cell.configure(style: type.cellStyle, viewModel: cellViewModel)
     }
     
     private func conditionSelected(at type: Condition, cell: UITableViewCell) {
-        guard let filterViewModel = filterViewModel else { return }
         filterViewModel.generalConditionSelected(at: type)
         cell.accessoryType = filterViewModel.condition(of: type) ? .checkmark : .none
     }
     
     private func detailConditionSelected(at type: DetailCondition, cell: UITableViewCell) {
-        guard let cell = cell as? DetailFilterCellView,
-              let dataSource = filterViewModel?.detailConditionDataSource(of: type) else { return }
+        guard let cell = cell as? DetailFilterCellView else { return }
         
+        let dataSource = filterViewModel.detailConditionDataSource(of: type)
         let viewModel = DetailConditionViewModel(detailCondition: type, viewModelDataSource: dataSource, maxSelection: 1)
         let vc = DetailConditionSelectViewController.createViewController(with: viewModel)
         
         vc.onSelectionComplete = { selected in
-            self.filterViewModel?.detailConditionSelected(at: type, id: selected[safe: 0]?.id)
+            self.filterViewModel.detailConditionSelected(at: type, id: selected[safe: 0]?.id)
             cell.configure(style: type.cellStyle, viewModel: selected[safe: 0])
         }
         present(vc, animated: true)

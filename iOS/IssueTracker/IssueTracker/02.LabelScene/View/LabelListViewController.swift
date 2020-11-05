@@ -10,20 +10,20 @@ import UIKit
 
 class LabelListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    var labelListViewModel: LabelListViewModelProtocol?
+    
+    var labelListViewModel: LabelListViewModelProtocol? {
+        didSet {
+            labelListViewModel?.didFetch = { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        configureLabelListViewModel()
         labelListViewModel?.needFetchItems()
         title = "레이블"
-    }
-    
-    private func configureLabelListViewModel() {
-        labelListViewModel?.didFetch = { [weak self] in
-            self?.collectionView.reloadData()
-        }
     }
     
     private func configureCollectionView() {
