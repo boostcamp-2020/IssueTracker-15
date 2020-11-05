@@ -12,14 +12,21 @@ extension String {
     
     enum RegexPattern {
         // yyyy-MM-dd
-        static let milestoneFormDate = "(19|20)\\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])"
+        case milestoneFormDate
+        
+        var patternString: String {
+            switch self {
+            case .milestoneFormDate:
+                return "(19|20)\\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])"
+            }
+        }
     }
     
-    func contains(of pattern: String) -> Bool {
-        guard let regex = try? NSRegularExpression(pattern: pattern) else { return false }
-        let nsRange = NSRange(location: 0, length: self.utf16.count)
-        return regex.firstMatch(in: self, options: [], range: nsRange) != nil
-    }
+    func contains(regexPattern: RegexPattern) -> Bool {
+        guard let regex = try? NSRegularExpression(pattern: regexPattern.patternString) else { return false }
+        let range = NSRange(location: 0, length: utf16.count)
+        return regex.firstMatch(in: self, options: [], range: range) != nil
+            }
     
     func numberOfMatches(of str: String) -> Int {
         guard let regex = try? NSRegularExpression(pattern: str, options: .caseInsensitive) else { return 0 }

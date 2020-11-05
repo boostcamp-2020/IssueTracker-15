@@ -46,7 +46,7 @@ extension MilestoneSubmitFieldsView {
             dueDateLabel.textColor = .black
             return true
         }
-        return text.contains(of: String.RegexPattern.milestoneFormDate)
+        return text.contains(regexPattern: String.RegexPattern.milestoneFormDate)
     }
     
 }
