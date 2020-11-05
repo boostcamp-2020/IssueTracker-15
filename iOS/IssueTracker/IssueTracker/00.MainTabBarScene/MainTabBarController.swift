@@ -14,11 +14,14 @@ class MainTabBarController: UITabBarController {
     private var dataLoader: DataLoadable?
     private var labelProvider: LabelProvidable?
     private var milestoneProvider: MilestoneProvidable?
+    private var issueProvider: IssueProvidable?
     
+    // TODO: 로직분리!
     func setupSubViewControllers(with dataLoader: DataLoadable) {
         
-        let labelProvider = LabelProvider(dataLoader: dataLoader)
-        let milestoneProvider = MilestoneProvider(dataLoader: dataLoader)
+        let issueProvider: IssueProvidable = IssueProvider(dataLoader: dataLoader)
+        let labelProvider: LabelProvidable = LabelProvider(dataLoader: dataLoader)
+        let milestoneProvider: MilestoneProvidable = MilestoneProvider(dataLoader: dataLoader)
         
         let commonAppearance = UINavigationBarAppearance()
         commonAppearance.backgroundColor = .white
@@ -27,6 +30,12 @@ class MainTabBarController: UITabBarController {
         if let navigationController = self.viewControllers?[safe: 0] as? UINavigationController,
             let issueListViewController = navigationController.topViewController as? IssueListViewController {
             navigationController.navigationBar.scrollEdgeAppearance = commonAppearance
+            
+            let issueListViewModel = IssueListViewModel(labelProvider: labelProvider,
+                                                        milestoneProvider: milestoneProvider,
+                                                        issueProvider: issueProvider)
+            
+            issueListViewController.issueListViewModel = issueListViewModel
         }
         // controllers[1] = LabelListViewController
         if let navigationController = self.viewControllers?[safe: 1] as? UINavigationController,
@@ -46,6 +55,7 @@ class MainTabBarController: UITabBarController {
         self.dataLoader = dataLoader
         self.labelProvider = labelProvider
         self.milestoneProvider = milestoneProvider
+        self.issueProvider = issueProvider
     }
     
     override func viewDidLoad() {
