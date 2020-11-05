@@ -71,9 +71,16 @@ class IssueListViewController: UIViewController {
 
 extension IssueListViewController {
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
-        guard self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) != nil else { return }
-        let issueDetailVC = IssueDetailViewController.createViewController()
-        self.navigationController?.pushViewController(issueDetailVC, animated: true)
+        guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) else { return }
+        
+        switch viewingMode {
+        case .general:
+            let issueDetailVC = IssueDetailViewController.createViewController()
+            self.navigationController?.pushViewController(issueDetailVC, animated: true)
+        case .edit:
+            
+            break
+        }
     }
     
     @IBAction func rightNavButtonTapped(_ sender: Any) {
