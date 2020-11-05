@@ -22,6 +22,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var addIssueButton: UIButton!
     
     var issueListViewModel: IssueListViewModel?
+    var issueDetailViewModel: IssueDetailViewModel?
     private var viewingMode: ViewingMode = .general
         
     override func viewDidLoad() {
@@ -71,11 +72,14 @@ class IssueListViewController: UIViewController {
 
 extension IssueListViewController {
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
-        guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) else { return }
+        guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)),
+            let issueListViewModel = issueListViewModel,
+            let issueDetailViewModel = issueDetailViewModel
+            else { return }
         
         switch viewingMode {
         case .general:
-            let issueDetailVC = IssueDetailViewController.createViewController()
+            let issueDetailVC = IssueDetailViewController.createViewController(currentIssueId: issueListViewModel.cellForItemAt(path: indexPath).id, issueDetailViewModel: issueDetailViewModel)
             self.navigationController?.pushViewController(issueDetailVC, animated: true)
         case .edit:
             
