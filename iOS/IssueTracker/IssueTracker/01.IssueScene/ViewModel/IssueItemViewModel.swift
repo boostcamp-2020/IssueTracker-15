@@ -17,11 +17,16 @@ class IssueItemViewModel {
     private(set) var milestoneTitle: String = ""
     private(set) var labelTitle: String = ""
     private(set) var labelColor: String = ""
+    var check: Bool = false {
+        didSet {
+            didSelected?(check)
+        }
+    }
     
+    var didSelected: ((Bool) -> Void)?
     var didLabelChanged: ((String, String) -> Void)?
     var didMilestoneChanged: ((String) -> Void)?
     
-    var check: Bool = false
     
     init(issue: Issue) {
         id = issue.id

@@ -16,6 +16,10 @@ protocol IssueListViewModelProtocol: AnyObject {
     func needFetchItems()
     func cellForItemAt(path: IndexPath) -> IssueItemViewModel
     func numberOfItem() -> Int
+    
+    func selectItemAt(path: IndexPath)
+    func selectAll()
+    func clearAll()
 }
 
 class IssueListViewModel: IssueListViewModelProtocol {
@@ -67,6 +71,18 @@ class IssueListViewModel: IssueListViewModelProtocol {
     
     func numberOfItem() -> Int {
         return issues.count
+    }
+    
+    func selectItemAt(path: IndexPath) {
+        issues[path.row].check = !issues[path.row].check
+    }
+    
+    func selectAll() {
+        issues.forEach { $0.check = true }
+    }
+    
+    func clearAll() {
+        issues.forEach { $0.check = false }
     }
     
     var filterViewModel: IssueFilterViewModelProtocol? {

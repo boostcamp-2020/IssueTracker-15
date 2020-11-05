@@ -81,13 +81,12 @@ extension IssueListViewController {
         case .general:
             performSegue(withIdentifier: "createIssueFilterViewController", sender: self)
         case .edit:
-            // TODO: SelectAll
-            break
+            issueListViewModel?.selectAll()
         }
     }
     
     @IBAction func closeAllSelectedIssueButtonTapped(_ sender: Any) {
-    
+        
     }
     
     private func toEditMode() {
@@ -96,6 +95,7 @@ extension IssueListViewController {
         leftNavButton.setTitle("Select All", for: .normal)
         bottomToolBar.isHidden = false
         tabBarController?.tabBar.isHidden = true
+        issueListViewModel?.clearAll()
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: true, animation: true)

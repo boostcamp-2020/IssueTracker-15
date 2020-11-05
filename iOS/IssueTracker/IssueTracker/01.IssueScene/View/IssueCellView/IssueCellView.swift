@@ -60,6 +60,12 @@ class IssueCellView: UICollectionViewCell {
             }
         }
         
+        issueItemViewModel.didSelected = { [weak self] (checked) in
+            DispatchQueue.main.async {
+                self?.checkBoxButton.isSelected =  checked
+            }
+        }
+        
         layoutIfNeeded()
     }
     
@@ -73,10 +79,6 @@ class IssueCellView: UICollectionViewCell {
 
 // MARK: - Action
 extension IssueCellView {
-    
-    @IBAction func checkBoxButtonTapped(_ sender: Any) {
-        checkBoxButton.isSelected.toggle()
-    }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
         

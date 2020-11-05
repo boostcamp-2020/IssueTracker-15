@@ -13,9 +13,15 @@ class DetailConditionSelectViewController: UIViewController {
     @IBOutlet weak var titleNavItem: UINavigationItem!
 
     var onSelectionComplete: (([CellComponentViewModel]) -> Void)?
-    
-    // TODO: Dummy Data to ViewModelProtocol
-    private var viewModel: DetailConditionViewModelProtocol?
+    private var viewModel: DetailConditionViewModelProtocol? {
+        didSet {
+            viewModel?.didChanged = { (from, to) in
+                guard let cell = self.tableView.cellForRow(at: from) as? DetailConditionSelectCellView else { return }
+                self.tableView.moveRow(at: from, to: to)
+                cell.setCheck(to.section == 0)
+            }
+        }
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -32,11 +38,6 @@ class DetailConditionSelectViewController: UIViewController {
         super.viewDidLoad()
         configureTableView()
         titleNavItem.title = title
-        viewModel?.didChanged = { (from, to) in
-            guard let cell = self.tableView.cellForRow(at: from) as? DetailConditionSelectCellView else { return }
-            self.tableView.moveRow(at: from, to: to)
-            cell.setCheck(to.section == 0)
-        }
     }
     
     private func configureTableView() {

@@ -30,9 +30,6 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                                 </state>
                                                 <state key="selected" image="checkmark.circle.fill" catalog="system"/>
-                                                <connections>
-                                                    <action selector="checkBoxButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ltS-j8-8kn"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -168,7 +165,7 @@
             <connections>
                 <outlet property="cellHorizontalScrollView" destination="YEo-pC-kZI" id="FTZ-IO-Xjq"/>
                 <outlet property="checkBoxButton" destination="AAN-XX-dal" id="QHJ-gC-vfP"/>
-                <outlet property="checkBoxGuideView" destination="Xnl-RV-xeJ" id="pM6-Gc-qd3"/>
+                <outlet property="checkBoxGuideView" destination="Xnl-RV-xeJ" id="bhp-bW-Kux"/>
                 <outlet property="closeBoxGuideView" destination="XRe-PE-geQ" id="8FI-B3-OQw"/>
                 <outlet property="deleteBoxGuideView" destination="xNn-Jb-haT" id="Bqy-iT-38k"/>
                 <outlet property="descriptionLabel" destination="63W-Xg-or6" id="bGB-ic-bXm"/>
