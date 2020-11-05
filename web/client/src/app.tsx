@@ -1,11 +1,14 @@
-import React from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import CreateIssuePage from "./views/create-issue";
-import CreateMilestonePage from "./views/create-milestone";
-import DetailIssuePage from "./views/detail-issue";
-import IssuePage from "./views/issue";
-import LabelPage from "./views/label";
-import MilestonePage from "./views/milestone";
+import React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { Reset } from 'styled-reset';
+import Commentbox from './components/commentBox/CommentBox';
+import IssueHeader from './components/IssueHeader/IssueHeader';
+import CreateIssuePage from './views/create-issue';
+import CreateMilestonePage from './views/create-milestone';
+import DetailIssuePage from './views/detail-issue';
+import IssuePage from './views/issue';
+import LabelPage from './views/label';
+import MilestonePage from './views/milestone';
 
 const App = () => {
   return (
