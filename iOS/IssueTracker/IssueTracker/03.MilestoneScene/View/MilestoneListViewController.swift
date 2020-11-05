@@ -11,66 +11,83 @@ import UIKit
 class MilestoneListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    var milestoneListViewModel: MilestoneListViewModelProtocol?
+    
+    var milestoneListViewModel: MilestoneListViewModelProtocol? {
+        didSet {
+            milestoneListViewModel?.didFetch = { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        configureMilestoneListViewModel()
         milestoneListViewModel?.needFetchItems()
+        title = "마일스톤"
     }
     
     private func configureCollectionView() {
         setupCollectionViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(type: MilestoneCellView.self)
-        HeaderView.register(in: collectionView)
-    }
-    
-    private func configureMilestoneListViewModel() {
-        milestoneListViewModel?.didFetch = { [weak self] in
-            self?.collectionView.reloadData()
-        }
+        collectionView.registerCell(type: MilestoneCellView.self)
     }
     
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 8)
-        layout.headerReferenceSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 12)
         layout.minimumLineSpacing = 1
         layout.sectionHeadersPinToVisibleBounds = true
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
+}
+
+// MARK: - Action
+
+extension MilestoneListViewController {
     
     @IBAction func plusButtonTapped(_ sender: Any) {
-        showSubmitFormView()
+        showSubmitFormView(type: .add)
     }
     
-    private func showSubmitFormView(indexPath: IndexPath? = nil) {
-        guard let tabBarController = self.tabBarController, let milestoneSubmitFormView = MilestoneSubmitFormView.createView() else { return }
+    private func showSubmitFormView(type: MilestoneSubmitFieldsView.SubmitFieldType) {
+        guard let tabBarController = self.tabBarController,
+            let formView = SubmitFormView.createView(),
+            let milestoneSubmitFieldsView = MilestoneSubmitFieldsView.createView()
+            else { return }
         
-        if let indexPath = indexPath {
-            milestoneSubmitFormView.configure(milestoneItemViewModel: milestoneListViewModel?.cellForItemAt(path: indexPath))
-            milestoneSubmitFormView.saveButtonTapped = { (title, description, dueDate) in
-                self.milestoneListViewModel?.editMileStone(at: indexPath, title: title, description: description, dueDate: dueDate)
+        formView.configure(submitField: milestoneSubmitFieldsView)
+        
+        switch type {
+        case .add:
+            milestoneSubmitFieldsView.onSaveButtonTapped = milestoneListViewModel?.addNewMileStone
+        case .edit(let indexPath):
+            milestoneSubmitFieldsView.configure(milestoneItemViewModel: milestoneListViewModel?.cellForItemAt(path: indexPath))
+            milestoneSubmitFieldsView.onSaveButtonTapped = { (title, dueDate, desc) in
+                self.milestoneListViewModel?.editMileStone(at: indexPath, title: title, description: desc, dueDate: dueDate)
             }
-        } else {
-            milestoneSubmitFormView.configure()
-            milestoneSubmitFormView.saveButtonTapped = self.milestoneListViewModel?.addNewMileStone
         }
         
-        tabBarController.view.addSubview(milestoneSubmitFormView)
-        milestoneSubmitFormView.frame = tabBarController.view.frame
+        tabBarController.view.addSubview(formView)
+        formView.frame = tabBarController.view.frame
     }
     
 }
 
-extension MilestoneListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+// MARK: - UICollectionViewDelegate Implementation
+
+extension MilestoneListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        showSubmitFormView(indexPath: indexPath)
+        showSubmitFormView(type: .edit(indexPath))
     }
+    
+}
+
+// MARK: - UICollectionViewDataSource Implementation
+
+extension MilestoneListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return milestoneListViewModel?.numberOfItem() ?? 0
@@ -79,20 +96,8 @@ extension MilestoneListViewController: UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: MilestoneCellView = collectionView.dequeueCell(at: indexPath),
             let cellViewModel = milestoneListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
-        
         cell.configure(with: cellViewModel)
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = HeaderView.dequeue(from: collectionView, for: indexPath) else { return UICollectionReusableView() }
-        
-        header.configure(title: "마일스톤")
-        
-        return header
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
 }

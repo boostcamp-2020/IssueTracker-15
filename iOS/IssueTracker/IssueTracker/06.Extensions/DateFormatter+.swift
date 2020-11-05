@@ -10,14 +10,13 @@ import Foundation
 
 extension DateFormatter {
     
-    static let dateFromMileStone: DateFormatter = {
+    static let datdFromServer: DateFormatter = {
         let formatter = DateFormatter()
-        // TODO: 서버에서 받은 시간 형식에 따라 변경
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return formatter
     }()
     
-    static let dateForMileStone: DateFormatter = {
+    static let dateForCollectionView: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy년 MM월 dd일"
         return formatter
@@ -29,4 +28,9 @@ extension DateFormatter {
         return formatter
     }()
     
+    static let dateForConditionCell: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM dd, yyyy"
+        return formatter
+    }()
 }

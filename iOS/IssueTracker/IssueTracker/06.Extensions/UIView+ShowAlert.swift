@@ -8,13 +8,12 @@
 
 import UIKit
 
-extension UIView {
-    func showAlert(title: String) {
-        let previousFrameOrigin = self.frame.origin.y
-        self.frame.origin.y = 0
+extension UIView {    
+    func showAlert(title: String, prepare: (() -> Void)?, completion: (() -> Void)?) {
+        prepare?()
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { [weak self] (_: UIAlertAction) in
-            self?.frame.origin.y = previousFrameOrigin
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { (_: UIAlertAction) in
+            completion?()
         }))
         self.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }

@@ -4,6 +4,7 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
 } from "typeorm";
 import IssueEntity from "./issue.entity";
 import UserEntity from "./user.entity";
@@ -16,11 +17,7 @@ class CommentEntity {
   @Column({ type: "varchar", nullable: false })
   content!: string;
 
-  @Column({
-    type: "timestamp",
-    nullable: false,
-    default: () => "CURRENT_TIMESTAMP()",
-  })
+  @CreateDateColumn()
   createAt!: Date;
 
   @Column({ type: "int" })
