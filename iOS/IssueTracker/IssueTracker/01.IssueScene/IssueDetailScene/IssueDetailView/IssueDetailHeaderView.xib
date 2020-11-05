@@ -10,7 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IssueDetailHeaderView" id="U6b-Vx-4bR" customClass="IssueDetailHeaderView" customModule="IssueTracker" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="470" height="257"/>
+            <rect key="frame" x="0.0" y="0.0" width="470" height="172"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JK" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swF-Ki-5s6" userLabel="Issue Author">
@@ -37,19 +37,16 @@
                         <constraint firstAttribute="width" secondItem="TIo-KR-UoL" secondAttribute="height" multiplier="1:1" id="G62-jS-SiS"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQ8-pu-lg7" userLabel="Badge">
-                    <rect key="frame" x="10" y="191" width="64" height="22"/>
-                    <color key="backgroundColor" red="0.94120150800000002" green="0.98432999850000003" blue="0.94900780920000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <color key="tintColor" red="0.035294117649999998" green="0.33333333329999998" blue="0.058823529409999999" alpha="0.85999999999999999" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <state key="normal" title="Open" image="exclamationmark.circle" catalog="system">
-                        <color key="titleColor" red="0.31764705882352939" green="0.56470588235294117" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    </state>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6Y-oR-4KN" userLabel="Badge">
+                    <rect key="frame" x="10" y="106" width="42" height="20.5"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="5"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                </button>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -57,27 +54,26 @@
                 <constraint firstItem="swF-Ki-5s6" firstAttribute="leading" secondItem="TIo-KR-UoL" secondAttribute="trailing" constant="10" id="6OZ-No-vuw"/>
                 <constraint firstItem="gDF-Uv-gPE" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="10" id="DHm-xl-Osh"/>
                 <constraint firstItem="ffa-ud-S2G" firstAttribute="top" secondItem="TIo-KR-UoL" secondAttribute="top" id="EAf-r7-hbj"/>
+                <constraint firstItem="r6Y-oR-4KN" firstAttribute="top" secondItem="gDF-Uv-gPE" secondAttribute="bottom" constant="10" id="F5X-Cg-Ccs"/>
                 <constraint firstItem="TIo-KR-UoL" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="15" id="PO3-rE-Wua"/>
                 <constraint firstItem="gDF-Uv-gPE" firstAttribute="top" secondItem="TIo-KR-UoL" secondAttribute="bottom" constant="10" id="Pht-md-1HC"/>
                 <constraint firstItem="TIo-KR-UoL" firstAttribute="width" secondItem="U6b-Vx-4bR" secondAttribute="width" multiplier="0.1" id="PiH-iV-Ohw"/>
-                <constraint firstItem="DQ8-pu-lg7" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="10" id="WAA-3O-h6x"/>
                 <constraint firstAttribute="trailing" secondItem="ffa-ud-S2G" secondAttribute="trailing" constant="10" id="Xgc-wV-seR"/>
                 <constraint firstItem="swF-Ki-5s6" firstAttribute="centerY" secondItem="TIo-KR-UoL" secondAttribute="centerY" id="fOd-32-NHJ"/>
-                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="DQ8-pu-lg7" secondAttribute="bottom" constant="10" id="kTm-Da-SNT"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="gDF-Uv-gPE" secondAttribute="trailing" constant="10" id="orJ-Pp-aIX"/>
+                <constraint firstItem="r6Y-oR-4KN" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="10" id="ytT-fj-OlG"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <connections>
                 <outlet property="issueAuthor" destination="swF-Ki-5s6" id="Mzn-xQ-ytJ"/>
-                <outlet property="issueBadge" destination="DQ8-pu-lg7" id="NrX-gL-iHv"/>
+                <outlet property="issueBadge" destination="r6Y-oR-4KN" id="OUk-A5-cRb"/>
                 <outlet property="issueNumber" destination="ffa-ud-S2G" id="XOL-O6-W0t"/>
                 <outlet property="issueTitle" destination="gDF-Uv-gPE" id="rkM-l9-FHb"/>
             </connections>
-            <point key="canvasLocation" x="240.57971014492756" y="213.95089285714286"/>
+            <point key="canvasLocation" x="240.57971014492756" y="185.49107142857142"/>
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <image name="person" catalog="system" width="128" height="117"/>
     </resources>
 </document>
