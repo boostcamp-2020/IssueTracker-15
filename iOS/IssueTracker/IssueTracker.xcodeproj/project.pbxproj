@@ -104,7 +104,7 @@
 		96A58F46254A6F4100248F1E /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F3C254A6A3300248F1E /* DateFormatter+.swift */; };
 		96A58F47254A6F4100248F1E /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F3E254A6C2500248F1E /* Date+.swift */; };
 		96A58F48254A6F4500248F1E /* Array+SafeAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966DD02A254A259F00A44FBA /* Array+SafeAccess.swift */; };
-		96A58F53254A91AC00248F1E /* String+Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F52254A91AC00248F1E /* String+Regex.swift */; };
+		96A58F53254A91AC00248F1E /* String+Matching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F52254A91AC00248F1E /* String+Matching.swift */; };
 		96A58F55254AA5BC00248F1E /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A58F54254AA5BC00248F1E /* String+Date.swift */; };
 		96AD640B2551579D00B16BD3 /* IssueTrackerEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AD640A2551579D00B16BD3 /* IssueTrackerEndPoint.swift */; };
 		96AD640E2551636C00B16BD3 /* JSONEncoder+encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AD640D2551636C00B16BD3 /* JSONEncoder+encode.swift */; };
@@ -257,7 +257,7 @@
 		96A58F3C254A6A3300248F1E /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "DateFormatter+.swift"; path = "IssueTracker/06.Extensions/DateFormatter+.swift"; sourceTree = SOURCE_ROOT; };
 		96A58F3E254A6C2500248F1E /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		96A58F42254A6E6000248F1E /* MilestoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTests.swift; sourceTree = "<group>"; };
-		96A58F52254A91AC00248F1E /* String+Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Regex.swift"; sourceTree = "<group>"; };
+		96A58F52254A91AC00248F1E /* String+Matching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Matching.swift"; sourceTree = "<group>"; };
 		96A58F54254AA5BC00248F1E /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		96AD640A2551579D00B16BD3 /* IssueTrackerEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerEndPoint.swift; sourceTree = "<group>"; };
 		96AD640D2551636C00B16BD3 /* JSONEncoder+encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONEncoder+encode.swift"; sourceTree = "<group>"; };
@@ -380,7 +380,7 @@
 				966DD02A254A259F00A44FBA /* Array+SafeAccess.swift */,
 				96A58F3E254A6C2500248F1E /* Date+.swift */,
 				950EB00E254A94D0004857C2 /* UILabel+FontSize.swift */,
-				96A58F52254A91AC00248F1E /* String+Regex.swift */,
+				96A58F52254A91AC00248F1E /* String+Matching.swift */,
 				9505446E254AA6E0007767C6 /* UIView+ShowAlert.swift */,
 				95054472254AAC0D007767C6 /* CollectionView+Registerable.swift */,
 				96A58F54254AA5BC00248F1E /* String+Date.swift */,
@@ -1066,7 +1066,7 @@
 			files = (
 				963A1A9525524150003E2BBB /* UserInfoComponentView.swift in Sources */,
 				96F95C07254EA70B00EC00C6 /* IssueCellView.swift in Sources */,
-				96A58F53254A91AC00248F1E /* String+Regex.swift in Sources */,
+				96A58F53254A91AC00248F1E /* String+Matching.swift in Sources */,
 				9627A5AC255087FF000BFF4D /* DetailConditionSelectCellView.swift in Sources */,
 				965A4DDE2552AFC300A4A7D7 /* IssueProvider.swift in Sources */,
 				96AD640B2551579D00B16BD3 /* IssueTrackerEndPoint.swift in Sources */,
