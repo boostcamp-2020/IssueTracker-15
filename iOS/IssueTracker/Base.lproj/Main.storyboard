@@ -310,7 +310,7 @@
                     <tabBarItem key="tabBarItem" title="마일스톤" image="3.circle.fill" catalog="system" id="RDq-oe-4vG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="jZ3-TC-wsS">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
@@ -527,18 +527,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cYP-py-DgA">
-                                <rect key="frame" x="20" y="152.5" width="374" height="42"/>
+                                <rect key="frame" x="20" y="144" width="374" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNE-Xl-7zb">
-                                <rect key="frame" x="20" y="126.5" width="374" height="21"/>
+                                <rect key="frame" x="20" y="118" width="374" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ffC-xq-HP2">
-                                <rect key="frame" x="20" y="204.5" width="374" height="35"/>
+                                <rect key="frame" x="20" y="196" width="374" height="35"/>
                                 <segments>
                                     <segment title="마크다운"/>
                                     <segment title="미리보기"/>
@@ -632,61 +632,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0q-Ph-9XO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2948" y="-556"/>
-        </scene>
-        <!--Issue Detail View Controller-->
-        <scene sceneID="JHX-o1-ap6">
-            <objects>
-                <viewController storyboardIdentifier="IssueDetailViewController" id="oYN-fe-tCl" customClass="IssueDetailViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="U3d-TU-QQW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="emk-zj-VTs">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" red="0.93730884790000002" green="0.94113391639999999" blue="0.96077984569999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bnD-Ve-d9M">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="BP0-T1-6yo">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BLu-iQ-XqF">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="gBp-g6-nMt" firstAttribute="trailing" secondItem="emk-zj-VTs" secondAttribute="trailing" id="2jd-VT-56W"/>
-                            <constraint firstItem="emk-zj-VTs" firstAttribute="top" secondItem="gBp-g6-nMt" secondAttribute="top" id="6Sj-IF-ney"/>
-                            <constraint firstItem="emk-zj-VTs" firstAttribute="leading" secondItem="gBp-g6-nMt" secondAttribute="leading" id="glm-c1-rE2"/>
-                            <constraint firstItem="gBp-g6-nMt" firstAttribute="bottom" secondItem="emk-zj-VTs" secondAttribute="bottom" id="naV-na-Y8s"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="gBp-g6-nMt"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Vq2-YF-ME7">
-                        <barButtonItem key="rightBarButtonItem" id="zKf-VU-FdM">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yLl-SN-uqF" userLabel="Edit Button">
-                                <rect key="frame" x="302" y="7" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Edit"/>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="collectionView" destination="emk-zj-VTs" id="OX4-uC-R8a"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zau-TZ-QYO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1958" y="-1248"/>
         </scene>
     </scenes>
     <resources>

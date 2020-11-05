@@ -59,12 +59,8 @@ class IssueListViewController: UIViewController {
 // MARK: - Actions
 extension IssueListViewController {
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        guard self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) != nil,
-        let issueDetailVC = storyboard.instantiateViewController(withIdentifier: IssueDetailViewController.identifier) as? IssueDetailViewController
-        else { return }
-        
+        guard self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) != nil else { return }
+        let issueDetailVC = IssueDetailViewController.createViewController()
         self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
     

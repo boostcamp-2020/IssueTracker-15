@@ -1,8 +1,8 @@
 //
-//  IssueDetailViewController.swift
+//  IssueDetailViewController-tmp.swift
 //  IssueTracker
 //
-//  Created by sihyung you on 2020/11/04.
+//  Created by sihyung you on 2020/11/05.
 //  Copyright © 2020 IssueTracker-15. All rights reserved.
 //
 
@@ -18,15 +18,16 @@ class IssueDetailViewController: UIViewController {
     ]
     
     @IBOutlet weak var collectionView: UICollectionView!
-    lazy var addCommentView: AddCommentView? = {
-        return AddCommentView.createView()
-    }()
+    var addCommentView: AddCommentView?
     
     private var currentIndexPath: IndexPath? {
-        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
-        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        guard let currentIndexPath = collectionView.indexPathForItem(at: visiblePoint) else { return nil }
-        return currentIndexPath
+        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.frame.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.minY)
+        if let currentIndexPath = collectionView.indexPathForItem(at: visiblePoint) {
+            return currentIndexPath
+        } else {
+            return IndexPath(item: -1, section: 0)
+        }
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -42,15 +43,27 @@ class IssueDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.prefersLargeTitles = false
+        configureNavigationBarButtons()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        configureInitialLayout()
+    }
+    
+    private func configureNavigationBarButtons() {
         configureBackButton()
-        configureCollectionView()
-        addBottomSheetView()
+        configureEditButton()
     }
     
     private func configureBackButton() {
         self.navigationItem.hidesBackButton = true
-        let customButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(self.backButtonTapped(_:)))
-        self.navigationItem.leftBarButtonItem = customButton
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(self.backButtonTapped(_:)))
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+    
+    private func configureEditButton() {
+        let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: nil)
+        self.navigationItem.rightBarButtonItem = editButton
     }
     
     @objc func backButtonTapped(_ sender: UIBarButtonItem) {
@@ -65,36 +78,57 @@ class IssueDetailViewController: UIViewController {
         collectionView.registerCell(type: IssueDetailCellView.self)
     }
     
+    private func configureInitialLayout() {
+        guard addCommentView != nil else {
+            configureCollectionView()
+            configureBottomSheetView()
+            addBottomSheetView()
+            return
+        }
+    }
+    
+    private func configureBottomSheetView() {
+        addCommentView = AddCommentView.createView()
+        let height = view.frame.height
+        let width  = view.frame.width
+        self.addCommentView?.frame = CGRect(x: 0, y: self.view.frame.maxY * 0.85, width: width, height: height)
+    }
+    
     private func addBottomSheetView() {
         guard let addCommentView = addCommentView else { return }
         
         addCommentView.upButtonTapped = { [weak self] in
             guard let `self` = self,
-                let currentIndexPath = self.currentIndexPath,
-                currentIndexPath.item > 0
+                let currentIndexPath = self.currentIndexPath
                 else { return }
-            self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item - 1, section: 0), at: .centeredVertically, animated: true)
+            
+            if currentIndexPath.item == 0 {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.collectionView.contentOffset = CGPoint.zero
+                })
+            } else if currentIndexPath.item != -1 {
+                self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item - 1, section: 0), at: .top, animated: true)
+            }
         }
-
+        
         addCommentView.downButtonTapped = { [weak self] in
             guard let `self` = self,
                 let currentIndexPath = self.currentIndexPath,
                 currentIndexPath.item < self.cellData.count - 1
                 else { return }
-            self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item + 1, section: 0), at: .centeredVertically, animated: true)
+            
+            self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item + 1, section: 0), at: .top, animated: true)
         }
         
         self.view.addSubview(addCommentView)
-        let height = view.frame.height
-        let width  = view.frame.width
-        addCommentView.frame = CGRect(x: 0, y: self.view.frame.maxY * 0.85, width: width, height: height)
     }
     
     private func setupCollectionViewLayout() {
         let flowLayout = UICollectionViewFlowLayout()
-        let width = self.view.frame.width
+        let width = self.view.frame.size.width
         let headerHeight = self.view.frame.height * 0.2
         
+        flowLayout.itemSize.width = width
         flowLayout.estimatedItemSize = CGSize(width: width, height: headerHeight)
         flowLayout.headerReferenceSize = CGSize(width: width, height: headerHeight)
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
@@ -115,7 +149,7 @@ extension IssueDetailViewController: UICollectionViewDataSource {
         cell.configure(with: cellData[indexPath.row])
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         guard let header: IssueDetailHeaderView = collectionView.dequeueHeader(at: indexPath) else { return UICollectionReusableView() }
@@ -124,5 +158,14 @@ extension IssueDetailViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
+    }
+}
+
+extension IssueDetailViewController {
+    static let nibName = "IssueDetailViewController"
+    
+    static func createViewController() -> IssueDetailViewController {
+        let vc = IssueDetailViewController(nibName: nibName, bundle: Bundle.main)
+        return vc
     }
 }
