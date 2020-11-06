@@ -75,8 +75,13 @@
 <img src="https://noticon-static.tammolo.com/dgggcrkxq/image/upload/v1582581609/noticon/cczbpahp5od6voerbvwr.svg" height = "100px">
 </p>
 
-## 📌 1주차 데모 🖥
-
+## 🖥 1주차 데모  
 ### [Web](http://118.67.133.155:3000/)
 
 ### [iOS](https://youtu.be/4jwzIijJ9fo)
+
+## 🖥 2주차 데모  
+### [Web-Server](http://118.67.133.155:3000/)  
+### [Web-Client](http://118.67.128.192/issue)  
+
+### [iOS](https://youtu.be/o4B0ahz36oY)
