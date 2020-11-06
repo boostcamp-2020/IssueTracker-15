@@ -21,7 +21,6 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var bottomToolBar: UIToolbar!
     @IBOutlet weak var addIssueButton: UIButton!
     
-    var issueDetailViewModel: IssueDetailViewModel?
     private var viewingMode: ViewingMode = .general
     var issueListViewModel: IssueListViewModel? {
         didSet {
@@ -71,13 +70,13 @@ class IssueListViewController: UIViewController {
 extension IssueListViewController {
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
         guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)),
-            let issueListViewModel = issueListViewModel,
-            let issueDetailViewModel = issueDetailViewModel
+            let issueListViewModel = issueListViewModel
             else { return }
         
         switch viewingMode {
         case .general:
-            let issueDetailVC = IssueDetailViewController.createViewController(currentIssueId: issueListViewModel.cellForItemAt(path: indexPath).id, issueDetailViewModel: issueDetailViewModel)
+            let issueDetailViewModel = issueListViewModel.createIssueDetailViewModel(path: indexPath)
+            let issueDetailVC = IssueDetailViewController.createViewController(issueDetailViewModel: issueDetailViewModel)
             self.navigationController?.pushViewController(issueDetailVC, animated: true)
         case .edit:
             
@@ -144,7 +143,7 @@ extension IssueListViewController {
         let onDismiss = { (generalCondition: [Bool], detailCondition: [Int]) in
             issueListViewModel.filter = IssueFilter(generalCondition: generalCondition, detailCondition: detailCondition)
         }
-        IssueFilterViewController.present(at: self, filterViewModel: issueListViewModel.filterViewModel, onDismiss: onDismiss)
+        IssueFilterViewController.present(at: self, filterViewModel: issueListViewModel.createFilterViewModel(), onDismiss: onDismiss)
     }
     
     @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {

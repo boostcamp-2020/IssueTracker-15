@@ -15,7 +15,7 @@ class IssueDetailHeaderView: UICollectionReusableView {
     @IBOutlet weak var issueNumber: UILabel!
     @IBOutlet weak var issueBadge: UIButton!
     
-    func configure(with issueDetailViewModel: IssueDetailViewModel) {
+    func configure(with issueDetailViewModel: IssueDetailViewModelProtocol) {
         self.issueAuthor.text = issueDetailViewModel.author
         self.issueTitle.text = issueDetailViewModel.title
         self.issueNumber.text = "#" + String(issueDetailViewModel.issueNumber)
