@@ -1,10 +1,8 @@
-import express from "express";
-import SignInRouter from "./sign-in";
-import SignUpRouter from "./sign-up";
+import express from 'express';
+import SignInRouter from './sign-in';
 
 const AuthRouter = express.Router();
 
-AuthRouter.use("/signin", SignInRouter);
-AuthRouter.use("/signup", SignUpRouter);
+AuthRouter.use('/signin', SignInRouter);
 
 export default AuthRouter;

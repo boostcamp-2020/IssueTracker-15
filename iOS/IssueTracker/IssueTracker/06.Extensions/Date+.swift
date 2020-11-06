@@ -11,11 +11,15 @@ import Foundation
 extension Date {
     
     var stringForMilestone: String {
-        DateFormatter.dateForMileStone.string(from: self)
+        DateFormatter.dateForCollectionView.string(from: self)
     }
     
     var stringForSubmitForm: String {
         DateFormatter.dateForSubmitForm.string(from: self)
+    }
+    
+    var stringForConditionCell: String {
+        DateFormatter.dateForConditionCell.string(from: self)
     }
     
 }

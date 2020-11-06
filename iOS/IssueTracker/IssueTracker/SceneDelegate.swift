@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NetworkFramework
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,7 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
               let mainTabVC = window?.rootViewController as? MainTabBarController
         else { return }
         // TODO:- Network, Cache, AuthService 초기화 및 로그인 여부 검증 -> AppDelegate로??
-        mainTabVC.setupDependencies()
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
+        let dataLoader = DataLoader(session: session)
+        mainTabVC.setupSubViewControllers(with: dataLoader)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
