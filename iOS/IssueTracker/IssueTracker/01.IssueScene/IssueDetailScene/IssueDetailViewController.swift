@@ -144,9 +144,8 @@ class IssueDetailViewController: UIViewController {
         let width = self.view.frame.size.width
         let headerHeight = self.view.frame.height * 0.2
         
-        flowLayout.itemSize.width = width
         flowLayout.estimatedItemSize = CGSize(width: width, height: headerHeight)
-        flowLayout.headerReferenceSize = CGSize(width: width, height: headerHeight)
+        flowLayout.headerReferenceSize = CGSize(width: width, height: 150)
         
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         
@@ -186,6 +185,13 @@ extension IssueDetailViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let indexPath = IndexPath(row: 0, section: section)
+        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath)
+        
+        return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
     }
 }
 

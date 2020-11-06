@@ -27,18 +27,18 @@ class IssueDetailHeaderView: UICollectionReusableView {
         configureIssueBadge(isOpened: issueDetailViewModel.isOpened)
     }
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        super.preferredLayoutAttributesFitting(layoutAttributes)
-        layoutIfNeeded()
-        
-        let size = self.systemLayoutSizeFitting(layoutAttributes.size)
-
-        var frame = layoutAttributes.frame
-        frame.size.height = ceil(size.height)
-        layoutAttributes.frame = frame
-
-        return layoutAttributes
-    }
+//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+//        super.preferredLayoutAttributesFitting(layoutAttributes)
+//        layoutIfNeeded()
+//
+//        let size = self.systemLayoutSizeFitting(layoutAttributes.size)
+//
+//        var frame = layoutAttributes.frame
+//        frame.size.height = ceil(size.height)
+//        layoutAttributes.frame = frame
+//
+//        return layoutAttributes
+//    }
     
     private func configureIssueBadge(isOpened: Bool) {
         var badgeColor: UIColor
