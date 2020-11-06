@@ -47,9 +47,14 @@ class IssueDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = false
         configureNavigationBarButtons()
         configureIssueDetailViewModel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "이슈 상세"
+        self.navigationItem.largeTitleDisplayMode = .never
     }
     
     override func viewDidLayoutSubviews() {
@@ -79,8 +84,6 @@ class IssueDetailViewController: UIViewController {
     }
     
     @objc func backButtonTapped(_ sender: UIBarButtonItem) {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -101,7 +104,6 @@ class IssueDetailViewController: UIViewController {
     }
     
     private func configureBottomSheetView() {
-        self.tabBarController?.tabBar.isHidden = true
         addCommentView = AddCommentView.createView()
         let height = view.frame.height
         let width  = view.frame.width

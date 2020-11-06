@@ -40,6 +40,12 @@ class IssueListViewController: UIViewController {
         issueListViewModel?.needFetchItems()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = "이슈"
+        self.navigationItem.largeTitleDisplayMode = .always
+    }
+    
     // TODO: SerachBar Configure
     private func configureSearchBar() {
         navigationItem.searchController = UISearchController(searchResultsController: nil)
@@ -69,15 +75,11 @@ class IssueListViewController: UIViewController {
 
 extension IssueListViewController {
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
-        guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)),
-            let issueListViewModel = issueListViewModel
-            else { return }
+        guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) else { return }
         
         switch viewingMode {
         case .general:
-            let issueDetailViewModel = issueListViewModel.createIssueDetailViewModel(path: indexPath)
-            let issueDetailVC = IssueDetailViewController.createViewController(issueDetailViewModel: issueDetailViewModel)
-            self.navigationController?.pushViewController(issueDetailVC, animated: true)
+            presentIssueDetailViewController(indexPath: indexPath)
         case .edit:
             
             break
@@ -144,6 +146,16 @@ extension IssueListViewController {
             issueListViewModel.filter = IssueFilter(generalCondition: generalCondition, detailCondition: detailCondition)
         }
         IssueFilterViewController.present(at: self, filterViewModel: issueListViewModel.createFilterViewModel(), onDismiss: onDismiss)
+    }
+    
+    private func presentIssueDetailViewController(indexPath: IndexPath) {
+        guard let issueListViewModel = issueListViewModel,
+            let issueDetailViewModel = issueListViewModel.createIssueDetailViewModel(path: indexPath)
+            else { return }
+        
+        let issueDetailVC = IssueDetailViewController.createViewController(issueDetailViewModel: issueDetailViewModel)
+        
+        self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
     
     @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
