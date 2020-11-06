@@ -97,7 +97,7 @@ extension IssueListViewController {
     @IBAction func leftNavButtonTapped(_ sender: Any) {
         switch viewingMode {
         case .general:
-            performSegue(withIdentifier: "createIssueFilterViewController", sender: self)
+            presentFilterViewController()
         case .edit:
             // TODO: SelectAll
             break
@@ -133,22 +133,18 @@ extension IssueListViewController {
     }
 }
 
-// MARK: - Segue Action
+// MARK: - Present
 
 extension IssueListViewController {
     
-    @IBSegueAction func createIssueFilterViewController(_ coder: NSCoder) -> IssueFilterViewController? {
+    private func presentFilterViewController() {
         guard viewingMode == .general,
-              let issueListViewModel  = issueListViewModel,
-            let filterViewModel = issueListViewModel.filterViewModel
-        else { return nil }
-        let vc = IssueFilterViewController(coder: coder, filterViewModel: filterViewModel)
-        vc?.onSelectionComplete = { (filterViewModel) in
-            let filter = IssueFilter(generalCondition: filterViewModel.generalConditions,
-                                     detailCondition: filterViewModel.detailConditions)
-            issueListViewModel.filter = filter
+            let issueListViewModel  = issueListViewModel
+            else { return }
+        let onDismiss = { (generalCondition: [Bool], detailCondition: [Int]) in
+            issueListViewModel.filter = IssueFilter(generalCondition: generalCondition, detailCondition: detailCondition)
         }
-        return vc
+        IssueFilterViewController.present(at: self, filterViewModel: issueListViewModel.filterViewModel, onDismiss: onDismiss)
     }
     
     @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
