@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iN0-l3-epB" customClass="MilestoneComponentView" customModule="IssueTracker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="136" height="58"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="unc-Yh-koE">
+                    <rect key="frame" x="0.0" y="4.5" width="42" height="49"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysZ-Mm-tNh" userLabel="milestoneBadge">
+                            <rect key="frame" x="0.0" y="0.0" width="42" height="29"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbb-nl-cLY" userLabel="DueDate">
+                            <rect key="frame" x="0.0" y="32" width="42" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="unc-Yh-koE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="MJ9-nT-Dbs"/>
+                <constraint firstItem="Dbb-nl-cLY" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.3" id="TsY-8c-fZZ"/>
+                <constraint firstItem="unc-Yh-koE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="byU-DK-VWy"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="unc-Yh-koE" secondAttribute="trailing" id="i87-nV-Tbu"/>
+                <constraint firstItem="ysZ-Mm-tNh" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.5" id="t9d-fZ-fIc"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="dueDateLabel" destination="Dbb-nl-cLY" id="Nhw-wH-C5e"/>
+                <outlet property="titleLabel" destination="ysZ-Mm-tNh" id="AAl-kH-DwA"/>
+            </connections>
+            <point key="canvasLocation" x="95.652173913043484" y="141.29464285714286"/>
+        </view>
+    </objects>
+</document>

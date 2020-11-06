@@ -23,19 +23,30 @@ protocol MilestoneSubmitFormConfigurable {
     var dueDateForForm: String { get }
 }
 
+enum DateFormatFrom {
+    case fromServer
+    case fromSubmitView
+}
+
 struct MilestoneItemViewModel: MilestoneCellConfigurable, MilestoneSubmitFormConfigurable {
     
+    private(set) var id: Int
     private(set) var title: String
     private(set) var description: String
     private(set) var dueDate: Date?
     private(set) var issueOpened: Int = 0
     private(set) var issueClosed: Int = 0
     
-    init(milestone: Milestone) {
+    init(milestone: Milestone, from: DateFormatFrom) {
+        self.id = milestone.id
         self.title = milestone.title
         self.description = milestone.description
-        // TODO:- TIMESTAMP 형식 데이터를 알맞게 변환
-        self.dueDate = milestone.dueDate.dateForMilestoneViewModel
+        switch from {
+        case .fromServer:
+            self.dueDate = milestone.dueDate.datdForServer
+        case .fromSubmitView:
+            self.dueDate = milestone.dueDate.dateForSubmitForm
+        }
     }
     
     var dueDateText: String {

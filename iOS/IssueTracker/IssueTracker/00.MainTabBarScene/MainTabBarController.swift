@@ -7,20 +7,59 @@
 //
 
 import UIKit
+import NetworkFramework
 
 class MainTabBarController: UITabBarController {
     
-    func setupDependencies() {
+    private var dataLoader: DataLoadable?
+    private var labelProvider: LabelProvidable?
+    private var milestoneProvider: MilestoneProvidable?
+    private var issueProvider: IssueProvidable?
+    
+    // TODO: 로직분리!
+    func setupSubViewControllers(with dataLoader: DataLoadable) {
+        
+        let issueProvider: IssueProvidable = IssueProvider(dataLoader: dataLoader)
+        let labelProvider: LabelProvidable = LabelProvider(dataLoader: dataLoader)
+        let milestoneProvider: MilestoneProvidable = MilestoneProvider(dataLoader: dataLoader)
+        
+        let commonAppearance = UINavigationBarAppearance()
+        commonAppearance.backgroundColor = .white
+        commonAppearance.shadowColor = .gray
         // controllers[0] = UINavigationController -> root: IssueListViewController
+        if let navigationController = self.viewControllers?[safe: 0] as? UINavigationController,
+            let issueListViewController = navigationController.topViewController as? IssueListViewController {
+            navigationController.navigationBar.scrollEdgeAppearance = commonAppearance
+            
+            let issueListViewModel = IssueListViewModel(labelProvider: labelProvider,
+                                                        milestoneProvider: milestoneProvider,
+                                                        issueProvider: issueProvider)
+            
+            let issueDetailViewModel = IssueDetailViewModel(issueProvider: issueProvider)
+            
+            issueListViewController.issueListViewModel = issueListViewModel
+            issueListViewController.issueDetailViewModel = issueDetailViewModel
+            
+        }
         // controllers[1] = LabelListViewController
-        if let labelListViewController = self.viewControllers?[safe: 1] as? LabelListViewController {
-            labelListViewController.labelListViewModel = LabelListViewModel()
+        if let navigationController = self.viewControllers?[safe: 1] as? UINavigationController,
+            let labelListViewController = navigationController.topViewController as? LabelListViewController {
+            navigationController.navigationBar.scrollEdgeAppearance = commonAppearance
+            
+            labelListViewController.labelListViewModel = LabelListViewModel(with: labelProvider)
         }
         // controllers[2] = MilestoneListViewConroller
-        if let milestoneListViewController = self.viewControllers?[safe: 2] as? MilestoneListViewController {
-            milestoneListViewController.milestoneListViewModel = MilestoneListViewModel()
+        if let navigationController = self.viewControllers?[safe: 2] as? UINavigationController,
+            let milestoneListViewController = navigationController.topViewController as? MilestoneListViewController {
+            navigationController.navigationBar.scrollEdgeAppearance = commonAppearance
+            milestoneListViewController.milestoneListViewModel = MilestoneListViewModel(with: milestoneProvider)
         }
         // controllers[3] = SettingViewController
+        
+        self.dataLoader = dataLoader
+        self.labelProvider = labelProvider
+        self.milestoneProvider = milestoneProvider
+        self.issueProvider = issueProvider
     }
     
     override func viewDidLoad() {
