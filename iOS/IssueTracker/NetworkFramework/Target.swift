@@ -9,6 +9,7 @@
 import Foundation
 
 public protocol Target {
+    
     var baseURL: URL { get }
     
     var path: String { get }

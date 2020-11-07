@@ -488,8 +488,8 @@
 				956B5D0425503D20001CBAA9 /* MilestoneService.swift */,
 				956B5D0625503E8A001CBAA9 /* LabelService.swift */,
 				965A4DEF2552CDA900A4A7D7 /* IssueService.swift */,
-				96B6E3602556AFCF00D8BABF /* IssueTrackerAPIs.swift */,
 				96526C642557043200E2E387 /* CommentService.swift */,
+				96B6E3602556AFCF00D8BABF /* IssueTrackerAPIs.swift */,
 			);
 			path = 08.Endpoints;
 			sourceTree = "<group>";

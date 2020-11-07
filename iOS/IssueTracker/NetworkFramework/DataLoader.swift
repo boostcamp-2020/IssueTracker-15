@@ -8,8 +8,6 @@
 
 import Foundation
 
-public typealias RequestResult<T> = Result<T?, NetworkError>
-
 public typealias Completion = (_ result: Result<Response, NetworkError>) -> Void
 public typealias RequestCompletion =  (Data?, URLResponse?, Error?) -> Void
 

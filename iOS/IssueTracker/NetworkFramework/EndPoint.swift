@@ -25,7 +25,7 @@ public class EndPoint {
         guard let requestURL = Foundation.URL(string: url) else {
             return .failure(NetworkError.urlMappingError("URL을 생성할 수 없습니다."))
         }
-
+        
         var request = URLRequest(url: requestURL)
         request.httpMethod = method.rawValue
         request.allHTTPHeaderFields = httpHeaderFields

@@ -15,7 +15,7 @@ struct EncodableObject: Encodable {
     public init(_ object: Encodable) {
         self.object = object
     }
-
+    
     func encode(to encoder: Encoder) throws {
         try object.encode(to: encoder)
     }
