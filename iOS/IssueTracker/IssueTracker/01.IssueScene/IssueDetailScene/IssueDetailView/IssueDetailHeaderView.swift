@@ -18,7 +18,7 @@ class IssueDetailHeaderView: UICollectionReusableView {
     @IBOutlet weak var issueAuthor: UILabel!
     @IBOutlet weak var issueTitle: UILabel!
     @IBOutlet weak var issueNumber: UILabel!
-    @IBOutlet weak var issueBadge: UILabel!
+    @IBOutlet weak var issueBadge: UIButton!
     
     func configure(with issueDetailViewModel: IssueDetailViewModel) {
         self.issueAuthor.text = issueDetailViewModel.author
@@ -27,26 +27,13 @@ class IssueDetailHeaderView: UICollectionReusableView {
         configureIssueBadge(isOpened: issueDetailViewModel.isOpened)
     }
     
-//    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-//        super.preferredLayoutAttributesFitting(layoutAttributes)
-//        layoutIfNeeded()
-//
-//        let size = self.systemLayoutSizeFitting(layoutAttributes.size)
-//
-//        var frame = layoutAttributes.frame
-//        frame.size.height = ceil(size.height)
-//        layoutAttributes.frame = frame
-//
-//        return layoutAttributes
-//    }
-    
     private func configureIssueBadge(isOpened: Bool) {
         var badgeColor: UIColor
         var badgeText: String
         badgeColor = isOpened ? UIColor(named: IssueBadgeColor.open.rawValue) ?? UIColor.green : UIColor(named: IssueBadgeColor.closed.rawValue) ?? UIColor.red
         badgeText = isOpened ? "Open" : "Closed"
         
-        issueBadge.convertToIssueBadge(text: badgeText, textColor: .white, backgroundColor: badgeColor)
+        issueBadge.convertToIssueBadge(text: badgeText, backgroundColor: badgeColor)
     }
 }
 
@@ -62,22 +49,10 @@ extension IssueDetailHeaderView: UICollectionViewHeaderRegisterable {
     
 }
 
-extension UILabel {
+extension UIButton {
     
-    func convertToIssueBadge(text: String, textColor: UIColor, backgroundColor: UIColor) {
-        self.textColor = textColor
+    func convertToIssueBadge(text: String, backgroundColor: UIColor) {
         self.backgroundColor = backgroundColor
-        
-        let textAttachment = NSTextAttachment()
-        let badgeImage = UIImage(systemName: "exclamationmark.circle")?.withTintColor(textColor)
-        textAttachment.image = badgeImage
-        let attributedStringWithImage = NSAttributedString(attachment: textAttachment)
-        
-        let fullAttributedString = NSMutableAttributedString(string: "")
-        fullAttributedString.append(attributedStringWithImage)
-        fullAttributedString.append(NSMutableAttributedString(string: text))
-        
-        self.attributedText = fullAttributedString
+        self.setTitle(text, for: .normal)
     }
-    
 }
