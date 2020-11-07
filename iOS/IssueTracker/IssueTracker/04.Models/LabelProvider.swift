@@ -53,34 +53,27 @@ class LabelProvider: LabelProvidable {
     }
     
     func addLabel(title: String, description: String, color: String, completion: @escaping (Label?) -> Void) {
-        
-        let endPoint = LabelEndPoint(requestType: .create)
-        endPoint.httpBody = JSONEncoder.encode(data: Label(title: title, description: description, hexColor: color))
-        dataLoader?.request(Label.self, endpoint: endPoint, completion: { (result) in
-            switch result {
-            case .success(let data):
-                completion(data)
+        dataLoader?.request(LabelService.createLabel(title, description, color), callBackQueue: .main, completion: { (response) in
+            switch response {
             case .failure:
                 completion(nil)
+            case .success(let response):
+                let label = response.mapEncodable(Label.self)
+                completion(label)
             }
         })
-
     }
     
     func editLabel(id: Int, title: String, description: String, color: String, completion: @escaping (Label?) -> Void) {
-        
-        let endPoint = LabelEndPoint(requestType: .edit, parameter: String(id))
-        endPoint.httpBody = JSONEncoder.encode(data: Label(id: id, title: title, description: description, hexColor: color))
-        dataLoader?.request(Label.self, endpoint: endPoint, completion: { (result) in
-            switch result {
+        dataLoader?.request(LabelService.editLabel(id, title, description, color), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
             case .success:
                 let label = Label(id: id, title: title, description: description, hexColor: color)
                 completion(label)
-            case .failure:
-                completion(nil)
             }
         })
-
     }
     
     func fetchLabels(completion: @escaping ([Label]?) -> Void) {
@@ -91,23 +84,23 @@ class LabelProvider: LabelProvidable {
         
         onFetching = true
         fetchingCompletionHandlers[fetchingCompletionHandlers.count] = completion
-        let labelFetchEndPoint = LabelEndPoint(requestType: .fetch)
-        dataLoader?.request([Label].self, endpoint: labelFetchEndPoint, completion: { (result) in
-            switch result {
-            case .success(let data):
-                if let data = data { self.labels = data }
-                print("num fetchingCompletionHandlers: \(self.fetchingCompletionHandlers.count)")
-                self.fetchingCompletionHandlers.forEach {
-                    $0.value(data)
-                }
+        
+        dataLoader?.request(LabelService.fetchAll, callBackQueue: .main, completion: { (response) in
+            switch response {
             case .failure:
                 completion(nil)
+            case .success(let response):
+                if let labels = response.mapEncodable([Label].self) {
+                    self.labels = labels
+                    self.fetchingCompletionHandlers.forEach {
+                        $0.value(labels)
+                    }
+                }
             }
             
             self.fetchingCompletionHandlers.removeAll()
             self.onFetching = false
         })
-        
     }
     
 }

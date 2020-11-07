@@ -50,15 +50,11 @@ class IssueCellView: UICollectionViewCell {
         setMilestone(title: issueItemViewModel.milestoneTitle)
         
         issueItemViewModel.didMilestoneChanged = { [weak self] milestone in
-            DispatchQueue.main.async {
                 self?.setMilestone(title: milestone)
-            }
         }
         
         issueItemViewModel.didLabelChanged = { [weak self] (text, colorCode) in
-            DispatchQueue.main.async {
                 self?.setLabel(title: text, colorCode: colorCode)
-            }
         }
         
         layoutIfNeeded()
