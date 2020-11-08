@@ -16,6 +16,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GLk-Jp-VZv">
+                                <rect key="frame" x="0.0" y="140" width="414" height="624"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yJu-Dn-s5w">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uf-dk-ieS" userLabel="addIssueButton">
                                 <rect key="frame" x="332.5" y="682.5" width="51.5" height="51.5"/>
                                 <color key="backgroundColor" red="0.28235294119999998" green="0.52156862749999999" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -30,30 +41,23 @@
                                     <segue destination="24V-yA-fcF" kind="presentation" id="V9m-AE-YrN"/>
                                 </connections>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GLk-Jp-VZv">
-                                <rect key="frame" x="0.0" y="140" width="414" height="624"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yJu-Dn-s5w">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="top" secondItem="H30-KX-izY" secondAttribute="top" id="Jjq-wu-VdB"/>
+                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="leading" secondItem="H30-KX-izY" secondAttribute="leading" id="TpQ-Z4-Tqa"/>
+                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="trailing" secondItem="H30-KX-izY" secondAttribute="trailing" id="euk-O1-b5c"/>
+                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="bottom" secondItem="H30-KX-izY" secondAttribute="bottom" id="ezy-wt-qAl"/>
                             <constraint firstItem="4uf-dk-ieS" firstAttribute="width" secondItem="H30-KX-izY" secondAttribute="width" multiplier="0.125" id="f87-8S-auL"/>
+                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="top" secondItem="H30-KX-izY" secondAttribute="top" id="kNB-Tf-FMg"/>
                             <constraint firstItem="H30-KX-izY" firstAttribute="trailing" secondItem="4uf-dk-ieS" secondAttribute="trailing" constant="30" id="m8W-vm-4P7"/>
-                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="trailing" secondItem="H30-KX-izY" secondAttribute="trailing" id="m9J-2b-IIa"/>
                             <constraint firstItem="H30-KX-izY" firstAttribute="bottom" secondItem="4uf-dk-ieS" secondAttribute="bottom" constant="30" id="ts3-cz-JO8"/>
-                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="leading" secondItem="H30-KX-izY" secondAttribute="leading" id="uAn-iL-eez"/>
-                            <constraint firstItem="H30-KX-izY" firstAttribute="bottom" secondItem="GLk-Jp-VZv" secondAttribute="bottom" id="vDG-jx-1OQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="H30-KX-izY"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="iih-wH-6MK"/>
+                        <barButtonItem title="선택 이슈 닫기" id="obz-kB-KUJ"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="ckC-hN-RTX">
                         <barButtonItem key="leftBarButtonItem" title="Filter" id="ni1-aj-Ha6">
                             <connections>
@@ -68,6 +72,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addIssueButton" destination="4uf-dk-ieS" id="eBa-8x-nGb"/>
+                        <outlet property="closeSelectedIssueButton" destination="obz-kB-KUJ" id="hQU-DH-mJM"/>
                         <outlet property="collectionView" destination="GLk-Jp-VZv" id="WIq-9W-NmX"/>
                         <outlet property="leftNavButton" destination="ni1-aj-Ha6" id="M2A-Dn-5ci"/>
                         <outlet property="rightNavButton" destination="dfC-go-Z3a" id="qnE-l3-dTM"/>
@@ -75,7 +80,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H7j-e0-wEm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1957.9710144927537" y="-556.47321428571422"/>
+            <point key="canvasLocation" x="2020" y="-588"/>
         </scene>
         <!--Label List View Controller-->
         <scene sceneID="tne-QT-ifu">

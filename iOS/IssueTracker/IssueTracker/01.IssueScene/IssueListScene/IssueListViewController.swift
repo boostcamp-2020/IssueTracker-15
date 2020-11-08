@@ -19,6 +19,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var rightNavButton: UIBarButtonItem!
     @IBOutlet weak var leftNavButton: UIBarButtonItem!
     @IBOutlet weak var addIssueButton: UIButton!
+    @IBOutlet weak var closeSelectedIssueButton: UIBarButtonItem!
     
     private var viewingMode: ViewingMode = .general
     var issueListViewModel: IssueListViewModel? {
@@ -36,14 +37,8 @@ class IssueListViewController: UIViewController {
         configureCollectionView()
         addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
         navigationItem.title = "이슈"
-        self.navigationItem.largeTitleDisplayMode = .automatic
         issueListViewModel?.needFetchItems()
         navigationController?.isToolbarHidden = true
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
     }
     
     // TODO: SerachBar Configure
@@ -64,7 +59,7 @@ class IssueListViewController: UIViewController {
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
         let cellHeight = self.view.bounds.height / 10
-        layout.itemSize = CGSize(width: self.view.bounds.width, height: cellHeight)
+        layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: cellHeight)
         layout.minimumLineSpacing = 1
         collectionView.setCollectionViewLayout(layout, animated: false)
     }

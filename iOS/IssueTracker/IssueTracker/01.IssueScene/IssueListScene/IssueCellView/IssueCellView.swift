@@ -40,6 +40,10 @@ class IssueCellView: UICollectionViewCell {
         
         labelBadge.cornerRadiusRatio = 0.5
         labelBadge.setPadding(top: 3, left: 5, bottom: 3, right: 5)
+        
+        NSLayoutConstraint.activate([
+            cellHorizontalScrollView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+        ])
     }
     
     func configure(issueItemViewModel: IssueItemViewModel) {
@@ -81,8 +85,8 @@ class IssueCellView: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        titleLabel.autoResizeFontWithHeight()
-        descriptionLabel.autoResizeFontWithHeight()
+//        titleLabel.autoResizeFontWithHeight()
+//        descriptionLabel.autoResizeFontWithHeight()
     }
 }
 
