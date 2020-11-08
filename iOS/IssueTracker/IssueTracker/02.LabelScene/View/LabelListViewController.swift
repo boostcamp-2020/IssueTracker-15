@@ -35,7 +35,7 @@ class LabelListViewController: UIViewController {
     
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 10)
+        layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 10)
         layout.minimumLineSpacing = 1
         layout.sectionHeadersPinToVisibleBounds = true
         collectionView.setCollectionViewLayout(layout, animated: false)
