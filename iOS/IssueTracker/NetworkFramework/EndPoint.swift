@@ -48,8 +48,8 @@ public class EndPoint {
 }
 
 extension EndPoint {
-    static func endPointMapping(_ target: Target) -> EndPoint {
-        return EndPoint(url: URL(target: target).absoluteString,
+    static func endPointMapping(_ target: Target) throws -> EndPoint {
+        return try EndPoint(url: URL(target: target).absoluteString,
                         method: target.method,
                         task: target.task,
                         httpHeaderFields: target.headers)

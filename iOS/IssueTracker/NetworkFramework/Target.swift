@@ -22,4 +22,5 @@ public protocol Target {
     
     var headers: [String: String]? { get }
     
+    var queryItems: [String: String]? { get }
 }

@@ -9,6 +9,7 @@
 import Foundation
 
 public enum NetworkError: Error {
+    case endPointMaappingError(String)
     case urlMappingError(String)
     case encodingData(Error)
     case responseError(String)

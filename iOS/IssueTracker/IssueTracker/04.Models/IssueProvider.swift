@@ -55,7 +55,17 @@ class IssueProvider: IssueProvidable {
     func fetchIssues(completion: @escaping ([Issue]?) -> Void) {
         onFetching = true
         
-        completion(issues)
+        dataLoader?.request(IssueService.fetchAll(true), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success(let response):
+                if let datas = response.mapJsonArr() {
+                    self.issues = datas.compactMap { Issue(json: $0) }
+                    completion(self.issues)
+                }
+            }
+        })
         
         onFetching = false
     }

@@ -38,6 +38,10 @@ extension CommentService: IssueTrackerService {
         }
     }
     
+    var queryItems: [String : String]? {
+        return nil
+    }
+    
     var method: HTTPMethod {
         switch self {
         case .addComment:

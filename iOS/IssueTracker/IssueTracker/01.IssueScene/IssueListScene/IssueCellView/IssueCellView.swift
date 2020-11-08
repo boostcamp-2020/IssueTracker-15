@@ -83,11 +83,6 @@ class IssueCellView: UICollectionViewCell {
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-//        titleLabel.autoResizeFontWithHeight()
-//        descriptionLabel.autoResizeFontWithHeight()
-    }
 }
 
 // MARK: - Action

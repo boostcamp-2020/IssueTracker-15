@@ -65,9 +65,9 @@ extension IssueService: IssueTrackerService {
     
     var path: String {
         switch self {
-        case .fetchAll(let opened):
+        case .fetchAll:
             // /api/issue?isOpened={boolean}
-            return "/api/issue?isOpened=\(opened)"
+            return "/api/issue"
         case .getIssue(let id):
             // /api/issue/:id
             return "/api/issue/\(id)"
@@ -101,6 +101,15 @@ extension IssueService: IssueTrackerService {
         case .deleteAssignee(let id, let assigneeId):
             // /api/issue/:id/assignees/:assigneeId
             return "/api/issue/\(id)/assignees/\(assigneeId)"
+        }
+    }
+    
+    var queryItems: [String : String]? {
+        switch self {
+        case .fetchAll(let isOpened):
+            return ["isOpened": "\(isOpened)"]
+        default:
+            return nil
         }
     }
     

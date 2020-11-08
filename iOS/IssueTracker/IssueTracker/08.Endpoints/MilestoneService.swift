@@ -48,6 +48,10 @@ extension MilestoneService: IssueTrackerService {
         }
     }
     
+    var queryItems: [String : String]? {
+        return nil
+    }
+    
     var method: HTTPMethod {
         switch self {
         case .fetchAll, .getMilestone:

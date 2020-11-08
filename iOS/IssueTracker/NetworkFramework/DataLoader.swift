@@ -24,7 +24,13 @@ public class DataLoader: DataLoadable {
     }
     
     public func request(_ target: Target, callBackQueue: DispatchQueue? = .none, completion: @escaping Completion) {
-        let endPoint = EndPoint.endPointMapping(target)
+        let endPoint: EndPoint
+        do {
+            endPoint = try EndPoint.endPointMapping(target)
+        } catch {
+            completion(.failure(NetworkError.endPointMaappingError("endpoint mapping error")))
+            return
+        }
         
         let urlRequest: URLRequest
         switch endPoint.urlRequest() {
