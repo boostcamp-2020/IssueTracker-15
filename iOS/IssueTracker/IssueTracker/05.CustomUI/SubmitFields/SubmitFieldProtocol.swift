@@ -10,6 +10,6 @@ import UIKit
 
 protocol SubmitFieldProtocol {
     var contentView: UIView { get }
-    func saveButtonTapped() -> SubmitFormView.SaveResult
+    func saveButtonTapped() -> SubmitFormViewController.SaveResult
     func resetButtonTapped()
 }

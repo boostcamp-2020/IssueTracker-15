@@ -52,8 +52,7 @@ extension MilestoneListViewController {
     }
     
     private func showSubmitFormView(type: MilestoneSubmitFieldsView.SubmitFieldType) {
-        guard let tabBarController = self.tabBarController,
-            let formView = SubmitFormView.createView(),
+        guard let formView = SubmitFormViewController.createViewController(),
             let milestoneSubmitFieldsView = MilestoneSubmitFieldsView.createView()
             else { return }
         
@@ -69,8 +68,8 @@ extension MilestoneListViewController {
             }
         }
         
-        tabBarController.view.addSubview(formView)
-        formView.frame = tabBarController.view.frame
+        
+        present(formView, animated: true, completion: nil)
     }
     
 }

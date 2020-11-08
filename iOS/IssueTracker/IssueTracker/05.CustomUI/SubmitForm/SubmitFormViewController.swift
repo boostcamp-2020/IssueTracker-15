@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SubmitFormView: UIView {
+class SubmitFormViewController: UIViewController {
     
     enum SaveResult {
         case success
@@ -21,10 +21,22 @@ class SubmitFormView: UIView {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var formView: UIView!
     @IBOutlet weak var submitFieldGuideView: UIView!
+    
     private var submitField: SubmitFieldProtocol?
     
     func configure(submitField: SubmitFieldProtocol) {
         self.submitField = submitField
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureSubmitField()
+        subscribeNotifications()
+        configureTapGesture()
+    }
+    
+    private func configureSubmitField() {
+        guard let submitField = submitField else { return }
         submitFieldGuideView.addSubview(submitField.contentView)
         NSLayoutConstraint.activate([
             submitField.contentView.topAnchor.constraint(equalTo: submitFieldGuideView.topAnchor),
@@ -32,38 +44,32 @@ class SubmitFormView: UIView {
             submitField.contentView.leadingAnchor.constraint(equalTo: submitFieldGuideView.leadingAnchor),
             submitField.contentView.trailingAnchor.constraint(equalTo: submitFieldGuideView.trailingAnchor)
         ])
-        subscribeNotifications()
-        configureTapGesture()
     }
     
+    @IBAction func closeButtonTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    @IBAction func resetButtonTapped(_ sender: Any) {
+        submitField?.resetButtonTapped()
+    }
+    @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let submitField = self.submitField else {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+
+        switch submitField.saveButtonTapped() {
+        case .success:
+            dismiss(animated: true, completion: nil)
+        case .failure(let message):
+            showAlert(at: self, title: message, prepare: moveFormViewDownward, completion: moveFormViewUpward)
+        }
+    }
 }
 
 // MARK: - Action
 
-extension SubmitFormView {
-    
-    @IBAction func closeButtonTapped(_ sender: Any) {
-        removeFromSuperview()
-    }
-    
-    @IBAction func resetButtonTapped(_ sender: Any) {
-        submitField?.resetButtonTapped()
-    }
-    
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let submitField = self.submitField else {
-            removeFromSuperview()
-            return
-        }
-        
-        switch submitField.saveButtonTapped() {
-        case .success:
-            removeFromSuperview()
-        case .failure(let message):
-            showAlert(title: message, prepare: moveFormViewDownward, completion: moveFormViewUpward)
-        }
-        
-    }
+extension SubmitFormViewController {
     
     @objc func keyboardWillShowOrHide(notification: NSNotification) {
         if let userInfo = notification.userInfo,
@@ -82,7 +88,7 @@ extension SubmitFormView {
     }
     
     @objc func formViewTapped() {
-        self.endEditing(true)
+        self.view.endEditing(true)
         self.formViewEndPoint = nil
         
         formView.frame.origin.y += moveUpward
@@ -90,14 +96,14 @@ extension SubmitFormView {
     }
     
     @objc func backgroundTapped() {
-        self.removeFromSuperview()
+        dismiss(animated: true, completion: nil)
     }
     
 }
 
 // MARK: - Private Function
 
-extension SubmitFormView {
+extension SubmitFormViewController {
     
     private func configureTapGesture() {
         formView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(formViewTapped)))
@@ -121,4 +127,15 @@ extension SubmitFormView {
         formView.frame.origin.y += moveUpward
     }
     
+}
+
+extension SubmitFormViewController {
+    static let nibName = "SubmitFormViewController"
+
+    static func createViewController() -> SubmitFormViewController? {
+        let vc = SubmitFormViewController(nibName: nibName, bundle: Bundle.main)
+        vc.modalPresentationStyle = .overFullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        return vc
+    }
 }
