@@ -49,7 +49,7 @@ enum IssueService {
     
     // deleteMilestone ( Id, milestoneId)
     // [DELETE] /api/issue/:id/milestone/:milestoneId
-    case delteMilestone( Int, Int)
+    case deleteMilestone( Int, Int)
     
     // addAssignee( Id, userId)
     // [POST] /api/issue/:id/assignees/:assigneeId
@@ -92,7 +92,7 @@ extension IssueService: IssueTrackerService {
         case .addMilestone(let id, let milestoneId):
             // /api/issue/:id/milestone/:milestoneId
             return "/api/issue/\(id)/milestone/\(milestoneId)"
-        case .delteMilestone(let id, let milestoneId):
+        case .deleteMilestone(let id, let milestoneId):
             // /api/issue/:id/milestone/:milestoneId
             return "/api/issue/\(id)/milestone/\(milestoneId)"
         case .addAssignee(let id, let assigneeId):
@@ -121,7 +121,7 @@ extension IssueService: IssueTrackerService {
             return .post
         case .editTitle, .editDescription:
             return .patch
-        case .delete, .deleteLabel, .delteMilestone, .deleteAssignee:
+        case .delete, .deleteLabel, .deleteMilestone, .deleteAssignee:
             return .delete
         }
     }
@@ -129,7 +129,7 @@ extension IssueService: IssueTrackerService {
     var task: Task {
         switch self {
         case .fetchAll, .getIssue, .delete, .addLabel,
-             .deleteLabel, .addMilestone, .delteMilestone,
+             .deleteLabel, .addMilestone, .deleteMilestone,
              .addAssignee, .deleteAssignee:
             return .requestPlain
         case .createIssue(let title, let description, let milestoneId, let authorId):
@@ -166,7 +166,7 @@ extension IssueService: IssueTrackerService {
             return .custom([204])
         case .addMilestone:
             return .custom([201])
-        case .delteMilestone:
+        case .deleteMilestone:
             return .custom([204])
         case .addAssignee:
             return .custom([201])

@@ -38,7 +38,8 @@ class BadgeLabelView: UILabel {
     override var intrinsicContentSize: CGSize {
         let contentSize = super.intrinsicContentSize
         let contentWidth = contentSize.width + contentInsets.left + contentInsets.right
-        return CGSize(width: contentWidth, height: contentSize.height)
+        let contentHeight = contentSize.height + contentInsets.top + contentInsets.bottom
+        return CGSize(width: contentWidth, height: contentHeight)
     }
     
     override func layoutSubviews() {

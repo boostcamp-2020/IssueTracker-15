@@ -50,8 +50,8 @@ public class DataLoader: DataLoadable {
             
             switch result {
             case .success(let response):
-                print("mapJsonObject \(response.mapJsonObject())")
-                print("mapJsonArr \(response.mapJsonArr())")
+                print("mapJsonObject: \(response.mapJsonObject())")
+                print("mapJsonArr: \(response.mapJsonArr())")
             case .failure(let error):
                 print("response fail with : \(error)")
             }
