@@ -91,7 +91,9 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success(let response):
-                // TODO: response 처리
+                if let jsonObject = response.mapJsonObject() {
+                    
+                }
                 break
             }
         })
@@ -107,7 +109,7 @@ class IssueProvider: IssueProvidable {
             switch response {
             case .failure:
                 completion(nil)
-            case .success(let response):
+            case .success:
                 // TODO: response 처리
             break
             }
@@ -122,7 +124,7 @@ class IssueProvider: IssueProvidable {
             switch response {
             case .failure:
                 completion(nil)
-            case .success(let response):
+            case .success:
             //TODO: response 처리
             break
             }
@@ -190,7 +192,7 @@ class IssueProvider: IssueProvidable {
             switch response {
             case .failure:
                 completion(nil)
-            case .success(let response):
+            case .success:
             //TODO: response 처리
             break
             }
@@ -204,7 +206,7 @@ class IssueProvider: IssueProvidable {
             switch response {
             case .failure:
                 completion(nil)
-            case .success(let response):
+            case .success:
             //TODO: response 처리
             break
             }
@@ -219,7 +221,7 @@ class IssueProvider: IssueProvidable {
             switch response {
             case .failure:
                 completion(nil)
-            case .success(let response):
+            case .success:
             //TODO: response 처리
             break
             }
@@ -234,7 +236,7 @@ class IssueProvider: IssueProvidable {
             switch response {
             case .failure:
                 completion(nil)
-            case .success(let response):
+            case .success:
                 // TODO: response 처리
             break
             }
@@ -248,7 +250,7 @@ class IssueProvider: IssueProvidable {
             switch response {
             case .failure:
                 completion(nil)
-            case .success(let response):
+            case .success:
                 // TODO: response 처리
                 break
             }
@@ -262,7 +264,7 @@ class IssueProvider: IssueProvidable {
             switch response {
             case .failure:
                 completion(nil)
-            case .success(let response):
+            case .success:
                 // TODO response 처리
                 break
             }
