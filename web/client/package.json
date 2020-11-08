@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run type-check && webpack --mode production",
-    "dev": "webpack-dev-server --open --mode development",
+    "build": "NODE_ENV=PRODUCTION webpack --config webpack.prod.js",
+    "dev": "NODE_ENV=DEVELOPMENT webpack-dev-server --config webpack.dev.js",
     "type-check": "tsc"
   },
   "keywords": [],
@@ -19,21 +19,27 @@
     "@babel/preset-typescript": "^7.12.1",
     "@types/react": "^16.9.55",
     "@types/react-dom": "^16.9.9",
+    "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.4",
     "babel-loader": "^8.1.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
     "styled-components": "^5.2.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "@types/react-router-dom": "^5.1.6"
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.4",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^5.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1",
-    "styled-reset": "^4.3.0"
+    "styled-reset": "^4.3.0",
+    "ts-loader": "^8.0.10",
+    "typescript": "^4.0.5",
+    "webpack-merge": "^5.3.0"
   }
 }

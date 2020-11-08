@@ -13,7 +13,7 @@ const BoxForm = styled.div`
   box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px,
     rgba(0, 0, 0, 0.5) 2px 2px 3px 3px;
 `;
-function Auth(props) {
+function Auth(props: { children: React.ReactNode; }) {
   return <BoxForm>{props.children}</BoxForm>;
 }
 export default Auth;

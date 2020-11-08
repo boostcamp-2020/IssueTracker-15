@@ -7,7 +7,7 @@ const BtnAuth = styled.div`
 interface BtnProps {
   btnName: string;
 }
-function Button<BtnProps>(props) {
+function Button<BtnProps>(props: { btnName: React.ReactNode }) {
   return <BtnAuth> {props.btnName} </BtnAuth>;
 }
 

@@ -11,7 +11,7 @@ const TitleInputWrapAuth = styled.div`
 interface TitleProps {
   title: string;
 }
-function InputTitle<TitleProps>(props) {
+function InputTitle<TitleProps>(props: { title: React.ReactNode; }) {
   return <TitleInputWrapAuth>{props.title}</TitleInputWrapAuth>;
 }
 
