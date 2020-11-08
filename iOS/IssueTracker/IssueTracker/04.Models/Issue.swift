@@ -91,8 +91,8 @@ struct Issue {
     
 }
 
-
 // MARK: - Parse From API Response
+
 extension Issue {
     
     // from fetchIssue API
@@ -119,12 +119,13 @@ extension Issue {
         self.comments = []
     }
     
-    static func fetchResponse(jsonArr: [[String: Any]]) -> [Issue]? {
-        return jsonArr.compactMap{ Issue.fetchResponse(jsonObject: $0) }
+    static func fetchResponse(jsonArr: [[String: Any]]?) -> [Issue]? {
+        return jsonArr?.compactMap { Issue.fetchResponse(jsonObject: $0) }
     }
     
-    static func fetchResponse(jsonObject: [String: Any]) -> Issue? {
-        guard let id = jsonObject["id"] as? Int,
+    static func fetchResponse(jsonObject: [String: Any]?) -> Issue? {
+        guard let jsonObject = jsonObject,
+              let id = jsonObject["id"] as? Int,
               let title = jsonObject["title"] as? String,
               let isOpened = jsonObject["isOpened"] as? Bool,
               let createdAt = jsonObject["createAt"] as? String,
@@ -163,8 +164,9 @@ extension Issue {
         self.comments = []
     }
     
-    static func addResponse(jsonObject: [String: Any]) -> Issue? {
-        guard let id = jsonObject["id"] as? Int,
+    static func addResponse(jsonObject: [String: Any]?) -> Issue? {
+        guard let jsonObject = jsonObject,
+              let id = jsonObject["id"] as? Int,
               let title = jsonObject["title"] as? String,
               let isOpened = jsonObject["isOpened"] as? Bool,
               let createAt = jsonObject["createAt"] as? String,
@@ -178,8 +180,9 @@ extension Issue {
     }
 
     // from getIssue API
-    static func getResponse(jsonObject: [String: Any]) -> Issue? {
-        guard let id = jsonObject["id"] as? Int,
+    static func getResponse(jsonObject: [String: Any]?) -> Issue? {
+        guard let jsonObject = jsonObject,
+              let id = jsonObject["id"] as? Int,
               let title = jsonObject["title"] as? String,
               let isOpened = jsonObject["isOpened"] as? Bool,
               let createAt = jsonObject["createAt"] as? String,
@@ -193,7 +196,7 @@ extension Issue {
         let milestoneId = (jsonObject["milestone"] as? [String: Any])?["id"] as? Int
         let labels = labelObjects.compactMap { $0["id"] as? Int }
         let assignees = assigneeObjects.compactMap { User(json: $0) }
-        let comments = commentObjects.compactMap{ Comment(json: $0) }
+        let comments = commentObjects.compactMap { Comment(json: $0) }
         
         return Issue(id: id, title: title, description: description, author: author, isOpened: isOpened, createdAt: createAt, updatedAt: updateAt, milestone: milestoneId, labels: labels, assignees: assignees, comments: comments)
     }

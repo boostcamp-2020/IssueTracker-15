@@ -60,9 +60,9 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success(let response):
-                if let datas = response.mapJsonArr() {
-                    self.issues = datas.compactMap { Issue(json: $0) }
-                    completion(self.issues)
+                if let issues = Issue.fetchResponse(jsonArr: response.mapJsonArr()) {
+                    completion(issues)
+                    self.issues = issues
                 }
             }
         })
@@ -73,32 +73,35 @@ class IssueProvider: IssueProvidable {
     
     /*
      Response : 201
-     {
-     "title": "마일스톤을 뺀 이슈 테스트!",
-     "description": "마일스톤 데이터 없이 보내 봅니다...",
-     "authorId": 1,
-     "milestoneId": null,
-     "id": 8,
-     "createAt": "2020-11-08T13:21:11.702Z",
-     "updateAt": "2020-11-08T13:21:11.702Z",
-     "isOpened": true
-     }
      */
     func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion: @escaping (Issue?) -> Void) {
-        //createIssue (title, description, milestoneID, authorID)
         dataLoader?.request(IssueService.createIssue(title, description, milestoneID, authorID), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success(let response):
-                if let jsonObject = response.mapJsonObject() {
-                    
+                if let issue = Issue.addResponse(jsonObject: response.mapJsonObject()) {
+                    self.issues.append(issue)
+                    completion(issue)
                 }
-                break
             }
         })
     }
-    
+    /*
+     Response: 200
+     */
+    func getIssue(at id: Int, completion: @escaping (Issue?) -> Void) {
+        dataLoader?.request(IssueService.getIssue(id), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success(let response):
+                if let issue = Issue.getResponse(jsonObject: response.mapJsonObject()) {
+                    completion(issue)
+                }
+            }
+        })
+    }
     /*
      Response : 200 body: nil
      
@@ -130,60 +133,7 @@ class IssueProvider: IssueProvidable {
             }
         })
     }
-    /*
-     Response: 200
-     {
-       "id": 3,
-       "title": "짜장면",
-       "description": "짜장면 먹고싶네요",
-       "createAt": "2020-11-02T11:42:27.161Z",
-       "updateAt": "2020-11-02T11:42:27.249Z",
-       "isOpened": true,
-       "milestone": { /// Nil
-         "id": 19,
-         "title": "스프린트1"
-       },
-       "author": {
-         "userName": "namda"
-       },
-       "labels": [
-         {
-           "id": 12,
-           "title": "Configure",
-           "description": "환경설정을 위한 레이블",
-           "color": "#90F69E"
-         }
-       ],
-       "assignees": [
-         {
-           "userName": "강근우",
-           "imageURL": null
-         }
-       ],
-       "comments": [
-         {
-           "id": 3,
-           "content": "###안녕하세요",
-           "createAt": "2020-11-02T14:26:16.241Z",
-           "user": {
-             "userName": "namda",
-             "imageURL": ""
-           }
-         }
-       ]
-     }
-     */
-    func getIssue(at id: Int, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.getIssue(id), callBackQueue: .main, completion: { (response) in
-            switch response {
-            case .failure:
-                completion(nil)
-            case .success(let response):
-            //TODO: response 처리
-            break
-            }
-        })
-    }
+    
     /*
      response: 201 body : nil
      */
