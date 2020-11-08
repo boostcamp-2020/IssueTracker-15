@@ -48,7 +48,7 @@ extension MilestoneService: IssueTrackerService {
         }
     }
     
-    var queryItems: [String : String]? {
+    var queryItems: [String: String]? {
         return nil
     }
     

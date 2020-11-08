@@ -15,7 +15,6 @@ class MilestoneSubmitFieldsView: UIStackView {
         case edit(IndexPath)
     }
     
-    
     @IBOutlet var dueDateLabels: [UILabel]!
     @IBOutlet weak var titleTextFieldView: UITextField!
     @IBOutlet weak var dueDateTextFieldView: UITextField!

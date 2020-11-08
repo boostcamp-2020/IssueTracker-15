@@ -104,7 +104,7 @@ extension IssueService: IssueTrackerService {
         }
     }
     
-    var queryItems: [String : String]? {
+    var queryItems: [String: String]? {
         switch self {
         case .fetchAll(let isOpened):
             return ["isOpened": "\(isOpened)"]

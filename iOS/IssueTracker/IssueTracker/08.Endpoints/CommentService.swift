@@ -38,7 +38,7 @@ extension CommentService: IssueTrackerService {
         }
     }
     
-    var queryItems: [String : String]? {
+    var queryItems: [String: String]? {
         return nil
     }
     
