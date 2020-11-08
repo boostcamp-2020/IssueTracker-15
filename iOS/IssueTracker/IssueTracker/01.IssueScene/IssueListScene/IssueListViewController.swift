@@ -19,7 +19,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var rightNavButton: UIBarButtonItem!
     @IBOutlet weak var leftNavButton: UIBarButtonItem!
     @IBOutlet weak var addIssueButton: UIButton!
-    @IBOutlet weak var closeSelectedIssueButton: UIBarButtonItem!
+    //@IBOutlet weak var closeSelectedIssueButton: UIBarButtonItem!
     
     private var viewingMode: ViewingMode = .general
     var issueListViewModel: IssueListViewModel? {
@@ -39,6 +39,11 @@ class IssueListViewController: UIViewController {
         navigationController?.isToolbarHidden = true
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.largeTitleDisplayMode = .automatic
+    }
+    
     // TODO: SerachBar Configure
     private func configureSearchBar() {
         navigationItem.searchController = UISearchController(searchResultsController: nil)

@@ -57,18 +57,12 @@ class IssueDetailViewController: UIViewController {
         self.navigationItem.largeTitleDisplayMode = .never
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationItem.largeTitleDisplayMode = .always
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         configureInitialLayout()
     }
     
     private func configureNavigationBarButtons() {
-//        configureBackButton()
         configureEditButton()
     }
     
