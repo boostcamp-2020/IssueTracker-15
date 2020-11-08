@@ -16,9 +16,8 @@ class IssueListViewController: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var rightNavButton: UIButton!
-    @IBOutlet weak var leftNavButton: UIButton!
-    @IBOutlet weak var bottomToolBar: UIToolbar!
+    @IBOutlet weak var rightNavButton: UIBarButtonItem!
+    @IBOutlet weak var leftNavButton: UIBarButtonItem!
     @IBOutlet weak var addIssueButton: UIButton!
     
     private var viewingMode: ViewingMode = .general
@@ -36,14 +35,15 @@ class IssueListViewController: UIViewController {
         configureSearchBar()
         configureCollectionView()
         addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
-        
+        navigationItem.title = "이슈"
+        self.navigationItem.largeTitleDisplayMode = .automatic
         issueListViewModel?.needFetchItems()
+        navigationController?.isToolbarHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.title = "이슈"
-        self.navigationItem.largeTitleDisplayMode = .always
+        
     }
     
     // TODO: SerachBar Configure
@@ -111,9 +111,9 @@ extension IssueListViewController {
     
     private func toEditMode() {
         viewingMode = .edit
-        rightNavButton.setTitle("Cancle", for: .normal)
-        leftNavButton.setTitle("Select All", for: .normal)
-        bottomToolBar.isHidden = false
+        rightNavButton.title = "Cancel"
+        leftNavButton.title = "Select All"
+        navigationController?.isToolbarHidden = false
         tabBarController?.tabBar.isHidden = true
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
@@ -123,9 +123,9 @@ extension IssueListViewController {
     
     private func toGeneralMode() {
         viewingMode = .general
-        rightNavButton.setTitle("Edit", for: .normal)
-        leftNavButton.setTitle("Filter", for: .normal)
-        bottomToolBar.isHidden = true
+        rightNavButton.title = "Edit"
+        leftNavButton.title = "Filter"
+        navigationController?.isToolbarHidden = true
         tabBarController?.tabBar.isHidden = false
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }

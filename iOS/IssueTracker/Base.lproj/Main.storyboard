@@ -13,34 +13,11 @@
             <objects>
                 <viewController id="reG-4P-boI" customClass="IssueListViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZnO-iI-d8z">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="664.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GLk-Jp-VZv">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="664.5"/>
-                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yJu-Dn-s5w">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
-                            <toolbar hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vxu-uE-83u">
-                                <rect key="frame" x="0.0" y="582" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem width="278" style="plain" systemItem="fixedSpace" id="uGA-XZ-w4V"/>
-                                    <barButtonItem title="선택 이슈 닫기" id="0W1-3w-fAd">
-                                        <connections>
-                                            <action selector="closeAllSelectedIssueButtonTapped:" destination="reG-4P-boI" id="nY8-Jj-nDg"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uf-dk-ieS" userLabel="addIssueButton">
-                                <rect key="frame" x="332.5" y="583" width="51.5" height="51.5"/>
+                                <rect key="frame" x="332.5" y="682.5" width="51.5" height="51.5"/>
                                 <color key="backgroundColor" red="0.28235294119999998" green="0.52156862749999999" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4uf-dk-ieS" secondAttribute="height" multiplier="1:1" id="chX-d9-dj7"/>
@@ -53,48 +30,47 @@
                                     <segue destination="24V-yA-fcF" kind="presentation" id="V9m-AE-YrN"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GLk-Jp-VZv">
+                                <rect key="frame" x="0.0" y="140" width="414" height="624"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yJu-Dn-s5w">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="top" secondItem="H30-KX-izY" secondAttribute="top" id="4Gw-jh-rwr"/>
-                            <constraint firstItem="H30-KX-izY" firstAttribute="trailing" secondItem="GLk-Jp-VZv" secondAttribute="trailing" id="Tpl-yn-WEI"/>
+                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="top" secondItem="H30-KX-izY" secondAttribute="top" id="Jjq-wu-VdB"/>
                             <constraint firstItem="4uf-dk-ieS" firstAttribute="width" secondItem="H30-KX-izY" secondAttribute="width" multiplier="0.125" id="f87-8S-auL"/>
-                            <constraint firstItem="H30-KX-izY" firstAttribute="bottom" secondItem="GLk-Jp-VZv" secondAttribute="bottom" id="jKc-VU-vQF"/>
                             <constraint firstItem="H30-KX-izY" firstAttribute="trailing" secondItem="4uf-dk-ieS" secondAttribute="trailing" constant="30" id="m8W-vm-4P7"/>
-                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="leading" secondItem="H30-KX-izY" secondAttribute="leading" id="tSa-cm-dR4"/>
+                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="trailing" secondItem="H30-KX-izY" secondAttribute="trailing" id="m9J-2b-IIa"/>
                             <constraint firstItem="H30-KX-izY" firstAttribute="bottom" secondItem="4uf-dk-ieS" secondAttribute="bottom" constant="30" id="ts3-cz-JO8"/>
+                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="leading" secondItem="H30-KX-izY" secondAttribute="leading" id="uAn-iL-eez"/>
+                            <constraint firstItem="H30-KX-izY" firstAttribute="bottom" secondItem="GLk-Jp-VZv" secondAttribute="bottom" id="vDG-jx-1OQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="H30-KX-izY"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="ckC-hN-RTX">
-                        <barButtonItem key="leftBarButtonItem" id="FnO-s3-Fbz">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EwP-TN-DZv">
-                                <rect key="frame" x="20" y="7" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Filter"/>
-                                <connections>
-                                    <action selector="leftNavButtonTapped:" destination="reG-4P-boI" eventType="touchUpInside" id="Bsn-rt-Qbf"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" title="Filter" id="ni1-aj-Ha6">
+                            <connections>
+                                <action selector="leftNavButtonTapped:" destination="reG-4P-boI" id="42N-vE-cfi"/>
+                            </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="8t5-bC-b4C">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9FY-Nz-Jhv">
-                                <rect key="frame" x="302" y="7" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Edit"/>
-                                <connections>
-                                    <action selector="rightNavButtonTapped:" destination="reG-4P-boI" eventType="touchUpInside" id="Fdi-FT-d5f"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="dfC-go-Z3a">
+                            <connections>
+                                <action selector="rightNavButtonTapped:" destination="reG-4P-boI" id="Id2-At-Kfo"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addIssueButton" destination="4uf-dk-ieS" id="eBa-8x-nGb"/>
-                        <outlet property="bottomToolBar" destination="vxu-uE-83u" id="pBP-Gk-NKi"/>
                         <outlet property="collectionView" destination="GLk-Jp-VZv" id="WIq-9W-NmX"/>
-                        <outlet property="leftNavButton" destination="EwP-TN-DZv" id="wKq-yh-VJa"/>
-                        <outlet property="rightNavButton" destination="9FY-Nz-Jhv" id="dow-bL-5Hn"/>
+                        <outlet property="leftNavButton" destination="ni1-aj-Ha6" id="M2A-Dn-5ci"/>
+                        <outlet property="rightNavButton" destination="dfC-go-Z3a" id="qnE-l3-dTM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H7j-e0-wEm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -257,20 +233,21 @@
         <!--이슈-->
         <scene sceneID="cO4-Yn-VzX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="B8N-ph-yYZ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="B8N-ph-yYZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="A1f-zK-Nd4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="LqH-iR-KEA">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Cd4-GL-yuy">
+                        <rect key="frame" x="0.0" y="764" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="reG-4P-boI" kind="relationship" relationship="rootViewController" id="P1G-PO-wng"/>
+                        <segue destination="reG-4P-boI" kind="relationship" relationship="rootViewController" id="f4u-bx-Cxl"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yuh-U9-70h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -284,7 +261,7 @@
                     <tabBarItem key="tabBarItem" title="레이블" image="2.circle.fill" catalog="system" id="NXm-Dv-qAK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="NKq-kU-VOX">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
@@ -304,7 +281,7 @@
                     <tabBarItem key="tabBarItem" title="마일스톤" image="3.circle.fill" catalog="system" id="RDq-oe-4vG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="jZ3-TC-wsS">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>

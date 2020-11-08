@@ -49,20 +49,23 @@ class IssueDetailViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBarButtons()
         configureIssueDetailViewModel()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         navigationItem.title = "이슈 상세"
         self.navigationItem.largeTitleDisplayMode = .never
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        navigationItem.title = "이슈 상세"
+//        self.navigationItem.largeTitleDisplayMode = .automatic
+    }
+    
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         configureInitialLayout()
     }
     
     private func configureNavigationBarButtons() {
-        configureBackButton()
+//        configureBackButton()
         configureEditButton()
     }
     
@@ -72,19 +75,9 @@ class IssueDetailViewController: UIViewController {
         }
     }
     
-    private func configureBackButton() {
-        self.navigationItem.hidesBackButton = true
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(self.backButtonTapped(_:)))
-        self.navigationItem.leftBarButtonItem = backButton
-    }
-    
     private func configureEditButton() {
         let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: nil)
         self.navigationItem.rightBarButtonItem = editButton
-    }
-    
-    @objc func backButtonTapped(_ sender: UIBarButtonItem) {
-        self.navigationController?.popViewController(animated: true)
     }
     
     private func configureCollectionView() {
