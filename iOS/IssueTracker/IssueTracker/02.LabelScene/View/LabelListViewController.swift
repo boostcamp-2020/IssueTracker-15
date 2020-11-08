@@ -23,7 +23,6 @@ class LabelListViewController: UIViewController {
         super.viewDidLoad()
         configureCollectionView()
         labelListViewModel?.needFetchItems()
-        title = "레이블"
     }
     
     private func configureCollectionView() {

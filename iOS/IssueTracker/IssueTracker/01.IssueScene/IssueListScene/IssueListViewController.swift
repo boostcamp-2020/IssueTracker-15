@@ -32,15 +32,13 @@ class IssueListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "이슈"
         configureSearchBar()
         configureCollectionView()
         addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
-        navigationItem.title = "이슈"
         issueListViewModel?.needFetchItems()
         navigationController?.isToolbarHidden = true
     }
-    
+
     // TODO: SerachBar Configure
     private func configureSearchBar() {
         navigationItem.searchController = UISearchController(searchResultsController: nil)

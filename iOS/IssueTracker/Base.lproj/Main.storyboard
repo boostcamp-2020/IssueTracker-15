@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Issue List View Controller-->
+        <!--이슈-->
         <scene sceneID="OA6-wq-6JX">
             <objects>
                 <viewController id="reG-4P-boI" customClass="IssueListViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GLk-Jp-VZv">
-                                <rect key="frame" x="0.0" y="140" width="414" height="624"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yJu-Dn-s5w">
                                     <size key="itemSize" width="128" height="128"/>
@@ -28,7 +28,7 @@
                                 <cells/>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4uf-dk-ieS" userLabel="addIssueButton">
-                                <rect key="frame" x="332.5" y="682.5" width="51.5" height="51.5"/>
+                                <rect key="frame" x="332.5" y="814.5" width="51.5" height="51.5"/>
                                 <color key="backgroundColor" red="0.28235294119999998" green="0.52156862749999999" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4uf-dk-ieS" secondAttribute="height" multiplier="1:1" id="chX-d9-dj7"/>
@@ -44,21 +44,17 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="leading" secondItem="H30-KX-izY" secondAttribute="leading" id="TpQ-Z4-Tqa"/>
-                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="trailing" secondItem="H30-KX-izY" secondAttribute="trailing" id="euk-O1-b5c"/>
-                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="bottom" secondItem="H30-KX-izY" secondAttribute="bottom" id="ezy-wt-qAl"/>
-                            <constraint firstItem="4uf-dk-ieS" firstAttribute="width" secondItem="H30-KX-izY" secondAttribute="width" multiplier="0.125" id="f87-8S-auL"/>
-                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="top" secondItem="H30-KX-izY" secondAttribute="top" id="kNB-Tf-FMg"/>
-                            <constraint firstItem="H30-KX-izY" firstAttribute="trailing" secondItem="4uf-dk-ieS" secondAttribute="trailing" constant="30" id="m8W-vm-4P7"/>
-                            <constraint firstItem="H30-KX-izY" firstAttribute="bottom" secondItem="4uf-dk-ieS" secondAttribute="bottom" constant="30" id="ts3-cz-JO8"/>
+                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="leading" secondItem="ZnO-iI-d8z" secondAttribute="leading" id="TpQ-Z4-Tqa"/>
+                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="trailing" secondItem="ZnO-iI-d8z" secondAttribute="trailing" id="euk-O1-b5c"/>
+                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="bottom" secondItem="ZnO-iI-d8z" secondAttribute="bottom" id="ezy-wt-qAl"/>
+                            <constraint firstItem="4uf-dk-ieS" firstAttribute="width" secondItem="ZnO-iI-d8z" secondAttribute="width" multiplier="0.125" id="f87-8S-auL"/>
+                            <constraint firstItem="GLk-Jp-VZv" firstAttribute="top" secondItem="ZnO-iI-d8z" secondAttribute="top" id="kNB-Tf-FMg"/>
+                            <constraint firstAttribute="trailing" secondItem="4uf-dk-ieS" secondAttribute="trailing" constant="30" id="m8W-vm-4P7"/>
+                            <constraint firstAttribute="bottom" secondItem="4uf-dk-ieS" secondAttribute="bottom" constant="30" id="ts3-cz-JO8"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="H30-KX-izY"/>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="iih-wH-6MK"/>
-                        <barButtonItem title="선택 이슈 닫기" id="obz-kB-KUJ"/>
-                    </toolbarItems>
-                    <navigationItem key="navigationItem" id="ckC-hN-RTX">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="이슈" id="ckC-hN-RTX">
                         <barButtonItem key="leftBarButtonItem" title="Filter" id="ni1-aj-Ha6">
                             <connections>
                                 <action selector="leftNavButtonTapped:" destination="reG-4P-boI" id="42N-vE-cfi"/>
@@ -72,7 +68,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addIssueButton" destination="4uf-dk-ieS" id="eBa-8x-nGb"/>
-                        <outlet property="closeSelectedIssueButton" destination="obz-kB-KUJ" id="hQU-DH-mJM"/>
                         <outlet property="collectionView" destination="GLk-Jp-VZv" id="WIq-9W-NmX"/>
                         <outlet property="leftNavButton" destination="ni1-aj-Ha6" id="M2A-Dn-5ci"/>
                         <outlet property="rightNavButton" destination="dfC-go-Z3a" id="qnE-l3-dTM"/>
@@ -82,7 +77,7 @@
             </objects>
             <point key="canvasLocation" x="2020" y="-588"/>
         </scene>
-        <!--Label List View Controller-->
+        <!--레이블-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="LabelListVC" id="BYZ-38-t0r" customClass="LabelListViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
@@ -120,7 +115,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="NjL-aG-9it">
+                    <navigationItem key="navigationItem" title="레이블" id="NjL-aG-9it">
                         <barButtonItem key="rightBarButtonItem" style="done" id="7ln-Zd-Fg5">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bhF-f7-8uc">
                                 <rect key="frame" x="266" y="0.0" width="128" height="44"/>
@@ -238,7 +233,7 @@
         <!--이슈-->
         <scene sceneID="cO4-Yn-VzX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="B8N-ph-yYZ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="B8N-ph-yYZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="A1f-zK-Nd4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="LqH-iR-KEA">
@@ -248,7 +243,6 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Cd4-GL-yuy">
-                        <rect key="frame" x="0.0" y="764" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -308,18 +302,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cYP-py-DgA">
-                                <rect key="frame" x="20" y="144" width="374" height="42"/>
+                                <rect key="frame" x="20" y="152.5" width="374" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNE-Xl-7zb">
-                                <rect key="frame" x="20" y="118" width="374" height="21"/>
+                                <rect key="frame" x="20" y="126.5" width="374" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ffC-xq-HP2">
-                                <rect key="frame" x="20" y="196" width="374" height="35"/>
+                                <rect key="frame" x="20" y="204.5" width="374" height="35"/>
                                 <segments>
                                     <segment title="마크다운"/>
                                     <segment title="미리보기"/>

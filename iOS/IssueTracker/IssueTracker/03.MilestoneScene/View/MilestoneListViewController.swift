@@ -24,7 +24,6 @@ class MilestoneListViewController: UIViewController {
         super.viewDidLoad()
         configureCollectionView()
         milestoneListViewModel?.needFetchItems()
-        title = "마일스톤"
     }
     
     private func configureCollectionView() {

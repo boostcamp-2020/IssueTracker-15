@@ -61,7 +61,6 @@ class IssueCellView: UICollectionViewCell {
                 self?.setLabel(title: text, colorCode: colorCode)
         }
         
-        layoutIfNeeded()
     }
     
     private func setLabel(title: String, colorCode: String) {

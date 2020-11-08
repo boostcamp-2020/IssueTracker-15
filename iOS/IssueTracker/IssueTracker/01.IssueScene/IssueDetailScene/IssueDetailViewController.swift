@@ -50,13 +50,16 @@ class IssueDetailViewController: UIViewController {
         configureNavigationBarButtons()
         configureIssueDetailViewModel()
         navigationItem.title = "이슈 상세"
-        self.navigationItem.largeTitleDisplayMode = .never
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        navigationItem.title = "이슈 상세"
-//        self.navigationItem.largeTitleDisplayMode = .automatic
+        self.navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationItem.largeTitleDisplayMode = .always
     }
     
     override func viewDidLayoutSubviews() {
