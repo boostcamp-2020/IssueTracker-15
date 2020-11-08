@@ -52,11 +52,9 @@ extension LabelListViewController {
     }
     
     private func showSubmitFormView(type: LabelSubmitFieldsView.SubmitFieldType) {
-        guard let formView = SubmitFormViewController.createViewController(),
-            let labelSubmitFieldsView = LabelSubmitFieldsView.createView()
+        guard let labelSubmitFieldsView = LabelSubmitFieldsView.createView(),
+            let formView = SubmitFormViewController.createViewController(with: labelSubmitFieldsView)
             else { return }
-        
-        formView.configure(submitField: labelSubmitFieldsView)
         
         switch type {
         case .add:

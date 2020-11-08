@@ -52,11 +52,9 @@ extension MilestoneListViewController {
     }
     
     private func showSubmitFormView(type: MilestoneSubmitFieldsView.SubmitFieldType) {
-        guard let formView = SubmitFormViewController.createViewController(),
-            let milestoneSubmitFieldsView = MilestoneSubmitFieldsView.createView()
+        guard let milestoneSubmitFieldsView = MilestoneSubmitFieldsView.createView(),
+            let formView = SubmitFormViewController.createViewController(with: milestoneSubmitFieldsView)
             else { return }
-        
-        formView.configure(submitField: milestoneSubmitFieldsView)
         
         switch type {
         case .add:

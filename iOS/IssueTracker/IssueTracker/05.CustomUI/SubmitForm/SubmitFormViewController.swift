@@ -24,8 +24,13 @@ class SubmitFormViewController: UIViewController {
     
     private var submitField: SubmitFieldProtocol?
     
-    func configure(submitField: SubmitFieldProtocol) {
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, submitField: SubmitFieldProtocol) {
         self.submitField = submitField
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     override func viewDidLoad() {
@@ -132,8 +137,8 @@ extension SubmitFormViewController {
 extension SubmitFormViewController {
     static let nibName = "SubmitFormViewController"
 
-    static func createViewController() -> SubmitFormViewController? {
-        let vc = SubmitFormViewController(nibName: nibName, bundle: Bundle.main)
+    static func createViewController(with submitField: SubmitFieldProtocol) -> SubmitFormViewController? {
+        let vc = SubmitFormViewController(nibName: nibName, bundle: Bundle.main, submitField: submitField)
         vc.modalPresentationStyle = .overFullScreen
         vc.modalTransitionStyle = .crossDissolve
         return vc
