@@ -45,6 +45,11 @@ class SubmitFormViewController: UIViewController {
             submitField.contentView.trailingAnchor.constraint(equalTo: submitFieldGuideView.trailingAnchor)
         ])
     }
+}
+
+// MARK: - Action
+
+extension SubmitFormViewController {
     
     @IBAction func closeButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -65,12 +70,7 @@ class SubmitFormViewController: UIViewController {
             showAlert(at: self, title: message, prepare: moveFormViewDownward, completion: moveFormViewUpward)
         }
     }
-}
 
-// MARK: - Action
-
-extension SubmitFormViewController {
-    
     @objc func keyboardWillShowOrHide(notification: NSNotification) {
         if let userInfo = notification.userInfo,
             let keyboardValue = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue {
