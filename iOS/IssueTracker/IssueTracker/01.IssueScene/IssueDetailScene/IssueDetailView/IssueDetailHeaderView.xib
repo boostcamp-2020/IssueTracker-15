@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,7 +19,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="이슈 타이틀" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDF-Uv-gPE" userLabel="Issue Title">
-                    <rect key="frame" x="10" y="67" width="450" height="105"/>
+                    <rect key="frame" x="10" y="67" width="450" height="139"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -38,7 +37,7 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Yr-oe-ZWr">
-                    <rect key="frame" x="10" y="182" width="20" height="22"/>
+                    <rect key="frame" x="10" y="216" width="20" height="22"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="AjD-FI-4lm"/>
@@ -54,10 +53,10 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="TIo-KR-UoL" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="10" id="2hR-IV-OTs"/>
+                <constraint firstItem="TIo-KR-UoL" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="10" id="2hR-IV-OTs"/>
                 <constraint firstItem="swF-Ki-5s6" firstAttribute="leading" secondItem="TIo-KR-UoL" secondAttribute="trailing" constant="10" id="6OZ-No-vuw"/>
-                <constraint firstItem="8Yr-oe-ZWr" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="10" id="C02-5V-ExX"/>
-                <constraint firstItem="gDF-Uv-gPE" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="10" id="DHm-xl-Osh"/>
+                <constraint firstItem="8Yr-oe-ZWr" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="10" id="C02-5V-ExX"/>
+                <constraint firstItem="gDF-Uv-gPE" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="10" id="DHm-xl-Osh"/>
                 <constraint firstItem="ffa-ud-S2G" firstAttribute="top" secondItem="TIo-KR-UoL" secondAttribute="top" id="EAf-r7-hbj"/>
                 <constraint firstItem="8Yr-oe-ZWr" firstAttribute="top" secondItem="gDF-Uv-gPE" secondAttribute="bottom" constant="10" id="Omh-lp-YSB"/>
                 <constraint firstItem="TIo-KR-UoL" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="10" id="PO3-rE-Wua"/>
@@ -65,10 +64,9 @@
                 <constraint firstItem="TIo-KR-UoL" firstAttribute="width" secondItem="U6b-Vx-4bR" secondAttribute="width" multiplier="0.1" id="PiH-iV-Ohw"/>
                 <constraint firstAttribute="trailing" secondItem="ffa-ud-S2G" secondAttribute="trailing" constant="10" id="Xgc-wV-seR"/>
                 <constraint firstItem="swF-Ki-5s6" firstAttribute="centerY" secondItem="TIo-KR-UoL" secondAttribute="centerY" id="fOd-32-NHJ"/>
-                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="8Yr-oe-ZWr" secondAttribute="bottom" constant="10" id="m8W-Gy-Zol"/>
-                <constraint firstItem="VXr-Tz-HHm" firstAttribute="trailing" secondItem="gDF-Uv-gPE" secondAttribute="trailing" constant="10" id="orJ-Pp-aIX"/>
+                <constraint firstAttribute="bottom" secondItem="8Yr-oe-ZWr" secondAttribute="bottom" constant="10" id="m8W-Gy-Zol"/>
+                <constraint firstAttribute="trailing" secondItem="gDF-Uv-gPE" secondAttribute="trailing" constant="10" id="orJ-Pp-aIX"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <connections>
                 <outlet property="issueAuthor" destination="swF-Ki-5s6" id="Mzn-xQ-ytJ"/>
                 <outlet property="issueBadge" destination="8Yr-oe-ZWr" id="1hW-OX-c8W"/>

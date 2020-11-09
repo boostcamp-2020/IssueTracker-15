@@ -19,7 +19,7 @@ class IssueDetailViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     private var addCommentView: AddCommentView?
-    private var issueDetailViewModel: IssueDetailViewModel?
+    private var issueDetailViewModel: IssueDetailViewModelProtocol?
     private var currentIssueId: Int = -1
     private var didFetchDetails: Bool = false
     
@@ -33,7 +33,7 @@ class IssueDetailViewController: UIViewController {
         }
     }
     
-    init(currentIssueId: Int, issueDetailViewModel: IssueDetailViewModel) {
+    init(currentIssueId: Int, issueDetailViewModel: IssueDetailViewModelProtocol) {
         self.currentIssueId = currentIssueId
         self.issueDetailViewModel = issueDetailViewModel
         super.init(nibName: nil, bundle: nil)
@@ -175,7 +175,7 @@ extension IssueDetailViewController: UICollectionViewDataSource {
         if didFetchDetails {
             header.configure(with: issueDetailViewModel)
         } else {
-            issueDetailViewModel.needFetchDetails(with: currentIssueId)
+            issueDetailViewModel.needFetchDetails()
             header.configure(with: issueDetailViewModel)
         }
         
@@ -194,7 +194,7 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
 
         let indexPath = IndexPath(row: 0, section: section)
         if let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as? IssueDetailHeaderView {
-            headerView.setNeedsLayout()
+            headerView.layoutIfNeeded()
             let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize).height
             return CGSize(width: self.view.frame.width, height: height)
         }
