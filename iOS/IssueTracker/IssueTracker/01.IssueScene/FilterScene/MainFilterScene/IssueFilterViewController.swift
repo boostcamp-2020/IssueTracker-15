@@ -40,7 +40,7 @@ class IssueFilterViewController: UITableViewController {
 
 extension IssueFilterViewController {
     
-    @IBAction func cancleButtonTapped(_ sender: Any) {
+    @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     

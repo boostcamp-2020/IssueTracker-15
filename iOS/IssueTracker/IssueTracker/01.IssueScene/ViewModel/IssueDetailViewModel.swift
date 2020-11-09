@@ -31,8 +31,6 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     var title: String = ""
     var description: String = ""
     var author: String = ""
-    var badge: String = ""
-    var badgeColor: IssueBadgeColor = .green
     var didFetch: (() -> Void)?
     
     private weak var issueProvider: IssueProvidable?
@@ -54,8 +52,6 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             self.issueNumber = currentIssue.id
             self.title = currentIssue.title
             self.isOpened = currentIssue.isOpened
-            self.badge = self.isOpened ? "Open" : "Closed"
-            self.badgeColor = self.isOpened ? .green : .red
             self.description = currentIssue.description
             self.author = currentIssue.author
             self.didFetch?()
