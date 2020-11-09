@@ -6,11 +6,7 @@ import {
   makeIssuesTemplate,
   makeIssueTemplate,
 } from "../lib/make-issue-template";
-import {
-  CreateIssue,
-  UpdateIssueContent,
-  UpdateIssueTitle,
-} from "../types/issue";
+import { CreateIssue, UpdateIssue } from "../types/issue";
 
 const IssueService = {
   createIssue: async (issueData: CreateIssue): Promise<IssueEntity> => {
@@ -60,6 +56,7 @@ const IssueService = {
         "Issue.updateAt",
         "Issue.isOpened",
         "User.userName",
+        "User.imageURL",
         "Milestone.id",
         "Milestone.title",
       ])
@@ -168,23 +165,11 @@ const IssueService = {
     return;
   },
 
-  updateIssueContent: async (issueId: number, content: UpdateIssueContent) => {
+  updateIssueContent: async (issueId: number, body: UpdateIssue) => {
     const issueRepository = getRepository(IssueEntity);
     const issueToUpdate = await IssueService.getIssueById(issueId);
     if (!issueToUpdate) throw new Error("issue dose not exist");
-
-    await issueRepository.update(issueToUpdate, content);
-
-    return;
-  },
-
-  updateIssueTitle: async (issueId: number, title: UpdateIssueTitle) => {
-    const issueRepository = getRepository(IssueEntity);
-    const issueToUpdate = await IssueService.getIssueById(issueId);
-
-    if (!issueToUpdate) throw new Error("issue dose not exist");
-
-    await issueRepository.update(issueToUpdate, title);
+    await issueRepository.update({ id: issueId }, body);
 
     return;
   },
