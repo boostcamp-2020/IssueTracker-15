@@ -246,28 +246,24 @@ struct User {
 
 // TODO: Comment DataModel? <- 그냥 이슈가 들고있는게 좋나?
 struct Comment {
-    let id: Int
     let content: String
     let createAt: String
-    let user: User
+    let author: User
     
-    init(id: Int) {
-        self.id = id
-        self.content = ""
+    init(content: String, user: User) {
+        self.content = content
         self.createAt = ""
-        self.user = User(id: id)
+        self.author = user
     }
     
     init?(json: [String: Any]) {
-        guard let id = json["id"] as? Int,
-            let content = json["content"] as? String,
+        guard let content = json["content"] as? String,
             let createAt = json["createAt"] as? String,
             let userObject = json["user"] as? [String: Any],
             let user = User(json: userObject)
             else { return nil }
-        self.id = id
         self.content = content
         self.createAt = createAt
-        self.user = user
+        self.author = user
     }
 }

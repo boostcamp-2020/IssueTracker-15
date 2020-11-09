@@ -15,7 +15,7 @@ class IssueDetailViewController: UIViewController {
     private var addCommentView: AddCommentView?
     private var issueDetailViewModel: IssueDetailViewModelProtocol
     private var currentIssueId: Int = -1
-
+    
     private var currentIndexPath: IndexPath? {
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.frame.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.minY)
@@ -50,6 +50,12 @@ class IssueDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.largeTitleDisplayMode = .never
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -93,28 +99,7 @@ class IssueDetailViewController: UIViewController {
     private func addBottomSheetView() {
         guard let addCommentView = addCommentView else { return }
         
-        addCommentView.upButtonTapped = { [weak self] in
-            guard let `self` = self,
-                let currentIndexPath = self.currentIndexPath
-                else { return }
-            
-            if currentIndexPath.item == 0 {
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.collectionView.contentOffset = CGPoint.zero
-                })
-            } else if currentIndexPath.item != -1 {
-                self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item - 1, section: 0), at: .top, animated: true)
-            }
-        }
-        
-        addCommentView.downButtonTapped = { [weak self] in
-            guard let `self` = self,
-                let currentIndexPath = self.currentIndexPath,
-                currentIndexPath.item < self.issueDetailViewModel.comments.count - 1
-                else { return }
-            
-            self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item + 1, section: 0), at: .top, animated: true)
-        }
+        addCommentView.addCommentDelegate = self
         
         self.view.addSubview(addCommentView)
     }
@@ -160,12 +145,12 @@ extension IssueDetailViewController: UICollectionViewDataSource {
 }
 
 extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let indexPath = IndexPath(row: 0, section: section)
         
         if let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as? IssueDetailHeaderView {
-
+            
             let size = CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height)
             
             return headerView.systemLayoutSizeFitting(size, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
@@ -173,7 +158,7 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: self.view.frame.width, height: CGFloat(100))
     }
-
+    
 }
 
 extension IssueDetailViewController {
@@ -182,5 +167,34 @@ extension IssueDetailViewController {
     static func createViewController(issueDetailViewModel: IssueDetailViewModel) -> IssueDetailViewController {
         let vc = IssueDetailViewController(issueDetailViewModel: issueDetailViewModel)
         return vc
+    }
+}
+
+extension IssueDetailViewController: AddCommentDelegate {
+    func upButtonTapped() {
+        guard let currentIndexPath = self.currentIndexPath else { return }
+        
+        if currentIndexPath.item == 0 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.collectionView.contentOffset = CGPoint.zero
+            })
+        } else if currentIndexPath.item != -1 {
+            self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item - 1, section: 0), at: .top, animated: true)
+        }
+    }
+    
+    func downButtonTapped() {
+        guard let currentIndexPath = self.currentIndexPath else { return }
+        
+        if currentIndexPath.item < self.issueDetailViewModel.comments.count - 1 {
+            self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item + 1, section: 0), at: .top, animated: true)
+        }
+    }
+    
+    func addCommentButtonTapped() {
+        AddNewIssueViewController.present(at: self, addType: .newComment, onDismiss: { [weak self] (content) in
+            print(content)
+            self?.issueDetailViewModel.addComment(content: content)
+        })
     }
 }

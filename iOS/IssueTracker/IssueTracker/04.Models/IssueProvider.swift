@@ -22,6 +22,7 @@ protocol IssueProvidable: AnyObject {
     func deleteMilestone(at id: Int, completion: @escaping (Issue?) -> Void)
     func addAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func deleteAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
+    func addComment(issueNumber: Int, content: String, completion: @escaping (Bool) -> Void)
 }
 
 class IssueProvider: IssueProvidable {
@@ -69,6 +70,20 @@ class IssueProvider: IssueProvidable {
 
         // completion(issues)
         onFetching = false
+    }
+    
+    /*
+     Response :
+     */
+    func addComment(issueNumber: Int, content: String, completion: @escaping (Bool) -> Void) {
+        dataLoader?.request(CommentService.addComment(1, issueNumber, content), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(false)
+            case .success:
+                completion(true)
+            }
+        })
     }
     
     /*

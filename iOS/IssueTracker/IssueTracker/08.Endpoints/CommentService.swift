@@ -11,17 +11,17 @@ import NetworkFramework
 
 enum CommentService {
     
-    // addComment ( issueId, comment )
+    // addComment ( userId, issueId, comment )
     // [POST] /api/comment
-    case addComment( Int, String)
+    case addComment(Int, Int, String)
     
     // editComment ( issueId, comment )
     // [PATCH] /api/comment/:id
-    case editComment( Int, String)
+    case editComment(Int, String)
     
     // deleteComment ( issueId)
     // [DELETE] /api/comment/:id
-    case deleteComment( Int)
+    case deleteComment(Int)
     
 }
 
@@ -55,9 +55,10 @@ extension CommentService: IssueTrackerService {
     
     var task: Task {
         switch self {
-        case .addComment(let id, let comment):
+        case .addComment(let userId, let issueId, let comment):
             var jsonObject = [String: Any]()
-            jsonObject["issueID"] = id
+            jsonObject["userId"] = userId
+            jsonObject["issueId"] = issueId
             jsonObject["content"] = comment
             return .requestJsonObject(jsonObject)
         case .editComment(let id, let comment):

@@ -40,7 +40,7 @@ class IssueListViewController: UIViewController {
         issueListViewModel?.needFetchItems()
         navigationController?.isToolbarHidden = true
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.largeTitleDisplayMode = .automatic
@@ -67,6 +67,11 @@ class IssueListViewController: UIViewController {
         layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: cellHeight)
         layout.minimumLineSpacing = 1
         collectionView.setCollectionViewLayout(layout, animated: false)
+    }
+    
+    @IBAction func addIssueButtonTapped(_ sender: Any) {
+        // TODO : add issue
+        AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: nil)
     }
     
 }
@@ -156,11 +161,6 @@ extension IssueListViewController {
         self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
     
-    @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
-        let addIssueViewController = AddNewIssueViewController(coder: coder)
-        // addIssueVC의 doneButtonTapped 주입
-        return addIssueViewController
-    }
     
 }
 
@@ -168,7 +168,7 @@ extension IssueListViewController {
 extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath),
-              let cellViewModel = issueListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
+            let cellViewModel = issueListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
         cellView.configure(issueItemViewModel: cellViewModel)
         cellView.showCheckBox(show: viewingMode == .edit, animation: false)
         return cellView

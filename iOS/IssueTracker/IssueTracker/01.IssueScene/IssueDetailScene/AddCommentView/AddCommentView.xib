@@ -35,7 +35,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="addCommentButtonTapped:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="wkv-AM-D0j"/>
+                        <action selector="addCommentButtonTapped:" destination="i5M-Pr-FkT" eventType="touchUpInside" id="D3h-Nz-CTB"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nE5-uG-pPY" userLabel="Down Button">

@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol AddCommentDelegate: AnyObject {
+    func addCommentButtonTapped()
+    func upButtonTapped()
+    func downButtonTapped()
+}
+
 class AddCommentView: UIView {
-    var upButtonTapped: (() -> Void)?
-    var downButtonTapped: (() -> Void)?
+    weak var addCommentDelegate: AddCommentDelegate?
     @IBOutlet weak var barView: UIView!
     @IBOutlet weak var addCommentButton: UIButton!
     @IBOutlet weak var upButton: UIButton!
@@ -29,6 +34,12 @@ class AddCommentView: UIView {
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(self.panGesture))
         self.addGestureRecognizer(gesture)
     }
+    
+    @IBAction func addCommentButtonTapped(_ sender: Any) {
+        // delegate 발동
+        addCommentDelegate?.addCommentButtonTapped()
+    }
+    
 }
 
 // MARK: - loadNIB extension
@@ -66,15 +77,12 @@ extension AddCommentView {
             }, completion: nil)
         }
     }
-    
-    @IBAction func addCommentButtonTapped(_ sender: Any) {
-    }
 
     @IBAction func upButtonTapped(_ sender: Any) {
-        upButtonTapped?()
+        addCommentDelegate?.upButtonTapped()
     }
 
     @IBAction func downButtonTapped(_ sender: Any) {
-        downButtonTapped?()
+        addCommentDelegate?.downButtonTapped()
     }
 }

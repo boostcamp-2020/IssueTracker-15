@@ -33,6 +33,7 @@
 		956B5D0525503D20001CBAA9 /* MilestoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B5D0425503D20001CBAA9 /* MilestoneService.swift */; };
 		956B5D0725503E8A001CBAA9 /* LabelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B5D0625503E8A001CBAA9 /* LabelService.swift */; };
 		957D8222255060DA0033484F /* AddNewIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957D8220255060DA0033484F /* AddNewIssueViewController.swift */; };
+		95AE90CF25594610002BAE95 /* EditIssue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95AE90CE25594610002BAE95 /* EditIssue.storyboard */; };
 		95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8942547EBE0006B3BC6 /* Label.swift */; };
 		95C2F8982547EDC7006B3BC6 /* ColorConvertTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */; };
 		95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C2F89B2547EF47006B3BC6 /* String+Color.swift */; };
@@ -210,6 +211,7 @@
 		956B5D0425503D20001CBAA9 /* MilestoneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneService.swift; sourceTree = "<group>"; };
 		956B5D0625503E8A001CBAA9 /* LabelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelService.swift; sourceTree = "<group>"; };
 		957D8220255060DA0033484F /* AddNewIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewIssueViewController.swift; sourceTree = "<group>"; };
+		95AE90CE25594610002BAE95 /* EditIssue.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditIssue.storyboard; sourceTree = "<group>"; };
 		95C2F8942547EBE0006B3BC6 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		95C2F8972547EDC7006B3BC6 /* ColorConvertTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConvertTests.swift; sourceTree = "<group>"; };
 		95C2F89B2547EF47006B3BC6 /* String+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Color.swift"; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				957D8220255060DA0033484F /* AddNewIssueViewController.swift */,
+				95AE90CE25594610002BAE95 /* EditIssue.storyboard */,
 			);
 			path = IssueEditScene;
 			sourceTree = "<group>";
@@ -994,6 +997,7 @@
 				963A1AA225524AEC003E2BBB /* MilestoneComponentView.xib in Resources */,
 				961B10602558F39500C7048C /* IssueFilter.storyboard in Resources */,
 				9508B8252552A71A0015C636 /* IssueDetailCellView.xib in Resources */,
+				95AE90CF25594610002BAE95 /* EditIssue.storyboard in Resources */,
 				9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */,
 				95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */,
 				963A1A9E255249BB003E2BBB /* LabelComponentView.xib in Resources */,

@@ -19,21 +19,20 @@ protocol IssueDetailViewModelProtocol {
     var labels: [LabelItemViewModel] { get }
     var assignees: [UserViewModel] { get }
     func needFetchDetails()
+    func addComment(content: String)
 }
 
 struct CommentViewModel {
-    let id: Int
     let content: String
     let createAt: String
     let userName: String
     let imageURL: String?
     
     init(comment: Comment) {
-        id = comment.id
         content = comment.content
         createAt = comment.createAt
-        userName = comment.user.name
-        imageURL = comment.user.imageUrl
+        userName = comment.author.name
+        imageURL = comment.author.imageUrl
     }
 }
 
@@ -76,7 +75,6 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     }
     
     func needFetchDetails() {
-        print("needFetchDetails()")
         issueProvider?.getIssue(at: issueNumber) { [weak self] (issue) in
             guard let `self` = self,
                 let currentIssue = issue
@@ -105,4 +103,13 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             self.didFetch?()
         }
     }
+    
+    func addComment(content: String) {
+        issueProvider?.addComment(issueNumber: self.issueNumber, content: content) { [weak self] (response) in
+            guard let `self` = self, response else { return }
+            self.comments.append(CommentViewModel(comment: Comment(content: content, user: User(id: 1))))
+            self.didFetch?()
+        }
+    }
+    
 }
