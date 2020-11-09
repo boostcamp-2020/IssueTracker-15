@@ -27,6 +27,7 @@ export default function LabelRowContainer() {
 
   return (
     <S.LabelRowContainer>
+      <S.LabelContainerHeader>{labels.length} Labels</S.LabelContainerHeader>
       {labels.map((label) => {
         return <LabelRow key={label.id} label={label} />;
       })}
