@@ -89,8 +89,8 @@ class IssueListViewModel: IssueListViewModelProtocol {
     func createIssueDetailViewModel(path: IndexPath) -> IssueDetailViewModel? {
         let cellViewModel = issues[path.row]
         return IssueDetailViewModel(id: cellViewModel.id,
-                                    title: cellViewModel.title,
-                                    description: cellViewModel.description,
-                                    issueProvider: issueProvider)
+                                    issueProvider: issueProvider,
+                                    labelProvier: labelProvider,
+                                    milestoneProvider: milestoneProvider)
     }
 }

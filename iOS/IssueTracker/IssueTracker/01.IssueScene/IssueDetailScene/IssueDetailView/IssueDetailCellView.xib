@@ -82,7 +82,10 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="586" height="523"/>
             <connections>
-                <outlet property="desc" destination="6oD-yh-wAK" id="SjD-jd-dwW"/>
+                <outlet property="author" destination="3vp-g9-v3l" id="cce-nR-BcY"/>
+                <outlet property="content" destination="6oD-yh-wAK" id="SjD-jd-dwW"/>
+                <outlet property="createAt" destination="WMG-Kc-bHQ" id="v4j-iY-3jC"/>
+                <outlet property="profilePicture" destination="gvy-u4-1hO" id="4CT-jJ-SSc"/>
             </connections>
             <point key="canvasLocation" x="518.84057971014499" y="311.71875"/>
         </collectionViewCell>

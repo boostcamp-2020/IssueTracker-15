@@ -10,19 +10,12 @@ import UIKit
 
 class IssueDetailViewController: UIViewController {
     static let identifier = "IssueDetailViewController"
-    private var cellData = [
-        "레이블 전체 목록을 볼 수 있는게 어떨까요 전체 설명이 보여야 선택할 수 있으니까 마크다운 문법을 지원하고 HTML 형태로 보여줘야 할까요",
-        "긍정적인 기능이네요 댓글은 한 줄",
-        "아 힘드렁",
-        "Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
-    ]
     
     @IBOutlet weak var collectionView: UICollectionView!
     private var addCommentView: AddCommentView?
-    private var issueDetailViewModel: IssueDetailViewModelProtocol?
+    private var issueDetailViewModel: IssueDetailViewModelProtocol
     private var currentIssueId: Int = -1
-    private var didFetchDetails: Bool = false
-    
+
     private var currentIndexPath: IndexPath? {
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.frame.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.minY)
@@ -36,20 +29,21 @@ class IssueDetailViewController: UIViewController {
     init(issueDetailViewModel: IssueDetailViewModelProtocol) {
         self.issueDetailViewModel = issueDetailViewModel
         super.init(nibName: nil, bundle: nil)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        self.issueDetailViewModel.didFetch = { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
     
     required init?(coder: NSCoder) {
+        issueDetailViewModel = IssueDetailViewModel(id: 1, issueProvider: nil, labelProvier: nil, milestoneProvider: nil)
         super.init(coder: coder)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBarButtons()
-        configureIssueDetailViewModel()
+        issueDetailViewModel.needFetchDetails()
         navigationItem.title = "이슈 상세"
     }
     
@@ -65,12 +59,6 @@ class IssueDetailViewController: UIViewController {
     
     private func configureNavigationBarButtons() {
         configureEditButton()
-    }
-    
-    private func configureIssueDetailViewModel() {
-        issueDetailViewModel?.didFetch = { [weak self] in
-            self?.didFetchDetails = true
-        }
     }
     
     private func configureEditButton() {
@@ -122,7 +110,7 @@ class IssueDetailViewController: UIViewController {
         addCommentView.downButtonTapped = { [weak self] in
             guard let `self` = self,
                 let currentIndexPath = self.currentIndexPath,
-                currentIndexPath.item < self.cellData.count - 1
+                currentIndexPath.item < self.issueDetailViewModel.comments.count - 1
                 else { return }
             
             self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item + 1, section: 0), at: .top, animated: true)
@@ -147,29 +135,20 @@ class IssueDetailViewController: UIViewController {
 
 extension IssueDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellData.count
+        return issueDetailViewModel.comments.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: IssueDetailCellView = collectionView.dequeueCell(at: indexPath) else { return UICollectionViewCell() }
-        cell.configure(with: cellData[indexPath.row])
+        cell.configure(with: issueDetailViewModel.comments[indexPath.row])
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header: IssueDetailHeaderView = collectionView.dequeueHeader(at: indexPath) else { return UICollectionReusableView() }
         
-        guard let header: IssueDetailHeaderView = collectionView.dequeueHeader(at: indexPath),
-            let issueDetailViewModel = issueDetailViewModel
-            else { return UICollectionReusableView() }
-        
-        if didFetchDetails {
-            header.configure(with: issueDetailViewModel)
-        } else {
-            issueDetailViewModel.needFetchDetails()
-            header.configure(with: issueDetailViewModel)
-        }
-        
+        header.configure(with: issueDetailViewModel)
         return header
     }
     
@@ -186,7 +165,7 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
         let indexPath = IndexPath(row: 0, section: section)
         if let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as? IssueDetailHeaderView {
             headerView.layoutIfNeeded()
-            let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+            let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize).height
 
             return CGSize(width: self.view.frame.width, height: height)
         }
