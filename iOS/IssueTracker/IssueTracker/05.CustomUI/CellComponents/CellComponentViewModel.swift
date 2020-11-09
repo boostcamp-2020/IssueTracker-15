@@ -31,6 +31,12 @@ struct CellComponentViewModel {
         element = milestone.dueDate
     }
     
+    init(user: User) {
+        id = -1
+        title = user.name
+        element = user.imageUrl ?? ""
+    }
+    
     // TODO:
     /*
      init(userInfo: UserInfo) {
