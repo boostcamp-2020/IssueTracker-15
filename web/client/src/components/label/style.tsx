@@ -9,4 +9,5 @@ export const Label = styled.div`
   width: max-content;
   padding: 5px 8px;
   border-radius: 9px;
+  font-size: small;
 `;

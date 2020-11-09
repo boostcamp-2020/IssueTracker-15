@@ -5,8 +5,8 @@ export const LabelRow = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 60%;
-  padding: 1.2rem 1rem;
+  width: 65%;
+  padding: 0.7rem 1rem 0.7rem 1.5rem;
   border-left: 1px solid #e8e8e8;
   border-right: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
@@ -14,9 +14,9 @@ export const LabelRow = styled.div`
 
 export const LabelContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  width: 30%;
+  width: 25%;
 `;
 
 export const LabelDescription = styled.div`
@@ -24,19 +24,21 @@ export const LabelDescription = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 45%;
+  font-size: small;
 `;
 
 export const LabelControllButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  width: 20%;
+  width: 15%;
+  font-size: small;
 `;
 
 export const LabelControllbutton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0rem 1rem;
+  margin: 0rem 0.5rem;
   cursor: pointer;
 `;
