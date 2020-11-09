@@ -9,15 +9,13 @@
 import Foundation
 
 protocol IssueListViewModelProtocol: AnyObject {
+    var filterViewModel: IssueFilterViewModelProtocol? { get }
     var didFetch: (() -> Void)? { get set }
     var filter: IssueFilterable? { get set }
     
     func needFetchItems()
     func cellForItemAt(path: IndexPath) -> IssueItemViewModel
     func numberOfItem() -> Int
-    
-    func createFilterViewModel() -> IssueFilterViewModelProtocol?
-    func createIssueDetailViewModel(path: IndexPath) -> IssueDetailViewModel?
 }
 
 class IssueListViewModel: IssueListViewModelProtocol {
@@ -71,7 +69,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
         return issues.count
     }
     
-    func createFilterViewModel() -> IssueFilterViewModelProtocol? {
+    var filterViewModel: IssueFilterViewModelProtocol? {
         let generalConditions = filter?.generalConditions ?? [Bool](repeating: false, count: Condition.allCases.count)
         let detailConditions = filter?.detailConditions ?? [Int](repeating: -1, count: DetailCondition.allCases.count)
         let viewModel = IssueFilterViewModel(labelProvider: labelProvider,
@@ -83,11 +81,4 @@ class IssueListViewModel: IssueListViewModelProtocol {
         return viewModel
     }
     
-    func createIssueDetailViewModel(path: IndexPath) -> IssueDetailViewModel? {
-        let cellViewModel = issues[path.row]
-        return IssueDetailViewModel(id: cellViewModel.id,
-                                    title: cellViewModel.title,
-                                    description: cellViewModel.description,
-                                    issueProvider: issueProvider)
-    }
 }
