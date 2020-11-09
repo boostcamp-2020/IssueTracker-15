@@ -19,8 +19,7 @@ class IssueDetailViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     private var addCommentView: AddCommentView?
-    private var issueDetailViewModel: IssueDetailViewModel?
-    private var currentIssueId: Int = -1
+    private var issueDetailViewModel: IssueDetailViewModelProtocol?
     private var didFetchDetails: Bool = false
     
     private var currentIndexPath: IndexPath? {
@@ -33,8 +32,7 @@ class IssueDetailViewController: UIViewController {
         }
     }
     
-    init(currentIssueId: Int, issueDetailViewModel: IssueDetailViewModel) {
-        self.currentIssueId = currentIssueId
+    init(issueDetailViewModel: IssueDetailViewModelProtocol?) {
         self.issueDetailViewModel = issueDetailViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -175,7 +173,7 @@ extension IssueDetailViewController: UICollectionViewDataSource {
         if didFetchDetails {
             header.configure(with: issueDetailViewModel)
         } else {
-            issueDetailViewModel.needFetchDetails(with: currentIssueId)
+            issueDetailViewModel.needFetchDetails()
             header.configure(with: issueDetailViewModel)
         }
         
@@ -207,8 +205,8 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
 extension IssueDetailViewController {
     static let nibName = "IssueDetailViewController"
     
-    static func createViewController(currentIssueId: Int, issueDetailViewModel: IssueDetailViewModel) -> IssueDetailViewController {
-        let vc = IssueDetailViewController(currentIssueId: currentIssueId, issueDetailViewModel: issueDetailViewModel)
+    static func createViewController(issueDetailViewModel: IssueDetailViewModelProtocol?) -> IssueDetailViewController {
+        let vc = IssueDetailViewController(issueDetailViewModel: issueDetailViewModel)
         return vc
     }
 }

@@ -49,6 +49,7 @@
 		960205612553140500888394 /* DetailConditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960205602553140500888394 /* DetailConditionViewModel.swift */; };
 		9602056325531E1B00888394 /* FilterConditionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9602056225531E1B00888394 /* FilterConditionType.swift */; };
 		960205652553259D00888394 /* IssueFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960205642553259D00888394 /* IssueFilter.swift */; };
+		960A493A255569EC000AEE6A /* IssueFilter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 960A4939255569EC000AEE6A /* IssueFilter.storyboard */; };
 		9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9613C12D2547B265005EF13C /* .swiftlint.yml */; };
 		9627A5A825506985000BFF4D /* UITableView+Registerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5A725506985000BFF4D /* UITableView+Registerable.swift */; };
 		9627A5AC255087FF000BFF4D /* DetailConditionSelectCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5AB255087FF000BFF4D /* DetailConditionSelectCellView.swift */; };
@@ -216,6 +217,7 @@
 		960205602553140500888394 /* DetailConditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionViewModel.swift; sourceTree = "<group>"; };
 		9602056225531E1B00888394 /* FilterConditionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConditionType.swift; sourceTree = "<group>"; };
 		960205642553259D00888394 /* IssueFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilter.swift; sourceTree = "<group>"; };
+		960A4939255569EC000AEE6A /* IssueFilter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueFilter.storyboard; sourceTree = "<group>"; };
 		9613C12D2547B265005EF13C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		9627A5A725506985000BFF4D /* UITableView+Registerable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Registerable.swift"; sourceTree = "<group>"; };
 		9627A5AB255087FF000BFF4D /* DetailConditionSelectCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionSelectCellView.swift; sourceTree = "<group>"; };
@@ -537,14 +539,6 @@
 			path = IssueTrackerTests;
 			sourceTree = "<group>";
 		};
-		9602055F255313EC00888394 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				960205602553140500888394 /* DetailConditionViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		963971DC2549BB66005BB4FA /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -581,9 +575,9 @@
 		963A1AA825526E24003E2BBB /* MainFilterScene */ = {
 			isa = PBXGroup;
 			children = (
-				965A4DF42552E86600A4A7D7 /* ViewModel */,
 				965F09732550425A00B3A248 /* IssueFilterViewController.swift */,
 				963A1AA4255267FC003E2BBB /* DetailFilterCellView.swift */,
+				960A4939255569EC000AEE6A /* IssueFilter.storyboard */,
 			);
 			path = MainFilterScene;
 			sourceTree = "<group>";
@@ -591,20 +585,11 @@
 		963A1AA925526E2F003E2BBB /* DetailConditionScene */ = {
 			isa = PBXGroup;
 			children = (
-				9602055F255313EC00888394 /* ViewModel */,
 				965F097B25505A1200B3A248 /* DetailConditionSelectViewController.swift */,
 				965F097C25505A1200B3A248 /* DetailConditionSelectViewController.xib */,
 				965F097F25505B5400B3A248 /* DetailConditionSelectCell */,
 			);
 			path = DetailConditionScene;
-			sourceTree = "<group>";
-		};
-		965A4DF42552E86600A4A7D7 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				965A4DF52552E88500A4A7D7 /* IssueFilterViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		965F09752550589F00B3A248 /* FilterScene */ = {
@@ -762,6 +747,8 @@
 		96F95BF6254E692800EC00C6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				965A4DF52552E88500A4A7D7 /* IssueFilterViewModel.swift */,
+				960205602553140500888394 /* DetailConditionViewModel.swift */,
 				965A4DE52552BF1200A4A7D7 /* IssueListViewModel.swift */,
 				965A4DEA2552C28300A4A7D7 /* IssueItemViewModel.swift */,
 				950F75092553EB7400F5A43C /* IssueDetailViewModel.swift */,
@@ -960,6 +947,7 @@
 				966ADAEA254D9BE900A480DD /* LabelSubmitFieldsView.xib in Resources */,
 				95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */,
 				9508B8212552A3620015C636 /* IssueDetailHeaderView.xib in Resources */,
+				960A493A255569EC000AEE6A /* IssueFilter.storyboard in Resources */,
 				955CB1712553C2B200B99093 /* IssueDetailViewController.xib in Resources */,
 				951341C22553026600EDFB83 /* AddCommentView.xib in Resources */,
 				965F098925505B9D00B3A248 /* DetailConditionSelectCellView.xib in Resources */,

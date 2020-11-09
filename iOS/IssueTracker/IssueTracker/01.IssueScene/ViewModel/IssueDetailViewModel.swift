@@ -8,22 +8,43 @@
 
 import Foundation
 
-class IssueDetailViewModel {
+enum IssueBadgeColor {
+    case green
+    case red
+}
+
+protocol IssueDetailViewModelProtocol {
+    var issueNumber: Int { get }
+    var title: String { get }
+    var description: String { get }
+    var author: String { get }
+    var badge: String { get }
+    var badgeColor: IssueBadgeColor { get }
+    
+    var didFetch: (() -> Void)? { get set }
+    func needFetchDetails()
+}
+
+class IssueDetailViewModel: IssueDetailViewModelProtocol {
     
     var issueNumber: Int = 0
     var title: String = ""
     var description: String = ""
     var author: String = ""
     var didFetch: (() -> Void)?
-    var isOpened: Bool = false
-    private weak var issueProvider: IssueProvidable?
     
-    init(issueProvider: IssueProvidable) {
+    private weak var issueProvider: IssueProvidable?
+    private var isOpened: Bool = false
+    
+    init(id: Int, title: String, description: String, issueProvider: IssueProvidable?) {
         self.issueProvider = issueProvider
+        self.issueNumber = id
+        self.title = title
+        self.description = description
     }
     
-    func needFetchDetails(with id: Int) {
-        issueProvider?.getIssue(at: id, completion: { [weak self] (issue) in
+    func needFetchDetails() {
+        issueProvider?.getIssue(at: issueNumber, completion: { [weak self] (issue) in
             guard let `self` = self,
                 let currentIssue = issue
                 else { return }

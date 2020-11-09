@@ -41,7 +41,7 @@ struct Milestone: Codable {
         description = try container.decode(String.self, forKey: .description)
         openedIssueNum = try container.decode(String.self, forKey: .openedIssueNum)
         closedIssueNum = try container.decode(String.self, forKey: .closedIssueNum)
-        dueDate = try container.decode(String.self, forKey: .dueDate)
+        dueDate = (try? container.decode(String.self, forKey: .dueDate)) ?? ""
     }
     
     func encode(to encoder: Encoder) throws {
