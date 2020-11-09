@@ -43,7 +43,7 @@ struct Issue {
     }
     
     // TODO: mock init 삭제할 것!
-    init(id: Int, title: String, description: String, labels: [Int], milestone: Int? = nil, author: String) {
+    init(id: Int, title: String, description: String, labels: [Int], milestone: Int? = nil, author: String, isOpened: Bool) {
         self.id = id
         self.title = title
         self.author = author

@@ -47,6 +47,8 @@ struct MilestoneItemViewModel: MilestoneCellConfigurable, MilestoneSubmitFormCon
         case .fromSubmitView:
             self.dueDate = milestone.dueDate.dateForSubmitForm
         }
+        self.issueOpened = Int(milestone.openedIssueNum) ?? 0
+        self.issueClosed = Int(milestone.closedIssueNum) ?? 0
     }
     
     var dueDateText: String {

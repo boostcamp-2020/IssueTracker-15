@@ -20,6 +20,7 @@ class IssueDetailViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     private var addCommentView: AddCommentView?
     private var issueDetailViewModel: IssueDetailViewModelProtocol?
+    private var currentIssueId: Int = -1
     private var didFetchDetails: Bool = false
     
     private var currentIndexPath: IndexPath? {
@@ -32,7 +33,7 @@ class IssueDetailViewController: UIViewController {
         }
     }
     
-    init(issueDetailViewModel: IssueDetailViewModelProtocol?) {
+    init(issueDetailViewModel: IssueDetailViewModelProtocol) {
         self.issueDetailViewModel = issueDetailViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -80,6 +81,7 @@ class IssueDetailViewController: UIViewController {
     private func configureCollectionView() {
         setupCollectionViewLayout()
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.registerHeader(type: IssueDetailHeaderView.self)
         collectionView.registerCell(type: IssueDetailCellView.self)
     }
@@ -132,11 +134,9 @@ class IssueDetailViewController: UIViewController {
     private func setupCollectionViewLayout() {
         let flowLayout = UICollectionViewFlowLayout()
         let width = self.view.frame.size.width
-        let headerHeight = self.view.frame.height * 0.2
+        let headerHeight = self.view.frame.size.height * 0.2
         
-        flowLayout.itemSize.width = width
         flowLayout.estimatedItemSize = CGSize(width: width, height: headerHeight)
-        flowLayout.headerReferenceSize = CGSize(width: width, height: headerHeight)
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         
         collectionView.collectionViewLayout = flowLayout
@@ -153,6 +153,7 @@ extension IssueDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: IssueDetailCellView = collectionView.dequeueCell(at: indexPath) else { return UICollectionViewCell() }
         cell.configure(with: cellData[indexPath.row])
+        
         return cell
     }
     
@@ -175,12 +176,29 @@ extension IssueDetailViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
+    
+}
+
+extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+
+        let indexPath = IndexPath(row: 0, section: section)
+        if let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as? IssueDetailHeaderView {
+            headerView.layoutIfNeeded()
+            let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize).height
+            return CGSize(width: self.view.frame.width, height: height)
+        }
+
+        return CGSize(width: self.view.frame.width, height: CGFloat(100))
+    }
+
 }
 
 extension IssueDetailViewController {
     static let nibName = "IssueDetailViewController"
     
-    static func createViewController(issueDetailViewModel: IssueDetailViewModelProtocol?) -> IssueDetailViewController {
+    static func createViewController(issueDetailViewModel: IssueDetailViewModel) -> IssueDetailViewController {
         let vc = IssueDetailViewController(issueDetailViewModel: issueDetailViewModel)
         return vc
     }

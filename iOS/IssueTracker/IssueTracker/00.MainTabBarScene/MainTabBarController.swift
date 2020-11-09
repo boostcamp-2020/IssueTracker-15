@@ -34,6 +34,7 @@ class MainTabBarController: UITabBarController {
             let issueListViewModel = IssueListViewModel(labelProvider: labelProvider,
                                                         milestoneProvider: milestoneProvider,
                                                         issueProvider: issueProvider)
+            
             issueListViewController.issueListViewModel = issueListViewModel
         }
         // controllers[1] = LabelListViewController

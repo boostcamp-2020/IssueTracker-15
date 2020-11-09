@@ -5,7 +5,6 @@
 //  Created by 김신우 on 2020/11/01.
 //  Copyright © 2020 IssueTracker-15. All rights reserved.
 //
-
 import UIKit
 
 class IssueListViewController: UIViewController {
@@ -73,7 +72,6 @@ class IssueListViewController: UIViewController {
 }
 
 // MARK: - Actions
-
 extension IssueListViewController {
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
         guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) else { return }
@@ -136,7 +134,6 @@ extension IssueListViewController {
 }
 
 // MARK: - Present
-
 extension IssueListViewController {
     
     private func presentFilterViewController() {
@@ -168,7 +165,6 @@ extension IssueListViewController {
 }
 
 // MARK: - UICollectionViewDataSource Implementation
-
 extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath),

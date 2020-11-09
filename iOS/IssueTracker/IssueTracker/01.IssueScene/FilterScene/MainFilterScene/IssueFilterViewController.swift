@@ -89,7 +89,6 @@ extension IssueFilterViewController {
 }
 
 // MARK: - TableView Private Functions
-
 extension IssueFilterViewController {
     
     private func willDisplayConditionCell(at type: Condition, cell: UITableViewCell) {
@@ -129,7 +128,6 @@ extension IssueFilterViewController {
 }
 
 // MARK: - Load From StoryBoard
-
 extension IssueFilterViewController {
     static let storyBoardName = "IssueFilter"
     

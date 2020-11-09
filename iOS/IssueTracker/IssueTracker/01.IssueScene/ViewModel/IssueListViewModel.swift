@@ -5,7 +5,6 @@
 //  Created by 김신우 on 2020/11/04.
 //  Copyright © 2020 IssueTracker-15. All rights reserved.
 //
-
 import Foundation
 
 protocol IssueListViewModelProtocol: AnyObject {
