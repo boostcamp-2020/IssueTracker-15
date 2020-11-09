@@ -1,9 +1,11 @@
 import React from "react";
+import LabelRow from "../components/label-row";
+import LabelRowContainer from "../components/label-row-container";
 
 const LabelPage = () => {
   return (
     <>
-      <div>라벨 페이지 입니다</div>
+      <LabelRowContainer />
     </>
   );
 };
