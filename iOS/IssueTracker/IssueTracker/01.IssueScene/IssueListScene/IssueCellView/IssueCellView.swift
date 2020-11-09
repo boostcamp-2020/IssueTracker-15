@@ -95,6 +95,10 @@ class IssueCellView: UICollectionViewCell {
         self.labelCollectionView.reloadData()
     }
     
+    func setCheck(_ check: Bool) {
+        checkBoxButton.setImage(check ? Constant.checkedImage : Constant.uncheckedImage, for: .normal)
+    }
+    
 }
 
 // MARK: - Action
@@ -177,5 +181,14 @@ extension IssueCellView: UICollectionViewRegisterable {
     
     static var cellNib: UINib {
         UINib(nibName: cellIdentifier, bundle: nil)
+    }
+}
+
+// MARK: - Constant
+
+extension IssueCellView {
+    enum Constant {
+        static let uncheckedImage = UIImage(systemName: "circle")
+        static let checkedImage = UIImage(systemName: "checkmark.circle.fill")
     }
 }

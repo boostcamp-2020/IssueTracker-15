@@ -29,6 +29,10 @@ class IssueListViewController: UIViewController {
             issueListViewModel?.invalidateLayout = { [weak self] in
                 self?.collectionView.collectionViewLayout.invalidateLayout()
             }
+            issueListViewModel?.didCellChecked = { [weak self] (indexPath, check) in
+                guard let cell = self?.collectionView.cellForItem(at: indexPath) as? IssueCellView else { return }
+                cell.setCheck(check)
+            }
         }
     }
     
@@ -80,8 +84,7 @@ extension IssueListViewController {
         case .general:
             presentIssueDetailViewController(indexPath: indexPath)
         case .edit:
-            
-            break
+            issueListViewModel?.cellSelected(at: indexPath)
         }
     }
     
@@ -99,8 +102,7 @@ extension IssueListViewController {
         case .general:
             presentFilterViewController()
         case .edit:
-            // TODO: SelectAll
-            break
+            issueListViewModel?.cellSelectAll()
         }
     }
     
@@ -112,7 +114,6 @@ extension IssueListViewController {
         viewingMode = .edit
         rightNavButton.title = "Cancel"
         leftNavButton.title = "Select All"
-        navigationController?.isToolbarHidden = false
         tabBarController?.tabBar.isHidden = true
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
@@ -124,8 +125,8 @@ extension IssueListViewController {
         viewingMode = .general
         rightNavButton.title = "Edit"
         leftNavButton.title = "Filter"
-        navigationController?.isToolbarHidden = true
         tabBarController?.tabBar.isHidden = false
+        issueListViewModel?.cellSelectClear()
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: false, animation: true)
