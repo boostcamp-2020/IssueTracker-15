@@ -48,6 +48,10 @@ class IssueListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.largeTitleDisplayMode = .automatic
+        collectionView.visibleCells.forEach {
+            guard let cell = $0 as? IssueCellView else { return }
+            cell.resetScrollOffset()
+        }
     }
     
     // TODO: SerachBar Configure

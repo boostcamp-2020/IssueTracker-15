@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="192"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AIv-qe-DsP">
-                                <rect key="frame" x="0.0" y="0.0" width="798" height="192"/>
+                                <rect key="frame" x="0.0" y="0.0" width="579.5" height="192"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xnl-RV-xeJ" userLabel="checkBoxGuide">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="192"/>
@@ -84,10 +84,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-PE-geQ" userLabel="CloseBoxGuide">
-                                        <rect key="frame" x="414" y="0.0" width="192" height="192"/>
+                                        <rect key="frame" x="414" y="0.0" width="83" height="192"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WSs-W9-8Rt">
-                                                <rect key="frame" x="0.0" y="0.0" width="192" height="192"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="83" height="192"/>
                                                 <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Close">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -99,7 +99,6 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="XRe-PE-geQ" secondAttribute="height" multiplier="1:1" id="HfY-7t-WEg"/>
                                             <constraint firstItem="WSs-W9-8Rt" firstAttribute="top" secondItem="XRe-PE-geQ" secondAttribute="top" id="Rya-JF-60E"/>
                                             <constraint firstAttribute="bottom" secondItem="WSs-W9-8Rt" secondAttribute="bottom" id="TWs-Go-e4T"/>
                                             <constraint firstItem="WSs-W9-8Rt" firstAttribute="leading" secondItem="XRe-PE-geQ" secondAttribute="leading" id="hCB-G3-I9W"/>
@@ -107,10 +106,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xNn-Jb-haT" userLabel="DeleteBoxGuide">
-                                        <rect key="frame" x="606" y="0.0" width="192" height="192"/>
+                                        <rect key="frame" x="497" y="0.0" width="82.5" height="192"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8u4-5P-XF4">
-                                                <rect key="frame" x="0.0" y="0.0" width="192" height="192"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="82.5" height="192"/>
                                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Delete">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -126,14 +125,13 @@
                                             <constraint firstItem="8u4-5P-XF4" firstAttribute="top" secondItem="xNn-Jb-haT" secondAttribute="top" id="NxG-S5-5WR"/>
                                             <constraint firstAttribute="trailing" secondItem="8u4-5P-XF4" secondAttribute="trailing" id="ZN2-r0-hgH"/>
                                             <constraint firstItem="8u4-5P-XF4" firstAttribute="leading" secondItem="xNn-Jb-haT" secondAttribute="leading" id="eRv-5g-Wqu"/>
-                                            <constraint firstAttribute="width" secondItem="xNn-Jb-haT" secondAttribute="height" multiplier="1:1" id="tu5-23-9qW"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="XRe-PE-geQ" firstAttribute="height" secondItem="xNn-Jb-haT" secondAttribute="height" id="1bE-tX-lne"/>
-                                    <constraint firstItem="R8Z-t0-U66" firstAttribute="height" secondItem="XRe-PE-geQ" secondAttribute="height" id="XfU-9a-5Le"/>
+                                    <constraint firstItem="xNn-Jb-haT" firstAttribute="width" secondItem="R8Z-t0-U66" secondAttribute="width" multiplier="0.2" id="8ID-C4-z84"/>
                                     <constraint firstItem="Xnl-RV-xeJ" firstAttribute="height" secondItem="R8Z-t0-U66" secondAttribute="height" id="dL0-5O-8Oz"/>
+                                    <constraint firstItem="XRe-PE-geQ" firstAttribute="width" secondItem="R8Z-t0-U66" secondAttribute="width" multiplier="0.2" id="qeL-HN-On5"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="WU3-Lk-8Ve"/>
                             </stackView>

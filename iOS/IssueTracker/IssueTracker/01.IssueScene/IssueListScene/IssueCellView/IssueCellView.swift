@@ -95,6 +95,10 @@ class IssueCellView: UICollectionViewCell {
         self.labelCollectionView.reloadData()
     }
     
+    func resetScrollOffset() {
+        cellHorizontalScrollView.contentOffset = CGPoint.zero
+    }
+    
     func setCheck(_ check: Bool) {
         checkBoxButton.setImage(check ? Constant.checkedImage : Constant.uncheckedImage, for: .normal)
     }
