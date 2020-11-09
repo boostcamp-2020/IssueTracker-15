@@ -126,6 +126,7 @@ class IssueDetailViewController: UIViewController {
         
         flowLayout.estimatedItemSize = CGSize(width: width, height: headerHeight)
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        flowLayout.headerReferenceSize = CGSize(width: view.frame.width, height: headerHeight)
         
         collectionView.collectionViewLayout = flowLayout
     }
@@ -159,17 +160,17 @@ extension IssueDetailViewController: UICollectionViewDataSource {
 }
 
 extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-
         let indexPath = IndexPath(row: 0, section: section)
+        
         if let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as? IssueDetailHeaderView {
-            headerView.layoutIfNeeded()
-            let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingExpandedSize).height
 
-            return CGSize(width: self.view.frame.width, height: height)
+            let size = CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height)
+            
+            return headerView.systemLayoutSizeFitting(size, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
         }
-
+        
         return CGSize(width: self.view.frame.width, height: CGFloat(100))
     }
 

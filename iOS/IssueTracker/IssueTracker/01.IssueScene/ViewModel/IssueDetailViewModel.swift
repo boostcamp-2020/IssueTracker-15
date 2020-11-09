@@ -76,6 +76,7 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     }
     
     func needFetchDetails() {
+        print("needFetchDetails()")
         issueProvider?.getIssue(at: issueNumber) { [weak self] (issue) in
             guard let `self` = self,
                 let currentIssue = issue

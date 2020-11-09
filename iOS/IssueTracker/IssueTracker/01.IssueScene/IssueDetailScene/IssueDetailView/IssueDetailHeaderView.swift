@@ -28,13 +28,6 @@ class IssueDetailHeaderView: UICollectionReusableView {
         configureIssueBadge(isOpened: issueDetailViewModel.isOpened)
     }
     
-    override func systemLayoutSizeFitting(_ targetSize: CGSize) -> CGSize {
-        var size = super.systemLayoutSizeFitting(targetSize)
-        size.height += issueTitle.intrinsicContentSize.height
-
-        return size
-    }
-    
     private func configureIssueBadge(isOpened: Bool) {
         var badgeColor: UIColor
         var badgeText: String
@@ -63,4 +56,5 @@ extension UIButton {
         self.backgroundColor = backgroundColor
         self.setTitle(text, for: .normal)
     }
+    
 }
