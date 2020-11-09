@@ -24,7 +24,7 @@ export const LabelTitleRow = styled.div`
 export const LableInputRow = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   padding: 0rem 1rem 0.3rem 1.5rem;
@@ -43,6 +43,12 @@ export const descriptionTitle = styled.div`
   width: 16rem;
 `;
 export const colorTitle = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+export const inputContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -92,5 +98,14 @@ export const colorInput = styled.input`
   justify-content: flex-start;
   align-items: center;
   width: 5rem;
-  margin-right: 5rem;
+  margin-right: 1rem;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 11rem;
+  padding-right: 1rem;
 `;
