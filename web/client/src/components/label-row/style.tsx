@@ -7,7 +7,9 @@ export const LabelRow = styled.div`
   align-items: center;
   width: 60%;
   padding: 1.2rem 1rem;
-  border: 1px solid #e7eaef;
+  border-left: 1px solid #e8e8e8;
+  border-right: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
 `;
 
 export const LabelContainer = styled.div`

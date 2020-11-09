@@ -7,6 +7,6 @@ export const Label = styled.div`
   align-items: center;
   background-color: ${(props) => props.color};
   width: max-content;
-  padding: 5px;
+  padding: 5px 8px;
   border-radius: 9px;
 `;
