@@ -8,7 +8,17 @@
 
 import Foundation
 
-class IssueDetailViewModel {
+protocol IssueDetailViewModelProtocol {
+    var issueNumber: Int { get }
+    var title: String { get }
+    var description: String { get }
+    var author: String { get }
+    var isOpened: Bool { get }
+    var didFetch: (() -> Void)? { get set }
+    func needFetchDetails()
+}
+
+class IssueDetailViewModel: IssueDetailViewModelProtocol {
     
     var issueNumber: Int = 0
     var title: String = ""
@@ -22,8 +32,8 @@ class IssueDetailViewModel {
         self.issueProvider = issueProvider
     }
     
-    func needFetchDetails(with id: Int) {
-        issueProvider?.getIssue(at: id, completion: { [weak self] (issue) in
+    func needFetchDetails() {
+        issueProvider?.getIssue(at: issueNumber, completion: { [weak self] (issue) in
             guard let `self` = self,
                 let currentIssue = issue
                 else { return }
