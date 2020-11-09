@@ -149,7 +149,7 @@
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="A1f-zK-Nd4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="LqH-iR-KEA">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
@@ -185,11 +185,8 @@
                                 <cells/>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVQ-k4-p1T" userLabel="addIssueButton">
-                                <rect key="frame" x="332.5" y="731.5" width="51.5" height="51.5"/>
+                                <rect key="frame" x="361.5" y="738" width="22.5" height="45"/>
                                 <color key="backgroundColor" red="0.28235294119999998" green="0.52156862749999999" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="EVQ-k4-p1T" secondAttribute="height" multiplier="1:1" id="i9Y-Md-Gyd"/>
-                                </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="plus" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
@@ -198,16 +195,31 @@
                                     <action selector="addIssueButtonTapped:" destination="EML-Kz-Cea" eventType="touchUpInside" id="XKx-Fh-3lx"/>
                                 </connections>
                             </button>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apM-nX-fph">
+                                <rect key="frame" x="0.0" y="813" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7sm-7Q-uuV"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Krs-lb-QRz"/>
+                                    <barButtonItem title="선택 이슈 닫기" id="MYd-sl-1sn">
+                                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="18" maxX="0.0" maxY="0.0"/>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="MsW-cq-Pbp" firstAttribute="leading" secondItem="WFd-Ro-ELe" secondAttribute="leading" id="5ou-My-cfT"/>
                             <constraint firstItem="bvj-Iu-non" firstAttribute="bottom" secondItem="EVQ-k4-p1T" secondAttribute="bottom" constant="30" id="6RT-pJ-WK0"/>
                             <constraint firstItem="bvj-Iu-non" firstAttribute="trailing" secondItem="EVQ-k4-p1T" secondAttribute="trailing" constant="30" id="d5d-CT-sGM"/>
+                            <constraint firstAttribute="trailing" secondItem="apM-nX-fph" secondAttribute="trailing" id="djv-5R-5Af"/>
+                            <constraint firstItem="EVQ-k4-p1T" firstAttribute="height" secondItem="WFd-Ro-ELe" secondAttribute="height" multiplier="0.05" id="e87-Eq-mon"/>
+                            <constraint firstItem="apM-nX-fph" firstAttribute="leading" secondItem="WFd-Ro-ELe" secondAttribute="leading" id="fMC-lQ-6yV"/>
                             <constraint firstAttribute="trailing" secondItem="MsW-cq-Pbp" secondAttribute="trailing" id="oa6-tj-VKC"/>
+                            <constraint firstItem="apM-nX-fph" firstAttribute="top" secondItem="bvj-Iu-non" secondAttribute="bottom" id="uUD-rU-wDy"/>
                             <constraint firstItem="MsW-cq-Pbp" firstAttribute="top" secondItem="WFd-Ro-ELe" secondAttribute="top" id="v60-lQ-n4N"/>
-                            <constraint firstItem="bvj-Iu-non" firstAttribute="bottom" secondItem="MsW-cq-Pbp" secondAttribute="bottom" id="x24-aC-Bhe"/>
-                            <constraint firstItem="EVQ-k4-p1T" firstAttribute="width" secondItem="WFd-Ro-ELe" secondAttribute="width" multiplier="0.125" id="zi2-Uq-BbX"/>
+                            <constraint firstAttribute="bottom" secondItem="MsW-cq-Pbp" secondAttribute="bottom" id="x24-aC-Bhe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bvj-Iu-non"/>
                     </view>
@@ -232,7 +244,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B44-Di-3xG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="-556"/>
+            <point key="canvasLocation" x="1957.9710144927537" y="-556.47321428571422"/>
         </scene>
         <!--레이블-->
         <scene sceneID="aGH-dv-WkZ">

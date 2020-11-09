@@ -152,7 +152,6 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
         if let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as? IssueDetailHeaderView {
             
             let size = CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height)
-            
             return headerView.systemLayoutSizeFitting(size, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
         }
         

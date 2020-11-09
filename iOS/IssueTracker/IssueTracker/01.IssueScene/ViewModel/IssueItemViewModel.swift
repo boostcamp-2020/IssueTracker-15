@@ -8,7 +8,19 @@
 
 import Foundation
 
-class IssueItemViewModel {
+protocol IssueItemViewModelProtocol: AnyObject {
+    var id: Int { get }
+    var title: String { get }
+    var description: String { get }
+    var milestoneTitle: String { get }
+    var labelItemViewModels: [LabelItemViewModel] { get }
+    
+    var didMilestoneChanged: ((String) -> Void)? { get set }
+    var didLabelsChanged: (([LabelItemViewModel]) -> Void)? { get set }
+    var checked: Bool { get }
+}
+
+class IssueItemViewModel: IssueItemViewModelProtocol {
     
     let id: Int
     let title: String
@@ -16,13 +28,11 @@ class IssueItemViewModel {
     
     private(set) var milestoneTitle: String = ""
     private(set) var labelItemViewModels = [LabelItemViewModel]()
-    private(set) var labelTitle: String = ""
-    private(set) var labelColor: String = ""
     
     var didMilestoneChanged: ((String) -> Void)?
     var didLabelsChanged: (([LabelItemViewModel]) -> Void)?
     
-    var check: Bool = false
+    var checked: Bool = false
     
     init(issue: Issue) {
         id = issue.id
