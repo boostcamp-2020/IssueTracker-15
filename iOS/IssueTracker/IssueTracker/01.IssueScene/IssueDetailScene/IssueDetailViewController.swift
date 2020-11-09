@@ -33,8 +33,7 @@ class IssueDetailViewController: UIViewController {
         }
     }
     
-    init(currentIssueId: Int, issueDetailViewModel: IssueDetailViewModelProtocol) {
-        self.currentIssueId = currentIssueId
+    init(issueDetailViewModel: IssueDetailViewModelProtocol) {
         self.issueDetailViewModel = issueDetailViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -49,17 +48,22 @@ class IssueDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = false
         configureNavigationBarButtons()
         configureIssueDetailViewModel()
+        navigationItem.title = "이슈 상세"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.largeTitleDisplayMode = .never
     }
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         configureInitialLayout()
     }
     
     private func configureNavigationBarButtons() {
-        configureBackButton()
         configureEditButton()
     }
     
@@ -69,21 +73,9 @@ class IssueDetailViewController: UIViewController {
         }
     }
     
-    private func configureBackButton() {
-        self.navigationItem.hidesBackButton = true
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(self.backButtonTapped(_:)))
-        self.navigationItem.leftBarButtonItem = backButton
-    }
-    
     private func configureEditButton() {
         let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: nil)
         self.navigationItem.rightBarButtonItem = editButton
-    }
-    
-    @objc func backButtonTapped(_ sender: UIBarButtonItem) {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.popViewController(animated: true)
     }
     
     private func configureCollectionView() {
@@ -104,7 +96,6 @@ class IssueDetailViewController: UIViewController {
     }
     
     private func configureBottomSheetView() {
-        self.tabBarController?.tabBar.isHidden = true
         addCommentView = AddCommentView.createView()
         let height = view.frame.height
         let width  = view.frame.width
@@ -207,8 +198,8 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
 extension IssueDetailViewController {
     static let nibName = "IssueDetailViewController"
     
-    static func createViewController(currentIssueId: Int, issueDetailViewModel: IssueDetailViewModel) -> IssueDetailViewController {
-        let vc = IssueDetailViewController(currentIssueId: currentIssueId, issueDetailViewModel: issueDetailViewModel)
+    static func createViewController(issueDetailViewModel: IssueDetailViewModel) -> IssueDetailViewController {
+        let vc = IssueDetailViewController(issueDetailViewModel: issueDetailViewModel)
         return vc
     }
 }

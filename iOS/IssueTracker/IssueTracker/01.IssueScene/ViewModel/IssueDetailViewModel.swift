@@ -32,6 +32,13 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         self.issueProvider = issueProvider
     }
     
+    init(id: Int, title: String, description: String, issueProvider: IssueProvidable?) {
+        self.issueProvider = issueProvider
+        self.issueNumber = id
+        self.title = title
+        self.description = description
+    }
+    
     func needFetchDetails() {
         issueProvider?.getIssue(at: issueNumber, completion: { [weak self] (issue) in
             guard let `self` = self,

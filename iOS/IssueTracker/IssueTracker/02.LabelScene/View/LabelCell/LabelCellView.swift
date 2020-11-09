@@ -13,6 +13,14 @@ class LabelCellView: UICollectionViewCell {
     @IBOutlet weak var titleLabel: BadgeLabelView!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+        ])
+    }
+    
     func configure(with currentItem: LabelItemViewModel) {
         configureTitle(text: currentItem.title, color: currentItem.hexColor.color)
         configureDescription(with: currentItem.description)

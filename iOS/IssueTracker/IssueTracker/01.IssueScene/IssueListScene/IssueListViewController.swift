@@ -5,7 +5,6 @@
 //  Created by 김신우 on 2020/11/01.
 //  Copyright © 2020 IssueTracker-15. All rights reserved.
 //
-
 import UIKit
 
 class IssueListViewController: UIViewController {
@@ -16,12 +15,11 @@ class IssueListViewController: UIViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var rightNavButton: UIButton!
-    @IBOutlet weak var leftNavButton: UIButton!
-    @IBOutlet weak var bottomToolBar: UIToolbar!
+    @IBOutlet weak var rightNavButton: UIBarButtonItem!
+    @IBOutlet weak var leftNavButton: UIBarButtonItem!
     @IBOutlet weak var addIssueButton: UIButton!
+    //@IBOutlet weak var closeSelectedIssueButton: UIBarButtonItem!
     
-    var issueDetailViewModel: IssueDetailViewModel?
     private var viewingMode: ViewingMode = .general
     var issueListViewModel: IssueListViewModel? {
         didSet {
@@ -33,12 +31,16 @@ class IssueListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "이슈"
         configureSearchBar()
         configureCollectionView()
         addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
-        
         issueListViewModel?.needFetchItems()
+        navigationController?.isToolbarHidden = true
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.largeTitleDisplayMode = .automatic
     }
     
     // TODO: SerachBar Configure
@@ -59,7 +61,7 @@ class IssueListViewController: UIViewController {
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
         let cellHeight = self.view.bounds.height / 10
-        layout.itemSize = CGSize(width: self.view.bounds.width, height: cellHeight)
+        layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: cellHeight)
         layout.minimumLineSpacing = 1
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
@@ -67,18 +69,13 @@ class IssueListViewController: UIViewController {
 }
 
 // MARK: - Actions
-
 extension IssueListViewController {
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
-        guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)),
-            let issueListViewModel = issueListViewModel,
-            let issueDetailViewModel = issueDetailViewModel
-            else { return }
+        guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) else { return }
         
         switch viewingMode {
         case .general:
-            let issueDetailVC = IssueDetailViewController.createViewController(currentIssueId: issueListViewModel.cellForItemAt(path: indexPath).id, issueDetailViewModel: issueDetailViewModel)
-            self.navigationController?.pushViewController(issueDetailVC, animated: true)
+            presentIssueDetailViewController(indexPath: indexPath)
         case .edit:
             
             break
@@ -97,7 +94,7 @@ extension IssueListViewController {
     @IBAction func leftNavButtonTapped(_ sender: Any) {
         switch viewingMode {
         case .general:
-            performSegue(withIdentifier: "createIssueFilterViewController", sender: self)
+            presentFilterViewController()
         case .edit:
             // TODO: SelectAll
             break
@@ -110,9 +107,9 @@ extension IssueListViewController {
     
     private func toEditMode() {
         viewingMode = .edit
-        rightNavButton.setTitle("Cancel", for: .normal)
-        leftNavButton.setTitle("Select All", for: .normal)
-        bottomToolBar.isHidden = false
+        rightNavButton.title = "Cancel"
+        leftNavButton.title = "Select All"
+        navigationController?.isToolbarHidden = false
         tabBarController?.tabBar.isHidden = true
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
@@ -122,9 +119,9 @@ extension IssueListViewController {
     
     private func toGeneralMode() {
         viewingMode = .general
-        rightNavButton.setTitle("Edit", for: .normal)
-        leftNavButton.setTitle("Filter", for: .normal)
-        bottomToolBar.isHidden = true
+        rightNavButton.title = "Edit"
+        leftNavButton.title = "Filter"
+        navigationController?.isToolbarHidden = true
         tabBarController?.tabBar.isHidden = false
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
@@ -133,22 +130,27 @@ extension IssueListViewController {
     }
 }
 
-// MARK: - Segue Action
-
+// MARK: - Present
 extension IssueListViewController {
     
-    @IBSegueAction func createIssueFilterViewController(_ coder: NSCoder) -> IssueFilterViewController? {
+    private func presentFilterViewController() {
         guard viewingMode == .general,
-              let issueListViewModel  = issueListViewModel,
-            let filterViewModel = issueListViewModel.filterViewModel
-        else { return nil }
-        let vc = IssueFilterViewController(coder: coder, filterViewModel: filterViewModel)
-        vc?.onSelectionComplete = { (filterViewModel) in
-            let filter = IssueFilter(generalCondition: filterViewModel.generalConditions,
-                                     detailCondition: filterViewModel.detailConditions)
-            issueListViewModel.filter = filter
+            let issueListViewModel  = issueListViewModel
+            else { return }
+        let onDismiss = { (generalCondition: [Bool], detailCondition: [Int]) in
+            issueListViewModel.filter = IssueFilter(generalCondition: generalCondition, detailCondition: detailCondition)
         }
-        return vc
+        IssueFilterViewController.present(at: self, filterViewModel: issueListViewModel.createFilterViewModel(), onDismiss: onDismiss)
+    }
+    
+    private func presentIssueDetailViewController(indexPath: IndexPath) {
+        guard let issueListViewModel = issueListViewModel,
+            let issueDetailViewModel = issueListViewModel.createIssueDetailViewModel(path: indexPath)
+            else { return }
+        
+        let issueDetailVC = IssueDetailViewController.createViewController(issueDetailViewModel: issueDetailViewModel)
+        
+        self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
     
     @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
@@ -160,7 +162,6 @@ extension IssueListViewController {
 }
 
 // MARK: - UICollectionViewDataSource Implementation
-
 extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath),

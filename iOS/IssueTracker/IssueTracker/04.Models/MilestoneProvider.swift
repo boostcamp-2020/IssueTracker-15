@@ -51,35 +51,32 @@ class MilestoneProvider: MilestoneProvidable {
     }
     
     func addMilestone(title: String, dueDate: String, description: String, completion: @escaping (Milestone?) -> Void) {
-        
-        let endPoint = MilestoneEndPoint(requestType: .create)
-        let addingMilestone = Milestone(title: title, description: description, dueDate: dueDate)
-        endPoint.httpBody = JSONEncoder.encode(data: addingMilestone)
-        
-        dataLoader?.request(Milestone.self, endpoint: endPoint, completion: { (result) in
-            switch result {
-            case .success(let data):
-                completion(data)
+                
+        dataLoader?.request(MilestoneService.createMilestone(title, dueDate, description), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .success(let response):
+                let milestone = response.mapEncodable(Milestone.self)
+                completion(milestone)
             case .failure:
                 completion(nil)
             }
         })
+        
     }
     
     func editMilestone(id: Int, title: String, dueDate: String, description: String, openIssuesLength: String, closeIssueLength: String, completion: @escaping (Milestone?) -> Void) {
         
-        let endPoint = MilestoneEndPoint(requestType: .edit, parameter: String(id))
-        let editingMilestone = Milestone(id: id, title: title, description: description, dueDate: dueDate, openIssuesLength: openIssuesLength, closeIssueLength: closeIssueLength)
-        endPoint.httpBody = JSONEncoder.encode(data: editingMilestone)
-        
-        dataLoader?.request(Milestone.self, endpoint: endPoint, completion: { (result) in
-            switch result {
-            case .success:
-                completion(editingMilestone)
+        dataLoader?.request(MilestoneService.editMilestone(id, title, dueDate, description), callBackQueue: .main, completion: { (response) in
+            switch response {
             case .failure:
                 completion(nil)
+            case .success:
+                let milestone = Milestone(id: id, title: title, description: description, dueDate: dueDate, openIssuesLength: openIssuesLength, closeIssueLength: closeIssueLength)
+                completion(milestone)
             }
+            
         })
+        
     }
     
     func fetchMilestones(completion: @escaping ([Milestone]?) -> Void) {
@@ -90,21 +87,24 @@ class MilestoneProvider: MilestoneProvidable {
         
         onFetching = true
         fetchingCompletionHandlers[fetchingCompletionHandlers.count] = completion
-        let endPoint = MilestoneEndPoint(requestType: .fetch)
-        dataLoader?.request([Milestone].self, endpoint: endPoint, completion: { (result) in
-            switch result {
-            case .success(let data):
-                if let data = data { self.milestons = data }
-                self.fetchingCompletionHandlers.forEach {
-                    $0.value(data)
-                }
+        
+        dataLoader?.request(MilestoneService.fetchAll, callBackQueue: .main, completion: { (response) in
+            switch response {
             case .failure:
                 completion(nil)
+            case .success(let response):
+                if let milestones = response.mapEncodable([Milestone].self) {
+                    self.milestons = milestones
+                    self.fetchingCompletionHandlers.forEach {
+                        $0.value(milestones)
+                    }
+                }
             }
             
             self.fetchingCompletionHandlers.removeAll()
             self.onFetching = false
         })
+        
     }
         
 }

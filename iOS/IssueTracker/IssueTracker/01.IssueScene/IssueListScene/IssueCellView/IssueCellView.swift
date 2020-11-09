@@ -40,6 +40,10 @@ class IssueCellView: UICollectionViewCell {
         
         labelBadge.cornerRadiusRatio = 0.5
         labelBadge.setPadding(top: 3, left: 5, bottom: 3, right: 5)
+        
+        NSLayoutConstraint.activate([
+            cellHorizontalScrollView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+        ])
     }
     
     func configure(issueItemViewModel: IssueItemViewModel) {
@@ -50,18 +54,13 @@ class IssueCellView: UICollectionViewCell {
         setMilestone(title: issueItemViewModel.milestoneTitle)
         
         issueItemViewModel.didMilestoneChanged = { [weak self] milestone in
-            DispatchQueue.main.async {
                 self?.setMilestone(title: milestone)
-            }
         }
         
         issueItemViewModel.didLabelChanged = { [weak self] (text, colorCode) in
-            DispatchQueue.main.async {
                 self?.setLabel(title: text, colorCode: colorCode)
-            }
         }
         
-        layoutIfNeeded()
     }
     
     private func setLabel(title: String, colorCode: String) {
@@ -83,11 +82,6 @@ class IssueCellView: UICollectionViewCell {
         }
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        titleLabel.autoResizeFontWithHeight()
-        descriptionLabel.autoResizeFontWithHeight()
-    }
 }
 
 // MARK: - Action

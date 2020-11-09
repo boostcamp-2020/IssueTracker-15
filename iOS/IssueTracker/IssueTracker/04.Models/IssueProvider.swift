@@ -31,13 +31,20 @@ class IssueProvider: IssueProvidable {
     // TODO: 같은 Fetch 요청이 여러번 들어왔을 겨우 completion을 배열에 넣어두었다 한 패칭에 Completion을 모두 처리해주는 방식으로!
     private var onFetching: Bool = false
     private(set) var issues: [Issue] = [ // labels 9 ~ 17 milestone 19, 22, 23, 24, 25, 28, 36
-        Issue(id: 1, title: "댓글 추가화면 개선", description: "현재 버튼만 생성되었음", labels: [9], milestone: 19, author: "JK", isOpened: true),
-        Issue(id: 2, title: "이슈 상세화면 UI 틀 잡기", description: "상세화면 dynamic sizing 적용하기", labels: [10], milestone: 22, author: "JK", isOpened: false),
-        Issue(id: 3, title: "네트워크 모델 설계", description: "네트워크 부분 프레임워크로 분리하기", labels: [11], milestone: 23, author: "JK", isOpened: true),
-        Issue(id: 4, title: "마일스톤 API PATCH 부분 수정", description: "API 수정", labels: [12], milestone: 24, author: "JK", isOpened: false),
-        Issue(id: 5, title: "이슈 수정/추가 화면에서 마크다운 문법 지원 -> 렌더링 하여 미리보기 기능 구현하기", description: "마크다운 렌더링 방법 알아보기 (pod 사용도 고려)", labels: [13], milestone: 25, author: "JK", isOpened: true),
-        Issue(id: 6, title: "MilestoneHeader, MileStoneSubmitForm 연결하고 xib Autolayout 조정하기", description: "xib의 발음은 nib", labels: [14], milestone: 28, author: "JK", isOpened: false),
-        Issue(id: 7, title: "Issue/Label/Milestone Provider 설계", description: "네트워크 통신은 Provider가 담당하도록 설계", labels: [15], milestone: 36, author: "JK", isOpened: true)
+        Issue(id: 1, title: "이슈[1]", description: "ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH", labels: [9], milestone: 19, author: "JK", isOpened: true),
+        Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10], milestone: 22, author: "JK", isOpened: true),
+        Issue(id: 3, title: "이슈[3]", description: "ABCDEFGH", labels: [11], milestone: 23, author: "JK", isOpened: true),
+        Issue(id: 4, title: "이슈[4]", description: "ABCDEFGH", labels: [12], milestone: 24, author: "JK", isOpened: true),
+        Issue(id: 5, title: "이슈[5]", description: "ABCDEFGH", labels: [13], milestone: 25, author: "JK", isOpened: true),
+        Issue(id: 6, title: "이슈[6]", description: "ABCDEFGH", labels: [14], milestone: 28, author: "JK", isOpened: true),
+        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true)
     ]
     private weak var dataLoader: DataLoadable?
     
@@ -47,73 +54,171 @@ class IssueProvider: IssueProvidable {
     
     func fetchIssues(completion: @escaping ([Issue]?) -> Void) {
         onFetching = true
-        
-        completion(issues)
-        
+
+        dataLoader?.request(IssueService.fetchAll(true), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success(let response):
+                if let issues = Issue.fetchResponse(jsonArr: response.mapJsonArr()) {
+                    completion(issues)
+                    self.issues = issues
+                }
+            }
+        })
+
+        //completion(issues)
         onFetching = false
     }
     
+    /*
+     Response : 201
+     */
     func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion: @escaping (Issue?) -> Void) {
-        let issue = Issue(id: issues.count, author: String(authorID), title: title, description: description, milestoneId: milestoneID)
-        issues.append(issue)
-        completion(issue)
+        dataLoader?.request(IssueService.createIssue(title, description, milestoneID, authorID), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success(let response):
+                if let issue = Issue.addResponse(jsonObject: response.mapJsonObject()) {
+                    self.issues.append(issue)
+                    completion(issue)
+                }
+            }
+        })
     }
-    
-    func editIssue(id: Int, description: String, completion: @escaping (Issue?) -> Void) {
-        guard let idx = issues.firstIndex(where: {$0.id == id}) else { completion(nil); return }
-        let issue = issues[idx]
-        let newIssue = Issue(id: issue.id, author: issue.author, title: issue.title, description: description, milestoneId: issue.milestone)
-        issues[idx] = newIssue
-        completion(newIssue)
-    }
-    
-    func editIssue(id: Int, title: String, completion: @escaping (Issue?) -> Void) {
-        guard let idx = issues.firstIndex(where: {$0.id == id}) else { completion(nil); return }
-        let issue = issues[idx]
-        let newIssue = Issue(id: issue.id, author: issue.author, title: title, description: issue.description, milestoneId: issue.milestone)
-        issues[idx] = newIssue
-        completion(newIssue)
-    }
-    
+    /*
+     Response: 200
+     */
     func getIssue(at id: Int, completion: @escaping (Issue?) -> Void) {
-        guard let idx = issues.firstIndex(where: {$0.id == id}) else { completion(nil); return }
-        completion(issues[idx])
+        dataLoader?.request(IssueService.getIssue(id), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success(let response):
+                if let issue = Issue.getResponse(jsonObject: response.mapJsonObject()) {
+                    completion(issue)
+                }
+            }
+        })
+    }
+    /*
+     Response : 200 body: nil
+     
+     */
+    func editIssue(id: Int, description: String, completion: @escaping (Issue?) -> Void) {
+        
+        dataLoader?.request(IssueService.editDescription(id, description), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success:
+                // TODO: response 처리
+            break
+            }
+        })
+        
+    }
+    /*
+     Response : 200 body: nil
+     */
+    func editIssue(id: Int, title: String, completion: @escaping (Issue?) -> Void) {
+        dataLoader?.request(IssueService.editDescription(id, title), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success:
+            //TODO: response 처리
+            break
+            }
+        })
     }
     
+    /*
+     response: 201 body : nil
+     */
     func addLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void) {
-        guard let idx = issues.firstIndex(where: {$0.id == id}) else { completion(nil); return }
-        issues[idx].addLabel(id: labelId)
-        completion(issues[idx])
+        dataLoader?.request(IssueService.addLabel(id, id), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success:
+            //TODO: response 처리
+            break
+            }
+        })
     }
-    
+    /*
+     response: 204 body: nil
+     */
     func deleteLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void) {
-        guard let idx = issues.firstIndex(where: {$0.id == id}) else { completion(nil); return }
-        issues[idx].deleteLabel(id: labelId)
-        completion(issues[idx])
+        dataLoader?.request(IssueService.deleteLabel(id, id), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success:
+            //TODO: response 처리
+            break
+            }
+        })
     }
     
+    /*
+     response: 201
+     */
     func addMilestone(at id: Int, of milestone: Int, completion: @escaping (Issue?) -> Void) {
-        guard let idx = issues.firstIndex(where: {$0.id == id}) else { completion(nil); return }
-        issues[idx].addMilestone(id: id)
-        completion(issues[idx])
+        dataLoader?.request(IssueService.addMilestone(id, id), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success:
+            //TODO: response 처리
+            break
+            }
+        })
     }
     
+    /*
+     response: 204
+     */
     func deleteMilestone(at id: Int, completion: @escaping (Issue?) -> Void) {
-        guard let idx = issues.firstIndex(where: {$0.id == id}) else { completion(nil); return }
-        issues[idx].deleteLabel(id: id)
-        completion(issues[idx])
+        dataLoader?.request(IssueService.deleteMilestone(id, 0), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success:
+                // TODO: response 처리
+            break
+            }
+        })
     }
-    
+    /*
+     response: 201
+     */
     func addAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void) {
-        guard let idx = issues.firstIndex(where: {$0.id == id}) else { completion(nil); return }
-        issues[idx].addAssignee(id: userId)
-        completion(issues[idx])
+        dataLoader?.request(IssueService.addAssignee(id, userId), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success:
+                // TODO: response 처리
+                break
+            }
+        })
     }
-    
+    /*
+     response: 204
+     */
     func deleteAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void) {
-        guard let idx = issues.firstIndex(where: {$0.id == id}) else { completion(nil); return }
-        issues[idx].deleteAssignee(id: userId)
-        completion(issues[idx])
+        dataLoader?.request(IssueService.deleteAssignee(id, userId), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success:
+                // TODO response 처리
+                break
+            }
+        })
     }
         
 }

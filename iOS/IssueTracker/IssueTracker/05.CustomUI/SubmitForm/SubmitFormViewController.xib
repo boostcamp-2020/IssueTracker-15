@@ -25,10 +25,10 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3L-ZF-Cs3" userLabel="mainForm">
-                    <rect key="frame" x="20.5" y="229" width="373" height="448"/>
+                    <rect key="frame" x="20.5" y="328" width="373" height="250"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWw-dL-qqD" userLabel="closeButton">
-                            <rect key="frame" x="15" y="15" width="45" height="45"/>
+                            <rect key="frame" x="15" y="15" width="25" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="lWw-dL-qqD" secondAttribute="height" multiplier="1:1" id="6XY-l4-oOH"/>
                             </constraints>
@@ -41,17 +41,17 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Khc-ap-Zfc" userLabel="divider">
-                            <rect key="frame" x="0.0" y="74" width="373" height="1"/>
+                            <rect key="frame" x="0.0" y="54" width="373" height="1"/>
                             <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="5N7-2A-T53"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fl-u3-s6T" userLabel="FormFields">
-                            <rect key="frame" x="23.5" y="87" width="325" height="269"/>
+                            <rect key="frame" x="23.5" y="67" width="325" height="91"/>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1U-IU-ww6">
-                            <rect key="frame" x="279.5" y="384" width="74.5" height="54"/>
+                            <rect key="frame" x="279.5" y="210" width="74.5" height="30"/>
                             <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="저장"/>
@@ -65,7 +65,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0z-hY-fR7">
-                            <rect key="frame" x="19" y="384" width="39" height="54"/>
+                            <rect key="frame" x="19" y="210" width="39" height="30"/>
                             <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="초기화"/>
                             <connections>
@@ -101,7 +101,6 @@
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="N3L-ZF-Cs3" firstAttribute="height" secondItem="xWd-JY-6SX" secondAttribute="height" multiplier="0.5" id="C76-cX-0MC"/>
                 <constraint firstAttribute="bottom" secondItem="pfn-bp-1ph" secondAttribute="bottom" id="CWE-Ag-ZsJ"/>
                 <constraint firstItem="N3L-ZF-Cs3" firstAttribute="centerY" secondItem="PAt-LX-K2A" secondAttribute="centerY" id="Gla-Y7-ScW"/>
                 <constraint firstItem="N3L-ZF-Cs3" firstAttribute="centerX" secondItem="PAt-LX-K2A" secondAttribute="centerX" id="IeY-xd-74Y"/>
