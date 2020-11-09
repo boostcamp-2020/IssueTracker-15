@@ -65,11 +65,6 @@ class IssueListViewController: UIViewController {
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
-    }
-    
     // TODO: SerachBar Configure
     private func configureSearchBar() {
         navigationItem.searchController = UISearchController(searchResultsController: nil)
@@ -101,6 +96,7 @@ class IssueListViewController: UIViewController {
 }
 
 // MARK: - Actions
+
 extension IssueListViewController {
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
         guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) else { return }
@@ -177,6 +173,7 @@ extension IssueListViewController {
 }
 
 // MARK: - Present
+
 extension IssueListViewController {
     
     private func presentFilterViewController() {
@@ -203,6 +200,7 @@ extension IssueListViewController {
 }
 
 // MARK: - UICollectionViewDataSource Implementation
+
 extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath),

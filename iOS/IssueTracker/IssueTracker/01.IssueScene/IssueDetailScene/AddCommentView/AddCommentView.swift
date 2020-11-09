@@ -134,12 +134,12 @@ extension AddCommentView: UITableViewDataSource {
         case 1:
             guard let cell = AddCommentLabelCollectionView.createView() else { break }
             cell.configure(labelItemViewModels: [
-                LabelItemViewModel(label: Label(title: "TESTTEST", description: "", hexColor: "#123456")),
-                LabelItemViewModel(label: Label(title: "TESTTEST", description: "", hexColor: "#123456")),
-                LabelItemViewModel(label: Label(title: "TESTTEST", description: "", hexColor: "#123456")),
-                LabelItemViewModel(label: Label(title: "TESTTEST", description: "", hexColor: "#123456")),
-                LabelItemViewModel(label: Label(title: "TESTTEST", description: "", hexColor: "#123456")),
-                LabelItemViewModel(label: Label(title: "TESTTEST", description: "", hexColor: "#123456"))
+                LabelItemViewModel(label: Label(title: "Inhencement", description: "", hexColor: "#FEF2C0")),
+                LabelItemViewModel(label: Label(title: "Feature", description: "", hexColor: "#FBCA04")),
+                LabelItemViewModel(label: Label(title: "Merge_Dev-iOS", description: "", hexColor: "#0075CA")),
+                LabelItemViewModel(label: Label(title: "Merge_Dev-Web", description: "", hexColor: "#F7F9AC")),
+                LabelItemViewModel(label: Label(title: "Merge_Feature", description: "", hexColor: "#D3F49F")),
+                LabelItemViewModel(label: Label(title: "Release", description: "", hexColor: "#FBCA04"))
             ])
             labelsCollectionViewCell = cell
             return cell

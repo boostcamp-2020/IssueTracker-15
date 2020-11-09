@@ -26,7 +26,6 @@ class AddCommentMilestoneCellView: UITableViewCell {
     func configure(milestoneViewModel: MilestoneItemViewModel) {
         titleLabel.text = milestoneViewModel.title
         setGaugeBar(close: CGFloat(milestoneViewModel.issueClosed), open: CGFloat(milestoneViewModel.issueOpened))
-        
     }
     
     func setGaugeBar(close: CGFloat, open: CGFloat) {
@@ -43,8 +42,6 @@ class AddCommentMilestoneCellView: UITableViewCell {
         super.layoutSubviews()
         backgroundBar.layer.cornerRadius = backgroundBar.bounds.height / 2
         layer.cornerRadius = bounds.height / 2 * 0.25
-        
-        contentView.frame = contentView.frame.insetBy(dx: 20, dy: 20)
     }
 }
 

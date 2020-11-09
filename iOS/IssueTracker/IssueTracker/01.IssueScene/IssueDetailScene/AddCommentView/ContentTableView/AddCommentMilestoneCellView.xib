@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DjU-us-0ZA">
-                        <rect key="frame" x="10" y="44.5" width="42" height="20.5"/>
+                        <rect key="frame" x="10" y="10" width="42" height="55"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -40,7 +40,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="PvE-eB-TzB" secondAttribute="bottom" constant="10" id="2RB-Ur-fAS"/>
-                    <constraint firstItem="DjU-us-0ZA" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="LMl-iA-JxW"/>
+                    <constraint firstItem="DjU-us-0ZA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="LMl-iA-JxW"/>
                     <constraint firstItem="DjU-us-0ZA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="TBM-6M-J6q"/>
                     <constraint firstItem="PvE-eB-TzB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="UuU-Pm-Pv0"/>
                     <constraint firstItem="PvE-eB-TzB" firstAttribute="top" secondItem="DjU-us-0ZA" secondAttribute="bottom" constant="10" id="o0l-PX-asD"/>
