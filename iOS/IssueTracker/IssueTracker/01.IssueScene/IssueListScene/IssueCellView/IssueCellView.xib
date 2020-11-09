@@ -48,25 +48,19 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="192"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-pc-tFP" userLabel="title">
-                                                <rect key="frame" x="15" y="10" width="324" height="24"/>
+                                                <rect key="frame" x="15" y="10" width="48" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="63W-Xg-or6" userLabel="description">
-                                                <rect key="frame" x="15" y="44" width="310" height="18"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ig-WN-dKN" userLabel="milestone" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ig-WN-dKN" userLabel="milestone" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
                                                 <rect key="frame" x="355" y="11.5" width="44" height="21.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Kmn-zW-86B">
-                                                <rect key="frame" x="15" y="72" width="319" height="110"/>
+                                                <rect key="frame" x="15" y="44" width="319" height="138"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="4" id="Xch-51-Jf9">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -78,16 +72,13 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstItem="Kmn-zW-86B" firstAttribute="leading" secondItem="63W-Xg-or6" secondAttribute="leading" id="3hD-Wt-yYt"/>
                                             <constraint firstAttribute="bottom" secondItem="Kmn-zW-86B" secondAttribute="bottom" constant="10" id="8sN-dc-pnA"/>
                                             <constraint firstItem="0Ig-WN-dKN" firstAttribute="centerY" secondItem="Ikc-pc-tFP" secondAttribute="centerY" id="AZv-ZN-uPG"/>
-                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="leading" secondItem="63W-Xg-or6" secondAttribute="trailing" constant="30" id="DhJ-BR-4yi"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="leading" secondItem="R8Z-t0-U66" secondAttribute="leading" constant="15" id="MZD-b8-cTd"/>
-                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="leading" secondItem="Ikc-pc-tFP" secondAttribute="trailing" constant="16" id="NWN-kr-ZA2"/>
-                                            <constraint firstItem="63W-Xg-or6" firstAttribute="top" secondItem="Ikc-pc-tFP" secondAttribute="bottom" constant="10" id="d6B-Hc-csr"/>
+                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="trailing" constant="16" id="NWN-kr-ZA2"/>
                                             <constraint firstAttribute="trailing" secondItem="0Ig-WN-dKN" secondAttribute="trailing" constant="15" id="gpr-1e-lf0"/>
-                                            <constraint firstItem="Kmn-zW-86B" firstAttribute="top" secondItem="63W-Xg-or6" secondAttribute="bottom" constant="10" id="jbm-vV-mHF"/>
-                                            <constraint firstItem="63W-Xg-or6" firstAttribute="leading" secondItem="Ikc-pc-tFP" secondAttribute="leading" id="oEq-5q-UXw"/>
+                                            <constraint firstItem="Kmn-zW-86B" firstAttribute="top" secondItem="Ikc-pc-tFP" secondAttribute="bottom" constant="10" id="nyd-8b-Iqd"/>
+                                            <constraint firstItem="Kmn-zW-86B" firstAttribute="leading" secondItem="Ikc-pc-tFP" secondAttribute="leading" id="x2e-F0-yYo"/>
                                             <constraint firstAttribute="trailing" secondItem="Kmn-zW-86B" secondAttribute="trailing" constant="80" id="yCF-Gf-oAg"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="top" secondItem="R8Z-t0-U66" secondAttribute="top" constant="10" id="zfI-bt-iTJ"/>
                                         </constraints>
@@ -173,7 +164,6 @@
                 <outlet property="checkBoxGuideView" destination="Xnl-RV-xeJ" id="pM6-Gc-qd3"/>
                 <outlet property="closeBoxGuideView" destination="XRe-PE-geQ" id="8FI-B3-OQw"/>
                 <outlet property="deleteBoxGuideView" destination="xNn-Jb-haT" id="Bqy-iT-38k"/>
-                <outlet property="descriptionLabel" destination="63W-Xg-or6" id="bGB-ic-bXm"/>
                 <outlet property="labelCollectionView" destination="Kmn-zW-86B" id="AyF-ut-CBp"/>
                 <outlet property="mainContentGuideView" destination="R8Z-t0-U66" id="6V4-E2-2eB"/>
                 <outlet property="milestoneBadge" destination="0Ig-WN-dKN" id="3Et-lC-TC8"/>

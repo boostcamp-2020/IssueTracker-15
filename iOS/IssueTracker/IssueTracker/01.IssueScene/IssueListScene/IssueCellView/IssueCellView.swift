@@ -18,7 +18,6 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var deleteBoxGuideView: UIView!
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var milestoneBadge: BadgeLabelView!
     @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var labelCollectionView: UICollectionView!
@@ -33,8 +32,6 @@ class IssueCellView: UICollectionViewCell {
         cellHorizontalScrollView.decelerationRate = .init(rawValue: 0.99999)
         checkBoxGuideWidthConstraint.isActive = true
         checkBoxGuideView.isHidden = false
-        
-        descriptionLabel.numberOfLines = 2
         
         milestoneBadge.setBorder(width: 1, color: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1))
         milestoneBadge.cornerRadiusRatio = 0.5
@@ -70,7 +67,6 @@ class IssueCellView: UICollectionViewCell {
     func configure(issueItemViewModel: IssueItemViewModel) {
         
         titleLabel.text = issueItemViewModel.title
-        descriptionLabel.text = issueItemViewModel.description
         setMilestone(title: issueItemViewModel.milestoneTitle)
         setLabels(labelViewModels: issueItemViewModel.labelItemViewModels)
         
