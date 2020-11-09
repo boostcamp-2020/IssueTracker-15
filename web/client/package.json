@@ -35,6 +35,7 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1",
+    "styled-icons": "^10.22.0",
     "styled-reset": "^4.3.0",
     "ts-loader": "^8.0.10",
     "typescript": "^4.0.5",
