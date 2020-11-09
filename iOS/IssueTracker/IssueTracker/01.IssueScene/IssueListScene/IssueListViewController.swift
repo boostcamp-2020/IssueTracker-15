@@ -125,11 +125,11 @@ extension IssueListViewController {
     }
     
     @IBAction func floatingButtonTapped(_ sender: Any) {
-        
         switch viewingMode {
         case .edit:
-                AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: nil)
+            break
         case .general:
+            AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: nil)
             break
         }
 
@@ -222,6 +222,7 @@ extension IssueListViewController: UICollectionViewDataSource {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath),
             let cellViewModel = issueListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
         cellView.configure(issueItemViewModel: cellViewModel)
+        cellView.delegate = self
         cellView.showCheckBox(show: viewingMode == .edit, animation: false)
         return cellView
     }
@@ -229,4 +230,27 @@ extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return issueListViewModel?.numberOfItem() ?? 0
     }
+}
+
+// MARK: - IssucCellViewDelegate Implementation
+
+extension IssueListViewController: IssucCellViewDelegate {
+    
+    func closeIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int) {
+        
+    }
+    
+    func deleteIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int) {
+        
+    }
+    
+    func issueCellViewBeginDragging(_ issueCellView: IssueCellView, at id: Int) {
+        collectionView.visibleCells.forEach {
+            guard let cell = $0 as? IssueCellView, cell != issueCellView else { return }
+            UIView.animate(withDuration: 0.5) {
+                cell.cellHorizontalScrollView.contentOffset = CGPoint.zero
+            }
+        }
+    }
+    
 }

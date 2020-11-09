@@ -8,7 +8,15 @@
 
 import UIKit
 
+protocol IssucCellViewDelegate: AnyObject {
+    func closeIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int)
+    func deleteIssueButtonTapped(_ issueCellView: IssueCellView,at id: Int)
+    func issueCellViewBeginDragging(_ issueCellView: IssueCellView, at id: Int)
+}
+
 class IssueCellView: UICollectionViewCell {
+    
+    weak var delegate: IssucCellViewDelegate?
     
     @IBOutlet weak var cellHorizontalScrollView: UIScrollView!
     
@@ -116,11 +124,13 @@ extension IssueCellView {
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
-        
+        guard let id = issueItemViewModel?.id else { return }
+        delegate?.closeIssueButtonTapped(self, at: id)
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
-        
+        guard let id = issueItemViewModel?.id else { return }
+        delegate?.deleteIssueButtonTapped(self, at: id)
     }
     
     func showCheckBox(show: Bool, animation: Bool) {
@@ -139,6 +149,11 @@ extension IssueCellView {
 
 // MARK: - UIScrollViewDelegate Implementation
 extension IssueCellView: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        guard let id = issueItemViewModel?.id else { return }
+        delegate?.issueCellViewBeginDragging(self, at: id)
+    }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         targetContentOffset.pointee = pagingTargetOffset(contentOffset: scrollView.contentOffset)
