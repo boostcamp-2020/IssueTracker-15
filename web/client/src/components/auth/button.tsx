@@ -1,14 +1,11 @@
 import React, { Fragment } from "react";
-import styled from "styled-components";
+import * as S from "./style";
 
-const BtnAuth = styled.div`
-  color: blue;
-`;
 interface BtnProps {
   btnName: string;
 }
 function Button(props: BtnProps) {
-  return <BtnAuth> {props.btnName} </BtnAuth>;
+  return <S.BtnAuth> {props.btnName} </S.BtnAuth>;
 }
 
 export default Button;
