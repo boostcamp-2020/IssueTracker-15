@@ -21,6 +21,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var bottomToolBar: UIToolbar!
     @IBOutlet weak var addIssueButton: UIButton!
     
+    var issueDetailViewModel: IssueDetailViewModel?
     private var viewingMode: ViewingMode = .general
     var issueListViewModel: IssueListViewModel? {
         didSet {
@@ -70,13 +71,13 @@ class IssueListViewController: UIViewController {
 extension IssueListViewController {
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
         guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)),
-            let issueListViewModel = issueListViewModel
+            let issueListViewModel = issueListViewModel,
+            let issueDetailViewModel = issueDetailViewModel
             else { return }
         
         switch viewingMode {
         case .general:
-            let issueDetailViewModel = issueListViewModel.createIssueDetailViewModel(path: indexPath)
-            let issueDetailVC = IssueDetailViewController.createViewController(issueDetailViewModel: issueDetailViewModel)
+            let issueDetailVC = IssueDetailViewController.createViewController(currentIssueId: issueListViewModel.cellForItemAt(path: indexPath).id, issueDetailViewModel: issueDetailViewModel)
             self.navigationController?.pushViewController(issueDetailVC, animated: true)
         case .edit:
             
@@ -96,7 +97,7 @@ extension IssueListViewController {
     @IBAction func leftNavButtonTapped(_ sender: Any) {
         switch viewingMode {
         case .general:
-            presentFilterViewController()
+            performSegue(withIdentifier: "createIssueFilterViewController", sender: self)
         case .edit:
             // TODO: SelectAll
             break
@@ -132,18 +133,22 @@ extension IssueListViewController {
     }
 }
 
-// MARK: - Present
+// MARK: - Segue Action
 
 extension IssueListViewController {
     
-    private func presentFilterViewController() {
+    @IBSegueAction func createIssueFilterViewController(_ coder: NSCoder) -> IssueFilterViewController? {
         guard viewingMode == .general,
-            let issueListViewModel  = issueListViewModel
-            else { return }
-        let onDismiss = { (generalCondition: [Bool], detailCondition: [Int]) in
-            issueListViewModel.filter = IssueFilter(generalCondition: generalCondition, detailCondition: detailCondition)
+              let issueListViewModel  = issueListViewModel,
+            let filterViewModel = issueListViewModel.filterViewModel
+        else { return nil }
+        let vc = IssueFilterViewController(coder: coder, filterViewModel: filterViewModel)
+        vc?.onSelectionComplete = { (filterViewModel) in
+            let filter = IssueFilter(generalCondition: filterViewModel.generalConditions,
+                                     detailCondition: filterViewModel.detailConditions)
+            issueListViewModel.filter = filter
         }
-        IssueFilterViewController.present(at: self, filterViewModel: issueListViewModel.createFilterViewModel(), onDismiss: onDismiss)
+        return vc
     }
     
     @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
