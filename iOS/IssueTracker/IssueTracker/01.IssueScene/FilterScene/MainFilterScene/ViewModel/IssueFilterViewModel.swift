@@ -69,7 +69,7 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
         case .assignee, .writer:
             return mockUserInfo.first(where: {$0.id == id})
         case .label:
-            guard let label = labelProvider?.labels.first(where: {$0.id == id}) else { return nil }
+            guard let label = labelProvider?.labels[id] else { return nil }
             return CellComponentViewModel(label: label)
         case .milestone:
             guard let milestone = milestoneProvider?.milestons.first(where: {$0.id == id}) else { return nil }
@@ -85,8 +85,8 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
             viewModels = [ [], mockUserInfo  ]
         case .label:
             labelProvider?.labels.forEach {
-                let viewModel = CellComponentViewModel(label: $0)
-                if $0.id == detailConditions[type.rawValue] {
+                let viewModel = CellComponentViewModel(label: $0.value)
+                if $0.key == detailConditions[type.rawValue] {
                     viewModels[0].append(viewModel)
                 } else {
                     viewModels[1].append(viewModel)

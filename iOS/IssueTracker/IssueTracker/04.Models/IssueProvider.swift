@@ -67,7 +67,7 @@ class IssueProvider: IssueProvidable {
             }
         })
 
-        //completion(issues)
+//        completion(issues)
         onFetching = false
     }
     
@@ -75,12 +75,14 @@ class IssueProvider: IssueProvidable {
      Response : 201
      */
     func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.createIssue(title, description, milestoneID, authorID), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.createIssue(title, "", milestoneID, authorID), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success(let response):
                 if let issue = Issue.addResponse(jsonObject: response.mapJsonObject()) {
+                    // TODO: completion nil 처리
+                    //self.dataLoader?.request(CommentService.addComment(issue.id, description), callBackQueue: nil, completion: nil)
                     self.issues.append(issue)
                     completion(issue)
                 }

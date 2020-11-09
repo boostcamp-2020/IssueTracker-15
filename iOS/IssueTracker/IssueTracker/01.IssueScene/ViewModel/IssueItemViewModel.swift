@@ -15,11 +15,12 @@ class IssueItemViewModel {
     let description: String
     
     private(set) var milestoneTitle: String = ""
+    private(set) var labelItemViewModels = [LabelItemViewModel]()
     private(set) var labelTitle: String = ""
     private(set) var labelColor: String = ""
     
-    var didLabelChanged: ((String, String) -> Void)?
     var didMilestoneChanged: ((String) -> Void)?
+    var didLabelsChanged: (([LabelItemViewModel]) -> Void)?
     
     var check: Bool = false
     
@@ -29,11 +30,10 @@ class IssueItemViewModel {
         description = issue.description
     }
     
-    func setLabel(label: Label?) {
-        guard let label = label else { return }
-        labelTitle = label.title
-        labelColor = label.hexColor
-        didLabelChanged?(labelTitle, labelColor)
+    func setLabels(labels: [Label]?) {
+        guard let labels = labels else { return }
+        labelItemViewModels = labels.map { LabelItemViewModel(label: $0) }
+        didLabelsChanged?(labelItemViewModels)
     }
     
     func setMilestone(milestone: Milestone?) {

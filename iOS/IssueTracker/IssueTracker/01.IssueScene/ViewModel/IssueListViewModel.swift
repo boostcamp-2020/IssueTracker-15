@@ -9,6 +9,7 @@ import Foundation
 
 protocol IssueListViewModelProtocol: AnyObject {
     var didFetch: (() -> Void)? { get set }
+    var invalidateLayout: (() -> Void)? { get set }
     var filter: IssueFilterable? { get set }
     
     func needFetchItems()
@@ -27,6 +28,8 @@ class IssueListViewModel: IssueListViewModelProtocol {
     
     var filter: IssueFilterable?
     var didFetch: (() -> Void)?
+    var invalidateLayout: (() -> Void)?
+    
     private var issues = [IssueItemViewModel]()
     
     init(labelProvider: LabelProvidable, milestoneProvider: MilestoneProvidable, issueProvider: IssueProvidable) {
@@ -43,17 +46,18 @@ class IssueListViewModel: IssueListViewModelProtocol {
             
             issues.forEach {
                 let itemViewModel = IssueItemViewModel(issue: $0)
-                if let labelID = $0.labels.first {
-                    self.labelProvider?.getLabel(at: labelID, completion: { [weak itemViewModel] label in
-                        itemViewModel?.setLabel(label: label)
-                    })
-                }
+                self.issues.append(itemViewModel)
+                self.labelProvider?.getLabels(of: $0.labels, completion: { [weak itemViewModel] (labels) in
+                    itemViewModel?.setLabels(labels: labels)
+                    self.invalidateLayout?()
+                })
+                
                 if let milestoneID = $0.milestone {
                     self.milestoneProvider?.getMilestone(at: milestoneID, completion: { [weak itemViewModel] milestone in
                         itemViewModel?.setMilestone(milestone: milestone)
+                        self.invalidateLayout?()
                     })
                 }
-                self.issues.append(itemViewModel)
             }
             
             DispatchQueue.main.async {
