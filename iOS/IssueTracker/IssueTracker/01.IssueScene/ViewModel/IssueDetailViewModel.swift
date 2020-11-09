@@ -8,19 +8,12 @@
 
 import Foundation
 
-enum IssueBadgeColor {
-    case green
-    case red
-}
-
 protocol IssueDetailViewModelProtocol {
     var issueNumber: Int { get }
     var title: String { get }
     var description: String { get }
     var author: String { get }
-    var badge: String { get }
-    var badgeColor: IssueBadgeColor { get }
-    
+    var isOpened: Bool { get }
     var didFetch: (() -> Void)? { get set }
     func needFetchDetails()
 }
@@ -31,12 +24,13 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     var title: String = ""
     var description: String = ""
     var author: String = ""
-    var badge: String = ""
-    var badgeColor: IssueBadgeColor = .green
     var didFetch: (() -> Void)?
-    
+    var isOpened: Bool = false
     private weak var issueProvider: IssueProvidable?
-    private var isOpened: Bool = false
+    
+    init(issueProvider: IssueProvidable) {
+        self.issueProvider = issueProvider
+    }
     
     init(id: Int, title: String, description: String, issueProvider: IssueProvidable?) {
         self.issueProvider = issueProvider
@@ -54,8 +48,6 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             self.issueNumber = currentIssue.id
             self.title = currentIssue.title
             self.isOpened = currentIssue.isOpened
-            self.badge = self.isOpened ? "Open" : "Closed"
-            self.badgeColor = self.isOpened ? .green : .red
             self.description = currentIssue.description
             self.author = currentIssue.author
             self.didFetch?()

@@ -60,7 +60,7 @@ extension MilestoneSubmitFieldsView: SubmitFieldProtocol {
     
     var contentView: UIView { self }
     
-    func saveButtonTapped() -> SubmitFormView.SaveResult {
+    func saveButtonTapped() -> SubmitFormViewController.SaveResult {
         guard checkDateFieldValidation() else {
             return .failure("날짜를 양식에 맞게 적어주세요!")
         }

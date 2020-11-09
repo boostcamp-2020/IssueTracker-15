@@ -51,12 +51,9 @@ extension LabelListViewController {
     }
     
     private func showSubmitFormView(type: LabelSubmitFieldsView.SubmitFieldType) {
-        guard let tabBarController = self.tabBarController,
-            let formView = SubmitFormView.createView(),
-            let labelSubmitFieldsView = LabelSubmitFieldsView.createView()
+        guard let labelSubmitFieldsView = LabelSubmitFieldsView.createView(),
+            let formView = SubmitFormViewController.createViewController(with: labelSubmitFieldsView)
             else { return }
-        
-        formView.configure(submitField: labelSubmitFieldsView)
         
         switch type {
         case .add:
@@ -67,9 +64,7 @@ extension LabelListViewController {
                 self.labelListViewModel?.editLabel(at: indexPath, title: title, desc: desc, hexColor: colorCode)
             }
         }
-        
-        tabBarController.view.addSubview(formView)
-        formView.frame = tabBarController.view.frame
+        present(formView, animated: true, completion: nil)
     }
     
 }
