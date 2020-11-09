@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { LabelCreateBoxProps } from "./index";
 
 export const LabelCreateBox = styled.div`
-  display: flex;
+  display: ${(props: LabelCreateBoxProps) => (props.visible ? "flex" : "none")};
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;

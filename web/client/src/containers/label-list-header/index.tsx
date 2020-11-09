@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import * as S from "./style";
 import Button from "../../components/button";
-import LabelEditor from "../../components/label-editor";
 import LabelCreateBox from "../../components/label-create-box";
+
 export default function LabelListHeader() {
+  const [createLabelVisible, setCreateLabel] = useState(false);
+
+  const toggleCreateLabel = useCallback(() => {
+    setCreateLabel(!createLabelVisible);
+  }, [createLabelVisible]);
+
   return (
     <S.LabelListHeaderWrapper>
       <S.LabelListHeader>
-        <Button value="New Label" color="green" />
+        <Button value="New Label" color="green" onClick={toggleCreateLabel} />
       </S.LabelListHeader>
-      <LabelCreateBox />
+      <LabelCreateBox visible={createLabelVisible} />
     </S.LabelListHeaderWrapper>
   );
 }
