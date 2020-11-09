@@ -15,6 +15,7 @@ enum IssueBadgeColor: String {
 
 class IssueDetailHeaderView: UICollectionReusableView {
     
+    @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var issueAuthor: UILabel!
     @IBOutlet weak var issueTitle: UILabel!
     @IBOutlet weak var issueNumber: UILabel!
@@ -25,6 +26,13 @@ class IssueDetailHeaderView: UICollectionReusableView {
         self.issueTitle.text = issueDetailViewModel.title
         self.issueNumber.text = "#" + String(issueDetailViewModel.issueNumber)
         configureIssueBadge(isOpened: issueDetailViewModel.isOpened)
+    }
+    
+    override func systemLayoutSizeFitting(_ targetSize: CGSize) -> CGSize {
+        var size = super.systemLayoutSizeFitting(targetSize)
+        size.height += issueTitle.intrinsicContentSize.height
+
+        return size
     }
     
     private func configureIssueBadge(isOpened: Bool) {
