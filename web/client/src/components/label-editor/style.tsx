@@ -6,8 +6,7 @@ export const LabelEditor = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0rem 1rem;
-  width: 65%;
+  width: 100%;
   overflow: hidden;
 `;
 

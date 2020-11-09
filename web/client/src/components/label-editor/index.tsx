@@ -19,7 +19,6 @@ export default function LabelEditor() {
           </S.IconContainer>
           <S.colorInput />
         </S.colorInputContainer>
-
         <Button value="cancel" color="white" />
         <Button value="Create Name" color="green" />
       </S.LableInputRow>
