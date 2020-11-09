@@ -11,15 +11,16 @@ protocol IssueListViewModelProtocol: AnyObject {
     var didFetch: (() -> Void)? { get set }
     var invalidateLayout: (() -> Void)? { get set }
     var didCellChecked: ((IndexPath, Bool) -> Void)? { get set }
+    var showTitleWithCheckNum: ((Int) -> Void)? { get set }
     var filter: IssueFilterable? { get set }
     
     func needFetchItems()
     func cellForItemAt(path: IndexPath) -> IssueItemViewModel
     func numberOfItem() -> Int
     
-    func cellSelected(at path: IndexPath)
-    func cellSelectClear()
-    func cellSelectAll()
+    func selectCell(at path: IndexPath)
+    func clearSelectedCells()
+    func selectAllCells()
     
     func createFilterViewModel() -> IssueFilterViewModelProtocol?
     func createIssueDetailViewModel(path: IndexPath) -> IssueDetailViewModel?
@@ -34,6 +35,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
     var filter: IssueFilterable?
     var didFetch: (() -> Void)?
     var invalidateLayout: (() -> Void)?
+    var showTitleWithCheckNum: ((Int) -> Void)?
     var didCellChecked: ((IndexPath, Bool) -> Void)?
     
     private var issues = [IssueItemViewModel]()
@@ -80,23 +82,26 @@ class IssueListViewModel: IssueListViewModelProtocol {
         return issues.count
     }
     
-    func cellSelected(at path: IndexPath) {
+    func selectCell(at path: IndexPath) {
         issues[path.row].checked.toggle()
         self.didCellChecked?(path, issues[path.row].checked)
+        showTitleWithCheckNum?(issues.filter { $0.checked }.count)
     }
     
-    func cellSelectClear() {
+    func clearSelectedCells() {
         for (idx, issue) in issues.enumerated() {
             issue.checked = false
             self.didCellChecked?(IndexPath(row: idx, section: 0), false)
         }
+        showTitleWithCheckNum?(0)
     }
     
-    func cellSelectAll() {
+    func selectAllCells() {
         for (idx, issue) in issues.enumerated() {
             issue.checked = true
             self.didCellChecked?(IndexPath(row: idx, section: 0), true)
         }
+        showTitleWithCheckNum?(issues.filter { $0.checked }.count)
     }
     
     func createFilterViewModel() -> IssueFilterViewModelProtocol? {

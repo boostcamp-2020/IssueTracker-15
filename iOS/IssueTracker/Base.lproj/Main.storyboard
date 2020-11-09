@@ -149,7 +149,7 @@
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="A1f-zK-Nd4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="LqH-iR-KEA">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
@@ -185,11 +185,8 @@
                                 <cells/>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVQ-k4-p1T" userLabel="addIssueButton">
-                                <rect key="frame" x="332.5" y="731.5" width="51.5" height="51.5"/>
+                                <rect key="frame" x="361.5" y="738" width="22.5" height="45"/>
                                 <color key="backgroundColor" red="0.28235294119999998" green="0.52156862749999999" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="EVQ-k4-p1T" secondAttribute="height" multiplier="1:1" id="i9Y-Md-Gyd"/>
-                                </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" image="plus" catalog="system">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
@@ -217,12 +214,12 @@
                             <constraint firstItem="bvj-Iu-non" firstAttribute="bottom" secondItem="EVQ-k4-p1T" secondAttribute="bottom" constant="30" id="6RT-pJ-WK0"/>
                             <constraint firstItem="bvj-Iu-non" firstAttribute="trailing" secondItem="EVQ-k4-p1T" secondAttribute="trailing" constant="30" id="d5d-CT-sGM"/>
                             <constraint firstAttribute="trailing" secondItem="apM-nX-fph" secondAttribute="trailing" id="djv-5R-5Af"/>
+                            <constraint firstItem="EVQ-k4-p1T" firstAttribute="height" secondItem="WFd-Ro-ELe" secondAttribute="height" multiplier="0.05" id="e87-Eq-mon"/>
                             <constraint firstItem="apM-nX-fph" firstAttribute="leading" secondItem="WFd-Ro-ELe" secondAttribute="leading" id="fMC-lQ-6yV"/>
                             <constraint firstAttribute="trailing" secondItem="MsW-cq-Pbp" secondAttribute="trailing" id="oa6-tj-VKC"/>
                             <constraint firstItem="apM-nX-fph" firstAttribute="top" secondItem="bvj-Iu-non" secondAttribute="bottom" id="uUD-rU-wDy"/>
                             <constraint firstItem="MsW-cq-Pbp" firstAttribute="top" secondItem="WFd-Ro-ELe" secondAttribute="top" id="v60-lQ-n4N"/>
                             <constraint firstAttribute="bottom" secondItem="MsW-cq-Pbp" secondAttribute="bottom" id="x24-aC-Bhe"/>
-                            <constraint firstItem="EVQ-k4-p1T" firstAttribute="width" secondItem="WFd-Ro-ELe" secondAttribute="width" multiplier="0.125" id="zi2-Uq-BbX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bvj-Iu-non"/>
                     </view>
@@ -298,18 +295,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cYP-py-DgA">
-                                <rect key="frame" x="20" y="152.5" width="374" height="42"/>
+                                <rect key="frame" x="20" y="144" width="374" height="42"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNE-Xl-7zb">
-                                <rect key="frame" x="20" y="126.5" width="374" height="21"/>
+                                <rect key="frame" x="20" y="118" width="374" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ffC-xq-HP2">
-                                <rect key="frame" x="20" y="204.5" width="374" height="35"/>
+                                <rect key="frame" x="20" y="196" width="374" height="35"/>
                                 <segments>
                                     <segment title="마크다운"/>
                                     <segment title="미리보기"/>

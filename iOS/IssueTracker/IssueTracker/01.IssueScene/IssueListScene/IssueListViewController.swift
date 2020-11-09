@@ -19,6 +19,12 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var leftNavButton: UIBarButtonItem!
     @IBOutlet weak var addIssueButton: UIButton!
     //@IBOutlet weak var closeSelectedIssueButton: UIBarButtonItem!
+    lazy var addIssueButtonWidthConstraint: NSLayoutConstraint = {
+        self.addIssueButton.widthAnchor.constraint(equalToConstant: 100)
+    }()
+    lazy var addIssueButtonAspectRatioConstraint: NSLayoutConstraint = {
+        self.addIssueButton.widthAnchor.constraint(equalTo: self.addIssueButton.heightAnchor)
+    }()
     
     private var viewingMode: ViewingMode = .general
     var issueListViewModel: IssueListViewModel? {
@@ -33,6 +39,10 @@ class IssueListViewController: UIViewController {
                 guard let cell = self?.collectionView.cellForItem(at: indexPath) as? IssueCellView else { return }
                 cell.setCheck(check)
             }
+            issueListViewModel?.showTitleWithCheckNum = { [weak self] (num) in
+                guard let vieingMode = self?.viewingMode, vieingMode == .edit else { return }
+                self?.title = "\(num) 개 선택"
+            }
         }
     }
     
@@ -40,8 +50,9 @@ class IssueListViewController: UIViewController {
         super.viewDidLoad()
         configureSearchBar()
         configureCollectionView()
-        addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
         issueListViewModel?.needFetchItems()
+        addIssueButtonWidthConstraint.isActive = false
+        addIssueButtonAspectRatioConstraint.isActive = true
         navigationController?.isToolbarHidden = true
     }
 
@@ -52,6 +63,11 @@ class IssueListViewController: UIViewController {
             guard let cell = $0 as? IssueCellView else { return }
             cell.resetScrollOffset()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
     }
     
     // TODO: SerachBar Configure
@@ -88,7 +104,7 @@ extension IssueListViewController {
         case .general:
             presentIssueDetailViewController(indexPath: indexPath)
         case .edit:
-            issueListViewModel?.cellSelected(at: indexPath)
+            issueListViewModel?.selectCell(at: indexPath)
         }
     }
     
@@ -106,7 +122,7 @@ extension IssueListViewController {
         case .general:
             presentFilterViewController()
         case .edit:
-            issueListViewModel?.cellSelectAll()
+            issueListViewModel?.selectAllCells()
         }
     }
     
@@ -116,8 +132,16 @@ extension IssueListViewController {
     
     private func toEditMode() {
         viewingMode = .edit
+        title = "0 개 선택"
         rightNavButton.title = "Cancel"
         leftNavButton.title = "Select All"
+        addIssueButtonWidthConstraint.isActive = true
+        addIssueButtonAspectRatioConstraint.isActive = false
+        addIssueButtonWidthConstraint.constant = addIssueButton.bounds.height + 100
+        addIssueButton.setTitle("선택 이슈 닫기", for: .normal)
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
         tabBarController?.tabBar.isHidden = true
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
@@ -127,10 +151,19 @@ extension IssueListViewController {
     
     private func toGeneralMode() {
         viewingMode = .general
+        title = "이슈"
         rightNavButton.title = "Edit"
         leftNavButton.title = "Filter"
+        addIssueButtonWidthConstraint.isActive = false
+        addIssueButtonAspectRatioConstraint.isActive = true
+        addIssueButton.setTitle("", for: .normal)
+        addIssueButton.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
+        addIssueButton.tintColor = .blue
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
         tabBarController?.tabBar.isHidden = false
-        issueListViewModel?.cellSelectClear()
+        issueListViewModel?.clearSelectedCells()
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: false, animation: true)
