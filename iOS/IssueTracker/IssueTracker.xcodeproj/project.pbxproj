@@ -73,6 +73,9 @@
 		963A1AA025524ADF003E2BBB /* MilestoneComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963A1A9F25524ADF003E2BBB /* MilestoneComponentView.swift */; };
 		963A1AA225524AEC003E2BBB /* MilestoneComponentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 963A1AA125524AEC003E2BBB /* MilestoneComponentView.xib */; };
 		963A1AA6255267FC003E2BBB /* DetailFilterCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963A1AA4255267FC003E2BBB /* DetailFilterCellView.swift */; };
+		96400EBF255846A00006726F /* LabelBadgeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96400EBD255846A00006726F /* LabelBadgeCellView.swift */; };
+		96400EC0255846A00006726F /* LabelBadgeCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96400EBE255846A00006726F /* LabelBadgeCellView.xib */; };
+		96400EC22558584B0006726F /* LeftAlignedBadgeFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96400EC12558584B0006726F /* LeftAlignedBadgeFlowLayout.swift */; };
 		96526C652557043200E2E387 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96526C642557043200E2E387 /* CommentService.swift */; };
 		965A4DDE2552AFC300A4A7D7 /* IssueProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A4DDD2552AFC300A4A7D7 /* IssueProvider.swift */; };
 		965A4DE62552BF1200A4A7D7 /* IssueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A4DE52552BF1200A4A7D7 /* IssueListViewModel.swift */; };
@@ -244,6 +247,9 @@
 		963A1A9F25524ADF003E2BBB /* MilestoneComponentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneComponentView.swift; sourceTree = "<group>"; };
 		963A1AA125524AEC003E2BBB /* MilestoneComponentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MilestoneComponentView.xib; sourceTree = "<group>"; };
 		963A1AA4255267FC003E2BBB /* DetailFilterCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailFilterCellView.swift; sourceTree = "<group>"; };
+		96400EBD255846A00006726F /* LabelBadgeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelBadgeCellView.swift; sourceTree = "<group>"; };
+		96400EBE255846A00006726F /* LabelBadgeCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelBadgeCellView.xib; sourceTree = "<group>"; };
+		96400EC12558584B0006726F /* LeftAlignedBadgeFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedBadgeFlowLayout.swift; sourceTree = "<group>"; };
 		96526C642557043200E2E387 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		965A4DDD2552AFC300A4A7D7 /* IssueProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueProvider.swift; sourceTree = "<group>"; };
 		965A4DE52552BF1200A4A7D7 /* IssueListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueListViewModel.swift; sourceTree = "<group>"; };
@@ -734,6 +740,9 @@
 				9679DFBA254D786600550BE4 /* SubmitFields */,
 				9679DFB7254D767800550BE4 /* SubmitForm */,
 				96C8357425490F1A0086A6E6 /* BadgeLabelView.swift */,
+				96400EBD255846A00006726F /* LabelBadgeCellView.swift */,
+				96400EBE255846A00006726F /* LabelBadgeCellView.xib */,
+				96400EC12558584B0006726F /* LeftAlignedBadgeFlowLayout.swift */,
 			);
 			path = 05.CustomUI;
 			sourceTree = "<group>";
@@ -984,6 +993,7 @@
 				955CB1712553C2B200B99093 /* IssueDetailViewController.xib in Resources */,
 				951341C22553026600EDFB83 /* AddCommentView.xib in Resources */,
 				965F098925505B9D00B3A248 /* DetailConditionSelectCellView.xib in Resources */,
+				96400EC0255846A00006726F /* LabelBadgeCellView.xib in Resources */,
 				95E9F5832546EC07001FBA0D /* Main.storyboard in Resources */,
 				96F95C08254EA70B00EC00C6 /* IssueCellView.xib in Resources */,
 				9679DFB9254D768C00550BE4 /* SubmitFormView.xib in Resources */,
@@ -1124,6 +1134,7 @@
 				96DD118B2550F3930065F44A /* CellComponentViewModel.swift in Sources */,
 				96A58F3F254A6C2500248F1E /* Date+.swift in Sources */,
 				950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */,
+				96400EC22558584B0006726F /* LeftAlignedBadgeFlowLayout.swift in Sources */,
 				966ADAEC254D9DDD00A480DD /* LabelSubmitFieldsView+LoadFromNib.swift in Sources */,
 				96A58F3B254A629500248F1E /* MilestoneItemViewModel.swift in Sources */,
 				966DD039254A5B1600A44FBA /* Milestone.swift in Sources */,
@@ -1168,6 +1179,7 @@
 				956B5D0725503E8A001CBAA9 /* LabelService.swift in Sources */,
 				95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */,
 				960205652553259D00888394 /* IssueFilter.swift in Sources */,
+				96400EBF255846A00006726F /* LabelBadgeCellView.swift in Sources */,
 				9679DFBD254D78D000550BE4 /* SubmitFieldProtocol.swift in Sources */,
 				965A4DEB2552C28300A4A7D7 /* IssueItemViewModel.swift in Sources */,
 				96F95BFA254E6C4A00EC00C6 /* IssueListViewController.swift in Sources */,

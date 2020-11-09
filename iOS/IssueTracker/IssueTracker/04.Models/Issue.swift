@@ -24,7 +24,6 @@ struct Issue {
     var milestone: Int?
     var labels: [Int]
     
-    // TODO: asignees -> [id]
     var assignees: [User]
     
     var comments: [Comment]

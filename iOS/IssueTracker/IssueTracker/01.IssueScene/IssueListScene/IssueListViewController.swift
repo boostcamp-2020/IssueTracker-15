@@ -27,6 +27,9 @@ class IssueListViewController: UIViewController {
             issueListViewModel?.didFetch = { [weak self] in
                 self?.collectionView.reloadData()
             }
+            issueListViewModel?.invalidateLayout = { [weak self] in
+                self?.collectionView.collectionViewLayout.invalidateLayout()
+            }
         }
     }
     

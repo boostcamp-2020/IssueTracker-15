@@ -20,8 +20,10 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var milestoneBadge: BadgeLabelView!
-    @IBOutlet weak var labelBadge: BadgeLabelView!
     @IBOutlet weak var checkBoxButton: UIButton!
+    @IBOutlet weak var labelCollectionView: UICollectionView!
+    
+    private var labelBadgeCells = [LabelItemViewModel]()
     
     private lazy var checkBoxGuideWidthConstraint = checkBoxGuideView.widthAnchor.constraint(equalToConstant: 0)
     
@@ -38,39 +40,48 @@ class IssueCellView: UICollectionViewCell {
         milestoneBadge.cornerRadiusRatio = 0.5
         milestoneBadge.setPadding(top: 5, left: 5, bottom: 5, right: 5)
         
-        labelBadge.cornerRadiusRatio = 0.5
-        labelBadge.setPadding(top: 3, left: 5, bottom: 3, right: 5)
+        labelCollectionView.dataSource = self
         
+        let layout = LeftAlignedBadgeFlowLayout()
+        layout.leftSpacing = 10
+        layout.estimatedItemSize = CGSize(width: bounds.width/3, height: 30)
+        layout.minimumLineSpacing = 10
+        labelCollectionView.setCollectionViewLayout(layout, animated: false)
+        
+        labelCollectionView.registerCell(type: LabelBadgeCellView.self)
         NSLayoutConstraint.activate([
             cellHorizontalScrollView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
         ])
     }
     
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        super.preferredLayoutAttributesFitting(layoutAttributes)
+        layoutIfNeeded()
+        
+        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
+        
+        var frame = layoutAttributes.frame
+        frame.size.height = ceil(size.height + labelCollectionView.collectionViewLayout.collectionViewContentSize.height)
+        layoutAttributes.frame = frame
+        
+        return layoutAttributes
+    }
+
     func configure(issueItemViewModel: IssueItemViewModel) {
         
         titleLabel.text = issueItemViewModel.title
         descriptionLabel.text = issueItemViewModel.description
-        setLabel(title: issueItemViewModel.labelTitle, colorCode: issueItemViewModel.labelColor)
         setMilestone(title: issueItemViewModel.milestoneTitle)
+        setLabels(labelViewModels: issueItemViewModel.labelItemViewModels)
         
         issueItemViewModel.didMilestoneChanged = { [weak self] milestone in
                 self?.setMilestone(title: milestone)
         }
         
-        issueItemViewModel.didLabelChanged = { [weak self] (text, colorCode) in
-                self?.setLabel(title: text, colorCode: colorCode)
+        issueItemViewModel.didLabelsChanged = { [weak self] (labelViewModels) in
+            self?.setLabels(labelViewModels: labelViewModels)
         }
         
-    }
-    
-    private func setLabel(title: String, colorCode: String) {
-        if title.isEmpty {
-            labelBadge.isHidden = true
-        } else {
-            labelBadge.isHidden = false
-            labelBadge.text = title
-            labelBadge.setBackgroundColor(colorCode.color)
-        }
     }
     
     private func setMilestone(title: String) {
@@ -82,9 +93,16 @@ class IssueCellView: UICollectionViewCell {
         }
     }
     
+    private func setLabels(labelViewModels: [LabelItemViewModel]) {
+        self.labelBadgeCells.removeAll()
+        self.labelBadgeCells = labelViewModels
+        self.labelCollectionView.reloadData()
+    }
+    
 }
 
 // MARK: - Action
+
 extension IssueCellView {
     
     @IBAction func checkBoxButtonTapped(_ sender: Any) {
@@ -102,7 +120,8 @@ extension IssueCellView {
     func showCheckBox(show: Bool, animation: Bool) {
         cellHorizontalScrollView.contentOffset = CGPoint.zero
         cellHorizontalScrollView.isScrollEnabled = !show
-        checkBoxGuideWidthConstraint.constant = show ? checkBoxGuideView.bounds.height * 0.5 : 0
+        
+        checkBoxGuideWidthConstraint.constant = show ? mainContentGuideView.bounds.width * 0.1 : 0
         if animation {
             UIView.animate(withDuration: 0.5) {
                 self.layoutIfNeeded()
@@ -135,7 +154,26 @@ extension IssueCellView: UIScrollViewDelegate {
     
 }
 
+// MARK: - UICollectionViewDataSource Implementation
+
+extension IssueCellView: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return labelBadgeCells.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell: LabelBadgeCellView = collectionView.dequeueCell(at: indexPath) else {
+            return UICollectionViewCell()
+        }
+        cell.configure(labelViewModel: labelBadgeCells[indexPath.row])
+        return cell
+    }
+    
+}
+
 // MARK: - UICollectionViewRegisterable Implementation
+
 extension IssueCellView: UICollectionViewRegisterable {
     static var cellIdentifier: String {
         "IssueCellView"

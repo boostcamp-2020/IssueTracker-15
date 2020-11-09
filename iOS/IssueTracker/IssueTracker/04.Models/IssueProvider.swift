@@ -32,10 +32,10 @@ class IssueProvider: IssueProvidable {
     private var onFetching: Bool = false
     private(set) var issues: [Issue] = [ // labels 9 ~ 17 milestone 19, 22, 23, 24, 25, 28, 36
         Issue(id: 1, title: "이슈[1]", description: "ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH", labels: [9], milestone: 19, author: "JK"),
-        Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10], milestone: 22, author: "JK"),
-        Issue(id: 3, title: "이슈[3]", description: "ABCDEFGH", labels: [11], milestone: 23, author: "JK"),
-        Issue(id: 4, title: "이슈[4]", description: "ABCDEFGH", labels: [12], milestone: 24, author: "JK"),
-        Issue(id: 5, title: "이슈[5]", description: "ABCDEFGH", labels: [13], milestone: 25, author: "JK"),
+        Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10, 11, 12, 13, 14, 15], milestone: 22, author: "JK"),
+        Issue(id: 3, title: "이슈[3]", description: "ABCDEFGH", labels: [11, 12, 13, 14, 15], milestone: 23, author: "JK"),
+        Issue(id: 4, title: "이슈[4]", description: "ABCDEFGH", labels: [12, 13, 14, 15], milestone: 24, author: "JK"),
+        Issue(id: 5, title: "이슈[5]", description: "ABCDEFGH", labels: [13, 14, 15], milestone: 25, author: "JK"),
         Issue(id: 6, title: "이슈[6]", description: "ABCDEFGH", labels: [14], milestone: 28, author: "JK"),
         Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK"),
         Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK"),
@@ -67,7 +67,7 @@ class IssueProvider: IssueProvidable {
             }
         })
 
-        //completion(issues)
+//        completion(issues)
         onFetching = false
     }
     
@@ -75,12 +75,14 @@ class IssueProvider: IssueProvidable {
      Response : 201
      */
     func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.createIssue(title, description, milestoneID, authorID), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.createIssue(title, "", milestoneID, authorID), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success(let response):
                 if let issue = Issue.addResponse(jsonObject: response.mapJsonObject()) {
+                    // TODO: completion nil 처리
+                    //self.dataLoader?.request(CommentService.addComment(issue.id, description), callBackQueue: nil, completion: nil)
                     self.issues.append(issue)
                     completion(issue)
                 }

@@ -10,13 +10,14 @@ import Foundation
 import NetworkFramework
 
 protocol LabelProvidable: AnyObject {
-    var labels: [Label] { get }
+    var labels: [Int: Label] { get }
     
     func addLabel(title: String, description: String, color: String, completion:  @escaping (Label?) -> Void )
     func editLabel(id: Int, title: String, description: String, color: String, completion:  @escaping (Label?) -> Void)
     //func deleteLabel(id: Int, completion: (Bool)->Void)
     func fetchLabels(completion: @escaping ([Label]?) -> Void)
     
+    func getLabels(of ids: [Int], completion: @escaping ([Label]) -> Void)
     func getLabel(at id: Int, completion: @escaping (Label?) -> Void)
 }
 
@@ -29,22 +30,35 @@ class LabelProvider: LabelProvidable {
     // 효율적인 key 관리 기법 생각해보기!
     private var fetchingCompletionHandlers = [Int: ([Label]?)->Void]()
     
-    private(set) var labels = [Label]()
+    private(set) var labels = [Int: Label]()
     private weak var dataLoader: DataLoadable?
     
     init(dataLoader: DataLoadable) {
         self.dataLoader = dataLoader
     }
     
+    func getLabels(of ids: [Int], completion: @escaping ([Label]) -> Void) {
+        let founded = ids.compactMap { self.labels[$0] }
+        if founded.count == ids.count {
+            completion(founded)
+            return
+        }
+        
+        fetchLabels { [weak self] _ in
+            let founded = ids.compactMap { self?.labels[$0] }
+            completion(founded)
+        }
+    }
+    
     func getLabel(at id: Int, completion: @escaping (Label?) -> Void) {
-        if let idx = labels.firstIndex(where: {$0.id == id}) {
-            completion(labels[idx])
+        if labels.contains(where: {$0.key == id }) {
+            completion(labels[id])
             return
         }
         
         // TODO : fetch 함수 분리하기
         fetchLabels { [weak self] _ in
-            if let label = self?.labels.first(where: {$0.id == id}) {
+            if let label = self?.labels[id] {
                 completion(label)
                 return
             }
@@ -91,7 +105,7 @@ class LabelProvider: LabelProvidable {
                 completion(nil)
             case .success(let response):
                 if let labels = response.mapEncodable([Label].self) {
-                    self.labels = labels
+                    self.labels = labels.reduce(into: [:]) { $0[$1.id] = $1 }
                     self.fetchingCompletionHandlers.forEach {
                         $0.value(labels)
                     }
