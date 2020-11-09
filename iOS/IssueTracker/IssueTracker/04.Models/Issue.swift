@@ -16,7 +16,7 @@ struct Issue {
     let description: String
     
     // TODO: author -> id!
-    let author: String
+    let author: User
     let isOpened: Bool
     let createdAt: String
     let updatedAt: String
@@ -31,7 +31,7 @@ struct Issue {
     init(id: Int, author: String, title: String, description: String? = nil, milestoneId: Int? = nil) {
         self.id = id
         self.title = title
-        self.author = author
+        self.author = User(name: author)
         self.milestone = milestoneId
         self.description = description ?? ""
         self.createdAt = ""
@@ -46,7 +46,7 @@ struct Issue {
     init(id: Int, title: String, description: String, labels: [Int], milestone: Int? = nil, author: String, isOpened: Bool) {
         self.id = id
         self.title = title
-        self.author = author
+        self.author = User(name: author)
         self.milestone = milestone
         self.description = description
         self.createdAt = ""
@@ -108,7 +108,7 @@ extension Issue {
         self.id = id
         self.title = title
         self.description = description
-        self.author = author
+        self.author = User(name: author)
         self.isOpened = isOpened
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -129,13 +129,14 @@ extension Issue {
             let isOpened = jsonObject["isOpened"] as? Bool,
             let createdAt = jsonObject["createAt"] as? String,
             let updatedAt = jsonObject["updateAt"] as? String,
+            let authorObject = jsonObject["author"] as? [String:Any],
+            let author = authorObject["userName"] as? String,
             let labelObjects = jsonObject["labels"] as? [[String: Any]],
             let assigneeObjects = jsonObject["assignees"] as? [[String: Any]]
             else { return nil }
         let labels = labelObjects.compactMap { $0["id"] as? Int }
         let assignees = assigneeObjects.compactMap { User(json: $0) }
         let description = ""
-        let author = (jsonObject["author"] as? String)  ?? ""
         let milestone = jsonObject["milestoneId"] as? Int
         
         return Issue(id: id, title: title, description: description, author: author, isOpened: isOpened, createdAt: createdAt, updatedAt: updatedAt, milestone: milestone, labels: labels, assignees: assignees)
@@ -145,7 +146,7 @@ extension Issue {
     init(id: Int,
          title: String,
          description: String,
-         author: String,
+         authorId: Int,
          isOpened: Bool,
          createdAt: String,
          updatedAt: String,
@@ -153,7 +154,7 @@ extension Issue {
         self.id = id
         self.title = title
         self.description = description
-        self.author = author
+        self.author = User(id: authorId)
         self.isOpened = isOpened
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -175,7 +176,7 @@ extension Issue {
         let description = (jsonObject["description"] as? String) ?? ""
         let milestoneId = jsonObject["milestoneId"] as? Int
         
-        return Issue(id: id, title: title, description: description, author: String(authorId), isOpened: isOpened, createdAt: createAt, updatedAt: updateAt, milestone: milestoneId)
+        return Issue(id: id, title: title, description: description, authorId: authorId, isOpened: isOpened, createdAt: createAt, updatedAt: updateAt, milestone: milestoneId)
     }
     
     // from getIssue API
@@ -187,7 +188,7 @@ extension Issue {
             let createAt = jsonObject["createAt"] as? String,
             let updateAt = jsonObject["updateAt"] as? String,
             let authorObject = jsonObject["author"] as? [String: Any],
-            let author = authorObject["userName"] as? String,
+            let authorName = authorObject["userName"] as? String,
             let labelObjects = jsonObject["labels"] as? [[String: Any]],
             let assigneeObjects = jsonObject["assignees"] as? [[String: Any]],
             let commentObjects = jsonObject["comments"] as? [[String: Any]]
@@ -195,6 +196,9 @@ extension Issue {
         let description = (jsonObject["description"] as? String) ?? ""
         let milestoneId = (jsonObject["milestone"] as? [String: Any])?["id"] as? Int
         let labels = labelObjects.compactMap { $0["id"] as? Int }
+        let authorImageUrl = authorObject["imageURL"] as? String
+        
+        let author = User(name: authorName, imageUrl: authorImageUrl)
         let assignees = assigneeObjects.compactMap { User(json: $0) }
         let comments = commentObjects.compactMap { Comment(json: $0) }
         
@@ -204,7 +208,7 @@ extension Issue {
     init(id: Int,
          title: String,
          description: String,
-         author: String,
+         author: User,
          isOpened: Bool,
          createdAt: String,
          updatedAt: String,
@@ -235,6 +239,11 @@ struct User {
     init(id: Int) {
         name = String(id)
         imageUrl = nil
+    }
+    
+    init(name: String, imageUrl: String? = nil) {
+        self.name = name
+        self.imageUrl = imageUrl
     }
     
     init?(json: [String: Any]) {

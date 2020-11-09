@@ -125,7 +125,7 @@ class IssueProvider: IssueProvidable {
      */
     func editIssue(id: Int, description: String, completion: @escaping (Issue?) -> Void) {
         
-        dataLoader?.request(IssueService.editDescription(id, description), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.editIssue(id, description, nil), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)
@@ -140,7 +140,7 @@ class IssueProvider: IssueProvidable {
      Response : 200 body: nil
      */
     func editIssue(id: Int, title: String, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.editDescription(id, title), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.editTitle(id, title), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)

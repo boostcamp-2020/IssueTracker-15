@@ -22,6 +22,8 @@ protocol IssueListViewModelProtocol: AnyObject {
     func clearSelectedCells()
     func selectAllCells()
     
+    func closeSelectedIssue(at paths: [IndexPath])
+    
     func createFilterViewModel() -> IssueFilterViewModelProtocol?
     func createIssueDetailViewModel(path: IndexPath) -> IssueDetailViewModel?
 }
@@ -72,6 +74,10 @@ class IssueListViewModel: IssueListViewModelProtocol {
                 self.didFetch?()
             }
         })
+    }
+    
+    func closeSelectedIssue(at paths: [IndexPath]) {
+        
     }
     
     func cellForItemAt(path: IndexPath) -> IssueItemViewModel {

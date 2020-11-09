@@ -11,7 +11,7 @@ import Foundation
 protocol IssueDetailViewModelProtocol {
     var issueNumber: Int { get }
     var title: String { get }
-    var author: String { get }
+    var author: UserViewModel { get }
     var isOpened: Bool { get }
     var didFetch: (() -> Void)? { get set }
     var milestone: MilestoneItemViewModel? { get }
@@ -49,13 +49,18 @@ struct UserViewModel {
         userName = user.name
         imageURL = user.imageUrl
     }
+    
+    init(userName: String, imageURL: String? = nil) {
+        self.userName = userName
+        self.imageURL = imageURL
+    }
 }
 
 class IssueDetailViewModel: IssueDetailViewModelProtocol {
     
     var issueNumber: Int = 0
     var title: String = ""
-    var author: String = ""
+    var author: UserViewModel = UserViewModel(userName: "")
     var didFetch: (() -> Void)?
     var isOpened: Bool = false
     var milestone: MilestoneItemViewModel?
@@ -83,7 +88,7 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             self.issueNumber = currentIssue.id
             self.title = currentIssue.title
             self.isOpened = currentIssue.isOpened
-            self.author = currentIssue.author
+            self.author = UserViewModel(user: currentIssue.author)
             
             self.comments = currentIssue.comments.map { CommentViewModel(comment: $0) }
             

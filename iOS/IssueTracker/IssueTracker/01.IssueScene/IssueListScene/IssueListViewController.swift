@@ -24,7 +24,7 @@ class IssueListViewController: UIViewController {
     }()
     
     private var viewingMode: ViewingMode = .general
-    var issueListViewModel: IssueListViewModel? {
+    var issueListViewModel: IssueListViewModelProtocol? {
         didSet {
             issueListViewModel?.didFetch = { [weak self] in
                 self?.collectionView.reloadData()

@@ -27,9 +27,9 @@ enum IssueService {
     // [PATCH] /api/issue/:id/title
     case editTitle(Int, String)
     
-    // editDescription (Id, description)
+    // editDescription (Id, description, isOpened)
     // [PATCH] /api/issue/:id/
-    case editDescription(Int, String)
+    case editIssue(Int, String?, Bool?)
     
     // delete (Id)
     // [DELETE] /api/issue/:id
@@ -77,7 +77,7 @@ extension IssueService: IssueTrackerService {
         case .editTitle(let id, let title):
             // /api/issue/:id/title
             return "/api/issue/\(id)/\(title)"
-        case .editDescription(let id, _):
+        case .editIssue(let id, _, _):
             //  /api/issue/:id/
             return "/api/issue/\(id)"
         case .delete(let id):
@@ -119,7 +119,7 @@ extension IssueService: IssueTrackerService {
             return .get
         case .createIssue, .addLabel, .addMilestone, .addAssignee:
             return .post
-        case .editTitle, .editDescription:
+        case .editTitle, .editIssue:
             return .patch
         case .delete, .deleteLabel, .deleteMilestone, .deleteAssignee:
             return .delete
@@ -141,8 +141,11 @@ extension IssueService: IssueTrackerService {
             return .requestJsonObject(jsonObject)
         case .editTitle(_, let title):
             return .requestJsonObject(["title": title])
-        case .editDescription(_, let description):
-            return .requestJsonObject(["description": description])
+        case .editIssue(_, let description, let isOpened):
+            var jsonObject = [String: Any]()
+            jsonObject["description"] = description
+            jsonObject["isOpened"] = isOpened
+            return .requestJsonObject(jsonObject)
         }
     }
     
@@ -156,7 +159,7 @@ extension IssueService: IssueTrackerService {
             return .custom([200])
         case .editTitle:
             return .custom([200])
-        case .editDescription:
+        case .editIssue:
             return .custom([200])
         case .delete:
             return .custom([200])
