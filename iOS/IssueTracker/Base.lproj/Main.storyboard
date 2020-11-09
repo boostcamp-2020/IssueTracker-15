@@ -192,7 +192,7 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
                                 </state>
                                 <connections>
-                                    <action selector="addIssueButtonTapped:" destination="EML-Kz-Cea" eventType="touchUpInside" id="XKx-Fh-3lx"/>
+                                    <action selector="floatingButtonTapped:" destination="EML-Kz-Cea" eventType="touchUpInside" id="XKx-Fh-3lx"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -221,8 +221,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addIssueButton" destination="EVQ-k4-p1T" id="D5H-8n-kfh"/>
                         <outlet property="collectionView" destination="MsW-cq-Pbp" id="Ejw-HB-dGN"/>
+                        <outlet property="floatingButton" destination="EVQ-k4-p1T" id="D5H-8n-kfh"/>
                         <outlet property="leftNavButton" destination="TOO-qs-SZ3" id="SkZ-SZ-Fpk"/>
                         <outlet property="rightNavButton" destination="hqn-sB-pF1" id="HYf-EL-un8"/>
                     </connections>

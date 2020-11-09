@@ -17,10 +17,10 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var rightNavButton: UIBarButtonItem!
     @IBOutlet weak var leftNavButton: UIBarButtonItem!
-    @IBOutlet weak var addIssueButton: UIButton!
+    @IBOutlet weak var floatingButton: UIButton!
 
-    lazy var addIssueButtonAspectRatioConstraint: NSLayoutConstraint = {
-        self.addIssueButton.widthAnchor.constraint(equalTo: self.addIssueButton.heightAnchor)
+    lazy var floatingButtonAspectRatioConstraint: NSLayoutConstraint = {
+        self.floatingButton.widthAnchor.constraint(equalTo: self.floatingButton.heightAnchor)
     }()
     
     private var viewingMode: ViewingMode = .general
@@ -48,7 +48,7 @@ class IssueListViewController: UIViewController {
         configureSearchBar()
         configureCollectionView()
         issueListViewModel?.needFetchItems()
-        addIssueButtonAspectRatioConstraint.isActive = true
+        floatingButtonAspectRatioConstraint.isActive = true
         navigationController?.isToolbarHidden = true
     }
     
@@ -63,7 +63,7 @@ class IssueListViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        addIssueButton.layer.cornerRadius = addIssueButton.bounds.height / 2 * 1
+        floatingButton.layer.cornerRadius = floatingButton.bounds.height / 2 * 1
     }
     
     // TODO: SerachBar Configure
@@ -89,16 +89,12 @@ class IssueListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
-    @IBAction func addIssueButtonTapped(_ sender: Any) {
-        // TODO : add issue
-        AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: nil)
-    }
-    
 }
 
 // MARK: - Actions
 
 extension IssueListViewController {
+    
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
         guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) else { return }
         
@@ -128,8 +124,15 @@ extension IssueListViewController {
         }
     }
     
-    @IBAction func closeAllSelectedIssueButtonTapped(_ sender: Any) {
+    @IBAction func floatingButtonTapped(_ sender: Any) {
         
+        switch viewingMode {
+        case .edit:
+                AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: nil)
+        case .general:
+            break
+        }
+
     }
     
     private func toEditMode() {
@@ -160,29 +163,30 @@ extension IssueListViewController {
     private func changeButtonTo(mode: ViewingMode) {
         switch mode {
         case .edit:
-            addIssueButtonAspectRatioConstraint.isActive = false
-            addIssueButton.setTitle("선택 이슈 닫기", for: .normal)
-            addIssueButton.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
-            addIssueButton.backgroundColor = .red
+            floatingButtonAspectRatioConstraint.isActive = false
+            floatingButton.setTitle("선택 이슈 닫기", for: .normal)
+            floatingButton.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
+            floatingButton.backgroundColor = .red
             UIView.animate(withDuration: 0.5) {
                 self.view.layoutIfNeeded()
-                self.addIssueButton.contentEdgeInsets.left = 10
-                self.addIssueButton.contentEdgeInsets.right = 10
-                self.addIssueButton.imageEdgeInsets.left = -5
+                self.floatingButton.contentEdgeInsets.left = 10
+                self.floatingButton.contentEdgeInsets.right = 10
+                self.floatingButton.imageEdgeInsets.left = -5
             }
         case .general:
-            addIssueButtonAspectRatioConstraint.isActive = true
-            addIssueButton.setTitle("", for: .normal)
-            addIssueButton.setImage(UIImage(systemName: "plus"), for: .normal)
-            addIssueButton.backgroundColor = UIColor(displayP3Red: 72/255, green: 133/255, blue: 195/255, alpha: 1)
+            floatingButtonAspectRatioConstraint.isActive = true
+            floatingButton.setTitle("", for: .normal)
+            floatingButton.setImage(UIImage(systemName: "plus"), for: .normal)
+            floatingButton.backgroundColor = UIColor(displayP3Red: 72/255, green: 133/255, blue: 195/255, alpha: 1)
             UIView.animate(withDuration: 0.5) {
                 self.view.layoutIfNeeded()
-                self.addIssueButton.contentEdgeInsets.right = 0
-                self.addIssueButton.contentEdgeInsets.left = 0
-                self.addIssueButton.imageEdgeInsets.left = 0
+                self.floatingButton.contentEdgeInsets.right = 0
+                self.floatingButton.contentEdgeInsets.left = 0
+                self.floatingButton.imageEdgeInsets.left = 0
             }
         }
     }
+    
 }
 
 // MARK: - Present
