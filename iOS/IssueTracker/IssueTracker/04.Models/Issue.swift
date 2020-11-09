@@ -56,7 +56,7 @@ struct Issue {
         self.isOpened = true
         self.comments = []
     }
-   
+    
     mutating func addLabel(id: Int) {
         if labels.contains(where: {$0 == id}) { return }
         labels.append(id)
@@ -124,14 +124,14 @@ extension Issue {
     
     static func fetchResponse(jsonObject: [String: Any]?) -> Issue? {
         guard let jsonObject = jsonObject,
-              let id = jsonObject["id"] as? Int,
-              let title = jsonObject["title"] as? String,
-              let isOpened = jsonObject["isOpened"] as? Bool,
-              let createdAt = jsonObject["createAt"] as? String,
-              let updatedAt = jsonObject["updateAt"] as? String,
-              let labelObjects = jsonObject["labels"] as? [[String: Any]],
-              let assigneeObjects = jsonObject["assignees"] as? [[String: Any]]
-        else { return nil }
+            let id = jsonObject["id"] as? Int,
+            let title = jsonObject["title"] as? String,
+            let isOpened = jsonObject["isOpened"] as? Bool,
+            let createdAt = jsonObject["createAt"] as? String,
+            let updatedAt = jsonObject["updateAt"] as? String,
+            let labelObjects = jsonObject["labels"] as? [[String: Any]],
+            let assigneeObjects = jsonObject["assignees"] as? [[String: Any]]
+            else { return nil }
         let labels = labelObjects.compactMap { $0["id"] as? Int }
         let assignees = assigneeObjects.compactMap { User(json: $0) }
         let description = ""
@@ -165,32 +165,33 @@ extension Issue {
     
     static func addResponse(jsonObject: [String: Any]?) -> Issue? {
         guard let jsonObject = jsonObject,
-              let id = jsonObject["id"] as? Int,
-              let title = jsonObject["title"] as? String,
-              let isOpened = jsonObject["isOpened"] as? Bool,
-              let createAt = jsonObject["createAt"] as? String,
-              let updateAt = jsonObject["updateAt"] as? String,
-              let authorId = jsonObject["authorId"] as? Int
-        else { return nil }
+            let id = jsonObject["id"] as? Int,
+            let title = jsonObject["title"] as? String,
+            let isOpened = jsonObject["isOpened"] as? Bool,
+            let createAt = jsonObject["createAt"] as? String,
+            let updateAt = jsonObject["updateAt"] as? String,
+            let authorId = jsonObject["authorId"] as? Int
+            else { return nil }
         let description = (jsonObject["description"] as? String) ?? ""
         let milestoneId = jsonObject["milestoneId"] as? Int
         
         return Issue(id: id, title: title, description: description, author: String(authorId), isOpened: isOpened, createdAt: createAt, updatedAt: updateAt, milestone: milestoneId)
     }
-
+    
     // from getIssue API
     static func getResponse(jsonObject: [String: Any]?) -> Issue? {
         guard let jsonObject = jsonObject,
-              let id = jsonObject["id"] as? Int,
-              let title = jsonObject["title"] as? String,
-              let isOpened = jsonObject["isOpened"] as? Bool,
-              let createAt = jsonObject["createAt"] as? String,
-              let updateAt = jsonObject["updateAt"] as? String,
-              let author = jsonObject["author"] as? String,
-              let labelObjects = jsonObject["labels"] as? [[String: Any]],
-              let assigneeObjects = jsonObject["assignees"] as? [[String: Any]],
-              let commentObjects = jsonObject["comments"] as? [[String: Any]]
-        else { return nil }
+            let id = jsonObject["id"] as? Int,
+            let title = jsonObject["title"] as? String,
+            let isOpened = jsonObject["isOpened"] as? Bool,
+            let createAt = jsonObject["createAt"] as? String,
+            let updateAt = jsonObject["updateAt"] as? String,
+            let authorObject = jsonObject["author"] as? [String: Any],
+            let author = authorObject["userName"] as? String,
+            let labelObjects = jsonObject["labels"] as? [[String: Any]],
+            let assigneeObjects = jsonObject["assignees"] as? [[String: Any]],
+            let commentObjects = jsonObject["comments"] as? [[String: Any]]
+            else { return nil }
         let description = (jsonObject["description"] as? String) ?? ""
         let milestoneId = (jsonObject["milestone"] as? [String: Any])?["id"] as? Int
         let labels = labelObjects.compactMap { $0["id"] as? Int }
@@ -259,11 +260,11 @@ struct Comment {
     
     init?(json: [String: Any]) {
         guard let id = json["id"] as? Int,
-              let content = json["content"] as? String,
-              let createAt = json["createAt"] as? String,
-              let userObject = json["user"] as? [String: Any],
-              let user = User(json: userObject)
-        else { return nil }
+            let content = json["content"] as? String,
+            let createAt = json["createAt"] as? String,
+            let userObject = json["user"] as? [String: Any],
+            let user = User(json: userObject)
+            else { return nil }
         self.id = id
         self.content = content
         self.createAt = createAt

@@ -18,11 +18,11 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var deleteBoxGuideView: UIView!
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var milestoneBadge: BadgeLabelView!
     @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var labelCollectionView: UICollectionView!
     
+    private weak var issueItemViewModel: IssueItemViewModelProtocol?
     private var labelBadgeCells = [LabelItemViewModel]()
     
     private lazy var checkBoxGuideWidthConstraint = checkBoxGuideView.widthAnchor.constraint(equalToConstant: 0)
@@ -33,8 +33,6 @@ class IssueCellView: UICollectionViewCell {
         cellHorizontalScrollView.decelerationRate = .init(rawValue: 0.99999)
         checkBoxGuideWidthConstraint.isActive = true
         checkBoxGuideView.isHidden = false
-        
-        descriptionLabel.numberOfLines = 2
         
         milestoneBadge.setBorder(width: 1, color: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1))
         milestoneBadge.cornerRadiusRatio = 0.5
@@ -54,6 +52,23 @@ class IssueCellView: UICollectionViewCell {
         ])
     }
     
+    func configure(issueItemViewModel: IssueItemViewModelProtocol) {
+        self.issueItemViewModel = issueItemViewModel
+        
+        titleLabel.text = issueItemViewModel.title
+        setMilestone(title: issueItemViewModel.milestoneTitle)
+        setLabels(labelViewModels: issueItemViewModel.labelItemViewModels)
+        
+        self.issueItemViewModel?.didMilestoneChanged = { [weak self] milestone in
+                self?.setMilestone(title: milestone)
+        }
+        
+        self.issueItemViewModel?.didLabelsChanged = { [weak self] (labelViewModels) in
+            self?.setLabels(labelViewModels: labelViewModels)
+        }
+        
+    }
+
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         super.preferredLayoutAttributesFitting(layoutAttributes)
         layoutIfNeeded()
@@ -65,23 +80,6 @@ class IssueCellView: UICollectionViewCell {
         layoutAttributes.frame = frame
         
         return layoutAttributes
-    }
-
-    func configure(issueItemViewModel: IssueItemViewModel) {
-        
-        titleLabel.text = issueItemViewModel.title
-        descriptionLabel.text = issueItemViewModel.description
-        setMilestone(title: issueItemViewModel.milestoneTitle)
-        setLabels(labelViewModels: issueItemViewModel.labelItemViewModels)
-        
-        issueItemViewModel.didMilestoneChanged = { [weak self] milestone in
-                self?.setMilestone(title: milestone)
-        }
-        
-        issueItemViewModel.didLabelsChanged = { [weak self] (labelViewModels) in
-            self?.setLabels(labelViewModels: labelViewModels)
-        }
-        
     }
     
     private func setMilestone(title: String) {
@@ -97,6 +95,14 @@ class IssueCellView: UICollectionViewCell {
         self.labelBadgeCells.removeAll()
         self.labelBadgeCells = labelViewModels
         self.labelCollectionView.reloadData()
+    }
+    
+    func resetScrollOffset() {
+        cellHorizontalScrollView.contentOffset = CGPoint.zero
+    }
+    
+    func setCheck(_ check: Bool) {
+        checkBoxButton.setImage(check ? Constant.checkedImage : Constant.uncheckedImage, for: .normal)
     }
     
 }
@@ -159,14 +165,15 @@ extension IssueCellView: UIScrollViewDelegate {
 extension IssueCellView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return labelBadgeCells.count
+        return issueItemViewModel?.labelItemViewModels.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: LabelBadgeCellView = collectionView.dequeueCell(at: indexPath) else {
+        guard let cell: LabelBadgeCellView = collectionView.dequeueCell(at: indexPath),
+            let labelItemViewModel = issueItemViewModel?.labelItemViewModels[indexPath.row] else {
             return UICollectionViewCell()
         }
-        cell.configure(labelViewModel: labelBadgeCells[indexPath.row])
+        cell.configure(labelViewModel: labelItemViewModel)
         return cell
     }
     
@@ -181,5 +188,14 @@ extension IssueCellView: UICollectionViewRegisterable {
     
     static var cellNib: UINib {
         UINib(nibName: cellIdentifier, bundle: nil)
+    }
+}
+
+// MARK: - Constant
+
+extension IssueCellView {
+    enum Constant {
+        static let uncheckedImage = UIImage(systemName: "circle")
+        static let checkedImage = UIImage(systemName: "checkmark.circle.fill")
     }
 }

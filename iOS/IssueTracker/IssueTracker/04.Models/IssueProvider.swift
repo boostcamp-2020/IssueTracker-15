@@ -32,7 +32,7 @@ class IssueProvider: IssueProvidable {
     private var onFetching: Bool = false
     private(set) var issues: [Issue] = [ // labels 9 ~ 17 milestone 19, 22, 23, 24, 25, 28, 36
         Issue(id: 1, title: "이슈[1]", description: "ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH", labels: [9], milestone: 19, author: "JK", isOpened: true),
-        Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10], milestone: 22, author: "JK", isOpened: true),
+        Issue(id: 2, title: "이슈[2]aaasdfsdfsdfadfasdfasdfasdfasdf", description: "ABCDEFGH", labels: [10], milestone: 22, author: "JK", isOpened: true),
         Issue(id: 3, title: "이슈[3]", description: "ABCDEFGH", labels: [11], milestone: 23, author: "JK", isOpened: true),
         Issue(id: 4, title: "이슈[4]", description: "ABCDEFGH", labels: [12], milestone: 24, author: "JK", isOpened: true),
         Issue(id: 5, title: "이슈[5]", description: "ABCDEFGH", labels: [13], milestone: 25, author: "JK", isOpened: true),
