@@ -1,18 +1,36 @@
 import React from 'react';
 import * as S from './style';
 
+import ProfileImage from '../profile-image'
+import { getTimeTillNow } from '../../lib/dateParser';
+
 interface CommentBoxPropsType {
   isAuthor: boolean;
+  comment: {
+    id: number;
+    createAt: string;
+    content: string;
+    user: {
+      userName: string;
+      imageURL: string;
+    }
+  }
 }
 
-export default function CommentBox({ isAuthor }: CommentBoxPropsType) {
+
+export default function CommentBox({ isAuthor, comment }: CommentBoxPropsType) {
+
   return (
     <>
+    <S.CommentWithProfileWrapper>
+      <S.ProfilePhotoWrapper>
+        <ProfileImage img={comment.user.imageURL} size={40}/>
+      </S.ProfilePhotoWrapper>
       <S.CommentBoxWrapper>
         <S.CommentBoxTitle isAuthor={isAuthor}>
           <S.TitleLeft>
-            <S.UserID>moaikang</S.UserID>
-            <S.WriteTime>commented 3 days ago</S.WriteTime>
+            <S.UserID>{comment.user.userName}</S.UserID>
+            <S.WriteTime>{`commented ${getTimeTillNow(comment.createAt)} ago`}</S.WriteTime>
           </S.TitleLeft>
 
           <S.TitleRight isAuthor={isAuthor}>
@@ -22,11 +40,11 @@ export default function CommentBox({ isAuthor }: CommentBoxPropsType) {
         </S.CommentBoxTitle>
         <S.CommentBoxBody isAuthor={isAuthor}>
           <div>
-            딱대시는것이 <br />
-            좋을거 같아요
+            {comment.content}
           </div>
         </S.CommentBoxBody>
       </S.CommentBoxWrapper>
+    </S.CommentWithProfileWrapper>
     </>
   );
 }

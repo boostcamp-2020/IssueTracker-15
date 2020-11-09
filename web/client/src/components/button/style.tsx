@@ -6,10 +6,10 @@ export const CustomButton = styled.div`
   align-items: center;
 
   border-radius: 6px;
-  color: ${(porps) => (porps.color === "white" ? "black" : "white")};
+  color: ${(props) => (props.color === "white" ? "black" : "white")};
   background-color: ${(porps) =>
     porps.color === "white" ? "white" : "#2ea44f"};
-  width: 3rem;
+  width: max-content;
   height: 1.5rem;
   padding: 0.3rem 0.5rem;
 

@@ -1,11 +1,7 @@
 import express, { Request, Response } from "express";
 import IssueEntity from "../entity/issue.entity";
 import IssueService from "../services/issue.service";
-import {
-  CreateIssue,
-  UpdateIssueContent,
-  UpdateIssueTitle,
-} from "../types/issue";
+import { CreateIssue, UpdateIssue } from "../types/issue";
 
 const IssueRouter = express.Router();
 
@@ -93,17 +89,6 @@ IssueRouter.delete(
   }
 );
 
-IssueRouter.patch("/:issueId/title", async (req: Request, res: Response) => {
-  const issueId = Number(req.params.issueId);
-  try {
-    const newTitle: UpdateIssueTitle = req.body;
-    await IssueService.updateIssueTitle(issueId, newTitle);
-    res.json();
-  } catch (e) {
-    res.status(400).json({ message: e.message });
-  }
-});
-
 IssueRouter.get("/:issueId", async (req: Request, res: Response) => {
   const issueId = Number(req.params.issueId);
   try {
@@ -117,7 +102,7 @@ IssueRouter.get("/:issueId", async (req: Request, res: Response) => {
 IssueRouter.patch("/:issueId", async (req: Request, res: Response) => {
   const issueId = Number(req.params.issueId);
   try {
-    const newDiscription: UpdateIssueContent = req.body;
+    const newDiscription: UpdateIssue = req.body;
     await IssueService.updateIssueContent(issueId, newDiscription);
     res.json();
   } catch (e) {
