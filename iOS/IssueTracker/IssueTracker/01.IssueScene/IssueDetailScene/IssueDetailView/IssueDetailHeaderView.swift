@@ -15,6 +15,7 @@ enum IssueBadgeColor: String {
 
 class IssueDetailHeaderView: UICollectionReusableView {
     
+    @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var issueAuthor: UILabel!
     @IBOutlet weak var issueTitle: UILabel!
     @IBOutlet weak var issueNumber: UILabel!
@@ -55,4 +56,5 @@ extension UIButton {
         self.backgroundColor = backgroundColor
         self.setTitle(text, for: .normal)
     }
+    
 }

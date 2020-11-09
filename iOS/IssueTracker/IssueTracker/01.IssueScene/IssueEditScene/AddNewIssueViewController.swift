@@ -9,19 +9,33 @@
 import UIKit
 import MarkdownView
 
+enum AddType: String {
+    case newIssue = "새 이슈"
+    case newComment = "댓글 추가"
+}
+
 class AddNewIssueViewController: UIViewController {
+    static let identifier = "AddNewIssueViewController"
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var titleLabel: UILabel!
     private var commentTextView: UITextView = UITextView()
     private var markdownView: MarkdownView = MarkdownView()
+    var addType: AddType = .newIssue
     
     private let textViewPlaceholder = "코멘트는 여기에 작성하세요"
-    var doneButtonTapped: (() -> Void)?
+    var doneButtonTapped: ((String) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "새 이슈"
-        
+        switch addType {
+        case .newIssue:
+            titleLabel.isHidden = false
+            titleTextField.isHidden = false
+        case .newComment:
+            titleLabel.isHidden = true
+            titleTextField.isHidden = true
+        }
         configureKeyboardRelated()
         configureNavigationBar()
         configureCommentTextView()
@@ -83,18 +97,7 @@ class AddNewIssueViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        /*
-         doneButtonTapped()
-         서버와 통신, POST 요청
-         응답이 오면 (OK status code, 서버 저장에 성공한 객체)
-         해당 객체를 decode 하여 프론트 collectionview의 datasource에도 추가
-         datasource는 이슈목록 리스트에 있으므로 doneButtonTapped를 주입시키든가 delegate protocol을 통해서 datasource를 건드릴 수 있도록 수정
-         
-         dismiss()
-         현재 VC를 dismiss한다.
-        */
-        
-        doneButtonTapped?()
+        doneButtonTapped?(commentTextView.text)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -158,4 +161,27 @@ extension AddNewIssueViewController: UITextViewDelegate {
             setTextViewPlaceholder()
         }
     }
+}
+
+extension AddNewIssueViewController {
+    
+    static let storyboardName = "EditIssue"
+    
+    static func present(at viewController: UIViewController,
+                        addType: AddType,
+                        onDismiss: ((String) -> Void)?) {
+        
+        let storyBoard = UIStoryboard(name: storyboardName, bundle: Bundle.main)
+        guard let container = storyBoard.instantiateInitialViewController() as? UINavigationController,
+            let vc = container.topViewController as? AddNewIssueViewController
+            else { return }
+        
+        vc.addType = addType
+        vc.title = addType.rawValue
+        vc.doneButtonTapped = onDismiss
+        
+        viewController.present(container, animated: true, completion: nil)
+        
+    }
+    
 }

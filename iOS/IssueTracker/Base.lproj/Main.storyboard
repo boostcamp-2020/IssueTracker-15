@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Im-NR-0j4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Im-NR-0j4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -174,7 +174,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MsW-cq-Pbp">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HQK-O9-Si0">
                                     <size key="itemSize" width="128" height="128"/>
@@ -192,7 +192,7 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
                                 </state>
                                 <connections>
-                                    <segue destination="24V-yA-fcF" kind="presentation" id="kxg-o8-Tgn"/>
+                                    <action selector="addIssueButtonTapped:" destination="EML-Kz-Cea" eventType="touchUpInside" id="XKx-Fh-3lx"/>
                                 </connections>
                             </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apM-nX-fph">
@@ -253,7 +253,7 @@
                     <tabBarItem key="tabBarItem" title="레이블" image="2.circle.fill" catalog="system" id="NXm-Dv-qAK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="NKq-kU-VOX">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
@@ -285,102 +285,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ge-sC-IQD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076.8115942028987" y="893.97321428571422"/>
-        </scene>
-        <!--Add New Issue View Controller-->
-        <scene sceneID="xnh-53-5MK">
-            <objects>
-                <viewController storyboardIdentifier="AddNewIssueViewController" id="Y8p-ie-OWu" customClass="AddNewIssueViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="iVE-nq-huQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cYP-py-DgA">
-                                <rect key="frame" x="20" y="144" width="374" height="42"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uNE-Xl-7zb">
-                                <rect key="frame" x="20" y="118" width="374" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ffC-xq-HP2">
-                                <rect key="frame" x="20" y="196" width="374" height="35"/>
-                                <segments>
-                                    <segment title="마크다운"/>
-                                    <segment title="미리보기"/>
-                                </segments>
-                                <connections>
-                                    <action selector="segmentDidChange:" destination="Y8p-ie-OWu" eventType="valueChanged" id="C00-0y-5e3"/>
-                                </connections>
-                            </segmentedControl>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="XOH-zx-EwI" firstAttribute="trailing" secondItem="cYP-py-DgA" secondAttribute="trailing" constant="20" id="4Xv-Fb-wWv"/>
-                            <constraint firstItem="XOH-zx-EwI" firstAttribute="trailing" secondItem="uNE-Xl-7zb" secondAttribute="trailing" constant="20" id="D8v-ke-tlR"/>
-                            <constraint firstItem="uNE-Xl-7zb" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="HoI-7x-9vz"/>
-                            <constraint firstItem="ffC-xq-HP2" firstAttribute="top" secondItem="cYP-py-DgA" secondAttribute="bottom" constant="10" id="OAl-zB-1Ot"/>
-                            <constraint firstItem="cYP-py-DgA" firstAttribute="top" secondItem="uNE-Xl-7zb" secondAttribute="bottom" constant="5" id="OG0-ez-xPR"/>
-                            <constraint firstItem="cYP-py-DgA" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="Tdg-Gy-kN4"/>
-                            <constraint firstItem="cYP-py-DgA" firstAttribute="height" secondItem="iVE-nq-huQ" secondAttribute="height" multiplier="0.05" id="Tjy-6E-9hD"/>
-                            <constraint firstItem="ffC-xq-HP2" firstAttribute="height" secondItem="iVE-nq-huQ" secondAttribute="height" multiplier="0.04" id="ZKM-fv-ofD"/>
-                            <constraint firstItem="uNE-Xl-7zb" firstAttribute="top" secondItem="XOH-zx-EwI" secondAttribute="top" constant="10" id="b7o-ff-RG4"/>
-                            <constraint firstItem="ffC-xq-HP2" firstAttribute="leading" secondItem="XOH-zx-EwI" secondAttribute="leading" constant="20" id="dqL-DH-JUs"/>
-                            <constraint firstItem="XOH-zx-EwI" firstAttribute="trailing" secondItem="ffC-xq-HP2" secondAttribute="trailing" constant="20" id="slE-d5-DSA"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="XOH-zx-EwI"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="xyz-op-LC6">
-                        <barButtonItem key="leftBarButtonItem" style="done" id="tJ9-WO-SS0">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1SI-Qo-mgN">
-                                <rect key="frame" x="20" y="13" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancel"/>
-                                <connections>
-                                    <action selector="cancelButtonTapped:" destination="Y8p-ie-OWu" eventType="touchUpInside" id="WVE-Ai-G3E"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" id="jJT-Y8-nLZ">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mc1-Ta-aaw">
-                                <rect key="frame" x="302" y="13" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Done"/>
-                                <connections>
-                                    <action selector="doneButtonTapped:" destination="Y8p-ie-OWu" eventType="touchUpInside" id="Fw0-8b-Wf3"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="segmentedControl" destination="ffC-xq-HP2" id="THk-Jf-wsn"/>
-                        <outlet property="titleTextField" destination="cYP-py-DgA" id="uv5-n6-lP9"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oeR-Yt-dD7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3683" y="-556"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="TWO-Da-erg">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="24V-yA-fcF" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="kro-Mr-mzO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Y8p-ie-OWu" kind="relationship" relationship="rootViewController" destinationCreationSelector="addIssueSeguePerformed:" id="SHT-mG-O5o"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gUz-cP-Oom" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2807" y="-556"/>
         </scene>
     </scenes>
     <resources>

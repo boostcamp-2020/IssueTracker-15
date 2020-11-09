@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -36,12 +36,9 @@
                         <constraint firstAttribute="width" secondItem="TIo-KR-UoL" secondAttribute="height" multiplier="1:1" id="G62-jS-SiS"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Yr-oe-ZWr">
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Yr-oe-ZWr">
                     <rect key="frame" x="10" y="216" width="20" height="22"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="22" id="AjD-FI-4lm"/>
-                    </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" image="exclamationmark.circle" catalog="system"/>
                     <userDefinedRuntimeAttributes>
@@ -72,6 +69,7 @@
                 <outlet property="issueBadge" destination="8Yr-oe-ZWr" id="1hW-OX-c8W"/>
                 <outlet property="issueNumber" destination="ffa-ud-S2G" id="XOL-O6-W0t"/>
                 <outlet property="issueTitle" destination="gDF-Uv-gPE" id="rkM-l9-FHb"/>
+                <outlet property="profilePicture" destination="TIo-KR-UoL" id="t2Q-Di-YHv"/>
             </connections>
             <point key="canvasLocation" x="211.59420289855075" y="194.86607142857142"/>
         </collectionReusableView>

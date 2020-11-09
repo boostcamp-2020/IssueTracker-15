@@ -10,9 +10,15 @@ import UIKit
 
 class IssueDetailCellView: UICollectionViewCell {
        
-    @IBOutlet weak var desc: UILabel!
-    func configure(with text: String) {
-        desc.text = text
+    @IBOutlet weak var content: UILabel!
+    @IBOutlet weak var author: UILabel!
+    @IBOutlet weak var createAt: UILabel!
+    @IBOutlet weak var profilePicture: UIImageView!
+    
+    func configure(with comment: CommentViewModel) {
+        content.text = comment.content
+        author.text = comment.userName
+        createAt.text = comment.createAt
     }
     
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
