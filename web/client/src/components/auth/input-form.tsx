@@ -21,7 +21,7 @@ interface InputProps {
   title: string;
   name: string;
 }
-function Input<InputProps>(props: { title: any; name: string | undefined; }) {
+function Input(props: InputProps) {
   return (
     <InputWrap>
       <InputTitle title={props.title} />
