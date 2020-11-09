@@ -25,15 +25,11 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     var description: String = ""
     var author: String = ""
     var didFetch: (() -> Void)?
-    
-    private weak var issueProvider: IssueProvidable?
     var isOpened: Bool = false
+    private weak var issueProvider: IssueProvidable?
     
-    init(id: Int, title: String, description: String, issueProvider: IssueProvidable?) {
+    init(issueProvider: IssueProvidable) {
         self.issueProvider = issueProvider
-        self.issueNumber = id
-        self.title = title
-        self.description = description
     }
     
     func needFetchDetails() {
