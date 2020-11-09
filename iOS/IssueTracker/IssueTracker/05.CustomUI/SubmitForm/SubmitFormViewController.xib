@@ -7,9 +7,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubmitFormViewController" customModule="IssueTracker" customModuleProvider="target">
+            <connections>
+                <outlet property="backgroundView" destination="pfn-bp-1ph" id="Ka8-X7-L5a"/>
+                <outlet property="formView" destination="N3L-ZF-Cs3" id="k10-Ux-Ksc"/>
+                <outlet property="submitFieldGuideView" destination="3fl-u3-s6T" id="VYA-Ls-Sg1"/>
+                <outlet property="view" destination="xWd-JY-6SX" id="Nka-BB-jDU"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" restorationIdentifier="SubmitFormView" id="xWd-JY-6SX" userLabel="SubmitFormView" customClass="SubmitFormView" customModule="IssueTracker" customModuleProvider="target">
+        <view contentMode="scaleToFill" restorationIdentifier="SubmitFormView" id="xWd-JY-6SX" userLabel="SubmitFormView">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -30,7 +37,7 @@
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                             </state>
                             <connections>
-                                <action selector="closeButtonTapped:" destination="xWd-JY-6SX" eventType="touchUpInside" id="gWs-Jh-eet"/>
+                                <action selector="closeButtonTapped:" destination="-1" eventType="touchUpInside" id="9fC-Kj-dRj"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Khc-ap-Zfc" userLabel="divider">
@@ -54,7 +61,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="saveButtonTapped:" destination="xWd-JY-6SX" eventType="touchUpInside" id="r04-dq-Pvb"/>
+                                <action selector="saveButtonTapped:" destination="-1" eventType="touchUpInside" id="1ui-bg-Eo3"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0z-hY-fR7">
@@ -62,7 +69,7 @@
                             <color key="tintColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="초기화"/>
                             <connections>
-                                <action selector="resetButtonTapped:" destination="xWd-JY-6SX" eventType="touchUpInside" id="Mac-bB-gsQ"/>
+                                <action selector="resetButtonTapped:" destination="-1" eventType="touchUpInside" id="q8g-bK-pvV"/>
                             </connections>
                         </button>
                     </subviews>
@@ -104,11 +111,6 @@
                 <constraint firstItem="pfn-bp-1ph" firstAttribute="leading" secondItem="xWd-JY-6SX" secondAttribute="leading" id="wNb-9G-Ssv"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="PAt-LX-K2A"/>
-            <connections>
-                <outlet property="backgroundView" destination="pfn-bp-1ph" id="iAX-Gg-y4O"/>
-                <outlet property="formView" destination="N3L-ZF-Cs3" id="vnA-iQ-3zr"/>
-                <outlet property="submitFieldGuideView" destination="3fl-u3-s6T" id="aAQ-Ac-1g6"/>
-            </connections>
             <point key="canvasLocation" x="134.78260869565219" y="799.55357142857144"/>
         </view>
     </objects>

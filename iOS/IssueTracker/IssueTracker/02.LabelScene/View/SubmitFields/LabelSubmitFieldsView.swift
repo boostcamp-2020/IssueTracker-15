@@ -64,7 +64,7 @@ extension LabelSubmitFieldsView: SubmitFieldProtocol {
     
     var contentView: UIView { self }
     
-    func saveButtonTapped() -> SubmitFormView.SaveResult {
+    func saveButtonTapped() -> SubmitFormViewController.SaveResult {
         if let titleText = titleTextField.text, !titleText.isEmpty,
             let descText = descTextField.text, !descText.isEmpty,
             let hexCodeText = colorTextField.text, !hexCodeText.isEmpty {
