@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './style';
 
-//import ProfileImage from '../profile-image'
+import ProfileImage from '../profile-image'
 import { getTimeTillNow } from '../../lib/dateParser';
 
 interface CommentBoxPropsType {
@@ -19,9 +19,13 @@ interface CommentBoxPropsType {
 
 
 export default function CommentBox({ isAuthor, comment }: CommentBoxPropsType) {
+
   return (
     <>
-      {/*<ProfileImage img={comment.user.imageURL} size={40}/>*/}
+    <S.CommentWithProfileWrapper>
+      <S.ProfilePhotoWrapper>
+        <ProfileImage img={comment.user.imageURL} size={40}/>
+      </S.ProfilePhotoWrapper>
       <S.CommentBoxWrapper>
         <S.CommentBoxTitle isAuthor={isAuthor}>
           <S.TitleLeft>
@@ -40,6 +44,7 @@ export default function CommentBox({ isAuthor, comment }: CommentBoxPropsType) {
           </div>
         </S.CommentBoxBody>
       </S.CommentBoxWrapper>
+    </S.CommentWithProfileWrapper>
     </>
   );
 }
