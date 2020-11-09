@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum IssueBadgeColor: String {
+    case open = "OpenIssueBackgroundColor"
+    case closed = "ClosedIssueBackgroundColor"
+}
+
 class IssueDetailHeaderView: UICollectionReusableView {
     
     @IBOutlet weak var issueAuthor: UILabel!
@@ -19,25 +24,21 @@ class IssueDetailHeaderView: UICollectionReusableView {
         self.issueAuthor.text = issueDetailViewModel.author
         self.issueTitle.text = issueDetailViewModel.title
         self.issueNumber.text = "#" + String(issueDetailViewModel.issueNumber)
-        configureIssueBadge(text: issueDetailViewModel.badge, color: issueDetailViewModel.badgeColor)
+        configureIssueBadge(isOpened: issueDetailViewModel.isOpened)
     }
     
-    private func configureIssueBadge(text: String, color: IssueBadgeColor) {
+    private func configureIssueBadge(isOpened: Bool) {
         var badgeColor: UIColor
+        var badgeText: String
+        badgeColor = isOpened ? UIColor(named: IssueBadgeColor.open.rawValue) ?? UIColor.green : UIColor(named: IssueBadgeColor.closed.rawValue) ?? UIColor.red
+        badgeText = isOpened ? "Open" : "Closed"
         
-        switch color {
-        case .green:
-            badgeColor = UIColor.green
-        case .red:
-            badgeColor = UIColor.red
-        }
-        
-        issueBadge.setTitle(text, for: .normal)
-        issueBadge.backgroundColor = badgeColor
+        issueBadge.convertToIssueBadge(text: badgeText, backgroundColor: badgeColor)
     }
 }
 
 extension IssueDetailHeaderView: UICollectionViewHeaderRegisterable {
+    
     static var headerIdentifier: String {
         return "IssueDetailHeaderView"
     }
@@ -46,4 +47,12 @@ extension IssueDetailHeaderView: UICollectionViewHeaderRegisterable {
         return UINib(nibName: "IssueDetailHeaderView", bundle: .main)
     }
     
+}
+
+extension UIButton {
+    
+    func convertToIssueBadge(text: String, backgroundColor: UIColor) {
+        self.backgroundColor = backgroundColor
+        self.setTitle(text, for: .normal)
+    }
 }

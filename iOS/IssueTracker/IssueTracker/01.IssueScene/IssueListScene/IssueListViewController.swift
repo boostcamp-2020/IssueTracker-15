@@ -110,7 +110,7 @@ extension IssueListViewController {
     
     private func toEditMode() {
         viewingMode = .edit
-        rightNavButton.setTitle("Cancle", for: .normal)
+        rightNavButton.setTitle("Cancel", for: .normal)
         leftNavButton.setTitle("Select All", for: .normal)
         bottomToolBar.isHidden = false
         tabBarController?.tabBar.isHidden = true

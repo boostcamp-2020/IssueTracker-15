@@ -8,22 +8,14 @@
 
 import Foundation
 
-enum IssueBadgeColor {
-    case green
-    case red
-}
-
 class IssueDetailViewModel {
     
     var issueNumber: Int = 0
     var title: String = ""
     var description: String = ""
     var author: String = ""
-    var badge: String = ""
-    var badgeColor: IssueBadgeColor = .green
     var didFetch: (() -> Void)?
-    
-    private var isOpened: Bool = false
+    var isOpened: Bool = false
     private weak var issueProvider: IssueProvidable?
     
     init(issueProvider: IssueProvidable) {
@@ -39,8 +31,6 @@ class IssueDetailViewModel {
             self.issueNumber = currentIssue.id
             self.title = currentIssue.title
             self.isOpened = currentIssue.isOpened
-            self.badge = self.isOpened ? "Open" : "Closed"
-            self.badgeColor = self.isOpened ? .green : .red
             self.description = currentIssue.description
             self.author = currentIssue.author
             self.didFetch?()
