@@ -1,34 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LabelForm from "../../@types/label-form";
 import LabelRow from "../../components/label-row";
 import * as S from "./style";
 
 export default function LabelRowContainer() {
-  const labels: LabelForm[] = [
-    {
-      id: 1,
-      title: "backend",
-      color: "#ff0000",
-      description: "바보같이 굴지말기",
-    },
-    {
-      id: 2,
-      title: "frontend",
-      color: "#bba333",
-      description: "예쁘게 디자인",
-    },
-    {
-      id: 3,
-      title: "기어 second",
-      color: "#2ea44f",
-      description: "오늘 달린다",
-    },
-  ];
+  const [labels, setLabels] = useState([]);
+
+  useEffect(() => {
+    const getLabels = async () => {
+      const result = await fetch("http://118.67.134.194:3000/api/label", {
+        method: "GET",
+      });
+      if (!result.ok) return;
+
+      const labelList = await result.json();
+
+      setLabels(labelList);
+    };
+    getLabels();
+  }, [labels]);
 
   return (
     <S.LabelRowContainer>
       <S.LabelContainerHeader>{labels.length} Labels</S.LabelContainerHeader>
-      {labels.map((label) => {
+      {labels.map((label: LabelForm) => {
         return <LabelRow key={label.id} label={label} />;
       })}
     </S.LabelRowContainer>

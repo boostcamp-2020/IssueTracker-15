@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Refresh } from "@styled-icons/boxicons-regular/Refresh";
 
 export const LabelEditor = styled.div`
-  display: flex;
+  display: "flex";
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -107,5 +107,5 @@ export const ButtonContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 11rem;
-  padding-right: 1rem;
+  padding-right: 2rem;
 `;
