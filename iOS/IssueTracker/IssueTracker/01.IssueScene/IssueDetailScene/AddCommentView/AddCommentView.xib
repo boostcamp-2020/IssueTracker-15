@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -83,6 +83,11 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5uF-bO-s66">
+                    <rect key="frame" x="10" y="120.5" width="384" height="581.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="0.96865135430000004" green="0.96860426659999999" blue="0.97646409270000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
@@ -91,14 +96,18 @@
                 <constraint firstItem="nE5-uG-pPY" firstAttribute="leading" secondItem="ga9-Pf-fmR" secondAttribute="trailing" id="4L3-5w-B6B"/>
                 <constraint firstItem="nE5-uG-pPY" firstAttribute="top" secondItem="qKZ-un-zM2" secondAttribute="bottom" constant="10" id="BhO-7n-lSb"/>
                 <constraint firstItem="foy-rZ-nQ4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="EJ9-kD-pL9"/>
+                <constraint firstItem="5uF-bO-s66" firstAttribute="top" secondItem="foy-rZ-nQ4" secondAttribute="bottom" constant="10" id="FFP-DP-NC5"/>
                 <constraint firstItem="nE5-uG-pPY" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.1" id="Il6-Ib-mnI"/>
+                <constraint firstItem="5uF-bO-s66" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="JBr-ch-uCo"/>
                 <constraint firstItem="0CJ-Kj-Z3G" firstAttribute="height" secondItem="foy-rZ-nQ4" secondAttribute="height" multiplier="0.722892" id="Kxg-Kj-P3f"/>
+                <constraint firstItem="0CJ-Kj-Z3G" firstAttribute="top" secondItem="5uF-bO-s66" secondAttribute="bottom" constant="10" id="WCw-0y-Lry"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nE5-uG-pPY" secondAttribute="trailing" constant="20" id="ekq-va-WWX"/>
                 <constraint firstItem="ga9-Pf-fmR" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.1" id="fLa-7e-Mnd"/>
                 <constraint firstItem="foy-rZ-nQ4" firstAttribute="height" secondItem="ga9-Pf-fmR" secondAttribute="height" id="g2f-gG-z7I"/>
                 <constraint firstItem="qKZ-un-zM2" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.2" id="hKR-bv-lij"/>
                 <constraint firstItem="nE5-uG-pPY" firstAttribute="centerY" secondItem="foy-rZ-nQ4" secondAttribute="centerY" id="kL6-Ym-C40"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0CJ-Kj-Z3G" secondAttribute="trailing" constant="10" id="mjf-Nu-dgW"/>
+                <constraint firstItem="5uF-bO-s66" firstAttribute="trailing" secondItem="nE5-uG-pPY" secondAttribute="trailing" id="qDU-fK-fIt"/>
                 <constraint firstItem="ga9-Pf-fmR" firstAttribute="leading" secondItem="foy-rZ-nQ4" secondAttribute="trailing" constant="10" id="u7i-sw-xAM"/>
                 <constraint firstItem="qKZ-un-zM2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vt5-FA-im6"/>
                 <constraint firstItem="ga9-Pf-fmR" firstAttribute="centerY" secondItem="foy-rZ-nQ4" secondAttribute="centerY" id="wgc-HK-fAP"/>
@@ -114,6 +123,7 @@
                 <outlet property="addCommentButton" destination="foy-rZ-nQ4" id="JLI-gG-rsJ"/>
                 <outlet property="barView" destination="qKZ-un-zM2" id="2jp-qV-VxV"/>
                 <outlet property="downButton" destination="nE5-uG-pPY" id="Zl2-kJ-j9N"/>
+                <outlet property="tableView" destination="5uF-bO-s66" id="edP-Yf-Ckc"/>
                 <outlet property="upButton" destination="ga9-Pf-fmR" id="xae-FJ-T5g"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="152.67857142857142"/>

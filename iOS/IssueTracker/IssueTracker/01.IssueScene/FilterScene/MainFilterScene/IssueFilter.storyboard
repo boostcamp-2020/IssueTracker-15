@@ -9,7 +9,6 @@
         <!--필터 선택-->
         <scene sceneID="fj1-Qa-syD">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h7c-XN-GSP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="IssueFilterViewController" id="5sC-z1-hcr" customClass="IssueFilterViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="default" allowsMultipleSelection="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="zoy-EY-wnv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -198,17 +197,17 @@
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h7c-XN-GSP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4666.666666666667" y="-556.47321428571422"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RSo-od-Xo0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e3K-4X-S6m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HMg-7R-cLt" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Q7T-dy-NLx">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
@@ -217,6 +216,7 @@
                         <segue destination="5sC-z1-hcr" kind="relationship" relationship="rootViewController" id="dlK-Zy-P3v"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e3K-4X-S6m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3756.521739130435" y="-556.47321428571422"/>
         </scene>
