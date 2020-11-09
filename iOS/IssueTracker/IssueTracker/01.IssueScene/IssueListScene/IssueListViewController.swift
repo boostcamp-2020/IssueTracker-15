@@ -18,10 +18,7 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var rightNavButton: UIBarButtonItem!
     @IBOutlet weak var leftNavButton: UIBarButtonItem!
     @IBOutlet weak var addIssueButton: UIButton!
-    //@IBOutlet weak var closeSelectedIssueButton: UIBarButtonItem!
-    lazy var addIssueButtonWidthConstraint: NSLayoutConstraint = {
-        self.addIssueButton.widthAnchor.constraint(equalToConstant: 100)
-    }()
+
     lazy var addIssueButtonAspectRatioConstraint: NSLayoutConstraint = {
         self.addIssueButton.widthAnchor.constraint(equalTo: self.addIssueButton.heightAnchor)
     }()
@@ -51,7 +48,6 @@ class IssueListViewController: UIViewController {
         configureSearchBar()
         configureCollectionView()
         issueListViewModel?.needFetchItems()
-        addIssueButtonWidthConstraint.isActive = false
         addIssueButtonAspectRatioConstraint.isActive = true
         navigationController?.isToolbarHidden = true
     }
@@ -63,6 +59,11 @@ class IssueListViewController: UIViewController {
             guard let cell = $0 as? IssueCellView else { return }
             cell.resetScrollOffset()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        addIssueButton.layer.cornerRadius = addIssueButton.bounds.height / 2 * 1
     }
     
     // TODO: SerachBar Configure
@@ -136,14 +137,7 @@ extension IssueListViewController {
         title = "0 개 선택"
         rightNavButton.title = "Cancel"
         leftNavButton.title = "Select All"
-        addIssueButtonWidthConstraint.isActive = true
-        addIssueButtonAspectRatioConstraint.isActive = false
-        addIssueButtonWidthConstraint.constant = addIssueButton.bounds.height + 100
-        addIssueButton.setTitle("선택 이슈 닫기", for: .normal)
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
-        }
-        tabBarController?.tabBar.isHidden = true
+        changeButtonTo(mode: .edit)
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: true, animation: true)
@@ -155,19 +149,38 @@ extension IssueListViewController {
         title = "이슈"
         rightNavButton.title = "Edit"
         leftNavButton.title = "Filter"
-        addIssueButtonWidthConstraint.isActive = false
-        addIssueButtonAspectRatioConstraint.isActive = true
-        addIssueButton.setTitle("", for: .normal)
-        addIssueButton.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
-        addIssueButton.tintColor = .blue
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
-        }
-        tabBarController?.tabBar.isHidden = false
+        changeButtonTo(mode: .general)
         issueListViewModel?.clearSelectedCells()
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: false, animation: true)
+        }
+    }
+    
+    private func changeButtonTo(mode: ViewingMode) {
+        switch mode {
+        case .edit:
+            addIssueButtonAspectRatioConstraint.isActive = false
+            addIssueButton.setTitle("선택 이슈 닫기", for: .normal)
+            addIssueButton.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
+            addIssueButton.backgroundColor = .red
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+                self.addIssueButton.contentEdgeInsets.left = 10
+                self.addIssueButton.contentEdgeInsets.right = 10
+                self.addIssueButton.imageEdgeInsets.left = -5
+            }
+        case .general:
+            addIssueButtonAspectRatioConstraint.isActive = true
+            addIssueButton.setTitle("", for: .normal)
+            addIssueButton.setImage(UIImage(systemName: "plus"), for: .normal)
+            addIssueButton.backgroundColor = UIColor(displayP3Red: 72/255, green: 133/255, blue: 195/255, alpha: 1)
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+                self.addIssueButton.contentEdgeInsets.right = 0
+                self.addIssueButton.contentEdgeInsets.left = 0
+                self.addIssueButton.imageEdgeInsets.left = 0
+            }
         }
     }
 }
@@ -195,7 +208,6 @@ extension IssueListViewController {
         
         self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
-    
     
 }
 
