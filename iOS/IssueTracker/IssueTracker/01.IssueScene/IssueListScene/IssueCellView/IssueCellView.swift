@@ -22,6 +22,7 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var labelCollectionView: UICollectionView!
     
+    private weak var issueItemViewModel: IssueItemViewModelProtocol?
     private var labelBadgeCells = [LabelItemViewModel]()
     
     private lazy var checkBoxGuideWidthConstraint = checkBoxGuideView.widthAnchor.constraint(equalToConstant: 0)
@@ -51,6 +52,24 @@ class IssueCellView: UICollectionViewCell {
         ])
     }
     
+    func configure(issueItemViewModel: IssueItemViewModelProtocol) {
+        self.issueItemViewModel = issueItemViewModel
+        
+        titleLabel.text = issueItemViewModel.title
+        setMilestone(title: issueItemViewModel.milestoneTitle)
+        setLabels(labelViewModels: issueItemViewModel.labelItemViewModels)
+        
+        self.issueItemViewModel?.didMilestoneChanged = { [weak self] milestone in
+                self?.setMilestone(title: milestone)
+        }
+        
+        self.issueItemViewModel?.didLabelsChanged = { [weak self] (labelViewModels) in
+            self?.setLabels(labelViewModels: labelViewModels)
+        }
+        
+    }
+
+    
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         super.preferredLayoutAttributesFitting(layoutAttributes)
         layoutIfNeeded()
@@ -62,22 +81,6 @@ class IssueCellView: UICollectionViewCell {
         layoutAttributes.frame = frame
         
         return layoutAttributes
-    }
-
-    func configure(issueItemViewModel: IssueItemViewModel) {
-        
-        titleLabel.text = issueItemViewModel.title
-        setMilestone(title: issueItemViewModel.milestoneTitle)
-        setLabels(labelViewModels: issueItemViewModel.labelItemViewModels)
-        
-        issueItemViewModel.didMilestoneChanged = { [weak self] milestone in
-                self?.setMilestone(title: milestone)
-        }
-        
-        issueItemViewModel.didLabelsChanged = { [weak self] (labelViewModels) in
-            self?.setLabels(labelViewModels: labelViewModels)
-        }
-        
     }
     
     private func setMilestone(title: String) {
@@ -163,14 +166,15 @@ extension IssueCellView: UIScrollViewDelegate {
 extension IssueCellView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return labelBadgeCells.count
+        return issueItemViewModel?.labelItemViewModels.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: LabelBadgeCellView = collectionView.dequeueCell(at: indexPath) else {
+        guard let cell: LabelBadgeCellView = collectionView.dequeueCell(at: indexPath),
+            let labelItemViewModel = issueItemViewModel?.labelItemViewModels[indexPath.row] else {
             return UICollectionViewCell()
         }
-        cell.configure(labelViewModel: labelBadgeCells[indexPath.row])
+        cell.configure(labelViewModel: labelItemViewModel)
         return cell
     }
     

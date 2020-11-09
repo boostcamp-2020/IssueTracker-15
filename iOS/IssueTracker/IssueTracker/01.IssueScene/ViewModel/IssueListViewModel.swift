@@ -81,20 +81,20 @@ class IssueListViewModel: IssueListViewModelProtocol {
     }
     
     func cellSelected(at path: IndexPath) {
-        issues[path.row].check.toggle()
-        self.didCellChecked?(path, issues[path.row].check)
+        issues[path.row].checked.toggle()
+        self.didCellChecked?(path, issues[path.row].checked)
     }
     
     func cellSelectClear() {
         for (idx, issue) in issues.enumerated() {
-            issue.check = false
+            issue.checked = false
             self.didCellChecked?(IndexPath(row: idx, section: 0), false)
         }
     }
     
     func cellSelectAll() {
         for (idx, issue) in issues.enumerated() {
-            issue.check = true
+            issue.checked = true
             self.didCellChecked?(IndexPath(row: idx, section: 0), true)
         }
     }
