@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "type-check": "tsc"
@@ -34,6 +33,7 @@
     "@types/styled-components": "^5.1.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1",
     "styled-icons": "^10.22.0",
