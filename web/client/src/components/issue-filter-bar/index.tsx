@@ -2,6 +2,7 @@ import React from "react";
 import * as S from "./style";
 import Dropdown from "../dropdown";
 import IssueSideBar from "../issue-sidebar/sidebar";
+import { TitleInputWrapAuth } from "../auth/style";
 
 const DropdownContents = {
   title: "Filter Issues",
@@ -12,6 +13,7 @@ const DropdownContents = {
     "Everything mentioning to you",
     "Closed Issues",
   ],
+  isVisible: true,
 };
 
 function IssueFilterBar() {

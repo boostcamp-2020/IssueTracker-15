@@ -6,14 +6,16 @@ import DropdownTitle from "./dropdown-title";
 interface dropdownProps {
   title: string;
   contents: string[];
+  isVisible: boolean;
 }
+
 // { "제목 " : {{"title" : ~}, {"content" : [] }};
-function Dropdown({ title, contents }: dropdownProps) {
+function Dropdown<IProps_Squre>(props: dropdownProps) {
   return (
-    <S.DropdownWrapper>
-      <DropdownTitle title={title} />
+    <S.DropdownWrapper isVisible={props.isVisible}>
+      <DropdownTitle title={props.title} />
       <S.ListWrapper>
-        {contents.map((content: string) => {
+        {props.contents.map((content: string) => {
           console.log(content);
           return <DropdownContent content={content} />;
         })}
