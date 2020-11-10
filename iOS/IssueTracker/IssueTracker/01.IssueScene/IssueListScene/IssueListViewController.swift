@@ -17,17 +17,14 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var rightNavButton: UIBarButtonItem!
     @IBOutlet weak var leftNavButton: UIBarButtonItem!
-    @IBOutlet weak var addIssueButton: UIButton!
-    //@IBOutlet weak var closeSelectedIssueButton: UIBarButtonItem!
-    lazy var addIssueButtonWidthConstraint: NSLayoutConstraint = {
-        self.addIssueButton.widthAnchor.constraint(equalToConstant: 100)
-    }()
-    lazy var addIssueButtonAspectRatioConstraint: NSLayoutConstraint = {
-        self.addIssueButton.widthAnchor.constraint(equalTo: self.addIssueButton.heightAnchor)
+    @IBOutlet weak var floatingButton: UIButton!
+
+    lazy var floatingButtonAspectRatioConstraint: NSLayoutConstraint = {
+        self.floatingButton.widthAnchor.constraint(equalTo: self.floatingButton.heightAnchor)
     }()
     
     private var viewingMode: ViewingMode = .general
-    var issueListViewModel: IssueListViewModel? {
+    var issueListViewModel: IssueListViewModelProtocol? {
         didSet {
             issueListViewModel?.didFetch = { [weak self] in
                 self?.collectionView.reloadData()
@@ -51,8 +48,7 @@ class IssueListViewController: UIViewController {
         configureSearchBar()
         configureCollectionView()
         issueListViewModel?.needFetchItems()
-        addIssueButtonWidthConstraint.isActive = false
-        addIssueButtonAspectRatioConstraint.isActive = true
+        floatingButtonAspectRatioConstraint.isActive = true
         navigationController?.isToolbarHidden = true
     }
     
@@ -67,7 +63,7 @@ class IssueListViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
+        floatingButton.layer.cornerRadius = floatingButton.bounds.height / 2 * 1
     }
     
     // TODO: SerachBar Configure
@@ -93,15 +89,12 @@ class IssueListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
-    @IBAction func addIssueButtonTapped(_ sender: Any) {
-        // TODO : add issue
-        AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: nil)
-    }
-    
 }
 
 // MARK: - Actions
+
 extension IssueListViewController {
+    
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
         guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) else { return }
         
@@ -131,8 +124,15 @@ extension IssueListViewController {
         }
     }
     
-    @IBAction func closeAllSelectedIssueButtonTapped(_ sender: Any) {
-        
+    @IBAction func floatingButtonTapped(_ sender: Any) {
+        switch viewingMode {
+        case .edit:
+            break
+        case .general:
+            AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: nil)
+            break
+        }
+
     }
     
     private func toEditMode() {
@@ -140,14 +140,7 @@ extension IssueListViewController {
         title = "0 개 선택"
         rightNavButton.title = "Cancel"
         leftNavButton.title = "Select All"
-        addIssueButtonWidthConstraint.isActive = true
-        addIssueButtonAspectRatioConstraint.isActive = false
-        addIssueButtonWidthConstraint.constant = addIssueButton.bounds.height + 100
-        addIssueButton.setTitle("선택 이슈 닫기", for: .normal)
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
-        }
-        tabBarController?.tabBar.isHidden = true
+        changeButtonTo(mode: .edit)
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: true, animation: true)
@@ -159,24 +152,45 @@ extension IssueListViewController {
         title = "이슈"
         rightNavButton.title = "Edit"
         leftNavButton.title = "Filter"
-        addIssueButtonWidthConstraint.isActive = false
-        addIssueButtonAspectRatioConstraint.isActive = true
-        addIssueButton.setTitle("", for: .normal)
-        addIssueButton.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
-        addIssueButton.tintColor = .blue
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
-        }
-        tabBarController?.tabBar.isHidden = false
+        changeButtonTo(mode: .general)
         issueListViewModel?.clearSelectedCells()
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: false, animation: true)
         }
     }
+    
+    private func changeButtonTo(mode: ViewingMode) {
+        switch mode {
+        case .edit:
+            floatingButtonAspectRatioConstraint.isActive = false
+            floatingButton.setTitle("선택 이슈 닫기", for: .normal)
+            floatingButton.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
+            floatingButton.backgroundColor = .red
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+                self.floatingButton.contentEdgeInsets.left = 10
+                self.floatingButton.contentEdgeInsets.right = 10
+                self.floatingButton.imageEdgeInsets.left = -5
+            }
+        case .general:
+            floatingButtonAspectRatioConstraint.isActive = true
+            floatingButton.setTitle("", for: .normal)
+            floatingButton.setImage(UIImage(systemName: "plus"), for: .normal)
+            floatingButton.backgroundColor = UIColor(displayP3Red: 72/255, green: 133/255, blue: 195/255, alpha: 1)
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+                self.floatingButton.contentEdgeInsets.right = 0
+                self.floatingButton.contentEdgeInsets.left = 0
+                self.floatingButton.imageEdgeInsets.left = 0
+            }
+        }
+    }
+    
 }
 
 // MARK: - Present
+
 extension IssueListViewController {
     
     private func presentFilterViewController() {
@@ -199,15 +213,16 @@ extension IssueListViewController {
         self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
     
-    
 }
 
 // MARK: - UICollectionViewDataSource Implementation
+
 extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath),
             let cellViewModel = issueListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
         cellView.configure(issueItemViewModel: cellViewModel)
+        cellView.delegate = self
         cellView.showCheckBox(show: viewingMode == .edit, animation: false)
         return cellView
     }
@@ -215,4 +230,27 @@ extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return issueListViewModel?.numberOfItem() ?? 0
     }
+}
+
+// MARK: - IssucCellViewDelegate Implementation
+
+extension IssueListViewController: IssucCellViewDelegate {
+    
+    func closeIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int) {
+        
+    }
+    
+    func deleteIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int) {
+        
+    }
+    
+    func issueCellViewBeginDragging(_ issueCellView: IssueCellView, at id: Int) {
+        collectionView.visibleCells.forEach {
+            guard let cell = $0 as? IssueCellView, cell != issueCellView else { return }
+            UIView.animate(withDuration: 0.5) {
+                cell.cellHorizontalScrollView.contentOffset = CGPoint.zero
+            }
+        }
+    }
+    
 }

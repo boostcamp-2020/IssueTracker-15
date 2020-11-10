@@ -12,10 +12,11 @@ import NetworkFramework
 protocol IssueProvidable: AnyObject {
     func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion:  @escaping (Issue?) -> Void )
     func editIssue(id: Int, description: String, completion:  @escaping (Issue?) -> Void)
-    func editIssue(id: Int, title: String, completion: @escaping (Issue?) -> Void)
+    func editTitle(id: Int, title: String, completion: @escaping (Issue?) -> Void)
     func fetchIssues(completion: @escaping ([Issue]?) -> Void)
     
     func getIssue(at id: Int, completion: @escaping (Issue?) -> Void)
+    func closeIssue(id: Int, completion: @escaping (Bool) -> Void)
     func addLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void)
     func deleteLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void)
     func addMilestone(at id: Int, of milestone: Int, completion: @escaping (Issue?) -> Void)
@@ -119,13 +120,25 @@ class IssueProvider: IssueProvidable {
             }
         })
     }
+    
+    func closeIssue(id: Int, completion: @escaping (Bool) -> Void) {
+        dataLoader?.request(IssueService.editIssue(id, nil, false), callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion(false)
+            case .success:
+                completion(true)
+            }
+        })
+    }
+    
     /*
      Response : 200 body: nil
      
      */
     func editIssue(id: Int, description: String, completion: @escaping (Issue?) -> Void) {
         
-        dataLoader?.request(IssueService.editDescription(id, description), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.editIssue(id, description, nil), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)
@@ -139,8 +152,8 @@ class IssueProvider: IssueProvidable {
     /*
      Response : 200 body: nil
      */
-    func editIssue(id: Int, title: String, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.editDescription(id, title), callBackQueue: .main, completion: { (response) in
+    func editTitle(id: Int, title: String, completion: @escaping (Issue?) -> Void) {
+        dataLoader?.request(IssueService.editTitle(id, title), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)

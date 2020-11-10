@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Im-NR-0j4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Im-NR-0j4">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -149,7 +149,7 @@
                     <tabBarItem key="tabBarItem" title="이슈" image="1.circle.fill" catalog="system" id="A1f-zK-Nd4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="LqH-iR-KEA">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
@@ -174,7 +174,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MsW-cq-Pbp">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HQK-O9-Si0">
                                     <size key="itemSize" width="128" height="128"/>
@@ -192,32 +192,17 @@
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
                                 </state>
                                 <connections>
-                                    <action selector="addIssueButtonTapped:" destination="EML-Kz-Cea" eventType="touchUpInside" id="XKx-Fh-3lx"/>
+                                    <action selector="floatingButtonTapped:" destination="EML-Kz-Cea" eventType="touchUpInside" id="XKx-Fh-3lx"/>
                                 </connections>
                             </button>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apM-nX-fph">
-                                <rect key="frame" x="0.0" y="813" width="414" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="7sm-7Q-uuV"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Krs-lb-QRz"/>
-                                    <barButtonItem title="선택 이슈 닫기" id="MYd-sl-1sn">
-                                        <inset key="largeContentSizeImageInsets" minX="0.0" minY="18" maxX="0.0" maxY="0.0"/>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="MsW-cq-Pbp" firstAttribute="leading" secondItem="WFd-Ro-ELe" secondAttribute="leading" id="5ou-My-cfT"/>
                             <constraint firstItem="bvj-Iu-non" firstAttribute="bottom" secondItem="EVQ-k4-p1T" secondAttribute="bottom" constant="30" id="6RT-pJ-WK0"/>
                             <constraint firstItem="bvj-Iu-non" firstAttribute="trailing" secondItem="EVQ-k4-p1T" secondAttribute="trailing" constant="30" id="d5d-CT-sGM"/>
-                            <constraint firstAttribute="trailing" secondItem="apM-nX-fph" secondAttribute="trailing" id="djv-5R-5Af"/>
                             <constraint firstItem="EVQ-k4-p1T" firstAttribute="height" secondItem="WFd-Ro-ELe" secondAttribute="height" multiplier="0.05" id="e87-Eq-mon"/>
-                            <constraint firstItem="apM-nX-fph" firstAttribute="leading" secondItem="WFd-Ro-ELe" secondAttribute="leading" id="fMC-lQ-6yV"/>
                             <constraint firstAttribute="trailing" secondItem="MsW-cq-Pbp" secondAttribute="trailing" id="oa6-tj-VKC"/>
-                            <constraint firstItem="apM-nX-fph" firstAttribute="top" secondItem="bvj-Iu-non" secondAttribute="bottom" id="uUD-rU-wDy"/>
                             <constraint firstItem="MsW-cq-Pbp" firstAttribute="top" secondItem="WFd-Ro-ELe" secondAttribute="top" id="v60-lQ-n4N"/>
                             <constraint firstAttribute="bottom" secondItem="MsW-cq-Pbp" secondAttribute="bottom" id="x24-aC-Bhe"/>
                         </constraints>
@@ -236,8 +221,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addIssueButton" destination="EVQ-k4-p1T" id="D5H-8n-kfh"/>
                         <outlet property="collectionView" destination="MsW-cq-Pbp" id="Ejw-HB-dGN"/>
+                        <outlet property="floatingButton" destination="EVQ-k4-p1T" id="D5H-8n-kfh"/>
                         <outlet property="leftNavButton" destination="TOO-qs-SZ3" id="SkZ-SZ-Fpk"/>
                         <outlet property="rightNavButton" destination="hqn-sB-pF1" id="HYf-EL-un8"/>
                     </connections>
@@ -253,7 +238,7 @@
                     <tabBarItem key="tabBarItem" title="레이블" image="2.circle.fill" catalog="system" id="NXm-Dv-qAK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="NKq-kU-VOX">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
@@ -273,7 +258,7 @@
                     <tabBarItem key="tabBarItem" title="마일스톤" image="3.circle.fill" catalog="system" id="RDq-oe-4vG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="jZ3-TC-wsS">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
