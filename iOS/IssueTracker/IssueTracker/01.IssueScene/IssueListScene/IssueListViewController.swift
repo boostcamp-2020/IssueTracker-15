@@ -81,7 +81,6 @@ class IssueListViewController: UIViewController {
     
     private func configureCollectionView() {
         setupCollectionViewLayout()
-//        collectionView.dataSource = self
         collectionView.registerCell(type: IssueCellView.self)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didSelectCell(_:)))
@@ -97,12 +96,13 @@ class IssueListViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
-    func makeDataSource() -> DataSource {
-        let dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, issueItem) -> UICollectionViewCell? in
+    private func makeDataSource() -> DataSource {
+        let dataSource = DataSource(collectionView: collectionView,
+                                    cellProvider: { (collectionView, indexPath, issueItem) -> UICollectionViewCell? in
                                         guard let cell: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return nil }
                                         cell.configure(issueItemViewModel: issueItem)
                                         return cell
-        }
+                                    })
         return dataSource
     }
     
