@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./style";
 import Dropdown from "../dropdown";
 import IssueSideBar from "../issue-sidebar/sidebar";
@@ -13,16 +13,18 @@ const DropdownContents = {
     "Everything mentioning to you",
     "Closed Issues",
   ],
-  isVisible: true,
 };
 
 function IssueFilterBar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleDropdown = () => setIsOpen(!isOpen);
+
   return (
     <S.FilterBar>
       <S.FilterWrapper>
         <S.FilterForm>
-          <S.FilterComp>Filters</S.FilterComp>
-          <Dropdown {...DropdownContents} />
+          <S.FilterComp onClick={toggleDropdown}>Filters</S.FilterComp>
+          {isOpen && <Dropdown {...DropdownContents} />}
         </S.FilterForm>
       </S.FilterWrapper>
       <S.SearchForm>is:issue is:open</S.SearchForm>

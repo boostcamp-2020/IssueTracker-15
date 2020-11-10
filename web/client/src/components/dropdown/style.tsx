@@ -19,18 +19,14 @@ export const DropdownTitle = styled.div`
   padding-right: 5%;
   border-bottom: 1px solid #ced4da;
 `;
-interface displayProps {
-  isVisible: boolean;
-}
 
-export const DropdownWrapper = styled.div<displayProps>`
+export const DropdownWrapper = styled.div`
   position: absolute;
   border: 1px solid #ced4da;
   width: 300px;
   margin-top: 12%;
   border-radius: 6px;
   left: 0;
-  display: ${(props) => (props.isVisible ? "block" : "none")};
 `;
 
 export const ListWrapper = styled.ul`
