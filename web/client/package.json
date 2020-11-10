@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV = PRODUCTION webpack --config webpack.prod.js",
-    "dev": "SET \"NODE_ENV = DEVELOPMENT\" && webpack-dev-server --config webpack.dev.js",
+
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack-dev-server --config webpack.dev.js",
     "type-check": "tsc"
   },
   "keywords": [],
