@@ -40,12 +40,17 @@ class IssueListViewModel: IssueListViewModelProtocol {
     private weak var milestoneProvider: MilestoneProvidable?
     private weak var issueProvider: IssueProvidable?
     
-    var filter: IssueFilterable?
     var didItemChanged: (([IssueItemViewModel]) -> Void)?
     var showTitleWithCheckNum: ((Int) -> Void)?
     var didCellChecked: ((IndexPath, Bool) -> Void)?
     
     private(set) var issues = [IssueItemViewModel]()
+    var filter: IssueFilterable? {
+        didSet {
+            needFetchItems()
+        }
+    }
+    
     
     init(labelProvider: LabelProvidable, milestoneProvider: MilestoneProvidable, issueProvider: IssueProvidable, issueFilter: IssueFilterable? = IssueFilter()) {
         self.labelProvider = labelProvider
@@ -63,7 +68,8 @@ extension IssueListViewModel {
     private func fetchItems() {
         let group = DispatchGroup()
         group.enter()
-        issueProvider?.fetchIssues(completion: { [weak self] (issues) in
+        
+        issueProvider?.fetchIssues(with: filter, completion: { [weak self] (issues) in
             guard let `self` = self,
                 let issues = issues
                 else { return }
@@ -120,7 +126,7 @@ extension IssueListViewModel {
         }
         
         group.notify(queue: .main) { [weak self] in
-            // TODO 어떻게 동작할 것인가?
+            self?.needFetchItems()
         }
     }
 }

@@ -88,6 +88,18 @@ struct Issue {
     
 }
 
+// MARK: - Hashable
+
+extension Issue: Hashable {
+    static func == (lhs: Issue, rhs: Issue) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
 // MARK: - Parse From API Response
 
 extension Issue {
