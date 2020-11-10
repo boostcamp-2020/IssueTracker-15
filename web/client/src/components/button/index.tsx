@@ -4,11 +4,12 @@ import * as S from "./style";
 interface ButtonProps {
   value: string;
   color: string;
+  onClick?: () => void;
 }
-export default function Button({ value, color }: ButtonProps) {
+export default function Button({ value, color, onClick }: ButtonProps) {
   return (
-    <>
-      <S.CustomButton color={color}>{value}</S.CustomButton>
-    </>
+    <S.CustomButton color={color} onClick={onClick}>
+      {value}
+    </S.CustomButton>
   );
 }

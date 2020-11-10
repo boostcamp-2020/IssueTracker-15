@@ -6,7 +6,7 @@ export const LabelRow = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 65%;
-  padding: 0.7rem 1rem 0.7rem 1.5rem;
+  padding: 0.7rem 1rem;
   border-left: 1px solid #e8e8e8;
   border-right: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
