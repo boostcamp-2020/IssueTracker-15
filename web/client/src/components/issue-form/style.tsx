@@ -11,3 +11,10 @@ export const IssueForm = styled.div`
   padding-right: 3%;
   padding-left: 3%;
 `;
+
+export const IssueComp = styled.div`
+  border-top: 1px solid #ced4da;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  display: flex;
+`;
