@@ -10,16 +10,16 @@ import Foundation
 
 struct Issue {
     let id: Int
-    let title: String
+    var title: String
     
     // TODO: description -> 없을 시 ""
-    let description: String
+    var description: String?
     
     // TODO: author -> id!
     let author: User
-    let isOpened: Bool
+    var isOpened: Bool
     let createdAt: String
-    let updatedAt: String
+    var updatedAt: String
     
     var milestone: Int?
     var labels: [Int]
@@ -95,7 +95,7 @@ extension Issue {
     // from fetchIssue API
     init(id: Int,
          title: String,
-         description: String,
+         description: String? = nil,
          author: String,
          isOpened: Bool,
          createdAt: String,
@@ -134,15 +134,15 @@ extension Issue {
             else { return nil }
         let labels = labelObjects.compactMap { $0["id"] as? Int }
         let assignees = assigneeObjects.compactMap { User(json: $0) }
-        let description = ""
         let milestone = jsonObject["milestoneId"] as? Int
-        return Issue(id: id, title: title, description: description, author: author, isOpened: isOpened, createdAt: createdAt, updatedAt: updatedAt, milestone: milestone, labels: labels, assignees: assignees)
+        
+        return Issue(id: id, title: title, description: nil, author: author, isOpened: isOpened, createdAt: createdAt, updatedAt: updatedAt, milestone: milestone, labels: labels, assignees: assignees)
     }
     
     // from AddIssue API
     init(id: Int,
          title: String,
-         description: String,
+         description: String? = nil,
          authorId: Int,
          isOpened: Bool,
          createdAt: String,
@@ -170,8 +170,12 @@ extension Issue {
             let updateAt = jsonObject["updateAt"] as? String,
             let authorId = jsonObject["authorId"] as? Int
             else { return nil }
-        let description = (jsonObject["description"] as? String) ?? ""
+    
         let milestoneId = jsonObject["milestoneId"] as? Int
+        var description: String?
+        if let desc = (jsonObject["description"] as? String) {
+            description = desc.isEmpty ? nil : desc
+        }
         
         return Issue(id: id, title: title, description: description, authorId: authorId, isOpened: isOpened, createdAt: createAt, updatedAt: updateAt, milestone: milestoneId)
     }
@@ -190,7 +194,12 @@ extension Issue {
             let assigneeObjects = jsonObject["assignees"] as? [[String: Any]],
             let commentObjects = jsonObject["comments"] as? [[String: Any]]
             else { return nil }
-        let description = (jsonObject["description"] as? String) ?? ""
+        
+        var description: String?
+        if let desc = (jsonObject["description"] as? String) {
+            description = desc.isEmpty ? nil : desc
+        }
+        
         let milestoneId = (jsonObject["milestone"] as? [String: Any])?["id"] as? Int
         let labels = labelObjects.compactMap { $0["id"] as? Int }
         let authorImageUrl = authorObject["imageURL"] as? String
@@ -204,7 +213,7 @@ extension Issue {
     
     init(id: Int,
          title: String,
-         description: String,
+         description: String? = nil,
          author: User,
          isOpened: Bool,
          createdAt: String,
@@ -225,7 +234,6 @@ extension Issue {
         self.assignees = assignees
         self.comments = comments
     }
-    
 }
 
 // TODO: User DataModel

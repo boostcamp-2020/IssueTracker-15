@@ -26,6 +26,8 @@ protocol IssueListViewModelProtocol: AnyObject {
     
     func createFilterViewModel() -> IssueFilterViewModelProtocol?
     func createIssueDetailViewModel(path: IndexPath) -> IssueDetailViewModel?
+    
+    func addNewIssue(title: String, description: String, authorID: Int)
 }
 
 class IssueListViewModel: IssueListViewModelProtocol {
@@ -53,6 +55,8 @@ class IssueListViewModel: IssueListViewModelProtocol {
             guard let `self` = self,
                 let issues = datas
                 else { return }
+            
+            self.issues.removeAll()
             
             issues.forEach {
                 let itemViewModel = IssueItemViewModel(issue: $0)
@@ -128,5 +132,15 @@ class IssueListViewModel: IssueListViewModelProtocol {
                                     issueProvider: issueProvider,
                                     labelProvier: labelProvider,
                                     milestoneProvider: milestoneProvider)
+    }
+    
+    func addNewIssue(title: String, description: String, authorID: Int) {
+        issueProvider?.addIssue(title: title, description: description, authorID: authorID, milestoneID: nil) { [weak self] (createdIssue) in
+            guard let `self` = self,
+                let createdIssue = createdIssue
+                else { return }
+            self.issues.append(IssueItemViewModel(issue: createdIssue))
+            self.didFetch?()
+        }
     }
 }

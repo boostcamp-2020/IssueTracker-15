@@ -48,7 +48,6 @@ class IssueListViewController: UIViewController {
         super.viewDidLoad()
         configureSearchBar()
         configureCollectionView()
-        issueListViewModel?.needFetchItems()
         floatingButtonAspectRatioConstraint.isActive = true
         navigationController?.isToolbarHidden = true
         //floatingButton.setTitle("", for: .normal)
@@ -61,6 +60,8 @@ class IssueListViewController: UIViewController {
             guard let cell = $0 as? IssueCellView else { return }
             cell.resetScrollOffset()
         }
+        
+        issueListViewModel?.needFetchItems()
     }
     
     override func viewDidLayoutSubviews() {
@@ -131,7 +132,10 @@ extension IssueListViewController {
         case .edit:
             break
         case .general:
-            AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: nil)
+            AddNewIssueViewController.present(at: self, addType: .newIssue, previousData: nil, onDismiss: { [weak self] (content) in
+                print(content)
+                self?.issueListViewModel?.addNewIssue(title: content[0], description: content[1], authorID: 3)
+            })
         }
     }
     

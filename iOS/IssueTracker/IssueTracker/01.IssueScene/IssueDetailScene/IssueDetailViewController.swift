@@ -43,7 +43,7 @@ class IssueDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBarButtons()
+        configureEditButton()
         issueDetailViewModel.needFetchDetails()
         configureCollectionView()
         configureBottomSheetView()
@@ -60,14 +60,21 @@ class IssueDetailViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
     }
-    
-    private func configureNavigationBarButtons() {
-        configureEditButton()
+
+    private func configureEditButton() {
+        let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editButtonTapped))
+        self.navigationItem.rightBarButtonItem = editButton
     }
     
-    private func configureEditButton() {
-        let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: nil)
-        self.navigationItem.rightBarButtonItem = editButton
+    @objc func editButtonTapped() {
+        let previousData: [String] = [issueDetailViewModel.title,
+                                      issueDetailViewModel.description ?? ""]
+        
+        AddNewIssueViewController.present(at: self, addType: .editIssue, previousData: previousData) { [weak self] (content) in
+            let editedTitle = content[0]
+            let editedDescription = content[1]
+            self?.issueDetailViewModel.editIssue(title: editedTitle, description: editedDescription)
+        }
     }
     
     private func configureCollectionView() {
@@ -84,7 +91,6 @@ class IssueDetailViewController: UIViewController {
         bottomSheetView.delegate = self
         let height = UIScreen.main.bounds.height
         let width  = UIScreen.main.bounds.width
-        print("size \(UIScreen.main.bounds.height * 0.85)")
         bottomSheetView.frame = CGRect(x: 0, y: height * 0.85, width: width, height: height)
         
         self.bottomSheetView = bottomSheetView
@@ -185,9 +191,9 @@ extension IssueDetailViewController: BottomSheetViewDelegate {
     }
     
     func addCommentButtonTapped() {
-        AddNewIssueViewController.present(at: self, addType: .newComment, onDismiss: { [weak self] (content) in
+        AddNewIssueViewController.present(at: self, addType: .newComment, previousData: nil, onDismiss: { [weak self] (content) in
             print(content)
-            self?.issueDetailViewModel.addComment(content: content)
+            self?.issueDetailViewModel.addComment(content: content[0])
         })
     }
 }
