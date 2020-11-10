@@ -15,6 +15,8 @@ protocol IssucCellViewDelegate: AnyObject {
 }
 
 class IssueCellView: UICollectionViewCell {
+    typealias DataSource = UICollectionViewDiffableDataSource<Int,LabelItemViewModel>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Int,LabelItemViewModel>
     
     weak var delegate: IssucCellViewDelegate?
     
@@ -31,8 +33,15 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var labelCollectionView: UICollectionView!
     
+    private lazy var dataSource: DataSource = {
+        return DataSource(collectionView: labelCollectionView) { (collectionView, indexPath, labelItem) -> UICollectionViewCell? in
+            guard let cell: LabelBadgeCellView = collectionView.dequeueCell(at: indexPath) else { return nil }
+            cell.configure(labelViewModel: labelItem)
+            return cell
+        }
+    }()
+    
     private weak var issueItemViewModel: IssueItemViewModelProtocol?
-    private var labelBadgeCells = [LabelItemViewModel]()
     
     private lazy var checkBoxGuideWidthConstraint = checkBoxGuideView.widthAnchor.constraint(equalToConstant: 0)
     
@@ -46,8 +55,6 @@ class IssueCellView: UICollectionViewCell {
         milestoneBadge.setBorder(width: 1, color: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1))
         milestoneBadge.cornerRadiusRatio = 0.5
         milestoneBadge.setPadding(top: 5, left: 5, bottom: 5, right: 5)
-        
-        labelCollectionView.dataSource = self
         
         let layout = LeftAlignedBadgeFlowLayout()
         layout.leftSpacing = 10
@@ -101,9 +108,10 @@ class IssueCellView: UICollectionViewCell {
     }
     
     private func setLabels(labelViewModels: [LabelItemViewModel]) {
-        self.labelBadgeCells.removeAll()
-        self.labelBadgeCells = labelViewModels
-        self.labelCollectionView.reloadData()
+        var snapShot = SnapShot()
+        snapShot.appendSections([0])
+        snapShot.appendItems(labelViewModels)
+        dataSource.apply(snapShot)
     }
     
     func resetScrollOffset() {
@@ -173,25 +181,6 @@ extension IssueCellView: UIScrollViewDelegate {
         }
         
         return CGPoint(x: closeBoxGuideView.bounds.width + deleteBoxGuideView.bounds.width, y: 0)
-    }
-    
-}
-
-// MARK: - UICollectionViewDataSource Implementation
-
-extension IssueCellView: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return issueItemViewModel?.labelItemViewModels.count ?? 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell: LabelBadgeCellView = collectionView.dequeueCell(at: indexPath),
-            let labelItemViewModel = issueItemViewModel?.labelItemViewModels[indexPath.row] else {
-            return UICollectionViewCell()
-        }
-        cell.configure(labelViewModel: labelItemViewModel)
-        return cell
     }
     
 }

@@ -184,6 +184,7 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
+                
                 self.issues[id]?.deleteLabel(id: labelId)
                 completion(self.issues[id])
             }

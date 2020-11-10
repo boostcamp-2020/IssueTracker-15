@@ -86,9 +86,9 @@ extension IssueService: IssueTrackerService {
         case .addLabel(let id, let labelId):
             // /api/issue/:id/label/:labelId
             return "/api/issue/\(id)/label/\(labelId)"
-        case .deleteLabel(let id, let milestoneId):
+        case .deleteLabel(let id, let labelId):
             // /api/issue/:id/milestone/:milestoneId
-            return "/api/issue/\(id)/milestone/\(milestoneId)"
+            return "/api/issue/\(id)/label/\(labelId)"
         case .addMilestone(let id, let milestoneId):
             // /api/issue/:id/milestone/:milestoneId
             return "/api/issue/\(id)/milestone/\(milestoneId)"

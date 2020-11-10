@@ -60,7 +60,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Kmn-zW-86B">
-                                                <rect key="frame" x="15" y="46" width="319" height="141"/>
+                                                <rect key="frame" x="15" y="46" width="349" height="141"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="4" id="Xch-51-Jf9">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -80,7 +80,7 @@
                                             <constraint firstItem="Kmn-zW-86B" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="bottom" constant="5" id="if2-fg-gN0"/>
                                             <constraint firstItem="Kmn-zW-86B" firstAttribute="top" secondItem="0Ig-WN-dKN" secondAttribute="bottom" constant="10" id="vvg-DU-nbx"/>
                                             <constraint firstItem="Kmn-zW-86B" firstAttribute="leading" secondItem="Ikc-pc-tFP" secondAttribute="leading" id="x2e-F0-yYo"/>
-                                            <constraint firstAttribute="trailing" secondItem="Kmn-zW-86B" secondAttribute="trailing" constant="80" id="yCF-Gf-oAg"/>
+                                            <constraint firstAttribute="trailing" secondItem="Kmn-zW-86B" secondAttribute="trailing" constant="50" id="yCF-Gf-oAg"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="top" secondItem="R8Z-t0-U66" secondAttribute="top" constant="10" id="zfI-bt-iTJ"/>
                                         </constraints>
                                     </view>
