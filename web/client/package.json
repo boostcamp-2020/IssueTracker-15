@@ -17,6 +17,7 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
+    "@types/qs": "^6.9.5",
     "@types/react": "^16.9.55",
     "@types/react-dom": "^16.9.9",
     "@types/react-router-dom": "^5.1.6",
@@ -31,8 +32,10 @@
   },
   "dependencies": {
     "@types/styled-components": "^5.1.4",
+    "qs": "^6.9.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-github-login-button": "^1.0.1",
     "react-icons": "^3.11.0",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1",
