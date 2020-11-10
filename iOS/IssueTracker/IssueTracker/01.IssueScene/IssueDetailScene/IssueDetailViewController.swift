@@ -152,6 +152,18 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - BottomSheetViewDelegate Implementatioin
 
 extension IssueDetailViewController: BottomSheetViewDelegate {
+    
+    func categoryHeaderTapped(type: DetailSelectionType) {
+        let maximumSelection = type == .milestone ? 1 : 0
+        let dataSource = issueDetailViewModel.detailSelectionItemDataSource(of: type)
+        let viewModel = DetailSelectionViewModel(detailCondition: type, viewModelDataSource: dataSource, maxSelection: maximumSelection)
+        let vc = DetailSelectionViewController.createViewController(with: viewModel)
+        vc.onSelectionComplete = { selectedItems in
+            self.issueDetailViewModel.detailItemSelected(type: type, selectedItems: selectedItems)
+        }
+        present(vc, animated: true)
+    }
+    
     func upButtonTapped() {
         guard let currentIndexPath = self.currentIndexPath else { return }
         

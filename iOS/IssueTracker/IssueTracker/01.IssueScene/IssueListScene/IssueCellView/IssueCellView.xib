@@ -24,7 +24,7 @@
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xnl-RV-xeJ" userLabel="checkBoxGuide">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="192"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAN-XX-dal">
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAN-XX-dal">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="192"/>
                                                 <state key="normal" image="circle" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
@@ -39,7 +39,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="AAN-XX-dal" secondAttribute="trailing" id="0nk-h7-CnY"/>
                                             <constraint firstAttribute="bottom" secondItem="AAN-XX-dal" secondAttribute="bottom" id="BHa-Vz-vzZ"/>
-                                            <constraint firstAttribute="width" priority="250" id="Gy9-Mu-ND8"/>
+                                            <constraint firstAttribute="width" priority="250" constant="100" id="Gy9-Mu-ND8"/>
                                             <constraint firstItem="AAN-XX-dal" firstAttribute="top" secondItem="Xnl-RV-xeJ" secondAttribute="top" id="Ifv-Za-2Wr"/>
                                             <constraint firstItem="AAN-XX-dal" firstAttribute="leading" secondItem="Xnl-RV-xeJ" secondAttribute="leading" id="Xss-VE-CMJ"/>
                                         </constraints>
@@ -48,19 +48,19 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="192"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-pc-tFP" userLabel="title">
-                                                <rect key="frame" x="15" y="10" width="55" height="27.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                <rect key="frame" x="15" y="10" width="59.5" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ig-WN-dKN" userLabel="milestone" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
-                                                <rect key="frame" x="355" y="13" width="44" height="21.5"/>
+                                                <rect key="frame" x="355" y="14.5" width="44" height="21.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Kmn-zW-86B">
-                                                <rect key="frame" x="15" y="42.5" width="319" height="144.5"/>
+                                                <rect key="frame" x="15" y="46" width="319" height="141"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="4" id="Xch-51-Jf9">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -75,9 +75,10 @@
                                             <constraint firstAttribute="bottom" secondItem="Kmn-zW-86B" secondAttribute="bottom" constant="5" id="8sN-dc-pnA"/>
                                             <constraint firstItem="0Ig-WN-dKN" firstAttribute="centerY" secondItem="Ikc-pc-tFP" secondAttribute="centerY" id="AZv-ZN-uPG"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="leading" secondItem="R8Z-t0-U66" secondAttribute="leading" constant="15" id="MZD-b8-cTd"/>
-                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="trailing" constant="16" id="NWN-kr-ZA2"/>
-                                            <constraint firstItem="Kmn-zW-86B" firstAttribute="top" secondItem="Ikc-pc-tFP" secondAttribute="bottom" constant="5" id="U7E-yw-Uh7"/>
+                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="trailing" constant="20" id="NWN-kr-ZA2"/>
                                             <constraint firstAttribute="trailing" secondItem="0Ig-WN-dKN" secondAttribute="trailing" constant="15" id="gpr-1e-lf0"/>
+                                            <constraint firstItem="Kmn-zW-86B" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="bottom" constant="5" id="if2-fg-gN0"/>
+                                            <constraint firstItem="Kmn-zW-86B" firstAttribute="top" secondItem="0Ig-WN-dKN" secondAttribute="bottom" constant="10" id="vvg-DU-nbx"/>
                                             <constraint firstItem="Kmn-zW-86B" firstAttribute="leading" secondItem="Ikc-pc-tFP" secondAttribute="leading" id="x2e-F0-yYo"/>
                                             <constraint firstAttribute="trailing" secondItem="Kmn-zW-86B" secondAttribute="trailing" constant="80" id="yCF-Gf-oAg"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="top" secondItem="R8Z-t0-U66" secondAttribute="top" constant="10" id="zfI-bt-iTJ"/>
