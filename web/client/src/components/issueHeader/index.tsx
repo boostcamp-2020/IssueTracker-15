@@ -2,6 +2,7 @@ import React from 'react';
 
 import * as S from './style';
 import { getTimeTillNow } from '../../lib/dateParser';
+import Button from '../button';
 
 interface IssueProps {
   title: string;
@@ -27,11 +28,11 @@ export default function IssueHeader({
           <S.IssueNumber>#{id}</S.IssueNumber>
         </S.IssueTitleNumberWrapper>
 
-        <button>Edit</button>
+        <Button color="white">Edit</Button>
       </S.IssueTitleNumberButtonWrapper>
 
       <S.IssueInfoWrapper>
-        <button>OPEN</button>
+        <Button color="green">Open</Button>
         <S.IssueInfoText>
           <S.UserName>{`${author.userName}`}&nbsp;</S.UserName>
           {` opened this issue ${getTimeTillNow(
