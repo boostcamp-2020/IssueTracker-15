@@ -5,12 +5,12 @@ import { BiLabel } from "react-icons/bi";
 
 interface NavButtonProps {
   classify?: string;
+  count: number;
 }
 
 const milestoneConf = {
-  width: "15%",
+  width: "13%",
   title: "milestone",
-  //onClick 넣어줘야 함
 };
 
 const labelConf = {
@@ -20,12 +20,13 @@ const labelConf = {
 };
 
 const labelNavButton = {};
-function NavButton({ classify }: NavButtonProps) {
+function NavButton({ classify, count }: NavButtonProps) {
   const conf = classify === "milestone" ? milestoneConf : labelConf;
   return (
     <S.NavButton width={conf.width}>
       {classify === "milestone" ? <VscMilestone /> : <BiLabel />}
       <S.NavButtonTitle> {conf.title}</S.NavButtonTitle>
+      <S.NavButtonCountWrapper>{count}</S.NavButtonCountWrapper>
     </S.NavButton>
   );
 }

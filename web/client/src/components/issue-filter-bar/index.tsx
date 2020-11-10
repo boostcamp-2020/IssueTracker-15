@@ -16,6 +16,7 @@ const DropdownContents = {
 
 function IssueFilterBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [filterCmd, setFilterCmd] = useState("is:issue is:open");
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   return (
@@ -27,10 +28,10 @@ function IssueFilterBar() {
             {isOpen && <Dropdown {...DropdownContents} />}
           </S.FilterForm>
         </S.FilterWrapper>
-        <S.SearchForm>is:issue is:open</S.SearchForm>
+        <S.SearchForm>{filterCmd}</S.SearchForm>
       </S.FilterContainer>
-      <NavButton classify={"label"} />
-      <NavButton classify={"milestone"} />
+      <NavButton classify={"label"} count={2} />
+      <NavButton classify={"milestone"} count={3} />
     </S.FilterBar>
   );
 }

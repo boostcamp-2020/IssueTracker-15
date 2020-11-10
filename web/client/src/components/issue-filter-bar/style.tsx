@@ -5,11 +5,11 @@ export const FilterBar = styled.div`
   display: flex;
   margin: 1%;
   justify-content: space-between;
+  align-items: flex-start;
 `;
 
 export const FilterWrapper = styled.div`
   width: 12%;
-  padding: 0.7%;
   border-right: 1px solid #ced4da;
   position: relative;
 `;
@@ -20,17 +20,20 @@ export const FilterForm = styled.div`
 `;
 
 export const FilterComp = styled.div`
+  align-self: center;
   font-weight: bold;
 `;
 
 export const SearchForm = styled.div`
   width: 70%;
-  padding: 1%;
+
   padding-left: 2%;
   color: #586069;
 `;
 
 export const FilterContainer = styled.div`
+  padding-top: 0.7%;
+  padding-bottom: 0.7%;
   width: 60%;
   border: 1px solid #ced4da;
   align-items: center;
