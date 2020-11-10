@@ -130,7 +130,6 @@ extension IssueListViewController {
             break
         case .general:
             AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: nil)
-            break
         }
 
     }

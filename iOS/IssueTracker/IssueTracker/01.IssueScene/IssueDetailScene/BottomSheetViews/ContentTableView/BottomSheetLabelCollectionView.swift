@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddCommentLabelCollectionView: UITableViewCell {
+class BottomSheetLabelCollectionView: UITableViewCell {
     
     @IBOutlet weak var labelCollectionView: UICollectionView!
     
@@ -29,13 +29,14 @@ class AddCommentLabelCollectionView: UITableViewCell {
     
     func configure(labelItemViewModels: [LabelItemViewModel]) {
         self.labelItemViewModels = labelItemViewModels
+        labelCollectionView.reloadData()
     }
     
 }
 
 // MARK: - UICollectionViewDataSource Implementation
 
-extension AddCommentLabelCollectionView: UICollectionViewDataSource {
+extension BottomSheetLabelCollectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return labelItemViewModels.count
@@ -51,9 +52,9 @@ extension AddCommentLabelCollectionView: UICollectionViewDataSource {
 
 // MARK: - loadNIB extension
 
-extension AddCommentLabelCollectionView {
-    static let identifier = "AddCommentLabelCollectionView"
-    static func createView() -> AddCommentLabelCollectionView? {
-        return Bundle.main.loadNibNamed(AddCommentLabelCollectionView.identifier, owner: self, options: nil)?.last as? AddCommentLabelCollectionView
+extension BottomSheetLabelCollectionView {
+    static let identifier = "BottomSheetLabelCollectionView"
+    static func createView() -> BottomSheetLabelCollectionView? {
+        return Bundle.main.loadNibNamed(BottomSheetLabelCollectionView.identifier, owner: self, options: nil)?.last as? BottomSheetLabelCollectionView
     }
 }

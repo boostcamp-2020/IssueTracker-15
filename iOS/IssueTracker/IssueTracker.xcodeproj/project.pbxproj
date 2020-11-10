@@ -19,7 +19,7 @@
 		950EB00D254A8DE2004857C2 /* MilestoneListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EB00C254A8DE2004857C2 /* MilestoneListViewModel.swift */; };
 		950EB00F254A94D0004857C2 /* UILabel+FontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950EB00E254A94D0004857C2 /* UILabel+FontSize.swift */; };
 		950F750A2553EB7400F5A43C /* IssueDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950F75092553EB7400F5A43C /* IssueDetailViewModel.swift */; };
-		951341C22553026600EDFB83 /* AddCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 951341C02553026600EDFB83 /* AddCommentView.xib */; };
+		951341C22553026600EDFB83 /* BottomSheetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 951341C02553026600EDFB83 /* BottomSheetView.xib */; };
 		9521FCB9254FE7FE00FC0220 /* NetworkFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9521FCB0254FE7FD00FC0220 /* NetworkFramework.framework */; };
 		9521FCC0254FE7FE00FC0220 /* NetworkFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521FCBF254FE7FE00FC0220 /* NetworkFrameworkTests.swift */; };
 		9521FCC2254FE7FE00FC0220 /* NetworkFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 9521FCB2254FE7FD00FC0220 /* NetworkFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,7 +27,7 @@
 		9521FCC6254FE7FE00FC0220 /* NetworkFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9521FCB0254FE7FD00FC0220 /* NetworkFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9521FCCF254FE84D00FC0220 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521FCCE254FE84D00FC0220 /* DataLoader.swift */; };
 		9521FCD1255007DC00FC0220 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521FCCE254FE84D00FC0220 /* DataLoader.swift */; };
-		95328CC025539C0B004AB911 /* AddCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95328CBF25539C0B004AB911 /* AddCommentView.swift */; };
+		95328CC025539C0B004AB911 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95328CBF25539C0B004AB911 /* BottomSheetView.swift */; };
 		955CB1702553C2B200B99093 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955CB16E2553C2B200B99093 /* IssueDetailViewController.swift */; };
 		955CB1712553C2B200B99093 /* IssueDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 955CB16F2553C2B200B99093 /* IssueDetailViewController.xib */; };
 		956B5D0525503D20001CBAA9 /* MilestoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956B5D0425503D20001CBAA9 /* MilestoneService.swift */; };
@@ -83,12 +83,12 @@
 		965A4DEB2552C28300A4A7D7 /* IssueItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A4DEA2552C28300A4A7D7 /* IssueItemViewModel.swift */; };
 		965A4DF02552CDA900A4A7D7 /* IssueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A4DEF2552CDA900A4A7D7 /* IssueService.swift */; };
 		965A4DF62552E88500A4A7D7 /* IssueFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A4DF52552E88500A4A7D7 /* IssueFilterViewModel.swift */; };
-		965AA4D12559808300747468 /* AddCommentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AA4D02559808300747468 /* AddCommentHeaderView.swift */; };
-		965AA4D3255980A400747468 /* AddCommentHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965AA4D2255980A400747468 /* AddCommentHeaderView.xib */; };
-		965AA4D625598A5000747468 /* AddCommentLabelCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AA4D425598A5000747468 /* AddCommentLabelCollectionView.swift */; };
-		965AA4D725598A5000747468 /* AddCommentLabelCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965AA4D525598A5000747468 /* AddCommentLabelCollectionView.xib */; };
-		965AA4DA25599E0C00747468 /* AddCommentMilestoneCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AA4D825599E0C00747468 /* AddCommentMilestoneCellView.swift */; };
-		965AA4DB25599E0C00747468 /* AddCommentMilestoneCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965AA4D925599E0C00747468 /* AddCommentMilestoneCellView.xib */; };
+		965AA4D12559808300747468 /* BottomSheetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AA4D02559808300747468 /* BottomSheetHeaderView.swift */; };
+		965AA4D3255980A400747468 /* BottomSheetHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965AA4D2255980A400747468 /* BottomSheetHeaderView.xib */; };
+		965AA4D625598A5000747468 /* BottomSheetLabelCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AA4D425598A5000747468 /* BottomSheetLabelCollectionView.swift */; };
+		965AA4D725598A5000747468 /* BottomSheetLabelCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965AA4D525598A5000747468 /* BottomSheetLabelCollectionView.xib */; };
+		965AA4DA25599E0C00747468 /* BottomSheetMilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AA4D825599E0C00747468 /* BottomSheetMilestoneView.swift */; };
+		965AA4DB25599E0C00747468 /* BottomSheetMilestoneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965AA4D925599E0C00747468 /* BottomSheetMilestoneView.xib */; };
 		965F09712550299A00B3A248 /* JSONDecoder+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */; };
 		965F09742550425A00B3A248 /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09732550425A00B3A248 /* IssueFilterViewController.swift */; };
 		965F097D25505A1200B3A248 /* DetailConditionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F097B25505A1200B3A248 /* DetailConditionSelectViewController.swift */; };
@@ -203,7 +203,7 @@
 		950EB00C254A8DE2004857C2 /* MilestoneListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneListViewModel.swift; sourceTree = "<group>"; };
 		950EB00E254A94D0004857C2 /* UILabel+FontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+FontSize.swift"; sourceTree = "<group>"; };
 		950F75092553EB7400F5A43C /* IssueDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewModel.swift; sourceTree = "<group>"; };
-		951341C02553026600EDFB83 /* AddCommentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCommentView.xib; sourceTree = "<group>"; };
+		951341C02553026600EDFB83 /* BottomSheetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetView.xib; sourceTree = "<group>"; };
 		9521FCB0254FE7FD00FC0220 /* NetworkFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9521FCB2254FE7FD00FC0220 /* NetworkFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkFramework.h; sourceTree = "<group>"; };
 		9521FCB3254FE7FD00FC0220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -211,7 +211,7 @@
 		9521FCBF254FE7FE00FC0220 /* NetworkFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkFrameworkTests.swift; sourceTree = "<group>"; };
 		9521FCC1254FE7FE00FC0220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9521FCCE254FE84D00FC0220 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
-		95328CBF25539C0B004AB911 /* AddCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentView.swift; sourceTree = "<group>"; };
+		95328CBF25539C0B004AB911 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		955CB16E2553C2B200B99093 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		955CB16F2553C2B200B99093 /* IssueDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IssueDetailViewController.xib; sourceTree = "<group>"; };
 		956B5D0425503D20001CBAA9 /* MilestoneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneService.swift; sourceTree = "<group>"; };
@@ -263,12 +263,12 @@
 		965A4DEA2552C28300A4A7D7 /* IssueItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueItemViewModel.swift; sourceTree = "<group>"; };
 		965A4DEF2552CDA900A4A7D7 /* IssueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueService.swift; sourceTree = "<group>"; };
 		965A4DF52552E88500A4A7D7 /* IssueFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewModel.swift; sourceTree = "<group>"; };
-		965AA4D02559808300747468 /* AddCommentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentHeaderView.swift; sourceTree = "<group>"; };
-		965AA4D2255980A400747468 /* AddCommentHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCommentHeaderView.xib; sourceTree = "<group>"; };
-		965AA4D425598A5000747468 /* AddCommentLabelCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentLabelCollectionView.swift; sourceTree = "<group>"; };
-		965AA4D525598A5000747468 /* AddCommentLabelCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCommentLabelCollectionView.xib; sourceTree = "<group>"; };
-		965AA4D825599E0C00747468 /* AddCommentMilestoneCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentMilestoneCellView.swift; sourceTree = "<group>"; };
-		965AA4D925599E0C00747468 /* AddCommentMilestoneCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCommentMilestoneCellView.xib; sourceTree = "<group>"; };
+		965AA4D02559808300747468 /* BottomSheetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetHeaderView.swift; sourceTree = "<group>"; };
+		965AA4D2255980A400747468 /* BottomSheetHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetHeaderView.xib; sourceTree = "<group>"; };
+		965AA4D425598A5000747468 /* BottomSheetLabelCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetLabelCollectionView.swift; sourceTree = "<group>"; };
+		965AA4D525598A5000747468 /* BottomSheetLabelCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetLabelCollectionView.xib; sourceTree = "<group>"; };
+		965AA4D825599E0C00747468 /* BottomSheetMilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetMilestoneView.swift; sourceTree = "<group>"; };
+		965AA4D925599E0C00747468 /* BottomSheetMilestoneView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetMilestoneView.xib; sourceTree = "<group>"; };
 		965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Decode.swift"; sourceTree = "<group>"; };
 		965F09732550425A00B3A248 /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
 		965F097B25505A1200B3A248 /* DetailConditionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionSelectViewController.swift; sourceTree = "<group>"; };
@@ -376,14 +376,14 @@
 			path = IssueDetailView;
 			sourceTree = "<group>";
 		};
-		9508B8262552DB980015C636 /* AddCommentView */ = {
+		9508B8262552DB980015C636 /* BottomSheetViews */ = {
 			isa = PBXGroup;
 			children = (
 				965AA4CF2559803900747468 /* ContentTableView */,
-				951341C02553026600EDFB83 /* AddCommentView.xib */,
-				95328CBF25539C0B004AB911 /* AddCommentView.swift */,
+				951341C02553026600EDFB83 /* BottomSheetView.xib */,
+				95328CBF25539C0B004AB911 /* BottomSheetView.swift */,
 			);
-			path = AddCommentView;
+			path = BottomSheetViews;
 			sourceTree = "<group>";
 		};
 		950EA0592547FF74005BE133 /* View */ = {
@@ -401,7 +401,7 @@
 			children = (
 				955CB16E2553C2B200B99093 /* IssueDetailViewController.swift */,
 				955CB16F2553C2B200B99093 /* IssueDetailViewController.xib */,
-				9508B8262552DB980015C636 /* AddCommentView */,
+				9508B8262552DB980015C636 /* BottomSheetViews */,
 				9508B81D2552A33B0015C636 /* IssueDetailView */,
 			);
 			path = IssueDetailScene;
@@ -666,12 +666,12 @@
 		965AA4CF2559803900747468 /* ContentTableView */ = {
 			isa = PBXGroup;
 			children = (
-				965AA4D02559808300747468 /* AddCommentHeaderView.swift */,
-				965AA4D2255980A400747468 /* AddCommentHeaderView.xib */,
-				965AA4D425598A5000747468 /* AddCommentLabelCollectionView.swift */,
-				965AA4D525598A5000747468 /* AddCommentLabelCollectionView.xib */,
-				965AA4D825599E0C00747468 /* AddCommentMilestoneCellView.swift */,
-				965AA4D925599E0C00747468 /* AddCommentMilestoneCellView.xib */,
+				965AA4D02559808300747468 /* BottomSheetHeaderView.swift */,
+				965AA4D2255980A400747468 /* BottomSheetHeaderView.xib */,
+				965AA4D425598A5000747468 /* BottomSheetLabelCollectionView.swift */,
+				965AA4D525598A5000747468 /* BottomSheetLabelCollectionView.xib */,
+				965AA4D825599E0C00747468 /* BottomSheetMilestoneView.swift */,
+				965AA4D925599E0C00747468 /* BottomSheetMilestoneView.xib */,
 			);
 			path = ContentTableView;
 			sourceTree = "<group>";
@@ -1030,14 +1030,14 @@
 				963A1A9725524160003E2BBB /* UserInfoComponentView.xib in Resources */,
 				965F097E25505A1200B3A248 /* DetailConditionSelectViewController.xib in Resources */,
 				9679DFC1254D7ADC00550BE4 /* MilestoneSubmitFieldsView.xib in Resources */,
-				965AA4DB25599E0C00747468 /* AddCommentMilestoneCellView.xib in Resources */,
-				965AA4D3255980A400747468 /* AddCommentHeaderView.xib in Resources */,
+				965AA4DB25599E0C00747468 /* BottomSheetMilestoneView.xib in Resources */,
+				965AA4D3255980A400747468 /* BottomSheetHeaderView.xib in Resources */,
 				966ADAEA254D9BE900A480DD /* LabelSubmitFieldsView.xib in Resources */,
 				95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */,
 				9508B8212552A3620015C636 /* IssueDetailHeaderView.xib in Resources */,
-				965AA4D725598A5000747468 /* AddCommentLabelCollectionView.xib in Resources */,
+				965AA4D725598A5000747468 /* BottomSheetLabelCollectionView.xib in Resources */,
 				955CB1712553C2B200B99093 /* IssueDetailViewController.xib in Resources */,
-				951341C22553026600EDFB83 /* AddCommentView.xib in Resources */,
+				951341C22553026600EDFB83 /* BottomSheetView.xib in Resources */,
 				965F098925505B9D00B3A248 /* DetailConditionSelectCellView.xib in Resources */,
 				96400EC0255846A00006726F /* LabelBadgeCellView.xib in Resources */,
 				95E9F5832546EC07001FBA0D /* Main.storyboard in Resources */,
@@ -1174,7 +1174,7 @@
 				96F95C07254EA70B00EC00C6 /* IssueCellView.swift in Sources */,
 				96A58F53254A91AC00248F1E /* String+Matching.swift in Sources */,
 				9627A5AC255087FF000BFF4D /* DetailConditionSelectCellView.swift in Sources */,
-				965AA4D625598A5000747468 /* AddCommentLabelCollectionView.swift in Sources */,
+				965AA4D625598A5000747468 /* BottomSheetLabelCollectionView.swift in Sources */,
 				965A4DDE2552AFC300A4A7D7 /* IssueProvider.swift in Sources */,
 				9627A5A825506985000BFF4D /* UITableView+Registerable.swift in Sources */,
 				95C36592254A76BB008ACCB5 /* MilestoneCellView.swift in Sources */,
@@ -1184,7 +1184,7 @@
 				96400EC22558584B0006726F /* LeftAlignedBadgeFlowLayout.swift in Sources */,
 				966ADAEC254D9DDD00A480DD /* LabelSubmitFieldsView+LoadFromNib.swift in Sources */,
 				96A58F3B254A629500248F1E /* MilestoneItemViewModel.swift in Sources */,
-				965AA4D12559808300747468 /* AddCommentHeaderView.swift in Sources */,
+				965AA4D12559808300747468 /* BottomSheetHeaderView.swift in Sources */,
 				966DD039254A5B1600A44FBA /* Milestone.swift in Sources */,
 				9602056325531E1B00888394 /* FilterConditionType.swift in Sources */,
 				96C734D52549452600DEC9A4 /* LabelItemViewModel.swift in Sources */,
@@ -1199,7 +1199,7 @@
 				9505446F254AA6E0007767C6 /* UIViewController+ShowAlert.swift in Sources */,
 				95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */,
 				96A58F55254AA5BC00248F1E /* String+Date.swift in Sources */,
-				95328CC025539C0B004AB911 /* AddCommentView.swift in Sources */,
+				95328CC025539C0B004AB911 /* BottomSheetView.swift in Sources */,
 				950EA05C2547FFA0005BE133 /* LabelCellView.swift in Sources */,
 				955CB1702553C2B200B99093 /* IssueDetailViewController.swift in Sources */,
 				96F95C02254E891E00EC00C6 /* CGFloat+Clamp.swift in Sources */,
@@ -1233,7 +1233,7 @@
 				966ADAE5254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift in Sources */,
 				963A1A9C255249AB003E2BBB /* LabelComponentView.swift in Sources */,
 				965F09742550425A00B3A248 /* IssueFilterViewController.swift in Sources */,
-				965AA4DA25599E0C00747468 /* AddCommentMilestoneCellView.swift in Sources */,
+				965AA4DA25599E0C00747468 /* BottomSheetMilestoneView.swift in Sources */,
 				9508B8242552A71A0015C636 /* IssueDetailCellView.swift in Sources */,
 				963A1AA025524ADF003E2BBB /* MilestoneComponentView.swift in Sources */,
 				95054473254AAC0D007767C6 /* CollectionView+Registerable.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 
 protocol IssucCellViewDelegate: AnyObject {
     func closeIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int)
-    func deleteIssueButtonTapped(_ issueCellView: IssueCellView,at id: Int)
+    func deleteIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int)
     func issueCellViewBeginDragging(_ issueCellView: IssueCellView, at id: Int)
 }
 

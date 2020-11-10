@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol IssueDetailViewModelProtocol {
+protocol IssueDetailViewModelProtocol: AnyObject {
     var issueNumber: Int { get }
     var title: String { get }
     var author: UserViewModel { get }
@@ -20,6 +20,9 @@ protocol IssueDetailViewModelProtocol {
     var assignees: [UserViewModel] { get }
     func needFetchDetails()
     func addComment(content: String)
+    
+    var didLabelChanged: (() -> Void)? { get set }
+    var didMilestoneChanged: (() -> Void)? { get set }
 }
 
 struct CommentViewModel {
@@ -68,6 +71,9 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     var labels: [LabelItemViewModel] = [LabelItemViewModel]()
     var assignees: [UserViewModel] = [UserViewModel]()
     
+    var didLabelChanged: (() -> Void)?
+    var didMilestoneChanged: (() -> Void)?
+    
     private weak var issueProvider: IssueProvidable?
     private weak var labelProvier: LabelProvidable?
     private weak var milestoneProvider: MilestoneProvidable?
@@ -94,12 +100,14 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             
             self.labelProvier?.getLabels(of: currentIssue.labels) { (labels) in
                 self.labels = labels.map { LabelItemViewModel(label: $0)}
+                self.didLabelChanged?()
             }
             
             if let milestoneId = currentIssue.milestone {
                 self.milestoneProvider?.getMilestone(at: milestoneId) { (milestone) in
                     guard let milestone = milestone else { return }
                     self.milestone = MilestoneItemViewModel(milestone: milestone, from: .fromServer)
+                    self.didMilestoneChanged?()
                 }
             }
             

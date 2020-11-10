@@ -12,7 +12,7 @@ class IssueDetailViewController: UIViewController {
     static let identifier = "IssueDetailViewController"
     
     @IBOutlet weak var collectionView: UICollectionView!
-    private var addCommentView: AddCommentView?
+    private var bottomSheetView: BottomSheetView?
     private var issueDetailViewModel: IssueDetailViewModelProtocol
     private var currentIssueId: Int = -1
     
@@ -32,6 +32,7 @@ class IssueDetailViewController: UIViewController {
         
         self.issueDetailViewModel.didFetch = { [weak self] in
             self?.collectionView.reloadData()
+            self?.bottomSheetView?.reloadData()
         }
     }
     
@@ -44,6 +45,8 @@ class IssueDetailViewController: UIViewController {
         super.viewDidLoad()
         configureNavigationBarButtons()
         issueDetailViewModel.needFetchDetails()
+        configureCollectionView()
+        configureBottomSheetView()
         navigationItem.title = "이슈 상세"
     }
     
@@ -56,11 +59,6 @@ class IssueDetailViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        configureInitialLayout()
     }
     
     private func configureNavigationBarButtons() {
@@ -80,38 +78,27 @@ class IssueDetailViewController: UIViewController {
         collectionView.registerCell(type: IssueDetailCellView.self)
     }
     
-    private func configureInitialLayout() {
-        guard addCommentView != nil else {
-            configureCollectionView()
-            configureBottomSheetView()
-            addBottomSheetView()
-            return
-        }
-    }
-    
     private func configureBottomSheetView() {
-        addCommentView = AddCommentView.createView()
-        let height = view.frame.height
-        let width  = view.frame.width
-        self.addCommentView?.frame = CGRect(x: 0, y: self.view.frame.maxY * 0.85, width: width, height: height)
-    }
-    
-    private func addBottomSheetView() {
-        guard let addCommentView = addCommentView else { return }
+        guard let bottomSheetView = BottomSheetView.createView() else { return }
+        bottomSheetView.configure(issueDetailViewModel: issueDetailViewModel)
+        bottomSheetView.delegate = self
+        let height = UIScreen.main.bounds.height
+        let width  = UIScreen.main.bounds.width
+        print("size \(UIScreen.main.bounds.height * 0.85)")
+        bottomSheetView.frame = CGRect(x: 0, y: height * 0.85, width: width, height: height)
         
-        addCommentView.addCommentDelegate = self
-        
-        self.view.addSubview(addCommentView)
+        self.bottomSheetView = bottomSheetView
+        self.view.addSubview(bottomSheetView)
     }
     
     private func setupCollectionViewLayout() {
         let flowLayout = UICollectionViewFlowLayout()
         let width = self.view.frame.size.width
-        let headerHeight = self.view.frame.size.height * 0.2
+        let headerHeight = UIScreen.main.bounds.height * 0.2
         
         flowLayout.estimatedItemSize = CGSize(width: width, height: headerHeight)
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-        flowLayout.headerReferenceSize = CGSize(width: view.frame.width, height: headerHeight)
+        flowLayout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: headerHeight)
         
         collectionView.collectionViewLayout = flowLayout
     }
@@ -169,7 +156,7 @@ extension IssueDetailViewController {
     }
 }
 
-extension IssueDetailViewController: AddCommentDelegate {
+extension IssueDetailViewController: BottomSheetViewDelegate {
     func upButtonTapped() {
         guard let currentIndexPath = self.currentIndexPath else { return }
         
