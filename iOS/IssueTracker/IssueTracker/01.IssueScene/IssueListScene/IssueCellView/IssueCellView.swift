@@ -31,7 +31,7 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var labelCollectionView: UICollectionView!
     
-    private weak var issueItemViewModel: IssueItemViewModel?
+    private weak var issueItemViewModel: IssueItemViewModelProtocol?
     private var labelBadgeCells = [LabelItemViewModel]()
     
     private lazy var checkBoxGuideWidthConstraint = checkBoxGuideView.widthAnchor.constraint(equalToConstant: 0)
@@ -61,7 +61,7 @@ class IssueCellView: UICollectionViewCell {
         ])
     }
     
-    func configure(issueItemViewModel: IssueItemViewModel) {
+    func configure(issueItemViewModel: IssueItemViewModelProtocol) {
         self.issueItemViewModel = issueItemViewModel
         
         titleLabel.text = issueItemViewModel.title
