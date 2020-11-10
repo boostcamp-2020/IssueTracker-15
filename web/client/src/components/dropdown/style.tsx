@@ -27,7 +27,7 @@ export const DropdownWrapper = styled.div`
   margin-top: 12%;
   border-radius: 6px;
   left: 0;
-  display: none;
+  // display: none;
 `;
 
 export const ListWrapper = styled.ul`

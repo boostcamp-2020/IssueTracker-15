@@ -14,7 +14,8 @@ function Dropdown({ title, contents }: dropdownProps) {
       <DropdownTitle title={title} />
       <S.ListWrapper>
         {contents.map((content: string) => {
-          <DropdownContent content={content} />;
+          console.log(content);
+          return <DropdownContent content={content} />;
         })}
       </S.ListWrapper>
     </S.DropdownWrapper>
