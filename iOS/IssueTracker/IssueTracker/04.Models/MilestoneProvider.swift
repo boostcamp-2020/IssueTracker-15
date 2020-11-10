@@ -72,12 +72,13 @@ class MilestoneProvider: MilestoneProvidable {
     
     func editMilestone(id: Int, title: String, dueDate: String, description: String, openIssuesLength: String, closeIssueLength: String, completion: @escaping (Milestone?) -> Void) {
         
-        dataLoader?.request(MilestoneService.editMilestone(id, title, dueDate, description), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(MilestoneService.editMilestone(id, title, dueDate, description), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success:
                 let milestone = Milestone(id: id, title: title, description: description, dueDate: dueDate, openIssuesLength: openIssuesLength, closeIssueLength: closeIssueLength)
+                self?.milestons[id] = milestone
                 completion(milestone)
             }
             
