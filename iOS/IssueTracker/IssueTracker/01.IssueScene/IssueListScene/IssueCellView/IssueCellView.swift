@@ -93,6 +93,7 @@ class IssueCellView: UICollectionViewCell {
         super.prepareForReuse()
         delegate = nil
         issueItemViewModel = nil
+        cellHorizontalScrollView.contentOffset = CGPoint.zero
         let snapShot = SnapShot()
         dataSource.apply(snapShot, animatingDifferences: false, completion: nil)
     }
@@ -100,13 +101,10 @@ class IssueCellView: UICollectionViewCell {
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         super.preferredLayoutAttributesFitting(layoutAttributes)
         layoutIfNeeded()
-        
         let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-        
         var frame = layoutAttributes.frame
         frame.size.height = ceil(size.height + labelCollectionView.collectionViewLayout.collectionViewContentSize.height)
         layoutAttributes.frame = frame
-        
         return layoutAttributes
     }
     
