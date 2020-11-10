@@ -24,7 +24,7 @@ class AddNewIssueViewController: UIViewController {
     var addType: AddType = .newIssue
     
     private let textViewPlaceholder = "코멘트는 여기에 작성하세요"
-    var doneButtonTapped: ((String) -> Void)?
+    var doneButtonTapped: (([String]) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,7 +97,13 @@ class AddNewIssueViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        doneButtonTapped?(commentTextView.text)
+        var content: [String] = [String]()
+        if addType == .newIssue {
+            content.append(titleTextField.text ?? "")
+        }
+        content.append(commentTextView.text)
+        
+        doneButtonTapped?(content)
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -169,7 +175,7 @@ extension AddNewIssueViewController {
     
     static func present(at viewController: UIViewController,
                         addType: AddType,
-                        onDismiss: ((String) -> Void)?) {
+                        onDismiss: (([String]) -> Void)?) {
         
         let storyBoard = UIStoryboard(name: storyboardName, bundle: Bundle.main)
         guard let container = storyBoard.instantiateInitialViewController() as? UINavigationController,

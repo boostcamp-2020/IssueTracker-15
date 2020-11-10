@@ -91,7 +91,7 @@ class IssueProvider: IssueProvidable {
      Response : 201
      */
     func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.createIssue(title, "", milestoneID, authorID), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.createIssue(title, description, milestoneID, authorID), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)

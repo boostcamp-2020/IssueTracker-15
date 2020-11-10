@@ -130,7 +130,10 @@ extension IssueListViewController {
         case .edit:
             break
         case .general:
-            AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: nil)
+            AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: { [weak self] (content) in
+                print(content)
+                self?.issueListViewModel?.addNewIssue(title: content[0], description: content[1], authorID: 1)
+            })
         }
     }
     
