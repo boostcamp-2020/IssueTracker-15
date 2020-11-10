@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import * as S from "./style";
 import Dropdown from "../dropdown";
 import NavButton from "../nav-button";
+import useToggle from "../../hooks/useToggle";
 
 function IssueFilterBar(this: any) {
-  const [isOpen, setIsOpen] = useState(false);
   const [filterCmd, setFilterCmd] = useState("is:issue is:open");
-  const toggleDropdown = () => setIsOpen(!isOpen);
-
+  const [isOpen, setIsOpen] = useToggle(false);
   const onClickDropdownContent = (props: string) => {
     setFilterCmd(props);
   };
@@ -41,7 +40,7 @@ function IssueFilterBar(this: any) {
       <S.FilterContainer>
         <S.FilterWrapper>
           <S.FilterForm>
-            <S.FilterComp onClick={toggleDropdown}>Filters</S.FilterComp>
+            <S.FilterComp onClick={setIsOpen}>Filters</S.FilterComp>
             {isOpen && <Dropdown {...DropdownContents} />}
           </S.FilterForm>
         </S.FilterWrapper>
