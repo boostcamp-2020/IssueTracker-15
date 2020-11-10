@@ -23,7 +23,7 @@ protocol IssueListViewModelProtocol: AnyObject {
     func clearSelectedCells()
     func selectAllCells()
     
-    func closeIssue(at path: IndexPath)
+    func closeIssue(of id: Int)
     func closeSelectedIssue()
     
     func addNewIssue(title: String, description: String, authorID: Int)
@@ -171,8 +171,9 @@ extension IssueListViewModel {
         }
     }
     
-    func closeIssue(at path: IndexPath) {
-        closeIssue(of: [issues[path.row]])
+    func closeIssue(of id: Int) {
+        guard let item = issues.first(where: { $0.id == id }) else { return }
+        closeIssue(of: [item])
     }
     
     func closeSelectedIssue() {

@@ -98,6 +98,7 @@ class IssueListViewController: UIViewController {
                                     cellProvider: { (collectionView, indexPath, issueItem) -> UICollectionViewCell? in
                                         guard let cell: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return nil }
                                         cell.configure(issueItemViewModel: issueItem)
+                                        cell.delegate = self
                                         return cell
                                     })
         return dataSource
@@ -140,6 +141,8 @@ extension IssueListViewController {
     @IBAction func floatingButtonTapped(_ sender: Any) {
         switch viewingMode {
         case .edit:
+            issueListViewModel?.closeSelectedIssue()
+            toGeneralMode()
             break
         case .general:
             AddNewIssueViewController.present(at: self, addType: .newIssue, previousData: nil, onDismiss: { [weak self] (content) in
@@ -235,7 +238,7 @@ extension IssueListViewController {
 extension IssueListViewController: IssucCellViewDelegate {
     
     func closeIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int) {
-        
+        issueListViewModel?.closeIssue(of: id)
     }
     
     func deleteIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int) {

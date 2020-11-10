@@ -86,6 +86,14 @@ class IssueCellView: UICollectionViewCell {
         }
         
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        delegate = nil
+        issueItemViewModel = nil
+        let snapShot = SnapShot()
+        dataSource.apply(snapShot, animatingDifferences: false, completion: nil)
+    }
 
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         super.preferredLayoutAttributesFitting(layoutAttributes)
@@ -142,6 +150,7 @@ extension IssueCellView {
     @IBAction func closeButtonTapped(_ sender: Any) {
         guard let id = issueItemViewModel?.id else { return }
         delegate?.closeIssueButtonTapped(self, at: id)
+        cellHorizontalScrollView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
