@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import * as S from "./style";
 import Dropdown from "../dropdown";
-import IssueSideBar from "../issue-sidebar/sidebar";
-import { TitleInputWrapAuth } from "../auth/style";
+import NavButton from "../nav-button";
 
 const DropdownContents = {
   title: "Filter Issues",
@@ -21,13 +20,17 @@ function IssueFilterBar() {
 
   return (
     <S.FilterBar>
-      <S.FilterWrapper>
-        <S.FilterForm>
-          <S.FilterComp onClick={toggleDropdown}>Filters</S.FilterComp>
-          {isOpen && <Dropdown {...DropdownContents} />}
-        </S.FilterForm>
-      </S.FilterWrapper>
-      <S.SearchForm>is:issue is:open</S.SearchForm>
+      <S.FilterContainer>
+        <S.FilterWrapper>
+          <S.FilterForm>
+            <S.FilterComp onClick={toggleDropdown}>Filters</S.FilterComp>
+            {isOpen && <Dropdown {...DropdownContents} />}
+          </S.FilterForm>
+        </S.FilterWrapper>
+        <S.SearchForm>is:issue is:open</S.SearchForm>
+      </S.FilterContainer>
+      <NavButton classify={"label"} />
+      <NavButton classify={"milestone"} />
     </S.FilterBar>
   );
 }
