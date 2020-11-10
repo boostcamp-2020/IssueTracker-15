@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import getFontColor from "../../lib/label-fontcolor";
+import { LabelProps } from "./index";
 
 export const Label = styled.div`
   display: flex;
@@ -10,4 +12,5 @@ export const Label = styled.div`
   padding: 5px 8px;
   border-radius: 9px;
   font-size: small;
+  color: ${(props: LabelProps) => getFontColor(props.color)};
 `;
