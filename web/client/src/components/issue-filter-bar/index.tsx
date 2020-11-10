@@ -3,21 +3,38 @@ import * as S from "./style";
 import Dropdown from "../dropdown";
 import NavButton from "../nav-button";
 
-const DropdownContents = {
-  title: "Filter Issues",
-  contents: [
-    "Open Issues",
-    "Your Issues",
-    "Everything assigned to you",
-    "Everything mentioning to you",
-    "Closed Issues",
-  ],
-};
-
-function IssueFilterBar() {
+function IssueFilterBar(this: any) {
   const [isOpen, setIsOpen] = useState(false);
   const [filterCmd, setFilterCmd] = useState("is:issue is:open");
   const toggleDropdown = () => setIsOpen(!isOpen);
+
+  const onClickDropdownContent = (props: string) => {
+    setFilterCmd(props);
+  };
+  const DropdownContents = {
+    title: "Filter Issues",
+    contents: [
+      {
+        content: "Open Issues",
+        onClick: onClickDropdownContent.bind(this, "is:issue is:open"),
+      },
+      {
+        content: "Your Issues",
+        onClick: onClickDropdownContent.bind(
+          this,
+          "is:open is:issue author:@me"
+        ),
+      },
+      {
+        content: "Everything assigned to you",
+        onClick: onClickDropdownContent.bind(this, "is:open assignee:@me"),
+      },
+      {
+        content: "Closed Issues",
+        onClick: onClickDropdownContent.bind(this, "is:close is:issue"),
+      },
+    ],
+  };
 
   return (
     <S.FilterBar>

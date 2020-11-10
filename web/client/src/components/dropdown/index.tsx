@@ -5,22 +5,24 @@ import DropdownTitle from "./dropdown-title";
 
 interface dropdownProps {
   title: string;
-  contents: string[];
-  isVisible?: boolean;
+  contents: any[];
 }
 
 // { "제목 " : {{"title" : ~}, {"content" : [] }};
-function Dropdown(props: dropdownProps) {
+function Dropdown({ title, contents }: dropdownProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const onClicktoggle = () => setIsVisible(!isVisible);
 
   return (
     <S.DropdownWrapper>
-      <DropdownTitle title={props.title} />
+      <DropdownTitle title={title} />
       <S.ListWrapper>
-        {props.contents.map((content: string) => {
-          console.log(content);
-          return <DropdownContent content={content} />;
+        {contents.map((element: any) => {
+          return (
+            <DropdownContent
+              onClick={element.onClick}
+              content={element.content}
+            />
+          );
         })}
       </S.ListWrapper>
     </S.DropdownWrapper>
