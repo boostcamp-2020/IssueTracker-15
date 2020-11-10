@@ -8,7 +8,7 @@
 import Foundation
 
 protocol IssueListViewModelProtocol: AnyObject {
-    var didFetch: (() -> Void)? { get set }
+    var didFetch: (([IssueItemViewModel]) -> Void)? { get set }
     var invalidateLayout: (() -> Void)? { get set }
     var didCellChecked: ((IndexPath, Bool) -> Void)? { get set }
     var showTitleWithCheckNum: ((Int) -> Void)? { get set }
@@ -35,7 +35,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
     private weak var issueProvider: IssueProvidable?
     
     var filter: IssueFilterable?
-    var didFetch: (() -> Void)?
+    var didFetch: (([IssueItemViewModel]) -> Void)?
     var invalidateLayout: (() -> Void)?
     var showTitleWithCheckNum: ((Int) -> Void)?
     var didCellChecked: ((IndexPath, Bool) -> Void)?
@@ -72,9 +72,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
                 }
             }
             
-            DispatchQueue.main.async {
-                self.didFetch?()
-            }
+            self.didFetch?(self.issues)
         })
     }
     
@@ -130,7 +128,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
                 let createdIssue = createdIssue
                 else { return }
             self.issues.append(IssueItemViewModel(issue: createdIssue))
-            self.didFetch?()
+            self.didFetch?(self.issues)
         }
     }
 }

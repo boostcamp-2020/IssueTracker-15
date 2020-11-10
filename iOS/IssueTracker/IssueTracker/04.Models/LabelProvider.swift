@@ -67,24 +67,31 @@ class LabelProvider: LabelProvidable {
     }
     
     func addLabel(title: String, description: String, color: String, completion: @escaping (Label?) -> Void) {
-        dataLoader?.request(LabelService.createLabel(title, description, color), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(LabelService.createLabel(title, description, color), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success(let response):
-                let label = response.mapEncodable(Label.self)
+                guard let `self` = self,
+                    let label = response.mapEncodable(Label.self)
+                    else {
+                        completion(nil)
+                        return
+                }
+                self.labels[label.id] = label
                 completion(label)
             }
         })
     }
     
     func editLabel(id: Int, title: String, description: String, color: String, completion: @escaping (Label?) -> Void) {
-        dataLoader?.request(LabelService.editLabel(id, title, description, color), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(LabelService.editLabel(id, title, description, color), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success:
                 let label = Label(id: id, title: title, description: description, hexColor: color)
+                self?.labels[id] = label
                 completion(label)
             }
         })
