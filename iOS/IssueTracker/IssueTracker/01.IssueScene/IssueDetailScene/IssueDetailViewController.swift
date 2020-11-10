@@ -14,7 +14,6 @@ class IssueDetailViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     private var bottomSheetView: BottomSheetView?
     private var issueDetailViewModel: IssueDetailViewModelProtocol
-    private var currentIssueId: Int = -1
     
     private var currentIndexPath: IndexPath? {
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.frame.size)
@@ -197,6 +196,7 @@ extension IssueDetailViewController: BottomSheetViewDelegate {
             self?.issueDetailViewModel.addComment(content: content[0])
         })
     }
+    
 }
 
 // MARK: - Create ViewController
