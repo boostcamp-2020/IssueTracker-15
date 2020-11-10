@@ -47,7 +47,7 @@
 		95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5842546EC0C001FBA0D /* Assets.xcassets */; };
 		95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5862546EC0C001FBA0D /* LaunchScreen.storyboard */; };
 		95E9F5932546EC0C001FBA0D /* LabelModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */; };
-		960205612553140500888394 /* DetailConditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960205602553140500888394 /* DetailConditionViewModel.swift */; };
+		960205612553140500888394 /* DetailSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960205602553140500888394 /* DetailSelectionViewModel.swift */; };
 		9602056325531E1B00888394 /* FilterConditionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9602056225531E1B00888394 /* FilterConditionType.swift */; };
 		960205652553259D00888394 /* IssueFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960205642553259D00888394 /* IssueFilter.swift */; };
 		9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9613C12D2547B265005EF13C /* .swiftlint.yml */; };
@@ -91,8 +91,8 @@
 		965AA4DB25599E0C00747468 /* BottomSheetMilestoneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965AA4D925599E0C00747468 /* BottomSheetMilestoneView.xib */; };
 		965F09712550299A00B3A248 /* JSONDecoder+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */; };
 		965F09742550425A00B3A248 /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09732550425A00B3A248 /* IssueFilterViewController.swift */; };
-		965F097D25505A1200B3A248 /* DetailConditionSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F097B25505A1200B3A248 /* DetailConditionSelectViewController.swift */; };
-		965F097E25505A1200B3A248 /* DetailConditionSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F097C25505A1200B3A248 /* DetailConditionSelectViewController.xib */; };
+		965F097D25505A1200B3A248 /* DetailSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F097B25505A1200B3A248 /* DetailSelectionViewController.swift */; };
+		965F097E25505A1200B3A248 /* DetailSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F097C25505A1200B3A248 /* DetailSelectionViewController.xib */; };
 		965F098925505B9D00B3A248 /* DetailConditionSelectCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965F098725505B9D00B3A248 /* DetailConditionSelectCellView.xib */; };
 		966ADAE5254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ADAE4254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift */; };
 		966ADAE8254D9BD400A480DD /* LabelSubmitFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966ADAE7254D9BD400A480DD /* LabelSubmitFieldsView.swift */; };
@@ -235,7 +235,7 @@
 		95E9F58E2546EC0C001FBA0D /* IssueTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelModelTests.swift; sourceTree = "<group>"; };
 		95E9F5942546EC0C001FBA0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		960205602553140500888394 /* DetailConditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionViewModel.swift; sourceTree = "<group>"; };
+		960205602553140500888394 /* DetailSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelectionViewModel.swift; sourceTree = "<group>"; };
 		9602056225531E1B00888394 /* FilterConditionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConditionType.swift; sourceTree = "<group>"; };
 		960205642553259D00888394 /* IssueFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilter.swift; sourceTree = "<group>"; };
 		9613C12D2547B265005EF13C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -271,8 +271,8 @@
 		965AA4D925599E0C00747468 /* BottomSheetMilestoneView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetMilestoneView.xib; sourceTree = "<group>"; };
 		965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Decode.swift"; sourceTree = "<group>"; };
 		965F09732550425A00B3A248 /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
-		965F097B25505A1200B3A248 /* DetailConditionSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConditionSelectViewController.swift; sourceTree = "<group>"; };
-		965F097C25505A1200B3A248 /* DetailConditionSelectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailConditionSelectViewController.xib; sourceTree = "<group>"; };
+		965F097B25505A1200B3A248 /* DetailSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelectionViewController.swift; sourceTree = "<group>"; };
+		965F097C25505A1200B3A248 /* DetailSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailSelectionViewController.xib; sourceTree = "<group>"; };
 		965F098725505B9D00B3A248 /* DetailConditionSelectCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailConditionSelectCellView.xib; sourceTree = "<group>"; };
 		966ADAE4254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MilestoneSubmitFieldsView+LoadFromNib.swift"; sourceTree = "<group>"; };
 		966ADAE7254D9BD400A480DD /* LabelSubmitFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSubmitFieldsView.swift; sourceTree = "<group>"; };
@@ -595,7 +595,7 @@
 		9602055F255313EC00888394 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				960205602553140500888394 /* DetailConditionViewModel.swift */,
+				960205602553140500888394 /* DetailSelectionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -644,15 +644,15 @@
 			path = MainFilterScene;
 			sourceTree = "<group>";
 		};
-		963A1AA925526E2F003E2BBB /* DetailConditionScene */ = {
+		963A1AA925526E2F003E2BBB /* DetailSelectionScene */ = {
 			isa = PBXGroup;
 			children = (
 				9602055F255313EC00888394 /* ViewModel */,
-				965F097B25505A1200B3A248 /* DetailConditionSelectViewController.swift */,
-				965F097C25505A1200B3A248 /* DetailConditionSelectViewController.xib */,
+				965F097B25505A1200B3A248 /* DetailSelectionViewController.swift */,
+				965F097C25505A1200B3A248 /* DetailSelectionViewController.xib */,
 				965F097F25505B5400B3A248 /* DetailConditionSelectCell */,
 			);
-			path = DetailConditionScene;
+			path = DetailSelectionScene;
 			sourceTree = "<group>";
 		};
 		965A4DF42552E86600A4A7D7 /* ViewModel */ = {
@@ -679,7 +679,6 @@
 		965F09752550589F00B3A248 /* FilterScene */ = {
 			isa = PBXGroup;
 			children = (
-				963A1AA925526E2F003E2BBB /* DetailConditionScene */,
 				963A1AA825526E24003E2BBB /* MainFilterScene */,
 				9602056225531E1B00888394 /* FilterConditionType.swift */,
 			);
@@ -821,6 +820,7 @@
 		96F95BF5254E691500EC00C6 /* 01.IssueScene */ = {
 			isa = PBXGroup;
 			children = (
+				963A1AA925526E2F003E2BBB /* DetailSelectionScene */,
 				950F750D2553FD5100F5A43C /* IssueEditScene */,
 				950F750C2553FD4500F5A43C /* IssueListScene */,
 				950F750B2553FD1A00F5A43C /* IssueDetailScene */,
@@ -1028,7 +1028,7 @@
 				95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */,
 				963A1A9E255249BB003E2BBB /* LabelComponentView.xib in Resources */,
 				963A1A9725524160003E2BBB /* UserInfoComponentView.xib in Resources */,
-				965F097E25505A1200B3A248 /* DetailConditionSelectViewController.xib in Resources */,
+				965F097E25505A1200B3A248 /* DetailSelectionViewController.xib in Resources */,
 				9679DFC1254D7ADC00550BE4 /* MilestoneSubmitFieldsView.xib in Resources */,
 				965AA4DB25599E0C00747468 /* BottomSheetMilestoneView.xib in Resources */,
 				965AA4D3255980A400747468 /* BottomSheetHeaderView.xib in Resources */,
@@ -1204,7 +1204,7 @@
 				955CB1702553C2B200B99093 /* IssueDetailViewController.swift in Sources */,
 				96F95C02254E891E00EC00C6 /* CGFloat+Clamp.swift in Sources */,
 				96B6E3612556AFCF00D8BABF /* IssueTrackerAPIs.swift in Sources */,
-				960205612553140500888394 /* DetailConditionViewModel.swift in Sources */,
+				960205612553140500888394 /* DetailSelectionViewModel.swift in Sources */,
 				963A1AA6255267FC003E2BBB /* DetailFilterCellView.swift in Sources */,
 				950EB00F254A94D0004857C2 /* UILabel+FontSize.swift in Sources */,
 				96AD6410255164A100B16BD3 /* MilestoneProvider.swift in Sources */,
@@ -1239,7 +1239,7 @@
 				95054473254AAC0D007767C6 /* CollectionView+Registerable.swift in Sources */,
 				96C734D32549444E00DEC9A4 /* LabelListViewModel.swift in Sources */,
 				965A4DF62552E88500A4A7D7 /* IssueFilterViewModel.swift in Sources */,
-				965F097D25505A1200B3A248 /* DetailConditionSelectViewController.swift in Sources */,
+				965F097D25505A1200B3A248 /* DetailSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

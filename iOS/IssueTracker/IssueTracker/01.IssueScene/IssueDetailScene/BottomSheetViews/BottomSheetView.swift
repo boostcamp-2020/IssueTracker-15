@@ -197,7 +197,7 @@ extension BottomSheetView: UITableViewDataSource {
 
 // MARK: - loadNIB extension
 extension BottomSheetView {
-    static let identifier = "AddCommentView"
+    static let identifier = "BottomSheetView"
     static func createView() -> BottomSheetView? {
         return Bundle.main.loadNibNamed(BottomSheetView.identifier, owner: self, options: nil)?.last as? BottomSheetView
     }

@@ -16,10 +16,10 @@ protocol IssueFilterable: AnyObject {
 class IssueFilter: IssueFilterable {
     
     var generalConditions = [Bool](repeating: false, count: Condition.allCases.count)
-    var detailConditions = [Int](repeating: -1, count: DetailCondition.allCases.count)
+    var detailConditions = [Int](repeating: -1, count: DetailSelectionType.allCases.count)
     
     init(generalCondition: [Bool], detailCondition: [Int]) {
-        guard detailCondition.count == DetailCondition.allCases.count,
+        guard detailCondition.count == DetailSelectionType.allCases.count,
         generalCondition.count == Condition.allCases.count
             else { return }
         self.generalConditions = generalCondition

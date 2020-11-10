@@ -13,10 +13,10 @@ protocol IssueFilterViewModelProtocol: AnyObject {
     var detailConditions: [Int] { get }
     
     func generalConditionSelected(at type: Condition)
-    func detailConditionSelected(at type: DetailCondition, id: Int?)
+    func detailConditionSelected(at type: DetailSelectionType, id: Int?)
     func condition(of type: Condition) -> Bool
-    func detailCondition(of type: DetailCondition) -> CellComponentViewModel?
-    func detailConditionDataSource(of type: DetailCondition) -> [[CellComponentViewModel]]
+    func detailCondition(of type: DetailSelectionType) -> CellComponentViewModel?
+    func detailConditionDataSource(of type: DetailSelectionType) -> [[CellComponentViewModel]]
 }
 
 class IssueFilterViewModel: IssueFilterViewModelProtocol {
@@ -53,7 +53,7 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
         generalConditions[type.rawValue] = !generalConditions[type.rawValue]
     }
     
-    func detailConditionSelected(at type: DetailCondition, id: Int?) {
+    func detailConditionSelected(at type: DetailSelectionType, id: Int?) {
         detailConditions[type.rawValue] = id ?? -1
     }
     
@@ -61,7 +61,7 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
         return generalConditions[type.rawValue]
     }
     
-    func detailCondition(of type: DetailCondition) -> CellComponentViewModel? {
+    func detailCondition(of type: DetailSelectionType) -> CellComponentViewModel? {
         let id = detailConditions[type.rawValue]
         if id == -1 { return nil }
         
@@ -77,7 +77,7 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
         }
     }
     
-    func detailConditionDataSource(of type: DetailCondition) -> [[CellComponentViewModel]] {
+    func detailConditionDataSource(of type: DetailSelectionType) -> [[CellComponentViewModel]] {
         var viewModels: [[CellComponentViewModel]] = [[], []]
         switch type {
         case .assignee, .writer:

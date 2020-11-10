@@ -63,7 +63,7 @@ extension IssueFilterViewController {
             guard let type = Condition(rawValue: indexPath.row) else { return }
             willDisplayConditionCell(at: type, cell: cell)
         case .detailCondition:
-            guard let type = DetailCondition(rawValue: indexPath.row),
+            guard let type = DetailSelectionType(rawValue: indexPath.row),
                 let cell = cell as? DetailFilterCellView
                 else { return }
             willDisplayDetailConditionCell(at: type, cell: cell)
@@ -80,7 +80,7 @@ extension IssueFilterViewController {
             guard let condition = Condition(rawValue: indexPath.row) else { return }
             conditionSelected(at: condition, cell: cell)
         case .detailCondition:
-            guard let detailCondition = DetailCondition(rawValue: indexPath.row) else { return }
+            guard let detailCondition = DetailSelectionType(rawValue: indexPath.row) else { return }
             detailConditionSelected(at: detailCondition, cell: cell)
         }
         tableView.deselectRow(at: indexPath, animated: false)
@@ -96,7 +96,7 @@ extension IssueFilterViewController {
         cell.accessoryType = filterViewModel.condition(of: type) ? .checkmark : .none
     }
     
-    private func willDisplayDetailConditionCell(at type: DetailCondition, cell: DetailFilterCellView) {
+    private func willDisplayDetailConditionCell(at type: DetailSelectionType, cell: DetailFilterCellView) {
         guard let filterViewModel = filterViewModel,
             let cellViewModel = filterViewModel.detailCondition(of: type)
             else { return }
@@ -109,14 +109,14 @@ extension IssueFilterViewController {
         cell.accessoryType = filterViewModel.condition(of: type) ? .checkmark : .none
     }
     
-    private func detailConditionSelected(at type: DetailCondition, cell: UITableViewCell) {
+    private func detailConditionSelected(at type: DetailSelectionType, cell: UITableViewCell) {
         guard let filterViewModel = filterViewModel,
             let cell = cell as? DetailFilterCellView
             else { return }
         
         let dataSource = filterViewModel.detailConditionDataSource(of: type)
-        let viewModel = DetailConditionViewModel(detailCondition: type, viewModelDataSource: dataSource, maxSelection: 1)
-        let vc = DetailConditionSelectViewController.createViewController(with: viewModel)
+        let viewModel = DetailSelectionViewModel(detailCondition: type, viewModelDataSource: dataSource, maxSelection: 1)
+        let vc = DetailSelectionViewController.createViewController(with: viewModel)
         
         vc.onSelectionComplete = { selected in
             self.filterViewModel?.detailConditionSelected(at: type, id: selected[safe: 0]?.id)

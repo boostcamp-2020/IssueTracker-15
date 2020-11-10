@@ -28,6 +28,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foy-rZ-nQ4" userLabel="Add Comment Button">
                     <rect key="frame" x="10" y="69" width="291" height="41.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="댓글 추가"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -44,7 +45,9 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="nE5-uG-pPY" secondAttribute="height" multiplier="1:1" id="syK-IR-eMi"/>
                     </constraints>
-                    <state key="normal" image="chevron.down" catalog="system"/>
+                    <state key="normal" image="chevron.down" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                    </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="2"/>
@@ -60,7 +63,9 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="ga9-Pf-fmR" secondAttribute="height" multiplier="1:1" id="bdq-vY-lFv"/>
                     </constraints>
-                    <state key="normal" image="chevron.up" catalog="system"/>
+                    <state key="normal" image="chevron.up" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                    </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                             <integer key="value" value="2"/>
@@ -71,9 +76,9 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0CJ-Kj-Z3G" userLabel="Close Button">
-                    <rect key="frame" x="10" y="712" width="394" height="30"/>
+                    <rect key="frame" x="10" y="700.5" width="394" height="41.5"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                     <state key="normal" title="Close Issue">
                         <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -84,7 +89,7 @@
                     </userDefinedRuntimeAttributes>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5uF-bO-s66">
-                    <rect key="frame" x="10" y="120.5" width="384" height="581.5"/>
+                    <rect key="frame" x="10" y="120.5" width="384" height="570"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
@@ -99,7 +104,7 @@
                 <constraint firstItem="5uF-bO-s66" firstAttribute="top" secondItem="foy-rZ-nQ4" secondAttribute="bottom" constant="10" id="FFP-DP-NC5"/>
                 <constraint firstItem="nE5-uG-pPY" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.1" id="Il6-Ib-mnI"/>
                 <constraint firstItem="5uF-bO-s66" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="JBr-ch-uCo"/>
-                <constraint firstItem="0CJ-Kj-Z3G" firstAttribute="height" secondItem="foy-rZ-nQ4" secondAttribute="height" multiplier="0.722892" id="Kxg-Kj-P3f"/>
+                <constraint firstItem="0CJ-Kj-Z3G" firstAttribute="height" secondItem="foy-rZ-nQ4" secondAttribute="height" id="Kxg-Kj-P3f"/>
                 <constraint firstItem="0CJ-Kj-Z3G" firstAttribute="top" secondItem="5uF-bO-s66" secondAttribute="bottom" constant="10" id="WCw-0y-Lry"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nE5-uG-pPY" secondAttribute="trailing" constant="20" id="ekq-va-WWX"/>
                 <constraint firstItem="ga9-Pf-fmR" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.1" id="fLa-7e-Mnd"/>

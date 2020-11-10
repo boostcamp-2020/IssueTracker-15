@@ -16,7 +16,7 @@ enum Condition: Int, CaseIterable {
     case issueClosed = 4
 }
 
-enum DetailCondition: Int, CaseIterable {
+enum DetailSelectionType: Int, CaseIterable {
     case writer = 0
     case label = 1
     case milestone = 2
