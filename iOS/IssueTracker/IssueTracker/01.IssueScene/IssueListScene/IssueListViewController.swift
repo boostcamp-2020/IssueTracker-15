@@ -24,6 +24,7 @@ class IssueListViewController: UIViewController {
     }()
     
     private var viewingMode: ViewingMode = .general
+    
     var issueListViewModel: IssueListViewModelProtocol? {
         didSet {
             issueListViewModel?.didFetch = { [weak self] in
@@ -131,7 +132,6 @@ extension IssueListViewController {
         case .general:
             AddNewIssueViewController.present(at: self, addType: .newIssue, onDismiss: nil)
         }
-
     }
     
     private func toEditMode() {

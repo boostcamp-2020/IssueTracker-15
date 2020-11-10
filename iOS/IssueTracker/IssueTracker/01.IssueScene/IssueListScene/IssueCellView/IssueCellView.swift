@@ -149,6 +149,7 @@ extension IssueCellView {
 }
 
 // MARK: - UIScrollViewDelegate Implementation
+
 extension IssueCellView: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

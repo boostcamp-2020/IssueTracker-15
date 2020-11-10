@@ -34,7 +34,6 @@ class BottomSheetMilestoneView: UITableViewCell {
             frontBarGaugeWidthConstraint.constant = 0
             return
         }
-        
         frontBarGaugeWidthConstraint.constant = backgroundBar.bounds.width * close / (open + close)
     }
 
@@ -45,7 +44,7 @@ class BottomSheetMilestoneView: UITableViewCell {
     }
 }
 
-// MARK: - loadNIB extension
+// MARK: - Load From Nib
 
 extension BottomSheetMilestoneView {
     static let identifier = "BottomSheetMilestoneView"

@@ -54,6 +54,7 @@ extension BottomSheetLabelCollectionView: UICollectionViewDataSource {
 
 extension BottomSheetLabelCollectionView {
     static let identifier = "BottomSheetLabelCollectionView"
+    
     static func createView() -> BottomSheetLabelCollectionView? {
         return Bundle.main.loadNibNamed(BottomSheetLabelCollectionView.identifier, owner: self, options: nil)?.last as? BottomSheetLabelCollectionView
     }

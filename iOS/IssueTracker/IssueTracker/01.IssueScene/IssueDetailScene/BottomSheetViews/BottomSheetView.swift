@@ -21,14 +21,14 @@ class BottomSheetView: UIView {
     @IBOutlet weak var upButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    
     private var labelsCollectionViewCell: BottomSheetLabelCollectionView?
     
     private weak var issueDetailViewModel: IssueDetailViewModelProtocol?
     
     var fullView: CGFloat = 100
     var partialView: CGFloat {
-        return UIScreen.main.bounds.height - (addCommentButton.frame.maxY + (self.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0))
+        return UIScreen.main.bounds.height
+            - (addCommentButton.frame.maxY + (self.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0))
     }
     
     func configure(issueDetailViewModel: IssueDetailViewModelProtocol?) {
@@ -57,6 +57,18 @@ extension BottomSheetView {
         tableView.reloadData()
     }
     
+    @IBAction func addCommentButtonTapped(_ sender: Any) {
+        delegate?.addCommentButtonTapped()
+    }
+
+    @IBAction func upButtonTapped(_ sender: Any) {
+        delegate?.upButtonTapped()
+    }
+
+    @IBAction func downButtonTapped(_ sender: Any) {
+        delegate?.downButtonTapped()
+    }
+    
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: self)
         let velocity = recognizer.velocity(in: self)
@@ -78,23 +90,11 @@ extension BottomSheetView {
                 } else {
                     self.frame = CGRect(x: 0, y: self.fullView, width: self.frame.width, height: self.frame.height)
                 }
-                
             }, completion: nil)
         }
         
     }
     
-    @IBAction func addCommentButtonTapped(_ sender: Any) {
-        delegate?.addCommentButtonTapped()
-    }
-
-    @IBAction func upButtonTapped(_ sender: Any) {
-        delegate?.upButtonTapped()
-    }
-
-    @IBAction func downButtonTapped(_ sender: Any) {
-        delegate?.downButtonTapped()
-    }
 }
 
 // MARK: - UITableViewDelegate Implementation
@@ -149,6 +149,7 @@ extension BottomSheetView: UITableViewDataSource {
             return cell
         case 1:
             guard let labelViewModels = issueDetailViewModel?.labels else { break }
+            
             let cell: BottomSheetLabelCollectionView
             if let labelsCollectionViewCell = self.labelsCollectionViewCell {
                 cell = labelsCollectionViewCell
@@ -198,6 +199,7 @@ extension BottomSheetView: UITableViewDataSource {
 // MARK: - loadNIB extension
 extension BottomSheetView {
     static let identifier = "BottomSheetView"
+    
     static func createView() -> BottomSheetView? {
         return Bundle.main.loadNibNamed(BottomSheetView.identifier, owner: self, options: nil)?.last as? BottomSheetView
     }
