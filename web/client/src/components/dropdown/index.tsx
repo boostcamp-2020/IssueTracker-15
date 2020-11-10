@@ -22,15 +22,3 @@ function Dropdown({ title, contents }: dropdownProps) {
 }
 
 export default Dropdown;
-/*
-<S.DropdownWrapper>
-    <ListTitle>Filter Issues </ListTitle>
-    <S.ListWrapper>
-      <ListComp>Open Issues</ListComp>
-      <ListComp>Your Issues </ListComp>
-      <ListComp>Everything assigned to you</ListComp>
-      <ListComp>Everything mentioning to you</ListComp>
-      <ListComp>Closed Issues</ListComp>
-    </S.ListWrapper>
-  </S.DropdownWrapper>;
-*/
