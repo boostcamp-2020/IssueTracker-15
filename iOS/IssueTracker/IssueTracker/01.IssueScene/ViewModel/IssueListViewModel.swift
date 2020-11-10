@@ -9,7 +9,6 @@ import Foundation
 
 protocol IssueListViewModelProtocol: AnyObject {
     var didFetch: (([IssueItemViewModel]) -> Void)? { get set }
-    var invalidateLayout: (() -> Void)? { get set }
     var didCellChecked: ((IndexPath, Bool) -> Void)? { get set }
     var showTitleWithCheckNum: ((Int) -> Void)? { get set }
     var filter: IssueFilterable? { get set }
@@ -36,7 +35,6 @@ class IssueListViewModel: IssueListViewModelProtocol {
     
     var filter: IssueFilterable?
     var didFetch: (([IssueItemViewModel]) -> Void)?
-    var invalidateLayout: (() -> Void)?
     var showTitleWithCheckNum: ((Int) -> Void)?
     var didCellChecked: ((IndexPath, Bool) -> Void)?
     
@@ -55,24 +53,29 @@ class IssueListViewModel: IssueListViewModelProtocol {
                 else { return }
             
             self.issues.removeAll()
+            let group = DispatchGroup()
             
             issues.forEach {
                 let itemViewModel = IssueItemViewModel(issue: $0)
                 self.issues.append(itemViewModel)
+                group.enter()
                 self.labelProvider?.getLabels(of: $0.labels, completion: { [weak itemViewModel] (labels) in
                     itemViewModel?.setLabels(labels: labels)
-                    self.invalidateLayout?()
+                    group.leave()
                 })
                 
                 if let milestoneID = $0.milestone {
+                    group.enter()
                     self.milestoneProvider?.getMilestone(at: milestoneID, completion: { [weak itemViewModel] milestone in
                         itemViewModel?.setMilestone(milestone: milestone)
-                        self.invalidateLayout?()
+                        group.leave()
                     })
                 }
             }
             
-            self.didFetch?(self.issues)
+            group.notify(queue: .main) {
+                self.didFetch?(self.issues)
+            }
         })
     }
     

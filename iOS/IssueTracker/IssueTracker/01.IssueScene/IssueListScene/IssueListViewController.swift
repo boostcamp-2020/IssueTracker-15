@@ -37,9 +37,6 @@ class IssueListViewController: UIViewController {
                 snapShot.appendItems(issueItems)
                 self.dataSource.apply(snapShot)
             }
-            issueListViewModel?.invalidateLayout = { [weak self] in
-                self?.collectionView.layoutIfNeeded()
-            }
             issueListViewModel?.didCellChecked = { [weak self] (indexPath, check) in
                 guard let cell = self?.collectionView.cellForItem(at: indexPath) as? IssueCellView else { return }
                 cell.setCheck(check)

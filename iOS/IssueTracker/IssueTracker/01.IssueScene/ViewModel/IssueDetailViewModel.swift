@@ -208,52 +208,73 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         
         let idForRemove = prevSet.subtracting(incomingSet)
         let idForAdd = incomingSet.subtracting(prevSet)
-        
+        let dispatchGroup = DispatchGroup()
         switch type {
         case .assignee, .writer:
             return
         case .label:
-            idForRemove.forEach { deleteLabel(of: $0)}
-            idForAdd.forEach { addLabel(of: $0)  }
+            idForRemove.forEach {
+                deleteLabel(of: $0, group: dispatchGroup)
+            }
+            idForAdd.forEach {
+                addLabel(of: $0, group: dispatchGroup)
+            }
         case .milestone:
-            if idForAdd.isEmpty && !idForRemove.isEmpty { removeMilestone() }
-            idForAdd.forEach { addMilestone(of: $0) }
+            if idForAdd.isEmpty && !idForRemove.isEmpty {
+                removeMilestone(group: dispatchGroup)
+            }
+            idForAdd.forEach {
+                addMilestone(of: $0, group: dispatchGroup)
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.didLabelChanged?()
+            self.didMilestoneChanged?()
         }
     }
     
-    private func addLabel(of id: Int) {
-        self.issueProvider?.addLabel(at: issueNumber, of: id, completion: { [weak self] issue in
+    private func addLabel(of id: Int, group: DispatchGroup?) {
+        guard let provider = issueProvider else { return }
+        group?.enter()
+        provider.addLabel(at: issueNumber, of: id, completion: { [weak self] issue in
             guard issue !=  nil,
                 let label = self?.labelProvier?.labels[id]
                 else { return }
             self?.labels.append(LabelItemViewModel(label: label))
-            self?.didLabelChanged?()
+            group?.leave()
         })
     }
     
-    private func deleteLabel(of id: Int) {
-        self.issueProvider?.deleteLabel(at: issueNumber, of: id, completion: { [weak self] issue in
+    private func deleteLabel(of id: Int, group: DispatchGroup?) {
+        guard let provider = issueProvider else { return }
+        group?.enter()
+        provider.deleteLabel(at: issueNumber, of: id, completion: { [weak self] issue in
             if issue == nil { return }
             self?.labels.removeAll(where: {$0.id == id})
-            self?.didLabelChanged?()
+            group?.leave()
         })
     }
     
-    private func addMilestone(of id: Int) {
-        self.issueProvider?.addMilestone(at: issueNumber, of: id, completion: { [weak self] issue in
+    private func addMilestone(of id: Int, group: DispatchGroup?) {
+        guard let provider = issueProvider else { return }
+        group?.enter()
+        provider.addMilestone(at: issueNumber, of: id, completion: { [weak self] issue in
             guard issue !=  nil,
                 let milestone = self?.milestoneProvider?.milestons[id]
                 else { return }
             self?.milestone = MilestoneItemViewModel(milestone: milestone, from: .fromServer)
-            self?.didMilestoneChanged?()
+            group?.leave()
         })
     }
     
-    private func removeMilestone() {
-        self.issueProvider?.deleteMilestone(at: issueNumber, completion: { [weak self] issue in
+    private func removeMilestone(group: DispatchGroup?) {
+        guard let provider = issueProvider else { return }
+        group?.enter()
+        provider.deleteMilestone(at: issueNumber, completion: { [weak self] issue in
             guard issue != nil else { return }
             self?.milestone = nil
-            self?.didMilestoneChanged?()
+            group?.enter()
         })
     }
 }
