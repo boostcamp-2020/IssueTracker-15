@@ -71,11 +71,16 @@ class IssueFilter: IssueFilterable {
         }
         
         if let id = detailConditions[safe: DetailSelectionType.milestone.rawValue],
-            id != -1  {
+            id != -1 {
             dataSet = dataSet.intersection(datas.filter { $0.milestone ?? -1 ==  id })
         }
         
-        
-        return dataSet.map { $0 }
+        return dataSet.sorted { (lhs, rhs) -> Bool in
+            guard let dateLhs = lhs.createdAt.datdForServer,
+                let dateRhs = rhs.createdAt.datdForServer
+                else { return true }
+            
+            return dateLhs > dateRhs
+        }
     }
 }
