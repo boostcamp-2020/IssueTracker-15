@@ -1,8 +1,8 @@
 import React from "react";
 import * as S from "./style";
 
-interface LabelProps {
-  name: string;
+export interface LabelProps {
+  name?: string;
   color: string;
 }
 
