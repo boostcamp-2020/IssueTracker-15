@@ -129,7 +129,7 @@ extension Issue {
             let isOpened = jsonObject["isOpened"] as? Bool,
             let createdAt = jsonObject["createAt"] as? String,
             let updatedAt = jsonObject["updateAt"] as? String,
-            let authorObject = jsonObject["author"] as? [String:Any],
+            let authorObject = jsonObject["author"] as? [String: Any],
             let author = authorObject["userName"] as? String,
             let labelObjects = jsonObject["labels"] as? [[String: Any]],
             let assigneeObjects = jsonObject["assignees"] as? [[String: Any]]
@@ -138,7 +138,6 @@ extension Issue {
         let assignees = assigneeObjects.compactMap { User(json: $0) }
         let description = ""
         let milestone = jsonObject["milestoneId"] as? Int
-        
         return Issue(id: id, title: title, description: description, author: author, isOpened: isOpened, createdAt: createdAt, updatedAt: updatedAt, milestone: milestone, labels: labels, assignees: assignees)
     }
     

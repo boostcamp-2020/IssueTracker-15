@@ -26,6 +26,7 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var deleteBoxGuideView: UIView!
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var milestoneBadge: BadgeLabelView!
     @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var labelCollectionView: UICollectionView!
