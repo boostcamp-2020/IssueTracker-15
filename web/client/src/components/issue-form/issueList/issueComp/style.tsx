@@ -21,5 +21,19 @@ export const IssueTitle = styled.div`
 `;
 
 export const IssueEtc = styled.div`
+  display: flex;
   font-size: 12px;
+`;
+
+export const ExclamationWrapper = styled.div`
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+`;
+
+export const VscMilestoneWrapper = styled.div`
+  margin-right: 20px;
+`;
+
+export const IssueEtcWrapper = styled.div`
+  margin-right: 5px;
 `;

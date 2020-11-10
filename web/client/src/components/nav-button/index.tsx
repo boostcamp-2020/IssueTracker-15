@@ -16,7 +16,6 @@ const milestoneConf = {
 const labelConf = {
   width: "10%",
   title: "Label",
-  // onClick 넣어줘야 함
 };
 
 const labelNavButton = {};
