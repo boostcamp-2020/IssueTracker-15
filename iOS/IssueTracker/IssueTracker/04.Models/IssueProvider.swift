@@ -18,7 +18,7 @@ protocol IssueProvidable: AnyObject {
     func editTitle(id: Int, title: String, completion: @escaping (Issue?) -> Void)
     
     func getIssue(at id: Int, completion: @escaping (Issue?) -> Void)
-    func closeIssue(id: Int, completion: @escaping (Bool) -> Void)
+    func changeIssueState(id: Int, open: Bool, completion: @escaping (Bool) -> Void)
     func addLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void)
     func deleteLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void)
     func addMilestone(at id: Int, of milestone: Int, completion: @escaping (Issue?) -> Void)
@@ -159,12 +159,13 @@ class IssueProvider: IssueProvidable {
         })
     }
     
-    func closeIssue(id: Int, completion: @escaping (Bool) -> Void) {
-        dataLoader?.request(IssueService.editIssue(id, nil, nil, false), callBackQueue: .main, completion: { (response) in
+    func changeIssueState(id: Int, open: Bool, completion: @escaping (Bool) -> Void) {
+        dataLoader?.request(IssueService.editIssue(id, nil, nil, open), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(false)
             case .success:
+                self?.issues[id]?.isOpened = open
                 completion(true)
             }
         })
@@ -251,13 +252,13 @@ class IssueProvider: IssueProvidable {
      response: 204
      */
     func deleteMilestone(at id: Int, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.deleteMilestone(id, 0), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.deleteMilestone(id, 0), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success:
-                self.issues[id]?.deleteMilestone()
-                completion(self.issues[id])
+                self?.issues[id]?.deleteMilestone()
+                completion(self?.issues[id])
             }
         })
     }

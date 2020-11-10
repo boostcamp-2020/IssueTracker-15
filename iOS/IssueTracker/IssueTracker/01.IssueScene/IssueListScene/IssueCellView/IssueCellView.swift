@@ -32,6 +32,7 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var milestoneBadge: BadgeLabelView!
     @IBOutlet weak var checkBoxButton: UIButton!
+    @IBOutlet weak var closeBoxButton: UIButton!
     @IBOutlet weak var labelCollectionView: UICollectionView!
     
     private lazy var dataSource: DataSource = {
@@ -75,7 +76,7 @@ class IssueCellView: UICollectionViewCell {
         titleLabel.text = issueItemViewModel.title
         setMilestone(title: issueItemViewModel.milestoneTitle)
         setLabels(labelViewModels: issueItemViewModel.labelItemViewModels)
-        setStatusImage(isOpened: issueItemViewModel.isOpened)
+        setStatus(isOpened: issueItemViewModel.isOpened)
         
         self.issueItemViewModel?.didMilestoneChanged = { [weak self] milestone in
                 self?.setMilestone(title: milestone)
@@ -124,9 +125,11 @@ class IssueCellView: UICollectionViewCell {
         dataSource.apply(snapShot)
     }
     
-    private func setStatusImage(isOpened: Bool) {
+    private func setStatus(isOpened: Bool) {
         guard let color = isOpened ? Constant.openColor : Constant.closeColor else { return }
         statusImage.tintColor = color
+        closeBoxButton.setTitle(isOpened ? "Close" : "Open", for: .normal)
+        closeBoxButton.backgroundColor = isOpened ? Constant.openColor : .link
     }
     
     func resetScrollOffset() {

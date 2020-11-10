@@ -51,7 +51,6 @@ class IssueListViewModel: IssueListViewModelProtocol {
         }
     }
     
-    
     init(labelProvider: LabelProvidable, milestoneProvider: MilestoneProvidable, issueProvider: IssueProvidable, issueFilter: IssueFilterable? = IssueFilter()) {
         self.labelProvider = labelProvider
         self.milestoneProvider = milestoneProvider
@@ -114,13 +113,13 @@ extension IssueListViewModel {
         })
     }
     
-    private func closeIssue(of issueItems: [IssueItemViewModel]) {
+    private func changeIssueState(of issueItems: [IssueItemViewModel], open: Bool) {
         guard let provider = issueProvider else { return }
         let group = DispatchGroup()
         
         issueItems.forEach {
             group.enter()
-            provider.closeIssue(id: $0.id) { _ in
+            provider.changeIssueState(id: $0.id, open: open) { _ in
                 group.leave()
             }
         }
@@ -173,12 +172,12 @@ extension IssueListViewModel {
     
     func closeIssue(of id: Int) {
         guard let item = issues.first(where: { $0.id == id }) else { return }
-        closeIssue(of: [item])
+        changeIssueState(of: [item], open: !item.isOpened)
     }
     
     func closeSelectedIssue() {
         let issueItems = issues.filter { $0.checked }
-        closeIssue(of: issueItems)
+        changeIssueState(of: issueItems, open: false)
     }
     
 }

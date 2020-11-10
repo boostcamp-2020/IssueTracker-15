@@ -132,9 +132,9 @@ extension BottomSheetView: UITableViewDataSource {
             return issueDetailViewModel?.assignees.count ?? 0
         case 1:
             let num = (issueDetailViewModel?.labels ?? []).isEmpty ? 0 : 1
-            print("[tableViewNum]: \(num)")
             return num
         case 2:
+            print("[bottomSheetTableView]: \((issueDetailViewModel?.milestone != nil) ? 1 : 0)")
             return (issueDetailViewModel?.milestone != nil) ? 1 : 0
         default:
             return 0

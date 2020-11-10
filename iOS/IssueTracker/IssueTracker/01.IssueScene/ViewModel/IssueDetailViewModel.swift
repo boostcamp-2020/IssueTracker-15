@@ -274,7 +274,7 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         provider.deleteMilestone(at: issueNumber, completion: { [weak self] issue in
             guard issue != nil else { return }
             self?.milestone = nil
-            group?.enter()
+            group?.leave()
         })
     }
 }

@@ -143,7 +143,6 @@ extension IssueListViewController {
         case .edit:
             issueListViewModel?.closeSelectedIssue()
             toGeneralMode()
-            break
         case .general:
             AddNewIssueViewController.present(at: self, addType: .newIssue, previousData: nil, onDismiss: { [weak self] (content) in
                 print(content)
