@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="IssueCellView" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="IssueCellView" customModule="IssueTracker" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="IssueCellView" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="IssueCellView" translatesAutoresizingMaskIntoConstraints="NO" id="gTV-IL-0wX" customClass="IssueCellView" customModule="IssueTracker" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="192"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="414" height="192"/>

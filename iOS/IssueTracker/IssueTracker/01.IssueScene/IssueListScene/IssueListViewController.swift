@@ -14,11 +14,14 @@ class IssueListViewController: UIViewController {
         case edit
     }
     
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var rightNavButton: UIBarButtonItem!
     @IBOutlet weak var leftNavButton: UIBarButtonItem!
     @IBOutlet weak var floatingButton: UIButton!
-
+    
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, IssueItemViewModel>
+    @IBOutlet weak var collectionView: UICollectionView!
+    private lazy var dataSource = makeDataSource()
+    
     lazy var floatingButtonAspectRatioConstraint: NSLayoutConstraint = {
         self.floatingButton.widthAnchor.constraint(equalTo: self.floatingButton.heightAnchor)
     }()
@@ -27,8 +30,12 @@ class IssueListViewController: UIViewController {
     
     var issueListViewModel: IssueListViewModelProtocol? {
         didSet {
-            issueListViewModel?.didFetch = { [weak self] in
-                self?.collectionView.reloadData()
+            issueListViewModel?.didFetch = { [weak self] issueItems in
+                guard let `self` = self else { return }
+                var snapShot = NSDiffableDataSourceSnapshot<Int, IssueItemViewModel>()
+                snapShot.appendSections([0])
+                snapShot.appendItems(issueItems)
+                self.dataSource.apply(snapShot)
             }
             issueListViewModel?.invalidateLayout = { [weak self] in
                 self?.collectionView.collectionViewLayout.invalidateLayout()
@@ -49,7 +56,6 @@ class IssueListViewController: UIViewController {
         configureSearchBar()
         configureCollectionView()
         floatingButtonAspectRatioConstraint.isActive = true
-//        issueListViewModel?.needFetchItems()
         navigationController?.isToolbarHidden = true
     }
     
@@ -60,7 +66,6 @@ class IssueListViewController: UIViewController {
             guard let cell = $0 as? IssueCellView else { return }
             cell.resetScrollOffset()
         }
-        
         issueListViewModel?.needFetchItems()
     }
     
@@ -76,7 +81,7 @@ class IssueListViewController: UIViewController {
     
     private func configureCollectionView() {
         setupCollectionViewLayout()
-        collectionView.dataSource = self
+//        collectionView.dataSource = self
         collectionView.registerCell(type: IssueCellView.self)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didSelectCell(_:)))
@@ -90,6 +95,15 @@ class IssueListViewController: UIViewController {
         layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: cellHeight)
         layout.minimumLineSpacing = 3
         collectionView.setCollectionViewLayout(layout, animated: false)
+    }
+    
+    func makeDataSource() -> DataSource {
+        let dataSource = DataSource(collectionView: collectionView) { (collectionView, indexPath, issueItem) -> UICollectionViewCell? in
+                                        guard let cell: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return nil }
+                                        cell.configure(issueItemViewModel: issueItem)
+                                        return cell
+        }
+        return dataSource
     }
     
 }
@@ -218,23 +232,6 @@ extension IssueListViewController {
         self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
     
-}
-
-// MARK: - UICollectionViewDataSource Implementation
-
-extension IssueListViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath),
-            let cellViewModel = issueListViewModel?.issues[indexPath.row] else { return IssueCellView() }
-        cellView.configure(issueItemViewModel: cellViewModel)
-        cellView.delegate = self
-        cellView.showCheckBox(show: viewingMode == .edit, animation: false)
-        return cellView
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return issueListViewModel?.issues.count ?? 0
-    }
 }
 
 // MARK: - IssucCellViewDelegate Implementation
