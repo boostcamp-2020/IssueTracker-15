@@ -8,6 +8,8 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, IssueItemViewModel>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, IssueItemViewModel>
     
     enum ViewingMode {
         case general
@@ -18,7 +20,6 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var leftNavButton: UIBarButtonItem!
     @IBOutlet weak var floatingButton: UIButton!
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, IssueItemViewModel>
     @IBOutlet weak var collectionView: UICollectionView!
     private lazy var dataSource = makeDataSource()
     
@@ -32,7 +33,7 @@ class IssueListViewController: UIViewController {
         didSet {
             issueListViewModel?.didItemChanged = { [weak self] issueItems in
                 guard let `self` = self else { return }
-                var snapShot = NSDiffableDataSourceSnapshot<Int, IssueItemViewModel>()
+                var snapShot = SnapShot()
                 snapShot.appendSections([0])
                 snapShot.appendItems(issueItems)
                 self.dataSource.apply(snapShot)
@@ -54,6 +55,8 @@ class IssueListViewController: UIViewController {
         configureCollectionView()
         floatingButtonAspectRatioConstraint.isActive = true
         navigationController?.isToolbarHidden = true
+        floatingButton.layoutSubviews()
+        floatingButton.layer.cornerRadius = floatingButton.bounds.height / 2 * 1
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,12 +69,6 @@ class IssueListViewController: UIViewController {
         issueListViewModel?.needFetchItems()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        floatingButton.layer.cornerRadius = floatingButton.bounds.height / 2 * 1
-    }
-    
-    // TODO: SerachBar Configure
     private func configureSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -81,10 +78,8 @@ class IssueListViewController: UIViewController {
     private func configureCollectionView() {
         setupCollectionViewLayout()
         collectionView.registerCell(type: IssueCellView.self)
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didSelectCell(_:)))
         self.collectionView.addGestureRecognizer(tap)
-        self.collectionView.isUserInteractionEnabled = true
     }
     
     private func setupCollectionViewLayout() {
@@ -226,9 +221,7 @@ extension IssueListViewController {
         guard let issueListViewModel = issueListViewModel,
             let issueDetailViewModel = issueListViewModel.createIssueDetailViewModel(path: indexPath)
             else { return }
-        
         let issueDetailVC = IssueDetailViewController.createViewController(issueDetailViewModel: issueDetailViewModel)
-        
         self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
     
