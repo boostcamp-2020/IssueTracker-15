@@ -11,7 +11,6 @@ import Foundation
 protocol IssueItemViewModelProtocol: AnyObject {
     var id: Int { get }
     var title: String { get }
-    var description: String { get }
     var milestoneTitle: String { get }
     var labelItemViewModels: [LabelItemViewModel] { get }
     
@@ -24,7 +23,6 @@ class IssueItemViewModel: IssueItemViewModelProtocol {
     
     let id: Int
     let title: String
-    let description: String
     
     private(set) var milestoneTitle: String = ""
     private(set) var labelItemViewModels = [LabelItemViewModel]()
@@ -37,7 +35,6 @@ class IssueItemViewModel: IssueItemViewModelProtocol {
     init(issue: Issue) {
         id = issue.id
         title = issue.title
-        description = issue.description
     }
     
     func setLabels(labels: [Label]?) {

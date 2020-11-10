@@ -11,6 +11,7 @@ import MarkdownView
 
 enum AddType: String {
     case newIssue = "새 이슈"
+    case editIssue = "이슈 수정"
     case newComment = "댓글 추가"
 }
 
@@ -21,6 +22,7 @@ class AddNewIssueViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     private var commentTextView: UITextView = UITextView()
     private var markdownView: MarkdownView = MarkdownView()
+    private var previousData: [String]?
     var addType: AddType = .newIssue
     
     private let textViewPlaceholder = "코멘트는 여기에 작성하세요"
@@ -29,7 +31,7 @@ class AddNewIssueViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         switch addType {
-        case .newIssue:
+        case .newIssue, .editIssue:
             titleLabel.isHidden = false
             titleTextField.isHidden = false
         case .newComment:
@@ -70,7 +72,13 @@ class AddNewIssueViewController: UIViewController {
         commentTextView.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 10).isActive = true
         commentTextView.widthAnchor.constraint(equalTo: self.segmentedControl.widthAnchor, multiplier: 1).isActive = true
         commentTextView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 10).isActive = true
-        initTextViewPlaceholder()
+        
+        switch addType {
+        case .newIssue, .newComment:
+            initTextViewPlaceholder()
+        case .editIssue:
+            initTextViewPreviousData()
+        }
     }
     
     private func configureMarkdownView() {
@@ -98,13 +106,27 @@ class AddNewIssueViewController: UIViewController {
     
     @IBAction func doneButtonTapped(_ sender: Any) {
         var content: [String] = [String]()
-        if addType == .newIssue {
-            content.append(titleTextField.text ?? "")
+
+        switch addType {
+        case .newIssue, .editIssue:
+            guard let title = titleTextField.text, !title.isEmpty else {
+                showAlert(at: self, title: "제목을 입력해주세요!", prepare: nil, completion: nil)
+                return
+            }
+            content.append(title)
+        default:
+            break
         }
-        content.append(commentTextView.text)
+
+        content.append(commentTextView.text == textViewPlaceholder ? "" : commentTextView.text)
         
         doneButtonTapped?(content)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    private func initTextViewPreviousData() {
+        titleTextField.text = previousData?[0]
+        commentTextView.text = previousData?[1]
     }
     
     private func initTextViewPlaceholder() {
@@ -175,12 +197,17 @@ extension AddNewIssueViewController {
     
     static func present(at viewController: UIViewController,
                         addType: AddType,
+                        previousData: [String]?,
                         onDismiss: (([String]) -> Void)?) {
-        
+                
         let storyBoard = UIStoryboard(name: storyboardName, bundle: Bundle.main)
         guard let container = storyBoard.instantiateInitialViewController() as? UINavigationController,
             let vc = container.topViewController as? AddNewIssueViewController
             else { return }
+        
+        if let previousData = previousData {
+            vc.previousData = previousData
+        }
         
         vc.addType = addType
         vc.title = addType.rawValue

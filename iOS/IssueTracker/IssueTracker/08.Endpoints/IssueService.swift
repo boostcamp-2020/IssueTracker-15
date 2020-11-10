@@ -21,15 +21,15 @@ enum IssueService {
     
     // createIssue (title, description, milestoneID, authorID)
     // [POST] /api/issue
-    case createIssue(String, String, Int?, Int)
+    case createIssue(String, String?, Int?, Int)
     
     // editTitle (Id, title)
     // [PATCH] /api/issue/:id/title
     case editTitle(Int, String)
     
-    // editDescription (Id, description, isOpened)
+    // editDescription (Id, title, description, isOpened)
     // [PATCH] /api/issue/:id/
-    case editIssue(Int, String?, Bool?)
+    case editIssue(Int, String?, String?, Bool?)
     
     // delete (Id)
     // [DELETE] /api/issue/:id
@@ -77,7 +77,7 @@ extension IssueService: IssueTrackerService {
         case .editTitle(let id, let title):
             // /api/issue/:id/title
             return "/api/issue/\(id)/\(title)"
-        case .editIssue(let id, _, _):
+        case .editIssue(let id, _, _, _):
             //  /api/issue/:id/
             return "/api/issue/\(id)"
         case .delete(let id):
@@ -141,8 +141,9 @@ extension IssueService: IssueTrackerService {
             return .requestJsonObject(jsonObject)
         case .editTitle(_, let title):
             return .requestJsonObject(["title": title])
-        case .editIssue(_, let description, let isOpened):
+        case .editIssue(_, let title, let description, let isOpened):
             var jsonObject = [String: Any]()
+            jsonObject["title"] = title
             jsonObject["description"] = description
             jsonObject["isOpened"] = isOpened
             return .requestJsonObject(jsonObject)

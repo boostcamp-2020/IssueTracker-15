@@ -56,6 +56,8 @@ class IssueListViewModel: IssueListViewModelProtocol {
                 let issues = datas
                 else { return }
             
+            self.issues.removeAll()
+            
             issues.forEach {
                 let itemViewModel = IssueItemViewModel(issue: $0)
                 self.issues.append(itemViewModel)
@@ -137,8 +139,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
             guard let `self` = self,
                 let createdIssue = createdIssue
                 else { return }
-            print("createdIssue: \(createdIssue)")
-            self.issues.insert(IssueItemViewModel(issue: createdIssue), at: 0)
+            self.issues.append(IssueItemViewModel(issue: createdIssue))
             self.didFetch?()
         }
     }

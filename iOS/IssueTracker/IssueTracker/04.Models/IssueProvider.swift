@@ -11,7 +11,7 @@ import NetworkFramework
 
 protocol IssueProvidable: AnyObject {
     func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion:  @escaping (Issue?) -> Void )
-    func editIssue(id: Int, description: String, completion:  @escaping (Issue?) -> Void)
+    func editIssue(id: Int, title: String, description: String, completion:  @escaping (Issue?) -> Void)
     func editTitle(id: Int, title: String, completion: @escaping (Issue?) -> Void)
     func fetchIssues(completion: @escaping ([Issue]?) -> Void)
     
@@ -120,7 +120,7 @@ class IssueProvider: IssueProvidable {
     }
     
     func closeIssue(id: Int, completion: @escaping (Bool) -> Void) {
-        dataLoader?.request(IssueService.editIssue(id, nil, false), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.editIssue(id, nil, nil, false), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(false)
@@ -132,21 +132,23 @@ class IssueProvider: IssueProvidable {
     
     /*
      Response : 200 body: nil
-     
      */
-    func editIssue(id: Int, description: String, completion: @escaping (Issue?) -> Void) {
+    func editIssue(id: Int, title: String, description: String, completion: @escaping (Issue?) -> Void) {
         
-        dataLoader?.request(IssueService.editIssue(id, description, nil), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.editIssue(id, title, description, nil), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success:
-                // TODO: response 처리
-            break
+                if let index = self.issues.firstIndex(where: {$0.id == id}) {
+                    self.issues[index].title = title
+                    self.issues[index].description = description.isEmpty ? nil : description
+                    completion(self.issues[index])
+                }
             }
         })
-        
     }
+    
     /*
      Response : 200 body: nil
      */

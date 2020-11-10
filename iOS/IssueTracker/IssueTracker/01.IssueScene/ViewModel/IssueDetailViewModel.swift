@@ -15,11 +15,13 @@ protocol IssueDetailViewModelProtocol: AnyObject {
     var isOpened: Bool { get }
     var didFetch: (() -> Void)? { get set }
     var milestone: MilestoneItemViewModel? { get }
+    var description: String? { get }
     var comments: [CommentViewModel] { get }
     var labels: [LabelItemViewModel] { get }
     var assignees: [UserViewModel] { get }
     func needFetchDetails()
     func addComment(content: String)
+    func editIssue(title: String, description: String)
     
     var didLabelChanged: (() -> Void)? { get set }
     var didMilestoneChanged: (() -> Void)? { get set }
@@ -66,6 +68,7 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     var author: UserViewModel = UserViewModel(userName: "")
     var didFetch: (() -> Void)?
     var isOpened: Bool = false
+    var description: String?
     var milestone: MilestoneItemViewModel?
     var comments: [CommentViewModel] = [CommentViewModel]()
     var labels: [LabelItemViewModel] = [LabelItemViewModel]()
@@ -96,7 +99,18 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             self.isOpened = currentIssue.isOpened
             self.author = UserViewModel(user: currentIssue.author)
             
-            self.comments = currentIssue.comments.map { CommentViewModel(comment: $0) }
+            dump(currentIssue)
+            
+            // comment에 넣되 description 변수를 둬서 분기별로 대응하는게 좋을것 같다!
+            if let firstComment = currentIssue.description {
+                self.comments.append(CommentViewModel(comment: Comment(content: firstComment, user: currentIssue.author)))
+            }
+            
+            if !currentIssue.comments.isEmpty {
+                currentIssue.comments.forEach { comment in
+                    self.comments.append(CommentViewModel(comment: comment))
+                }
+            }
             
             self.labelProvier?.getLabels(of: currentIssue.labels) { (labels) in
                 self.labels = labels.map { LabelItemViewModel(label: $0)}
@@ -112,7 +126,7 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             }
             
             self.assignees = currentIssue.assignees.map { UserViewModel(user: $0)}
-            
+
             self.didFetch?()
         }
     }
@@ -123,6 +137,31 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             self.comments.append(CommentViewModel(comment: Comment(content: content, user: User(id: 1))))
             self.didFetch?()
         }
+    }
+    
+    func editIssue(title: String, description: String) {
+        issueProvider?.editIssue(id: issueNumber, title: title, description: description, completion: { [weak self] (editedIssue) in
+            guard let `self` = self,
+                let editedIssue = editedIssue
+                else { return }
+            
+            self.title = editedIssue.title
+            
+            if let editedDescription = editedIssue.description {
+                let comment = CommentViewModel(comment: Comment(content: editedDescription, user: editedIssue.author))
+                if self.description != nil {
+                    self.comments[0] = comment
+                } else {
+                    self.comments.insert(comment, at: 0)
+                }
+                self.description = editedDescription
+            } else {
+                self.description = nil
+                self.comments.remove(at: 0)
+            }
+            
+            self.didFetch?()
+        })
     }
     
 }
