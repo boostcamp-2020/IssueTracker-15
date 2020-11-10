@@ -102,17 +102,13 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             self.isOpened = currentIssue.isOpened
             self.author = UserViewModel(user: currentIssue.author)
             
-            dump(currentIssue)
-            
-            // comment에 넣되 description 변수를 둬서 분기별로 대응하는게 좋을것 같다!
-            if let firstComment = currentIssue.description {
-                self.comments.append(CommentViewModel(comment: Comment(content: firstComment, user: currentIssue.author)))
+            if let description = currentIssue.description {
+                self.description = description
+                self.comments.append(CommentViewModel(comment: Comment(content: description, user: currentIssue.author)))
             }
             
-            if !currentIssue.comments.isEmpty {
-                currentIssue.comments.forEach { comment in
-                    self.comments.append(CommentViewModel(comment: comment))
-                }
+            currentIssue.comments.forEach { comment in
+                self.comments.append(CommentViewModel(comment: comment))
             }
             
             self.labelProvier?.getLabels(of: currentIssue.labels) { (labels) in

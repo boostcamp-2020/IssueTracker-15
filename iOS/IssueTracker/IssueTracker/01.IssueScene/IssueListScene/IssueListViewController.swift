@@ -49,7 +49,7 @@ class IssueListViewController: UIViewController {
         configureSearchBar()
         configureCollectionView()
         floatingButtonAspectRatioConstraint.isActive = true
-//        issueListViewModel?.needFetchItems()
+        issueListViewModel?.needFetchItems()
         navigationController?.isToolbarHidden = true
     }
     
@@ -61,7 +61,7 @@ class IssueListViewController: UIViewController {
             cell.resetScrollOffset()
         }
         
-        issueListViewModel?.needFetchItems()
+        // issueListViewModel?.needFetchItems()
     }
     
     override func viewDidLayoutSubviews() {
