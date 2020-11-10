@@ -28,12 +28,11 @@ protocol IssueProvidable: AnyObject {
 
 class IssueProvider: IssueProvidable {
     
-    //private(set) var issues = [Issue]()
     // mock data
     // TODO: 같은 Fetch 요청이 여러번 들어왔을 겨우 completion을 배열에 넣어두었다 한 패칭에 Completion을 모두 처리해주는 방식으로!
     private var onFetching: Bool = false
     private(set) var issues: [Int: Issue] = [ // labels 9 ~ 17 milestone 19, 22, 23, 24, 25, 28, 36
-        1: Issue(id: 1, title: "BCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH", description: "ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH", labels: [9], milestone: 19, author: "JK", isOpened: true),
+        1: Issue(id: 1, title: "이슈[1]", description: "ABCDEFGH", labels: [9], milestone: 19, author: "JK", isOpened: true),
         2: Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10], milestone: 22, author: "JK", isOpened: true),
         3: Issue(id: 3, title: "이슈[3]", description: "ABCDEFGH", labels: [11], milestone: 23, author: "JK", isOpened: true),
         4: Issue(id: 4, title: "이슈[4]", description: "ABCDEFGH", labels: [12], milestone: 24, author: "JK", isOpened: true),
@@ -140,11 +139,9 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
-                if let index = self.issues.firstIndex(where: {$0.id == id}) {
-                    self.issues[index].title = title
-                    self.issues[index].description = description.isEmpty ? nil : description
-                    completion(self.issues[index])
-                }
+                self.issues[id]?.title = title
+                self.issues[id]?.description = description.isEmpty ? nil : description
+                completion(self.issues[id])
             }
         })
     }
@@ -219,7 +216,6 @@ class IssueProvider: IssueProvidable {
             case .success:
                 self.issues[id]?.deleteMilestone()
                 completion(self.issues[id])
-            break
             }
         })
     }

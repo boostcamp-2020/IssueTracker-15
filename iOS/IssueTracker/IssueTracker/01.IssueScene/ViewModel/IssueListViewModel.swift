@@ -13,10 +13,8 @@ protocol IssueListViewModelProtocol: AnyObject {
     var didCellChecked: ((IndexPath, Bool) -> Void)? { get set }
     var showTitleWithCheckNum: ((Int) -> Void)? { get set }
     var filter: IssueFilterable? { get set }
-    
+    var issues: [IssueItemViewModel] { get }
     func needFetchItems()
-    func cellForItemAt(path: IndexPath) -> IssueItemViewModel
-    func numberOfItem() -> Int
     
     func selectCell(at path: IndexPath)
     func clearSelectedCells()
@@ -42,7 +40,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
     var showTitleWithCheckNum: ((Int) -> Void)?
     var didCellChecked: ((IndexPath, Bool) -> Void)?
     
-    private var issues = [IssueItemViewModel]()
+    private(set) var issues = [IssueItemViewModel]()
     
     init(labelProvider: LabelProvidable, milestoneProvider: MilestoneProvidable, issueProvider: IssueProvidable) {
         self.labelProvider = labelProvider
@@ -82,14 +80,6 @@ class IssueListViewModel: IssueListViewModelProtocol {
     
     func closeSelectedIssue(at paths: [IndexPath]) {
         
-    }
-    
-    func cellForItemAt(path: IndexPath) -> IssueItemViewModel {
-        return issues[path.row]
-    }
-    
-    func numberOfItem() -> Int {
-        return issues.count
     }
     
     func selectCell(at path: IndexPath) {

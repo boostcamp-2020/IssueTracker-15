@@ -49,8 +49,8 @@ class IssueListViewController: UIViewController {
         configureSearchBar()
         configureCollectionView()
         floatingButtonAspectRatioConstraint.isActive = true
+//        issueListViewModel?.needFetchItems()
         navigationController?.isToolbarHidden = true
-        //floatingButton.setTitle("", for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -225,7 +225,7 @@ extension IssueListViewController {
 extension IssueListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath),
-            let cellViewModel = issueListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
+            let cellViewModel = issueListViewModel?.issues[indexPath.row] else { return IssueCellView() }
         cellView.configure(issueItemViewModel: cellViewModel)
         cellView.delegate = self
         cellView.showCheckBox(show: viewingMode == .edit, animation: false)
@@ -233,7 +233,7 @@ extension IssueListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return issueListViewModel?.numberOfItem() ?? 0
+        return issueListViewModel?.issues.count ?? 0
     }
 }
 
