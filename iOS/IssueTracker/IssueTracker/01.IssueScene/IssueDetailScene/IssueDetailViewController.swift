@@ -158,8 +158,8 @@ extension IssueDetailViewController: BottomSheetViewDelegate {
         let dataSource = issueDetailViewModel.detailSelectionItemDataSource(of: type)
         let viewModel = DetailSelectionViewModel(detailCondition: type, viewModelDataSource: dataSource, maxSelection: maximumSelection)
         let vc = DetailSelectionViewController.createViewController(with: viewModel)
-        vc.onSelectionComplete = { selectedItem in
-            
+        vc.onSelectionComplete = { selectedItems in
+            self.issueDetailViewModel.detailItemSelected(type: type, selectedItems: selectedItems)
         }
         present(vc, animated: true)
     }

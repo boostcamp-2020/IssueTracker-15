@@ -10,7 +10,7 @@ import Foundation
 import NetworkFramework
 
 protocol MilestoneProvidable: AnyObject {
-    var milestons: [Milestone] { get }
+    var milestons: [Int: Milestone] { get }
     
     func addMilestone(title: String, dueDate: String, description: String, completion: @escaping (Milestone?) -> Void)
     func editMilestone(id: Int, title: String, dueDate: String, description: String, openIssuesLength: String, closeIssueLength: String, completion: @escaping (Milestone?) -> Void)
@@ -27,7 +27,7 @@ class MilestoneProvider: MilestoneProvidable {
     // Key, Value(CompletionFunc) 로 관리하고 처리 됬을 경우 삭제해주기!
     // 효율적인 key 관리 기법 생각해보기!
     private var fetchingCompletionHandlers = [Int: ([Milestone]?)->Void]()
-    private(set) var milestons = [Milestone]()
+    private(set) var milestons = [Int: Milestone]()
     private weak var dataLoader: DataLoadable?
     
     init(dataLoader: DataLoadable) {
@@ -35,15 +35,15 @@ class MilestoneProvider: MilestoneProvidable {
     }
     
     func getMilestone(at id: Int, completion: @escaping (Milestone?) -> Void) {
-        if let idx = milestons.firstIndex(where: {$0.id == id}) {
-            completion(milestons[idx])
+        if milestons.contains(where: { $0.key == id }) {
+            completion(milestons[id])
             return
         }
         
         // TODO : fetch 함수 분리하기
         fetchMilestones { [weak self] _ in
-            if let mileston = self?.milestons.first(where: {$0.id == id}) {
-                completion(mileston)
+            if let milestone = self?.milestons[id] {
+                completion(milestone)
                 return
             }
             completion(nil)
@@ -94,7 +94,7 @@ class MilestoneProvider: MilestoneProvidable {
                 completion(nil)
             case .success(let response):
                 if let milestones = response.mapEncodable([Milestone].self) {
-                    self.milestons = milestones
+                    self.milestons = milestones.reduce(into: [:]) { $0[$1.id] = $1 }
                     self.fetchingCompletionHandlers.forEach {
                         $0.value(milestones)
                     }

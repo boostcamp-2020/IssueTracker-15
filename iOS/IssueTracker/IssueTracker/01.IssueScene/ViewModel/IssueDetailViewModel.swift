@@ -130,11 +130,11 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     
     // TODO: UserInfo 처리 생각해보기
     private var mockUserInfo = [
-     CellComponentViewModel(title: "SHIVVVPP", element: "2020-08-11T00:00:00.000Z"),
-     CellComponentViewModel(title: "유시형", element: "2020-08-11T00:00:00.000Z"),
-     CellComponentViewModel(title: "namda-on", element: "2020-08-11T00:00:00.000Z"),
-     CellComponentViewModel(title: "moaikang", element: "2020-08-11T00:00:00.000Z"),
-     CellComponentViewModel(title: "maong0927", element: "2020-08-11T00:00:00.000Z")
+        CellComponentViewModel(title: "SHIVVVPP", element: "2020-08-11T00:00:00.000Z"),
+        CellComponentViewModel(title: "유시형", element: "2020-08-11T00:00:00.000Z"),
+        CellComponentViewModel(title: "namda-on", element: "2020-08-11T00:00:00.000Z"),
+        CellComponentViewModel(title: "moaikang", element: "2020-08-11T00:00:00.000Z"),
+        CellComponentViewModel(title: "maong0927", element: "2020-08-11T00:00:00.000Z")
     ]
     func detailSelectionItemDataSource(of type: DetailSelectionType) -> [[CellComponentViewModel]] {
         var viewModels: [[CellComponentViewModel]] = [[], []]
@@ -151,14 +151,67 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             }
         case .milestone:
             milestoneProvider?.milestons.forEach {
-                let viewModel = CellComponentViewModel(milestone: $0)
+                let viewModel = CellComponentViewModel(milestone: $0.value)
                 viewModels[milestone?.id == viewModel.id ? 0 : 1].append(viewModel)
             }
         }
         return viewModels
     }
     
-    func detailItemSelected(type: DetailSelectionType,selectedItems: [CellComponentViewModel]) {
+    func detailItemSelected(type: DetailSelectionType, selectedItems: [CellComponentViewModel]) {
+        var prevSet = Set<Int>()
+        let incomingSet = selectedItems.reduce(into: Set<Int>()) { $0.insert($1.id) }
+        switch type {
+        case .assignee, .writer:
+            return
+        case .label:
+            prevSet = labels.reduce(into: Set<Int>()) { $0.insert($1.id) }
+        case .milestone:
+            if let id = milestone?.id {
+                prevSet.insert(id)
+            }
+        }
         
+        let idForRemove = prevSet.subtracting(incomingSet)
+        let idForAdd = incomingSet.subtracting(prevSet)
+        
+        switch type {
+        case .assignee, .writer:
+            return
+        case .label:
+            idForRemove.forEach { idToRemove in
+                self.issueProvider?.deleteLabel(at: issueNumber, of: idToRemove, completion: { [weak self] issue in
+                    if issue == nil { return }
+                    self?.labels.removeAll(where: {$0.id == idToRemove})
+                    self?.didLabelChanged?()
+                })
+            }
+            idForAdd.forEach { idToAdd in
+                self.issueProvider?.addLabel(at: issueNumber, of: idToAdd, completion: { [weak self] issue in
+                    guard issue !=  nil,
+                        let label = self?.labelProvier?.labels[idToAdd]
+                        else { return }
+                    self?.labels.append(LabelItemViewModel(label: label))
+                    self?.didLabelChanged?()
+                })
+            }
+        case .milestone:
+            idForRemove.forEach { _ in
+                self.issueProvider?.deleteMilestone(at: issueNumber, completion: { [weak self] issue in
+                    if issue == nil { return }
+                    self?.milestone = nil
+                    self?.didMilestoneChanged?()
+                })
+            }
+            idForAdd.forEach { idToAdd in
+                self.issueProvider?.addLabel(at: issueNumber, of: idToAdd, completion: { [weak self] issue in
+                    guard issue !=  nil,
+                        let milestone = self?.milestoneProvider?.milestons[idToAdd]
+                        else { return }
+                    self?.milestone = MilestoneItemViewModel(milestone: milestone, from: .fromServer)
+                    self?.didMilestoneChanged?()
+                })
+            }
+        }
     }
 }
