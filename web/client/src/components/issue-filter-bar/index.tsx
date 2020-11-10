@@ -3,13 +3,16 @@ import * as S from "./style";
 import Dropdown from "../dropdown";
 import NavButton from "../nav-button";
 import useToggle from "../../hooks/useToggle";
+import { BiCaretDown } from "react-icons/bi";
 
 function IssueFilterBar(this: any) {
   const [filterCmd, setFilterCmd] = useState("is:issue is:open");
   const [isOpen, setIsOpen] = useToggle(false);
+
   const onClickDropdownContent = (props: string) => {
     setFilterCmd(props);
   };
+
   const DropdownContents = {
     title: "Filter Issues",
     contents: [
@@ -42,6 +45,7 @@ function IssueFilterBar(this: any) {
           <S.FilterForm>
             <S.FilterComp onClick={setIsOpen}>Filters</S.FilterComp>
             {isOpen && <Dropdown {...DropdownContents} />}
+            <BiCaretDown />
           </S.FilterForm>
         </S.FilterWrapper>
         <S.SearchForm>{filterCmd}</S.SearchForm>

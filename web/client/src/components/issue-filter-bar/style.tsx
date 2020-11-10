@@ -17,6 +17,7 @@ export const FilterWrapper = styled.div`
 export const FilterForm = styled.div`
   width: 100%;
   padding-left: 15%;
+  display: flex;
 `;
 
 export const FilterComp = styled.div`

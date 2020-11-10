@@ -8,6 +8,7 @@ export const DropdownContent = styled.li`
   padding-right: 5%;
   list-style: none;
   border-bottom: 1px solid #ced4da;
+  background-color: white;
 `;
 
 export const DropdownTitle = styled.div`
@@ -27,6 +28,7 @@ export const DropdownWrapper = styled.div`
   margin-top: 12%;
   border-radius: 6px;
   left: 0;
+  top: 20px;
 `;
 
 export const ListWrapper = styled.ul`
