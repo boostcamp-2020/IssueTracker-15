@@ -26,9 +26,9 @@ class IssueDetailViewController: UIViewController {
         }
     }
     
-    init(issueDetailViewModel: IssueDetailViewModelProtocol) {
-        self.issueDetailViewModel = issueDetailViewModel
-        super.init(nibName: nil, bundle: nil)
+    init(nibName: String, bundle: Bundle?, viewModel: IssueDetailViewModelProtocol) {
+        self.issueDetailViewModel = viewModel
+        super.init(nibName: nibName, bundle: bundle)
         
         self.issueDetailViewModel.didFetch = { [weak self] in
             self?.collectionView.reloadData()
@@ -131,6 +131,8 @@ extension IssueDetailViewController: UICollectionViewDataSource {
     
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout Implementation
+
 extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -147,14 +149,7 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
-extension IssueDetailViewController {
-    static let nibName = "IssueDetailViewController"
-    
-    static func createViewController(issueDetailViewModel: IssueDetailViewModel) -> IssueDetailViewController {
-        let vc = IssueDetailViewController(issueDetailViewModel: issueDetailViewModel)
-        return vc
-    }
-}
+// MARK: - BottomSheetViewDelegate Implementatioin
 
 extension IssueDetailViewController: BottomSheetViewDelegate {
     func upButtonTapped() {
@@ -182,5 +177,16 @@ extension IssueDetailViewController: BottomSheetViewDelegate {
             print(content)
             self?.issueDetailViewModel.addComment(content: content)
         })
+    }
+}
+
+// MARK: - Create ViewController
+
+extension IssueDetailViewController {
+    static let nibName = "IssueDetailViewController"
+    
+    static func createViewController(issueDetailViewModel: IssueDetailViewModel) -> IssueDetailViewController {
+        let vc = IssueDetailViewController(nibName: nibName, bundle: Bundle.main, viewModel: issueDetailViewModel)
+        return vc
     }
 }
