@@ -32,21 +32,21 @@ class IssueProvider: IssueProvidable {
     // mock data
     // TODO: 같은 Fetch 요청이 여러번 들어왔을 겨우 completion을 배열에 넣어두었다 한 패칭에 Completion을 모두 처리해주는 방식으로!
     private var onFetching: Bool = false
-    private(set) var issues: [Issue] = [ // labels 9 ~ 17 milestone 19, 22, 23, 24, 25, 28, 36
-        Issue(id: 1, title: "BCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH", description: "ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH", labels: [9], milestone: 19, author: "JK", isOpened: true),
-        Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10], milestone: 22, author: "JK", isOpened: true),
-        Issue(id: 3, title: "이슈[3]", description: "ABCDEFGH", labels: [11], milestone: 23, author: "JK", isOpened: true),
-        Issue(id: 4, title: "이슈[4]", description: "ABCDEFGH", labels: [12], milestone: 24, author: "JK", isOpened: true),
-        Issue(id: 5, title: "이슈[5]", description: "ABCDEFGH", labels: [13], milestone: 25, author: "JK", isOpened: true),
-        Issue(id: 6, title: "이슈[6]", description: "ABCDEFGH", labels: [14], milestone: 28, author: "JK", isOpened: true),
-        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true)
+    private(set) var issues: [Int: Issue] = [ // labels 9 ~ 17 milestone 19, 22, 23, 24, 25, 28, 36
+        1: Issue(id: 1, title: "BCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH", description: "ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH", labels: [9], milestone: 19, author: "JK", isOpened: true),
+        2: Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10], milestone: 22, author: "JK", isOpened: true),
+        3: Issue(id: 3, title: "이슈[3]", description: "ABCDEFGH", labels: [11], milestone: 23, author: "JK", isOpened: true),
+        4: Issue(id: 4, title: "이슈[4]", description: "ABCDEFGH", labels: [12], milestone: 24, author: "JK", isOpened: true),
+        5: Issue(id: 5, title: "이슈[5]", description: "ABCDEFGH", labels: [13], milestone: 25, author: "JK", isOpened: true),
+        6: Issue(id: 6, title: "이슈[6]", description: "ABCDEFGH", labels: [14], milestone: 28, author: "JK", isOpened: true),
+        7: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        8: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        9: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        10: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        11: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        12: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        13: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
+        14: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true)
     ]
     private weak var dataLoader: DataLoadable?
     
@@ -64,7 +64,7 @@ class IssueProvider: IssueProvidable {
             case .success(let response):
                 if let issues = Issue.fetchResponse(jsonArr: response.mapJsonArr()) {
                     completion(issues)
-                    self.issues = issues
+                    self.issues = issues.reduce(into: [:]) { $0[$1.id] = $1 }
                 }
             }
         })
@@ -97,7 +97,7 @@ class IssueProvider: IssueProvidable {
                 completion(nil)
             case .success(let response):
                 if let issue = Issue.addResponse(jsonObject: response.mapJsonObject()) {
-                    self.issues.append(issue)
+                    self.issues[issue.id] = issue
                     completion(issue)
                 }
             }
@@ -168,13 +168,13 @@ class IssueProvider: IssueProvidable {
      response: 201 body : nil
      */
     func addLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.addLabel(id, id), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.addLabel(id, labelId), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success:
-            //TODO: response 처리
-            break
+                self.issues[id]?.addLabel(id: labelId)
+                completion(self.issues[id])
             }
         })
     }
@@ -182,13 +182,13 @@ class IssueProvider: IssueProvidable {
      response: 204 body: nil
      */
     func deleteLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.deleteLabel(id, id), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.deleteLabel(id, labelId), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success:
-            //TODO: response 처리
-            break
+                self.issues[id]?.deleteLabel(id: labelId)
+                completion(self.issues[id])
             }
         })
     }
@@ -197,13 +197,13 @@ class IssueProvider: IssueProvidable {
      response: 201
      */
     func addMilestone(at id: Int, of milestone: Int, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.addMilestone(id, id), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.addMilestone(id, milestone), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success:
-            //TODO: response 처리
-            break
+                self.issues[id]?.addMilestone(id: milestone)
+                completion(self.issues[id])
             }
         })
     }
@@ -217,7 +217,8 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
-                // TODO: response 처리
+                self.issues[id]?.deleteMilestone()
+                completion(self.issues[id])
             break
             }
         })

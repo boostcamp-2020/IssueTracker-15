@@ -72,7 +72,7 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
             guard let label = labelProvider?.labels[id] else { return nil }
             return CellComponentViewModel(label: label)
         case .milestone:
-            guard let milestone = milestoneProvider?.milestons.first(where: {$0.id == id}) else { return nil }
+            guard let milestone = milestoneProvider?.milestons[id] else { return nil }
             return CellComponentViewModel(milestone: milestone)
         }
     }
@@ -94,8 +94,8 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
             }
         case .milestone:
             milestoneProvider?.milestons.forEach {
-                let viewModel = CellComponentViewModel(milestone: $0)
-                if $0.id == detailConditions[type.rawValue] {
+                let viewModel = CellComponentViewModel(milestone: $0.value)
+                if $0.key == detailConditions[type.rawValue] {
                     viewModels[0].append(viewModel)
                 } else {
                     viewModels[1].append(viewModel)

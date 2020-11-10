@@ -38,12 +38,12 @@
                 <constraint firstItem="qdH-nr-EdS" firstAttribute="top" secondItem="Ygu-mq-QBE" secondAttribute="bottom" constant="10" id="3bb-Ey-sCf"/>
                 <constraint firstItem="Ygu-mq-QBE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DEo-4n-cJl"/>
                 <constraint firstItem="yvN-Gp-O1Z" firstAttribute="trailing" secondItem="qdH-nr-EdS" secondAttribute="trailing" id="F2C-6T-f3b"/>
-                <constraint firstItem="yvN-Gp-O1Z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="KFl-1A-wrl"/>
+                <constraint firstItem="yvN-Gp-O1Z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="KFl-1A-wrl"/>
                 <constraint firstItem="qdH-nr-EdS" firstAttribute="leading" secondItem="Ygu-mq-QBE" secondAttribute="leading" id="L9H-KX-i2v"/>
                 <constraint firstItem="yvN-Gp-O1Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ygu-mq-QBE" secondAttribute="trailing" constant="20" id="RWZ-O2-brk"/>
                 <constraint firstItem="qdH-nr-EdS" firstAttribute="top" secondItem="yvN-Gp-O1Z" secondAttribute="bottom" constant="10" id="aJl-zR-rNC"/>
                 <constraint firstAttribute="bottom" secondItem="qdH-nr-EdS" secondAttribute="bottom" constant="10" id="eZ9-oT-9KP"/>
-                <constraint firstItem="Ygu-mq-QBE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="nIc-Bh-mbv"/>
+                <constraint firstItem="Ygu-mq-QBE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="nIc-Bh-mbv"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

@@ -50,6 +50,7 @@ class IssueListViewController: UIViewController {
         configureCollectionView()
         floatingButtonAspectRatioConstraint.isActive = true
         navigationController?.isToolbarHidden = true
+        //floatingButton.setTitle("", for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,7 +88,7 @@ class IssueListViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let cellHeight = self.view.bounds.height / 10
         layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: cellHeight)
-        layout.minimumLineSpacing = 1
+        layout.minimumLineSpacing = 3
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
@@ -168,6 +169,7 @@ extension IssueListViewController {
         case .edit:
             floatingButtonAspectRatioConstraint.isActive = false
             floatingButton.setTitle("선택 이슈 닫기", for: .normal)
+            floatingButton.layoutSubviews()
             floatingButton.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
             floatingButton.backgroundColor = .red
             UIView.animate(withDuration: 0.5) {

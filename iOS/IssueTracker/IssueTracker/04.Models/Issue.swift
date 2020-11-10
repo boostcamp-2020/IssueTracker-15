@@ -71,10 +71,8 @@ struct Issue {
         milestone = id
     }
     
-    mutating func deleteMilestone(id: Int) {
-        if milestone == id {
-            milestone = nil
-        }
+    mutating func deleteMilestone() {
+        milestone = nil
     }
     
     mutating func addAssignee(id: Int) {
