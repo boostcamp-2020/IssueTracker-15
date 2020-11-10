@@ -23,6 +23,9 @@ protocol IssueDetailViewModelProtocol: AnyObject {
     
     var didLabelChanged: (() -> Void)? { get set }
     var didMilestoneChanged: (() -> Void)? { get set }
+    
+    func detailSelectionItemDataSource(of type: DetailSelectionType) -> [[CellComponentViewModel]]
+    func detailItemSelected(type: DetailSelectionType,selectedItems: [CellComponentViewModel])
 }
 
 struct CommentViewModel {
@@ -125,4 +128,37 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         }
     }
     
+    // TODO: UserInfo 처리 생각해보기
+    private var mockUserInfo = [
+     CellComponentViewModel(title: "SHIVVVPP", element: "2020-08-11T00:00:00.000Z"),
+     CellComponentViewModel(title: "유시형", element: "2020-08-11T00:00:00.000Z"),
+     CellComponentViewModel(title: "namda-on", element: "2020-08-11T00:00:00.000Z"),
+     CellComponentViewModel(title: "moaikang", element: "2020-08-11T00:00:00.000Z"),
+     CellComponentViewModel(title: "maong0927", element: "2020-08-11T00:00:00.000Z")
+    ]
+    func detailSelectionItemDataSource(of type: DetailSelectionType) -> [[CellComponentViewModel]] {
+        var viewModels: [[CellComponentViewModel]] = [[], []]
+        switch type {
+        case .assignee, .writer:
+            // TODO: UserInfoProvider 구현
+            viewModels = [ [], mockUserInfo  ]
+        case .label:
+            let labelTable = labels.reduce(into: Set<Int>()) { $0.insert($1.id) }
+            
+            labelProvier?.labels.forEach {
+                let viewModel = CellComponentViewModel(label: $0.value)
+                viewModels[ labelTable.contains(viewModel.id) ? 0 : 1 ].append(viewModel)
+            }
+        case .milestone:
+            milestoneProvider?.milestons.forEach {
+                let viewModel = CellComponentViewModel(milestone: $0)
+                viewModels[milestone?.id == viewModel.id ? 0 : 1].append(viewModel)
+            }
+        }
+        return viewModels
+    }
+    
+    func detailItemSelected(type: DetailSelectionType,selectedItems: [CellComponentViewModel]) {
+        
+    }
 }

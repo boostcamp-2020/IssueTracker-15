@@ -24,7 +24,7 @@
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xnl-RV-xeJ" userLabel="checkBoxGuide">
                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="192"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAN-XX-dal">
+                                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAN-XX-dal">
                                                 <rect key="frame" x="0.0" y="0.0" width="0.0" height="192"/>
                                                 <state key="normal" image="circle" catalog="system">
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
@@ -39,7 +39,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="AAN-XX-dal" secondAttribute="trailing" id="0nk-h7-CnY"/>
                                             <constraint firstAttribute="bottom" secondItem="AAN-XX-dal" secondAttribute="bottom" id="BHa-Vz-vzZ"/>
-                                            <constraint firstAttribute="width" priority="250" id="Gy9-Mu-ND8"/>
+                                            <constraint firstAttribute="width" priority="250" constant="100" id="Gy9-Mu-ND8"/>
                                             <constraint firstItem="AAN-XX-dal" firstAttribute="top" secondItem="Xnl-RV-xeJ" secondAttribute="top" id="Ifv-Za-2Wr"/>
                                             <constraint firstItem="AAN-XX-dal" firstAttribute="leading" secondItem="Xnl-RV-xeJ" secondAttribute="leading" id="Xss-VE-CMJ"/>
                                         </constraints>

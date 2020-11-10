@@ -12,9 +12,11 @@ protocol BottomSheetViewDelegate: AnyObject {
     func addCommentButtonTapped()
     func upButtonTapped()
     func downButtonTapped()
+    func categoryHeaderTapped(type: DetailSelectionType)
 }
 
 class BottomSheetView: UIView {
+    
     weak var delegate: BottomSheetViewDelegate?
     @IBOutlet weak var barView: UIView!
     @IBOutlet weak var addCommentButton: UIButton!
@@ -60,11 +62,11 @@ extension BottomSheetView {
     @IBAction func addCommentButtonTapped(_ sender: Any) {
         delegate?.addCommentButtonTapped()
     }
-
+    
     @IBAction func upButtonTapped(_ sender: Any) {
         delegate?.upButtonTapped()
     }
-
+    
     @IBAction func downButtonTapped(_ sender: Any) {
         delegate?.downButtonTapped()
     }
@@ -101,14 +103,23 @@ extension BottomSheetView {
 
 extension BottomSheetView: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = BottomSheetHeaderView.createView()
+        headerView?.configure(type: TableViewConstant.headerTitles[section])
+        headerView?.onHeaderViewTapped = { [weak self] headerType in
+            self?.delegate?.categoryHeaderTapped(type: headerType)
+        }
+        return headerView
+    }
+    
 }
 
 // MARK: - UITableViewDataSource Implementation
 
 extension BottomSheetView: UITableViewDataSource {
-
+    
     enum TableViewConstant {
-        static let headerTitles = ["담당자", "레이블", "마일스톤"]
+        static let headerTitles = [DetailSelectionType.assignee, DetailSelectionType.label, DetailSelectionType.milestone]
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -165,7 +176,7 @@ extension BottomSheetView: UITableViewDataSource {
         case 2:
             guard let cell = BottomSheetMilestoneView.createView(),
                 let milestoneViewModel = issueDetailViewModel?.milestone
-            else { break }
+                else { break }
             cell.configure(milestoneViewModel: milestoneViewModel)
             return cell
         default:
@@ -173,12 +184,6 @@ extension BottomSheetView: UITableViewDataSource {
         }
         
         return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = BottomSheetHeaderView.createView()
-        headerView?.configure(title: TableViewConstant.headerTitles[section])
-        return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
