@@ -15,8 +15,8 @@ protocol IssucCellViewDelegate: AnyObject {
 }
 
 class IssueCellView: UICollectionViewCell {
-    typealias DataSource = UICollectionViewDiffableDataSource<Int,LabelItemViewModel>
-    typealias SnapShot = NSDiffableDataSourceSnapshot<Int,LabelItemViewModel>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, LabelItemViewModel>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, LabelItemViewModel>
     
     weak var delegate: IssucCellViewDelegate?
     
@@ -27,6 +27,7 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var closeBoxGuideView: UIView!
     @IBOutlet weak var deleteBoxGuideView: UIView!
     
+    @IBOutlet weak var statusImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var milestoneBadge: BadgeLabelView!
@@ -74,6 +75,7 @@ class IssueCellView: UICollectionViewCell {
         titleLabel.text = issueItemViewModel.title
         setMilestone(title: issueItemViewModel.milestoneTitle)
         setLabels(labelViewModels: issueItemViewModel.labelItemViewModels)
+        setStatusImage(isOpened: issueItemViewModel.isOpened)
         
         self.issueItemViewModel?.didMilestoneChanged = { [weak self] milestone in
                 self?.setMilestone(title: milestone)
@@ -112,6 +114,11 @@ class IssueCellView: UICollectionViewCell {
         snapShot.appendSections([0])
         snapShot.appendItems(labelViewModels)
         dataSource.apply(snapShot)
+    }
+    
+    private func setStatusImage(isOpened: Bool) {
+        guard let color = isOpened ? Constant.openColor : Constant.closeColor else { return }
+        statusImage.tintColor = color
     }
     
     func resetScrollOffset() {
@@ -203,5 +210,7 @@ extension IssueCellView {
     enum Constant {
         static let uncheckedImage = UIImage(systemName: "circle")
         static let checkedImage = UIImage(systemName: "checkmark.circle.fill")
+        static let openColor = UIColor(named: "OpenIssueBackgroundColor")
+        static let closeColor = UIColor(named: "ClosedIssueBackgroundColor")
     }
 }

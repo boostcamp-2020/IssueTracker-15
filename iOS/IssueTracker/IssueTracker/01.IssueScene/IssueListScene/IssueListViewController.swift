@@ -30,7 +30,7 @@ class IssueListViewController: UIViewController {
     
     var issueListViewModel: IssueListViewModelProtocol? {
         didSet {
-            issueListViewModel?.didFetch = { [weak self] issueItems in
+            issueListViewModel?.didItemChanged = { [weak self] issueItems in
                 guard let `self` = self else { return }
                 var snapShot = NSDiffableDataSourceSnapshot<Int, IssueItemViewModel>()
                 snapShot.appendSections([0])
@@ -111,7 +111,6 @@ extension IssueListViewController {
     
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
         guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) else { return }
-        
         switch viewingMode {
         case .general:
             presentIssueDetailViewController(indexPath: indexPath)
