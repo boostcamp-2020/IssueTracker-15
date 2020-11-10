@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import * as S from "./style";
 import Button from "../../components/button";
-import LabelCreateBox from "../../components/label-create-box";
+import LabelCreateBox from "../label-create-box";
 
 export default function LabelListHeader() {
   const [createLabelVisible, setCreateLabel] = useState(false);

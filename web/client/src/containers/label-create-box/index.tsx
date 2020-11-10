@@ -1,6 +1,6 @@
 import React from "react";
-import Label from "../label";
-import LabelEditor from "../label-editor";
+import Label from "../../components/label";
+import LabelEditor from "../../components/label-editor";
 import * as S from "./style";
 
 export interface LabelCreateBoxProps {
