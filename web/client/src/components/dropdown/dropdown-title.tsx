@@ -4,8 +4,8 @@ import * as S from "./style";
 interface DropdownTitleProps {
   title: string;
 }
-function DropdownContent(props: DropdownTitleProps) {
+function DropdownTitle(props: DropdownTitleProps) {
   return <S.DropdownTitle>{props.title}</S.DropdownTitle>;
 }
 
-export default DropdownContent;
+export default DropdownTitle;
