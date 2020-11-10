@@ -25,7 +25,7 @@ protocol IssueDetailViewModelProtocol: AnyObject {
     var didMilestoneChanged: (() -> Void)? { get set }
     
     func detailSelectionItemDataSource(of type: DetailSelectionType) -> [[CellComponentViewModel]]
-    func detailItemSelected(type: DetailSelectionType,selectedItems: [CellComponentViewModel])
+    func detailItemSelected(type: DetailSelectionType, selectedItems: [CellComponentViewModel])
 }
 
 struct CommentViewModel {
@@ -128,7 +128,6 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         }
     }
     
-    // TODO: UserInfo 처리 생각해보기
     private var mockUserInfo = [
         CellComponentViewModel(title: "SHIVVVPP", element: "2020-08-11T00:00:00.000Z"),
         CellComponentViewModel(title: "유시형", element: "2020-08-11T00:00:00.000Z"),
@@ -179,39 +178,47 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         case .assignee, .writer:
             return
         case .label:
-            idForRemove.forEach { idToRemove in
-                self.issueProvider?.deleteLabel(at: issueNumber, of: idToRemove, completion: { [weak self] issue in
-                    if issue == nil { return }
-                    self?.labels.removeAll(where: {$0.id == idToRemove})
-                    self?.didLabelChanged?()
-                })
-            }
-            idForAdd.forEach { idToAdd in
-                self.issueProvider?.addLabel(at: issueNumber, of: idToAdd, completion: { [weak self] issue in
-                    guard issue !=  nil,
-                        let label = self?.labelProvier?.labels[idToAdd]
-                        else { return }
-                    self?.labels.append(LabelItemViewModel(label: label))
-                    self?.didLabelChanged?()
-                })
-            }
+            idForRemove.forEach { deleteLabel(of: $0)}
+            idForAdd.forEach { addLabel(of: $0)  }
         case .milestone:
-            idForRemove.forEach { _ in
-                self.issueProvider?.deleteMilestone(at: issueNumber, completion: { [weak self] issue in
-                    if issue == nil { return }
-                    self?.milestone = nil
-                    self?.didMilestoneChanged?()
-                })
-            }
-            idForAdd.forEach { idToAdd in
-                self.issueProvider?.addLabel(at: issueNumber, of: idToAdd, completion: { [weak self] issue in
-                    guard issue !=  nil,
-                        let milestone = self?.milestoneProvider?.milestons[idToAdd]
-                        else { return }
-                    self?.milestone = MilestoneItemViewModel(milestone: milestone, from: .fromServer)
-                    self?.didMilestoneChanged?()
-                })
-            }
+            if idForAdd.isEmpty && !idForRemove.isEmpty { removeMilestone() }
+            idForAdd.forEach { addMilestone(of: $0) }
         }
+    }
+    
+    private func addLabel(of id: Int) {
+        self.issueProvider?.addLabel(at: issueNumber, of: id, completion: { [weak self] issue in
+            guard issue !=  nil,
+                let label = self?.labelProvier?.labels[id]
+                else { return }
+            self?.labels.append(LabelItemViewModel(label: label))
+            self?.didLabelChanged?()
+        })
+    }
+    
+    private func deleteLabel(of id: Int) {
+        self.issueProvider?.deleteLabel(at: issueNumber, of: id, completion: { [weak self] issue in
+            if issue == nil { return }
+            self?.labels.removeAll(where: {$0.id == id})
+            self?.didLabelChanged?()
+        })
+    }
+    
+    private func addMilestone(of id: Int) {
+        self.issueProvider?.addMilestone(at: issueNumber, of: id, completion: { [weak self] issue in
+            guard issue !=  nil,
+                let milestone = self?.milestoneProvider?.milestons[id]
+                else { return }
+            self?.milestone = MilestoneItemViewModel(milestone: milestone, from: .fromServer)
+            self?.didMilestoneChanged?()
+        })
+    }
+    
+    private func removeMilestone() {
+        self.issueProvider?.deleteMilestone(at: issueNumber, completion: { [weak self] issue in
+            guard issue != nil else { return }
+            self?.milestone = nil
+            self?.didMilestoneChanged?()
+        })
     }
 }

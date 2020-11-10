@@ -173,7 +173,6 @@ class IssueProvider: IssueProvidable {
             case .success:
                 self.issues[id]?.addLabel(id: labelId)
                 completion(self.issues[id])
-            break
             }
         })
     }
@@ -188,7 +187,6 @@ class IssueProvider: IssueProvidable {
             case .success:
                 self.issues[id]?.deleteLabel(id: labelId)
                 completion(self.issues[id])
-            break
             }
         })
     }
@@ -202,8 +200,8 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
-            //TODO: response 처리
-            break
+                self.issues[id]?.addMilestone(id: milestone)
+                completion(self.issues[id])
             }
         })
     }
@@ -217,7 +215,8 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
-                // TODO: response 처리
+                self.issues[id]?.deleteMilestone()
+                completion(self.issues[id])
             break
             }
         })
