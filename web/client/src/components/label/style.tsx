@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import getFontColor from "../../lib/label-fontcolor";
+import getFontColor from "../../lib/get-font-color";
 import { LabelProps } from "./index";
 
 export const Label = styled.div`
