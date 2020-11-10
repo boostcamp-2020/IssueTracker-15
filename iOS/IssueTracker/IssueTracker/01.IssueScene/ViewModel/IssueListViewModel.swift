@@ -47,10 +47,11 @@ class IssueListViewModel: IssueListViewModelProtocol {
     
     private(set) var issues = [IssueItemViewModel]()
     
-    init(labelProvider: LabelProvidable, milestoneProvider: MilestoneProvidable, issueProvider: IssueProvidable) {
+    init(labelProvider: LabelProvidable, milestoneProvider: MilestoneProvidable, issueProvider: IssueProvidable, issueFilter: IssueFilterable? = IssueFilter()) {
         self.labelProvider = labelProvider
         self.milestoneProvider = milestoneProvider
         self.issueProvider = issueProvider
+        self.filter = issueFilter
     }
     
 }
@@ -118,8 +119,8 @@ extension IssueListViewModel {
             }
         }
         
-        group.notify(queue: .main) {
-            
+        group.notify(queue: .main) { [weak self] in
+            // TODO 어떻게 동작할 것인가?
         }
     }
 }

@@ -10,10 +10,12 @@ import Foundation
 import NetworkFramework
 
 protocol IssueProvidable: AnyObject {
+    func fetchIssues(completion: @escaping ([Issue]?) -> Void)
+    func fetchIssues(with filter: IssueFilterable?, completion: @escaping ([Issue]?) -> Void)
+    
     func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion:  @escaping (Issue?) -> Void )
     func editIssue(id: Int, title: String, description: String, completion:  @escaping (Issue?) -> Void)
     func editTitle(id: Int, title: String, completion: @escaping (Issue?) -> Void)
-    func fetchIssues(completion: @escaping ([Issue]?) -> Void)
     
     func getIssue(at id: Int, completion: @escaping (Issue?) -> Void)
     func closeIssue(id: Int, completion: @escaping (Bool) -> Void)
@@ -28,9 +30,16 @@ protocol IssueProvidable: AnyObject {
 
 class IssueProvider: IssueProvidable {
     
+    private var lastUpdated: Date?
+    private var needFetch: Bool {
+        guard let lastUpdated = self.lastUpdated else { return true }
+        let current = Date()
+        let duration = Int(current.timeIntervalSince(lastUpdated))
+        // TODO: default 시간 차 구하기
+        return duration > 60 * 1
+    }
+    
     // mock data
-    // TODO: 같은 Fetch 요청이 여러번 들어왔을 겨우 completion을 배열에 넣어두었다 한 패칭에 Completion을 모두 처리해주는 방식으로!
-    private var onFetching: Bool = false
     private(set) var issues: [Int: Issue] = [ // labels 9 ~ 17 milestone 19, 22, 23, 24, 25, 28, 36
         1: Issue(id: 1, title: "이슈[1]", description: "ABCDEFGH", labels: [9], milestone: 19, author: "JK", isOpened: true),
         2: Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10], milestone: 22, author: "JK", isOpened: true),
@@ -54,22 +63,54 @@ class IssueProvider: IssueProvidable {
     }
     
     func fetchIssues(completion: @escaping ([Issue]?) -> Void) {
-        onFetching = true
-
-        dataLoader?.request(IssueService.fetchAll(true), callBackQueue: .main, completion: { (response) in
+        if !needFetch {
+            completion(issues.map { $0.value })
+            return
+        }
+        issues.removeAll()
+        
+        let group = DispatchGroup()
+        
+        let fetchWork: NetworkFramework.Completion = { [weak self] (response) in
             switch response {
             case .failure:
-                completion(nil)
+                break
             case .success(let response):
                 if let issues = Issue.fetchResponse(jsonArr: response.mapJsonArr()) {
-                    completion(issues)
-                    self.issues = issues.reduce(into: [:]) { $0[$1.id] = $1 }
+                    issues.forEach {
+                        self?.issues[$0.id] = $0
+                    }
                 }
             }
-        })
-
-        // completion(issues)
-        onFetching = false
+            group.leave()
+        }
+        
+        group.enter()
+        dataLoader?.request(IssueService.fetchAll(true), callBackQueue: .global(), completion: fetchWork)
+        group.enter()
+        dataLoader?.request(IssueService.fetchAll(false), callBackQueue: .global(), completion: fetchWork)
+        
+        group.notify(queue: .main) { [weak self] in
+            self?.lastUpdated = Date()
+            completion(self?.issues.map { $0.value })
+        }
+    }
+    
+    func fetchIssues(with filter: IssueFilterable?, completion: @escaping ([Issue]?) -> Void) {
+        let filterWork: ([Issue]?) -> Void = { [weak self] issues in
+            guard let `self` = self else {
+                completion([])
+                return
+            }
+            let issueDummy = issues ?? self.issues.map { $0.value }
+            completion(filter?.filter(datas: issueDummy))
+        }
+        
+        if needFetch {
+            fetchIssues(completion: filterWork)
+        } else {
+            fetchIssues(completion: filterWork)
+        }
     }
     
     /*
