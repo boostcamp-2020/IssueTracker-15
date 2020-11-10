@@ -11,7 +11,7 @@ import Foundation
 protocol IssueFilterable: AnyObject {
     var generalConditions: [Bool] { get set }
     var detailConditions: [Int] { get set }
-    
+    var searchText: String? { get set }
     func filter(datas: [Issue]) -> [Issue]
 }
 
@@ -19,6 +19,7 @@ class IssueFilter: IssueFilterable {
     
     var generalConditions = [Bool](repeating: false, count: Condition.allCases.count)
     var detailConditions = [Int](repeating: -1, count: DetailSelectionType.allCases.count)
+    var searchText: String?
     
     init() {
         self.generalConditions[0] = true
@@ -73,6 +74,10 @@ class IssueFilter: IssueFilterable {
         if let id = detailConditions[safe: DetailSelectionType.milestone.rawValue],
             id != -1 {
             dataSet = dataSet.intersection(datas.filter { $0.milestone ?? -1 ==  id })
+        }
+        
+        if let searchTarget = self.searchText {
+            dataSet = dataSet.filter { $0.title.contains(searchTarget) }
         }
         
         return dataSet.sorted { (lhs, rhs) -> Bool in

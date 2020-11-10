@@ -73,7 +73,9 @@ class IssueListViewController: UIViewController {
     
     // TODO: SerachBar Configure
     private func configureSearchBar() {
-        navigationItem.searchController = UISearchController(searchResultsController: nil)
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
     }
     
     private func configureCollectionView() {
@@ -251,6 +253,16 @@ extension IssueListViewController: IssucCellViewDelegate {
                 cell.cellHorizontalScrollView.contentOffset = CGPoint.zero
             }
         }
+    }
+    
+}
+
+// MARK: - UISearchController Implementation
+
+extension IssueListViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        issueListViewModel?.onSearch(text: searchController.searchBar.searchTextField.text)
     }
     
 }

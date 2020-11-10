@@ -29,6 +29,9 @@ protocol IssueListViewModelProtocol: AnyObject {
     
     func addNewIssue(title: String, description: String, authorID: Int)
     
+    // For Search
+    func onSearch(text: String?)
+    
     // For SubViewModels
     func createFilterViewModel() -> IssueFilterViewModelProtocol?
     func createIssueDetailViewModel(path: IndexPath) -> IssueDetailViewModel?
@@ -135,6 +138,13 @@ extension IssueListViewModel {
             self?.needFetchItems()
         })
     }
+    
+    private func filterToSearch(text: String?) {
+        filter?.searchText = (text ?? "").isEmpty ? nil : text!
+        issueProvider?.fetchIssues(with: filter, completion: { [weak self] _ in
+            self?.needFetchItems()
+        })
+    }
 }
 
 // MARK: - View Event
@@ -189,6 +199,10 @@ extension IssueListViewModel {
     
     func deleteIssue(of id: Int) {
         requestDeleteIssue(of: id)
+    }
+    
+    func onSearch(text: String?) {
+        filterToSearch(text: text)
     }
 }
 
