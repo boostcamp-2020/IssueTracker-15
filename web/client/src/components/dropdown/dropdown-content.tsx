@@ -5,7 +5,7 @@ interface DropdownContentProps {
   content: string;
 }
 function DropdownContent(props: DropdownContentProps) {
-  return <S.DropdownContent>Open Issues</S.DropdownContent>;
+  return <S.DropdownContent>{props.content}</S.DropdownContent>;
 }
 
 export default DropdownContent;
