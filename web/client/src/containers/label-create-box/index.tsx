@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Label from "../../components/label";
 import LabelEditor from "../../components/label-editor";
 import * as S from "./style";
+import { LabelHeaderContext } from "../label-list-header";
 
-export interface LabelCreateBoxProps {
-  visible: boolean;
-}
+export default function LabelCreateBox() {
+  const { createLabelVisible } = useContext(LabelHeaderContext);
 
-export default function LabelCreateBox({ visible }: LabelCreateBoxProps) {
   return (
-    <S.LabelCreateBox visible={visible}>
+    <S.LabelCreateBox createLabelVisible={createLabelVisible}>
       <S.LabelContainerRow>
         <Label name="예시" color="#0052CD" />
       </S.LabelContainerRow>
