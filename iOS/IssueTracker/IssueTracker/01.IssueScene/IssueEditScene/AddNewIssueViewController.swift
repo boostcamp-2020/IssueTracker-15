@@ -11,8 +11,14 @@ import MarkdownView
 
 enum AddType: String {
     case newIssue = "새 이슈"
-    case editIssue = "이슈 수정"
+    case editIssue = "#"
     case newComment = "댓글 추가"
+}
+
+struct PreviousData {
+    let title: String
+    let description: String
+    let issueNumber: String
 }
 
 class AddNewIssueViewController: UIViewController {
@@ -22,7 +28,7 @@ class AddNewIssueViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     private var commentTextView: UITextView = UITextView()
     private var markdownView: MarkdownView = MarkdownView()
-    private var previousData: [String]?
+    private var previousData: PreviousData?
     var addType: AddType = .newIssue
     
     private let textViewPlaceholder = "코멘트는 여기에 작성하세요"
@@ -125,12 +131,11 @@ class AddNewIssueViewController: UIViewController {
     }
     
     private func initTextViewPreviousData() {
-        titleTextField.text = previousData?[0]
-        commentTextView.text = previousData?[1]
+        titleTextField.text = previousData?.title
+        commentTextView.text = previousData?.description
     }
     
     private func initTextViewPlaceholder() {
-        // 마크다운 작성 View를 configure 할 때
         if commentTextView.text.isEmpty {
             commentTextView.text = textViewPlaceholder
             commentTextView.textColor = .lightGray
@@ -138,11 +143,10 @@ class AddNewIssueViewController: UIViewController {
     }
     
     private func setTextViewPlaceholder() {
-        // 마크다운 작성 View를 begin/end editing 할 때
         if commentTextView.text == textViewPlaceholder {
             commentTextView.text = ""
             commentTextView.textColor = .black
-        } else if commentTextView.text.isEmpty {
+        } else if commentTextView.text.isEmpty, addType != .editIssue {
             commentTextView.text = textViewPlaceholder
             commentTextView.textColor = .lightGray
         }
@@ -197,7 +201,7 @@ extension AddNewIssueViewController {
     
     static func present(at viewController: UIViewController,
                         addType: AddType,
-                        previousData: [String]?,
+                        previousData: PreviousData?,
                         onDismiss: (([String]) -> Void)?) {
                 
         let storyBoard = UIStoryboard(name: storyboardName, bundle: Bundle.main)
@@ -205,12 +209,17 @@ extension AddNewIssueViewController {
             let vc = container.topViewController as? AddNewIssueViewController
             else { return }
         
-        if let previousData = previousData {
-            vc.previousData = previousData
+        switch addType {
+        case .newIssue, .newComment:
+            vc.title = addType.rawValue
+        case .editIssue:
+            if let previousData = previousData {
+                vc.previousData = previousData
+                vc.title = addType.rawValue + previousData.issueNumber
+            }
         }
         
         vc.addType = addType
-        vc.title = addType.rawValue
         vc.doneButtonTapped = onDismiss
         
         viewController.present(container, animated: true, completion: nil)

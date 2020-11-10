@@ -67,9 +67,9 @@ class IssueDetailViewController: UIViewController {
     }
     
     @objc func editButtonTapped() {
-        dump(issueDetailViewModel.description)
-        let previousData: [String] = [issueDetailViewModel.title,
-                                      issueDetailViewModel.description ?? ""]
+        let previousData: PreviousData = PreviousData(title: issueDetailViewModel.title,
+                                                      description: issueDetailViewModel.description ?? "",
+                                                      issueNumber: String(issueDetailViewModel.issueNumber))
         
         AddNewIssueViewController.present(at: self, addType: .editIssue, previousData: previousData) { [weak self] (content) in
             let editedTitle = content[0]
