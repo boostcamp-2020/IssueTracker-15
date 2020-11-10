@@ -86,6 +86,7 @@ class IssueCellView: UICollectionViewCell {
             self?.setLabels(labelViewModels: labelViewModels)
         }
         
+        layoutIfNeeded()
     }
     
     override func prepareForReuse() {

@@ -48,8 +48,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8Z-t0-U66" userLabel="mainContent">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="192"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-pc-tFP" userLabel="title">
-                                                <rect key="frame" x="40.5" y="10" width="50" height="25.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-pc-tFP" userLabel="title">
+                                                <rect key="frame" x="41" y="10" width="165" height="26"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -84,7 +84,7 @@
                                             <constraint firstItem="0Ig-WN-dKN" firstAttribute="centerY" secondItem="Ikc-pc-tFP" secondAttribute="centerY" id="AZv-ZN-uPG"/>
                                             <constraint firstItem="Cka-IR-OVE" firstAttribute="centerY" secondItem="Ikc-pc-tFP" secondAttribute="centerY" id="LLI-Ji-rEk"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="leading" secondItem="Cka-IR-OVE" secondAttribute="trailing" constant="10" id="MZD-b8-cTd"/>
-                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="trailing" constant="20" id="NWN-kr-ZA2"/>
+                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="trailing" constant="10" id="NWN-kr-ZA2"/>
                                             <constraint firstItem="Kmn-zW-86B" firstAttribute="leading" secondItem="R8Z-t0-U66" secondAttribute="leading" constant="10" id="Ouy-Ov-TpG"/>
                                             <constraint firstAttribute="trailing" secondItem="0Ig-WN-dKN" secondAttribute="trailing" constant="15" id="gpr-1e-lf0"/>
                                             <constraint firstItem="Kmn-zW-86B" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="bottom" constant="5" id="if2-fg-gN0"/>
