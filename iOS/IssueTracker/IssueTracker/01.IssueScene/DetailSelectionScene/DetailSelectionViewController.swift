@@ -8,18 +8,18 @@
 
 import UIKit
 
-class DetailConditionSelectViewController: UIViewController {
+class DetailSelectionViewController: UIViewController {
     
     @IBOutlet weak var titleNavItem: UINavigationItem!
 
     var onSelectionComplete: (([CellComponentViewModel]) -> Void)?
     
     // TODO: Dummy Data to ViewModelProtocol
-    private var viewModel: DetailConditionViewModelProtocol
+    private var viewModel: DetailSelectionViewModelProtocol
     
     @IBOutlet weak var tableView: UITableView!
     
-    init(nibName: String, bundle: Bundle?, viewModel: DetailConditionViewModelProtocol) {
+    init(nibName: String, bundle: Bundle?, viewModel: DetailSelectionViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nibName, bundle: bundle)
         configureViewModel()
@@ -34,7 +34,7 @@ class DetailConditionSelectViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        self.viewModel = DetailConditionViewModel(detailCondition: .writer, viewModelDataSource: [[], []], maxSelection: 0)
+        self.viewModel = DetailSelectionViewModel(detailCondition: .writer, viewModelDataSource: [[], []], maxSelection: 0)
         super.init(coder: coder)
     }
     
@@ -54,7 +54,7 @@ class DetailConditionSelectViewController: UIViewController {
 
 // MARK: - Actions
 
-extension DetailConditionSelectViewController {
+extension DetailSelectionViewController {
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -69,7 +69,7 @@ extension DetailConditionSelectViewController {
 
 // MARK: - UITableViewDelegate Implementation
 
-extension DetailConditionSelectViewController: UITableViewDelegate {
+extension DetailSelectionViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.select(at: indexPath)
@@ -79,7 +79,7 @@ extension DetailConditionSelectViewController: UITableViewDelegate {
 
 // MARK: - UITableViewDataSource Implementation
 
-extension DetailConditionSelectViewController: UITableViewDataSource {
+extension DetailSelectionViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -100,7 +100,7 @@ extension DetailConditionSelectViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell: DetailConditionSelectCellView = tableView.dequeueCell(at: indexPath)
         else { return UITableViewCell() }
-        cell.configure(type: viewModel.detailCondition.cellStyle, viewModel: viewModel.cellForRow(at: indexPath))
+        cell.configure(type: viewModel.selectionType.cellStyle, viewModel: viewModel.cellForRow(at: indexPath))
         cell.setCheck(indexPath.section == 0)
         return cell
     }
@@ -109,13 +109,13 @@ extension DetailConditionSelectViewController: UITableViewDataSource {
 
 // MARK: - Load From Nib
 
-extension DetailConditionSelectViewController {
+extension DetailSelectionViewController {
     
-    static let nibName = "DetailConditionSelectViewController"
+    static let nibName = "DetailSelectionViewController"
     
     // TODO: Dependency Injection ( ViewModels )
-    static func createViewController(with viewModel: DetailConditionViewModelProtocol) -> DetailConditionSelectViewController {
-        let vc = DetailConditionSelectViewController(nibName: nibName, bundle: Bundle.main, viewModel: viewModel)
+    static func createViewController(with viewModel: DetailSelectionViewModelProtocol) -> DetailSelectionViewController {
+        let vc = DetailSelectionViewController(nibName: nibName, bundle: Bundle.main, viewModel: viewModel)
         return vc
     }
     

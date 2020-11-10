@@ -10,7 +10,7 @@ import UIKit
 
 protocol IssucCellViewDelegate: AnyObject {
     func closeIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int)
-    func deleteIssueButtonTapped(_ issueCellView: IssueCellView,at id: Int)
+    func deleteIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int)
     func issueCellViewBeginDragging(_ issueCellView: IssueCellView, at id: Int)
 }
 
@@ -26,6 +26,7 @@ class IssueCellView: UICollectionViewCell {
     @IBOutlet weak var deleteBoxGuideView: UIView!
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var milestoneBadge: BadgeLabelView!
     @IBOutlet weak var checkBoxButton: UIButton!
     @IBOutlet weak var labelCollectionView: UICollectionView!
@@ -148,6 +149,7 @@ extension IssueCellView {
 }
 
 // MARK: - UIScrollViewDelegate Implementation
+
 extension IssueCellView: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

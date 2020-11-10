@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddCommentMilestoneCellView: UITableViewCell {
+class BottomSheetMilestoneView: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var backgroundBar: UIView!
@@ -34,7 +34,6 @@ class AddCommentMilestoneCellView: UITableViewCell {
             frontBarGaugeWidthConstraint.constant = 0
             return
         }
-        
         frontBarGaugeWidthConstraint.constant = backgroundBar.bounds.width * close / (open + close)
     }
 
@@ -45,11 +44,11 @@ class AddCommentMilestoneCellView: UITableViewCell {
     }
 }
 
-// MARK: - loadNIB extension
+// MARK: - Load From Nib
 
-extension AddCommentMilestoneCellView {
-    static let identifier = "AddCommentMilestoneCellView"
-    static func createView() -> AddCommentMilestoneCellView? {
-        return Bundle.main.loadNibNamed(AddCommentMilestoneCellView.identifier, owner: self, options: nil)?.last as? AddCommentMilestoneCellView
+extension BottomSheetMilestoneView {
+    static let identifier = "BottomSheetMilestoneView"
+    static func createView() -> BottomSheetMilestoneView? {
+        return Bundle.main.loadNibNamed(BottomSheetMilestoneView.identifier, owner: self, options: nil)?.last as? BottomSheetMilestoneView
     }
 }

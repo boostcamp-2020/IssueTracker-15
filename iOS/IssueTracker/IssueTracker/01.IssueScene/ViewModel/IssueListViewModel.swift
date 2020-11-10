@@ -112,7 +112,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
     
     func createFilterViewModel() -> IssueFilterViewModelProtocol? {
         let generalConditions = filter?.generalConditions ?? [Bool](repeating: false, count: Condition.allCases.count)
-        let detailConditions = filter?.detailConditions ?? [Int](repeating: -1, count: DetailCondition.allCases.count)
+        let detailConditions = filter?.detailConditions ?? [Int](repeating: -1, count: DetailSelectionType.allCases.count)
         let viewModel = IssueFilterViewModel(labelProvider: labelProvider,
                                              milestoneProvider: milestoneProvider,
                                              issueProvider: issueProvider,

@@ -8,9 +8,9 @@
 
 import Foundation
 
-protocol DetailConditionViewModelProtocol: AnyObject {
+protocol DetailSelectionViewModelProtocol: AnyObject {
     
-    var detailCondition: DetailCondition { get }
+    var selectionType: DetailSelectionType { get }
     var result: [CellComponentViewModel] { get }
     var didChanged: ((IndexPath, IndexPath) -> Void)? { get set }
     
@@ -21,9 +21,9 @@ protocol DetailConditionViewModelProtocol: AnyObject {
     func numberOfDatas(at section: Int) -> Int
 }
 
-class DetailConditionViewModel: DetailConditionViewModelProtocol {
+class DetailSelectionViewModel: DetailSelectionViewModelProtocol {
     
-    private(set) var detailCondition: DetailCondition
+    private(set) var selectionType: DetailSelectionType
     private var viewModelDataSource: [[CellComponentViewModel]]
     private var maxSelection: Int
     
@@ -32,8 +32,8 @@ class DetailConditionViewModel: DetailConditionViewModelProtocol {
         viewModelDataSource[0]
     }
     
-    init(detailCondition: DetailCondition, viewModelDataSource: [[CellComponentViewModel]], maxSelection: Int) {
-        self.detailCondition = detailCondition
+    init(detailCondition: DetailSelectionType, viewModelDataSource: [[CellComponentViewModel]], maxSelection: Int) {
+        self.selectionType = detailCondition
         self.viewModelDataSource = viewModelDataSource
         self.maxSelection = maxSelection
     }
@@ -61,7 +61,8 @@ class DetailConditionViewModel: DetailConditionViewModelProtocol {
         
         didChanged?(indexFrom, indexTo)
         
-        if viewModelDataSource[0].count > maxSelection {
+        if maxSelection != 0,
+            viewModelDataSource[0].count > maxSelection {
             let indexFrom = IndexPath(row: 0, section: 0)
             let indexTo = IndexPath(row: viewModelDataSource[1].count, section: 1)
             

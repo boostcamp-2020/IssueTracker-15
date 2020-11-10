@@ -8,25 +8,33 @@
 
 import UIKit
 
-protocol AddCommentDelegate: AnyObject {
+protocol BottomSheetViewDelegate: AnyObject {
     func addCommentButtonTapped()
     func upButtonTapped()
     func downButtonTapped()
 }
 
-class AddCommentView: UIView {
-    weak var addCommentDelegate: AddCommentDelegate?
+class BottomSheetView: UIView {
+    weak var delegate: BottomSheetViewDelegate?
     @IBOutlet weak var barView: UIView!
     @IBOutlet weak var addCommentButton: UIButton!
     @IBOutlet weak var upButton: UIButton!
     @IBOutlet weak var downButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    private var labelsCollectionViewCell: BottomSheetLabelCollectionView?
     
-    private var labelsCollectionViewCell: AddCommentLabelCollectionView?
+    private weak var issueDetailViewModel: IssueDetailViewModelProtocol?
     
     var fullView: CGFloat = 100
     var partialView: CGFloat {
-        return UIScreen.main.bounds.height - (addCommentButton.frame.maxY + (self.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0))
+        return UIScreen.main.bounds.height
+            - (addCommentButton.frame.maxY + (self.window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0))
+    }
+    
+    func configure(issueDetailViewModel: IssueDetailViewModelProtocol?) {
+        self.issueDetailViewModel = issueDetailViewModel
+        self.issueDetailViewModel?.didMilestoneChanged = reloadData
+        self.issueDetailViewModel?.didLabelChanged = reloadData
     }
     
     override func awakeFromNib() {
@@ -41,15 +49,26 @@ class AddCommentView: UIView {
         self.addGestureRecognizer(gesture)
     }
     
-    @IBAction func addCommentButtonTapped(_ sender: Any) {
-        // delegate 발동
-        addCommentDelegate?.addCommentButtonTapped()
-    }
-    
 }
 
 // MARK: - Action
-extension AddCommentView {
+extension BottomSheetView {
+    func reloadData() {
+        tableView.reloadData()
+    }
+    
+    @IBAction func addCommentButtonTapped(_ sender: Any) {
+        delegate?.addCommentButtonTapped()
+    }
+
+    @IBAction func upButtonTapped(_ sender: Any) {
+        delegate?.upButtonTapped()
+    }
+
+    @IBAction func downButtonTapped(_ sender: Any) {
+        delegate?.downButtonTapped()
+    }
+    
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
         let translation = recognizer.translation(in: self)
         let velocity = recognizer.velocity(in: self)
@@ -71,29 +90,22 @@ extension AddCommentView {
                 } else {
                     self.frame = CGRect(x: 0, y: self.fullView, width: self.frame.width, height: self.frame.height)
                 }
-                
             }, completion: nil)
         }
+        
     }
-
-    @IBAction func upButtonTapped(_ sender: Any) {
-        addCommentDelegate?.upButtonTapped()
-    }
-
-    @IBAction func downButtonTapped(_ sender: Any) {
-        addCommentDelegate?.downButtonTapped()
-    }
+    
 }
 
 // MARK: - UITableViewDelegate Implementation
 
-extension AddCommentView: UITableViewDelegate {
+extension BottomSheetView: UITableViewDelegate {
     
 }
 
 // MARK: - UITableViewDataSource Implementation
 
-extension AddCommentView: UITableViewDataSource {
+extension BottomSheetView: UITableViewDataSource {
 
     enum TableViewConstant {
         static let headerTitles = ["담당자", "레이블", "마일스톤"]
@@ -106,11 +118,13 @@ extension AddCommentView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 3
+            return issueDetailViewModel?.assignees.count ?? 0
         case 1:
-            return 1
+            let num = (issueDetailViewModel?.labels ?? []).isEmpty ? 0 : 1
+            print("[tableViewNum]: \(num)")
+            return num
         case 2:
-            return 1
+            return (issueDetailViewModel?.milestone != nil) ? 1 : 0
         default:
             return 0
         }
@@ -120,7 +134,9 @@ extension AddCommentView: UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            guard let userComponentView = UserInfoComponentView.createView() else { break }
+            guard let userComponentView = UserInfoComponentView.createView(),
+                let userViewModel = issueDetailViewModel?.assignees[safe: indexPath.row]
+                else { break }
             let cell = UITableViewCell()
             cell.backgroundColor = .clear
             cell.addSubview(userComponentView)
@@ -129,23 +145,28 @@ extension AddCommentView: UITableViewDataSource {
                 userComponentView.topAnchor.constraint(equalTo: cell.topAnchor),
                 userComponentView.bottomAnchor.constraint(equalTo: cell.bottomAnchor)
             ])
-            userComponentView.configure(viewModel: CellComponentViewModel(title: "김신우", element: "dkdkdkdkdk"))
+            userComponentView.configure(viewModel: CellComponentViewModel(title: userViewModel.userName, element: userViewModel.imageURL ?? ""))
             return cell
         case 1:
-            guard let cell = AddCommentLabelCollectionView.createView() else { break }
-            cell.configure(labelItemViewModels: [
-                LabelItemViewModel(label: Label(title: "Inhencement", description: "", hexColor: "#FEF2C0")),
-                LabelItemViewModel(label: Label(title: "Feature", description: "", hexColor: "#FBCA04")),
-                LabelItemViewModel(label: Label(title: "Merge_Dev-iOS", description: "", hexColor: "#0075CA")),
-                LabelItemViewModel(label: Label(title: "Merge_Dev-Web", description: "", hexColor: "#F7F9AC")),
-                LabelItemViewModel(label: Label(title: "Merge_Feature", description: "", hexColor: "#D3F49F")),
-                LabelItemViewModel(label: Label(title: "Release", description: "", hexColor: "#FBCA04"))
-            ])
-            labelsCollectionViewCell = cell
+            guard let labelViewModels = issueDetailViewModel?.labels else { break }
+            
+            let cell: BottomSheetLabelCollectionView
+            if let labelsCollectionViewCell = self.labelsCollectionViewCell {
+                cell = labelsCollectionViewCell
+            } else if let labelsCollectionViewCell = BottomSheetLabelCollectionView.createView() {
+                cell = labelsCollectionViewCell
+                self.labelsCollectionViewCell = cell
+            } else {
+                break
+            }
+            
+            cell.configure(labelItemViewModels: labelViewModels)
             return cell
         case 2:
-            guard let cell = AddCommentMilestoneCellView.createView() else { break }
-            cell.configure(milestoneViewModel: MilestoneItemViewModel(milestone: Milestone(id: 0, title: "마일스톤1", description: "", dueDate: "2020-11-04T00:00:00.000Z", openIssuesLength: "9", closeIssueLength: "2"), from: .fromServer))
+            guard let cell = BottomSheetMilestoneView.createView(),
+                let milestoneViewModel = issueDetailViewModel?.milestone
+            else { break }
+            cell.configure(milestoneViewModel: milestoneViewModel)
             return cell
         default:
             break
@@ -155,7 +176,7 @@ extension AddCommentView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = AddCommentHeaderView.createView()
+        let headerView = BottomSheetHeaderView.createView()
         headerView?.configure(title: TableViewConstant.headerTitles[section])
         return headerView
     }
@@ -176,9 +197,10 @@ extension AddCommentView: UITableViewDataSource {
 }
 
 // MARK: - loadNIB extension
-extension AddCommentView {
-    static let identifier = "AddCommentView"
-    static func createView() -> AddCommentView? {
-        return Bundle.main.loadNibNamed(AddCommentView.identifier, owner: self, options: nil)?.last as? AddCommentView
+extension BottomSheetView {
+    static let identifier = "BottomSheetView"
+    
+    static func createView() -> BottomSheetView? {
+        return Bundle.main.loadNibNamed(BottomSheetView.identifier, owner: self, options: nil)?.last as? BottomSheetView
     }
 }

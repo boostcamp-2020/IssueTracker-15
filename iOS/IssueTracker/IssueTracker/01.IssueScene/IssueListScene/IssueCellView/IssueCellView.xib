@@ -60,7 +60,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Kmn-zW-86B">
-                                                <rect key="frame" x="15" y="47.5" width="319" height="134.5"/>
+                                                <rect key="frame" x="15" y="42.5" width="319" height="144.5"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="4" id="Xch-51-Jf9">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -72,12 +72,12 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="Kmn-zW-86B" secondAttribute="bottom" constant="10" id="8sN-dc-pnA"/>
+                                            <constraint firstAttribute="bottom" secondItem="Kmn-zW-86B" secondAttribute="bottom" constant="5" id="8sN-dc-pnA"/>
                                             <constraint firstItem="0Ig-WN-dKN" firstAttribute="centerY" secondItem="Ikc-pc-tFP" secondAttribute="centerY" id="AZv-ZN-uPG"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="leading" secondItem="R8Z-t0-U66" secondAttribute="leading" constant="15" id="MZD-b8-cTd"/>
                                             <constraint firstItem="0Ig-WN-dKN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="trailing" constant="16" id="NWN-kr-ZA2"/>
+                                            <constraint firstItem="Kmn-zW-86B" firstAttribute="top" secondItem="Ikc-pc-tFP" secondAttribute="bottom" constant="5" id="U7E-yw-Uh7"/>
                                             <constraint firstAttribute="trailing" secondItem="0Ig-WN-dKN" secondAttribute="trailing" constant="15" id="gpr-1e-lf0"/>
-                                            <constraint firstItem="Kmn-zW-86B" firstAttribute="top" secondItem="Ikc-pc-tFP" secondAttribute="bottom" constant="10" id="nyd-8b-Iqd"/>
                                             <constraint firstItem="Kmn-zW-86B" firstAttribute="leading" secondItem="Ikc-pc-tFP" secondAttribute="leading" id="x2e-F0-yYo"/>
                                             <constraint firstAttribute="trailing" secondItem="Kmn-zW-86B" secondAttribute="trailing" constant="80" id="yCF-Gf-oAg"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="top" secondItem="R8Z-t0-U66" secondAttribute="top" constant="10" id="zfI-bt-iTJ"/>

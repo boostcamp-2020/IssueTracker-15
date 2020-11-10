@@ -97,8 +97,6 @@ class IssueProvider: IssueProvidable {
                 completion(nil)
             case .success(let response):
                 if let issue = Issue.addResponse(jsonObject: response.mapJsonObject()) {
-                    // TODO: completion nil 처리
-                    //self.dataLoader?.request(CommentService.addComment(issue.id, description), callBackQueue: nil, completion: nil)
                     self.issues.append(issue)
                     completion(issue)
                 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddCommentHeaderView: UIView {
+class BottomSheetHeaderView: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
@@ -20,9 +20,9 @@ class AddCommentHeaderView: UIView {
 }
 
 // MARK: - loadNIB extension
-extension AddCommentHeaderView {
-    static let identifier = "AddCommentHeaderView"
-    static func createView() -> AddCommentHeaderView? {
-        return Bundle.main.loadNibNamed(AddCommentHeaderView.identifier, owner: self, options: nil)?.last as? AddCommentHeaderView
+extension BottomSheetHeaderView {
+    static let identifier = "BottomSheetHeaderView"
+    static func createView() -> BottomSheetHeaderView? {
+        return Bundle.main.loadNibNamed(BottomSheetHeaderView.identifier, owner: self, options: nil)?.last as? BottomSheetHeaderView
     }
 }
