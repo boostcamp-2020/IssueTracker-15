@@ -8,7 +8,6 @@ import LabelPage from "./views/label";
 import MilestonePage from "./views/milestone";
 import Header from "./components/header";
 import { Reset } from "styled-reset";
-import Callback from "./components/auth/callback";
 
 const App = () => {
   return (
@@ -22,7 +21,6 @@ const App = () => {
         <Route path="/issue/new" component={CreateIssuePage} />
         <Route path="/issue/:id" component={DetailIssuePage} />
         <Route path="/issue" component={IssuePage} />
-        <Route path="/auth/github" component={Callback} />
         <Redirect from="*" to="/issue" />
       </Switch>
     </>
