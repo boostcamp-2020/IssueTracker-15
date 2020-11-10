@@ -241,7 +241,7 @@ extension IssueListViewController: IssucCellViewDelegate {
     }
     
     func deleteIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int) {
-        
+        issueListViewModel?.deleteIssue(of: id)
     }
     
     func issueCellViewBeginDragging(_ issueCellView: IssueCellView, at id: Int) {

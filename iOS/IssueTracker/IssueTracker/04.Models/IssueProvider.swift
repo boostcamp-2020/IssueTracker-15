@@ -16,6 +16,7 @@ protocol IssueProvidable: AnyObject {
     func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion:  @escaping (Issue?) -> Void )
     func editIssue(id: Int, title: String, description: String, completion:  @escaping (Issue?) -> Void)
     func editTitle(id: Int, title: String, completion: @escaping (Issue?) -> Void)
+    func deleteIssue(id: Int, completion: @escaping (Issue?) -> Void)
     
     func getIssue(at id: Int, completion: @escaping (Issue?) -> Void)
     func changeIssueState(id: Int, open: Bool, completion: @escaping (Bool) -> Void)
@@ -167,6 +168,18 @@ class IssueProvider: IssueProvidable {
             case .success:
                 self?.issues[id]?.isOpened = open
                 completion(true)
+            }
+        })
+    }
+    
+    func deleteIssue(id: Int, completion: @escaping (Issue?) -> Void) {
+        dataLoader?.request(IssueService.delete(id), callBackQueue: .main, completion: { [weak self] (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success:
+                let issue = self?.issues.removeValue(forKey: id)
+                completion(issue)
             }
         })
     }

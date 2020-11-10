@@ -25,6 +25,7 @@ protocol IssueListViewModelProtocol: AnyObject {
     
     func closeIssue(of id: Int)
     func closeSelectedIssue()
+    func deleteIssue(of id: Int)
     
     func addNewIssue(title: String, description: String, authorID: Int)
     
@@ -64,7 +65,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
 
 extension IssueListViewModel {
     
-    private func fetchItems() {
+    private func requestFetchIssues() {
         let group = DispatchGroup()
         group.enter()
         
@@ -78,8 +79,8 @@ extension IssueListViewModel {
             issues.forEach {
                 let itemViewModel = IssueItemViewModel(issue: $0)
                 self.issues.append(itemViewModel)
-                self.fetchLabels(of: $0, to: itemViewModel, group: group)
-                self.fetchMilestones(of: $0, to: itemViewModel, group: group)
+                self.requestFetchLabels(of: $0, to: itemViewModel, group: group)
+                self.requestFetchMilestones(of: $0, to: itemViewModel, group: group)
             }
             
             group.leave()
@@ -91,7 +92,7 @@ extension IssueListViewModel {
         }
     }
     
-    private func fetchLabels(of issue: Issue, to issueItem: IssueItemViewModel, group: DispatchGroup? = nil) {
+    private func requestFetchLabels(of issue: Issue, to issueItem: IssueItemViewModel, group: DispatchGroup? = nil) {
         guard let provider = labelProvider else { return }
         
         group?.enter()
@@ -101,7 +102,7 @@ extension IssueListViewModel {
         })
     }
     
-    private func fetchMilestones(of issue: Issue, to issueItem: IssueItemViewModel, group: DispatchGroup? = nil) {
+    private func requestFetchMilestones(of issue: Issue, to issueItem: IssueItemViewModel, group: DispatchGroup? = nil) {
         guard let milestoneID = issue.milestone,
             let provider = milestoneProvider
         else { return }
@@ -113,7 +114,7 @@ extension IssueListViewModel {
         })
     }
     
-    private func changeIssueState(of issueItems: [IssueItemViewModel], open: Bool) {
+    private func requestChangeIssueState(of issueItems: [IssueItemViewModel], open: Bool) {
         guard let provider = issueProvider else { return }
         let group = DispatchGroup()
         
@@ -128,6 +129,12 @@ extension IssueListViewModel {
             self?.needFetchItems()
         }
     }
+    
+    private func requestDeleteIssue(of id: Int) {
+        issueProvider?.deleteIssue(id: id, completion: { [weak self] _ in
+            self?.needFetchItems()
+        })
+    }
 }
 
 // MARK: - View Event
@@ -135,7 +142,7 @@ extension IssueListViewModel {
 extension IssueListViewModel {
     
     func needFetchItems() {
-        fetchItems()
+        requestFetchIssues()
     }
     
     func selectCell(at path: IndexPath) {
@@ -172,14 +179,17 @@ extension IssueListViewModel {
     
     func closeIssue(of id: Int) {
         guard let item = issues.first(where: { $0.id == id }) else { return }
-        changeIssueState(of: [item], open: !item.isOpened)
+        requestChangeIssueState(of: [item], open: !item.isOpened)
     }
     
     func closeSelectedIssue() {
         let issueItems = issues.filter { $0.checked }
-        changeIssueState(of: issueItems, open: false)
+        requestChangeIssueState(of: issueItems, open: false)
     }
     
+    func deleteIssue(of id: Int) {
+        requestDeleteIssue(of: id)
+    }
 }
 
 // MARK: - SubViewModels

@@ -130,7 +130,7 @@ class IssueCellView: UICollectionViewCell {
         guard let color = isOpened ? Constant.openColor : Constant.closeColor else { return }
         statusImage.tintColor = color
         closeBoxButton.setTitle(isOpened ? "Close" : "Open", for: .normal)
-        closeBoxButton.backgroundColor = isOpened ? Constant.openColor : .link
+        closeBoxButton.backgroundColor = isOpened ? .link : Constant.openColor
     }
     
     func resetScrollOffset() {
