@@ -19,3 +19,19 @@ export const DropdownTitle = styled.div`
   padding-right: 5%;
   border-bottom: 1px solid #ced4da;
 `;
+
+export const DropdownWrapper = styled.div`
+  position: absolute;
+  border: 1px solid #ced4da;
+  width: 300px;
+  margin-top: 12%;
+  border-radius: 6px;
+  left: 0;
+  display: none;
+`;
+
+export const ListWrapper = styled.ul`
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+`;
