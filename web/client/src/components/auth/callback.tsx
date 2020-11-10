@@ -23,7 +23,7 @@ function Callback() {
     }
 
     getToken();
-  }, [location, history]);
+  }, []);
   return null;
 }
 

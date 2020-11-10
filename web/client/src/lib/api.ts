@@ -11,14 +11,13 @@ export const getLabels = async () => {
 };
 
 export const getJWTToken = async (code: string) => {
-  const result = await fetch("http://localhost:3000/api/auth/github", {
+  const result = await fetch("http://localhost:3000/api/signin/github", {
     method: "POST",
-    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      answer: code,
+      code,
     }),
   });
   const { accessToken } = await result.json();
