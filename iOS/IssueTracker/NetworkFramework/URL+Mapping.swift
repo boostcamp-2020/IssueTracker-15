@@ -9,7 +9,7 @@
 import Foundation
 
 extension URL {
-    init(target: Target) throws {
+    public init(target: Target) throws {
         
         var basComponent: URLComponents?
         if target.path.isEmpty {
