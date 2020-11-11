@@ -11,6 +11,7 @@ const Filters = [
   "sort",
 ];
 function issueHeader() {
+  const [milestones, setMilestones] = useState([]);
   return (
     <S.IssueHeader>
       <input type="checkbox" name="xxx" value="yyy" checked />

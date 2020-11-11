@@ -1,5 +1,15 @@
 const URL = "http://118.67.134.194:3000";
 
+export const getMilestones = async () => {
+  const result = await fetch(`${URL}/api/milestone`, {
+    method: "GET",
+  });
+  if (!result.ok) return;
+
+  const milestoneList = await result.json();
+  return milestoneList;
+};
+
 export const getIssues = async (isOpened: boolean) => {
   const result = await fetch(`${URL}/api/issue?isOpened=${isOpened}`, {
     method: "GET",
