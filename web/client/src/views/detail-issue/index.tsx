@@ -2,28 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
-import IssueSideBar from "../components/issue-sidebar/sidebar";
-import IssueHeader from "../components/issueHeader";
-import CommentBoxContainer from "../containers/commentBox-container";
-import useAsync from "../hooks/useAsync";
-import * as api from "../lib/api";
-
-const PageGrid = styled.div`
-  width: 1280px;
-  margin: 0 auto;
-`;
-const ColumnWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-const LeftColumn = styled.div`
-  flex-grow: 0.8;
-  flex-shrink: 0;
-`;
-
-const RightColumn = styled.div`
-  flex-shrink: 0;
-`;
+import IssueSideBar from "../../components/issue-sidebar/sidebar";
+import IssueHeader from "../../components/issueHeader";
+import CommentBoxContainer from "../../containers/commentBox-container";
+import useAsync from "../../hooks/useAsync";
+import * as api from "../../lib/api";
+import * as S from "./style";
 
 const DetailIssuePage = () => {
   const params: any = useParams();
@@ -37,7 +21,7 @@ const DetailIssuePage = () => {
   if (error) return <div>에러가 났네요;</div>;
 
   return (
-    <PageGrid>
+    <S.PageGrid>
       {issue && (
         <>
           <IssueHeader
@@ -48,8 +32,8 @@ const DetailIssuePage = () => {
             commentLength={issue.comments.length}
           />
 
-          <ColumnWrapper>
-            <LeftColumn>
+          <S.ColumnWrapper>
+            <S.LeftColumn>
               {issue.comments.map((comment: any) => (
                 <CommentBoxContainer
                   key={comment.id}
@@ -58,18 +42,18 @@ const DetailIssuePage = () => {
                 />
               ))}
               <CommentBoxContainer isAuthor={true} />
-            </LeftColumn>
-            <RightColumn>
+            </S.LeftColumn>
+            <S.RightColumn>
               <IssueSideBar
                 assignees={issue.assignees}
                 labels={issue.labels}
                 milestone={issue.milestone}
               />
-            </RightColumn>
-          </ColumnWrapper>
+            </S.RightColumn>
+          </S.ColumnWrapper>
         </>
       )}
-    </PageGrid>
+    </S.PageGrid>
   );
 };
 
