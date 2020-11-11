@@ -1,24 +1,15 @@
-import express, { Request, Response } from 'express';
-import UserService from '../services/user.service';
-import { SignUpInput } from '../types/sign-up.type';
+import express, { Request, Response } from "express";
+import UserService from "../services/user.service";
 
-const SignUpRouter = express.Router();
+const UserRouter = express.Router();
 
-SignUpRouter.post('/', async (req: Request, res: Response) => {
-  const { email, password, userName } = req.body;
-
-  const signUpInput: SignUpInput = {
-    email,
-    password,
-    userName,
-  };
-
+UserRouter.get("/", async (req: Request, res: Response) => {
   try {
-    await UserService.create(signUpInput, 'local');
-    return res.json();
+    const userList = await UserService.getUserList();
+    res.json(userList);
   } catch (err) {
     return res.status(400).json({ message: err.message });
   }
 });
 
-export default SignUpRouter;
+export default UserRouter;
