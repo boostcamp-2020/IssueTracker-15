@@ -165,19 +165,14 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         })
     }
     
-    private var mockUserInfo = [
-        CellComponentViewModel(title: "SHIVVVPP", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "유시형", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "namda-on", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "moaikang", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "maong0927", element: "2020-08-11T00:00:00.000Z")
-    ]
     func detailSelectionItemDataSource(of type: DetailSelectionType) -> [[CellComponentViewModel]] {
         var viewModels: [[CellComponentViewModel]] = [[], []]
         switch type {
         case .assignee, .writer:
-            // TODO: UserInfoProvider 구현
-            viewModels = [ [], mockUserInfo  ]
+            issueProvider?.users.forEach {
+                let viewModel = CellComponentViewModel(user: $0.value)
+                viewModels[$0.key == author.userName ? 0 : 1].append(viewModel)
+            }
         case .label:
             let labelTable = labels.reduce(into: Set<Int>()) { $0.insert($1.id) }
             

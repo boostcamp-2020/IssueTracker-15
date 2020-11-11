@@ -27,6 +27,8 @@ protocol IssueProvidable: AnyObject {
     func addAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func deleteAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void)
+    
+    var users: [String: User] { get }
 }
 
 class IssueProvider: IssueProvidable {
@@ -40,24 +42,9 @@ class IssueProvider: IssueProvidable {
         return duration > 60 * 1
     }
     
-    // mock data
-    private(set) var issues: [Int: Issue] = [ // labels 9 ~ 17 milestone 19, 22, 23, 24, 25, 28, 36
-        1: Issue(id: 1, title: "이슈[1]", description: "ABCDEFGH", labels: [9], milestone: 19, author: "JK", isOpened: true),
-        2: Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10], milestone: 22, author: "JK", isOpened: true),
-        3: Issue(id: 3, title: "이슈[3]", description: "ABCDEFGH", labels: [11], milestone: 23, author: "JK", isOpened: true),
-        4: Issue(id: 4, title: "이슈[4]", description: "ABCDEFGH", labels: [12], milestone: 24, author: "JK", isOpened: true),
-        5: Issue(id: 5, title: "이슈[5]", description: "ABCDEFGH", labels: [13], milestone: 25, author: "JK", isOpened: true),
-        6: Issue(id: 6, title: "이슈[6]", description: "ABCDEFGH", labels: [14], milestone: 28, author: "JK", isOpened: true),
-        7: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        8: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        9: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        10: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        11: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        12: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        13: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        14: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true)
-    ]
     private weak var dataLoader: DataLoadable?
+    private(set) var issues = [Int: Issue]()
+    private(set) var users = [String: User]()
     
     init(dataLoader: DataLoadable) {
         self.dataLoader = dataLoader
@@ -80,6 +67,8 @@ class IssueProvider: IssueProvidable {
                 if let issues = Issue.fetchResponse(jsonArr: response.mapJsonArr()) {
                     issues.forEach {
                         self?.issues[$0.id] = $0
+                        self?.users[$0.author.name] = $0.author
+                        $0.assignees.forEach { self?.users[$0.name] = $0 }
                     }
                 }
             }
@@ -154,13 +143,17 @@ class IssueProvider: IssueProvidable {
      Response: 200
      */
     func getIssue(at id: Int, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.getIssue(id), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.getIssue(id), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success(let response):
                 if let issue = Issue.getResponse(jsonObject: response.mapJsonObject()) {
+                    self?.issues[issue.id] = issue
+                    issue.comments.forEach { self?.users[$0.author.name] = $0.author }
                     completion(issue)
+                } else {
+                    completion(nil)
                 }
             }
         })

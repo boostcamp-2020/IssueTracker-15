@@ -81,8 +81,10 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
         var viewModels: [[CellComponentViewModel]] = [[], []]
         switch type {
         case .assignee, .writer:
-            // TODO: UserInfoProvider 구현
-            viewModels = [ [], mockUserInfo  ]
+            issueProvider?.users.forEach {
+                let viewModel = CellComponentViewModel(user: $0.value)
+                viewModels[$0.value.id == detailConditions[type.rawValue] ? 0 : 1].append(viewModel)
+            }
         case .label:
             labelProvider?.labels.forEach {
                 let viewModel = CellComponentViewModel(label: $0.value)

@@ -91,7 +91,7 @@ class IssueDetailViewController: UIViewController {
         bottomSheetView.delegate = self
         let height = UIScreen.main.bounds.height
         let width  = UIScreen.main.bounds.width
-        bottomSheetView.frame = CGRect(x: 0, y: height * 0.85, width: width, height: height)
+        bottomSheetView.frame = CGRect(x: 0, y: height * 0.9, width: width, height: height)
         
         self.bottomSheetView = bottomSheetView
         self.view.addSubview(bottomSheetView)
