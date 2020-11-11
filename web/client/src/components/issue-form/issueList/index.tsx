@@ -15,7 +15,6 @@ function IssueList() {
     };
     fetchIssues();
   }, []);
-  console.log(issues);
   return (
     <S.IssueList>
       {issues.map((issue: any) => {
