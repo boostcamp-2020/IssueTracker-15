@@ -97,6 +97,7 @@ class IssueListViewController: UIViewController {
                                     cellProvider: { (collectionView, indexPath, issueItem) -> UICollectionViewCell? in
                                         guard let cell: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return nil }
                                         cell.configure(issueItemViewModel: issueItem)
+                                        cell.showCheckBox(show: self.viewingMode == .edit, animation: false)
                                         cell.delegate = self
                                         return cell
                                     })
