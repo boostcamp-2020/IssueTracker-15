@@ -19,6 +19,9 @@ export const FilterForm = styled.div`
   width: 100%;
   padding-left: 15%;
   display: flex;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const FilterComp = styled.div`

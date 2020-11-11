@@ -13,38 +13,38 @@ function IssueList({ info }: IssueListProp) {
   const mention = info.isOpened ? "opened" : "closed";
 
   return (
-    <S.IssueInfoLink to={`/issue/${info.id}`}>
-      <S.IssueComp>
-        <input type="checkbox" name="xxx" value="yyy" />
-        <S.ExclamationWrapper>
-          <AiOutlineExclamationCircle color={color} />
-        </S.ExclamationWrapper>
-        <div>
-          <S.IssueInfo>
+    <S.IssueComp>
+      <input type="checkbox" name="xxx" value="yyy" />
+      <S.ExclamationWrapper>
+        <AiOutlineExclamationCircle color={color} />
+      </S.ExclamationWrapper>
+      <div>
+        <S.IssueInfo>
+          <S.IssueInfoLink to={`/issue/${info.id}`}>
             <S.IssueTitle>{info.title} </S.IssueTitle>
-            {info.labels.map((label: any) => {
-              return (
-                <S.LabelWrapper>
-                  <Label name={label.title} color={label.color} />
-                </S.LabelWrapper>
-              );
-            })}
-          </S.IssueInfo>
-          <S.IssueEtc>
-            <S.IssueEtcWrapper>
-              #{info.id} by {info.author.userName} was {mention} by{" "}
-              {getTimeTillNow(info.createAt)} ago
-            </S.IssueEtcWrapper>
-            {info.milestone && (
-              <div>
-                <VscMilestone />
-                {info.milestone.title}
-              </div>
-            )}
-          </S.IssueEtc>
-        </div>
-      </S.IssueComp>
-    </S.IssueInfoLink>
+          </S.IssueInfoLink>
+          {info.labels.map((label: any) => {
+            return (
+              <S.LabelWrapper>
+                <Label name={label.title} color={label.color} />
+              </S.LabelWrapper>
+            );
+          })}
+        </S.IssueInfo>
+        <S.IssueEtc>
+          <S.IssueEtcWrapper>
+            #{info.id} by {info.author.userName} was {mention} by{" "}
+            {getTimeTillNow(info.createAt)} ago
+          </S.IssueEtcWrapper>
+          {info.milestone && (
+            <div>
+              <VscMilestone />
+              {info.milestone.title}
+            </div>
+          )}
+        </S.IssueEtc>
+      </div>
+    </S.IssueComp>
   );
 }
 

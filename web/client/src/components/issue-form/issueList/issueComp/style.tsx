@@ -6,6 +6,9 @@ export const IssueComp = styled.div`
   padding-top: 1%;
   padding-bottom: 1%;
   display: flex;
+  &:hover {
+    background-color: white;
+  }
 `;
 
 export const IssueInfo = styled.div`
@@ -21,6 +24,9 @@ export const IssueTitle = styled.div`
   color: black;
   margin-left: 1.5%;
   margin-right: 1.5%;
+  &:hover {
+    color: blue;
+  }
 `;
 
 export const IssueEtc = styled.div`
