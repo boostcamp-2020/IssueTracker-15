@@ -8,28 +8,28 @@
 
 import Foundation
 
-struct User {
+struct User: Codable {
     let id: Int
-    let name: String
-    let imageUrl: String?
+    let userName: String
+    let imageURL: String?
     
     init(id: Int) {
         self.id = id
-        name = String(id)
-        imageUrl = nil
+        userName = String(id)
+        imageURL = nil
     }
     
     init(id: Int, name: String, imageUrl: String? = nil) {
         self.id = id
-        self.name = name
-        self.imageUrl = imageUrl
+        self.userName = name
+        self.imageURL = imageUrl
     }
     
     init(name: String, imageUrl: String? = nil) {
         // TODO: userID
         self.id = 0
-        self.name = name
-        self.imageUrl = imageUrl
+        self.userName = name
+        self.imageURL = imageUrl
     }
     
     init?(json: [String: Any]) {
@@ -37,7 +37,7 @@ struct User {
               let id = json["id"] as? Int
         else { return nil }
         self.id = id
-        self.name = name
-        self.imageUrl = json["imageURL"] as? String
+        self.userName = name
+        self.imageURL = json["imageURL"] as? String
     }
 }

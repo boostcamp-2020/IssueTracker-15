@@ -47,7 +47,7 @@ public class DataLoader: DataLoadable {
             switch result {
             case .success(let response):
                 print(response.debugDescription)
-                break
+//                break
             case .failure(let error):
                 print("response fail with : \(error)")
             }

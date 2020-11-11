@@ -40,8 +40,8 @@ struct CommentViewModel {
     init(comment: Comment) {
         content = comment.content
         createAt = comment.createAt
-        userName = comment.author.name
-        imageURL = comment.author.imageUrl
+        userName = comment.author.userName
+        imageURL = comment.author.imageURL
     }
 }
 
@@ -57,8 +57,8 @@ struct UserViewModel {
     
     init(user: User? = nil) {
         self.id = user?.id ?? -1
-        self.userName = user?.name ?? ""
-        self.imageURL = user?.imageUrl
+        self.userName = user?.userName ?? ""
+        self.imageURL = user?.imageURL
     }
 
 }

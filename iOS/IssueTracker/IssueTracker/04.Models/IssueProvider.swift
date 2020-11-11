@@ -43,11 +43,16 @@ class IssueProvider: IssueProvidable {
     }
     
     private weak var dataLoader: DataLoadable?
-    private(set) var issues = [Int: Issue]()
-    private(set) var users = [Int: User]()
+    private weak var userProvider: UserProvidable?
     
-    init(dataLoader: DataLoadable) {
+    private(set) var issues = [Int: Issue]()
+    var users: [Int: User] {
+        return userProvider?.users ?? [:]
+    }
+    
+    init(dataLoader: DataLoadable, userProvider: UserProvidable) {
         self.dataLoader = dataLoader
+        self.userProvider = userProvider
     }
     
     func fetchIssues(completion: @escaping ([Issue]?) -> Void) {
@@ -67,8 +72,8 @@ class IssueProvider: IssueProvidable {
                 if let issues = Issue.fetchResponse(jsonArr: response.mapJsonArr()) {
                     issues.forEach {
                         self?.issues[$0.id] = $0
-                        self?.users[$0.author.id] = $0.author
-                        $0.assignees.forEach { self?.users[$0.id] = $0 }
+                        self?.userProvider?.users[$0.author.id] = $0.author
+                        $0.assignees.forEach { self?.userProvider?.users[$0.id] = $0 }
                     }
                 }
             }
@@ -150,7 +155,7 @@ class IssueProvider: IssueProvidable {
             case .success(let response):
                 if let issue = Issue.getResponse(jsonObject: response.mapJsonObject()) {
                     self?.issues[issue.id] = issue
-                    issue.comments.forEach { self?.users[$0.author.id] = $0.author }
+                    issue.comments.forEach { self?.userProvider?.users[$0.author.id] = $0.author }
                     completion(issue)
                 } else {
                     completion(nil)

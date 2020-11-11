@@ -77,12 +77,12 @@ struct Issue {
     
     mutating func addAssignee(id: Int) {
         // TODO: Assignee -> [id]
-        if assignees.contains(where: { $0.name == String(id) }) { return }
+        if assignees.contains(where: { $0.userName == String(id) }) { return }
         assignees.append(User(id: id))
     }
     
     mutating func deleteAssignee(id: Int) {
-        guard let idx = assignees.firstIndex(where: { $0.name == String(id) }) else { return }
+        guard let idx = assignees.firstIndex(where: { $0.userName == String(id) }) else { return }
         assignees.remove(at: idx)
     }
     
