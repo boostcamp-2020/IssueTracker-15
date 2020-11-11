@@ -2,7 +2,8 @@ import React, { useState, Fragment } from "react";
 import * as S from "./style";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { VscMilestone } from "react-icons/vsc";
-
+import Label from "../../../label";
+import ProfileImage from "../../../profile-image";
 function IssueList() {
   return (
     <S.IssueComp>
@@ -13,6 +14,18 @@ function IssueList() {
       <div>
         <S.IssueInfo>
           <S.IssueTitle> 제목 </S.IssueTitle>
+          <S.LabelWrapper>
+            <Label name="bug" color="pink" />
+          </S.LabelWrapper>
+          <S.LabelWrapper>
+            <Label name="feature" color="blue" />
+          </S.LabelWrapper>
+          <S.ProfileImageWrapper size={300}>
+            <ProfileImage img="" size={25} />
+          </S.ProfileImageWrapper>
+          <S.ProfileImageWrapper size={303}>
+            <ProfileImage img="" size={25} />
+          </S.ProfileImageWrapper>
         </S.IssueInfo>
         <S.IssueEtc>
           <S.IssueEtcWrapper>

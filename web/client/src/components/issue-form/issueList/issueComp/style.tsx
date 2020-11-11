@@ -11,6 +11,7 @@ export const IssueInfo = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 2%;
+  position: relative;
 `;
 
 export const IssueTitle = styled.div`
@@ -36,4 +37,14 @@ export const VscMilestoneWrapper = styled.div`
 
 export const IssueEtcWrapper = styled.div`
   margin-right: 5px;
+`;
+
+export const LabelWrapper = styled.div`
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+`;
+
+export const ProfileImageWrapper = styled.div<{ size: number }>`
+  position: absolute;
+  left: ${(props) => props.size}%;
 `;
