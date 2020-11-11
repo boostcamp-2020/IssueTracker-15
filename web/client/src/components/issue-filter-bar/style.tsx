@@ -34,8 +34,8 @@ export const SearchForm = styled.div`
 `;
 
 export const FilterContainer = styled.div`
-  padding-top: 0.7%;
-  padding-bottom: 0.7%;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
   width: 60%;
   border: 1px solid #ced4da;
   align-items: center;
