@@ -66,10 +66,27 @@ extension Response: CustomDebugStringConvertible {
         return """
 [Request]   URL         :   \(String(describing: request?.url?.absoluteString ?? ""))
 [Request]   Method      :   \(String(describing: request?.httpMethod ?? ""))
-[Request]   httpBody    :   \(String(describing: String(data: request?.httpBody ?? Data(), encoding: .utf8)) )
+[Request]   httpBody    :   \(String(describing: prettyJson(data: request?.httpBody)) )
 [Response]  statusCode  :   \(String(describing: response?.statusCode ?? 0))
-[Response]  httpBody    :   \(String(data: self.data, encoding: .utf8) ?? "")
+[Response]  httpBody    :   \(String(describing: prettyJson(data: data)))
 """
     }
     
+    private func prettyJson(data: Data?) -> String {
+        guard let data = data,
+            let jsonAny = try? JSONSerialization.jsonObject(with: data, options: [])
+            else { return  "{No Body}" }
+        
+        let prettyJsonData: Data?
+        if let jsonObject = jsonAny as? [String: Any] {
+            prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
+        } else if let jsonArr = jsonAny as? [[String: Any]] {
+            prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonArr, options: .prettyPrinted)
+        } else {
+            prettyJsonData = nil
+        }
+        let prettyJsonStr = String(data: prettyJsonData ?? Data(), encoding: .utf8) ?? ""
+        
+        return prettyJsonStr.isEmpty ? "{No Body}" : prettyJsonStr
+    }
 }
