@@ -2,22 +2,17 @@ import React, { useEffect, useState } from "react";
 import LabelForm from "../../@types/label-form";
 import LabelRow from "../../components/label-row";
 import * as S from "./style";
+import { getLabels } from "../../lib/api";
 
 export default function LabelRowContainer() {
   const [labels, setLabels] = useState([]);
 
   useEffect(() => {
-    const getLabels = async () => {
-      const result = await fetch("http://118.67.134.194:3000/api/label", {
-        method: "GET",
-      });
-      if (!result.ok) return;
-
-      const labelList = await result.json();
-
+    const initLabels = async () => {
+      const labelList = await getLabels();
       setLabels(labelList);
     };
-    getLabels();
+    initLabels();
   }, [labels]);
 
   return (

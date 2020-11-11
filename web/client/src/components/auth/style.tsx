@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import GithubButton from "react-github-login-button";
 
 export const BtnAuth = styled.div`
   color: blue;
@@ -30,4 +31,9 @@ export const TitleInputWrapAuth = styled.div`
 export const WrapBtnForm = styled.div`
   display: flex;
   justify-content: space-around;
+`;
+
+export const GitHubBTN = styled(GithubButton)`
+  margin-top: 10% !important;
+  width: 100% !important;
 `;

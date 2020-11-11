@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import Palette from '../../../assets/palette';
+import styled from "styled-components";
+import Palette from "../../../assets/palette";
 
 const { color } = Palette;
 
@@ -13,7 +13,7 @@ export const CommentBoxTitle = styled.div<{ isAuthor: boolean }>`
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: center;
 
   padding: 13px 20px;
 
@@ -33,7 +33,7 @@ export const CommentBoxTitle = styled.div<{ isAuthor: boolean }>`
     right: 100%;
     top: 50%;
     border: solid transparent;
-    content: '';
+    content: "";
     height: 0;
     width: 0;
     position: absolute;
@@ -75,7 +75,7 @@ export const WriteTime = styled.div`
 `;
 
 export const TitleRight = styled.div<{ isAuthor: boolean }>`
-  display: ${(props) => (props.isAuthor ? 'flex' : 'none')};
+  display: ${(props) => (props.isAuthor ? "flex" : "none")};
   align-items: center;
 `;
 
@@ -113,11 +113,24 @@ export const CommentBoxBody = styled.div<{ isAuthor: boolean }>`
 `;
 
 export const CommentWithProfileWrapper = styled.div`
-  display:flex;
+  display: flex;
 `;
 
 export const ProfilePhotoWrapper = styled.div`
   padding-top: 10px;
 
-  box-sizing:border-box;
+  box-sizing: border-box;
+`;
+
+export const ButtonListWrapper = styled.div`
+  display: flex;
+
+  margin-top: 1rem;
+  margin-left: auto;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  width: fit-content;
+  margin-left: 0.5rem;
 `;

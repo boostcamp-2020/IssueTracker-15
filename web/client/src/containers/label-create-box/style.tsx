@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { LabelCreateBoxProps } from "./index";
+import { LabelContextProps } from "../label-list-header";
 
 export const LabelCreateBox = styled.div`
-  display: ${(props: LabelCreateBoxProps) => (props.visible ? "flex" : "none")};
+  display: ${(props: LabelContextProps) =>
+    props.createLabelVisible ? "flex" : "none"};
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;

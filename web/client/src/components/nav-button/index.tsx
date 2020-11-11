@@ -9,12 +9,12 @@ interface NavButtonProps {
 }
 
 const milestoneConf = {
-  width: "13%",
+  width: "100%",
   title: "milestone",
 };
 
 const labelConf = {
-  width: "10%",
+  width: "100%",
   title: "Label",
 };
 

@@ -1,15 +1,15 @@
-import React from "react";
-import * as S from "./style";
+import React from 'react';
+import * as S from './style';
 
 interface ButtonProps {
-  value: string;
+  children: React.ReactNode;
   color: string;
   onClick?: () => void;
 }
-export default function Button({ value, color, onClick }: ButtonProps) {
+export default function Button({ children, color, onClick }: ButtonProps) {
   return (
     <S.CustomButton color={color} onClick={onClick}>
-      {value}
+      {children}
     </S.CustomButton>
   );
 }

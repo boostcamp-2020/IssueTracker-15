@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from 'express';
-import passport from 'passport';
+import { NextFunction, Request, Response } from "express";
+import passport from "passport";
 
 const PassportMiddleware = {
   validateUser: async (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate('jwt', async (err, user, info) => {
+    passport.authenticate("jwt", async (err, user, info) => {
       if (err || info) return res.status(400).json({ message: info.message });
 
       req.user = user;
@@ -11,8 +11,8 @@ const PassportMiddleware = {
     })(req, res, next);
   },
 
-  signIn: async (req: Request, res: Response, next: NextFunction) => {
-    passport.authenticate('local', async (err, user, info) => {
+  signInLocal: async (req: Request, res: Response, next: NextFunction) => {
+    passport.authenticate("local", async (err, user, info) => {
       if (err || info) return res.status(400).json({ message: info.message });
 
       req.login(user, { session: false }, async (loginErr) => {
@@ -23,6 +23,10 @@ const PassportMiddleware = {
       next();
     })(req, res, next);
   },
+
+  // signInGithub : async (req : Request, res : Response, next : NextFunction) => {
+  //   passport.authenticate('github', { scope: [ 'user:email' ]})
+  // }
 };
 
 export default PassportMiddleware;
