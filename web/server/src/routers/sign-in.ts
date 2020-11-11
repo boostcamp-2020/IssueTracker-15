@@ -3,6 +3,7 @@ import Token from "../lib/token";
 import PassportMiddleware from "../middlewares/passport";
 import AuthService from "../services/auth";
 import axios from "axios";
+import UserService from "../services/user.service";
 
 const SignInRouter = express.Router();
 
@@ -45,12 +46,24 @@ SignInRouter.post("/github", async (req: Request, res: Response) => {
         Authorization: `token ${token}`,
       },
     });
+    let user = await UserService.getExistUser(data.login);
+    if (!user) {
+      user = await UserService.create(
+        {
+          email: data.login,
+          password: data.node_id,
+          userName: data.login,
+          imageURL: data.avatar_url,
+        },
+        "github"
+      );
+    }
 
-    const accessToken = Token.getToken(data.email, data.name);
+    const accessToken = Token.getToken(user.email, user.userName);
 
     return res.json({ accessToken });
   } catch (e) {
-    console.log(e.message);
+    res.status(500).json({ error: e.message });
   }
 });
 
