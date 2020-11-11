@@ -24,7 +24,6 @@ SignInRouter.post(
 
 SignInRouter.post("/github", async (req: Request, res: Response) => {
   const { code, type } = req.body;
-  console.log(type, process.env.IOS_CLIENT_ID, process.env.IOS_CLIENT_SECRET);
   try {
     const response = await axios.post(
       "https://github.com/login/oauth/access_token",
@@ -41,7 +40,6 @@ SignInRouter.post("/github", async (req: Request, res: Response) => {
         },
       }
     );
-    console.log(response.data);
     const token = response.data.access_token;
 
     const { data } = await axios.get("https://api.github.com/user", {
@@ -63,7 +61,6 @@ SignInRouter.post("/github", async (req: Request, res: Response) => {
     }
 
     const accessToken = Token.getToken(user.email, user.userName);
-    console.log(accessToken);
     return res.json({
       accessToken,
       user: { id: user.id, userName: user.userName, imageURL: user.imageURL },
