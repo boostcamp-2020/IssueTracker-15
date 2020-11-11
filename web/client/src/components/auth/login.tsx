@@ -12,6 +12,13 @@ function Login() {
         <Button btnName="로그인" />
         <Button btnName="회원가입" />
       </S.WrapBtnForm>
+      <S.GitHubBTN
+        onClick={() => {
+          window.open(
+            "https://github.com/login/oauth/authorize?client_id=bbd8f4faffe4f6f9c9b7&redirect_uri=http://localhost:8080/auth/github"
+          );
+        }}
+      />
     </Fragment>
   );
 }
