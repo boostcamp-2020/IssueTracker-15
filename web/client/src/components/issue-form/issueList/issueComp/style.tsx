@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const IssueComp = styled.div`
   border-top: 1px solid #ced4da;
@@ -48,4 +49,9 @@ export const LabelWrapper = styled.div`
 export const ProfileImageWrapper = styled.div<{ size: number }>`
   position: absolute;
   left: ${(props) => props.size}%;
+`;
+
+export const IssueInfoLink = styled(Link)`
+  text-decoration: none;
+  color: #586069;
 `;
