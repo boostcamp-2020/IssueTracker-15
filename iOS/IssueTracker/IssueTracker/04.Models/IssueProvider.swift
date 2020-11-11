@@ -13,7 +13,7 @@ protocol IssueProvidable: AnyObject {
     func fetchIssues(completion: @escaping ([Issue]?) -> Void)
     func fetchIssues(with filter: IssueFilterable?, completion: @escaping ([Issue]?) -> Void)
     
-    func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion:  @escaping (Issue?) -> Void )
+    func addIssue(title: String, description: String, milestoneID: Int?, completion:  @escaping (Issue?) -> Void )
     func editIssue(id: Int, title: String, description: String, completion:  @escaping (Issue?) -> Void)
     func editTitle(id: Int, title: String, completion: @escaping (Issue?) -> Void)
     func deleteIssue(id: Int, completion: @escaping (Issue?) -> Void)
@@ -28,7 +28,7 @@ protocol IssueProvidable: AnyObject {
     func deleteAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void)
     
-    var users: [String: User] { get }
+    var users: [Int: User] { get }
 }
 
 class IssueProvider: IssueProvidable {
@@ -43,11 +43,16 @@ class IssueProvider: IssueProvidable {
     }
     
     private weak var dataLoader: DataLoadable?
-    private(set) var issues = [Int: Issue]()
-    private(set) var users = [String: User]()
+    private weak var userProvider: UserProvidable?
     
-    init(dataLoader: DataLoadable) {
+    private(set) var issues = [Int: Issue]()
+    var users: [Int: User] {
+        return userProvider?.users ?? [:]
+    }
+    
+    init(dataLoader: DataLoadable, userProvider: UserProvidable) {
         self.dataLoader = dataLoader
+        self.userProvider = userProvider
     }
     
     func fetchIssues(completion: @escaping ([Issue]?) -> Void) {
@@ -67,8 +72,8 @@ class IssueProvider: IssueProvidable {
                 if let issues = Issue.fetchResponse(jsonArr: response.mapJsonArr()) {
                     issues.forEach {
                         self?.issues[$0.id] = $0
-                        self?.users[$0.author.name] = $0.author
-                        $0.assignees.forEach { self?.users[$0.name] = $0 }
+                        self?.userProvider?.users[$0.author.id] = $0.author
+                        $0.assignees.forEach { self?.userProvider?.users[$0.id] = $0 }
                     }
                 }
             }
@@ -107,7 +112,12 @@ class IssueProvider: IssueProvidable {
      Response :
      */
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void) {
-        dataLoader?.request(CommentService.addComment(1, issueNumber, content), callBackQueue: .main, completion: { [weak self] (response) in
+        guard let myId = userProvider?.currentUser?.id else {
+            completion(nil)
+            return
+        }
+        
+        dataLoader?.request(CommentService.addComment(myId, issueNumber, content), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(nil)
@@ -126,8 +136,13 @@ class IssueProvider: IssueProvidable {
     /*
      Response : 201
      */
-    func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.createIssue(title, description, milestoneID, authorID), callBackQueue: .main, completion: { (response) in
+    func addIssue(title: String, description: String, milestoneID: Int?, completion: @escaping (Issue?) -> Void) {
+        guard let myId = userProvider?.currentUser?.id else {
+            completion(nil)
+            return
+        }
+        
+        dataLoader?.request(IssueService.createIssue(title, description, milestoneID, myId), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)
@@ -150,7 +165,7 @@ class IssueProvider: IssueProvidable {
             case .success(let response):
                 if let issue = Issue.getResponse(jsonObject: response.mapJsonObject()) {
                     self?.issues[issue.id] = issue
-                    issue.comments.forEach { self?.users[$0.author.name] = $0.author }
+                    issue.comments.forEach { self?.userProvider?.users[$0.author.id] = $0.author }
                     completion(issue)
                 } else {
                     completion(nil)
@@ -238,7 +253,6 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
-                
                 self.issues[id]?.deleteLabel(id: labelId)
                 completion(self.issues[id])
             }
@@ -283,8 +297,8 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
-                // TODO: response 처리
-                break
+                self.issues[id]?.addAssignee(id: userId)
+                completion(self.issues[id])
             }
         })
     }
@@ -297,8 +311,8 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
-                // TODO response 처리
-                break
+                self.issues[id]?.deleteAssignee(id: userId)
+                completion(self.issues[id])
             }
         })
     }

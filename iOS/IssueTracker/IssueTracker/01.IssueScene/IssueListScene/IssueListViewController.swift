@@ -145,7 +145,6 @@ extension IssueListViewController {
             toGeneralMode()
         case .general:
             AddNewIssueViewController.present(at: self, addType: .newIssue, previousData: nil, onDismiss: { [weak self] (content) in
-                print(content)
                 self?.issueListViewModel?.addNewIssue(title: content[0], description: content[1], authorID: 3)
             })
         }

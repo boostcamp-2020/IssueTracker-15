@@ -11,16 +11,17 @@ import NetworkFramework
 
 class MainTabBarController: UITabBarController {
     
-    private var dataLoader: DataLoadable?
+    private weak var dataLoader: DataLoadable?
+    
     private var labelProvider: LabelProvidable
     private var milestoneProvider: MilestoneProvidable
     private var issueProvider: IssueProvidable
     
-    init?(coder: NSCoder, dataLoader: DataLoadable) {
+    init?(coder: NSCoder, dataLoader: DataLoadable, userProvider: UserProvidable) {
         self.dataLoader = dataLoader
-        self.issueProvider = IssueProvider(dataLoader: dataLoader)
-        self.labelProvider = LabelProvider(dataLoader: dataLoader)
-        self.milestoneProvider = MilestoneProvider(dataLoader: dataLoader)
+        self.issueProvider = IssueProvider(dataLoader: dataLoader, userProvider: userProvider)
+        self.labelProvider = LabelProvider(dataLoader: dataLoader, userProvider: userProvider)
+        self.milestoneProvider = MilestoneProvider(dataLoader: dataLoader, userProvider: userProvider)
         
         super.init(coder: coder)
         
@@ -29,9 +30,10 @@ class MainTabBarController: UITabBarController {
     
     required init?(coder: NSCoder) {
         let dataLoader = DataLoader(session: URLSession.shared)
-        self.issueProvider = IssueProvider(dataLoader: dataLoader)
-        self.labelProvider = LabelProvider(dataLoader: dataLoader)
-        self.milestoneProvider = MilestoneProvider(dataLoader: dataLoader)
+        let userProvider = UserProvider(dataLoader: dataLoader)
+        self.issueProvider = IssueProvider(dataLoader: dataLoader, userProvider: userProvider)
+        self.labelProvider = LabelProvider(dataLoader: dataLoader, userProvider: userProvider)
+        self.milestoneProvider = MilestoneProvider(dataLoader: dataLoader, userProvider: userProvider)
         self.dataLoader = dataLoader
         
         super.init(coder: coder)
@@ -79,11 +81,11 @@ class MainTabBarController: UITabBarController {
 extension MainTabBarController {
     static let storyBoardName = "Main"
     
-    static func createViewController(dataLoader: DataLoadable) -> UIViewController? {
+    static func createViewController(dataLoader: DataLoadable, userProvider: UserProvidable) -> UIViewController? {
         let storyBoard = UIStoryboard(name: storyBoardName, bundle: Bundle.main)
         
         let mainTabBarController = storyBoard.instantiateInitialViewController { (coder) -> UIViewController? in
-            return MainTabBarController(coder: coder, dataLoader: dataLoader)
+            return MainTabBarController(coder: coder, dataLoader: dataLoader, userProvider: userProvider)
         }
         
         return mainTabBarController

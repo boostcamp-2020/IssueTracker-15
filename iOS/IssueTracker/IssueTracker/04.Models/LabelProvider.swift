@@ -32,9 +32,11 @@ class LabelProvider: LabelProvidable {
     
     private(set) var labels = [Int: Label]()
     private weak var dataLoader: DataLoadable?
+    private weak var userProvider: UserProvidable?
     
-    init(dataLoader: DataLoadable) {
+    init(dataLoader: DataLoadable, userProvider: UserProvidable) {
         self.dataLoader = dataLoader
+        self.userProvider = userProvider
     }
     
     func getLabels(of ids: [Int], completion: @escaping ([Label]) -> Void) {

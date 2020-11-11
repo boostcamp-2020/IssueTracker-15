@@ -25,6 +25,7 @@ protocol IssueDetailViewModelProtocol: AnyObject {
     
     var didLabelChanged: (() -> Void)? { get set }
     var didMilestoneChanged: (() -> Void)? { get set }
+    var didAssigneeChanged: (() -> Void)? { get set }
     
     func detailSelectionItemDataSource(of type: DetailSelectionType) -> [[CellComponentViewModel]]
     func detailItemSelected(type: DetailSelectionType, selectedItems: [CellComponentViewModel])
@@ -39,8 +40,8 @@ struct CommentViewModel {
     init(comment: Comment) {
         content = comment.content
         createAt = comment.createAt
-        userName = comment.author.name
-        imageURL = comment.author.imageUrl
+        userName = comment.author.userName
+        imageURL = comment.author.imageURL
     }
 }
 
@@ -50,25 +51,23 @@ protocol UserViewModelProtocol {
 }
 
 struct UserViewModel {
+    let id: Int
     var userName: String
     var imageURL: String?
     
-    init(user: User) {
-        userName = user.name
-        imageURL = user.imageUrl
+    init(user: User? = nil) {
+        self.id = user?.id ?? -1
+        self.userName = user?.userName ?? ""
+        self.imageURL = user?.imageURL
     }
-    
-    init(userName: String, imageURL: String? = nil) {
-        self.userName = userName
-        self.imageURL = imageURL
-    }
+
 }
 
 class IssueDetailViewModel: IssueDetailViewModelProtocol {
     
     var issueNumber: Int = 0
     var title: String = ""
-    var author: UserViewModel = UserViewModel(userName: "")
+    var author: UserViewModel = UserViewModel()
     var didFetch: (() -> Void)?
     var isOpened: Bool = false
     var description: String?
@@ -79,6 +78,7 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     
     var didLabelChanged: (() -> Void)?
     var didMilestoneChanged: (() -> Void)?
+    var didAssigneeChanged: (() -> Void)?
     
     private weak var issueProvider: IssueProvidable?
     private weak var labelProvier: LabelProvidable?
@@ -169,9 +169,10 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         var viewModels: [[CellComponentViewModel]] = [[], []]
         switch type {
         case .assignee, .writer:
+            let assigneeTable = assignees.reduce(into: Set<Int>()) { $0.insert($1.id) }
             issueProvider?.users.forEach {
                 let viewModel = CellComponentViewModel(user: $0.value)
-                viewModels[$0.key == author.userName ? 0 : 1].append(viewModel)
+                viewModels[assigneeTable.contains(viewModel.id) ? 0 : 1].append(viewModel)
             }
         case .label:
             let labelTable = labels.reduce(into: Set<Int>()) { $0.insert($1.id) }
@@ -194,7 +195,7 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         let incomingSet = selectedItems.reduce(into: Set<Int>()) { $0.insert($1.id) }
         switch type {
         case .assignee, .writer:
-            return
+            prevSet = assignees.reduce(into: Set<Int>()) { $0.insert($1.id) }
         case .label:
             prevSet = labels.reduce(into: Set<Int>()) { $0.insert($1.id) }
         case .milestone:
@@ -208,10 +209,15 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         let dispatchGroup = DispatchGroup()
         switch type {
         case .assignee, .writer:
-            return
+            idForRemove.forEach {
+                removeAssignee(of: $0, group: dispatchGroup)
+            }
+            idForAdd.forEach {
+                addAssignee(of: $0, group: dispatchGroup)
+            }
         case .label:
             idForRemove.forEach {
-                deleteLabel(of: $0, group: dispatchGroup)
+                removeLabel(of: $0, group: dispatchGroup)
             }
             idForAdd.forEach {
                 addLabel(of: $0, group: dispatchGroup)
@@ -243,7 +249,7 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         })
     }
     
-    private func deleteLabel(of id: Int, group: DispatchGroup?) {
+    private func removeLabel(of id: Int, group: DispatchGroup?) {
         guard let provider = issueProvider else { return }
         group?.enter()
         provider.deleteLabel(at: issueNumber, of: id, completion: { [weak self] issue in
@@ -271,6 +277,27 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         provider.deleteMilestone(at: issueNumber, completion: { [weak self] issue in
             guard issue != nil else { return }
             self?.milestone = nil
+            group?.leave()
+        })
+    }
+    
+    private func addAssignee(of id: Int, group: DispatchGroup?) {
+        guard let provider = issueProvider else { return }
+        group?.enter()
+        provider.addAsignee(at: issueNumber, userId: id, completion: { [weak self] issue in
+            guard issue !=  nil,
+                let assignee = self?.issueProvider?.users[id] else { return }
+            self?.assignees.append(UserViewModel(user: assignee))
+            group?.leave()
+        })
+    }
+    
+    private func removeAssignee(of id: Int, group: DispatchGroup?) {
+        guard let provider = issueProvider else { return }
+        group?.enter()
+        provider.deleteLabel(at: issueNumber, of: id, completion: { [weak self] issue in
+            guard issue !=  nil else { return }
+            self?.assignees.removeAll(where: {$0.id == id})
             group?.leave()
         })
     }

@@ -32,9 +32,9 @@ struct CellComponentViewModel {
     }
     
     init(user: User) {
-        id = -1
-        title = user.name
-        element = user.imageUrl ?? ""
+        id = user.id
+        title = user.userName
+        element = user.imageURL ?? ""
     }
     
     // TODO:

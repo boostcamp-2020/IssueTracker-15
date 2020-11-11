@@ -192,7 +192,6 @@ extension IssueDetailViewController: BottomSheetViewDelegate {
     
     func addCommentButtonTapped() {
         AddNewIssueViewController.present(at: self, addType: .newComment, previousData: nil, onDismiss: { [weak self] (content) in
-            print(content)
             self?.issueDetailViewModel.addComment(content: content[0])
         })
     }
