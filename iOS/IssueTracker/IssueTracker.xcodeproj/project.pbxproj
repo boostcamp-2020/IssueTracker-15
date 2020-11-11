@@ -47,6 +47,10 @@
 		95E9F5852546EC0C001FBA0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5842546EC0C001FBA0D /* Assets.xcassets */; };
 		95E9F5882546EC0C001FBA0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95E9F5862546EC0C001FBA0D /* LaunchScreen.storyboard */; };
 		95E9F5932546EC0C001FBA0D /* LabelModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */; };
+		95EE227E255BDB060093A14C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE227C255BDB060093A14C /* LoginViewController.swift */; };
+		95EE227F255BDB060093A14C /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95EE227D255BDB060093A14C /* LoginViewController.xib */; };
+		95EE2281255BEA4A0093A14C /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE2280255BEA4A0093A14C /* UserProvider.swift */; };
+		95EE2283255BEAAA0093A14C /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EE2282255BEAAA0093A14C /* AuthService.swift */; };
 		960205612553140500888394 /* DetailSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960205602553140500888394 /* DetailSelectionViewModel.swift */; };
 		9602056325531E1B00888394 /* FilterConditionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9602056225531E1B00888394 /* FilterConditionType.swift */; };
 		960205652553259D00888394 /* IssueFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960205642553259D00888394 /* IssueFilter.swift */; };
@@ -237,6 +241,10 @@
 		95E9F58E2546EC0C001FBA0D /* IssueTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95E9F5922546EC0C001FBA0D /* LabelModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelModelTests.swift; sourceTree = "<group>"; };
 		95E9F5942546EC0C001FBA0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95EE227C255BDB060093A14C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		95EE227D255BDB060093A14C /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		95EE2280255BEA4A0093A14C /* UserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
+		95EE2282255BEAAA0093A14C /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		960205602553140500888394 /* DetailSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelectionViewModel.swift; sourceTree = "<group>"; };
 		9602056225531E1B00888394 /* FilterConditionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConditionType.swift; sourceTree = "<group>"; };
 		960205642553259D00888394 /* IssueFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilter.swift; sourceTree = "<group>"; };
@@ -511,6 +519,7 @@
 			children = (
 				956B5D0425503D20001CBAA9 /* MilestoneService.swift */,
 				956B5D0625503E8A001CBAA9 /* LabelService.swift */,
+				95EE2282255BEAAA0093A14C /* AuthService.swift */,
 				965A4DEF2552CDA900A4A7D7 /* IssueService.swift */,
 				96526C642557043200E2E387 /* CommentService.swift */,
 				96B6E3602556AFCF00D8BABF /* IssueTrackerAPIs.swift */,
@@ -530,6 +539,7 @@
 				960205642553259D00888394 /* IssueFilter.swift */,
 				96B2876F255B793D00CB98ED /* User.swift */,
 				96B28771255B794400CB98ED /* Comment.swift */,
+				95EE2280255BEA4A0093A14C /* UserProvider.swift */,
 			);
 			path = 04.Models;
 			sourceTree = "<group>";
@@ -584,6 +594,7 @@
 				952FF3D1254804120042A96F /* 06.Extensions */,
 				952FF3DA254814650042A96F /* 07.Supports */,
 				956B5D0325503D06001CBAA9 /* 08.Endpoints */,
+				95EE227B255BD9B20093A14C /* 09.LoginScene */,
 			);
 			path = IssueTracker;
 			sourceTree = "<group>";
@@ -596,6 +607,15 @@
 				95E9F5942546EC0C001FBA0D /* Info.plist */,
 			);
 			path = IssueTrackerTests;
+			sourceTree = "<group>";
+		};
+		95EE227B255BD9B20093A14C /* 09.LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+				95EE227C255BDB060093A14C /* LoginViewController.swift */,
+				95EE227D255BDB060093A14C /* LoginViewController.xib */,
+			);
+			path = 09.LoginScene;
 			sourceTree = "<group>";
 		};
 		9602055F255313EC00888394 /* ViewModel */ = {
@@ -1047,6 +1067,7 @@
 				965F098925505B9D00B3A248 /* DetailConditionSelectCellView.xib in Resources */,
 				96400EC0255846A00006726F /* LabelBadgeCellView.xib in Resources */,
 				95E9F5832546EC07001FBA0D /* Main.storyboard in Resources */,
+				95EE227F255BDB060093A14C /* LoginViewController.xib in Resources */,
 				96F95C08254EA70B00EC00C6 /* IssueCellView.xib in Resources */,
 				9679DFB9254D768C00550BE4 /* SubmitFormViewController.xib in Resources */,
 				950EA05D2547FFA0005BE133 /* LabelCellView.xib in Resources */,
@@ -1203,8 +1224,10 @@
 				95C2F89C2547EF47006B3BC6 /* String+Color.swift in Sources */,
 				95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */,
 				966DD02B254A259F00A44FBA /* Array+SafeAccess.swift in Sources */,
+				95EE2281255BEA4A0093A14C /* UserProvider.swift in Sources */,
 				9505446F254AA6E0007767C6 /* UIViewController+ShowAlert.swift in Sources */,
 				95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */,
+				95EE227E255BDB060093A14C /* LoginViewController.swift in Sources */,
 				96A58F55254AA5BC00248F1E /* String+Date.swift in Sources */,
 				95328CC025539C0B004AB911 /* BottomSheetView.swift in Sources */,
 				950EA05C2547FFA0005BE133 /* LabelCellView.swift in Sources */,
@@ -1231,6 +1254,7 @@
 				96F95BFC254E6E4C00EC00C6 /* Issue.swift in Sources */,
 				9508B8202552A3620015C636 /* IssueDetailHeaderView.swift in Sources */,
 				9670B37F2549E9E10026B0C9 /* MainTabBarController.swift in Sources */,
+				95EE2283255BEAAA0093A14C /* AuthService.swift in Sources */,
 				956B5D0725503E8A001CBAA9 /* LabelService.swift in Sources */,
 				95E9F57E2546EC07001FBA0D /* SceneDelegate.swift in Sources */,
 				960205652553259D00888394 /* IssueFilter.swift in Sources */,

@@ -12,16 +12,33 @@ import NetworkFramework
 class MainTabBarController: UITabBarController {
     
     private var dataLoader: DataLoadable?
-    private var labelProvider: LabelProvidable?
-    private var milestoneProvider: MilestoneProvidable?
-    private var issueProvider: IssueProvidable?
+    private var labelProvider: LabelProvidable
+    private var milestoneProvider: MilestoneProvidable
+    private var issueProvider: IssueProvidable
+    
+    init?(coder: NSCoder, dataLoader: DataLoadable) {
+        self.dataLoader = dataLoader
+        self.issueProvider = IssueProvider(dataLoader: dataLoader)
+        self.labelProvider = LabelProvider(dataLoader: dataLoader)
+        self.milestoneProvider = MilestoneProvider(dataLoader: dataLoader)
+        
+        super.init(coder: coder)
+        
+        setupSubViewControllers()
+    }
+    
+    required init?(coder: NSCoder) {
+        let dataLoader = DataLoader(session: URLSession.shared)
+        self.issueProvider = IssueProvider(dataLoader: dataLoader)
+        self.labelProvider = LabelProvider(dataLoader: dataLoader)
+        self.milestoneProvider = MilestoneProvider(dataLoader: dataLoader)
+        self.dataLoader = dataLoader
+        
+        super.init(coder: coder)
+    }
     
     // TODO: 로직분리!
-    func setupSubViewControllers(with dataLoader: DataLoadable) {
-        
-        let issueProvider: IssueProvidable = IssueProvider(dataLoader: dataLoader)
-        let labelProvider: LabelProvidable = LabelProvider(dataLoader: dataLoader)
-        let milestoneProvider: MilestoneProvidable = MilestoneProvider(dataLoader: dataLoader)
+    func setupSubViewControllers() {
         
         let commonAppearance = UINavigationBarAppearance()
         commonAppearance.backgroundColor = .white
@@ -51,15 +68,24 @@ class MainTabBarController: UITabBarController {
             milestoneListViewController.milestoneListViewModel = MilestoneListViewModel(with: milestoneProvider)
         }
         // controllers[3] = SettingViewController
-        
-        self.dataLoader = dataLoader
-        self.labelProvider = labelProvider
-        self.milestoneProvider = milestoneProvider
-        self.issueProvider = issueProvider
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+}
+
+extension MainTabBarController {
+    static let storyBoardName = "Main"
+    
+    static func createViewController(dataLoader: DataLoadable) -> UIViewController? {
+        let storyBoard = UIStoryboard(name: storyBoardName, bundle: Bundle.main)
+        
+        let mainTabBarController = storyBoard.instantiateInitialViewController { (coder) -> UIViewController? in
+            return MainTabBarController(coder: coder, dataLoader: dataLoader)
+        }
+        
+        return mainTabBarController
+    }
 }
