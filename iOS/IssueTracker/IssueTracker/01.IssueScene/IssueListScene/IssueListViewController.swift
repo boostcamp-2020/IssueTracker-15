@@ -216,6 +216,7 @@ extension IssueListViewController {
             else { return }
         let onDismiss = { (generalCondition: [Bool], detailCondition: [Int]) in
             issueListViewModel.filter = IssueFilter(generalCondition: generalCondition, detailCondition: detailCondition)
+            self.collectionView.scrollsToTop = true
         }
         IssueFilterViewController.present(at: self, filterViewModel: issueListViewModel.createFilterViewModel(), onDismiss: onDismiss)
     }
