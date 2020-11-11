@@ -15,10 +15,10 @@ function IssueList() {
         <S.IssueInfo>
           <S.IssueTitle> 제목 </S.IssueTitle>
           <S.LabelWrapper>
-            <Label name="bug" color="pink" />
+            <Label name="FE 💻" color="pink" />
           </S.LabelWrapper>
           <S.LabelWrapper>
-            <Label name="feature" color="blue" />
+            <Label name="Feature 🎨" color="blue" />
           </S.LabelWrapper>
           <S.ProfileImageWrapper size={300}>
             <ProfileImage img="" size={25} />
