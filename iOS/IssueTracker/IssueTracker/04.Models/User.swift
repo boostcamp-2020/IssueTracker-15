@@ -19,6 +19,12 @@ struct User {
         imageUrl = nil
     }
     
+    init(id: Int, name: String, imageUrl: String? = nil) {
+        self.id = id
+        self.name = name
+        self.imageUrl = imageUrl
+    }
+    
     init(name: String, imageUrl: String? = nil) {
         // TODO: userID
         self.id = 0
@@ -27,8 +33,10 @@ struct User {
     }
     
     init?(json: [String: Any]) {
-        guard let name = json["userName"] as? String else { return nil }
-        self.id = 0
+        guard let name = json["userName"] as? String,
+              let id = json["id"] as? Int
+        else { return nil }
+        self.id = id
         self.name = name
         self.imageUrl = json["imageURL"] as? String
     }

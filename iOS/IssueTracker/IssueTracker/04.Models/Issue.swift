@@ -108,7 +108,7 @@ extension Issue {
     init(id: Int,
          title: String,
          description: String? = nil,
-         author: String,
+         author: User,
          isOpened: Bool,
          createdAt: String,
          updatedAt: String,
@@ -118,7 +118,7 @@ extension Issue {
         self.id = id
         self.title = title
         self.description = description
-        self.author = User(name: author)
+        self.author = author
         self.isOpened = isOpened
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -140,7 +140,7 @@ extension Issue {
             let createdAt = jsonObject["createAt"] as? String,
             let updatedAt = jsonObject["updateAt"] as? String,
             let authorObject = jsonObject["author"] as? [String: Any],
-            let author = authorObject["userName"] as? String,
+            let author = User(json: authorObject),
             let labelObjects = jsonObject["labels"] as? [[String: Any]],
             let assigneeObjects = jsonObject["assignees"] as? [[String: Any]]
             else { return nil }
@@ -202,6 +202,7 @@ extension Issue {
             let updateAt = jsonObject["updateAt"] as? String,
             let authorObject = jsonObject["author"] as? [String: Any],
             let authorName = authorObject["userName"] as? String,
+            let authorId = authorObject["id"] as? Int,
             let labelObjects = jsonObject["labels"] as? [[String: Any]],
             let assigneeObjects = jsonObject["assignees"] as? [[String: Any]],
             let commentObjects = jsonObject["comments"] as? [[String: Any]]
@@ -216,7 +217,7 @@ extension Issue {
         let labels = labelObjects.compactMap { $0["id"] as? Int }
         let authorImageUrl = authorObject["imageURL"] as? String
         
-        let author = User(name: authorName, imageUrl: authorImageUrl)
+        let author = User(id: authorId, name: authorName, imageUrl: authorImageUrl)
         let assignees = assigneeObjects.compactMap { User(json: $0) }
         let comments = commentObjects.compactMap { Comment(json: $0) }
         
