@@ -4,8 +4,8 @@ import * as S from "./style";
 interface BtnProps {
   btnName: string;
 }
-function Button(props: BtnProps) {
+function AuthButton(props: BtnProps) {
   return <S.BtnAuth> {props.btnName} </S.BtnAuth>;
 }
 
-export default Button;
+export default AuthButton;
