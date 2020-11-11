@@ -12,6 +12,7 @@ protocol IssueItemViewModelProtocol: AnyObject {
     var id: Int { get }
     var title: String { get }
     var milestoneTitle: String { get }
+    var isOpened: Bool { get }
     var labelItemViewModels: [LabelItemViewModel] { get }
 
     var didMilestoneChanged: ((String) -> Void)? { get set }
@@ -24,6 +25,7 @@ class IssueItemViewModel: IssueItemViewModelProtocol {
     let id: Int
     let title: String
     
+    private(set) var isOpened: Bool
     private(set) var milestoneTitle: String = ""
     private(set) var labelItemViewModels = [LabelItemViewModel]()
     
@@ -35,6 +37,7 @@ class IssueItemViewModel: IssueItemViewModelProtocol {
     init(issue: Issue) {
         id = issue.id
         title = issue.title
+        isOpened = issue.isOpened
     }
     
     func setLabels(labels: [Label]?) {

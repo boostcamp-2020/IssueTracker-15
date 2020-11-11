@@ -10,78 +10,115 @@ import Foundation
 import NetworkFramework
 
 protocol IssueProvidable: AnyObject {
+    func fetchIssues(completion: @escaping ([Issue]?) -> Void)
+    func fetchIssues(with filter: IssueFilterable?, completion: @escaping ([Issue]?) -> Void)
+    
     func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion:  @escaping (Issue?) -> Void )
     func editIssue(id: Int, title: String, description: String, completion:  @escaping (Issue?) -> Void)
     func editTitle(id: Int, title: String, completion: @escaping (Issue?) -> Void)
-    func fetchIssues(completion: @escaping ([Issue]?) -> Void)
+    func deleteIssue(id: Int, completion: @escaping (Issue?) -> Void)
     
     func getIssue(at id: Int, completion: @escaping (Issue?) -> Void)
-    func closeIssue(id: Int, completion: @escaping (Bool) -> Void)
+    func changeIssueState(id: Int, open: Bool, completion: @escaping (Bool) -> Void)
     func addLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void)
     func deleteLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void)
     func addMilestone(at id: Int, of milestone: Int, completion: @escaping (Issue?) -> Void)
     func deleteMilestone(at id: Int, completion: @escaping (Issue?) -> Void)
     func addAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func deleteAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
-    func addComment(issueNumber: Int, content: String, completion: @escaping (Bool) -> Void)
+    func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void)
+    
+    var users: [String: User] { get }
 }
 
 class IssueProvider: IssueProvidable {
     
-    // mock data
-    // TODO: 같은 Fetch 요청이 여러번 들어왔을 겨우 completion을 배열에 넣어두었다 한 패칭에 Completion을 모두 처리해주는 방식으로!
-    private var onFetching: Bool = false
-    private(set) var issues: [Int: Issue] = [ // labels 9 ~ 17 milestone 19, 22, 23, 24, 25, 28, 36
-        1: Issue(id: 1, title: "이슈[1]", description: "ABCDEFGH", labels: [9], milestone: 19, author: "JK", isOpened: true),
-        2: Issue(id: 2, title: "이슈[2]", description: "ABCDEFGH", labels: [10], milestone: 22, author: "JK", isOpened: true),
-        3: Issue(id: 3, title: "이슈[3]", description: "ABCDEFGH", labels: [11], milestone: 23, author: "JK", isOpened: true),
-        4: Issue(id: 4, title: "이슈[4]", description: "ABCDEFGH", labels: [12], milestone: 24, author: "JK", isOpened: true),
-        5: Issue(id: 5, title: "이슈[5]", description: "ABCDEFGH", labels: [13], milestone: 25, author: "JK", isOpened: true),
-        6: Issue(id: 6, title: "이슈[6]", description: "ABCDEFGH", labels: [14], milestone: 28, author: "JK", isOpened: true),
-        7: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        8: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        9: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        10: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        11: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        12: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        13: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true),
-        14: Issue(id: 7, title: "이슈[7]", description: "ABCDEFGH", labels: [15], milestone: 36, author: "JK", isOpened: true)
-    ]
+    private var lastUpdated: Date?
+    private var needFetch: Bool {
+        guard let lastUpdated = self.lastUpdated else { return true }
+        let current = Date()
+        let duration = Int(current.timeIntervalSince(lastUpdated))
+        // TODO: default 시간 차 구하기
+        return duration > 60 * 1
+    }
+    
     private weak var dataLoader: DataLoadable?
+    private(set) var issues = [Int: Issue]()
+    private(set) var users = [String: User]()
     
     init(dataLoader: DataLoadable) {
         self.dataLoader = dataLoader
     }
     
     func fetchIssues(completion: @escaping ([Issue]?) -> Void) {
-        onFetching = true
-
-        dataLoader?.request(IssueService.fetchAll(true), callBackQueue: .main, completion: { (response) in
+        if !needFetch {
+            completion(issues.map { $0.value })
+            return
+        }
+        issues.removeAll()
+        
+        let group = DispatchGroup()
+        
+        let fetchWork: NetworkFramework.Completion = { [weak self] (response) in
             switch response {
             case .failure:
-                completion(nil)
+                break
             case .success(let response):
                 if let issues = Issue.fetchResponse(jsonArr: response.mapJsonArr()) {
-                    completion(issues)
-                    self.issues = issues.reduce(into: [:]) { $0[$1.id] = $1 }
+                    issues.forEach {
+                        self?.issues[$0.id] = $0
+                        self?.users[$0.author.name] = $0.author
+                        $0.assignees.forEach { self?.users[$0.name] = $0 }
+                    }
                 }
             }
-        })
-
-        // completion(issues)
-        onFetching = false
+            group.leave()
+        }
+        
+        group.enter()
+        dataLoader?.request(IssueService.fetchAll(true), callBackQueue: .global(), completion: fetchWork)
+        group.enter()
+        dataLoader?.request(IssueService.fetchAll(false), callBackQueue: .global(), completion: fetchWork)
+        
+        group.notify(queue: .main) { [weak self] in
+            self?.lastUpdated = Date()
+            completion(self?.issues.map { $0.value })
+        }
+    }
+    
+    func fetchIssues(with filter: IssueFilterable?, completion: @escaping ([Issue]?) -> Void) {
+        let filterWork: ([Issue]?) -> Void = { [weak self] issues in
+            guard let `self` = self else {
+                completion([])
+                return
+            }
+            let issueDummy = issues ?? self.issues.map { $0.value }
+            completion(filter?.filter(datas: issueDummy))
+        }
+        
+        if needFetch {
+            fetchIssues(completion: filterWork)
+        } else {
+            filterWork(issues.map { $0.value })
+        }
     }
     
     /*
      Response :
      */
-    func addComment(issueNumber: Int, content: String, completion: @escaping (Bool) -> Void) {
-        dataLoader?.request(CommentService.addComment(1, issueNumber, content), callBackQueue: .main, completion: { (response) in
+    func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void) {
+        dataLoader?.request(CommentService.addComment(1, issueNumber, content), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
-                completion(false)
-            case .success:
-                completion(true)
+                completion(nil)
+            case .success(let response):
+                guard let comment = Comment.addResponse(json: response.mapJsonObject())
+                    else {
+                        completion(nil)
+                        return
+                }
+                self?.issues[issueNumber]?.comments.append(comment)
+                completion(comment)
             }
         })
     }
@@ -106,25 +143,42 @@ class IssueProvider: IssueProvidable {
      Response: 200
      */
     func getIssue(at id: Int, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.getIssue(id), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.getIssue(id), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success(let response):
                 if let issue = Issue.getResponse(jsonObject: response.mapJsonObject()) {
+                    self?.issues[issue.id] = issue
+                    issue.comments.forEach { self?.users[$0.author.name] = $0.author }
                     completion(issue)
+                } else {
+                    completion(nil)
                 }
             }
         })
     }
     
-    func closeIssue(id: Int, completion: @escaping (Bool) -> Void) {
-        dataLoader?.request(IssueService.editIssue(id, nil, nil, false), callBackQueue: .main, completion: { (response) in
+    func changeIssueState(id: Int, open: Bool, completion: @escaping (Bool) -> Void) {
+        dataLoader?.request(IssueService.editIssue(id, nil, nil, open), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(false)
             case .success:
+                self?.issues[id]?.isOpened = open
                 completion(true)
+            }
+        })
+    }
+    
+    func deleteIssue(id: Int, completion: @escaping (Issue?) -> Void) {
+        dataLoader?.request(IssueService.delete(id), callBackQueue: .main, completion: { [weak self] (response) in
+            switch response {
+            case .failure:
+                completion(nil)
+            case .success:
+                let issue = self?.issues.removeValue(forKey: id)
+                completion(issue)
             }
         })
     }
@@ -184,6 +238,7 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
+                
                 self.issues[id]?.deleteLabel(id: labelId)
                 completion(self.issues[id])
             }
@@ -209,13 +264,13 @@ class IssueProvider: IssueProvidable {
      response: 204
      */
     func deleteMilestone(at id: Int, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.deleteMilestone(id, 0), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(IssueService.deleteMilestone(id, 0), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success:
-                self.issues[id]?.deleteMilestone()
-                completion(self.issues[id])
+                self?.issues[id]?.deleteMilestone()
+                completion(self?.issues[id])
             }
         })
     }

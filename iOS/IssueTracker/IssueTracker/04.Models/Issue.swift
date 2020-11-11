@@ -88,6 +88,18 @@ struct Issue {
     
 }
 
+// MARK: - Hashable
+
+extension Issue: Hashable {
+    static func == (lhs: Issue, rhs: Issue) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
 // MARK: - Parse From API Response
 
 extension Issue {
@@ -170,7 +182,7 @@ extension Issue {
             let updateAt = jsonObject["updateAt"] as? String,
             let authorId = jsonObject["authorId"] as? Int
             else { return nil }
-    
+        
         let milestoneId = jsonObject["milestoneId"] as? Int
         var description: String?
         if let desc = (jsonObject["description"] as? String) {
@@ -233,51 +245,5 @@ extension Issue {
         self.labels = labels
         self.assignees = assignees
         self.comments = comments
-    }
-}
-
-// TODO: User DataModel
-struct User {
-    let name: String
-    let imageUrl: String?
-    
-    init(id: Int) {
-        name = String(id)
-        imageUrl = nil
-    }
-    
-    init(name: String, imageUrl: String? = nil) {
-        self.name = name
-        self.imageUrl = imageUrl
-    }
-    
-    init?(json: [String: Any]) {
-        guard let name = json["userName"] as? String else { return nil }
-        self.name = name
-        self.imageUrl = json["imageURL"] as? String
-    }
-}
-
-// TODO: Comment DataModel? <- 그냥 이슈가 들고있는게 좋나?
-struct Comment {
-    let content: String
-    let createAt: String
-    let author: User
-    
-    init(content: String, user: User) {
-        self.content = content
-        self.createAt = ""
-        self.author = user
-    }
-    
-    init?(json: [String: Any]) {
-        guard let content = json["content"] as? String,
-            let createAt = json["createAt"] as? String,
-            let userObject = json["user"] as? [String: Any],
-            let user = User(json: userObject)
-            else { return nil }
-        self.content = content
-        self.createAt = createAt
-        self.author = user
     }
 }

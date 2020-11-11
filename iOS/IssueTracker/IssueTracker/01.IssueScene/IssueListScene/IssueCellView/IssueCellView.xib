@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -47,20 +48,20 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R8Z-t0-U66" userLabel="mainContent">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="192"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-pc-tFP" userLabel="title">
-                                                <rect key="frame" x="15" y="10" width="59.5" height="30"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="748" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-pc-tFP" userLabel="title">
+                                                <rect key="frame" x="41" y="10" width="165" height="26"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ig-WN-dKN" userLabel="milestone" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
-                                                <rect key="frame" x="355" y="14.5" width="44" height="21.5"/>
+                                                <rect key="frame" x="355" y="12" width="44" height="21.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Kmn-zW-86B">
-                                                <rect key="frame" x="15" y="46" width="319" height="141"/>
+                                                <rect key="frame" x="10" y="43.5" width="354" height="143.5"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="5" minimumInteritemSpacing="4" id="Xch-51-Jf9">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -69,18 +70,28 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                             </collectionView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exclamationmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Cka-IR-OVE">
+                                                <rect key="frame" x="10" y="13" width="20.5" height="19.5"/>
+                                                <color key="tintColor" name="OpenIssueBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="Cka-IR-OVE" secondAttribute="height" multiplier="1:1" id="NqH-Dg-VrL"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Kmn-zW-86B" secondAttribute="bottom" constant="5" id="8sN-dc-pnA"/>
                                             <constraint firstItem="0Ig-WN-dKN" firstAttribute="centerY" secondItem="Ikc-pc-tFP" secondAttribute="centerY" id="AZv-ZN-uPG"/>
-                                            <constraint firstItem="Ikc-pc-tFP" firstAttribute="leading" secondItem="R8Z-t0-U66" secondAttribute="leading" constant="15" id="MZD-b8-cTd"/>
-                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="trailing" constant="20" id="NWN-kr-ZA2"/>
+                                            <constraint firstItem="Cka-IR-OVE" firstAttribute="centerY" secondItem="Ikc-pc-tFP" secondAttribute="centerY" id="LLI-Ji-rEk"/>
+                                            <constraint firstItem="Ikc-pc-tFP" firstAttribute="leading" secondItem="Cka-IR-OVE" secondAttribute="trailing" constant="10" id="MZD-b8-cTd"/>
+                                            <constraint firstItem="0Ig-WN-dKN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="trailing" constant="10" id="NWN-kr-ZA2"/>
+                                            <constraint firstItem="Kmn-zW-86B" firstAttribute="leading" secondItem="R8Z-t0-U66" secondAttribute="leading" constant="10" id="Ouy-Ov-TpG"/>
                                             <constraint firstAttribute="trailing" secondItem="0Ig-WN-dKN" secondAttribute="trailing" constant="15" id="gpr-1e-lf0"/>
                                             <constraint firstItem="Kmn-zW-86B" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Ikc-pc-tFP" secondAttribute="bottom" constant="5" id="if2-fg-gN0"/>
+                                            <constraint firstItem="Cka-IR-OVE" firstAttribute="width" secondItem="R8Z-t0-U66" secondAttribute="width" multiplier="0.05" id="mVc-wU-JRp"/>
                                             <constraint firstItem="Kmn-zW-86B" firstAttribute="top" secondItem="0Ig-WN-dKN" secondAttribute="bottom" constant="10" id="vvg-DU-nbx"/>
-                                            <constraint firstItem="Kmn-zW-86B" firstAttribute="leading" secondItem="Ikc-pc-tFP" secondAttribute="leading" id="x2e-F0-yYo"/>
-                                            <constraint firstAttribute="trailing" secondItem="Kmn-zW-86B" secondAttribute="trailing" constant="80" id="yCF-Gf-oAg"/>
+                                            <constraint firstAttribute="trailing" secondItem="Kmn-zW-86B" secondAttribute="trailing" constant="50" id="yCF-Gf-oAg"/>
+                                            <constraint firstItem="Cka-IR-OVE" firstAttribute="leading" secondItem="R8Z-t0-U66" secondAttribute="leading" constant="10" id="yyp-yd-DOf"/>
                                             <constraint firstItem="Ikc-pc-tFP" firstAttribute="top" secondItem="R8Z-t0-U66" secondAttribute="top" constant="10" id="zfI-bt-iTJ"/>
                                         </constraints>
                                     </view>
@@ -161,11 +172,13 @@
                 <outlet property="cellHorizontalScrollView" destination="YEo-pC-kZI" id="FTZ-IO-Xjq"/>
                 <outlet property="checkBoxButton" destination="AAN-XX-dal" id="QHJ-gC-vfP"/>
                 <outlet property="checkBoxGuideView" destination="Xnl-RV-xeJ" id="pM6-Gc-qd3"/>
+                <outlet property="closeBoxButton" destination="WSs-W9-8Rt" id="TCJ-SW-PW5"/>
                 <outlet property="closeBoxGuideView" destination="XRe-PE-geQ" id="8FI-B3-OQw"/>
                 <outlet property="deleteBoxGuideView" destination="xNn-Jb-haT" id="Bqy-iT-38k"/>
                 <outlet property="labelCollectionView" destination="Kmn-zW-86B" id="AyF-ut-CBp"/>
                 <outlet property="mainContentGuideView" destination="R8Z-t0-U66" id="6V4-E2-2eB"/>
                 <outlet property="milestoneBadge" destination="0Ig-WN-dKN" id="3Et-lC-TC8"/>
+                <outlet property="statusImage" destination="Cka-IR-OVE" id="Sea-wa-0bc"/>
                 <outlet property="titleLabel" destination="Ikc-pc-tFP" id="TxB-o0-gHO"/>
             </connections>
             <point key="canvasLocation" x="169.56521739130437" y="453.34821428571428"/>
@@ -174,5 +187,9 @@
     <resources>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="circle" catalog="system" width="128" height="121"/>
+        <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
+        <namedColor name="OpenIssueBackgroundColor">
+            <color red="0.32499998807907104" green="0.6470000147819519" blue="0.31799998879432678" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>

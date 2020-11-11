@@ -131,9 +131,11 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     }
     
     func addComment(content: String) {
-        issueProvider?.addComment(issueNumber: self.issueNumber, content: content) { [weak self] (response) in
-            guard let `self` = self, response else { return }
-            self.comments.append(CommentViewModel(comment: Comment(content: content, user: User(id: 1))))
+        issueProvider?.addComment(issueNumber: self.issueNumber, content: content) { [weak self] (comment) in
+            guard let `self` = self,
+                let comment = comment
+                else { return }
+            self.comments.append(CommentViewModel(comment: comment))
             self.didFetch?()
         }
     }
@@ -163,19 +165,14 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         })
     }
     
-    private var mockUserInfo = [
-        CellComponentViewModel(title: "SHIVVVPP", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "유시형", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "namda-on", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "moaikang", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "maong0927", element: "2020-08-11T00:00:00.000Z")
-    ]
     func detailSelectionItemDataSource(of type: DetailSelectionType) -> [[CellComponentViewModel]] {
         var viewModels: [[CellComponentViewModel]] = [[], []]
         switch type {
         case .assignee, .writer:
-            // TODO: UserInfoProvider 구현
-            viewModels = [ [], mockUserInfo  ]
+            issueProvider?.users.forEach {
+                let viewModel = CellComponentViewModel(user: $0.value)
+                viewModels[$0.key == author.userName ? 0 : 1].append(viewModel)
+            }
         case .label:
             let labelTable = labels.reduce(into: Set<Int>()) { $0.insert($1.id) }
             
@@ -208,52 +205,73 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         
         let idForRemove = prevSet.subtracting(incomingSet)
         let idForAdd = incomingSet.subtracting(prevSet)
-        
+        let dispatchGroup = DispatchGroup()
         switch type {
         case .assignee, .writer:
             return
         case .label:
-            idForRemove.forEach { deleteLabel(of: $0)}
-            idForAdd.forEach { addLabel(of: $0)  }
+            idForRemove.forEach {
+                deleteLabel(of: $0, group: dispatchGroup)
+            }
+            idForAdd.forEach {
+                addLabel(of: $0, group: dispatchGroup)
+            }
         case .milestone:
-            if idForAdd.isEmpty && !idForRemove.isEmpty { removeMilestone() }
-            idForAdd.forEach { addMilestone(of: $0) }
+            if idForAdd.isEmpty && !idForRemove.isEmpty {
+                removeMilestone(group: dispatchGroup)
+            }
+            idForAdd.forEach {
+                addMilestone(of: $0, group: dispatchGroup)
+            }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.didLabelChanged?()
+            self.didMilestoneChanged?()
         }
     }
     
-    private func addLabel(of id: Int) {
-        self.issueProvider?.addLabel(at: issueNumber, of: id, completion: { [weak self] issue in
+    private func addLabel(of id: Int, group: DispatchGroup?) {
+        guard let provider = issueProvider else { return }
+        group?.enter()
+        provider.addLabel(at: issueNumber, of: id, completion: { [weak self] issue in
             guard issue !=  nil,
                 let label = self?.labelProvier?.labels[id]
                 else { return }
             self?.labels.append(LabelItemViewModel(label: label))
-            self?.didLabelChanged?()
+            group?.leave()
         })
     }
     
-    private func deleteLabel(of id: Int) {
-        self.issueProvider?.deleteLabel(at: issueNumber, of: id, completion: { [weak self] issue in
+    private func deleteLabel(of id: Int, group: DispatchGroup?) {
+        guard let provider = issueProvider else { return }
+        group?.enter()
+        provider.deleteLabel(at: issueNumber, of: id, completion: { [weak self] issue in
             if issue == nil { return }
             self?.labels.removeAll(where: {$0.id == id})
-            self?.didLabelChanged?()
+            group?.leave()
         })
     }
     
-    private func addMilestone(of id: Int) {
-        self.issueProvider?.addMilestone(at: issueNumber, of: id, completion: { [weak self] issue in
+    private func addMilestone(of id: Int, group: DispatchGroup?) {
+        guard let provider = issueProvider else { return }
+        group?.enter()
+        provider.addMilestone(at: issueNumber, of: id, completion: { [weak self] issue in
             guard issue !=  nil,
                 let milestone = self?.milestoneProvider?.milestons[id]
                 else { return }
             self?.milestone = MilestoneItemViewModel(milestone: milestone, from: .fromServer)
-            self?.didMilestoneChanged?()
+            group?.leave()
         })
     }
     
-    private func removeMilestone() {
-        self.issueProvider?.deleteMilestone(at: issueNumber, completion: { [weak self] issue in
+    private func removeMilestone(group: DispatchGroup?) {
+        guard let provider = issueProvider else { return }
+        group?.enter()
+        provider.deleteMilestone(at: issueNumber, completion: { [weak self] issue in
             guard issue != nil else { return }
             self?.milestone = nil
-            self?.didMilestoneChanged?()
+            group?.leave()
         })
     }
 }

@@ -8,24 +8,34 @@
 import Foundation
 
 protocol IssueListViewModelProtocol: AnyObject {
-    var didFetch: (([IssueItemViewModel]) -> Void)? { get set }
-    var invalidateLayout: (() -> Void)? { get set }
+    
+    // For Presentation
+    var didItemChanged: (([IssueItemViewModel]) -> Void)? { get set }
     var didCellChecked: ((IndexPath, Bool) -> Void)? { get set }
     var showTitleWithCheckNum: ((Int) -> Void)? { get set }
     var filter: IssueFilterable? { get set }
     var issues: [IssueItemViewModel] { get }
+    
+    // For Events
     func needFetchItems()
     
     func selectCell(at path: IndexPath)
     func clearSelectedCells()
     func selectAllCells()
     
-    func closeSelectedIssue(at paths: [IndexPath])
+    func closeIssue(of id: Int)
+    func closeSelectedIssue()
+    func deleteIssue(of id: Int)
     
+    func addNewIssue(title: String, description: String, authorID: Int)
+    
+    // For Search
+    func onSearch(text: String?)
+    
+    // For SubViewModels
     func createFilterViewModel() -> IssueFilterViewModelProtocol?
     func createIssueDetailViewModel(path: IndexPath) -> IssueDetailViewModel?
     
-    func addNewIssue(title: String, description: String, authorID: Int)
 }
 
 class IssueListViewModel: IssueListViewModelProtocol {
@@ -34,24 +44,37 @@ class IssueListViewModel: IssueListViewModelProtocol {
     private weak var milestoneProvider: MilestoneProvidable?
     private weak var issueProvider: IssueProvidable?
     
-    var filter: IssueFilterable?
-    var didFetch: (([IssueItemViewModel]) -> Void)?
-    var invalidateLayout: (() -> Void)?
+    var didItemChanged: (([IssueItemViewModel]) -> Void)?
     var showTitleWithCheckNum: ((Int) -> Void)?
     var didCellChecked: ((IndexPath, Bool) -> Void)?
     
     private(set) var issues = [IssueItemViewModel]()
+    var filter: IssueFilterable? {
+        didSet {
+            needFetchItems()
+        }
+    }
     
-    init(labelProvider: LabelProvidable, milestoneProvider: MilestoneProvidable, issueProvider: IssueProvidable) {
+    init(labelProvider: LabelProvidable, milestoneProvider: MilestoneProvidable, issueProvider: IssueProvidable, issueFilter: IssueFilterable? = IssueFilter()) {
         self.labelProvider = labelProvider
         self.milestoneProvider = milestoneProvider
         self.issueProvider = issueProvider
+        self.filter = issueFilter
     }
     
-    func needFetchItems() {
-        issueProvider?.fetchIssues(completion: { [weak self] (datas) in
+}
+
+// MARK: - Request Provider
+
+extension IssueListViewModel {
+    
+    private func requestFetchIssues() {
+        let group = DispatchGroup()
+        group.enter()
+        
+        issueProvider?.fetchIssues(with: filter, completion: { [weak self] (issues) in
             guard let `self` = self,
-                let issues = datas
+                let issues = issues
                 else { return }
             
             self.issues.removeAll()
@@ -59,25 +82,77 @@ class IssueListViewModel: IssueListViewModelProtocol {
             issues.forEach {
                 let itemViewModel = IssueItemViewModel(issue: $0)
                 self.issues.append(itemViewModel)
-                self.labelProvider?.getLabels(of: $0.labels, completion: { [weak itemViewModel] (labels) in
-                    itemViewModel?.setLabels(labels: labels)
-                    self.invalidateLayout?()
-                })
-                
-                if let milestoneID = $0.milestone {
-                    self.milestoneProvider?.getMilestone(at: milestoneID, completion: { [weak itemViewModel] milestone in
-                        itemViewModel?.setMilestone(milestone: milestone)
-                        self.invalidateLayout?()
-                    })
-                }
+                self.requestFetchLabels(of: $0, to: itemViewModel, group: group)
+                self.requestFetchMilestones(of: $0, to: itemViewModel, group: group)
             }
             
-            self.didFetch?(self.issues)
+            group.leave()
+        })
+        
+        group.notify(queue: .main) { [weak self] in
+            guard let `self` = self else { return }
+            self.didItemChanged?(self.issues)
+        }
+    }
+    
+    private func requestFetchLabels(of issue: Issue, to issueItem: IssueItemViewModel, group: DispatchGroup? = nil) {
+        guard let provider = labelProvider else { return }
+        
+        group?.enter()
+        provider.getLabels(of: issue.labels, completion: { [weak issueItem] (labels) in
+            issueItem?.setLabels(labels: labels)
+            group?.leave()
         })
     }
     
-    func closeSelectedIssue(at paths: [IndexPath]) {
+    private func requestFetchMilestones(of issue: Issue, to issueItem: IssueItemViewModel, group: DispatchGroup? = nil) {
+        guard let milestoneID = issue.milestone,
+            let provider = milestoneProvider
+        else { return }
+        group?.enter()
         
+        provider.getMilestone(at: milestoneID, completion: { [weak issueItem] milestone in
+            issueItem?.setMilestone(milestone: milestone)
+            group?.leave()
+        })
+    }
+    
+    private func requestChangeIssueState(of issueItems: [IssueItemViewModel], open: Bool) {
+        guard let provider = issueProvider else { return }
+        let group = DispatchGroup()
+        
+        issueItems.forEach {
+            group.enter()
+            provider.changeIssueState(id: $0.id, open: open) { _ in
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            self?.needFetchItems()
+        }
+    }
+    
+    private func requestDeleteIssue(of id: Int) {
+        issueProvider?.deleteIssue(id: id, completion: { [weak self] _ in
+            self?.needFetchItems()
+        })
+    }
+    
+    private func filterToSearch(text: String?) {
+        filter?.searchText = (text ?? "").isEmpty ? nil : text!
+        issueProvider?.fetchIssues(with: filter, completion: { [weak self] _ in
+            self?.needFetchItems()
+        })
+    }
+}
+
+// MARK: - View Event
+
+extension IssueListViewModel {
+    
+    func needFetchItems() {
+        requestFetchIssues()
     }
     
     func selectCell(at path: IndexPath) {
@@ -102,6 +177,39 @@ class IssueListViewModel: IssueListViewModelProtocol {
         showTitleWithCheckNum?(issues.filter { $0.checked }.count)
     }
     
+    func addNewIssue(title: String, description: String, authorID: Int) {
+        issueProvider?.addIssue(title: title, description: description, authorID: authorID, milestoneID: nil) { [weak self] (createdIssue) in
+            guard let `self` = self,
+                let createdIssue = createdIssue
+                else { return }
+            self.issues.append(IssueItemViewModel(issue: createdIssue))
+            self.didItemChanged?(self.issues)
+        }
+    }
+    
+    func closeIssue(of id: Int) {
+        guard let item = issues.first(where: { $0.id == id }) else { return }
+        requestChangeIssueState(of: [item], open: !item.isOpened)
+    }
+    
+    func closeSelectedIssue() {
+        let issueItems = issues.filter { $0.checked }
+        requestChangeIssueState(of: issueItems, open: false)
+    }
+    
+    func deleteIssue(of id: Int) {
+        requestDeleteIssue(of: id)
+    }
+    
+    func onSearch(text: String?) {
+        filterToSearch(text: text)
+    }
+}
+
+// MARK: - SubViewModels
+
+extension IssueListViewModel {
+    
     func createFilterViewModel() -> IssueFilterViewModelProtocol? {
         let generalConditions = filter?.generalConditions ?? [Bool](repeating: false, count: Condition.allCases.count)
         let detailConditions = filter?.detailConditions ?? [Int](repeating: -1, count: DetailSelectionType.allCases.count)
@@ -122,13 +230,4 @@ class IssueListViewModel: IssueListViewModelProtocol {
                                     milestoneProvider: milestoneProvider)
     }
     
-    func addNewIssue(title: String, description: String, authorID: Int) {
-        issueProvider?.addIssue(title: title, description: description, authorID: authorID, milestoneID: nil) { [weak self] (createdIssue) in
-            guard let `self` = self,
-                let createdIssue = createdIssue
-                else { return }
-            self.issues.append(IssueItemViewModel(issue: createdIssue))
-            self.didFetch?(self.issues)
-        }
-    }
 }

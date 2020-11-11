@@ -8,6 +8,8 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, IssueItemViewModel>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, IssueItemViewModel>
     
     enum ViewingMode {
         case general
@@ -18,7 +20,6 @@ class IssueListViewController: UIViewController {
     @IBOutlet weak var leftNavButton: UIBarButtonItem!
     @IBOutlet weak var floatingButton: UIButton!
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, IssueItemViewModel>
     @IBOutlet weak var collectionView: UICollectionView!
     private lazy var dataSource = makeDataSource()
     
@@ -30,15 +31,12 @@ class IssueListViewController: UIViewController {
     
     var issueListViewModel: IssueListViewModelProtocol? {
         didSet {
-            issueListViewModel?.didFetch = { [weak self] issueItems in
+            issueListViewModel?.didItemChanged = { [weak self] issueItems in
                 guard let `self` = self else { return }
-                var snapShot = NSDiffableDataSourceSnapshot<Int, IssueItemViewModel>()
+                var snapShot = SnapShot()
                 snapShot.appendSections([0])
                 snapShot.appendItems(issueItems)
                 self.dataSource.apply(snapShot)
-            }
-            issueListViewModel?.invalidateLayout = { [weak self] in
-                self?.collectionView.collectionViewLayout.invalidateLayout()
             }
             issueListViewModel?.didCellChecked = { [weak self] (indexPath, check) in
                 guard let cell = self?.collectionView.cellForItem(at: indexPath) as? IssueCellView else { return }
@@ -57,6 +55,8 @@ class IssueListViewController: UIViewController {
         configureCollectionView()
         floatingButtonAspectRatioConstraint.isActive = true
         navigationController?.isToolbarHidden = true
+        floatingButton.layoutSubviews()
+        floatingButton.layer.cornerRadius = floatingButton.bounds.height / 2 * 1
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,23 +69,19 @@ class IssueListViewController: UIViewController {
         issueListViewModel?.needFetchItems()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        floatingButton.layer.cornerRadius = floatingButton.bounds.height / 2 * 1
-    }
-    
-    // TODO: SerachBar Configure
     private func configureSearchBar() {
-        navigationItem.searchController = UISearchController(searchResultsController: nil)
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.definesPresentationContext = true
+        navigationItem.searchController = searchController
     }
     
     private func configureCollectionView() {
         setupCollectionViewLayout()
         collectionView.registerCell(type: IssueCellView.self)
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didSelectCell(_:)))
         self.collectionView.addGestureRecognizer(tap)
-        self.collectionView.isUserInteractionEnabled = true
     }
     
     private func setupCollectionViewLayout() {
@@ -101,6 +97,8 @@ class IssueListViewController: UIViewController {
                                     cellProvider: { (collectionView, indexPath, issueItem) -> UICollectionViewCell? in
                                         guard let cell: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return nil }
                                         cell.configure(issueItemViewModel: issueItem)
+                                        cell.showCheckBox(show: self.viewingMode == .edit, animation: false)
+                                        cell.delegate = self
                                         return cell
                                     })
         return dataSource
@@ -114,7 +112,6 @@ extension IssueListViewController {
     
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
         guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) else { return }
-        
         switch viewingMode {
         case .general:
             presentIssueDetailViewController(indexPath: indexPath)
@@ -144,7 +141,8 @@ extension IssueListViewController {
     @IBAction func floatingButtonTapped(_ sender: Any) {
         switch viewingMode {
         case .edit:
-            break
+            issueListViewModel?.closeSelectedIssue()
+            toGeneralMode()
         case .general:
             AddNewIssueViewController.present(at: self, addType: .newIssue, previousData: nil, onDismiss: { [weak self] (content) in
                 print(content)
@@ -218,6 +216,7 @@ extension IssueListViewController {
             else { return }
         let onDismiss = { (generalCondition: [Bool], detailCondition: [Int]) in
             issueListViewModel.filter = IssueFilter(generalCondition: generalCondition, detailCondition: detailCondition)
+            self.collectionView.scrollsToTop = true
         }
         IssueFilterViewController.present(at: self, filterViewModel: issueListViewModel.createFilterViewModel(), onDismiss: onDismiss)
     }
@@ -226,9 +225,7 @@ extension IssueListViewController {
         guard let issueListViewModel = issueListViewModel,
             let issueDetailViewModel = issueListViewModel.createIssueDetailViewModel(path: indexPath)
             else { return }
-        
         let issueDetailVC = IssueDetailViewController.createViewController(issueDetailViewModel: issueDetailViewModel)
-        
         self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
     
@@ -239,11 +236,11 @@ extension IssueListViewController {
 extension IssueListViewController: IssucCellViewDelegate {
     
     func closeIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int) {
-        
+        issueListViewModel?.closeIssue(of: id)
     }
     
     func deleteIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int) {
-        
+        issueListViewModel?.deleteIssue(of: id)
     }
     
     func issueCellViewBeginDragging(_ issueCellView: IssueCellView, at id: Int) {
@@ -253,6 +250,16 @@ extension IssueListViewController: IssucCellViewDelegate {
                 cell.cellHorizontalScrollView.contentOffset = CGPoint.zero
             }
         }
+    }
+    
+}
+
+// MARK: - UISearchController Implementation
+
+extension IssueListViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        issueListViewModel?.onSearch(text: searchController.searchBar.searchTextField.text)
     }
     
 }

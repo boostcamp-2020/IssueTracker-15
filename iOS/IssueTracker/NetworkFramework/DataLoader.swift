@@ -41,17 +41,12 @@ public class DataLoader: DataLoadable {
             completion(.failure(error))
             return
         }
-        print(endPoint.url)
-        print(endPoint.method)
-        print("HTTPBody : \(try? JSONSerialization.jsonObject(with: urlRequest.httpBody ?? Data(), options: []))")
-        
         let completionHandler: RequestCompletion = { ( data, response, error) in
             let result = Response.convertToResponse(response: response, request: urlRequest, data: data, error: error)
             
             switch result {
             case .success(let response):
-                print("mapJsonObject: \(response.mapJsonObject())")
-                print("mapJsonArr: \(response.mapJsonArr())")
+                print(response.debugDescription)
             case .failure(let error):
                 print("response fail with : \(error)")
             }
