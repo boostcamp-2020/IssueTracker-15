@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const FilterBar = styled.div`
-  width: 100%;
+  width: 98%;
   display: flex;
   margin: 1%;
   justify-content: space-between;
@@ -42,4 +43,17 @@ export const FilterContainer = styled.div`
   background-color: #fafbfc;
   color: #24292e;
   display: flex;
+`;
+
+export const MilestoneLink = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  justify-contents: center;
+  width: 15%;
+`;
+
+export const LabelLink = styled(Link)`
+  text-decoration: none;
+  justify-contents: center;
+  width: 10%;
 `;
