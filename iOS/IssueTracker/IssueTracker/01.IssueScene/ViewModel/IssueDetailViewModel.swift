@@ -131,9 +131,11 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     }
     
     func addComment(content: String) {
-        issueProvider?.addComment(issueNumber: self.issueNumber, content: content) { [weak self] (response) in
-            guard let `self` = self, response else { return }
-            self.comments.append(CommentViewModel(comment: Comment(content: content, user: User(id: 1))))
+        issueProvider?.addComment(issueNumber: self.issueNumber, content: content) { [weak self] (comment) in
+            guard let `self` = self,
+                let comment = comment
+                else { return }
+            self.comments.append(CommentViewModel(comment: comment))
             self.didFetch?()
         }
     }

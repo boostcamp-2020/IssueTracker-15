@@ -26,7 +26,7 @@ protocol IssueProvidable: AnyObject {
     func deleteMilestone(at id: Int, completion: @escaping (Issue?) -> Void)
     func addAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func deleteAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
-    func addComment(issueNumber: Int, content: String, completion: @escaping (Bool) -> Void)
+    func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void)
 }
 
 class IssueProvider: IssueProvidable {
@@ -117,19 +117,19 @@ class IssueProvider: IssueProvidable {
     /*
      Response :
      */
-    func addComment(issueNumber: Int, content: String, completion: @escaping (Bool) -> Void) {
+    func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void) {
         dataLoader?.request(CommentService.addComment(1, issueNumber, content), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
-                completion(false)
+                completion(nil)
             case .success(let response):
-                guard let comment = Comment(json: response.mapJsonObject())
+                guard let comment = Comment.addResponse(json: response.mapJsonObject())
                     else {
-                        completion(false)
+                        completion(nil)
                         return
                 }
                 self?.issues[issueNumber]?.comments.append(comment)
-                completion(true)
+                completion(comment)
             }
         })
     }

@@ -182,7 +182,7 @@ extension Issue {
             let updateAt = jsonObject["updateAt"] as? String,
             let authorId = jsonObject["authorId"] as? Int
             else { return nil }
-    
+        
         let milestoneId = jsonObject["milestoneId"] as? Int
         var description: String?
         if let desc = (jsonObject["description"] as? String) {
@@ -293,4 +293,26 @@ struct Comment {
         self.createAt = createAt
         self.author = user
     }
+    
+}
+
+extension Comment {
+    
+    // For AddResponse
+    static func addResponse(json: [String: Any]?) -> Comment? {
+        guard let json = json,
+            let content = json["content"] as? String,
+            let createAt = json["createAt"] as? String,
+            let authorId = json["userId"] as? Int
+            else { return nil }
+        
+        return Comment(content: content, authorId: authorId, createAt: createAt)
+    }
+    
+    init(content: String, authorId: Int, createAt: String) {
+        self.content = content
+        self.createAt = createAt
+        self.author = User(id: authorId)
+    }
+    
 }
