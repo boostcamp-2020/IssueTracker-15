@@ -4,35 +4,37 @@ import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { VscMilestone } from "react-icons/vsc";
 import Label from "../../../label";
 import ProfileImage from "../../../profile-image";
-function IssueList() {
+import { getTimeTillNow } from "../../../../lib/dateParser";
+
+interface IssueListProp {
+  info: any;
+}
+function IssueList({ info }: IssueListProp) {
+  const color = info.isOpened ? "green" : "red";
+  const mention = info.isOpened ? "opened" : "closed";
+
   return (
     <S.IssueComp>
-      <input type="checkbox" name="xxx" value="yyy" checked />
+      <input type="checkbox" name="xxx" value="yyy" />
       <S.ExclamationWrapper>
-        <AiOutlineExclamationCircle color="green" />
+        <AiOutlineExclamationCircle color={color} />
       </S.ExclamationWrapper>
       <div>
         <S.IssueInfo>
-          <S.IssueTitle> 제목 </S.IssueTitle>
-          <S.LabelWrapper>
-            <Label name="FE 💻" color="pink" />
-          </S.LabelWrapper>
-          <S.LabelWrapper>
-            <Label name="Feature 🎨" color="blue" />
-          </S.LabelWrapper>
-          <S.ProfileImageWrapper size={300}>
-            <ProfileImage img="" size={25} />
-          </S.ProfileImageWrapper>
-          <S.ProfileImageWrapper size={303}>
-            <ProfileImage img="" size={25} />
-          </S.ProfileImageWrapper>
+          <S.IssueTitle>{info.title} </S.IssueTitle>
+          {info.labels.map((label: any) => {
+            return (
+              <S.LabelWrapper>
+                <Label name={label.title} color={label.color} />
+              </S.LabelWrapper>
+            );
+          })}
         </S.IssueInfo>
         <S.IssueEtc>
           <S.IssueEtcWrapper>
-            #4 by heramoon was closed by 8 days ago
+            #{info.id} by {info.author.userName} was {mention} by{" "}
+            {getTimeTillNow(info.createAt)} ago
           </S.IssueEtcWrapper>
-          <VscMilestone />
-          스프린트2
         </S.IssueEtc>
       </div>
     </S.IssueComp>

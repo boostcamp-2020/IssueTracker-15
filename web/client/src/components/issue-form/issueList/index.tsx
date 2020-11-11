@@ -7,6 +7,7 @@ import useAsync from "../../../hooks/useAsync";
 function IssueList() {
   const [issues, setIssues] = useState([]);
 
+  // 맨 처음 opened issue 가져옴
   useEffect(() => {
     const fetchIssues = async () => {
       const newIssues = await getIssues(true);
@@ -14,11 +15,12 @@ function IssueList() {
     };
     fetchIssues();
   }, []);
-
+  console.log(issues);
   return (
     <S.IssueList>
-      <IssueComp />
-      <IssueComp />
+      {issues.map((issue: any) => {
+        return <IssueComp info={issue} />;
+      })}
     </S.IssueList>
   );
 }

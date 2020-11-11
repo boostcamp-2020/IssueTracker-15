@@ -12,6 +12,7 @@ export const IssueInfo = styled.div`
   align-items: center;
   margin-bottom: 2%;
   position: relative;
+  width: 100%;
 `;
 
 export const IssueTitle = styled.div`
