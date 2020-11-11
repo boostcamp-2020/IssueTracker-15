@@ -21,6 +21,7 @@ const CommentService = {
         "Comment.id",
         "Comment.content",
         "Comment.createAt",
+        "User.id",
         "User.userName",
         "User.imageURL",
       ])

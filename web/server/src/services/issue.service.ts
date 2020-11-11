@@ -31,6 +31,7 @@ const IssueService = {
         "Issue.updateAt",
         "Issue.isOpened",
         "Issue.milestoneId",
+        "User.id",
         "User.userName",
         "Milestone.title",
       ])
@@ -55,6 +56,7 @@ const IssueService = {
         "Issue.createAt",
         "Issue.updateAt",
         "Issue.isOpened",
+        "User.id",
         "User.userName",
         "User.imageURL",
         "Milestone.id",
