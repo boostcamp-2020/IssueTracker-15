@@ -35,6 +35,12 @@ function IssueList({ info }: IssueListProp) {
             #{info.id} by {info.author.userName} was {mention} by{" "}
             {getTimeTillNow(info.createAt)} ago
           </S.IssueEtcWrapper>
+          {info.milestone && (
+            <div>
+              <VscMilestone />
+              {info.milestone.title}
+            </div>
+          )}
         </S.IssueEtc>
       </div>
     </S.IssueComp>

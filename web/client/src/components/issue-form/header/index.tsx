@@ -17,7 +17,7 @@ function issueHeader() {
   useEffect(() => {
     const fetchMilestones = async () => {
       const newMilestones = await getMilestones();
-      const newMilestonesTitle = newMilestones.map((milestone) => {
+      const newMilestonesTitle = newMilestones.map((milestone: any) => {
         return milestone.title;
       });
       setMilestones(newMilestonesTitle);
