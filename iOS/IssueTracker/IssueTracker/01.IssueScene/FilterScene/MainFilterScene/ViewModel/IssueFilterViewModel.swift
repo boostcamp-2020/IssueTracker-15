@@ -25,15 +25,6 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
     private weak var milestoneProvider: MilestoneProvidable?
     private weak var issueProvider: IssueProvidable?
     
-    // TODO: UserInfoProvider
-    private var mockUserInfo = [
-        CellComponentViewModel(title: "SHIVVVPP", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "유시형", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "namda-on", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "moaikang", element: "2020-08-11T00:00:00.000Z"),
-        CellComponentViewModel(title: "maong0927", element: "2020-08-11T00:00:00.000Z")
-       ]
-    
     private(set) var generalConditions: [Bool]
     private(set) var detailConditions: [Int]
     
@@ -67,7 +58,8 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
         
         switch type {
         case .assignee, .writer:
-            return mockUserInfo.first(where: {$0.id == id})
+            guard let user = issueProvider?.users[id] else { return nil }
+            return CellComponentViewModel(user: user)
         case .label:
             guard let label = labelProvider?.labels[id] else { return nil }
             return CellComponentViewModel(label: label)

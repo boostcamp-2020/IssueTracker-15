@@ -28,6 +28,7 @@ protocol IssueProvidable: AnyObject {
     func deleteAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void)
     
+    var currentUser: User? { get }
     var users: [Int: User] { get }
 }
 
@@ -39,7 +40,7 @@ class IssueProvider: IssueProvidable {
         let current = Date()
         let duration = Int(current.timeIntervalSince(lastUpdated))
         // TODO: default 시간 차 구하기
-        return duration > 60 * 1
+        return duration > 60 * 0
     }
     
     private weak var dataLoader: DataLoadable?
@@ -48,6 +49,9 @@ class IssueProvider: IssueProvidable {
     private(set) var issues = [Int: Issue]()
     var users: [Int: User] {
         return userProvider?.users ?? [:]
+    }
+    var currentUser: User? {
+        userProvider?.currentUser
     }
     
     init(dataLoader: DataLoadable, userProvider: UserProvidable) {
@@ -81,9 +85,9 @@ class IssueProvider: IssueProvidable {
         }
         
         group.enter()
-        dataLoader?.request(IssueService.fetchAll(true), callBackQueue: .global(), completion: fetchWork)
+        dataLoader?.request(IssueService.fetchAll(true), callBackQueue: .main, completion: fetchWork)
         group.enter()
-        dataLoader?.request(IssueService.fetchAll(false), callBackQueue: .global(), completion: fetchWork)
+        dataLoader?.request(IssueService.fetchAll(false), callBackQueue: .main, completion: fetchWork)
         
         group.notify(queue: .main) { [weak self] in
             self?.lastUpdated = Date()
@@ -98,7 +102,7 @@ class IssueProvider: IssueProvidable {
                 return
             }
             let issueDummy = issues ?? self.issues.map { $0.value }
-            completion(filter?.filter(datas: issueDummy))
+            completion(filter?.filter(datas: issueDummy, user: self.currentUser))
         }
         
         if needFetch {

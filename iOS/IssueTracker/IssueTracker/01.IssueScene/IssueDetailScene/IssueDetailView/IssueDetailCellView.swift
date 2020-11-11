@@ -27,7 +27,6 @@ class IssueDetailCellView: UICollectionViewCell {
         author.text = comment.userName
         createAt.text = comment.createAt
         
-        
     }
     
 }

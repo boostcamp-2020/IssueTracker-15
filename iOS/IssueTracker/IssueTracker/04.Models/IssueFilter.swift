@@ -12,7 +12,7 @@ protocol IssueFilterable: AnyObject {
     var generalConditions: [Bool] { get set }
     var detailConditions: [Int] { get set }
     var searchText: String? { get set }
-    func filter(datas: [Issue]) -> [Issue]
+    func filter(datas: [Issue], user: User?) -> [Issue]
 }
 
 class IssueFilter: IssueFilterable {
@@ -33,7 +33,7 @@ class IssueFilter: IssueFilterable {
         self.detailConditions = detailCondition
     }
     
-    func filter(datas: [Issue]) -> [Issue] {
+    func filter(datas: [Issue], user: User?) -> [Issue] {
         
         var dataSet = Set<Issue>()
         if generalConditions[Condition.issueOpened.rawValue] {
@@ -44,27 +44,30 @@ class IssueFilter: IssueFilterable {
             dataSet = dataSet.union(datas.filter { !$0.isOpened })
         }
         
-        // TODO: Issue AssignedToMe, CommentedByMe, FromMe
-        //        if generalConditions[Condition.issueAssignedToMe.rawValue] {
-        //
-        //        }
-        //
-        //        if generalConditions[Condition.issueCommentedByMe.rawValue] {
-        //
-        //        }
-        //
-        //        if generalConditions[Condition.issueFromMe.rawValue] {
-        //
-        //        }
+        if generalConditions[Condition.issueAssignedToMe.rawValue] {
+            dataSet = dataSet.intersection(datas.filter {
+                $0.assignees.contains(where: {
+                    $0.id == user?.id
+                })
+            })
+        }
+        
+        if generalConditions[Condition.issueFromMe.rawValue] {
+            dataSet = dataSet.intersection(datas.filter {
+                $0.author.id == user?.id
+            })
+        }
         
         // TODO: Detail Condition
-        //        if detailConditions[DetailSelectionType.assignee.rawValue] != -1 {
-        //
-        //        }
-        //
-        //        if detailConditions[DetailSelectionType.writer.rawValue] != -1 {
-        //
-        //        }
+        if let id = detailConditions[safe: DetailSelectionType.assignee.rawValue],
+            id != -1 {
+            dataSet = dataSet.intersection(datas.filter { $0.assignees.contains(where: { $0.id == id })})
+        }
+
+        if let id = detailConditions[safe: DetailSelectionType.writer.rawValue],
+            id != -1 {
+            dataSet = dataSet.intersection(datas.filter { $0.author.id == id })
+        }
         
         if let id = detailConditions[safe: DetailSelectionType.label.rawValue],
             id != -1 {

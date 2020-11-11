@@ -10,10 +10,22 @@ import Foundation
 
 enum Condition: Int, CaseIterable {
     case issueOpened = 0
-    case issueFromMe = 1
-    case issueAssignedToMe = 2
-    case issueCommentedByMe = 3
-    case issueClosed = 4
+    case issueClosed = 1
+    case issueFromMe = 2
+    case issueAssignedToMe = 3
+    
+    var title: String {
+        switch self {
+        case .issueOpened:
+            return "열린 이슈들"
+        case .issueClosed:
+            return "닫힌 이슈들"
+        case .issueFromMe:
+            return "내가 작성한 이슈들"
+        case .issueAssignedToMe:
+            return "나에게 할당된 이슈들"
+        }
+    }
 }
 
 enum DetailSelectionType: Int, CaseIterable {
