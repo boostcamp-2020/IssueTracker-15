@@ -118,11 +118,17 @@ class IssueProvider: IssueProvidable {
      Response :
      */
     func addComment(issueNumber: Int, content: String, completion: @escaping (Bool) -> Void) {
-        dataLoader?.request(CommentService.addComment(1, issueNumber, content), callBackQueue: .main, completion: { (response) in
+        dataLoader?.request(CommentService.addComment(1, issueNumber, content), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(false)
-            case .success:
+            case .success(let response):
+                guard let comment = Comment(json: response.mapJsonObject())
+                    else {
+                        completion(false)
+                        return
+                }
+                self?.issues[issueNumber]?.comments.append(comment)
                 completion(true)
             }
         })

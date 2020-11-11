@@ -282,8 +282,9 @@ struct Comment {
         self.author = user
     }
     
-    init?(json: [String: Any]) {
-        guard let content = json["content"] as? String,
+    init?(json: [String: Any]?) {
+        guard let json = json,
+            let content = json["content"] as? String,
             let createAt = json["createAt"] as? String,
             let userObject = json["user"] as? [String: Any],
             let user = User(json: userObject)
