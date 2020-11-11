@@ -72,6 +72,8 @@ class IssueListViewController: UIViewController {
     private func configureSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.definesPresentationContext = true
         navigationItem.searchController = searchController
     }
     
