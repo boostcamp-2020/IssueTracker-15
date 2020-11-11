@@ -36,7 +36,7 @@ const UserService = {
     const assignees = await userRepository
       .createQueryBuilder("User")
       .innerJoin("User.assignees", "Assignees")
-      .select(["User.userName", "User.imageURL"])
+      .select(["User.id", "User.userName", "User.imageURL"])
       .where("Assignees.issueId = :issueId", { issueId })
       .getMany();
 
