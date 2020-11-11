@@ -59,3 +59,17 @@ extension Response {
         }
     }
 }
+
+extension Response: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
+        return """
+[Request]   URL         :   \(String(describing: request?.url?.absoluteString ?? ""))
+[Request]   Method      :   \(String(describing: request?.httpMethod ?? ""))
+[Request]   httpBody    :   \(String(describing: String(data: request?.httpBody ?? Data(), encoding: .utf8)) )
+[Response]  statusCode  :   \(String(describing: response?.statusCode ?? 0))
+[Response]  httpBody    :   \(String(data: self.data, encoding: .utf8) ?? "")
+"""
+    }
+    
+}

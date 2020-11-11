@@ -46,15 +46,7 @@ public class DataLoader: DataLoadable {
             
             switch result {
             case .success(let response):
-
-                print("[Request]    url             : \(endPoint.url)")
-                print("[Request]    method          : \(endPoint.method)")
-                print("[Request]    HTTPBody        : \(try? JSONSerialization.jsonObject(with: urlRequest.httpBody ?? Data(), options: []))")
-                print("[Request]    HTTPBody        : \(try? JSONSerialization.jsonObject(with: urlRequest.httpBody ?? Data(), options: []))")
-                print("[Response]   Data            : \(String(data: response.data, encoding: .utf8))")
-                print("[Response]   StatusCode      : \(response.statusCode)")
-                print("[Response]   mapJsonObject   : \(response.mapJsonObject())")
-                print("[Response]   mapJsonArr      : \(response.mapJsonArr())")
+                print(response.debugDescription)
             case .failure(let error):
                 print("response fail with : \(error)")
             }
