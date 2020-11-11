@@ -23,14 +23,17 @@ SignInRouter.post(
 );
 
 SignInRouter.post("/github", async (req: Request, res: Response) => {
-  const { code } = req.body;
+  const { code, type } = req.body;
+  console.log(type, process.env.IOS_CLIENT_ID, process.env.IOS_CLIENT_SECRET);
   try {
     const response = await axios.post(
       "https://github.com/login/oauth/access_token",
       {
         code,
-        client_id: process.env.CLIENT_ID,
-        client_secret: process.env.CLIENT_SECRET,
+        client_id: type ? process.env.IOS_CLIENT_ID : process.env.WEB_CLIENT_ID,
+        client_secret: type
+          ? process.env.IOS_CLIENT_SECRET
+          : process.env.WEB_CLIENT_SECRET,
       },
       {
         headers: {
@@ -38,7 +41,7 @@ SignInRouter.post("/github", async (req: Request, res: Response) => {
         },
       }
     );
-
+    console.log(response.data);
     const token = response.data.access_token;
 
     const { data } = await axios.get("https://api.github.com/user", {
@@ -60,12 +63,13 @@ SignInRouter.post("/github", async (req: Request, res: Response) => {
     }
 
     const accessToken = Token.getToken(user.email, user.userName);
-
+    console.log(accessToken);
     return res.json({
       accessToken,
       user: { id: user.id, userName: user.userName, imageURL: user.imageURL },
     });
   } catch (e) {
+    console.log(e);
     res.status(500).json({ error: e.message });
   }
 });
