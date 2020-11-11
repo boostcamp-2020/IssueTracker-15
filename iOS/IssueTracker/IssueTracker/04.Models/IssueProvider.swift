@@ -28,7 +28,7 @@ protocol IssueProvidable: AnyObject {
     func deleteAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void)
     
-    var users: [String: User] { get }
+    var users: [Int: User] { get }
 }
 
 class IssueProvider: IssueProvidable {
@@ -44,7 +44,7 @@ class IssueProvider: IssueProvidable {
     
     private weak var dataLoader: DataLoadable?
     private(set) var issues = [Int: Issue]()
-    private(set) var users = [String: User]()
+    private(set) var users = [Int: User]()
     
     init(dataLoader: DataLoadable) {
         self.dataLoader = dataLoader
@@ -67,8 +67,8 @@ class IssueProvider: IssueProvidable {
                 if let issues = Issue.fetchResponse(jsonArr: response.mapJsonArr()) {
                     issues.forEach {
                         self?.issues[$0.id] = $0
-                        self?.users[$0.author.name] = $0.author
-                        $0.assignees.forEach { self?.users[$0.name] = $0 }
+                        self?.users[$0.author.id] = $0.author
+                        $0.assignees.forEach { self?.users[$0.id] = $0 }
                     }
                 }
             }
@@ -150,7 +150,7 @@ class IssueProvider: IssueProvidable {
             case .success(let response):
                 if let issue = Issue.getResponse(jsonObject: response.mapJsonObject()) {
                     self?.issues[issue.id] = issue
-                    issue.comments.forEach { self?.users[$0.author.name] = $0.author }
+                    issue.comments.forEach { self?.users[$0.author.id] = $0.author }
                     completion(issue)
                 } else {
                     completion(nil)
@@ -238,7 +238,6 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
-                
                 self.issues[id]?.deleteLabel(id: labelId)
                 completion(self.issues[id])
             }
@@ -283,8 +282,8 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
-                // TODO: response 처리
-                break
+                self.issues[id]?.addAssignee(id: userId)
+                completion(self.issues[id])
             }
         })
     }
@@ -297,8 +296,8 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
-                // TODO response 처리
-                break
+                self.issues[id]?.deleteAssignee(id: userId)
+                completion(self.issues[id])
             }
         })
     }

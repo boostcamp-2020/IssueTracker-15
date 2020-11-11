@@ -41,7 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mainTabVC = MainTabBarController.createViewController(dataLoader: dataLoader)
         let loginViewController = LoginViewController.createViewController()
         
-        self.window?.rootViewController = loginViewController
+        self.window?.rootViewController = mainTabVC
         self.window?.makeKeyAndVisible()
     }
     

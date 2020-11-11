@@ -37,6 +37,7 @@ class BottomSheetView: UIView {
         self.issueDetailViewModel = issueDetailViewModel
         self.issueDetailViewModel?.didMilestoneChanged = reloadData
         self.issueDetailViewModel?.didLabelChanged = reloadData
+        self.issueDetailViewModel?.didAssigneeChanged = reloadData
     }
     
     override func awakeFromNib() {
