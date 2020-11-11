@@ -178,7 +178,7 @@ extension IssueListViewModel {
     }
     
     func addNewIssue(title: String, description: String, authorID: Int) {
-        issueProvider?.addIssue(title: title, description: description, authorID: authorID, milestoneID: nil) { [weak self] (createdIssue) in
+        issueProvider?.addIssue(title: title, description: description, milestoneID: nil) { [weak self] (createdIssue) in
             guard let `self` = self,
                 let createdIssue = createdIssue
                 else { return }

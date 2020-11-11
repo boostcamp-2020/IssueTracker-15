@@ -13,7 +13,7 @@ protocol IssueProvidable: AnyObject {
     func fetchIssues(completion: @escaping ([Issue]?) -> Void)
     func fetchIssues(with filter: IssueFilterable?, completion: @escaping ([Issue]?) -> Void)
     
-    func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion:  @escaping (Issue?) -> Void )
+    func addIssue(title: String, description: String, milestoneID: Int?, completion:  @escaping (Issue?) -> Void )
     func editIssue(id: Int, title: String, description: String, completion:  @escaping (Issue?) -> Void)
     func editTitle(id: Int, title: String, completion: @escaping (Issue?) -> Void)
     func deleteIssue(id: Int, completion: @escaping (Issue?) -> Void)
@@ -112,7 +112,12 @@ class IssueProvider: IssueProvidable {
      Response :
      */
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void) {
-        dataLoader?.request(CommentService.addComment(1, issueNumber, content), callBackQueue: .main, completion: { [weak self] (response) in
+        guard let myId = userProvider?.currentUser?.id else {
+            completion(nil)
+            return
+        }
+        
+        dataLoader?.request(CommentService.addComment(myId, issueNumber, content), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
                 completion(nil)
@@ -131,8 +136,13 @@ class IssueProvider: IssueProvidable {
     /*
      Response : 201
      */
-    func addIssue(title: String, description: String, authorID: Int, milestoneID: Int?, completion: @escaping (Issue?) -> Void) {
-        dataLoader?.request(IssueService.createIssue(title, description, milestoneID, authorID), callBackQueue: .main, completion: { (response) in
+    func addIssue(title: String, description: String, milestoneID: Int?, completion: @escaping (Issue?) -> Void) {
+        guard let myId = userProvider?.currentUser?.id else {
+            completion(nil)
+            return
+        }
+        
+        dataLoader?.request(IssueService.createIssue(title, description, milestoneID, myId), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)

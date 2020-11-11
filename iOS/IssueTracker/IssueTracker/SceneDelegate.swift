@@ -26,14 +26,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 else { return }
                 switch result {
                 case .success:
-                    UIView.transition(with: window, duration: 0.5, options: .transitionCurlUp, animations: {
+                    UIView.transition(with: window, duration: 1, options: .transitionFlipFromTop, animations: {
                         window.rootViewController = MainTabBarController.createViewController(dataLoader: dataLodaer, userProvider: userProvider)
                         window.makeKeyAndVisible()
                     }, completion: nil)
                 case .failure:
                 return
                 }
-                
             })
         }
     }
@@ -43,11 +42,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: nil)
         self.dataLoader = DataLoader(session: session)
-        self.userProvider = UserProvider(dataLoader: dataLoader!)
         
-        let loginViewController = LoginViewController.createViewController()
+        let rootViewController: UIViewController?
+        if let data = UserDefaults.standard.object(forKey: "AccessToken") as? Data,
+            let accessToken = JSONDecoder.decode(TokenResponse.self, from: data) {
+            userProvider = UserProvider(dataLoader: dataLoader!, tokenData: accessToken)
+            rootViewController = MainTabBarController.createViewController(dataLoader: dataLoader!, userProvider: userProvider!)
+        } else {
+            userProvider = UserProvider(dataLoader: dataLoader!)
+            rootViewController = LoginViewController.createViewController()
+        }
         
-        self.window?.rootViewController = loginViewController
+        self.window?.rootViewController = rootViewController
         self.window?.makeKeyAndVisible()
     }
     

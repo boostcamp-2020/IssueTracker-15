@@ -9,7 +9,7 @@
 import Foundation
 import NetworkFramework
 
-struct TokenResponse: Decodable {
+struct TokenResponse: Codable {
     let accessToken: String
     let user: User
 }
@@ -21,7 +21,7 @@ struct TokenRequest: Encodable {
 
 protocol UserProvidable: AnyObject {
     func requestAccessToken(code: String, completion: @escaping (LoginResult) -> Void )
-    
+    var currentUser: User? { get }
     var users: [Int: User] { get set }
 }
 
@@ -43,6 +43,12 @@ class UserProvider: UserProvidable {
         self.dataLoader = dataLoader
     }
     
+    init(dataLoader: DataLoadable, tokenData: TokenResponse) {
+        self.dataLoader = dataLoader
+        self.token = tokenData.accessToken
+        self.currentUser = tokenData.user
+    }
+    
     func requestAccessToken(code: String, completion: @escaping (LoginResult) -> Void ) {
         let request = TokenRequest(type: "iOS", code: code)
         dataLoader?.request(AuthService.server(request), callBackQueue: .main, completion: { [weak self] (response) in
@@ -57,6 +63,9 @@ class UserProvider: UserProvidable {
                 }
                 self.currentUser = tokenResult.user
                 self.token = tokenResult.accessToken
+                
+                let jsonData = JSONEncoder.encode(data: tokenResult)
+                UserDefaults.standard.set(jsonData, forKey: "AccessToken")
                 completion(.success)
             }
         })
