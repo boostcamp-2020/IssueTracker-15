@@ -35,6 +35,7 @@ class IssueDetailHeaderView: UICollectionReusableView {
         badgeText = isOpened ? "Open" : "Closed"
         
         issueBadge.convertToIssueBadge(text: badgeText, backgroundColor: badgeColor)
+        issueBadge.contentEdgeInsets = UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
     }
 }
 
