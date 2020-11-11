@@ -110,7 +110,7 @@ class IssueProvider: IssueProvidable {
         if needFetch {
             fetchIssues(completion: filterWork)
         } else {
-            fetchIssues(completion: filterWork)
+            filterWork(issues.map { $0.value })
         }
     }
     
