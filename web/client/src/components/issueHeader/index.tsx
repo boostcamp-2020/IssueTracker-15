@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useCallback, useState } from "react";
 
-import * as S from './style';
-import { getTimeTillNow } from '../../lib/dateParser';
-import Button from '../button';
+import * as S from "./style";
+import { getTimeTillNow } from "../../lib/dateParser";
+import Button from "../button";
 
 interface IssueProps {
   title: string;
@@ -20,15 +20,36 @@ export default function IssueHeader({
   createAt,
   commentLength,
 }: IssueProps) {
+  const [isEditBoxOpen, setIsEditBoxOpen] = useState(false);
+
+  const toggleEditBox = useCallback(() => {
+    setIsEditBoxOpen(!isEditBoxOpen);
+  }, [isEditBoxOpen]);
+
   return (
     <S.IssueHeaderWrapper>
       <S.IssueTitleNumberButtonWrapper>
         <S.IssueTitleNumberWrapper>
-          <S.IssueTitle>{title}</S.IssueTitle>
-          <S.IssueNumber>#{id}</S.IssueNumber>
+          {!isEditBoxOpen && (
+            <>
+              <S.IssueTitle>{title}</S.IssueTitle>
+              <S.IssueNumber>#{id}</S.IssueNumber>
+            </>
+          )}
+          {isEditBoxOpen && <S.EditBox autoFocus={true} />}
         </S.IssueTitleNumberWrapper>
 
-        <Button color="white">Edit</Button>
+        <S.ButtonCancleWrapper>
+          <Button color="white" onClick={toggleEditBox}>
+            {isEditBoxOpen ? "Save" : "Edit"}
+          </Button>
+
+          {isEditBoxOpen && (
+            <S.CancleText onClick={toggleEditBox}>
+              <div>Cancle</div>
+            </S.CancleText>
+          )}
+        </S.ButtonCancleWrapper>
       </S.IssueTitleNumberButtonWrapper>
 
       <S.IssueInfoWrapper>
