@@ -80,3 +80,15 @@ extension MilestoneSubmitFieldsView: SubmitFieldProtocol {
     }
     
 }
+
+// MARK: - Load From Nib
+
+extension MilestoneSubmitFieldsView {
+    
+    static let milestoneSubmitFieldsID: String = "MilestoneSubmitFieldsView"
+    
+    static func createView() -> MilestoneSubmitFieldsView? {
+        return Bundle.main.loadNibNamed(milestoneSubmitFieldsID, owner: self, options: nil)?.last as? MilestoneSubmitFieldsView
+    }
+    
+}
