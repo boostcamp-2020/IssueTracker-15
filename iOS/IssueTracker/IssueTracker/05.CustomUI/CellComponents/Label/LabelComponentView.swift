@@ -23,7 +23,7 @@ extension LabelComponentView: CellComponentProtocol {
     func configure(viewModel: CellComponentViewModel) {
         labelBadge.text = viewModel.title
         guard let colorCode = viewModel.element else { return }
-        labelBadge.textColor = UIColor(cgColor: colorCode).isDarkColor ? UIColor.white : UIColor.black
+        labelBadge.textColor = UIColor(cgColor: colorCode.color).isDarkColor ? UIColor.white : UIColor.black
         labelBadge.setBackgroundColor(colorCode.color)
         labelBadge.cornerRadiusRatio = 0.3
         labelBadge.setPadding(top: 5, left: 10, bottom: 5, right: 10)
