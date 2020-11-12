@@ -9,7 +9,7 @@ import LabelInfoType from "../../../../@types/label-form";
 import ProfileImage from "../../../profile-image";
 
 const START_POS = 850;
-const MOVING_POS = 20;
+const MOVING_POS = 10;
 interface IssueCompProp {
   info: IssueInfoType;
 }
