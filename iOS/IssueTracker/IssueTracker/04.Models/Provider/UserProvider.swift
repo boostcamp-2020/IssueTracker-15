@@ -14,6 +14,7 @@ protocol UserProvidable: AnyObject {
     var users: [Int: User] { get set }
     
     func requestAccessToken(code: String, completion: @escaping (LoginResult) -> Void )
+    func fetchUser(completion: (([User]?) -> Void)? )
     var currentUser: User? { get }
     
 }
@@ -59,4 +60,18 @@ class UserProvider: UserProvidable {
         })
     }
     
+    func fetchUser(completion: (([User]?) -> Void)?) {
+        dataLoader?.request(UserService.fetchAll, callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion?(nil)
+            case .success(let response):
+                if let jsonObject = response.mapJsonObject(),
+                    let users = User.fetchResponse(json: jsonObject) {
+                    self.users = users.reduce(into: [:]) { $0[$1.id] = $1 }
+                    completion?(users)
+                }
+            }
+        })
+    }
 }

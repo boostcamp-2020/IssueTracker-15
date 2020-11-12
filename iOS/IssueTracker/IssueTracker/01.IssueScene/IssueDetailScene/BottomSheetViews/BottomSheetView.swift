@@ -161,7 +161,7 @@ extension BottomSheetView: UITableViewDataSource {
                 userComponentView.topAnchor.constraint(equalTo: cell.topAnchor),
                 userComponentView.bottomAnchor.constraint(equalTo: cell.bottomAnchor)
             ])
-            userComponentView.configure(viewModel: CellComponentViewModel(title: userViewModel.userName, element: userViewModel.imageURL ?? ""))
+            userComponentView.configure(viewModel: CellComponentViewModel(title: userViewModel.userName, element: userViewModel.imageURL))
             return cell
         case 1:
             guard let labelViewModels = issueDetailViewModel?.labels else { break }

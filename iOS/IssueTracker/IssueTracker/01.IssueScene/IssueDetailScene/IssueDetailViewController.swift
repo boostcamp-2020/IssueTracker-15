@@ -168,7 +168,7 @@ extension IssueDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header: IssueDetailHeaderView = collectionView.dequeueHeader(at: indexPath) else { return UICollectionReusableView() }
         
-        header.configure(with: issueDetailViewModel)
+        header.configure(with: issueDetailViewModel.headerViewModel)
         return header
     }
     

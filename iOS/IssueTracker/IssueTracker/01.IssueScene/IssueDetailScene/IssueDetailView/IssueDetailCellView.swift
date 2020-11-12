@@ -26,9 +26,22 @@ class IssueDetailCellView: UICollectionViewCell {
         content.text = comment.content
         author.text = comment.userName
         createAt.text = comment.createAt
-        
+        comment.needImage { [weak self] (data) in
+            self?.setProfile(data: data)
+        }
     }
     
+    func setProfile(data: Data?) {
+        guard let data = data,
+            let image = UIImage(data: data)
+        else { return }
+        profilePicture.image = image
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+       profilePicture.setRound(ratio: 1)
+    }
 }
 
 extension IssueDetailCellView: UICollectionViewRegisterable {
