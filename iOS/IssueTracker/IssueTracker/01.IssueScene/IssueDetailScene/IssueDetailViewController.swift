@@ -15,6 +15,20 @@ class IssueDetailViewController: UIViewController {
     private var bottomSheetView: BottomSheetView?
     private var issueDetailViewModel: IssueDetailViewModelProtocol
     
+    let contentBlurView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        return blurredEffectView
+    }()
+    
+    let navBarBlurView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        return blurredEffectView
+    }()
+    
     private var currentIndexPath: IndexPath? {
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.frame.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.minY)
@@ -42,6 +56,8 @@ class IssueDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBarBlur()
+        setupContentBlur()
         configureEditButton()
         issueDetailViewModel.needFetchDetails()
         configureCollectionView()
@@ -53,13 +69,41 @@ class IssueDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationItem.largeTitleDisplayMode = .never
         self.tabBarController?.tabBar.isHidden = true
+        let height = UIScreen.main.bounds.height
+        let width  = UIScreen.main.bounds.width
+        bottomSheetView?.frame = CGRect(x: 0, y: height * 0.9, width: width, height: height)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
     }
-
+    
+    private func setupNavBarBlur() {
+        navBarBlurView.alpha = 0
+        let navBarHeight = navigationController?.navigationBar.frame.height ?? 50
+        self.navigationController?.navigationBar.addSubview(navBarBlurView)
+        
+        NSLayoutConstraint.activate([
+            navBarBlurView.topAnchor.constraint(equalTo: (self.navigationController?.navigationBar.topAnchor)!, constant: -1 * navBarHeight),
+            navBarBlurView.leadingAnchor.constraint(equalTo: (self.navigationController?.navigationBar.leadingAnchor)!),
+            navBarBlurView.trailingAnchor.constraint(equalTo: (self.navigationController?.navigationBar.trailingAnchor)!),
+            navBarBlurView.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!)
+        ])
+    }
+    
+    private func setupContentBlur() {
+        navBarBlurView.alpha = 0
+        self.view.addSubview(contentBlurView)
+        
+        NSLayoutConstraint.activate([
+            contentBlurView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            contentBlurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            contentBlurView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            contentBlurView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+    }
+    
     private func configureEditButton() {
         let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editButtonTapped))
         self.navigationItem.rightBarButtonItem = editButton
@@ -89,9 +133,6 @@ class IssueDetailViewController: UIViewController {
         guard let bottomSheetView = BottomSheetView.createView() else { return }
         bottomSheetView.configure(issueDetailViewModel: issueDetailViewModel)
         bottomSheetView.delegate = self
-        let height = UIScreen.main.bounds.height
-        let width  = UIScreen.main.bounds.width
-        bottomSheetView.frame = CGRect(x: 0, y: height * 0.9, width: width, height: height)
         
         self.bottomSheetView = bottomSheetView
         self.view.addSubview(bottomSheetView)
@@ -158,6 +199,13 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - BottomSheetViewDelegate Implementatioin
 
 extension IssueDetailViewController: BottomSheetViewDelegate {
+    func heightChanged(with newHeight: CGFloat) {
+        let newAlpha = newHeight / 1000
+        DispatchQueue.main.async { [weak self] in
+            self?.contentBlurView.alpha = (newAlpha - 0.5) * -1
+            self?.navBarBlurView.alpha = (newAlpha - 0.5) * -1
+        }
+    }
     
     func categoryHeaderTapped(type: DetailSelectionType) {
         let maximumSelection = type == .milestone ? 1 : 0
