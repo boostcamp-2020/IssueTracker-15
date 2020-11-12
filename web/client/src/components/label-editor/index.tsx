@@ -1,15 +1,33 @@
-import React, { useContext } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import { LabelHeaderContext } from "../../containers/label-list-header";
 import Button from "../button";
 import * as S from "./style";
 
-export default function LabelEditor() {
+interface LabelEditorProps {
+  labelContent: string;
+  setLabelContent: Dispatch<SetStateAction<string>>;
+  labelColor: string;
+  setLabelColor: Dispatch<SetStateAction<string>>;
+}
+
+export default function LabelEditor(props: LabelEditorProps) {
   const { setCreateLabel } = useContext(LabelHeaderContext);
 
   if (!setCreateLabel) throw new Error("ee");
 
   const toggleCreateLabel = () => {
     setCreateLabel(false);
+  };
+
+  const colorInput = useRef(null);
+  const changeLabelContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+    props.setLabelContent(e.target.value);
   };
 
   return (
@@ -21,13 +39,13 @@ export default function LabelEditor() {
       </S.LabelTitleRow>
       <S.LableInputRow>
         <S.inputContainer>
-          <S.nameInput />
-          <S.descriptionInput />
+          <S.nameInput placeholder="Label name" onChange={changeLabelContent} />
+          <S.descriptionInput placeholder="Description (optional)" />
           <S.colorInputContainer>
             <S.IconContainer>
               <S.refreshIcon />
             </S.IconContainer>
-            <S.colorInput />
+            <S.colorInput value={"#0052CD"} ref={colorInput} />
           </S.colorInputContainer>
         </S.inputContainer>
         <S.ButtonContainer>
