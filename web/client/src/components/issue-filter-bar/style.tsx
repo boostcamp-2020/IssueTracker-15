@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const FilterBar = styled.div`
-  width: 100%;
+  width: 98%;
   display: flex;
   margin: 1%;
   justify-content: space-between;
@@ -18,6 +19,9 @@ export const FilterForm = styled.div`
   width: 100%;
   padding-left: 15%;
   display: flex;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const FilterComp = styled.div`
@@ -33,8 +37,8 @@ export const SearchForm = styled.div`
 `;
 
 export const FilterContainer = styled.div`
-  padding-top: 0.7%;
-  padding-bottom: 0.7%;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
   width: 60%;
   border: 1px solid #ced4da;
   align-items: center;
@@ -42,4 +46,17 @@ export const FilterContainer = styled.div`
   background-color: #fafbfc;
   color: #24292e;
   display: flex;
+`;
+
+export const MilestoneLink = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  justify-contents: center;
+  width: 15%;
+`;
+
+export const LabelLink = styled(Link)`
+  text-decoration: none;
+  justify-contents: center;
+  width: 10%;
 `;

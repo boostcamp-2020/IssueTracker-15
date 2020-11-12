@@ -5,15 +5,16 @@ interface Container {
 }
 export const NavButton = styled.div<Container>`
   width: ${(props) => props.width};
-  padding-top: 0.7%;
-  padding-bottom: 0.7%;
-  padding-left: 2%;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  padding-left: 10%;
   display: flex;
   align-contents: center;
   color: #586069;
   border-radius: 6px;
   background-color: #fafbfc;
   border: 1px solid #ced4da;
+  justify-contents: center;
 `;
 
 export const NavButtonTitle = styled.div`

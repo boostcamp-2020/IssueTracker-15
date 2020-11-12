@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import * as S from "./style";
 import Dropdown from "../dropdown";
 import NavButton from "../nav-button";
 import useToggle from "../../hooks/useToggle";
 import { BiCaretDown } from "react-icons/bi";
+import Button from "../button";
 
 function IssueFilterBar(this: any) {
   const [filterCmd, setFilterCmd] = useState("is:issue is:open");
@@ -50,8 +52,13 @@ function IssueFilterBar(this: any) {
         </S.FilterWrapper>
         <S.SearchForm>{filterCmd}</S.SearchForm>
       </S.FilterContainer>
-      <NavButton classify={"label"} count={2} />
-      <NavButton classify={"milestone"} count={3} />
+      <S.LabelLink to="/label">
+        <NavButton classify={"label"} count={2} />
+      </S.LabelLink>
+      <S.MilestoneLink to="/milestone">
+        <NavButton classify={"milestone"} count={3} />
+      </S.MilestoneLink>
+      <Button color="green" children="new Issue" />
     </S.FilterBar>
   );
 }
