@@ -26,7 +26,7 @@ const DetailIssuePage = () => {
   const { loading, data: issue, error } = issueDetailState.issue;
   if (loading) return <div>로딩중...</div>;
   if (error) return <div>에러가 났네요;</div>;
-  if (!issue) return null;
+  if (!issue) return <div>해당하는 id의 이슈가 없어요!</div>;
 
   return (
     <>
