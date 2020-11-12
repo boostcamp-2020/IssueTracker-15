@@ -29,7 +29,6 @@ export const getIssueById = createActionDispatcher(
 );
 
 export const addComment = (comment: any, dispatch: any) => {
-  console.log(comment);
   dispatch({ type: "ADD_COMMENT", payload: { comment } });
 };
 

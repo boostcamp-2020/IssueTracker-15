@@ -46,7 +46,6 @@ export default function CommentBox({
 
   const issueDetailDispatch = useIssueDetailDispatch();
 
-  console.log(comment);
   return (
     <>
       <S.CommentWithProfileWrapper>
