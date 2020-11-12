@@ -7,6 +7,11 @@
 //
 import Foundation
 
+enum SelectionMode {
+    case opened
+    case closed
+}
+
 protocol IssueListViewModelProtocol: AnyObject {
     
     // For Presentation
@@ -15,6 +20,7 @@ protocol IssueListViewModelProtocol: AnyObject {
     var showTitleWithCheckNum: ((Int) -> Void)? { get set }
     var filter: IssueFilterable? { get set }
     var issues: [IssueItemViewModel] { get }
+    var editSelectionMode: SelectionMode { get }
     
     // For Events
     func needFetchItems()
@@ -48,6 +54,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
     var showTitleWithCheckNum: ((Int) -> Void)?
     var didCellChecked: ((IndexPath, Bool) -> Void)?
     
+    var editSelectionMode: SelectionMode = .opened
     private(set) var issues = [IssueItemViewModel]()
     var filter: IssueFilterable? {
         didSet {
@@ -181,7 +188,7 @@ extension IssueListViewModel {
             issue.checked = true
             self.didCellChecked?(IndexPath(row: idx, section: 0), true)
         }
-        showTitleWithCheckNum?(issues.filter { $0.checked }.count)
+        showTitleWithCheckNum?(issues.filter { $0.checked }.count )
     }
     
     func addNewIssue(title: String, description: String) {

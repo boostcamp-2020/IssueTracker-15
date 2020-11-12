@@ -78,6 +78,7 @@ class IssueCellView: UICollectionViewCell {
         setMilestone(title: issueItemViewModel.milestoneTitle)
         setLabels(labelViewModels: issueItemViewModel.labelItemViewModels)
         setStatus(isOpened: issueItemViewModel.isOpened)
+        setCheck(issueItemViewModel.checked)
         
         self.issueItemViewModel?.didMilestoneChanged = { [weak self] milestone in
                 self?.setMilestone(title: milestone)
@@ -96,6 +97,7 @@ class IssueCellView: UICollectionViewCell {
         titleLabel.text = ""
         cellHorizontalScrollView.contentOffset = CGPoint.zero
         labelCollectionView.isHidden = true
+        setCheck(false)
     }
 
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
