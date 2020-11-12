@@ -16,18 +16,10 @@ export const IssueInfo = styled.div`
   align-items: center;
   margin-bottom: 2%;
   position: relative;
-  width: 100%;
+  width: 200%;
 `;
 
-export const IssueTitle = styled.div`
-  font-weight: bold;
-  color: black;
-  margin-left: 1.5%;
-  margin-right: 1.5%;
-  &:hover {
-    color: blue;
-  }
-`;
+export const IssueTitle = styled.div``;
 
 export const IssueEtc = styled.div`
   display: flex;
@@ -48,16 +40,24 @@ export const IssueEtcWrapper = styled.div`
 `;
 
 export const LabelWrapper = styled.div`
-  margin-left: 0.5%;
   margin-right: 0.5%;
+  margin-left: 0.1%;
 `;
 
 export const ProfileImageWrapper = styled.div<{ size: number }>`
   position: absolute;
-  left: ${(props) => props.size}%;
+  left: ${(props) => props.size}px;
 `;
 
 export const IssueInfoLink = styled(Link)`
   text-decoration: none;
+  width: max-content;
   color: #586069;
+  font-weight: bold;
+  color: black;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
+  &:hover {
+    color: blue;
+  }
 `;

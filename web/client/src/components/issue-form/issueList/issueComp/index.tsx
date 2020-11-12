@@ -6,14 +6,17 @@ import Label from "../../../label";
 import { getTimeTillNow } from "../../../../lib/dateParser";
 import IssueInfoType from "../../../../@types/issue";
 import LabelInfoType from "../../../../@types/label-form";
+import ProfileImage from "../../../profile-image";
 
+const START_POS = 850;
+const MOVING_POS = 10;
 interface IssueCompProp {
   info: IssueInfoType;
 }
 function IssueComp({ info }: IssueCompProp) {
   const color = info.isOpened ? "green" : "red";
   const mention = info.isOpened ? "opened" : "closed";
-
+  let assigneePos = START_POS;
   return (
     <S.IssueComp>
       <input type="checkbox" name="xxx" value="yyy" />
@@ -23,13 +26,21 @@ function IssueComp({ info }: IssueCompProp) {
       <div>
         <S.IssueInfo>
           <S.IssueInfoLink to={`/issue/${info.id}`}>
-            <S.IssueTitle>{info.title} </S.IssueTitle>
+            {info.title}
           </S.IssueInfoLink>
           {info.labels.map((label: LabelInfoType) => {
             return (
               <S.LabelWrapper>
                 <Label name={label.title} color={label.color} />
               </S.LabelWrapper>
+            );
+          })}
+          {info.assignees.map((assignee: any) => {
+            assigneePos += MOVING_POS;
+            return (
+              <S.ProfileImageWrapper size={assigneePos}>
+                <ProfileImage img={assignee.imageURL} size={20} />
+              </S.ProfileImageWrapper>
             );
           })}
         </S.IssueInfo>
