@@ -5,6 +5,8 @@ import { VscMilestone } from "react-icons/vsc";
 import Label from "../../../label";
 import { getTimeTillNow } from "../../../../lib/dateParser";
 import IssueInfoType from "../../../../@types/issue";
+import LabelInfoType from "../../../../@types/label-form";
+
 interface IssueCompProp {
   info: IssueInfoType;
 }
@@ -23,7 +25,7 @@ function IssueComp({ info }: IssueCompProp) {
           <S.IssueInfoLink to={`/issue/${info.id}`}>
             <S.IssueTitle>{info.title} </S.IssueTitle>
           </S.IssueInfoLink>
-          {info.labels.map((label: any) => {
+          {info.labels.map((label: LabelInfoType) => {
             return (
               <S.LabelWrapper>
                 <Label name={label.title} color={label.color} />
