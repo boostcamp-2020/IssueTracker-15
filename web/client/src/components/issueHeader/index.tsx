@@ -39,6 +39,20 @@ export default function IssueHeader({
     setEditBox(value);
   };
 
+  const onClickCloseIssue = async () => {
+    if (!isOpened) return;
+    if (window.confirm("이슈를 닫겠습니까?")) {
+      await api.closeIssue(id);
+      window.location.reload(false);
+    }
+  };
+
+  const onClickUpdateEditBox = async () => {
+    const result = await api.updateIssueTitle(id, editBoxValue);
+    setIsTitleUpdate(true);
+    toggleEditBox();
+  };
+
   return (
     <S.IssueHeaderWrapper>
       <S.IssueTitleNumberButtonWrapper>
@@ -63,15 +77,7 @@ export default function IssueHeader({
         <S.ButtonCancleWrapper>
           <Button
             color="white"
-            onClick={
-              !isEditBoxOpen
-                ? toggleEditBox
-                : async () => {
-                    const result = await api.updateIssueTitle(id, editBoxValue);
-                    setIsTitleUpdate(true);
-                    toggleEditBox();
-                  }
-            }
+            onClick={!isEditBoxOpen ? toggleEditBox : onClickUpdateEditBox}
           >
             {isEditBoxOpen ? "Save" : "Edit"}
           </Button>
@@ -92,13 +98,7 @@ export default function IssueHeader({
       <S.IssueInfoWrapper>
         <Button
           color={isOpened ? "green" : "white"}
-          onClick={async () => {
-            if (!isOpened) return;
-            if (window.confirm("이슈를 닫겠습니까?")) {
-              await api.closeIssue(id);
-              window.location.reload(false);
-            }
-          }}
+          onClick={onClickCloseIssue}
         >
           {isOpened ? "Open" : "Close"}
         </Button>

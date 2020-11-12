@@ -44,6 +44,16 @@ export default function CommentBox({
     setIsCommentOpen(!isCommentOpen);
   }, [isCommentOpen]);
 
+  const onClickaddComment = async () => {
+    const result = await api.postComment({
+      userId: 5,
+      issueId: issueId,
+      content: textArea,
+    });
+    if (result) return addComment(result, issueDetailDispatch);
+    alert("커멘트 업데이트 실패!");
+  };
+
   const issueDetailDispatch = useIssueDetailDispatch();
 
   return (
@@ -90,19 +100,7 @@ export default function CommentBox({
                   </S.ButtonWrapper>
 
                   <S.ButtonWrapper>
-                    <Button
-                      color="green"
-                      onClick={async () => {
-                        const result = await api.postComment({
-                          userId: 5,
-                          issueId: issueId,
-                          content: textArea,
-                        });
-                        if (result)
-                          return addComment(result, issueDetailDispatch);
-                        alert("커멘트 업데이트 실패!");
-                      }}
-                    >
+                    <Button color="green" onClick={onClickaddComment}>
                       {comment ? "Update Comment" : "Comment"}
                     </Button>
                   </S.ButtonWrapper>
