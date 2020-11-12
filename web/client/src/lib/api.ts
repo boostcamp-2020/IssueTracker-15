@@ -48,7 +48,7 @@ interface CommentProps {
 }
 
 export const postComment = async ({userId, issueId, content}: CommentProps ) => {
-  const res = await fetch(`${URL}/api/`, {
+  const res = await fetch(`${URL}/api/comment`, {
     method: 'POST', 
     body: JSON.stringify({userId, issueId, content}), 
     headers:{
@@ -56,7 +56,7 @@ export const postComment = async ({userId, issueId, content}: CommentProps ) => 
     }
   })
 
-  if(!res.ok) return;
+  if(!res.ok) return false;
   return await res.json();
 }
 
@@ -74,3 +74,29 @@ export const getJWTToken = async (code: string) => {
   return accessToken;
 };
 
+export const updateIssueTitle = async (id: number, title: string) => {
+  const result = await fetch(`${URL}/api/issue/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title
+    }),
+  })
+};
+
+  export const closeIssue = async (id: number) => {
+    const result = await fetch(`${URL}/api/issue/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        isOpened: false
+      }),
+    });
+
+  if(!result.ok) return false;
+  return true;
+  };
