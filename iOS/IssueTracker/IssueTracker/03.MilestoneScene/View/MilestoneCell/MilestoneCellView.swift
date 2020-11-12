@@ -16,6 +16,14 @@ class MilestoneCellView: UICollectionViewCell {
     @IBOutlet weak var percentageLabel: UILabel!
     @IBOutlet weak var openedIssueLabel: UILabel!
     @IBOutlet weak var closedIssueLabel: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+        ])
+    }
 
     func configure(with currentItem: MilestoneItemViewModel) {
         configureTitle(text: currentItem.title)
@@ -51,14 +59,6 @@ class MilestoneCellView: UICollectionViewCell {
     
     private func configureCloseddIssue(with closedIssue: String) {
         closedIssueLabel.text = closedIssue
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        descriptionLabel.autoResizeFontWithHeight()
-        dateLabel.autoResizeFontWithHeight()
-        openedIssueLabel.autoResizeFontWithHeight()
-        closedIssueLabel.autoResizeFontWithHeight()
     }
     
 }

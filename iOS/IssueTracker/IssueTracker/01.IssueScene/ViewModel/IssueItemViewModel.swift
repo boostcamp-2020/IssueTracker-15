@@ -8,32 +8,42 @@
 
 import Foundation
 
-class IssueItemViewModel {
+protocol IssueItemViewModelProtocol: AnyObject {
+    var id: Int { get }
+    var title: String { get }
+    var milestoneTitle: String { get }
+    var isOpened: Bool { get }
+    var labelItemViewModels: [LabelItemViewModel] { get }
+
+    var didMilestoneChanged: ((String) -> Void)? { get set }
+    var didLabelsChanged: (([LabelItemViewModel]) -> Void)? { get set }
+    var checked: Bool { get }
+}
+
+class IssueItemViewModel: IssueItemViewModelProtocol {
     
     let id: Int
     let title: String
-    let description: String
     
+    private(set) var isOpened: Bool
     private(set) var milestoneTitle: String = ""
-    private(set) var labelTitle: String = ""
-    private(set) var labelColor: String = ""
+    private(set) var labelItemViewModels = [LabelItemViewModel]()
     
-    var didLabelChanged: ((String, String) -> Void)?
     var didMilestoneChanged: ((String) -> Void)?
+    var didLabelsChanged: (([LabelItemViewModel]) -> Void)?
     
-    var check: Bool = false
+    var checked: Bool = false
     
     init(issue: Issue) {
         id = issue.id
         title = issue.title
-        description = issue.description
+        isOpened = issue.isOpened
     }
     
-    func setLabel(label: Label?) {
-        guard let label = label else { return }
-        labelTitle = label.title
-        labelColor = label.hexColor
-        didLabelChanged?(labelTitle, labelColor)
+    func setLabels(labels: [Label]?) {
+        guard let labels = labels else { return }
+        labelItemViewModels = labels.map { LabelItemViewModel(label: $0) }
+        didLabelsChanged?(labelItemViewModels)
     }
     
     func setMilestone(milestone: Milestone?) {
@@ -42,4 +52,14 @@ class IssueItemViewModel {
         didMilestoneChanged?(milestoneTitle)
     }
     
+}
+
+extension IssueItemViewModel: Hashable {
+    static func == (lhs: IssueItemViewModel, rhs: IssueItemViewModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        return hasher.combine(id)
+    }
 }

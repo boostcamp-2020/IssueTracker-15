@@ -5,63 +5,107 @@
 //  Created by 김신우 on 2020/11/01.
 //  Copyright © 2020 IssueTracker-15. All rights reserved.
 //
-
 import UIKit
 
 class IssueListViewController: UIViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, IssueItemViewModel>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, IssueItemViewModel>
     
     enum ViewingMode {
         case general
         case edit
     }
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var rightNavButton: UIButton!
-    @IBOutlet weak var leftNavButton: UIButton!
-    @IBOutlet weak var bottomToolBar: UIToolbar!
-    @IBOutlet weak var addIssueButton: UIButton!
+    @IBOutlet weak var rightNavButton: UIBarButtonItem!
+    @IBOutlet weak var leftNavButton: UIBarButtonItem!
+    @IBOutlet weak var floatingButton: UIButton!
     
-    var issueDetailViewModel: IssueDetailViewModel?
+    @IBOutlet weak var collectionView: UICollectionView!
+    private lazy var dataSource = makeDataSource()
+    
+    lazy var floatingButtonAspectRatioConstraint: NSLayoutConstraint = {
+        self.floatingButton.widthAnchor.constraint(equalTo: self.floatingButton.heightAnchor)
+    }()
+    
     private var viewingMode: ViewingMode = .general
-    var issueListViewModel: IssueListViewModel? {
+    
+    var issueListViewModel: IssueListViewModelProtocol? {
         didSet {
-            issueListViewModel?.didFetch = { [weak self] in
-                self?.collectionView.reloadData()
+            issueListViewModel?.didItemChanged = { [weak self] issueItems in
+                guard let `self` = self else { return }
+                var snapShot = SnapShot()
+                snapShot.appendSections([0])
+                snapShot.appendItems(issueItems)
+                self.dataSource.apply(snapShot)
+            }
+            issueListViewModel?.didCellChecked = { [weak self] (indexPath, check) in
+                guard let cell = self?.collectionView.cellForItem(at: indexPath) as? IssueCellView else { return }
+                cell.setCheck(check)
+            }
+            issueListViewModel?.showTitleWithCheckNum = { [weak self] (num) in
+                guard let vieingMode = self?.viewingMode, vieingMode == .edit else { return }
+                self?.title = "\(num) 개 선택"
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "이슈"
         configureSearchBar()
         configureCollectionView()
-        addIssueButton.layer.cornerRadius = addIssueButton.frame.width/2
-        
+        floatingButtonAspectRatioConstraint.isActive = true
+        navigationController?.isToolbarHidden = true
+        floatingButton.layoutSubviews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.largeTitleDisplayMode = .automatic
+        collectionView.visibleCells.forEach {
+            guard let cell = $0 as? IssueCellView else { return }
+            cell.resetScrollOffset()
+        }
         issueListViewModel?.needFetchItems()
     }
     
-    // TODO: SerachBar Configure
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        floatingButton.layer.cornerRadius = floatingButton.bounds.height / 2 * 1
+    }
+    
     private func configureSearchBar() {
-        navigationItem.searchController = UISearchController(searchResultsController: nil)
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.definesPresentationContext = true
+        navigationItem.searchController = searchController
     }
     
     private func configureCollectionView() {
         setupCollectionViewLayout()
-        collectionView.dataSource = self
         collectionView.registerCell(type: IssueCellView.self)
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.didSelectCell(_:)))
         self.collectionView.addGestureRecognizer(tap)
-        self.collectionView.isUserInteractionEnabled = true
     }
     
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
         let cellHeight = self.view.bounds.height / 10
-        layout.itemSize = CGSize(width: self.view.bounds.width, height: cellHeight)
-        layout.minimumLineSpacing = 1
+        layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: cellHeight)
+        layout.minimumLineSpacing = 3
         collectionView.setCollectionViewLayout(layout, animated: false)
+    }
+    
+    private func makeDataSource() -> DataSource {
+        let dataSource = DataSource(collectionView: collectionView,
+                                    cellProvider: { (collectionView, indexPath, issueItem) -> UICollectionViewCell? in
+                                        guard let cell: IssueCellView = collectionView.dequeueCell(at: indexPath) else { return nil }
+                                        cell.configure(issueItemViewModel: issueItem)
+                                        cell.showCheckBox(show: self.viewingMode == .edit, animation: false)
+                                        cell.delegate = self
+                                        return cell
+                                    })
+        return dataSource
     }
     
 }
@@ -69,19 +113,14 @@ class IssueListViewController: UIViewController {
 // MARK: - Actions
 
 extension IssueListViewController {
+    
     @objc func didSelectCell(_ sender: UITapGestureRecognizer) {
-        guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)),
-            let issueListViewModel = issueListViewModel,
-            let issueDetailViewModel = issueDetailViewModel
-            else { return }
-        
+        guard let indexPath =  self.collectionView?.indexPathForItem(at: sender.location(in: self.collectionView)) else { return }
         switch viewingMode {
         case .general:
-            let issueDetailVC = IssueDetailViewController.createViewController(currentIssueId: issueListViewModel.cellForItemAt(path: indexPath).id, issueDetailViewModel: issueDetailViewModel)
-            self.navigationController?.pushViewController(issueDetailVC, animated: true)
+            presentIssueDetailViewController(indexPath: indexPath)
         case .edit:
-            
-            break
+            issueListViewModel?.selectCell(at: indexPath)
         }
     }
     
@@ -97,23 +136,30 @@ extension IssueListViewController {
     @IBAction func leftNavButtonTapped(_ sender: Any) {
         switch viewingMode {
         case .general:
-            performSegue(withIdentifier: "createIssueFilterViewController", sender: self)
+            presentFilterViewController()
         case .edit:
-            // TODO: SelectAll
-            break
+            issueListViewModel?.selectAllCells()
         }
     }
     
-    @IBAction func closeAllSelectedIssueButtonTapped(_ sender: Any) {
-        
+    @IBAction func floatingButtonTapped(_ sender: Any) {
+        switch viewingMode {
+        case .edit:
+            issueListViewModel?.closeSelectedIssue()
+            toGeneralMode()
+        case .general:
+            AddNewIssueViewController.present(at: self, addType: .newIssue, previousData: nil, onDismiss: { [weak self] (content) in
+                self?.issueListViewModel?.addNewIssue(title: content[0], description: content[1])
+            })
+        }
     }
     
     private func toEditMode() {
         viewingMode = .edit
-        rightNavButton.setTitle("Cancle", for: .normal)
-        leftNavButton.setTitle("Select All", for: .normal)
-        bottomToolBar.isHidden = false
-        tabBarController?.tabBar.isHidden = true
+        title = "0 개 선택"
+        rightNavButton.title = "Cancel"
+        leftNavButton.title = "Select All"
+        changeButtonTo(mode: .edit)
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: true, animation: true)
@@ -122,55 +168,101 @@ extension IssueListViewController {
     
     private func toGeneralMode() {
         viewingMode = .general
-        rightNavButton.setTitle("Edit", for: .normal)
-        leftNavButton.setTitle("Filter", for: .normal)
-        bottomToolBar.isHidden = true
-        tabBarController?.tabBar.isHidden = false
+        title = "이슈"
+        rightNavButton.title = "Edit"
+        leftNavButton.title = "Filter"
+        changeButtonTo(mode: .general)
+        issueListViewModel?.clearSelectedCells()
         collectionView.visibleCells.forEach {
             guard let cell = $0 as? IssueCellView else { return }
             cell.showCheckBox(show: false, animation: true)
         }
     }
+    
+    private func changeButtonTo(mode: ViewingMode) {
+        switch mode {
+        case .edit:
+            floatingButtonAspectRatioConstraint.isActive = false
+            floatingButton.setTitle("선택 이슈 닫기", for: .normal)
+            floatingButton.layoutSubviews()
+            floatingButton.setImage(UIImage(systemName: "exclamationmark.circle"), for: .normal)
+            floatingButton.backgroundColor = .red
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+                self.floatingButton.contentEdgeInsets.left = 10
+                self.floatingButton.contentEdgeInsets.right = 10
+                self.floatingButton.imageEdgeInsets.left = -5
+            }
+        case .general:
+            floatingButtonAspectRatioConstraint.isActive = true
+            floatingButton.setTitle("", for: .normal)
+            floatingButton.setImage(UIImage(systemName: "plus"), for: .normal)
+            floatingButton.backgroundColor = UIColor(displayP3Red: 72/255, green: 133/255, blue: 195/255, alpha: 1)
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+                self.floatingButton.contentEdgeInsets.right = 0
+                self.floatingButton.contentEdgeInsets.left = 0
+                self.floatingButton.imageEdgeInsets.left = 0
+            }
+        }
+    }
+    
 }
 
-// MARK: - Segue Action
+// MARK: - Present
 
 extension IssueListViewController {
     
-    @IBSegueAction func createIssueFilterViewController(_ coder: NSCoder) -> IssueFilterViewController? {
+    private func presentFilterViewController() {
         guard viewingMode == .general,
-              let issueListViewModel  = issueListViewModel,
-            let filterViewModel = issueListViewModel.filterViewModel
-        else { return nil }
-        let vc = IssueFilterViewController(coder: coder, filterViewModel: filterViewModel)
-        vc?.onSelectionComplete = { (filterViewModel) in
-            let filter = IssueFilter(generalCondition: filterViewModel.generalConditions,
-                                     detailCondition: filterViewModel.detailConditions)
-            issueListViewModel.filter = filter
+            let issueListViewModel  = issueListViewModel
+            else { return }
+        let onDismiss = { (generalCondition: [Bool], detailCondition: [Int]) in
+            issueListViewModel.filter = IssueFilter(generalCondition: generalCondition, detailCondition: detailCondition)
+            self.collectionView.scrollsToTop = true
         }
-        return vc
+        IssueFilterViewController.present(at: self, filterViewModel: issueListViewModel.createFilterViewModel(), onDismiss: onDismiss)
     }
     
-    @IBSegueAction func addIssueSeguePerformed(_ coder: NSCoder) -> AddNewIssueViewController? {
-        let addIssueViewController = AddNewIssueViewController(coder: coder)
-        // addIssueVC의 doneButtonTapped 주입
-        return addIssueViewController
+    private func presentIssueDetailViewController(indexPath: IndexPath) {
+        guard let issueListViewModel = issueListViewModel,
+            let issueDetailViewModel = issueListViewModel.createIssueDetailViewModel(path: indexPath)
+            else { return }
+        let issueDetailVC = IssueDetailViewController.createViewController(issueDetailViewModel: issueDetailViewModel)
+        self.navigationController?.pushViewController(issueDetailVC, animated: true)
     }
     
 }
 
-// MARK: - UICollectionViewDataSource Implementation
+// MARK: - IssucCellViewDelegate Implementation
 
-extension IssueListViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cellView: IssueCellView = collectionView.dequeueCell(at: indexPath),
-              let cellViewModel = issueListViewModel?.cellForItemAt(path: indexPath) else { return UICollectionViewCell() }
-        cellView.configure(issueItemViewModel: cellViewModel)
-        cellView.showCheckBox(show: viewingMode == .edit, animation: false)
-        return cellView
+extension IssueListViewController: IssucCellViewDelegate {
+    
+    func closeIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int) {
+        issueListViewModel?.closeIssue(of: id)
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return issueListViewModel?.numberOfItem() ?? 0
+    func deleteIssueButtonTapped(_ issueCellView: IssueCellView, at id: Int) {
+        issueListViewModel?.deleteIssue(of: id)
     }
+    
+    func issueCellViewBeginDragging(_ issueCellView: IssueCellView, at id: Int) {
+        collectionView.visibleCells.forEach {
+            guard let cell = $0 as? IssueCellView, cell != issueCellView else { return }
+            UIView.animate(withDuration: 0.5) {
+                cell.cellHorizontalScrollView.contentOffset = CGPoint.zero
+            }
+        }
+    }
+    
+}
+
+// MARK: - UISearchController Implementation
+
+extension IssueListViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        issueListViewModel?.onSearch(text: searchController.searchBar.searchTextField.text)
+    }
+    
 }

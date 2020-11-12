@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="y8U-UO-Qqa">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add New Issue View Controller-->
+        <scene sceneID="xaJ-CG-com">
+            <objects>
+                <viewController storyboardIdentifier="AddNewIssueViewController" id="M35-c9-E8H" customClass="AddNewIssueViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xo1-iA-LUn">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="4Wa-T2-4Np">
+                                <rect key="frame" x="10" y="158.5" width="394" height="106.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTR-7F-740">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WbQ-1C-VpD">
+                                        <rect key="frame" x="0.0" y="27.5" width="394" height="39.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Hp8-3G-REh">
+                                        <rect key="frame" x="0.0" y="74" width="394" height="33.5"/>
+                                        <segments>
+                                            <segment title="마크다운"/>
+                                            <segment title="미리보기"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentDidChange:" destination="M35-c9-E8H" eventType="valueChanged" id="oTx-gk-Te1"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Hp8-3G-REh" firstAttribute="height" secondItem="4Wa-T2-4Np" secondAttribute="height" multiplier="0.04" constant="27.920000000000002" id="46l-8s-OSs"/>
+                                    <constraint firstItem="WbQ-1C-VpD" firstAttribute="height" secondItem="4Wa-T2-4Np" secondAttribute="height" multiplier="0.05" constant="34.399999999999999" id="eaj-FU-wfX"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="4Wa-T2-4Np" firstAttribute="top" secondItem="Jyn-Am-b0I" secondAttribute="top" constant="10" id="2zw-ll-OL4"/>
+                            <constraint firstItem="4Wa-T2-4Np" firstAttribute="leading" secondItem="Jyn-Am-b0I" secondAttribute="leading" constant="10" id="W0a-yT-MJo"/>
+                            <constraint firstItem="Jyn-Am-b0I" firstAttribute="trailing" secondItem="4Wa-T2-4Np" secondAttribute="trailing" constant="10" id="k1b-ht-znZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Jyn-Am-b0I"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="FSZ-nB-s8A">
+                        <barButtonItem key="leftBarButtonItem" style="done" id="oit-GN-QoT">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gb4-Tc-aB5">
+                                <rect key="frame" x="20" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="M35-c9-E8H" eventType="touchUpInside" id="m7n-Sp-ebY"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" id="150-PN-DNy">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4IY-l3-prl">
+                                <rect key="frame" x="302" y="7" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneButtonTapped:" destination="M35-c9-E8H" eventType="touchUpInside" id="qSj-L3-c2o"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="segmentedControl" destination="Hp8-3G-REh" id="cMI-ph-19y"/>
+                        <outlet property="titleLabel" destination="fTR-7F-740" id="1xx-bF-yh7"/>
+                        <outlet property="titleTextField" destination="WbQ-1C-VpD" id="5uA-QI-WCU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TIE-yf-wzQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3683" y="-556"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VO4-Ll-gYt">
+            <objects>
+                <navigationController storyboardIdentifier="AddIssueNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="y8U-UO-Qqa" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="pE2-l5-t6I">
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="M35-c9-E8H" kind="relationship" relationship="rootViewController" destinationCreationSelector="addIssueSeguePerformed:" id="4wM-hd-bac"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0ml-dF-Rhd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2807" y="-556"/>
+        </scene>
+    </scenes>
+</document>

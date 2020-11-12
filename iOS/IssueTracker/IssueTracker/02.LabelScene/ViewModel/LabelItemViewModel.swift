@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LabelItemViewModel {
+struct LabelItemViewModel: Hashable {
     let id: Int
     let title: String
     let description: String

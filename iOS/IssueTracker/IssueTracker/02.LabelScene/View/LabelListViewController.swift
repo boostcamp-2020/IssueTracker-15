@@ -23,7 +23,6 @@ class LabelListViewController: UIViewController {
         super.viewDidLoad()
         configureCollectionView()
         labelListViewModel?.needFetchItems()
-        title = "레이블"
     }
     
     private func configureCollectionView() {
@@ -35,7 +34,7 @@ class LabelListViewController: UIViewController {
     
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 10)
+        layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 10)
         layout.minimumLineSpacing = 1
         layout.sectionHeadersPinToVisibleBounds = true
         collectionView.setCollectionViewLayout(layout, animated: false)
@@ -52,12 +51,9 @@ extension LabelListViewController {
     }
     
     private func showSubmitFormView(type: LabelSubmitFieldsView.SubmitFieldType) {
-        guard let tabBarController = self.tabBarController,
-            let formView = SubmitFormView.createView(),
-            let labelSubmitFieldsView = LabelSubmitFieldsView.createView()
+        guard let labelSubmitFieldsView = LabelSubmitFieldsView.createView(),
+            let formView = SubmitFormViewController.createViewController(with: labelSubmitFieldsView)
             else { return }
-        
-        formView.configure(submitField: labelSubmitFieldsView)
         
         switch type {
         case .add:
@@ -68,9 +64,7 @@ extension LabelListViewController {
                 self.labelListViewModel?.editLabel(at: indexPath, title: title, desc: desc, hexColor: colorCode)
             }
         }
-        
-        tabBarController.view.addSubview(formView)
-        formView.frame = tabBarController.view.frame
+        present(formView, animated: true, completion: nil)
     }
     
 }
