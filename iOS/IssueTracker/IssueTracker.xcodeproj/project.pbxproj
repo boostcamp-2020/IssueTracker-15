@@ -94,6 +94,7 @@
 		965AA4D725598A5000747468 /* BottomSheetLabelCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965AA4D525598A5000747468 /* BottomSheetLabelCollectionView.xib */; };
 		965AA4DA25599E0C00747468 /* BottomSheetMilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AA4D825599E0C00747468 /* BottomSheetMilestoneView.swift */; };
 		965AA4DB25599E0C00747468 /* BottomSheetMilestoneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965AA4D925599E0C00747468 /* BottomSheetMilestoneView.xib */; };
+		965AD491255D05FF0021FA57 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AD490255D05FF0021FA57 /* UserService.swift */; };
 		965F09712550299A00B3A248 /* JSONDecoder+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */; };
 		965F09742550425A00B3A248 /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09732550425A00B3A248 /* IssueFilterViewController.swift */; };
 		965F097D25505A1200B3A248 /* DetailSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F097B25505A1200B3A248 /* DetailSelectionViewController.swift */; };
@@ -281,6 +282,7 @@
 		965AA4D525598A5000747468 /* BottomSheetLabelCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetLabelCollectionView.xib; sourceTree = "<group>"; };
 		965AA4D825599E0C00747468 /* BottomSheetMilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetMilestoneView.swift; sourceTree = "<group>"; };
 		965AA4D925599E0C00747468 /* BottomSheetMilestoneView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomSheetMilestoneView.xib; sourceTree = "<group>"; };
+		965AD490255D05FF0021FA57 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Decode.swift"; sourceTree = "<group>"; };
 		965F09732550425A00B3A248 /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
 		965F097B25505A1200B3A248 /* DetailSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelectionViewController.swift; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 				965A4DEF2552CDA900A4A7D7 /* IssueService.swift */,
 				96526C642557043200E2E387 /* CommentService.swift */,
 				96B6E3602556AFCF00D8BABF /* IssueTrackerAPIs.swift */,
+				965AD490255D05FF0021FA57 /* UserService.swift */,
 			);
 			path = 08.Endpoints;
 			sourceTree = "<group>";
@@ -1236,6 +1239,7 @@
 				95E9F5802546EC07001FBA0D /* LabelListViewController.swift in Sources */,
 				966DD02B254A259F00A44FBA /* Array+SafeAccess.swift in Sources */,
 				95EE2281255BEA4A0093A14C /* UserProvider.swift in Sources */,
+				965AD491255D05FF0021FA57 /* UserService.swift in Sources */,
 				9505446F254AA6E0007767C6 /* UIViewController+ShowAlert.swift in Sources */,
 				95E9F57C2546EC07001FBA0D /* AppDelegate.swift in Sources */,
 				95EE227E255BDB060093A14C /* LoginViewController.swift in Sources */,
