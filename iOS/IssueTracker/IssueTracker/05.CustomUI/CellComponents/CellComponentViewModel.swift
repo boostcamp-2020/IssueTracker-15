@@ -8,10 +8,17 @@
 
 import UIKit
 
-struct CellComponentViewModel {
+class CellComponentViewModel {
     let id: Int
     let title: String
     let element: String
+    var data: Data?
+    
+    var didDataChanged: ((Data?) -> Void)?
+    func onDataReceived(data: Data?) {
+        self.data = data
+        didDataChanged?(data)
+    }
     
     init(title: String, element: String) {
         self.id = 0

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import NetworkFramework
 
 protocol IssueDetailViewModelProtocol: AnyObject {
     var issueNumber: Int { get }
@@ -31,11 +32,19 @@ protocol IssueDetailViewModelProtocol: AnyObject {
     func detailItemSelected(type: DetailSelectionType, selectedItems: [CellComponentViewModel])
 }
 
-struct CommentViewModel {
+class CommentViewModel {
     let content: String
     let createAt: String
     let userName: String
     let imageURL: String?
+    var data: Data?
+    
+    var didDataChanged: ((Data?) -> Void)?
+    
+    func onDataReceived(data: Data?) {
+        self.data = data
+        didDataChanged?(data)
+    }
     
     init(comment: Comment) {
         content = comment.content
@@ -50,10 +59,17 @@ protocol UserViewModelProtocol {
     var imageURL: String? { get set }
 }
 
-struct UserViewModel {
+class UserViewModel {
     let id: Int
     var userName: String
     var imageURL: String?
+    var data: Data?
+    
+    var didDataChanged: ((Data?) -> Void)?
+    func onDataReceived(data: Data?) {
+        self.data = data
+        didDataChanged?(data)
+    }
     
     init(user: User? = nil) {
         self.id = user?.id ?? -1
@@ -128,6 +144,18 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             
             self.assignees = currentIssue.assignees.compactMap {
                 guard let user = issueProvider.users[$0] else { return nil }
+                let userViewModel = UserViewModel(user: user)
+                if let imageURL = userViewModel.imageURL {
+                    ImageLoader.shared.loadImage(from: imageURL, callBackQueue: .main) { [weak userViewModel] (result) in
+                        switch result {
+                        case .failure, .success(.none):
+                            return
+                        case .success(.some(let data)):
+                            userViewModel?.onDataReceived(data: data)
+                        }
+                    }
+                                       
+                }
                 return UserViewModel(user: user)
             }
 

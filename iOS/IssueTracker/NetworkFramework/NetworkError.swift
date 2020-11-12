@@ -14,4 +14,7 @@ public enum NetworkError: Error {
     case encodingData(Error)
     case responseError(String)
     case underlying(Error, Response?)
+    
+    // For Image Request
+    case imageIsNil
 }
