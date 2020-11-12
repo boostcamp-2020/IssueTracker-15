@@ -18,6 +18,7 @@ class LabelBadgeCellView: UICollectionViewCell {
     
     func configure(labelViewModel: LabelItemViewModel) {
         label.text = labelViewModel.title
+        label.textColor = UIColor(cgColor: labelViewModel.hexColor.color).isDarkColor ? UIColor.white : UIColor.black
         layer.backgroundColor = labelViewModel.hexColor.color
     }
     
