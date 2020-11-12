@@ -56,7 +56,6 @@ class IssueListViewController: UIViewController {
         floatingButtonAspectRatioConstraint.isActive = true
         navigationController?.isToolbarHidden = true
         floatingButton.layoutSubviews()
-        floatingButton.layer.cornerRadius = floatingButton.bounds.height / 2 * 1
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +66,11 @@ class IssueListViewController: UIViewController {
             cell.resetScrollOffset()
         }
         issueListViewModel?.needFetchItems()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        floatingButton.layer.cornerRadius = floatingButton.bounds.height / 2 * 1
     }
     
     private func configureSearchBar() {
