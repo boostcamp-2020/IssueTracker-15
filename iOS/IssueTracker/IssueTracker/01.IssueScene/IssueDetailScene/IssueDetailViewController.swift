@@ -42,7 +42,8 @@ class IssueDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBlurView()
+        setupNavBarBlur()
+        setupContentBlur()
         configureEditButton()
         issueDetailViewModel.needFetchDetails()
         configureCollectionView()
@@ -50,22 +51,40 @@ class IssueDetailViewController: UIViewController {
         navigationItem.title = "이슈 상세"
     }
     
-    let blurredEffectView: UIVisualEffectView = {
+    let contentBlurView: UIVisualEffectView = {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
         blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
         return blurredEffectView
     }()
     
-    func setupBlurView() {
-        blurredEffectView.alpha = 0
-        self.view.addSubview(blurredEffectView)
+    let navBarBlurView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        return blurredEffectView
+    }()
+    
+    func setupNavBarBlur() {
+        navBarBlurView.alpha = 0
+        self.navigationController?.navigationBar.addSubview(navBarBlurView)
+        NSLayoutConstraint.activate([
+            navBarBlurView.topAnchor.constraint(equalTo: (self.navigationController?.navigationBar.topAnchor)!),
+            navBarBlurView.leadingAnchor.constraint(equalTo: (self.navigationController?.navigationBar.leadingAnchor)!),
+            navBarBlurView.trailingAnchor.constraint(equalTo: (self.navigationController?.navigationBar.trailingAnchor)!),
+            navBarBlurView.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!)
+        ])
+    }
+    
+    func setupContentBlur() {
+        navBarBlurView.alpha = 0
+        self.view.addSubview(contentBlurView)
         
         NSLayoutConstraint.activate([
-            blurredEffectView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            blurredEffectView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            blurredEffectView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            blurredEffectView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            contentBlurView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            contentBlurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            contentBlurView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            contentBlurView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
     
@@ -77,12 +96,12 @@ class IssueDetailViewController: UIViewController {
         let width  = UIScreen.main.bounds.width
         bottomSheetView?.frame = CGRect(x: 0, y: height * 0.9, width: width, height: height)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
     }
-
+    
     private func configureEditButton() {
         let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editButtonTapped))
         self.navigationItem.rightBarButtonItem = editButton
@@ -181,7 +200,8 @@ extension IssueDetailViewController: BottomSheetViewDelegate {
     func heightChanged(with newHeight: CGFloat) {
         let newAlpha = newHeight / 1000
         DispatchQueue.main.async { [weak self] in
-            self?.blurredEffectView.alpha = (newAlpha - 0.5) * -1
+            self?.contentBlurView.alpha = (newAlpha - 0.5) * -1
+            self?.navBarBlurView.alpha = (newAlpha - 0.5) * -1
         }
     }
     
