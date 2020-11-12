@@ -100,6 +100,7 @@
 		965AD497255D34760021FA57 /* ImageLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AD496255D34760021FA57 /* ImageLoadable.swift */; };
 		965AD499255D35700021FA57 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AD498255D35700021FA57 /* UserViewModel.swift */; };
 		965AD49D255D37650021FA57 /* IssueDetailHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AD49C255D37650021FA57 /* IssueDetailHeaderViewModel.swift */; };
+		965AD49F255D3BBA0021FA57 /* UIView+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965AD49E255D3BBA0021FA57 /* UIView+CornerRadius.swift */; };
 		965F09712550299A00B3A248 /* JSONDecoder+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */; };
 		965F09742550425A00B3A248 /* IssueFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F09732550425A00B3A248 /* IssueFilterViewController.swift */; };
 		965F097D25505A1200B3A248 /* DetailSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965F097B25505A1200B3A248 /* DetailSelectionViewController.swift */; };
@@ -293,6 +294,7 @@
 		965AD496255D34760021FA57 /* ImageLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadable.swift; sourceTree = "<group>"; };
 		965AD498255D35700021FA57 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		965AD49C255D37650021FA57 /* IssueDetailHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailHeaderViewModel.swift; sourceTree = "<group>"; };
+		965AD49E255D3BBA0021FA57 /* UIView+CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+CornerRadius.swift"; sourceTree = "<group>"; };
 		965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Decode.swift"; sourceTree = "<group>"; };
 		965F09732550425A00B3A248 /* IssueFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilterViewController.swift; sourceTree = "<group>"; };
 		965F097B25505A1200B3A248 /* DetailSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelectionViewController.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 				96F95C01254E891E00EC00C6 /* CGFloat+Clamp.swift */,
 				965F09702550299A00B3A248 /* JSONDecoder+Decode.swift */,
 				96AD640D2551636C00B16BD3 /* JSONEncoder+encode.swift */,
+				965AD49E255D3BBA0021FA57 /* UIView+CornerRadius.swift */,
 			);
 			path = 06.Extensions;
 			sourceTree = "<group>";
@@ -1273,6 +1276,7 @@
 				965A4DEB2552C28300A4A7D7 /* IssueItemViewModel.swift in Sources */,
 				96F95BFA254E6C4A00EC00C6 /* IssueListViewController.swift in Sources */,
 				966ADAE5254D9B7C00A480DD /* MilestoneSubmitFieldsView+LoadFromNib.swift in Sources */,
+				965AD49F255D3BBA0021FA57 /* UIView+CornerRadius.swift in Sources */,
 				963A1A9C255249AB003E2BBB /* LabelComponentView.swift in Sources */,
 				965AD497255D34760021FA57 /* ImageLoadable.swift in Sources */,
 				965F09742550425A00B3A248 /* IssueFilterViewController.swift in Sources */,

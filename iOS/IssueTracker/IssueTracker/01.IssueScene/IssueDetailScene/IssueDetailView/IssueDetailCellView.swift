@@ -32,8 +32,15 @@ class IssueDetailCellView: UICollectionViewCell {
     }
     
     func setProfile(data: Data?) {
-        guard let data = data else { return }
-        profilePicture.image = UIImage(data: data)
+        guard let data = data,
+            let image = UIImage(data: data)
+        else { return }
+        profilePicture.image = image
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+       profilePicture.setRound(ratio: 1)
     }
 }
 

@@ -18,28 +18,34 @@ public class ImageLoader {
     let imageCache = NSCache<NSString, NSData>()
     
     public func loadImage(from urlStr: String, callBackQueue: DispatchQueue?, completion: @escaping ImageCompletion) {
-        print("[ImageLoader!] \(urlStr) 이미지 요청!")
+        print("[ImageLoader:] \(urlStr) 이미지 요청!")
         if let cachedData = imageCache.object(forKey: NSString(string: urlStr)) {
-            print("[ImageLoader!] Cache로부터 load 합니다!")
+            print("[ImageLoader:] Cache로부터 load 합니다!")
             completion(.success(cachedData as Data))
             return
         }
         guard let url = URL(string: urlStr) else {
             self.completion(callBackQueue: callBackQueue) {
-                print("[ImageError] URL이 올바르지 않습니다.")
+                print("[ImageLoader: ImageError] URL이 올바르지 않습니다.")
                 completion(.failure(.urlMappingError("url이 올바르지 않습니다.")))
             }
             return
         }
         
         let taskCompletion: (Data?, URLResponse?, Error?) -> Void  = { data, response, error in
+            
+            if let response = response as? HTTPURLResponse {
+                print("[ImageLoader: StatusCode] \(response.statusCode)")
+            }
+            
             guard let data = data, !data.isEmpty else {
                 self.completion(callBackQueue: callBackQueue) {
-                    print("[ImageError] data가 0입니다!")
+                    print("[ImageLoader: ImageError] data가 0입니다!")
                     completion(.failure(NetworkError.imageIsNil))
                 }
                 return
             }
+            print("[ImageLoader: data] \(String(describing: data))")
             
             self.imageCache.setObject(data as NSData, forKey: NSString(string: urlStr))
             self.completion(callBackQueue: callBackQueue) {
