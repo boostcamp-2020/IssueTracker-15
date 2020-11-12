@@ -1,4 +1,4 @@
-import { PostLabel } from "../@types/label-form";
+import { PostLabel, UpdateLabel } from "../@types/label-form";
 
 const URL = "http://118.67.134.194:3000";
 
@@ -9,6 +9,17 @@ export const getLabels = async () => {
   if (!result.ok) return false;
 
   return await result.json();
+};
+
+export const patchUpdateLabel = async (label: UpdateLabel) => {
+  const result = await fetch(`${URL}/api/label/${label.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ...label }),
+  });
+  return result.ok;
 };
 
 export const postNewLabel = async (label: PostLabel) => {

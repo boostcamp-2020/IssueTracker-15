@@ -17,8 +17,9 @@ export default function LabelRow({ label }: { label: LabelForm }) {
   const { labels, setLabels, editBoxToggle, setEditBoxToggle } = useContext(
     LabelsContext
   );
-  const [editedLabel, setEditedLabel] = useState({} as PostLabel);
-  //TODO
+  const [editedLabel, setEditedLabel] = useState(
+    label ? label : ({} as PostLabel)
+  );
   const [labelColor, setLabelColor] = useState(label.color ? label.color : "");
 
   const toggleEditBox = useCallback(() => {

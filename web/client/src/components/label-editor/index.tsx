@@ -5,6 +5,7 @@ import React, {
   useContext,
   useCallback,
   useRef,
+  useEffect,
 } from "react";
 import { LabelHeaderContext } from "../../containers/label-list-header";
 import Button from "../button";
@@ -12,7 +13,7 @@ import * as S from "./style";
 import { LabelsContext } from "../../views/label";
 import { getRandomColor } from "../../lib/label-color";
 import Label, { PostLabel } from "../../@types/label-form";
-import { postNewLabel } from "../../lib/api";
+import { postNewLabel, patchUpdateLabel } from "../../lib/api";
 interface LabelEditorProps {
   isCreate?: boolean;
   labelId?: number;
@@ -20,7 +21,7 @@ interface LabelEditorProps {
   setLabelContent?: Dispatch<SetStateAction<string>>;
   labelColor?: string;
   setLabelColor?: Dispatch<SetStateAction<string>>;
-  newLabel: PostLabel;
+  newLabel: any;
   setNewLabel: Dispatch<SetStateAction<PostLabel>>;
 }
 
@@ -48,6 +49,20 @@ export default function LabelEditor(props: LabelEditorProps) {
     }
   };
 
+  const setInputDatas = () => {
+    labelNameInput.current.value = props.newLabel.title
+      ? props.newLabel.title
+      : "";
+    labelDescriptionInput.current.value = props.newLabel.description
+      ? props.newLabel.description
+      : "";
+  };
+
+  useEffect(() => {
+    if (editBoxToggle) labelNameInput.current.focus();
+    setInputDatas();
+  }, [editBoxToggle]);
+
   const toggleCreateLabel = () => {
     if (setCreateLabel) {
       setCreateLabel(false);
@@ -57,6 +72,21 @@ export default function LabelEditor(props: LabelEditorProps) {
   const resetInputs = () => {
     labelNameInput.current.value = "";
     labelDescriptionInput.current.value = "";
+  };
+
+  const updateLabel = async () => {
+    if (!props.newLabel.id) return;
+    const isSuccess = await patchUpdateLabel(props.newLabel);
+    if (!isSuccess) alert("업데이트 실패");
+    setLabels(
+      labels.map((l) => {
+        if (l.id == props.newLabel.id) {
+          l = { ...(props.newLabel as Label) };
+        }
+        return l;
+      })
+    );
+    setEditBoxToggle(0);
   };
 
   const createNewLabel = async () => {
@@ -131,7 +161,10 @@ export default function LabelEditor(props: LabelEditorProps) {
           >
             cancel
           </Button>
-          <Button color="green" onClick={createNewLabel}>
+          <Button
+            color="green"
+            onClick={props.isCreate ? createNewLabel : updateLabel}
+          >
             {props.isCreate ? "Create Label" : "Save Changes"}
           </Button>
         </S.ButtonContainer>

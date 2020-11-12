@@ -7,6 +7,13 @@ export default interface Label {
 
 export interface PostLabel {
   id?: number;
+  title: string;
+  description: string;
+  color: string;
+}
+
+export interface UpdateLabel {
+  id: number;
   title?: string;
   description?: string;
   color?: string;
