@@ -84,6 +84,9 @@ export const updateIssueTitle = async (id: number, title: string) => {
       title
     }),
   })
+
+  if(!result.ok) return false;
+  return true;
 };
 
   export const closeIssue = async (id: number) => {
