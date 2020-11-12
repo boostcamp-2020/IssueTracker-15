@@ -4,11 +4,11 @@ import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { VscMilestone } from "react-icons/vsc";
 import Label from "../../../label";
 import { getTimeTillNow } from "../../../../lib/dateParser";
-
-interface IssueListProp {
-  info: any;
+import IssueInfoType from "../../../../@types/issue";
+interface IssueCompProp {
+  info: IssueInfoType;
 }
-function IssueList({ info }: IssueListProp) {
+function IssueComp({ info }: IssueCompProp) {
   const color = info.isOpened ? "green" : "red";
   const mention = info.isOpened ? "opened" : "closed";
 
@@ -48,4 +48,4 @@ function IssueList({ info }: IssueListProp) {
   );
 }
 
-export default IssueList;
+export default IssueComp;
