@@ -58,7 +58,7 @@ export default function IssueSideBar({
       </IssueSideBarItem>
 
       <IssueSideBarItem menuName="Milestone">
-        <div>{milestone.title}</div>
+        <div>{milestone ? milestone.title : "마일스톤이 없습니다!"}</div>
       </IssueSideBarItem>
     </>
   );
