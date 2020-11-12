@@ -2,7 +2,7 @@ import { useReducer, useEffect } from 'react';
 
 interface State {
   loading: boolean;
-  data: object | null;
+  data: any | null;
   error: Error | null;
 }
 

@@ -29,6 +29,8 @@ export const DropdownWrapper = styled.div`
   border-radius: 6px;
   left: 0;
   top: 20px;
+  z-index: 1;
+  background-color: white;
 `;
 
 export const ListWrapper = styled.ul`

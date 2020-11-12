@@ -5,8 +5,9 @@ const { color } = Palette;
 
 export const CommentBoxWrapper = styled.div`
   margin-left: 15px;
+  width: 100%;
 
-  min-width: 500px;
+  margin-bottom: 2rem;
 `;
 
 export const CommentBoxTitle = styled.div<{ isAuthor: boolean }>`
@@ -17,6 +18,7 @@ export const CommentBoxTitle = styled.div<{ isAuthor: boolean }>`
 
   padding: 13px 20px;
 
+  width: 100%;
   height: 25px;
 
   background: ${(props) =>
@@ -100,6 +102,8 @@ export const Edit = styled.div`
 
 export const CommentBoxBody = styled.div<{ isAuthor: boolean }>`
   padding: 16px 20px;
+
+  width: 100%;
 
   border: 1px solid
     ${(props) =>

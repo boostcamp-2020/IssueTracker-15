@@ -5,8 +5,8 @@ interface Container {
 }
 export const NavButton = styled.div<Container>`
   width: ${(props) => props.width};
-  padding-top: 7.703px;
-  padding-bottom: 7.703px;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
   padding-left: 10%;
   display: flex;
   align-contents: center;
