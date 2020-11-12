@@ -30,6 +30,36 @@ export const getLabels = async () => {
   return labelList;
 };
 
+
+export const getIssueById = async (id: number) => {
+  const res = await fetch(
+    `${URL}/api/issue/${id}`
+  );
+
+  if(!res.ok) return;
+  const issue = await res.json();
+  return issue;
+};
+
+interface CommentProps {
+	  userId : number;
+	  issueId : number;
+    content :string;
+}
+
+export const postComment = async ({userId, issueId, content}: CommentProps ) => {
+  const res = await fetch(`${URL}/api/`, {
+    method: 'POST', 
+    body: JSON.stringify({userId, issueId, content}), 
+    headers:{
+      'Content-Type': 'application/json'
+    }
+  })
+
+  if(!res.ok) return;
+  return await res.json();
+}
+
 export const getJWTToken = async (code: string) => {
   const result = await fetch("http://localhost:3000/api/signin/github", {
     method: "POST",
@@ -43,3 +73,4 @@ export const getJWTToken = async (code: string) => {
   const { accessToken } = await result.json();
   return accessToken;
 };
+

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import CommentBox from "../../components/commentBox";
+import useAsync from "../../hooks/useAsync";
+import * as api from "../../lib/api";
 
 interface CommentBoxContainerPropsType {
   isAuthor: boolean;
@@ -23,6 +25,10 @@ export default function CommentBoxContainer({
     const value = e.target.value;
     setTextArea(value);
   };
+
+  const [state, postComment] = useAsync(() => {
+    return api.postComment({ userId: 3, issueId: 3, content: textarea });
+  }, []);
 
   return (
     <CommentBox
