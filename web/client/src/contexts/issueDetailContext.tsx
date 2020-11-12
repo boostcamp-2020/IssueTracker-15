@@ -1,84 +1,76 @@
 import React, { useReducer, useContext, createContext, Dispatch } from "react";
-import useAsync from "../hooks/useAsync";
 import * as api from "../lib/api";
+import createActionDispatcher from "../lib/asyncActionUtils";
+import { createAsyncHandler, initialAsyncState } from "../lib/asyncActionUtils";
 
-// 상태를 위한 타입
-type State = {
-  loading: boolean;
-  data: null | any;
-  error: null | any;
-};
-
-// 모든 액션들을 위한 타입
-type Action =
-  | { type: "FETCH_ISSUE_BY_ID" }
-  | { type: "FETCH_ISSUE_BY_ID_SUCCESS"; payload: { data: any } }
-  | { type: "FETCH_ISSUE_BY_ID_ERROR"; payload: { error: any } };
-
-// 디스패치를 위한 타입 (Dispatch 를 리액트에서 불러올 수 있음), 액션들의 타입을 Dispatch 의 Generics로 설정
-type issueDetailDispatch = Dispatch<Action>;
-
-export const fetchIssueByIdActionGenerator = async (
-  id: number,
-  dispatch: issueDetailDispatch
-) => {
-  try {
-    dispatch({ type: "FETCH_ISSUE_BY_ID" });
-    const data = await api.getIssueById(id);
-    dispatch({
-      type: "FETCH_ISSUE_BY_ID_SUCCESS",
-      payload: { data },
-    });
-  } catch (error) {
-    dispatch({ type: "FETCH_ISSUE_BY_ID_ERROR", payload: { error } });
-  }
-};
-
-// Context 만들기
-const IssueDetailStateContext = createContext<State | null>(null);
-const IssueDetailDispatchContext = createContext<issueDetailDispatch | null>(
-  null
+const IssueDetailStateContext = createContext<any>(null);
+const IssueDetailDispatchContext = createContext<Dispatch<any> | undefined>(
+  undefined
 );
 
-// 리듀서
-function reducer(state: State, action: Action): State {
-  switch (action.type) {
-    case "FETCH_ISSUE_BY_ID":
-      return {
-        loading: true,
-        data: null,
-        error: null,
-      };
-    case "FETCH_ISSUE_BY_ID_SUCCESS":
-      return {
-        ...state,
-        loading: false,
-        data: action.payload.data,
-      };
-    case "FETCH_ISSUE_BY_ID_ERROR":
-      return {
-        ...state,
-        loading: false,
-        data: null,
-        error: action.payload.error,
-      };
-    default:
-      throw new Error("Unhandled action");
-  }
-}
+const initialState = {
+  issue: initialAsyncState,
+};
 
-// SampleProvider 에서 useReduer를 사용하고
-// SampleStateContext.Provider 와 SampleDispatchContext.Provider 로 children 을 감싸서 반환합니다.
+const fakeComment = {
+  id: 3,
+  content: "###안녕하세요",
+  createAt: "2020-11-02T14:26:16.241Z",
+  user: {
+    id: 1,
+    userName: "namda",
+    imageURL: "https://avatars3.githubusercontent.com/u/60877502?v=4",
+  },
+};
+
+export const getIssueById = createActionDispatcher(
+  "GET_ISSUE_BY_ID",
+  api.getIssueById
+);
+
+export const addComment = (comment: any, dispatch: any) => {
+  console.log(comment);
+  dispatch({ type: "ADD_COMMENT", payload: { comment } });
+};
+
+const issueHandler = createAsyncHandler("GET_ISSUE_BY_ID", "issue");
+
 export function IssueDetailProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [state, dispatch] = useReducer(reducer, {
-    loading: false,
-    data: null,
-    error: null,
-  });
+  // 위에서 만든 객체 / 유틸 함수들을 사용하여 리듀서 작성
+  function reducer(state: any, action: any) {
+    switch (action.type) {
+      case "GET_ISSUE_BY_ID":
+      case "GET_ISSUE_BY_ID_SUCCESS":
+      case "GET_ISSUE_BY_ID_ERROR":
+        return issueHandler(state, action);
+      case "ADD_COMMENT":
+        return {
+          ...state,
+          issue: {
+            ...state.issue,
+            data: {
+              ...state.issue.data,
+              comments: [
+                ...state.issue.data.comments,
+                {
+                  ...fakeComment,
+                  content: action.payload.comment.content,
+                  createAt: new Date().toString(),
+                },
+              ],
+            },
+          },
+        };
+      default:
+        throw new Error(`Unhanded action type: ${action.type}`);
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <IssueDetailStateContext.Provider value={state}>
@@ -89,15 +81,14 @@ export function IssueDetailProvider({
   );
 }
 
-// state 와 dispatch 를 쉽게 사용하기 위한 커스텀 Hooks
 export function useIssueDetailState() {
   const state = useContext(IssueDetailStateContext);
-  if (!state) throw new Error("Cannot find SampleProvider"); // 유효하지 않을땐 에러를 발생
+  if (!state) throw new Error("Cannot find SampleProvider");
   return state;
 }
 
 export function useIssueDetailDispatch() {
   const dispatch = useContext(IssueDetailDispatchContext);
-  if (!dispatch) throw new Error("Cannot find SampleProvider"); // 유효하지 않을땐 에러를 발생
+  if (!dispatch) throw new Error("Cannot find SampleProvider");
   return dispatch;
 }
