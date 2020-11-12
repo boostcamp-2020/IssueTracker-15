@@ -45,6 +45,7 @@ extension BottomSheetLabelCollectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: LabelBadgeCellView = collectionView.dequeueCell(at: indexPath) else { return UICollectionViewCell() }
         cell.configure(labelViewModel: labelItemViewModels[indexPath.row])
+        cell.setFontSize(20)
         return cell
     }
     
