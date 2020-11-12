@@ -48,6 +48,17 @@ export default function LabelEditor(props: LabelEditorProps) {
     }
   };
 
+  const toggleCreateLabel = () => {
+    if (setCreateLabel) {
+      setCreateLabel(false);
+    }
+  };
+
+  const resetInputs = () => {
+    labelNameInput.current.value = "";
+    labelDescriptionInput.current.value = "";
+  };
+
   const createNewLabel = async () => {
     const newCreatedLabel = (await postNewLabel(props.newLabel)) as Label;
     if (!newCreatedLabel) {
@@ -55,12 +66,8 @@ export default function LabelEditor(props: LabelEditorProps) {
       return;
     }
     setLabels([...labels, newCreatedLabel]);
-  };
-
-  const toggleCreateLabel = () => {
-    if (setCreateLabel) {
-      setCreateLabel(false);
-    }
+    toggleCreateLabel();
+    resetInputs();
   };
 
   const changeLabelColor = () => {

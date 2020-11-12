@@ -5,7 +5,6 @@ import * as S from "./style";
 import { LabelHeaderContext } from "../label-list-header";
 
 import { PostLabel } from "../../@types/label-form";
-import { couldStartTrivia } from "typescript";
 import { getRandomColor } from "../../lib/label-color";
 
 export default function LabelCreateBox() {
