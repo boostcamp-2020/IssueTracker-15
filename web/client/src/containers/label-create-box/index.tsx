@@ -6,14 +6,13 @@ import { LabelHeaderContext } from "../label-list-header";
 
 import { PostLabel } from "../../@types/label-form";
 import { couldStartTrivia } from "typescript";
+import { getRandomColor } from "../../lib/label-color";
 
 export default function LabelCreateBox() {
   const { createLabelVisible } = useContext(LabelHeaderContext);
   const [labelContent, setLabelContent] = useState("exapmle");
-  const [labelColor, setLabelColor] = useState("#0052CD");
-  const [newLabel, setNewLabel] = useState({} as PostLabel);
-
-  console.log(newLabel);
+  const [labelColor, setLabelColor] = useState(getRandomColor());
+  const [newLabel, setNewLabel] = useState({ color: labelColor } as PostLabel);
 
   return (
     <S.LabelCreateBox createLabelVisible={createLabelVisible}>
