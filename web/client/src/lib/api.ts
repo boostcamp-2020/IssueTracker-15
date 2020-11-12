@@ -1,4 +1,4 @@
-const URL = "http://118.67.134.194:3000";
+import {URL} from '../config/apiConfig'
 
 export const getMilestones = async () => {
   const result = await fetch(`${URL}/api/milestone`, {
