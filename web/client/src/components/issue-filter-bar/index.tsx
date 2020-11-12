@@ -53,10 +53,10 @@ function IssueFilterBar(this: any) {
         <S.SearchForm>{filterCmd}</S.SearchForm>
       </S.FilterContainer>
       <S.LabelLink to="/label">
-        <NavButton classify={"label"} count={2} />
+        <NavButton classify={"label"} />
       </S.LabelLink>
       <S.MilestoneLink to="/milestone">
-        <NavButton classify={"milestone"} count={3} />
+        <NavButton classify={"milestone"} />
       </S.MilestoneLink>
       <Button color="green" children="new Issue" />
     </S.FilterBar>

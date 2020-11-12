@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import * as S from "./style";
 import { VscMilestone } from "react-icons/vsc";
 import { BiLabel } from "react-icons/bi";
+import { getMilestones, getLabels } from "../../lib/api";
 
 interface NavButtonProps {
-  classify?: string;
-  count: number;
+  classify: string;
 }
 
 const milestoneConf = {
@@ -18,9 +18,20 @@ const labelConf = {
   title: "Label",
 };
 
-const labelNavButton = {};
-function NavButton({ classify, count }: NavButtonProps) {
+function NavButton({ classify }: NavButtonProps) {
+  const [count, setCount] = useState(0);
   const conf = classify === "milestone" ? milestoneConf : labelConf;
+
+  useEffect(() => {
+    const getMilestoneCount = async () => {
+      const result =
+        classify === "milestone"
+          ? (await getMilestones()).length
+          : (await getLabels()).length;
+      setCount(result);
+    };
+    getMilestoneCount();
+  }, []);
   return (
     <S.NavButton width={conf.width}>
       {classify === "milestone" ? <VscMilestone /> : <BiLabel />}

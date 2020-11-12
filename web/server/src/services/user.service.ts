@@ -2,6 +2,7 @@ import { getRepository } from "typeorm";
 import Encryption from "../lib/encryption";
 import UserEntity from "../entity/user.entity";
 import { SignUpInput } from "../types/sign-up.type";
+import UserDTO from "../types/user-dto";
 
 const UserService = {
   create: async (
@@ -29,6 +30,17 @@ const UserService = {
     const user = await userRepository.findOne({ where: { email } });
 
     return user;
+  },
+
+  getUserList: async () => {
+    const userRepository = getRepository(UserEntity);
+    const users = await userRepository.find();
+
+    const userList = users.map((user) => {
+      return new UserDTO(user);
+    });
+
+    return { userList };
   },
 
   getAssigneeList: async (issueId: number) => {
