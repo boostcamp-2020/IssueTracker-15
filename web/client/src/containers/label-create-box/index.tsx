@@ -15,6 +15,7 @@ export default function LabelCreateBox() {
         <Label name={labelContent} color={labelColor} />
       </S.LabelContainerRow>
       <LabelEditor
+        isCreate={true}
         labelContent={labelContent}
         setLabelContent={setLabelContent}
         labelColor={labelColor}

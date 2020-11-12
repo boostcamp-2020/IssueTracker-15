@@ -2,36 +2,51 @@ import React, {
   Dispatch,
   SetStateAction,
   useContext,
-  useEffect,
+  useCallback,
   useRef,
 } from "react";
 import { LabelHeaderContext } from "../../containers/label-list-header";
 import Button from "../button";
 import * as S from "./style";
+import { LabelsContext } from "../../views/label";
 
 interface LabelEditorProps {
-  labelContent: string;
-  setLabelContent: Dispatch<SetStateAction<string>>;
-  labelColor: string;
-  setLabelColor: Dispatch<SetStateAction<string>>;
+  isCreate?: boolean;
+  labelId?: number;
+  labelContent?: string;
+  setLabelContent?: Dispatch<SetStateAction<string>>;
+  labelColor?: string;
+  setLabelColor?: Dispatch<SetStateAction<string>>;
 }
 
 export default function LabelEditor(props: LabelEditorProps) {
   const { setCreateLabel } = useContext(LabelHeaderContext);
-
-  if (!setCreateLabel) throw new Error("ee");
+  const { editBoxToggle, setEditBoxToggle } = useContext(LabelsContext);
 
   const toggleCreateLabel = () => {
-    setCreateLabel(false);
+    if (setCreateLabel) {
+      setCreateLabel(false);
+    }
   };
 
   const colorInput = useRef(null);
+
   const changeLabelContent = (e: React.ChangeEvent<HTMLInputElement>) => {
-    props.setLabelContent(e.target.value);
+    if (props.setLabelContent) {
+      props.setLabelContent(e.target.value);
+    }
   };
 
+  const toggleEditBox = useCallback(() => {
+    setEditBoxToggle(0);
+  }, [editBoxToggle]);
+
   return (
-    <S.LabelEditor>
+    <S.LabelEditor
+      isCreate={props.isCreate}
+      labelId={props.labelId}
+      visible={editBoxToggle}
+    >
       <S.LabelTitleRow>
         <S.nameTitle>Label name</S.nameTitle>
         <S.descriptionTitle>Description</S.descriptionTitle>
@@ -45,11 +60,14 @@ export default function LabelEditor(props: LabelEditorProps) {
             <S.IconContainer>
               <S.refreshIcon />
             </S.IconContainer>
-            <S.colorInput value={"#0052CD"} ref={colorInput} />
+            <S.colorInput defaultValue={"#0052CD"} ref={colorInput} />
           </S.colorInputContainer>
         </S.inputContainer>
         <S.ButtonContainer>
-          <Button color="white" onClick={toggleCreateLabel}>
+          <Button
+            color="white"
+            onClick={setCreateLabel ? toggleCreateLabel : toggleEditBox}
+          >
             cancel
           </Button>
           <Button color="green">Create Label</Button>

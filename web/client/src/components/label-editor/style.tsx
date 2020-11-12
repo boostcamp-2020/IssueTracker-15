@@ -1,8 +1,17 @@
 import styled from "styled-components";
 import { Refresh } from "@styled-icons/boxicons-regular/Refresh";
 
-export const LabelEditor = styled.div`
-  display: "flex";
+interface LabelEditorProps {
+  isCreate?: boolean;
+  labelId: number | undefined;
+  visible?: number;
+}
+
+export const LabelEditor = styled.div<LabelEditorProps>`
+  display: ${(props: LabelEditorProps) => {
+    if (props.isCreate) return "flex";
+    return props.labelId === props.visible ? "flex" : "none";
+  }};
   flex-direction: column;
   justify-content: center;
   align-items: center;
