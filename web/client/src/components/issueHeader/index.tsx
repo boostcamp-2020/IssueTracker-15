@@ -3,6 +3,7 @@ import React, { useCallback, useState } from "react";
 import * as S from "./style";
 import { getTimeTillNow } from "../../lib/dateParser";
 import Button from "../button";
+import useToggle from "../../hooks/useToggle";
 
 interface IssueProps {
   title: string;
@@ -20,11 +21,8 @@ export default function IssueHeader({
   createAt,
   commentLength,
 }: IssueProps) {
-  const [isEditBoxOpen, setIsEditBoxOpen] = useState(false);
-
-  const toggleEditBox = useCallback(() => {
-    setIsEditBoxOpen(!isEditBoxOpen);
-  }, [isEditBoxOpen]);
+  const [isEditBoxOpen, setIsEditBoxOpen] = useToggle(false);
+  const toggleEditBox = useCallback(setIsEditBoxOpen, [isEditBoxOpen]);
 
   return (
     <S.IssueHeaderWrapper>
