@@ -47,26 +47,26 @@ class IssueFilter: IssueFilterable {
         if generalConditions[Condition.issueAssignedToMe.rawValue] {
             dataSet = dataSet.intersection(datas.filter {
                 $0.assignees.contains(where: {
-                    $0.id == user?.id
+                    $0 == user?.id
                 })
             })
         }
         
         if generalConditions[Condition.issueFromMe.rawValue] {
             dataSet = dataSet.intersection(datas.filter {
-                $0.author.id == user?.id
+                $0.author == user?.id
             })
         }
         
         // TODO: Detail Condition
         if let id = detailConditions[safe: DetailSelectionType.assignee.rawValue],
             id != -1 {
-            dataSet = dataSet.intersection(datas.filter { $0.assignees.contains(where: { $0.id == id })})
+            dataSet = dataSet.intersection(datas.filter { $0.assignees.contains(where: { $0 == id })})
         }
 
         if let id = detailConditions[safe: DetailSelectionType.writer.rawValue],
             id != -1 {
-            dataSet = dataSet.intersection(datas.filter { $0.author.id == id })
+            dataSet = dataSet.intersection(datas.filter { $0.author == id })
         }
         
         if let id = detailConditions[safe: DetailSelectionType.label.rawValue],

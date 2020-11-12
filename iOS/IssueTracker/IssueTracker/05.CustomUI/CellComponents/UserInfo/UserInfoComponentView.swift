@@ -16,6 +16,7 @@ class UserInfoComponentView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         userNameLabel.autoResizeFontWithHeight()
+        titleImage.setRound(ratio: 1)
     }
 }
 
@@ -28,7 +29,18 @@ extension UserInfoComponentView: CellComponentProtocol {
     func configure(viewModel: CellComponentViewModel) {
         // TODO: configure UserInfo
         userNameLabel.text = viewModel.title
+        viewModel.needImage { [weak self](data) in
+            self?.setImage(data: data)
+        }
+        
         layoutIfNeeded()
+    }
+    
+    func setImage(data: Data?) {
+        guard let data = data,
+            let image = UIImage(data: data)
+        else { return }
+        titleImage.image = image
     }
     
 }

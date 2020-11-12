@@ -9,25 +9,14 @@
 import Foundation
 import NetworkFramework
 
-struct TokenResponse: Codable {
-    let accessToken: String
-    let user: User
-}
-
-struct TokenRequest: Encodable {
-    let type: String
-    let code: String
-}
-
 protocol UserProvidable: AnyObject {
-    func requestAccessToken(code: String, completion: @escaping (LoginResult) -> Void )
-    var currentUser: User? { get }
+    
     var users: [Int: User] { get set }
-}
-
-enum LoginResult {
-    case success
-    case failure
+    
+    func requestAccessToken(code: String, completion: @escaping (LoginResult) -> Void )
+    func fetchUser(completion: (([User]?) -> Void)? )
+    var currentUser: User? { get }
+    
 }
 
 class UserProvider: UserProvidable {
@@ -71,4 +60,18 @@ class UserProvider: UserProvidable {
         })
     }
     
+    func fetchUser(completion: (([User]?) -> Void)?) {
+        dataLoader?.request(UserService.fetchAll, callBackQueue: .main, completion: { (response) in
+            switch response {
+            case .failure:
+                completion?(nil)
+            case .success(let response):
+                if let jsonObject = response.mapJsonObject(),
+                    let users = User.fetchResponse(json: jsonObject) {
+                    self.users = users.reduce(into: [:]) { $0[$1.id] = $1 }
+                    completion?(users)
+                }
+            }
+        })
+    }
 }

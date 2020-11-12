@@ -11,51 +11,18 @@ import Foundation
 struct Issue {
     let id: Int
     var title: String
-    
-    // TODO: description -> 없을 시 ""
     var description: String?
     
-    // TODO: author -> id!
-    let author: User
+    let author: Int
     var isOpened: Bool
     let createdAt: String
     var updatedAt: String
     
     var milestone: Int?
     var labels: [Int]
-    
-    var assignees: [User]
+    var assignees: [Int]
     
     var comments: [Comment]
-    
-    init(id: Int, author: String, title: String, description: String? = nil, milestoneId: Int? = nil) {
-        self.id = id
-        self.title = title
-        self.author = User(name: author)
-        self.milestone = milestoneId
-        self.description = description ?? ""
-        self.createdAt = ""
-        self.updatedAt = ""
-        self.labels = []
-        self.assignees = []
-        self.isOpened = true
-        self.comments = []
-    }
-    
-    // TODO: mock init 삭제할 것!
-    init(id: Int, title: String, description: String, labels: [Int], milestone: Int? = nil, author: String, isOpened: Bool) {
-        self.id = id
-        self.title = title
-        self.author = User(name: author)
-        self.milestone = milestone
-        self.description = description
-        self.createdAt = ""
-        self.updatedAt = ""
-        self.labels = labels
-        self.assignees = []
-        self.isOpened = true
-        self.comments = []
-    }
     
     mutating func addLabel(id: Int) {
         if labels.contains(where: {$0 == id}) { return }
@@ -77,12 +44,12 @@ struct Issue {
     
     mutating func addAssignee(id: Int) {
         // TODO: Assignee -> [id]
-        if assignees.contains(where: { $0.userName == String(id) }) { return }
-        assignees.append(User(id: id))
+        if assignees.contains(where: { $0 == id }) { return }
+        assignees.append(id)
     }
     
     mutating func deleteAssignee(id: Int) {
-        guard let idx = assignees.firstIndex(where: { $0.userName == String(id) }) else { return }
+        guard let idx = assignees.firstIndex(where: { $0 == id }) else { return }
         assignees.remove(at: idx)
     }
     
@@ -108,13 +75,13 @@ extension Issue {
     init(id: Int,
          title: String,
          description: String? = nil,
-         author: User,
+         author: Int,
          isOpened: Bool,
          createdAt: String,
          updatedAt: String,
          milestone: Int?,
          labels: [Int],
-         assignees: [User]) {
+         assignees: [Int]) {
         self.id = id
         self.title = title
         self.description = description
@@ -145,10 +112,10 @@ extension Issue {
             let assigneeObjects = jsonObject["assignees"] as? [[String: Any]]
             else { return nil }
         let labels = labelObjects.compactMap { $0["id"] as? Int }
-        let assignees = assigneeObjects.compactMap { User(json: $0) }
+        let assignees = assigneeObjects.compactMap { User(json: $0)?.id }
         let milestone = jsonObject["milestoneId"] as? Int
         
-        return Issue(id: id, title: title, description: nil, author: author, isOpened: isOpened, createdAt: createdAt, updatedAt: updatedAt, milestone: milestone, labels: labels, assignees: assignees)
+        return Issue(id: id, title: title, description: nil, author: author.id, isOpened: isOpened, createdAt: createdAt, updatedAt: updatedAt, milestone: milestone, labels: labels, assignees: assignees)
     }
     
     // from AddIssue API
@@ -163,7 +130,7 @@ extension Issue {
         self.id = id
         self.title = title
         self.description = description
-        self.author = User(id: authorId)
+        self.author = authorId
         self.isOpened = isOpened
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -201,8 +168,7 @@ extension Issue {
             let createAt = jsonObject["createAt"] as? String,
             let updateAt = jsonObject["updateAt"] as? String,
             let authorObject = jsonObject["author"] as? [String: Any],
-            let authorName = authorObject["userName"] as? String,
-            let authorId = authorObject["id"] as? Int,
+            let author = User(json: authorObject),
             let labelObjects = jsonObject["labels"] as? [[String: Any]],
             let assigneeObjects = jsonObject["assignees"] as? [[String: Any]],
             let commentObjects = jsonObject["comments"] as? [[String: Any]]
@@ -215,36 +181,11 @@ extension Issue {
         
         let milestoneId = (jsonObject["milestone"] as? [String: Any])?["id"] as? Int
         let labels = labelObjects.compactMap { $0["id"] as? Int }
-        let authorImageUrl = authorObject["imageURL"] as? String
         
-        let author = User(id: authorId, name: authorName, imageUrl: authorImageUrl)
-        let assignees = assigneeObjects.compactMap { User(json: $0) }
+        let assignees = assigneeObjects.compactMap { User(json: $0)?.id }
         let comments = commentObjects.compactMap { Comment(json: $0) }
         
-        return Issue(id: id, title: title, description: description, author: author, isOpened: isOpened, createdAt: createAt, updatedAt: updateAt, milestone: milestoneId, labels: labels, assignees: assignees, comments: comments)
+        return Issue(id: id, title: title, description: description, author: author.id, isOpened: isOpened, createdAt: createAt, updatedAt: updateAt, milestone: milestoneId, labels: labels, assignees: assignees, comments: comments)
     }
     
-    init(id: Int,
-         title: String,
-         description: String? = nil,
-         author: User,
-         isOpened: Bool,
-         createdAt: String,
-         updatedAt: String,
-         milestone: Int?,
-         labels: [Int],
-         assignees: [User],
-         comments: [Comment]) {
-        self.id = id
-        self.title = title
-        self.description = description
-        self.author = author
-        self.isOpened = isOpened
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
-        self.milestone = milestone
-        self.labels = labels
-        self.assignees = assignees
-        self.comments = comments
-    }
 }

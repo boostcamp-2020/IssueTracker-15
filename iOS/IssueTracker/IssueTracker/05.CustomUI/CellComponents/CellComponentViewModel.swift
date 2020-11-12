@@ -8,12 +8,12 @@
 
 import UIKit
 
-struct CellComponentViewModel {
+class CellComponentViewModel: ImageLoadable {
     let id: Int
     let title: String
-    let element: String
+    let element: String?
     
-    init(title: String, element: String) {
+    init(title: String, element: String? = nil) {
         self.id = 0
         self.title = title
         self.element = element
@@ -34,14 +34,11 @@ struct CellComponentViewModel {
     init(user: User) {
         id = user.id
         title = user.userName
-        element = user.imageURL ?? ""
+        element = user.imageURL
     }
     
-    // TODO:
-    /*
-     init(userInfo: UserInfo) {
-     title = userInfo.name
-     element = userInfo.imageUrl
-     }
-     */
+    func needImage(completion: @escaping (Data?) -> Void ) {
+        guard let url = element, !url.isEmpty else { return }
+        loadImage(url: url, completion: completion)
+    }
 }

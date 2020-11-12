@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import NetworkFramework
 
 protocol IssueDetailViewModelProtocol: AnyObject {
     var issueNumber: Int { get }
@@ -15,6 +16,7 @@ protocol IssueDetailViewModelProtocol: AnyObject {
     var isOpened: Bool { get }
     var didFetch: (() -> Void)? { get set }
     var milestone: MilestoneItemViewModel? { get }
+    var headerViewModel: IssueDetailHeaderViewModel { get }
     var description: String? { get }
     var comments: [CommentViewModel] { get }
     var labels: [LabelItemViewModel] { get }
@@ -31,38 +33,6 @@ protocol IssueDetailViewModelProtocol: AnyObject {
     func detailItemSelected(type: DetailSelectionType, selectedItems: [CellComponentViewModel])
 }
 
-struct CommentViewModel {
-    let content: String
-    let createAt: String
-    let userName: String
-    let imageURL: String?
-    
-    init(comment: Comment) {
-        content = comment.content
-        createAt = comment.createAt
-        userName = comment.author.userName
-        imageURL = comment.author.imageURL
-    }
-}
-
-protocol UserViewModelProtocol {
-    var userName: String { get set }
-    var imageURL: String? { get set }
-}
-
-struct UserViewModel {
-    let id: Int
-    var userName: String
-    var imageURL: String?
-    
-    init(user: User? = nil) {
-        self.id = user?.id ?? -1
-        self.userName = user?.userName ?? ""
-        self.imageURL = user?.imageURL
-    }
-
-}
-
 class IssueDetailViewModel: IssueDetailViewModelProtocol {
     
     var issueNumber: Int = 0
@@ -75,6 +45,10 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     var comments: [CommentViewModel] = [CommentViewModel]()
     var labels: [LabelItemViewModel] = [LabelItemViewModel]()
     var assignees: [UserViewModel] = [UserViewModel]()
+    
+    var headerViewModel: IssueDetailHeaderViewModel {
+        IssueDetailHeaderViewModel(id: issueNumber, title: title, author: author, isOpened: isOpened)
+    }
     
     var didLabelChanged: (() -> Void)?
     var didMilestoneChanged: (() -> Void)?
@@ -94,17 +68,19 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     func needFetchDetails() {
         issueProvider?.getIssue(at: issueNumber) { [weak self] (issue) in
             guard let `self` = self,
-                let currentIssue = issue
+                let issueProvider = self.issueProvider,
+                let currentIssue = issue,
+                let author = issueProvider.users[currentIssue.author]
                 else { return }
             
             self.issueNumber = currentIssue.id
             self.title = currentIssue.title
             self.isOpened = currentIssue.isOpened
-            self.author = UserViewModel(user: currentIssue.author)
+            self.author = UserViewModel(user: author)
             
             if let description = currentIssue.description {
                 self.description = description
-                self.comments.append(CommentViewModel(comment: Comment(content: description, user: currentIssue.author)))
+                self.comments.append(CommentViewModel(comment: Comment(content: description, user: author)))
             }
             
             currentIssue.comments.forEach { comment in
@@ -124,7 +100,10 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
                 }
             }
             
-            self.assignees = currentIssue.assignees.map { UserViewModel(user: $0)}
+            self.assignees = currentIssue.assignees.compactMap {
+                guard let user = issueProvider.users[$0] else { return nil }
+                return UserViewModel(user: user)
+            }
 
             self.didFetch?()
         }
@@ -143,13 +122,14 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     func editIssue(title: String, description: String) {
         issueProvider?.editIssue(id: issueNumber, title: title, description: description, completion: { [weak self] (editedIssue) in
             guard let `self` = self,
-                let editedIssue = editedIssue
+                let editedIssue = editedIssue,
+                let author = self.issueProvider?.users[editedIssue.id]
                 else { return }
             
             self.title = editedIssue.title
             
             if let editedDescription = editedIssue.description {
-                let comment = CommentViewModel(comment: Comment(content: editedDescription, user: editedIssue.author))
+                let comment = CommentViewModel(comment: Comment(content: editedDescription, user: author))
                 if self.description != nil {
                     self.comments[0] = comment
                 } else {

@@ -10,6 +10,7 @@ import Foundation
 import NetworkFramework
 
 protocol LabelProvidable: AnyObject {
+    
     var labels: [Int: Label] { get }
     
     func addLabel(title: String, description: String, color: String, completion:  @escaping (Label?) -> Void )
@@ -23,16 +24,12 @@ protocol LabelProvidable: AnyObject {
 
 class LabelProvider: LabelProvidable {
     
-    // TODO: 같은 Fetch 요청이 여러번 들어왔을 겨우 completion을 배열에 넣어두었다 한 패칭에 Completion을 모두 처리해주는 방식으로!
-    // 추상화 단계를 한단계 올릴지 생각해 볼것!
-    private var onFetching = false
-    // Key, Value(CompletionFunc) 로 관리하고 처리 됬을 경우 삭제해주기!
-    // 효율적인 key 관리 기법 생각해보기!
-    private var fetchingCompletionHandlers = [Int: ([Label]?)->Void]()
-    
     private(set) var labels = [Int: Label]()
     private weak var dataLoader: DataLoadable?
     private weak var userProvider: UserProvidable?
+    
+    private var onFetching = false
+    private var fetchingCompletionHandlers = [Int: ([Label]?)->Void]()
     
     init(dataLoader: DataLoadable, userProvider: UserProvidable) {
         self.dataLoader = dataLoader

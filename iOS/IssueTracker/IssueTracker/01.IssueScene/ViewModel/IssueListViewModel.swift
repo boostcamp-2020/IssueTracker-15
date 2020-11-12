@@ -7,6 +7,11 @@
 //
 import Foundation
 
+enum SelectionMode {
+    case opened
+    case closed
+}
+
 protocol IssueListViewModelProtocol: AnyObject {
     
     // For Presentation
@@ -15,6 +20,7 @@ protocol IssueListViewModelProtocol: AnyObject {
     var showTitleWithCheckNum: ((Int) -> Void)? { get set }
     var filter: IssueFilterable? { get set }
     var issues: [IssueItemViewModel] { get }
+    var editSelectionMode: SelectionMode { get }
     
     // For Events
     func needFetchItems()
@@ -27,7 +33,7 @@ protocol IssueListViewModelProtocol: AnyObject {
     func closeSelectedIssue()
     func deleteIssue(of id: Int)
     
-    func addNewIssue(title: String, description: String, authorID: Int)
+    func addNewIssue(title: String, description: String)
     
     // For Search
     func onSearch(text: String?)
@@ -48,6 +54,7 @@ class IssueListViewModel: IssueListViewModelProtocol {
     var showTitleWithCheckNum: ((Int) -> Void)?
     var didCellChecked: ((IndexPath, Bool) -> Void)?
     
+    var editSelectionMode: SelectionMode = .opened
     private(set) var issues = [IssueItemViewModel]()
     var filter: IssueFilterable? {
         didSet {
@@ -145,6 +152,13 @@ extension IssueListViewModel {
             self?.needFetchItems()
         })
     }
+    
+    private func requestAddIssue(title: String, description: String) {
+        issueProvider?.addIssue(title: title, description: description, milestoneID: nil) { [weak self] (createdIssue) in
+            guard createdIssue != nil else { return }
+            self?.needFetchItems()
+        }
+    }
 }
 
 // MARK: - View Event
@@ -174,17 +188,11 @@ extension IssueListViewModel {
             issue.checked = true
             self.didCellChecked?(IndexPath(row: idx, section: 0), true)
         }
-        showTitleWithCheckNum?(issues.filter { $0.checked }.count)
+        showTitleWithCheckNum?(issues.filter { $0.checked }.count )
     }
     
-    func addNewIssue(title: String, description: String, authorID: Int) {
-        issueProvider?.addIssue(title: title, description: description, milestoneID: nil) { [weak self] (createdIssue) in
-            guard let `self` = self,
-                let createdIssue = createdIssue
-                else { return }
-            self.issues.append(IssueItemViewModel(issue: createdIssue))
-            self.didItemChanged?(self.issues)
-        }
+    func addNewIssue(title: String, description: String) {
+        requestAddIssue(title: title, description: description)
     }
     
     func closeIssue(of id: Int) {

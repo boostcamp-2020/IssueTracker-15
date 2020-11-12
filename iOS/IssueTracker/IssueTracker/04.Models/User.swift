@@ -19,18 +19,18 @@ struct User: Codable {
         imageURL = nil
     }
     
-    init(id: Int, name: String, imageUrl: String? = nil) {
-        self.id = id
-        self.userName = name
-        self.imageURL = imageUrl
-    }
-    
     init(name: String, imageUrl: String? = nil) {
         // TODO: userID
         self.id = 0
         self.userName = name
         self.imageURL = imageUrl
     }
+    
+}
+
+// MARK: - For Common Response Data
+
+extension User {
     
     init?(json: [String: Any]) {
         guard let name = json["userName"] as? String,
@@ -40,4 +40,10 @@ struct User: Codable {
         self.userName = name
         self.imageURL = json["imageURL"] as? String
     }
+    
+    static func fetchResponse(json: [String: Any]?) -> [User]? {
+        guard let userJsonArr = json?["userList"] as? [[String: Any]] else { return nil }
+        return userJsonArr.compactMap { User(json: $0) }
+    }
+    
 }
