@@ -11,8 +11,6 @@ import Foundation
 struct Issue {
     let id: Int
     var title: String
-    
-    // TODO: description -> 없을 시 ""
     var description: String?
     
     // TODO: author -> id!
@@ -24,38 +22,10 @@ struct Issue {
     var milestone: Int?
     var labels: [Int]
     
+    // TODO: user를 fetch 하는 기능이 완성되면 Int로 아이디 값을 저장할 것!
     var assignees: [User]
     
     var comments: [Comment]
-    
-    init(id: Int, author: String, title: String, description: String? = nil, milestoneId: Int? = nil) {
-        self.id = id
-        self.title = title
-        self.author = User(name: author)
-        self.milestone = milestoneId
-        self.description = description ?? ""
-        self.createdAt = ""
-        self.updatedAt = ""
-        self.labels = []
-        self.assignees = []
-        self.isOpened = true
-        self.comments = []
-    }
-    
-    // TODO: mock init 삭제할 것!
-    init(id: Int, title: String, description: String, labels: [Int], milestone: Int? = nil, author: String, isOpened: Bool) {
-        self.id = id
-        self.title = title
-        self.author = User(name: author)
-        self.milestone = milestone
-        self.description = description
-        self.createdAt = ""
-        self.updatedAt = ""
-        self.labels = labels
-        self.assignees = []
-        self.isOpened = true
-        self.comments = []
-    }
     
     mutating func addLabel(id: Int) {
         if labels.contains(where: {$0 == id}) { return }
@@ -201,8 +171,7 @@ extension Issue {
             let createAt = jsonObject["createAt"] as? String,
             let updateAt = jsonObject["updateAt"] as? String,
             let authorObject = jsonObject["author"] as? [String: Any],
-            let authorName = authorObject["userName"] as? String,
-            let authorId = authorObject["id"] as? Int,
+            let author = User(json: authorObject),
             let labelObjects = jsonObject["labels"] as? [[String: Any]],
             let assigneeObjects = jsonObject["assignees"] as? [[String: Any]],
             let commentObjects = jsonObject["comments"] as? [[String: Any]]
@@ -215,36 +184,11 @@ extension Issue {
         
         let milestoneId = (jsonObject["milestone"] as? [String: Any])?["id"] as? Int
         let labels = labelObjects.compactMap { $0["id"] as? Int }
-        let authorImageUrl = authorObject["imageURL"] as? String
         
-        let author = User(id: authorId, name: authorName, imageUrl: authorImageUrl)
         let assignees = assigneeObjects.compactMap { User(json: $0) }
         let comments = commentObjects.compactMap { Comment(json: $0) }
         
         return Issue(id: id, title: title, description: description, author: author, isOpened: isOpened, createdAt: createAt, updatedAt: updateAt, milestone: milestoneId, labels: labels, assignees: assignees, comments: comments)
     }
     
-    init(id: Int,
-         title: String,
-         description: String? = nil,
-         author: User,
-         isOpened: Bool,
-         createdAt: String,
-         updatedAt: String,
-         milestone: Int?,
-         labels: [Int],
-         assignees: [User],
-         comments: [Comment]) {
-        self.id = id
-        self.title = title
-        self.description = description
-        self.author = author
-        self.isOpened = isOpened
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
-        self.milestone = milestone
-        self.labels = labels
-        self.assignees = assignees
-        self.comments = comments
-    }
 }

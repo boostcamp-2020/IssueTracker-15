@@ -9,25 +9,13 @@
 import Foundation
 import NetworkFramework
 
-struct TokenResponse: Codable {
-    let accessToken: String
-    let user: User
-}
-
-struct TokenRequest: Encodable {
-    let type: String
-    let code: String
-}
-
 protocol UserProvidable: AnyObject {
+    
+    var users: [Int: User] { get set }
+    
     func requestAccessToken(code: String, completion: @escaping (LoginResult) -> Void )
     var currentUser: User? { get }
-    var users: [Int: User] { get set }
-}
-
-enum LoginResult {
-    case success
-    case failure
+    
 }
 
 class UserProvider: UserProvidable {

@@ -54,6 +54,7 @@
 		960205612553140500888394 /* DetailSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960205602553140500888394 /* DetailSelectionViewModel.swift */; };
 		9602056325531E1B00888394 /* FilterConditionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9602056225531E1B00888394 /* FilterConditionType.swift */; };
 		960205652553259D00888394 /* IssueFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960205642553259D00888394 /* IssueFilter.swift */; };
+		9603BC97255CDA410001416E /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603BC96255CDA410001416E /* Auth.swift */; };
 		9613C12E2547B265005EF13C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 9613C12D2547B265005EF13C /* .swiftlint.yml */; };
 		961B10602558F39500C7048C /* IssueFilter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 961B105F2558F39500C7048C /* IssueFilter.storyboard */; };
 		9627A5A825506985000BFF4D /* UITableView+Registerable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5A725506985000BFF4D /* UITableView+Registerable.swift */; };
@@ -248,6 +249,7 @@
 		960205602553140500888394 /* DetailSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSelectionViewModel.swift; sourceTree = "<group>"; };
 		9602056225531E1B00888394 /* FilterConditionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConditionType.swift; sourceTree = "<group>"; };
 		960205642553259D00888394 /* IssueFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueFilter.swift; sourceTree = "<group>"; };
+		9603BC96255CDA410001416E /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		9613C12D2547B265005EF13C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		961B105F2558F39500C7048C /* IssueFilter.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = IssueFilter.storyboard; path = IssueTracker/01.IssueScene/FilterScene/MainFilterScene/IssueFilter.storyboard; sourceTree = SOURCE_ROOT; };
 		9627A5A725506985000BFF4D /* UITableView+Registerable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Registerable.swift"; sourceTree = "<group>"; };
@@ -530,16 +532,13 @@
 		957DBF9A25513FA80051123C /* 04.Models */ = {
 			isa = PBXGroup;
 			children = (
+				9603BC9B255CDA8B0001416E /* Provider */,
 				95C2F8942547EBE0006B3BC6 /* Label.swift */,
-				96A519BD255151AB00A162B0 /* LabelProvider.swift */,
 				966DD038254A5B1600A44FBA /* Milestone.swift */,
-				96AD640F255164A100B16BD3 /* MilestoneProvider.swift */,
 				96F95BFB254E6E4C00EC00C6 /* Issue.swift */,
-				965A4DDD2552AFC300A4A7D7 /* IssueProvider.swift */,
-				960205642553259D00888394 /* IssueFilter.swift */,
 				96B2876F255B793D00CB98ED /* User.swift */,
 				96B28771255B794400CB98ED /* Comment.swift */,
-				95EE2280255BEA4A0093A14C /* UserProvider.swift */,
+				9603BC96255CDA410001416E /* Auth.swift */,
 			);
 			path = 04.Models;
 			sourceTree = "<group>";
@@ -624,6 +623,18 @@
 				960205602553140500888394 /* DetailSelectionViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9603BC9B255CDA8B0001416E /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				96A519BD255151AB00A162B0 /* LabelProvider.swift */,
+				96AD640F255164A100B16BD3 /* MilestoneProvider.swift */,
+				965A4DDD2552AFC300A4A7D7 /* IssueProvider.swift */,
+				960205642553259D00888394 /* IssueFilter.swift */,
+				95EE2280255BEA4A0093A14C /* UserProvider.swift */,
+			);
+			path = Provider;
 			sourceTree = "<group>";
 		};
 		963971DC2549BB66005BB4FA /* Mocks */ = {
@@ -1240,6 +1251,7 @@
 				96AD6410255164A100B16BD3 /* MilestoneProvider.swift in Sources */,
 				965F09712550299A00B3A248 /* JSONDecoder+Decode.swift in Sources */,
 				9679DFB6254D767400550BE4 /* SubmitFormViewController.swift in Sources */,
+				9603BC97255CDA410001416E /* Auth.swift in Sources */,
 				95C2F8952547EBE0006B3BC6 /* Label.swift in Sources */,
 				96C8357525490F1A0086A6E6 /* BadgeLabelView.swift in Sources */,
 				96B28772255B794400CB98ED /* Comment.swift in Sources */,

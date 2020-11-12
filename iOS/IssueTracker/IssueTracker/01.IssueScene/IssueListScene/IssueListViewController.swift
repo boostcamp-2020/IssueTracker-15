@@ -56,7 +56,6 @@ class IssueListViewController: UIViewController {
         floatingButtonAspectRatioConstraint.isActive = true
         navigationController?.isToolbarHidden = true
         floatingButton.layoutSubviews()
-        floatingButton.layer.cornerRadius = floatingButton.bounds.height / 2 * 1
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +66,11 @@ class IssueListViewController: UIViewController {
             cell.resetScrollOffset()
         }
         issueListViewModel?.needFetchItems()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        floatingButton.layer.cornerRadius = floatingButton.bounds.height / 2 * 1
     }
     
     private func configureSearchBar() {
@@ -145,7 +149,7 @@ extension IssueListViewController {
             toGeneralMode()
         case .general:
             AddNewIssueViewController.present(at: self, addType: .newIssue, previousData: nil, onDismiss: { [weak self] (content) in
-                self?.issueListViewModel?.addNewIssue(title: content[0], description: content[1], authorID: 3)
+                self?.issueListViewModel?.addNewIssue(title: content[0], description: content[1])
             })
         }
     }

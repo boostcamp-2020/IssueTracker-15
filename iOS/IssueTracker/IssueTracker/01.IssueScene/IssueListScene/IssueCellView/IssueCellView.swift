@@ -74,9 +74,11 @@ class IssueCellView: UICollectionViewCell {
         self.issueItemViewModel = issueItemViewModel
         
         titleLabel.text = issueItemViewModel.title
+        titleLabel.invalidateIntrinsicContentSize()
         setMilestone(title: issueItemViewModel.milestoneTitle)
         setLabels(labelViewModels: issueItemViewModel.labelItemViewModels)
         setStatus(isOpened: issueItemViewModel.isOpened)
+        setCheck(issueItemViewModel.checked)
         
         self.issueItemViewModel?.didMilestoneChanged = { [weak self] milestone in
                 self?.setMilestone(title: milestone)
@@ -85,17 +87,17 @@ class IssueCellView: UICollectionViewCell {
         self.issueItemViewModel?.didLabelsChanged = { [weak self] (labelViewModels) in
             self?.setLabels(labelViewModels: labelViewModels)
         }
-        
-        layoutIfNeeded()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         delegate = nil
         issueItemViewModel = nil
+        milestoneBadge.text = ""
+        titleLabel.text = ""
         cellHorizontalScrollView.contentOffset = CGPoint.zero
-        let snapShot = SnapShot()
-        dataSource.apply(snapShot, animatingDifferences: false, completion: nil)
+        labelCollectionView.isHidden = true
+        setCheck(false)
     }
 
     override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
@@ -110,6 +112,7 @@ class IssueCellView: UICollectionViewCell {
     
     private func setMilestone(title: String) {
         if title.isEmpty {
+            milestoneBadge.text = ""
             milestoneBadge.isHidden = true
         } else {
             milestoneBadge.isHidden = false
@@ -118,6 +121,7 @@ class IssueCellView: UICollectionViewCell {
     }
     
     private func setLabels(labelViewModels: [LabelItemViewModel]) {
+        labelCollectionView.isHidden = false
         var snapShot = SnapShot()
         snapShot.appendSections([0])
         snapShot.appendItems(labelViewModels)
