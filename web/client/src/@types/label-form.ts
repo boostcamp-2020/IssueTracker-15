@@ -1,4 +1,4 @@
-export default interface LabelForm {
+export default interface Label {
   id: number;
   title: string;
   description: string;

@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from "react";
-import LabelForm from "../../@types/label-form";
+import React, { useContext } from "react";
+import Label from "../../@types/label-form";
 import LabelRow from "../../components/label-row";
+import { LabelsContext } from "../../views/label";
 import * as S from "./style";
-import { getLabels } from "../../lib/api";
 
 export default function LabelRowContainer() {
-  const [labels, setLabels] = useState([]);
-
-  useEffect(() => {
-    const initLabels = async () => {
-      const labelList = await getLabels();
-      setLabels(labelList);
-    };
-    initLabels();
-  }, [labels]);
+  const { labels } = useContext(LabelsContext);
 
   return (
     <S.LabelRowContainer>
-      <S.LabelContainerHeader>{labels.length} Labels</S.LabelContainerHeader>
-      {labels.map((label: LabelForm) => {
+      <S.LabelContainerHeader>{labels?.length} Labels</S.LabelContainerHeader>
+      {labels?.map((label: Label) => {
         return <LabelRow key={label.id} label={label} />;
       })}
     </S.LabelRowContainer>

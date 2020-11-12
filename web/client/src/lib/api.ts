@@ -30,6 +30,13 @@ export const getLabels = async () => {
   return labelList;
 };
 
+export const deleteLabelReqeust = async (labelId: number) => {
+  const result = await fetch(`${URL}/api/label/${labelId}`, {
+    method: "DELETE",
+  });
+  return result;
+};
+
 
 export const getIssueById = async (id: number) => {
   const res = await fetch(
@@ -61,7 +68,7 @@ export const postComment = async ({userId, issueId, content}: CommentProps ) => 
 }
 
 export const getJWTToken = async (code: string) => {
-  const result = await fetch("http://localhost:3000/api/signin/github", {
+  const result = await fetch(`${URL}/api/signin/github`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
