@@ -10,23 +10,23 @@ import Foundation
 import NetworkFramework
 
 protocol MilestoneProvidable: AnyObject {
+    
     var milestons: [Int: Milestone] { get }
     
     func addMilestone(title: String, dueDate: String, description: String, completion: @escaping (Milestone?) -> Void)
     func editMilestone(id: Int, title: String, dueDate: String, description: String, openIssuesLength: String, closeIssueLength: String, completion: @escaping (Milestone?) -> Void)
     func fetchMilestones(completion: @escaping ([Milestone]?) -> Void)
-    
     func getMilestone(at id: Int, completion: @escaping (Milestone?) -> Void)
 }
 
 class MilestoneProvider: MilestoneProvidable {
     
-    private var onFetching = false
-    
-    private var fetchingCompletionHandlers = [Int: ([Milestone]?)->Void]()
     private(set) var milestons = [Int: Milestone]()
     private weak var dataLoader: DataLoadable?
     private weak var userProvider: UserProvidable?
+    
+    private var onFetching = false
+    private var fetchingCompletionHandlers = [Int: ([Milestone]?)->Void]()
     
     init(dataLoader: DataLoadable, userProvider: UserProvidable) {
         self.dataLoader = dataLoader

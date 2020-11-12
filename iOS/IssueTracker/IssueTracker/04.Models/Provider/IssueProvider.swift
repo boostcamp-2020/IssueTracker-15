@@ -10,6 +10,10 @@ import Foundation
 import NetworkFramework
 
 protocol IssueProvidable: AnyObject {
+    
+    var currentUser: User? { get }
+    var users: [Int: User] { get }
+    
     func fetchIssues(completion: @escaping ([Issue]?) -> Void)
     func fetchIssues(with filter: IssueFilterable?, completion: @escaping ([Issue]?) -> Void)
     
@@ -27,9 +31,7 @@ protocol IssueProvidable: AnyObject {
     func addAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func deleteAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void)
-    
-    var currentUser: User? { get }
-    var users: [Int: User] { get }
+
 }
 
 class IssueProvider: IssueProvidable {
