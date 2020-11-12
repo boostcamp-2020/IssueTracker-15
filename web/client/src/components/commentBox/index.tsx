@@ -5,6 +5,12 @@ import ProfileImage from "../profile-image";
 import { getTimeTillNow } from "../../lib/dateParser";
 import Button from "../button";
 import TextArea from "../textarea";
+import { closeIssue } from "../../lib/api";
+import {
+  addComment,
+  useIssueDetailDispatch,
+} from "../../contexts/issueDetailContext";
+import * as api from "../../lib/api";
 
 interface CommentBoxPropsType {
   isAuthor: boolean;
@@ -19,6 +25,9 @@ interface CommentBoxPropsType {
   } | null;
   textArea: string;
   onChangeTextArea: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  issueId: number;
+  closeIssue: () => Promise<any>;
+  isIssueOpened: boolean;
 }
 
 export default function CommentBox({
@@ -26,6 +35,8 @@ export default function CommentBox({
   comment = null,
   textArea,
   onChangeTextArea,
+  issueId,
+  isIssueOpened,
 }: CommentBoxPropsType) {
   const [isCommentOpen, setIsCommentOpen] = useState(comment ? false : true);
 
@@ -33,6 +44,9 @@ export default function CommentBox({
     setIsCommentOpen(!isCommentOpen);
   }, [isCommentOpen]);
 
+  const issueDetailDispatch = useIssueDetailDispatch();
+
+  console.log(comment);
   return (
     <>
       <S.CommentWithProfileWrapper>
@@ -66,14 +80,30 @@ export default function CommentBox({
                   <S.ButtonWrapper>
                     <Button
                       color="white"
-                      onClick={comment ? toggleComment : () => {}}
+                      onClick={
+                        comment
+                          ? toggleComment
+                          : async () => await closeIssue(issueId)
+                      }
                     >
-                      {comment ? "Cancle" : "Close Issue"}
+                      {comment && isIssueOpened ? "Cancle" : "Close Issue"}
                     </Button>
                   </S.ButtonWrapper>
 
                   <S.ButtonWrapper>
-                    <Button color="green">
+                    <Button
+                      color="green"
+                      onClick={async () => {
+                        const result = await api.postComment({
+                          userId: 5,
+                          issueId: issueId,
+                          content: textArea,
+                        });
+                        if (result)
+                          return addComment(result, issueDetailDispatch);
+                        alert("커멘트 업데이트 실패!");
+                      }}
+                    >
                       {comment ? "Update Comment" : "Comment"}
                     </Button>
                   </S.ButtonWrapper>
