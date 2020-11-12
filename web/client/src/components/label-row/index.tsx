@@ -11,11 +11,15 @@ import Label, { LabelProps } from "../label";
 import { LabelsContext } from "../../views/label";
 import LabelEditor from "../label-editor";
 import * as S from "./style";
+import { PostLabel } from "../../@types/label-form";
 
 export default function LabelRow({ label }: { label: LabelForm }) {
   const { labels, setLabels, editBoxToggle, setEditBoxToggle } = useContext(
     LabelsContext
   );
+  const [editedLabel, setEditedLabel] = useState({} as PostLabel);
+  //TODO
+  const [labelColor, setLabelColor] = useState(label.color ? label.color : "");
 
   const toggleEditBox = useCallback(() => {
     setEditBoxToggle(label.id);
@@ -32,7 +36,7 @@ export default function LabelRow({ label }: { label: LabelForm }) {
     <S.LabelRowContainer>
       <S.LabelRow>
         <S.LabelContainer>
-          <Label name={label.title} color={label.color} />
+          <Label name={label.title} color={labelColor} />
         </S.LabelContainer>
         <S.LabelDescription>{label.description}</S.LabelDescription>
         <S.LabelControllButtonContainer>
@@ -44,7 +48,13 @@ export default function LabelRow({ label }: { label: LabelForm }) {
           </S.LabelControllbutton>
         </S.LabelControllButtonContainer>
       </S.LabelRow>
-      <LabelEditor labelId={label.id}></LabelEditor>
+      <LabelEditor
+        newLabel={editedLabel}
+        setNewLabel={setEditedLabel}
+        labelColor={labelColor}
+        setLabelColor={setLabelColor}
+        labelId={label.id}
+      ></LabelEditor>
     </S.LabelRowContainer>
   );
 }
