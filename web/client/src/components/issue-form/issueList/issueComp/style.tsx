@@ -46,7 +46,7 @@ export const LabelWrapper = styled.div`
 
 export const ProfileImageWrapper = styled.div<{ size: number }>`
   position: absolute;
-  left: ${(props) => props.size}%;
+  left: ${(props) => props.size}px;
 `;
 
 export const IssueInfoLink = styled(Link)`

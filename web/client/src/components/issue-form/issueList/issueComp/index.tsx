@@ -6,6 +6,7 @@ import Label from "../../../label";
 import { getTimeTillNow } from "../../../../lib/dateParser";
 import IssueInfoType from "../../../../@types/issue";
 import LabelInfoType from "../../../../@types/label-form";
+import ProfileImage from "../../../profile-image";
 
 interface IssueCompProp {
   info: IssueInfoType;
@@ -13,7 +14,7 @@ interface IssueCompProp {
 function IssueComp({ info }: IssueCompProp) {
   const color = info.isOpened ? "green" : "red";
   const mention = info.isOpened ? "opened" : "closed";
-
+  let assigneePos = 850;
   return (
     <S.IssueComp>
       <input type="checkbox" name="xxx" value="yyy" />
@@ -30,6 +31,14 @@ function IssueComp({ info }: IssueCompProp) {
               <S.LabelWrapper>
                 <Label name={label.title} color={label.color} />
               </S.LabelWrapper>
+            );
+          })}
+          {info.assignees.map((assignee: any) => {
+            assigneePos += 10;
+            return (
+              <S.ProfileImageWrapper size={assigneePos}>
+                <ProfileImage img={assignee.imageURL} size={20} />
+              </S.ProfileImageWrapper>
             );
           })}
         </S.IssueInfo>
