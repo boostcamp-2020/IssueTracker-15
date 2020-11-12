@@ -50,6 +50,7 @@ export default function IssueHeader({
   const onClickUpdateEditBox = async () => {
     const result = await api.updateIssueTitle(id, editBoxValue);
     if (!result) return alert("업데이트에 실패 했습니다.");
+
     setIsTitleUpdate(true);
     toggleEditBox();
   };
