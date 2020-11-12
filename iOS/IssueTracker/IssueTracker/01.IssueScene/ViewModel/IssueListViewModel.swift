@@ -27,7 +27,7 @@ protocol IssueListViewModelProtocol: AnyObject {
     func closeSelectedIssue()
     func deleteIssue(of id: Int)
     
-    func addNewIssue(title: String, description: String, authorID: Int)
+    func addNewIssue(title: String, description: String)
     
     // For Search
     func onSearch(text: String?)
@@ -145,6 +145,13 @@ extension IssueListViewModel {
             self?.needFetchItems()
         })
     }
+    
+    private func requestAddIssue(title: String, description: String) {
+        issueProvider?.addIssue(title: title, description: description, milestoneID: nil) { [weak self] (createdIssue) in
+            guard createdIssue != nil else { return }
+            self?.needFetchItems()
+        }
+    }
 }
 
 // MARK: - View Event
@@ -177,14 +184,8 @@ extension IssueListViewModel {
         showTitleWithCheckNum?(issues.filter { $0.checked }.count)
     }
     
-    func addNewIssue(title: String, description: String, authorID: Int) {
-        issueProvider?.addIssue(title: title, description: description, milestoneID: nil) { [weak self] (createdIssue) in
-            guard let `self` = self,
-                let createdIssue = createdIssue
-                else { return }
-            self.issues.append(IssueItemViewModel(issue: createdIssue))
-            self.didItemChanged?(self.issues)
-        }
+    func addNewIssue(title: String, description: String) {
+        requestAddIssue(title: title, description: description)
     }
     
     func closeIssue(of id: Int) {
