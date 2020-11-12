@@ -136,7 +136,7 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
                     self.comments.insert(comment, at: 0)
                 }
                 self.description = editedDescription
-            } else {
+            } else if self.description != nil {
                 self.description = nil
                 self.comments.remove(at: 0)
             }
