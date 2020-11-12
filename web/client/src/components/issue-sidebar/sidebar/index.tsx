@@ -36,7 +36,6 @@ export default function IssueSideBar({
   labels,
   milestone,
 }: IssueSideBarProps) {
-  console.log(milestone);
   return (
     <>
       <IssueSideBarItem menuName="Assignees">
