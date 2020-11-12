@@ -53,6 +53,9 @@ class IssueDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationItem.largeTitleDisplayMode = .never
         self.tabBarController?.tabBar.isHidden = true
+        let height = UIScreen.main.bounds.height
+        let width  = UIScreen.main.bounds.width
+        bottomSheetView?.frame = CGRect(x: 0, y: height * 0.9, width: width, height: height)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,9 +92,6 @@ class IssueDetailViewController: UIViewController {
         guard let bottomSheetView = BottomSheetView.createView() else { return }
         bottomSheetView.configure(issueDetailViewModel: issueDetailViewModel)
         bottomSheetView.delegate = self
-        let height = UIScreen.main.bounds.height
-        let width  = UIScreen.main.bounds.width
-        bottomSheetView.frame = CGRect(x: 0, y: height * 0.9, width: width, height: height)
         
         self.bottomSheetView = bottomSheetView
         self.view.addSubview(bottomSheetView)
