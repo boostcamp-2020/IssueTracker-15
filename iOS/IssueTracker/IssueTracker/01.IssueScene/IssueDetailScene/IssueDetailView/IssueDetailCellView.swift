@@ -15,24 +15,20 @@ class IssueDetailCellView: UICollectionViewCell {
     @IBOutlet weak var createAt: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+        ])
+    }
+    
     func configure(with comment: CommentViewModel) {
         content.text = comment.content
         author.text = comment.userName
         createAt.text = comment.createAt
+        
     }
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        super.preferredLayoutAttributesFitting(layoutAttributes)
-        layoutIfNeeded()
-        
-        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-        
-        var frame = layoutAttributes.frame
-        frame.size.height = ceil(size.height)
-        layoutAttributes.frame = frame
-
-        return layoutAttributes
-    }
 }
 
 extension IssueDetailCellView: UICollectionViewRegisterable {
