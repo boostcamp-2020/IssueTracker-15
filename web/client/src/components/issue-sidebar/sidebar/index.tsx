@@ -3,6 +3,8 @@ import * as S from "./style";
 import ProfileImage from "../../profile-image";
 import IssueSideBarItem from "../item";
 import Label from "../../label";
+import LabelForm from "../../../@types/label-form";
+import Milestone from "../../../@types/milestone";
 
 interface AsigneeProfileProps {
   userName: string;
@@ -25,16 +27,8 @@ interface LabelProps {
 
 interface IssueSideBarProps {
   assignees: { userName: string; imageURL: string }[];
-  labels: {
-    id: number;
-    title: string;
-    description: string;
-    color: string;
-  }[];
-  milestone: {
-    id: number;
-    title: string;
-  };
+  labels: LabelForm[];
+  milestone: Milestone;
 }
 
 export default function IssueSideBar({
