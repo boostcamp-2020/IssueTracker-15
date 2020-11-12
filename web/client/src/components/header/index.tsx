@@ -1,9 +1,11 @@
 import React from "react";
 import * as S from "./style";
-
-interface HeaderProps {}
+import Modal from "../modal";
+import Login from "../auth/login";
+import useToggle from "../../hooks/useToggle";
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useToggle(false);
   return (
     <>
       <S.Header>
@@ -13,10 +15,15 @@ export default function Header() {
         <S.ButtonRow>
           <S.ButtonContainer>
             <S.joinButton>회원가입</S.joinButton>
-            <S.LoginButton>로그인</S.LoginButton>
+            <S.LoginButton onClick={setIsOpen}>로그인</S.LoginButton>
           </S.ButtonContainer>
         </S.ButtonRow>
       </S.Header>
+      {isOpen && (
+        <Modal>
+          <Login />
+        </Modal>
+      )}
     </>
   );
 }
