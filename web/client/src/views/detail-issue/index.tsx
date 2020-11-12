@@ -8,6 +8,7 @@ import CommentBoxContainer from "../../containers/commentBox-container";
 import useAsync from "../../hooks/useAsync";
 import * as api from "../../lib/api";
 import * as S from "./style";
+import { IssueDetailProvider } from "../../contexts/issueDetailContext";
 
 const DetailIssuePage = () => {
   const params: any = useParams();
@@ -21,9 +22,9 @@ const DetailIssuePage = () => {
   if (error) return <div>에러가 났네요;</div>;
 
   return (
-    <S.PageGrid>
+    <IssueDetailProvider>
       {issue && (
-        <>
+        <S.PageGrid>
           <IssueHeader
             title={issue.title}
             id={issue.id}
@@ -51,9 +52,9 @@ const DetailIssuePage = () => {
               />
             </S.RightColumn>
           </S.ColumnWrapper>
-        </>
+        </S.PageGrid>
       )}
-    </S.PageGrid>
+    </IssueDetailProvider>
   );
 };
 

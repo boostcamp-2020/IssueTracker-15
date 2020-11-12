@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import CommentBox from "../../components/commentBox";
+import {
+  fetchIssueByIdActionGenerator,
+  useIssueDetailDispatch,
+  useIssueDetailState,
+} from "../../contexts/issueDetailContext";
 import useAsync from "../../hooks/useAsync";
 import * as api from "../../lib/api";
 
@@ -30,12 +35,29 @@ export default function CommentBoxContainer({
     return api.postComment({ userId: 3, issueId: 3, content: textarea });
   }, []);
 
+  const issueDetail = useIssueDetailState();
+  const issueDetailDispatch = useIssueDetailDispatch();
+
   return (
-    <CommentBox
-      isAuthor={isAuthor}
-      comment={comment}
-      textArea={textarea}
-      onChangeTextArea={onChangeTextArea}
-    />
+    <>
+      <div
+        onClick={() => {
+          fetchIssueByIdActionGenerator(
+            parseInt((Math.random() * 9 + 1).toString()),
+            issueDetailDispatch
+          );
+          console.log("click");
+        }}
+      >
+        ㅋㅋ 페치
+      </div>
+      <div>{issueDetail?.data?.id}</div>
+      <CommentBox
+        isAuthor={isAuthor}
+        comment={comment}
+        textArea={textarea}
+        onChangeTextArea={onChangeTextArea}
+      />
+    </>
   );
 }
