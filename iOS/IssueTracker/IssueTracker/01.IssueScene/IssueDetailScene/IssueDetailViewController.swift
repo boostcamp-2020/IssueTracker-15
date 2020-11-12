@@ -19,6 +19,7 @@ class IssueDetailViewController: UIViewController {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
         blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurredEffectView.alpha = 0
         return blurredEffectView
     }()
     
@@ -26,6 +27,7 @@ class IssueDetailViewController: UIViewController {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
         blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurredEffectView.alpha = 0
         return blurredEffectView
     }()
     
