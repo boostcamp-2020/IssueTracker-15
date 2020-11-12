@@ -4,10 +4,16 @@ import LabelEditor from "../../components/label-editor";
 import * as S from "./style";
 import { LabelHeaderContext } from "../label-list-header";
 
+import { PostLabel } from "../../@types/label-form";
+import { couldStartTrivia } from "typescript";
+
 export default function LabelCreateBox() {
   const { createLabelVisible } = useContext(LabelHeaderContext);
   const [labelContent, setLabelContent] = useState("exapmle");
   const [labelColor, setLabelColor] = useState("#0052CD");
+  const [newLabel, setNewLabel] = useState({} as PostLabel);
+
+  console.log(newLabel);
 
   return (
     <S.LabelCreateBox createLabelVisible={createLabelVisible}>
@@ -20,6 +26,8 @@ export default function LabelCreateBox() {
         setLabelContent={setLabelContent}
         labelColor={labelColor}
         setLabelColor={setLabelColor}
+        newLabel={newLabel}
+        setNewLabel={setNewLabel}
       ></LabelEditor>
     </S.LabelCreateBox>
   );

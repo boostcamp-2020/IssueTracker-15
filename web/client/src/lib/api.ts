@@ -1,13 +1,27 @@
+import { PostLabel } from "../@types/label-form";
+
 const URL = "http://118.67.134.194:3000";
 
 export const getLabels = async () => {
   const result = await fetch(`${URL}/api/label`, {
     method: "GET",
   });
-  if (!result.ok) return;
+  if (!result.ok) return false;
 
-  const labelList = await result.json();
-  return labelList;
+  return await result.json();
+};
+
+export const postNewLabel = async (label: PostLabel) => {
+  const result = await fetch(`${URL}/api/label`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ...label }),
+  });
+  if (!result.ok) return false;
+
+  return await result.json();
 };
 
 export const deleteLabelReqeust = async (labelId: number) => {
