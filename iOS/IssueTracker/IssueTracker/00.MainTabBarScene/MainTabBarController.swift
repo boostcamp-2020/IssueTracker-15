@@ -39,12 +39,12 @@ class MainTabBarController: UITabBarController {
         super.init(coder: coder)
     }
     
-    // TODO: 로직분리!
     func setupSubViewControllers() {
         
         let commonAppearance = UINavigationBarAppearance()
         commonAppearance.backgroundColor = .white
         commonAppearance.shadowColor = .gray
+        
         // controllers[0] = UINavigationController -> root: IssueListViewController
         if let navigationController = self.viewControllers?[safe: 0] as? UINavigationController,
             let issueListViewController = navigationController.topViewController as? IssueListViewController {

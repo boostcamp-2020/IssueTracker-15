@@ -27,7 +27,6 @@ extension UserInfoComponentView: CellComponentProtocol {
     var contentView: UIView { self }
     
     func configure(viewModel: CellComponentViewModel) {
-        // TODO: configure UserInfo
         userNameLabel.text = viewModel.title
         viewModel.needImage { [weak self](data) in
             self?.setImage(data: data)

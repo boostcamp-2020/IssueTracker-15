@@ -39,7 +39,6 @@ class MilestoneProvider: MilestoneProvidable {
             return
         }
         
-        // TODO : fetch 함수 분리하기
         fetchMilestones { [weak self] _ in
             if let milestone = self?.milestons[id] {
                 completion(milestone)

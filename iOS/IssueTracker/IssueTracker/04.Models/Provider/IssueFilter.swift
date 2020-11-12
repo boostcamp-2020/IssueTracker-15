@@ -58,7 +58,6 @@ class IssueFilter: IssueFilterable {
             })
         }
         
-        // TODO: Detail Condition
         if let id = detailConditions[safe: DetailSelectionType.assignee.rawValue],
             id != -1 {
             dataSet = dataSet.intersection(datas.filter { $0.assignees.contains(where: { $0 == id })})

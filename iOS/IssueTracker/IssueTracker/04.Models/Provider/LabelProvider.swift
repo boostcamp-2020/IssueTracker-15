@@ -55,7 +55,6 @@ class LabelProvider: LabelProvidable {
             return
         }
         
-        // TODO : fetch 함수 분리하기
         fetchLabels { [weak self] _ in
             if let label = self?.labels[id] {
                 completion(label)

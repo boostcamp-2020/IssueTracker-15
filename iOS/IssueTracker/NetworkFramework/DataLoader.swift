@@ -37,20 +37,11 @@ public class DataLoader: DataLoadable {
         case .success(let request):
             urlRequest = request
         case .failure(let error):
-            print(error)
             completion(.failure(error))
             return
         }
         let completionHandler: RequestCompletion = { ( data, response, error) in
             let result = Response.convertToResponse(response: response, request: urlRequest, data: data, error: error)
-            
-            switch result {
-            case .success(let response):
-                print(response.debugDescription)
-//                break
-            case .failure(let error):
-                print("response fail with : \(error)")
-            }
             
             if let callBackQueue = callBackQueue {
                 callBackQueue.async {

@@ -41,8 +41,7 @@ class IssueProvider: IssueProvidable {
         guard let lastUpdated = self.lastUpdated else { return true }
         let current = Date()
         let duration = Int(current.timeIntervalSince(lastUpdated))
-        // TODO: default 시간 차 구하기
-        return duration > 60 * 0
+        return duration > 30
     }
     
     private weak var dataLoader: DataLoadable?
@@ -115,9 +114,7 @@ class IssueProvider: IssueProvidable {
         }
     }
     
-    /*
-     Response :
-     */
+    
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void) {
         guard let myId = userProvider?.currentUser?.id else {
             completion(nil)
@@ -140,9 +137,6 @@ class IssueProvider: IssueProvidable {
         })
     }
     
-    /*
-     Response : 201
-     */
     func addIssue(title: String, description: String, milestoneID: Int?, completion: @escaping (Issue?) -> Void) {
         guard let myId = userProvider?.currentUser?.id else {
             completion(nil)
@@ -161,9 +155,7 @@ class IssueProvider: IssueProvidable {
             }
         })
     }
-    /*
-     Response: 200
-     */
+    
     func getIssue(at id: Int, completion: @escaping (Issue?) -> Void) {
         dataLoader?.request(IssueService.getIssue(id), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
@@ -205,9 +197,6 @@ class IssueProvider: IssueProvidable {
         })
     }
     
-    /*
-     Response : 200 body: nil
-     */
     func editIssue(id: Int, title: String, description: String, completion: @escaping (Issue?) -> Void) {
         
         dataLoader?.request(IssueService.editIssue(id, title, description, nil), callBackQueue: .main, completion: { (response) in
@@ -222,24 +211,18 @@ class IssueProvider: IssueProvidable {
         })
     }
     
-    /*
-     Response : 200 body: nil
-     */
     func editTitle(id: Int, title: String, completion: @escaping (Issue?) -> Void) {
         dataLoader?.request(IssueService.editTitle(id, title), callBackQueue: .main, completion: { (response) in
             switch response {
             case .failure:
                 completion(nil)
             case .success:
-                //TODO: response 처리
-                break
+                self.issues[id]?.title = title
+                completion(self.issues[id])
             }
         })
     }
     
-    /*
-     response: 201 body : nil
-     */
     func addLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void) {
         dataLoader?.request(IssueService.addLabel(id, labelId), callBackQueue: .main, completion: { (response) in
             switch response {
@@ -251,9 +234,7 @@ class IssueProvider: IssueProvidable {
             }
         })
     }
-    /*
-     response: 204 body: nil
-     */
+    
     func deleteLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void) {
         dataLoader?.request(IssueService.deleteLabel(id, labelId), callBackQueue: .main, completion: { (response) in
             switch response {
@@ -266,9 +247,6 @@ class IssueProvider: IssueProvidable {
         })
     }
     
-    /*
-     response: 201
-     */
     func addMilestone(at id: Int, of milestone: Int, completion: @escaping (Issue?) -> Void) {
         dataLoader?.request(IssueService.addMilestone(id, milestone), callBackQueue: .main, completion: { (response) in
             switch response {
@@ -281,9 +259,6 @@ class IssueProvider: IssueProvidable {
         })
     }
     
-    /*
-     response: 204
-     */
     func deleteMilestone(at id: Int, completion: @escaping (Issue?) -> Void) {
         dataLoader?.request(IssueService.deleteMilestone(id, 0), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
@@ -295,9 +270,7 @@ class IssueProvider: IssueProvidable {
             }
         })
     }
-    /*
-     response: 201
-     */
+    
     func addAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void) {
         dataLoader?.request(IssueService.addAssignee(id, userId), callBackQueue: .main, completion: { (response) in
             switch response {
@@ -309,9 +282,7 @@ class IssueProvider: IssueProvidable {
             }
         })
     }
-    /*
-     response: 204
-     */
+    
     func deleteAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void) {
         dataLoader?.request(IssueService.deleteAssignee(id, userId), callBackQueue: .main, completion: { (response) in
             switch response {
