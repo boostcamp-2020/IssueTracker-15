@@ -59,8 +59,6 @@ class IssueListViewController: UIViewController {
         configureSearchBar()
         configureCollectionView()
         floatingButtonAspectRatioConstraint.isActive = true
-        navigationController?.isToolbarHidden = true
-        floatingButton.layoutSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
