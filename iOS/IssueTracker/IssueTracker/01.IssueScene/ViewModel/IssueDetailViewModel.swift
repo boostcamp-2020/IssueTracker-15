@@ -24,6 +24,7 @@ protocol IssueDetailViewModelProtocol: AnyObject {
     func needFetchDetails()
     func addComment(content: String)
     func editIssue(title: String, description: String)
+    func toggleIssueState()
     
     var didLabelChanged: (() -> Void)? { get set }
     var didMilestoneChanged: (() -> Void)? { get set }
@@ -142,6 +143,14 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             }
             
             self.didFetch?()
+        })
+    }
+    
+    func toggleIssueState() {
+        issueProvider?.changeIssueState(id: issueNumber, open: !isOpened, completion: { [weak self] issue in
+            guard let issue = issue else { return }
+            self?.isOpened = issue.isOpened
+            self?.didFetch?()
         })
     }
     

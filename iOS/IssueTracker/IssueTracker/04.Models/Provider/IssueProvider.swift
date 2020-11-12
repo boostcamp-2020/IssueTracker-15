@@ -23,7 +23,7 @@ protocol IssueProvidable: AnyObject {
     func deleteIssue(id: Int, completion: @escaping (Issue?) -> Void)
     
     func getIssue(at id: Int, completion: @escaping (Issue?) -> Void)
-    func changeIssueState(id: Int, open: Bool, completion: @escaping (Bool) -> Void)
+    func changeIssueState(id: Int, open: Bool, completion: @escaping (Issue?) -> Void)
     func addLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void)
     func deleteLabel(at id: Int, of labelId: Int, completion: @escaping (Issue?) -> Void)
     func addMilestone(at id: Int, of milestone: Int, completion: @escaping (Issue?) -> Void)
@@ -114,7 +114,6 @@ class IssueProvider: IssueProvidable {
         }
     }
     
-    
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void) {
         guard let myId = userProvider?.currentUser?.id else {
             completion(nil)
@@ -173,14 +172,14 @@ class IssueProvider: IssueProvidable {
         })
     }
     
-    func changeIssueState(id: Int, open: Bool, completion: @escaping (Bool) -> Void) {
+    func changeIssueState(id: Int, open: Bool, completion: @escaping (Issue?) -> Void) {
         dataLoader?.request(IssueService.editIssue(id, nil, nil, open), callBackQueue: .main, completion: { [weak self] (response) in
             switch response {
             case .failure:
-                completion(false)
+                completion(nil)
             case .success:
                 self?.issues[id]?.isOpened = open
-                completion(true)
+                completion(self?.issues[id])
             }
         })
     }
