@@ -13,17 +13,14 @@ struct Issue {
     var title: String
     var description: String?
     
-    // TODO: author -> id!
-    let author: User
+    let author: Int
     var isOpened: Bool
     let createdAt: String
     var updatedAt: String
     
     var milestone: Int?
     var labels: [Int]
-    
-    // TODO: user를 fetch 하는 기능이 완성되면 Int로 아이디 값을 저장할 것!
-    var assignees: [User]
+    var assignees: [Int]
     
     var comments: [Comment]
     
@@ -47,12 +44,12 @@ struct Issue {
     
     mutating func addAssignee(id: Int) {
         // TODO: Assignee -> [id]
-        if assignees.contains(where: { $0.userName == String(id) }) { return }
-        assignees.append(User(id: id))
+        if assignees.contains(where: { $0 == id }) { return }
+        assignees.append(id)
     }
     
     mutating func deleteAssignee(id: Int) {
-        guard let idx = assignees.firstIndex(where: { $0.userName == String(id) }) else { return }
+        guard let idx = assignees.firstIndex(where: { $0 == id }) else { return }
         assignees.remove(at: idx)
     }
     
@@ -78,13 +75,13 @@ extension Issue {
     init(id: Int,
          title: String,
          description: String? = nil,
-         author: User,
+         author: Int,
          isOpened: Bool,
          createdAt: String,
          updatedAt: String,
          milestone: Int?,
          labels: [Int],
-         assignees: [User]) {
+         assignees: [Int]) {
         self.id = id
         self.title = title
         self.description = description
@@ -115,10 +112,10 @@ extension Issue {
             let assigneeObjects = jsonObject["assignees"] as? [[String: Any]]
             else { return nil }
         let labels = labelObjects.compactMap { $0["id"] as? Int }
-        let assignees = assigneeObjects.compactMap { User(json: $0) }
+        let assignees = assigneeObjects.compactMap { User(json: $0)?.id }
         let milestone = jsonObject["milestoneId"] as? Int
         
-        return Issue(id: id, title: title, description: nil, author: author, isOpened: isOpened, createdAt: createdAt, updatedAt: updatedAt, milestone: milestone, labels: labels, assignees: assignees)
+        return Issue(id: id, title: title, description: nil, author: author.id, isOpened: isOpened, createdAt: createdAt, updatedAt: updatedAt, milestone: milestone, labels: labels, assignees: assignees)
     }
     
     // from AddIssue API
@@ -133,7 +130,7 @@ extension Issue {
         self.id = id
         self.title = title
         self.description = description
-        self.author = User(id: authorId)
+        self.author = authorId
         self.isOpened = isOpened
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -185,10 +182,10 @@ extension Issue {
         let milestoneId = (jsonObject["milestone"] as? [String: Any])?["id"] as? Int
         let labels = labelObjects.compactMap { $0["id"] as? Int }
         
-        let assignees = assigneeObjects.compactMap { User(json: $0) }
+        let assignees = assigneeObjects.compactMap { User(json: $0)?.id }
         let comments = commentObjects.compactMap { Comment(json: $0) }
         
-        return Issue(id: id, title: title, description: description, author: author, isOpened: isOpened, createdAt: createAt, updatedAt: updateAt, milestone: milestoneId, labels: labels, assignees: assignees, comments: comments)
+        return Issue(id: id, title: title, description: description, author: author.id, isOpened: isOpened, createdAt: createAt, updatedAt: updateAt, milestone: milestoneId, labels: labels, assignees: assignees, comments: comments)
     }
     
 }

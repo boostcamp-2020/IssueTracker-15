@@ -41,4 +41,9 @@ extension User {
         self.imageURL = json["imageURL"] as? String
     }
     
+    static func fetchResponse(json: [String: Any]?) -> [User]? {
+        guard let userJsonArr = json?["userList"] as? [[String: Any]] else { return nil }
+        return userJsonArr.compactMap { User(json: $0) }
+    }
+    
 }

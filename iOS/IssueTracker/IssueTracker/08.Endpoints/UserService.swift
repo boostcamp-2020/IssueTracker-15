@@ -11,7 +11,7 @@ import NetworkFramework
 
 enum UserService: IssueTrackerService {
     
-    case fetchUser
+    case fetchAll
     
     var path: String {
         return "/api/user"
@@ -29,11 +29,11 @@ enum UserService: IssueTrackerService {
         return .successCode
     }
     
-    var headers: [String : String]? {
+    var headers: [String: String]? {
         return nil
     }
     
-    var queryItems: [String : String]? {
+    var queryItems: [String: String]? {
         return nil
     }
     

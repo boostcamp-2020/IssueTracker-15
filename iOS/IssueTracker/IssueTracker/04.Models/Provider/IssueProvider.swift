@@ -31,7 +31,7 @@ protocol IssueProvidable: AnyObject {
     func addAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func deleteAsignee(at id: Int, userId: Int, completion: @escaping (Issue?) -> Void)
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void)
-
+    
 }
 
 class IssueProvider: IssueProvidable {
@@ -68,33 +68,34 @@ class IssueProvider: IssueProvidable {
         }
         issues.removeAll()
         
-        let group = DispatchGroup()
-        
-        let fetchWork: NetworkFramework.Completion = { [weak self] (response) in
-            switch response {
-            case .failure:
-                break
-            case .success(let response):
-                if let issues = Issue.fetchResponse(jsonArr: response.mapJsonArr()) {
-                    issues.forEach {
-                        self?.issues[$0.id] = $0
-                        self?.userProvider?.users[$0.author.id] = $0.author
-                        $0.assignees.forEach { self?.userProvider?.users[$0.id] = $0 }
+        userProvider?.fetchUser { [weak self] (_) in
+            let group = DispatchGroup()
+            
+            let fetchWork: NetworkFramework.Completion = { [weak self] (response) in
+                switch response {
+                case .failure:
+                    break
+                case .success(let response):
+                    if let issues = Issue.fetchResponse(jsonArr: response.mapJsonArr()) {
+                        issues.forEach {
+                            self?.issues[$0.id] = $0
+                        }
                     }
                 }
+                group.leave()
             }
-            group.leave()
+            
+            group.enter()
+            self?.dataLoader?.request(IssueService.fetchAll(true), callBackQueue: .main, completion: fetchWork)
+            group.enter()
+            self?.dataLoader?.request(IssueService.fetchAll(false), callBackQueue: .main, completion: fetchWork)
+            
+            group.notify(queue: .main) { [weak self] in
+                self?.lastUpdated = Date()
+                completion(self?.issues.map { $0.value })
+            }
         }
         
-        group.enter()
-        dataLoader?.request(IssueService.fetchAll(true), callBackQueue: .main, completion: fetchWork)
-        group.enter()
-        dataLoader?.request(IssueService.fetchAll(false), callBackQueue: .main, completion: fetchWork)
-        
-        group.notify(queue: .main) { [weak self] in
-            self?.lastUpdated = Date()
-            completion(self?.issues.map { $0.value })
-        }
     }
     
     func fetchIssues(with filter: IssueFilterable?, completion: @escaping ([Issue]?) -> Void) {
@@ -230,8 +231,8 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success:
-            //TODO: response 처리
-            break
+                //TODO: response 처리
+                break
             }
         })
     }
@@ -322,5 +323,5 @@ class IssueProvider: IssueProvidable {
             }
         })
     }
-        
+    
 }
