@@ -4,11 +4,13 @@ import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { VscMilestone } from "react-icons/vsc";
 import Label from "../../../label";
 import { getTimeTillNow } from "../../../../lib/dateParser";
+import IssueInfoType from "../../../../@types/issue";
+import LabelInfoType from "../../../../@types/label-form";
 
-interface IssueListProp {
-  info: any;
+interface IssueCompProp {
+  info: IssueInfoType;
 }
-function IssueList({ info }: IssueListProp) {
+function IssueComp({ info }: IssueCompProp) {
   const color = info.isOpened ? "green" : "red";
   const mention = info.isOpened ? "opened" : "closed";
 
@@ -23,7 +25,7 @@ function IssueList({ info }: IssueListProp) {
           <S.IssueInfoLink to={`/issue/${info.id}`}>
             <S.IssueTitle>{info.title} </S.IssueTitle>
           </S.IssueInfoLink>
-          {info.labels.map((label: any) => {
+          {info.labels.map((label: LabelInfoType) => {
             return (
               <S.LabelWrapper>
                 <Label name={label.title} color={label.color} />
@@ -48,4 +50,4 @@ function IssueList({ info }: IssueListProp) {
   );
 }
 
-export default IssueList;
+export default IssueComp;
