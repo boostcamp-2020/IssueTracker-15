@@ -8,13 +8,15 @@ import IssueInfoType from "../../../../@types/issue";
 import LabelInfoType from "../../../../@types/label-form";
 import ProfileImage from "../../../profile-image";
 
+const START_POS = 850;
+const MOVING_POS = 20;
 interface IssueCompProp {
   info: IssueInfoType;
 }
 function IssueComp({ info }: IssueCompProp) {
   const color = info.isOpened ? "green" : "red";
   const mention = info.isOpened ? "opened" : "closed";
-  let assigneePos = 850;
+  let assigneePos = START_POS;
   return (
     <S.IssueComp>
       <input type="checkbox" name="xxx" value="yyy" />
@@ -34,7 +36,7 @@ function IssueComp({ info }: IssueCompProp) {
             );
           })}
           {info.assignees.map((assignee: any) => {
-            assigneePos += 10;
+            assigneePos += MOVING_POS;
             return (
               <S.ProfileImageWrapper size={assigneePos}>
                 <ProfileImage img={assignee.imageURL} size={20} />
