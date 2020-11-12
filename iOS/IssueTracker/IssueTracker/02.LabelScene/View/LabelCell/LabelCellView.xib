@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,8 +16,8 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAl-ag-6SQ" userLabel="titleLabel" customClass="BadgeLabelView" customModule="IssueTracker" customModuleProvider="target">
-                        <rect key="frame" x="10" y="17.5" width="42" height="34"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="10" y="10" width="48" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
@@ -28,14 +27,14 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78q-8a-ZQH" userLabel="nextButton">
-                        <rect key="frame" x="368" y="42.5" width="28" height="28"/>
+                        <rect key="frame" x="369" y="45.5" width="22" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="78q-8a-ZQH" secondAttribute="height" multiplier="1:1" id="c3q-OO-tAl"/>
                         </constraints>
                         <state key="normal" image="chevron.right" catalog="system"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEG-Rb-vZI" userLabel="descriptionLabel">
-                        <rect key="frame" x="10" y="61.5" width="42" height="34"/>
+                        <rect key="frame" x="10" y="44" width="42" height="59"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -44,17 +43,14 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="OAl-ag-6SQ" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.3" id="B6L-uV-x9X"/>
-                <constraint firstItem="OAl-ag-6SQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="C47-Xn-ZwW"/>
-                <constraint firstItem="EEG-Rb-vZI" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.3" id="CHW-sW-hvI"/>
-                <constraint firstItem="EEG-Rb-vZI" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="KTQ-VZ-SVl"/>
-                <constraint firstAttribute="trailing" secondItem="78q-8a-ZQH" secondAttribute="trailing" constant="15" id="OwT-Nr-6Af"/>
-                <constraint firstAttribute="centerY" secondItem="OAl-ag-6SQ" secondAttribute="bottom" constant="5" id="Rf6-p8-rYP"/>
-                <constraint firstItem="EEG-Rb-vZI" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="5" id="jeP-cR-hmX"/>
-                <constraint firstItem="78q-8a-ZQH" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.25" id="lQB-Qs-heh"/>
-                <constraint firstItem="78q-8a-ZQH" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="qfx-um-WPO"/>
+                <constraint firstAttribute="trailing" secondItem="78q-8a-ZQH" secondAttribute="trailing" constant="20" id="3U5-i3-0dg"/>
+                <constraint firstItem="EEG-Rb-vZI" firstAttribute="leading" secondItem="OAl-ag-6SQ" secondAttribute="leading" id="MXj-Zr-pEI"/>
+                <constraint firstItem="78q-8a-ZQH" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Uk1-PK-rOL"/>
+                <constraint firstItem="EEG-Rb-vZI" firstAttribute="top" secondItem="OAl-ag-6SQ" secondAttribute="bottom" constant="10" id="bJM-C5-l3v"/>
+                <constraint firstAttribute="bottom" secondItem="EEG-Rb-vZI" secondAttribute="bottom" constant="10" id="gFR-IW-YaP"/>
+                <constraint firstItem="OAl-ag-6SQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="ope-VR-cKi"/>
+                <constraint firstItem="OAl-ag-6SQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="v0p-EQ-wss"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="411" height="113"/>
             <connections>
                 <outlet property="descriptionLabel" destination="EEG-Rb-vZI" id="vod-41-r9A"/>

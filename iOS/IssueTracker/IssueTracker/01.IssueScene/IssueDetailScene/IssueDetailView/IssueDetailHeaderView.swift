@@ -8,42 +8,69 @@
 
 import UIKit
 
+enum IssueBadgeColor: String {
+    case open = "OpenIssueBackgroundColor"
+    case closed = "ClosedIssueBackgroundColor"
+}
+
 class IssueDetailHeaderView: UICollectionReusableView {
     
+    @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var issueAuthor: UILabel!
     @IBOutlet weak var issueTitle: UILabel!
     @IBOutlet weak var issueNumber: UILabel!
     @IBOutlet weak var issueBadge: UIButton!
     
-    func configure(with issueDetailViewModel: IssueDetailViewModel) {
-        self.issueAuthor.text = issueDetailViewModel.author
-        self.issueTitle.text = issueDetailViewModel.title
-        self.issueNumber.text = "#" + String(issueDetailViewModel.issueNumber)
-        configureIssueBadge(text: issueDetailViewModel.badge, color: issueDetailViewModel.badgeColor)
+    func configure(with headerViewModel: IssueDetailHeaderViewModel) {
+        self.issueAuthor.text = headerViewModel.author.userName
+        self.issueTitle.text = headerViewModel.title
+        self.issueNumber.text = "#" + String(headerViewModel.id)
+        configureIssueBadge(isOpened: headerViewModel.isOpened)
+        headerViewModel.needImage { [weak self] (data) in
+            self?.setProfileImage(data: data)
+        }
     }
     
-    private func configureIssueBadge(text: String, color: IssueBadgeColor) {
+    private func configureIssueBadge(isOpened: Bool) {
         var badgeColor: UIColor
+        var badgeText: String
+        badgeColor = isOpened ? UIColor(named: IssueBadgeColor.open.rawValue) ?? UIColor.green : UIColor(named: IssueBadgeColor.closed.rawValue) ?? UIColor.red
+        badgeText = isOpened ? "Open" : "Closed"
         
-        switch color {
-        case .green:
-            badgeColor = UIColor.green
-        case .red:
-            badgeColor = UIColor.red
-        }
-        
-        issueBadge.setTitle(text, for: .normal)
-        issueBadge.backgroundColor = badgeColor
+        issueBadge.convertToIssueBadge(text: badgeText, backgroundColor: badgeColor)
+        issueBadge.contentEdgeInsets = UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
+    }
+    
+    private func setProfileImage(data: Data?) {
+        guard let data = data,
+            let image = UIImage(data: data)
+        else { return }
+        profilePicture.image = image
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+       profilePicture.setRound(ratio: 1)
     }
 }
 
 extension IssueDetailHeaderView: UICollectionViewHeaderRegisterable {
+    
     static var headerIdentifier: String {
         return "IssueDetailHeaderView"
     }
     
     static var headerNib: UINib {
         return UINib(nibName: "IssueDetailHeaderView", bundle: .main)
+    }
+    
+}
+
+extension UIButton {
+    
+    func convertToIssueBadge(text: String, backgroundColor: UIColor) {
+        self.backgroundColor = backgroundColor
+        self.setTitle(text, for: .normal)
     }
     
 }

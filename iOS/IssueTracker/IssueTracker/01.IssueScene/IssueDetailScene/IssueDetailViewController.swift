@@ -10,18 +10,24 @@ import UIKit
 
 class IssueDetailViewController: UIViewController {
     static let identifier = "IssueDetailViewController"
-    private var cellData = [
-        "레이블 전체 목록을 볼 수 있는게 어떨까요 전체 설명이 보여야 선택할 수 있으니까 마크다운 문법을 지원하고 HTML 형태로 보여줘야 할까요",
-        "긍정적인 기능이네요 댓글은 한 줄",
-        "아 힘드렁",
-        "Where does it come from? Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
-    ]
     
     @IBOutlet weak var collectionView: UICollectionView!
-    private var addCommentView: AddCommentView?
-    private var issueDetailViewModel: IssueDetailViewModel?
-    private var currentIssueId: Int = -1
-    private var didFetchDetails: Bool = false
+    private var bottomSheetView: BottomSheetView?
+    private var issueDetailViewModel: IssueDetailViewModelProtocol
+    
+    let contentBlurView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        return blurredEffectView
+    }()
+    
+    let navBarBlurView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        return blurredEffectView
+    }()
     
     private var currentIndexPath: IndexPath? {
         let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.frame.size)
@@ -33,121 +39,113 @@ class IssueDetailViewController: UIViewController {
         }
     }
     
-    init(currentIssueId: Int, issueDetailViewModel: IssueDetailViewModel) {
-        self.currentIssueId = currentIssueId
-        self.issueDetailViewModel = issueDetailViewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(nibName: String, bundle: Bundle?, viewModel: IssueDetailViewModelProtocol) {
+        self.issueDetailViewModel = viewModel
+        super.init(nibName: nibName, bundle: bundle)
+        
+        self.issueDetailViewModel.didFetch = { [weak self] in
+            self?.collectionView.reloadData()
+            self?.bottomSheetView?.reloadData()
+        }
     }
     
     required init?(coder: NSCoder) {
+        issueDetailViewModel = IssueDetailViewModel(id: 1, issueProvider: nil, labelProvier: nil, milestoneProvider: nil)
         super.init(coder: coder)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-        configureNavigationBarButtons()
-        configureIssueDetailViewModel()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        configureInitialLayout()
-    }
-    
-    private func configureNavigationBarButtons() {
-        configureBackButton()
+        setupNavBarBlur()
+        setupContentBlur()
         configureEditButton()
+        issueDetailViewModel.needFetchDetails()
+        configureCollectionView()
+        configureBottomSheetView()
+        navigationItem.title = "이슈 상세"
     }
     
-    private func configureIssueDetailViewModel() {
-        issueDetailViewModel?.didFetch = { [weak self] in
-            self?.didFetchDetails = true
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.largeTitleDisplayMode = .never
+        self.tabBarController?.tabBar.isHidden = true
+        let height = UIScreen.main.bounds.height
+        let width  = UIScreen.main.bounds.width
+        bottomSheetView?.frame = CGRect(x: 0, y: height * 0.9, width: width, height: height)
     }
     
-    private func configureBackButton() {
-        self.navigationItem.hidesBackButton = true
-        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .done, target: self, action: #selector(self.backButtonTapped(_:)))
-        self.navigationItem.leftBarButtonItem = backButton
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    private func setupNavBarBlur() {
+        navBarBlurView.alpha = 0
+        let navBarHeight = navigationController?.navigationBar.frame.height ?? 50
+        self.navigationController?.navigationBar.addSubview(navBarBlurView)
+        
+        NSLayoutConstraint.activate([
+            navBarBlurView.topAnchor.constraint(equalTo: (self.navigationController?.navigationBar.topAnchor)!, constant: -1 * navBarHeight),
+            navBarBlurView.leadingAnchor.constraint(equalTo: (self.navigationController?.navigationBar.leadingAnchor)!),
+            navBarBlurView.trailingAnchor.constraint(equalTo: (self.navigationController?.navigationBar.trailingAnchor)!),
+            navBarBlurView.bottomAnchor.constraint(equalTo: (self.navigationController?.navigationBar.bottomAnchor)!)
+        ])
+    }
+    
+    private func setupContentBlur() {
+        navBarBlurView.alpha = 0
+        self.view.addSubview(contentBlurView)
+        
+        NSLayoutConstraint.activate([
+            contentBlurView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            contentBlurView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            contentBlurView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            contentBlurView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
     }
     
     private func configureEditButton() {
-        let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: nil)
+        let editButton = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(editButtonTapped))
         self.navigationItem.rightBarButtonItem = editButton
     }
     
-    @objc func backButtonTapped(_ sender: UIBarButtonItem) {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.popViewController(animated: true)
+    @objc func editButtonTapped() {
+        let previousData: PreviousData = PreviousData(title: issueDetailViewModel.title,
+                                                      description: issueDetailViewModel.description ?? "",
+                                                      issueNumber: String(issueDetailViewModel.issueNumber))
+        
+        AddNewIssueViewController.present(at: self, addType: .editIssue, previousData: previousData) { [weak self] (content) in
+            let editedTitle = content[0]
+            let editedDescription = content[1]
+            self?.issueDetailViewModel.editIssue(title: editedTitle, description: editedDescription)
+        }
     }
     
     private func configureCollectionView() {
         setupCollectionViewLayout()
         collectionView.dataSource = self
+        collectionView.delegate = self
         collectionView.registerHeader(type: IssueDetailHeaderView.self)
         collectionView.registerCell(type: IssueDetailCellView.self)
     }
     
-    private func configureInitialLayout() {
-        guard addCommentView != nil else {
-            configureCollectionView()
-            configureBottomSheetView()
-            addBottomSheetView()
-            return
-        }
-    }
-    
     private func configureBottomSheetView() {
-        self.tabBarController?.tabBar.isHidden = true
-        addCommentView = AddCommentView.createView()
-        let height = view.frame.height
-        let width  = view.frame.width
-        self.addCommentView?.frame = CGRect(x: 0, y: self.view.frame.maxY * 0.85, width: width, height: height)
-    }
-    
-    private func addBottomSheetView() {
-        guard let addCommentView = addCommentView else { return }
+        guard let bottomSheetView = BottomSheetView.createView() else { return }
+        bottomSheetView.configure(issueDetailViewModel: issueDetailViewModel)
+        bottomSheetView.delegate = self
         
-        addCommentView.upButtonTapped = { [weak self] in
-            guard let `self` = self,
-                let currentIndexPath = self.currentIndexPath
-                else { return }
-            
-            if currentIndexPath.item == 0 {
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.collectionView.contentOffset = CGPoint.zero
-                })
-            } else if currentIndexPath.item != -1 {
-                self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item - 1, section: 0), at: .top, animated: true)
-            }
-        }
-        
-        addCommentView.downButtonTapped = { [weak self] in
-            guard let `self` = self,
-                let currentIndexPath = self.currentIndexPath,
-                currentIndexPath.item < self.cellData.count - 1
-                else { return }
-            
-            self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item + 1, section: 0), at: .top, animated: true)
-        }
-        
-        self.view.addSubview(addCommentView)
+        self.bottomSheetView = bottomSheetView
+        self.view.addSubview(bottomSheetView)
     }
     
     private func setupCollectionViewLayout() {
         let flowLayout = UICollectionViewFlowLayout()
         let width = self.view.frame.size.width
-        let headerHeight = self.view.frame.height * 0.2
+        let headerHeight = UIScreen.main.bounds.height * 0.2
         
-        flowLayout.itemSize.width = width
         flowLayout.estimatedItemSize = CGSize(width: width, height: headerHeight)
-        flowLayout.headerReferenceSize = CGSize(width: width, height: headerHeight)
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        flowLayout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: headerHeight)
         
         collectionView.collectionViewLayout = flowLayout
     }
@@ -157,41 +155,104 @@ class IssueDetailViewController: UIViewController {
 
 extension IssueDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cellData.count
+        return issueDetailViewModel.comments.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell: IssueDetailCellView = collectionView.dequeueCell(at: indexPath) else { return UICollectionViewCell() }
-        cell.configure(with: cellData[indexPath.row])
+        cell.configure(with: issueDetailViewModel.comments[indexPath.row])
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header: IssueDetailHeaderView = collectionView.dequeueHeader(at: indexPath) else { return UICollectionReusableView() }
         
-        guard let header: IssueDetailHeaderView = collectionView.dequeueHeader(at: indexPath),
-            let issueDetailViewModel = issueDetailViewModel
-            else { return UICollectionReusableView() }
-        
-        if didFetchDetails {
-            header.configure(with: issueDetailViewModel)
-        } else {
-            issueDetailViewModel.needFetchDetails(with: currentIssueId)
-            header.configure(with: issueDetailViewModel)
-        }
-        
+        header.configure(with: issueDetailViewModel.headerViewModel)
         return header
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
+    
 }
+
+// MARK: - UICollectionViewDelegateFlowLayout Implementation
+
+extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let indexPath = IndexPath(row: 0, section: section)
+        
+        if let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath) as? IssueDetailHeaderView {
+            
+            let size = CGSize(width: collectionView.frame.width, height: UIView.layoutFittingCompressedSize.height)
+            return headerView.systemLayoutSizeFitting(size, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+        }
+        
+        return CGSize(width: self.view.frame.width, height: CGFloat(100))
+    }
+    
+}
+
+// MARK: - BottomSheetViewDelegate Implementatioin
+
+extension IssueDetailViewController: BottomSheetViewDelegate {
+    func heightChanged(with newHeight: CGFloat) {
+        let newAlpha = newHeight / 1000
+        DispatchQueue.main.async { [weak self] in
+            self?.contentBlurView.alpha = (newAlpha - 0.5) * -1
+            self?.navBarBlurView.alpha = (newAlpha - 0.5) * -1
+        }
+    }
+    
+    func categoryHeaderTapped(type: DetailSelectionType) {
+        let maximumSelection = type == .milestone ? 1 : 0
+        let dataSource = issueDetailViewModel.detailSelectionItemDataSource(of: type)
+        let viewModel = DetailSelectionViewModel(detailCondition: type, viewModelDataSource: dataSource, maxSelection: maximumSelection)
+        let vc = DetailSelectionViewController.createViewController(with: viewModel)
+        vc.onSelectionComplete = { selectedItems in
+            self.issueDetailViewModel.detailItemSelected(type: type, selectedItems: selectedItems)
+        }
+        present(vc, animated: true)
+    }
+    
+    func upButtonTapped() {
+        guard let currentIndexPath = self.currentIndexPath else { return }
+        
+        if currentIndexPath.item == 0 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.collectionView.contentOffset = CGPoint.zero
+            })
+        } else if currentIndexPath.item != -1 {
+            self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item - 1, section: 0), at: .top, animated: true)
+        }
+    }
+    
+    func downButtonTapped() {
+        guard let currentIndexPath = self.currentIndexPath else { return }
+        
+        if currentIndexPath.item < self.issueDetailViewModel.comments.count - 1 {
+            self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item + 1, section: 0), at: .top, animated: true)
+        }
+    }
+    
+    func addCommentButtonTapped() {
+        AddNewIssueViewController.present(at: self, addType: .newComment, previousData: nil, onDismiss: { [weak self] (content) in
+            self?.issueDetailViewModel.addComment(content: content[0])
+        })
+    }
+    
+}
+
+// MARK: - Create ViewController
 
 extension IssueDetailViewController {
     static let nibName = "IssueDetailViewController"
     
-    static func createViewController(currentIssueId: Int, issueDetailViewModel: IssueDetailViewModel) -> IssueDetailViewController {
-        let vc = IssueDetailViewController(currentIssueId: currentIssueId, issueDetailViewModel: issueDetailViewModel)
+    static func createViewController(issueDetailViewModel: IssueDetailViewModel) -> IssueDetailViewController {
+        let vc = IssueDetailViewController(nibName: nibName, bundle: Bundle.main, viewModel: issueDetailViewModel)
         return vc
     }
 }

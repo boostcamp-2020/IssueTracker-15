@@ -2,13 +2,14 @@ import { getRepository } from "typeorm";
 import Encryption from "../lib/encryption";
 import UserEntity from "../entity/user.entity";
 import { SignUpInput } from "../types/sign-up.type";
+import UserDTO from "../types/user-dto";
 
 const UserService = {
   create: async (
     signUpInput: SignUpInput,
     type: string
   ): Promise<UserEntity> => {
-    const { email, password, userName } = signUpInput;
+    const { email, password, userName, imageURL } = signUpInput;
 
     const hashedPassword = await Encryption.encryptPassword(password);
 
@@ -17,10 +18,29 @@ const UserService = {
       email,
       password: hashedPassword,
       userName,
+      imageURL,
       type,
     });
     const newUser: UserEntity = await userRepository.save(user);
     return newUser;
+  },
+
+  getExistUser: async (email: string) => {
+    const userRepository = getRepository(UserEntity);
+    const user = await userRepository.findOne({ where: { email } });
+
+    return user;
+  },
+
+  getUserList: async () => {
+    const userRepository = getRepository(UserEntity);
+    const users = await userRepository.find();
+
+    const userList = users.map((user) => {
+      return new UserDTO(user);
+    });
+
+    return { userList };
   },
 
   getAssigneeList: async (issueId: number) => {
@@ -28,7 +48,7 @@ const UserService = {
     const assignees = await userRepository
       .createQueryBuilder("User")
       .innerJoin("User.assignees", "Assignees")
-      .select(["User.userName", "User.imageURL"])
+      .select(["User.id", "User.userName", "User.imageURL"])
       .where("Assignees.issueId = :issueId", { issueId })
       .getMany();
 

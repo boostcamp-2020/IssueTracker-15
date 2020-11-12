@@ -14,13 +14,6 @@ struct Label: Codable {
     let description: String
     let hexColor: String
     
-    init(title: String, description: String, hexColor: String) {
-        self.id = -1
-        self.title = title
-        self.description = description
-        self.hexColor = hexColor
-    }
-    
     init(id: Int, title: String, description: String, hexColor: String) {
         self.id = id
         self.title = title

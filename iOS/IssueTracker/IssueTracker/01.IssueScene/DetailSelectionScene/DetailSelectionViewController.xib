@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailSelectionViewController" customModule="IssueTracker" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="KK4-3J-bma" id="sYB-gg-iVs"/>
+                <outlet property="titleNavItem" destination="hzt-o1-LlN" id="DnO-CE-dfp"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="DetailConditionSelectViewController" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uJA-m9-pNo">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                    <items>
+                        <navigationItem title="Title" id="hzt-o1-LlN">
+                            <barButtonItem key="leftBarButtonItem" title="Cancle" id="aNJ-J3-UqK">
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="-1" id="iKH-gY-9HE"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" title="Done" id="grj-UR-Tfz">
+                                <connections>
+                                    <action selector="doneButtonTapped:" destination="-1" id="a2a-UJ-eeb"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" style="grouped" separatorInsetReference="fromAutomaticInsets" sectionIndexMinimumDisplayRowCount="2" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="KK4-3J-bma">
+                    <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                    <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KK4-3J-bma" secondAttribute="bottom" id="3pQ-xU-Fva"/>
+                <constraint firstItem="KK4-3J-bma" firstAttribute="top" secondItem="uJA-m9-pNo" secondAttribute="bottom" id="4Nz-iv-Jp8"/>
+                <constraint firstItem="uJA-m9-pNo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="CEZ-bk-1NE"/>
+                <constraint firstItem="KK4-3J-bma" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="PWy-V2-8EY"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KK4-3J-bma" secondAttribute="trailing" id="WnL-26-Pco"/>
+                <constraint firstItem="uJA-m9-pNo" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="jAd-Zi-Waq"/>
+                <constraint firstItem="uJA-m9-pNo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="yRE-ld-WaS"/>
+            </constraints>
+            <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="207" y="213"/>
+        </view>
+    </objects>
+</document>

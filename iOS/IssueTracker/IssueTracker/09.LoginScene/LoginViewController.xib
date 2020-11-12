@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="IssueTracker" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이슈트래커" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bV-tJ-Tf4">
+                    <rect key="frame" x="142" y="194" width="130" height="36"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XAr-Qc-hXV">
+                    <rect key="frame" x="100" y="383" width="39" height="30"/>
+                    <state key="normal" title="로그인"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ax-iI-dz7">
+                    <rect key="frame" x="41.5" y="463" width="331" height="30"/>
+                    <color key="backgroundColor" red="0.69513660669999999" green="0.69522148370000003" blue="0.69510769839999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="Sign in With Github">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="githubSigninButtonTapped:" destination="-1" eventType="touchUpInside" id="XsI-Kq-i5P"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="아이디" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ssl-0Z-JQE">
+                    <rect key="frame" x="41.5" y="275" width="331" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="비밀번호" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jsG-Gu-lo0">
+                    <rect key="frame" x="41.5" y="329" width="331" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rP0-36-dlm">
+                    <rect key="frame" x="41.5" y="513" width="331" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Sign in With Apple">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbZ-Fx-p5v">
+                    <rect key="frame" x="262" y="383" width="52" height="30"/>
+                    <state key="normal" title="회원가입"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.93175184730000005" green="0.93206220870000001" blue="0.93900996449999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="jsG-Gu-lo0" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0WX-ZN-Dbx"/>
+                <constraint firstItem="Ssl-0Z-JQE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="40p-zv-FR0"/>
+                <constraint firstItem="Ssl-0Z-JQE" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="8wP-lL-72r"/>
+                <constraint firstItem="5ax-iI-dz7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="EfD-Hv-ZDh"/>
+                <constraint firstItem="jsG-Gu-lo0" firstAttribute="top" secondItem="Ssl-0Z-JQE" secondAttribute="bottom" constant="20" id="G0X-68-W7d"/>
+                <constraint firstItem="XAr-Qc-hXV" firstAttribute="top" secondItem="jsG-Gu-lo0" secondAttribute="bottom" constant="20" id="Gsm-dZ-gBH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wbZ-Fx-p5v" secondAttribute="trailing" constant="100" id="IIw-Im-oX1"/>
+                <constraint firstItem="2bV-tJ-Tf4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="150" id="JTk-6J-v2V"/>
+                <constraint firstItem="5ax-iI-dz7" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="Jim-Pd-Bzw"/>
+                <constraint firstItem="5ax-iI-dz7" firstAttribute="top" secondItem="XAr-Qc-hXV" secondAttribute="bottom" constant="50" id="NSq-2o-CWp"/>
+                <constraint firstItem="2bV-tJ-Tf4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OPf-dU-KP6"/>
+                <constraint firstItem="rP0-36-dlm" firstAttribute="top" secondItem="5ax-iI-dz7" secondAttribute="bottom" constant="20" id="aey-b9-h2T"/>
+                <constraint firstItem="XAr-Qc-hXV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="dmP-iV-INA"/>
+                <constraint firstItem="Ssl-0Z-JQE" firstAttribute="top" secondItem="2bV-tJ-Tf4" secondAttribute="bottom" constant="45" id="fJs-BJ-lvN"/>
+                <constraint firstItem="rP0-36-dlm" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mhx-Dd-7Fm"/>
+                <constraint firstItem="jsG-Gu-lo0" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="oKX-OV-CFe"/>
+                <constraint firstItem="wbZ-Fx-p5v" firstAttribute="top" secondItem="jsG-Gu-lo0" secondAttribute="bottom" constant="20" id="pUS-L1-I6a"/>
+                <constraint firstItem="rP0-36-dlm" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="pjK-8D-h9K"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="-46" y="15"/>
+        </view>
+    </objects>
+</document>

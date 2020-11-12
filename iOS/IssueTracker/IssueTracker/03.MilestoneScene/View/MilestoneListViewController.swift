@@ -24,7 +24,6 @@ class MilestoneListViewController: UIViewController {
         super.viewDidLoad()
         configureCollectionView()
         milestoneListViewModel?.needFetchItems()
-        title = "마일스톤"
     }
     
     private func configureCollectionView() {
@@ -36,7 +35,7 @@ class MilestoneListViewController: UIViewController {
     
     private func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 8)
+        layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: self.view.bounds.height / 8)
         layout.minimumLineSpacing = 1
         layout.sectionHeadersPinToVisibleBounds = true
         collectionView.setCollectionViewLayout(layout, animated: false)
@@ -52,12 +51,9 @@ extension MilestoneListViewController {
     }
     
     private func showSubmitFormView(type: MilestoneSubmitFieldsView.SubmitFieldType) {
-        guard let tabBarController = self.tabBarController,
-            let formView = SubmitFormView.createView(),
-            let milestoneSubmitFieldsView = MilestoneSubmitFieldsView.createView()
+        guard let milestoneSubmitFieldsView = MilestoneSubmitFieldsView.createView(),
+            let formView = SubmitFormViewController.createViewController(with: milestoneSubmitFieldsView)
             else { return }
-        
-        formView.configure(submitField: milestoneSubmitFieldsView)
         
         switch type {
         case .add:
@@ -69,8 +65,7 @@ extension MilestoneListViewController {
             }
         }
         
-        tabBarController.view.addSubview(formView)
-        formView.frame = tabBarController.view.frame
+        present(formView, animated: true, completion: nil)
     }
     
 }
