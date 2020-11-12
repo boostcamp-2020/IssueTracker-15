@@ -29,7 +29,7 @@ extension MilestoneComponentView: CellComponentProtocol {
     
     func configure(viewModel: CellComponentViewModel) {
         titleLabel.text = viewModel.title
-        if let date = viewModel.element?.datdForServer {
+        if let date = viewModel.element?.dateForServer {
             dueDateLabel.text = "Due by " + date.stringForConditionCell
             if date < Date() {
                 dueDateLabel.textColor = .red

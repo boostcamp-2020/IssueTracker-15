@@ -49,8 +49,12 @@ extension Comment {
     }
     
     init(content: String, authorId: Int, createAt: String) {
+        if let createdDate = createAt.dateForServer {
+            self.createAt = DateFormatter.dateForCollectionView.string(from: createdDate)
+        } else {
+            self.createAt = ""
+        }
         self.content = content
-        self.createAt = createAt
         self.author = User(id: authorId)
     }
     
