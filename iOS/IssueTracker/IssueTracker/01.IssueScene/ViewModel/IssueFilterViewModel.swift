@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import NetworkFramework
 
 protocol IssueFilterViewModelProtocol: AnyObject {
     var generalConditions: [Bool] { get }
@@ -76,16 +75,6 @@ class IssueFilterViewModel: IssueFilterViewModelProtocol {
         case .assignee, .writer:
             issueProvider?.users.forEach {
                 let viewModel = CellComponentViewModel(user: $0.value)
-                if let imageURL = $0.value.imageURL {
-                    ImageLoader.shared.loadImage(from: imageURL, callBackQueue: .main) { [weak viewModel] (result) in
-                        switch result {
-                        case .failure, .success(.none):
-                            return
-                        case .success(.some(let data)):
-                            viewModel?.onDataReceived(data: data)
-                        }
-                    }
-                }
                 viewModels[$0.value.id == detailConditions[type.rawValue] ? 0 : 1].append(viewModel)
             }
         case .label:

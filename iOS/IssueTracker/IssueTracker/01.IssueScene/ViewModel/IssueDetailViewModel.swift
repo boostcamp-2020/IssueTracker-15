@@ -16,6 +16,7 @@ protocol IssueDetailViewModelProtocol: AnyObject {
     var isOpened: Bool { get }
     var didFetch: (() -> Void)? { get set }
     var milestone: MilestoneItemViewModel? { get }
+    var headerViewModel: IssueDetailHeaderViewModel { get }
     var description: String? { get }
     var comments: [CommentViewModel] { get }
     var labels: [LabelItemViewModel] { get }
@@ -32,53 +33,6 @@ protocol IssueDetailViewModelProtocol: AnyObject {
     func detailItemSelected(type: DetailSelectionType, selectedItems: [CellComponentViewModel])
 }
 
-class CommentViewModel {
-    let content: String
-    let createAt: String
-    let userName: String
-    let imageURL: String?
-    var data: Data?
-    
-    var didDataChanged: ((Data?) -> Void)?
-    
-    func onDataReceived(data: Data?) {
-        self.data = data
-        didDataChanged?(data)
-    }
-    
-    init(comment: Comment) {
-        content = comment.content
-        createAt = comment.createAt
-        userName = comment.author.userName
-        imageURL = comment.author.imageURL
-    }
-}
-
-protocol UserViewModelProtocol {
-    var userName: String { get set }
-    var imageURL: String? { get set }
-}
-
-class UserViewModel {
-    let id: Int
-    var userName: String
-    var imageURL: String?
-    var data: Data?
-    
-    var didDataChanged: ((Data?) -> Void)?
-    func onDataReceived(data: Data?) {
-        self.data = data
-        didDataChanged?(data)
-    }
-    
-    init(user: User? = nil) {
-        self.id = user?.id ?? -1
-        self.userName = user?.userName ?? ""
-        self.imageURL = user?.imageURL
-    }
-
-}
-
 class IssueDetailViewModel: IssueDetailViewModelProtocol {
     
     var issueNumber: Int = 0
@@ -91,6 +45,10 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     var comments: [CommentViewModel] = [CommentViewModel]()
     var labels: [LabelItemViewModel] = [LabelItemViewModel]()
     var assignees: [UserViewModel] = [UserViewModel]()
+    
+    var headerViewModel: IssueDetailHeaderViewModel {
+        IssueDetailHeaderViewModel(id: issueNumber, title: title, author: author, isOpened: isOpened)
+    }
     
     var didLabelChanged: (() -> Void)?
     var didMilestoneChanged: (() -> Void)?
@@ -144,18 +102,6 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             
             self.assignees = currentIssue.assignees.compactMap {
                 guard let user = issueProvider.users[$0] else { return nil }
-                let userViewModel = UserViewModel(user: user)
-                if let imageURL = userViewModel.imageURL {
-                    ImageLoader.shared.loadImage(from: imageURL, callBackQueue: .main) { [weak userViewModel] (result) in
-                        switch result {
-                        case .failure, .success(.none):
-                            return
-                        case .success(.some(let data)):
-                            userViewModel?.onDataReceived(data: data)
-                        }
-                    }
-                                       
-                }
                 return UserViewModel(user: user)
             }
 

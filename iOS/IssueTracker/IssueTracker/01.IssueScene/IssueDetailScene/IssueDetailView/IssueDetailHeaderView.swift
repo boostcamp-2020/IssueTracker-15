@@ -21,11 +21,14 @@ class IssueDetailHeaderView: UICollectionReusableView {
     @IBOutlet weak var issueNumber: UILabel!
     @IBOutlet weak var issueBadge: UIButton!
     
-    func configure(with issueDetailViewModel: IssueDetailViewModelProtocol) {
-        self.issueAuthor.text = issueDetailViewModel.author.userName
-        self.issueTitle.text = issueDetailViewModel.title
-        self.issueNumber.text = "#" + String(issueDetailViewModel.issueNumber)
-        configureIssueBadge(isOpened: issueDetailViewModel.isOpened)
+    func configure(with headerViewModel: IssueDetailHeaderViewModel) {
+        self.issueAuthor.text = headerViewModel.author.userName
+        self.issueTitle.text = headerViewModel.title
+        self.issueNumber.text = "#" + String(headerViewModel.id)
+        configureIssueBadge(isOpened: headerViewModel.isOpened)
+        headerViewModel.needImage { [weak self] (data) in
+            self?.setProfileImage(data: data)
+        }
     }
     
     private func configureIssueBadge(isOpened: Bool) {
@@ -36,6 +39,11 @@ class IssueDetailHeaderView: UICollectionReusableView {
         
         issueBadge.convertToIssueBadge(text: badgeText, backgroundColor: badgeColor)
         issueBadge.contentEdgeInsets = UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
+    }
+    
+    private func setProfileImage(data: Data?) {
+        guard let data = data else { return }
+        profilePicture.image = UIImage(data: data)
     }
 }
 

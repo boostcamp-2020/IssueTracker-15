@@ -33,7 +33,7 @@ public class ImageLoader {
         }
         
         let taskCompletion: (Data?, URLResponse?, Error?) -> Void  = { data, response, error in
-            guard let data = data else {
+            guard let data = data, !data.isEmpty else {
                 self.completion(callBackQueue: callBackQueue) {
                     print("[ImageError] data가 0입니다!")
                     completion(.failure(NetworkError.imageIsNil))
