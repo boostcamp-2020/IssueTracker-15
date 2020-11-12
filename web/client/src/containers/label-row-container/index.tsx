@@ -14,13 +14,14 @@ export const LabelsContext = React.createContext({} as LabelsContextProps);
 export default function LabelRowContainer() {
   const [labels, setLabels] = useState([] as Label[]);
 
+  const fetchInitialLabels = async () => {
+    const labelList = await getLabels();
+    setLabels(labelList);
+  };
+
   useEffect(() => {
-    const initLabels = async () => {
-      const labelList = await getLabels();
-      setLabels(labelList);
-    };
-    initLabels();
-  }, [labels]);
+    fetchInitialLabels();
+  });
 
   return (
     <LabelsContext.Provider value={{ labels, setLabels }}>
