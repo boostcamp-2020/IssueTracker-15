@@ -23,7 +23,7 @@ function IssueComp({ info }: IssueCompProp) {
       <div>
         <S.IssueInfo>
           <S.IssueInfoLink to={`/issue/${info.id}`}>
-            <S.IssueTitle>{info.title} </S.IssueTitle>
+            {info.title}
           </S.IssueInfoLink>
           {info.labels.map((label: LabelInfoType) => {
             return (
