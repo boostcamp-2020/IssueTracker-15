@@ -2,24 +2,46 @@ import React, { useState, Fragment } from "react";
 import * as S from "./style";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { VscMilestone } from "react-icons/vsc";
+import Label from "../../../label";
+import { getTimeTillNow } from "../../../../lib/dateParser";
 
-function IssueList() {
+interface IssueListProp {
+  info: any;
+}
+function IssueList({ info }: IssueListProp) {
+  const color = info.isOpened ? "green" : "red";
+  const mention = info.isOpened ? "opened" : "closed";
+
   return (
     <S.IssueComp>
-      <input type="checkbox" name="xxx" value="yyy" checked />
+      <input type="checkbox" name="xxx" value="yyy" />
       <S.ExclamationWrapper>
-        <AiOutlineExclamationCircle color="green" />
+        <AiOutlineExclamationCircle color={color} />
       </S.ExclamationWrapper>
       <div>
         <S.IssueInfo>
-          <S.IssueTitle> 제목 </S.IssueTitle>
+          <S.IssueInfoLink to={`/issue/${info.id}`}>
+            <S.IssueTitle>{info.title} </S.IssueTitle>
+          </S.IssueInfoLink>
+          {info.labels.map((label: any) => {
+            return (
+              <S.LabelWrapper>
+                <Label name={label.title} color={label.color} />
+              </S.LabelWrapper>
+            );
+          })}
         </S.IssueInfo>
         <S.IssueEtc>
           <S.IssueEtcWrapper>
-            #4 by heramoon was closed by 8 days ago
+            #{info.id} by {info.author.userName} was {mention} by{" "}
+            {getTimeTillNow(info.createAt)} ago
           </S.IssueEtcWrapper>
-          <VscMilestone />
-          스프린트2
+          {info.milestone && (
+            <div>
+              <VscMilestone />
+              {info.milestone.title}
+            </div>
+          )}
         </S.IssueEtc>
       </div>
     </S.IssueComp>

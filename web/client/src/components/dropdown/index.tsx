@@ -8,7 +8,6 @@ interface dropdownProps {
   contents: any[];
 }
 
-// { "제목 " : {{"title" : ~}, {"content" : [] }};
 function Dropdown({ title, contents }: dropdownProps) {
   const [isVisible, setIsVisible] = useState(false);
 
