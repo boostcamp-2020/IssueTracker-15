@@ -13,6 +13,7 @@ protocol BottomSheetViewDelegate: AnyObject {
     func upButtonTapped()
     func downButtonTapped()
     func categoryHeaderTapped(type: DetailSelectionType)
+    func heightChanged(with: CGFloat)
 }
 
 class BottomSheetView: UIView {
@@ -52,6 +53,10 @@ class BottomSheetView: UIView {
         self.addGestureRecognizer(gesture)
     }
     
+    override func layoutSubviews() {
+        delegate?.heightChanged(with: self.frame.minY)
+    }
+    
 }
 
 // MARK: - Action
@@ -77,7 +82,7 @@ extension BottomSheetView {
         let velocity = recognizer.velocity(in: self)
         let y = self.frame.minY
         
-        if ( y + translation.y >= fullView) && (y + translation.y <= partialView ) {
+        if (y + translation.y >= fullView) && (y + translation.y <= partialView ) {
             self.frame = CGRect(x: 0, y: y + translation.y, width: self.frame.width, height: self.frame.height)
             recognizer.setTranslation(CGPoint.zero, in: self)
         }

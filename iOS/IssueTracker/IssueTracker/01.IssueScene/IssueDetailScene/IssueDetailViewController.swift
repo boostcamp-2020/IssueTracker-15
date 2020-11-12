@@ -42,11 +42,31 @@ class IssueDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBlurView()
         configureEditButton()
         issueDetailViewModel.needFetchDetails()
         configureCollectionView()
         configureBottomSheetView()
         navigationItem.title = "이슈 상세"
+    }
+    
+    let blurredEffectView: UIVisualEffectView = {
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        return blurredEffectView
+    }()
+    
+    func setupBlurView() {
+        blurredEffectView.alpha = 0
+        self.view.addSubview(blurredEffectView)
+        
+        NSLayoutConstraint.activate([
+            blurredEffectView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            blurredEffectView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            blurredEffectView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            blurredEffectView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +77,7 @@ class IssueDetailViewController: UIViewController {
         let width  = UIScreen.main.bounds.width
         bottomSheetView?.frame = CGRect(x: 0, y: height * 0.9, width: width, height: height)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
@@ -158,6 +178,12 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - BottomSheetViewDelegate Implementatioin
 
 extension IssueDetailViewController: BottomSheetViewDelegate {
+    func heightChanged(with newHeight: CGFloat) {
+        let newAlpha = newHeight / 1000
+        DispatchQueue.main.async { [weak self] in
+            self?.blurredEffectView.alpha = (newAlpha - 0.5) * -1
+        }
+    }
     
     func categoryHeaderTapped(type: DetailSelectionType) {
         let maximumSelection = type == .milestone ? 1 : 0
