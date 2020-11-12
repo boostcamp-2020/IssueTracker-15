@@ -43,7 +43,6 @@ struct Issue {
     }
     
     mutating func addAssignee(id: Int) {
-        // TODO: Assignee -> [id]
         if assignees.contains(where: { $0 == id }) { return }
         assignees.append(id)
     }

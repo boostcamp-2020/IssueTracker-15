@@ -20,5 +20,4 @@ class MilestoneTests: XCTestCase {
         XCTAssertEqual(milestone.title, "스프린트2")
     }
     
-    //TODO:- initialize From JSON TEST
 }

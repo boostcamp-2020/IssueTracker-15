@@ -14,7 +14,6 @@ class DetailSelectionViewController: UIViewController {
 
     var onSelectionComplete: (([CellComponentViewModel]) -> Void)?
     
-    // TODO: Dummy Data to ViewModelProtocol
     private var viewModel: DetailSelectionViewModelProtocol
     
     @IBOutlet weak var tableView: UITableView!
@@ -113,7 +112,6 @@ extension DetailSelectionViewController {
     
     static let nibName = "DetailSelectionViewController"
     
-    // TODO: Dependency Injection ( ViewModels )
     static func createViewController(with viewModel: DetailSelectionViewModelProtocol) -> DetailSelectionViewController {
         let vc = DetailSelectionViewController(nibName: nibName, bundle: Bundle.main, viewModel: viewModel)
         return vc

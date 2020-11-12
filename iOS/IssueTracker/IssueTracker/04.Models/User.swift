@@ -19,13 +19,6 @@ struct User: Codable {
         imageURL = nil
     }
     
-    init(name: String, imageUrl: String? = nil) {
-        // TODO: userID
-        self.id = 0
-        self.userName = name
-        self.imageURL = imageUrl
-    }
-    
 }
 
 // MARK: - For Common Response Data
