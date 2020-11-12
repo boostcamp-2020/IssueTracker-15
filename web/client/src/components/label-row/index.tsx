@@ -26,6 +26,7 @@ export default function LabelRow({ label }: { label: LabelForm }) {
   }, [editBoxToggle]);
 
   const deleteLabel = useCallback(async () => {
+    confirm(`${label.title} 을 정말 삭제하시겠습니까?`);
     const result = await deleteLabelReqeust(label.id);
     if (!result.ok) return;
 
