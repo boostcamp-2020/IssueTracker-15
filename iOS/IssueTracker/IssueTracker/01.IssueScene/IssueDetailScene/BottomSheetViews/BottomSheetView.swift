@@ -14,6 +14,7 @@ protocol BottomSheetViewDelegate: AnyObject {
     func downButtonTapped()
     func categoryHeaderTapped(type: DetailSelectionType)
     func heightChanged(with: CGFloat)
+    func stateToggleButtonTapped()
 }
 
 class BottomSheetView: UIView {
@@ -46,6 +47,7 @@ class BottomSheetView: UIView {
         configureGesture()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = .clear
     }
     
     private func configureGesture() {
@@ -75,6 +77,10 @@ extension BottomSheetView {
     
     @IBAction func downButtonTapped(_ sender: Any) {
         delegate?.downButtonTapped()
+    }
+    
+    private func stateToggleButtonTapped() {
+        delegate?.stateToggleButtonTapped()
     }
     
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
@@ -110,12 +116,18 @@ extension BottomSheetView {
 extension BottomSheetView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard section < 3 else { return nil }
         let headerView = BottomSheetHeaderView.createView()
         headerView?.configure(type: TableViewConstant.headerTitles[section])
         headerView?.onHeaderViewTapped = { [weak self] headerType in
             self?.delegate?.categoryHeaderTapped(type: headerType)
         }
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section != 3 { return }
+        stateToggleButtonTapped()
     }
     
 }
@@ -129,7 +141,7 @@ extension BottomSheetView: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,69 +153,95 @@ extension BottomSheetView: UITableViewDataSource {
             return num
         case 2:
             return (issueDetailViewModel?.milestone != nil) ? 1 : 0
+        case 3:
+            return 1
         default:
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        let cell: UITableViewCell?
         switch indexPath.section {
         case 0:
-            guard let userComponentView = UserInfoComponentView.createView(),
-                let userViewModel = issueDetailViewModel?.assignees[safe: indexPath.row]
-                else { break }
-            let cell = UITableViewCell()
-            cell.backgroundColor = .clear
-            cell.addSubview(userComponentView)
-            NSLayoutConstraint.activate([
-                userComponentView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
-                userComponentView.topAnchor.constraint(equalTo: cell.topAnchor),
-                userComponentView.bottomAnchor.constraint(equalTo: cell.bottomAnchor)
-            ])
-            userComponentView.configure(viewModel: CellComponentViewModel(title: userViewModel.userName, element: userViewModel.imageURL))
-            return cell
+            cell = createAssigneeCell(indexPath: indexPath)
         case 1:
-            guard let labelViewModels = issueDetailViewModel?.labels else { break }
-            
-            let cell: BottomSheetLabelCollectionView
-            if let labelsCollectionViewCell = self.labelsCollectionViewCell {
-                cell = labelsCollectionViewCell
-            } else if let labelsCollectionViewCell = BottomSheetLabelCollectionView.createView() {
-                cell = labelsCollectionViewCell
-                self.labelsCollectionViewCell = cell
-            } else {
-                break
-            }
-            
-            cell.configure(labelItemViewModels: labelViewModels)
-            return cell
+            cell = createLabelCollectionCell()
         case 2:
-            guard let cell = BottomSheetMilestoneView.createView(),
-                let milestoneViewModel = issueDetailViewModel?.milestone
-                else { break }
-            cell.configure(milestoneViewModel: milestoneViewModel)
-            return cell
+            cell = createMilestoneCell()
+        case 3:
+            cell = createCloseOpenButtonCell()
         default:
-            break
+            cell = nil
         }
-        
-        return UITableViewCell()
+        return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0:
-            return UIScreen.main.bounds.height / 17
         case 1:
             labelsCollectionViewCell?.layoutIfNeeded()
             return labelsCollectionViewCell?.labelCollectionView.collectionViewLayout.collectionViewContentSize.height ?? 0
-        case 2:
-            return UIScreen.main.bounds.height / 15
         default:
-            return 0
+            return UITableView.automaticDimension
         }
     }
+    
+    private func createAssigneeCell(indexPath: IndexPath) -> UITableViewCell? {
+        guard let userComponentView = UserInfoComponentView.createView(),
+              let userViewModel = issueDetailViewModel?.assignees[safe: indexPath.row]
+        else { return nil }
+        let cell = UITableViewCell()
+        cell.backgroundColor = .clear
+        cell.addSubview(userComponentView)
+        NSLayoutConstraint.activate([
+            userComponentView.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+            userComponentView.topAnchor.constraint(equalTo: cell.topAnchor),
+            userComponentView.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
+            userComponentView.heightAnchor.constraint(equalTo: cell.widthAnchor, multiplier: 0.13)
+        ])
+        userComponentView.configure(viewModel: CellComponentViewModel(title: userViewModel.userName, element: userViewModel.imageURL))
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    private func createLabelCollectionCell() -> UITableViewCell? {
+        guard let labelViewModels = issueDetailViewModel?.labels else { return nil }
+        
+        let cell: BottomSheetLabelCollectionView
+        if let labelsCollectionViewCell = self.labelsCollectionViewCell {
+            cell = labelsCollectionViewCell
+        } else if let labelsCollectionViewCell = BottomSheetLabelCollectionView.createView() {
+            cell = labelsCollectionViewCell
+            self.labelsCollectionViewCell = cell
+        } else {
+            return nil
+        }
+        cell.configure(labelItemViewModels: labelViewModels)
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    private func createMilestoneCell() -> UITableViewCell? {
+        guard let cell = BottomSheetMilestoneView.createView(),
+              let milestoneViewModel = issueDetailViewModel?.milestone
+        else { return nil }
+        cell.configure(milestoneViewModel: milestoneViewModel)
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    private func createCloseOpenButtonCell() -> UITableViewCell? {
+        guard let isOpened = issueDetailViewModel?.isOpened else { return nil }
+        let cell = UITableViewCell()
+        cell.textLabel?.text = isOpened ? "Close Issue" : "Reopen Issue"
+        cell.imageView?.image = UIImage(systemName: "exclamationmark.circle")
+        cell.imageView?.tintColor = isOpened ? Constant.closeColor : Constant.openColor
+        cell.textLabel?.textColor = isOpened ? Constant.closeColor : Constant.openColor
+        cell.backgroundColor = UIColor.clear
+        return cell
+    }
+    
 }
 
 // MARK: - loadNIB extension
@@ -212,5 +250,14 @@ extension BottomSheetView {
     
     static func createView() -> BottomSheetView? {
         return Bundle.main.loadNibNamed(BottomSheetView.identifier, owner: self, options: nil)?.last as? BottomSheetView
+    }
+}
+
+// MARK: - Constant
+
+extension BottomSheetView {
+    enum Constant {
+        static let openColor = UIColor(named: "OpenIssueBackgroundColor")
+        static let closeColor = UIColor(named: "ClosedIssueBackgroundColor")
     }
 }
