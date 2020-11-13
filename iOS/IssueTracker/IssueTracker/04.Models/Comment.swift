@@ -38,24 +38,19 @@ struct Comment {
 extension Comment {
     
     // For AddResponse
-    static func addResponse(json: [String: Any]?) -> Comment? {
+    static func addResponse(json: [String: Any]?, author: User) -> Comment? {
         guard let json = json,
             let content = json["content"] as? String,
-            let createAt = json["createAt"] as? String,
-            let authorId = json["userId"] as? Int
+            let createAt = json["createAt"] as? String
             else { return nil }
         
-        return Comment(content: content, authorId: authorId, createAt: createAt)
+        return Comment(content: content, author: author, createAt: createAt)
     }
     
-    init(content: String, authorId: Int, createAt: String) {
-        if let createdDate = createAt.dateForServer {
-            self.createAt = DateFormatter.dateForCollectionView.string(from: createdDate)
-        } else {
-            self.createAt = ""
-        }
+    init(content: String, author: User, createAt: String) {
         self.content = content
-        self.author = User(id: authorId)
+        self.createAt = createAt
+        self.author = author
     }
     
 }
