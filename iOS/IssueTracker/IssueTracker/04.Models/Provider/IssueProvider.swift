@@ -113,7 +113,7 @@ class IssueProvider: IssueProvidable {
             filterWork(issues.map { $0.value })
         }
     }
-    
+  
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void) {
         guard let myId = userProvider?.currentUser?.id else {
             completion(nil)
@@ -125,7 +125,10 @@ class IssueProvider: IssueProvidable {
             case .failure:
                 completion(nil)
             case .success(let response):
-                guard let comment = Comment.addResponse(json: response.mapJsonObject())
+                guard let json = response.mapJsonObject(),
+                    let authorId = json["userId"] as? Int,
+                    let author = self?.users[authorId],
+                    let comment = Comment.addResponse(json: json, author: author)
                     else {
                         completion(nil)
                         return
