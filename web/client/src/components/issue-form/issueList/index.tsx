@@ -18,7 +18,7 @@ function IssueList() {
   return (
     <S.IssueList>
       {issues.map((issue: any) => {
-        return <IssueComp info={issue} />;
+        return <IssueComp key={issue.id} info={issue} />;
       })}
     </S.IssueList>
   );

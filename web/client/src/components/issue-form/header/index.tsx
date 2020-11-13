@@ -28,10 +28,12 @@ function issueHeader() {
   }, []);
   return (
     <S.IssueHeader>
-      <input type="checkbox" name="xxx" value="yyy" checked />
+      <input type="checkbox" name="xxx" value="yyy" />
       <S.FilterList>
-        {FilterTitles.map((filterTitle) => {
-          return <FilterListComp title={filterTitle}></FilterListComp>;
+        {FilterTitles.map((filterTitle, idx) => {
+          return (
+            <FilterListComp key={idx} title={filterTitle}></FilterListComp>
+          );
         })}
       </S.FilterList>
     </S.IssueHeader>
