@@ -15,7 +15,8 @@ function Login() {
       <S.GitHubBTN
         onClick={() => {
           window.open(
-            "https://github.com/login/oauth/authorize?client_id=bbd8f4faffe4f6f9c9b7&redirect_uri=http://localhost:8080/auth/github"
+            "https://github.com/login/oauth/authorize?client_id=bbd8f4faffe4f6f9c9b7&redirect_uri=http://localhost:8080/auth/github",
+            "_self"
           );
         }}
       />
