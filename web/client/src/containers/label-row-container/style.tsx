@@ -5,6 +5,7 @@ export const LabelRowContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 5rem;
 `;
 
 export const LabelContainerHeader = styled.div`

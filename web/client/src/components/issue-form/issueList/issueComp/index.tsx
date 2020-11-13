@@ -8,7 +8,7 @@ import IssueInfoType from "../../../../@types/issue";
 import LabelInfoType from "../../../../@types/label-form";
 import ProfileImage from "../../../profile-image";
 
-const START_POS = 850;
+const START_POS = 1365;
 const MOVING_POS = 10;
 interface IssueCompProp {
   info: IssueInfoType;
@@ -31,7 +31,7 @@ function IssueComp({ info }: IssueCompProp) {
           {info.labels.map((label: LabelInfoType) => {
             return (
               <S.LabelWrapper>
-                <Label name={label.title} color={label.color} />
+                <Label key={label.id} name={label.title} color={label.color} />
               </S.LabelWrapper>
             );
           })}
@@ -39,7 +39,11 @@ function IssueComp({ info }: IssueCompProp) {
             assigneePos += MOVING_POS;
             return (
               <S.ProfileImageWrapper size={assigneePos}>
-                <ProfileImage img={assignee.imageURL} size={20} />
+                <ProfileImage
+                  key={assignee.id}
+                  img={assignee.imageURL}
+                  size={20}
+                />
               </S.ProfileImageWrapper>
             );
           })}
