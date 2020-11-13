@@ -83,8 +83,8 @@ class IssueFilter: IssueFilterable {
         }
         
         return dataSet.sorted { (lhs, rhs) -> Bool in
-            guard let dateLhs = lhs.createdAt.datdForServer,
-                let dateRhs = rhs.createdAt.datdForServer
+            guard let dateLhs = lhs.createdAt.dateForServer,
+                let dateRhs = rhs.createdAt.dateForServer
                 else { return true }
             
             return dateLhs > dateRhs

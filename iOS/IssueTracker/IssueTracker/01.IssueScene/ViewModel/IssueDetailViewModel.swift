@@ -24,6 +24,7 @@ protocol IssueDetailViewModelProtocol: AnyObject {
     func needFetchDetails()
     func addComment(content: String)
     func editIssue(title: String, description: String)
+    func toggleIssueState()
     
     var didLabelChanged: (() -> Void)? { get set }
     var didMilestoneChanged: (() -> Void)? { get set }
@@ -111,11 +112,9 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
     
     func addComment(content: String) {
         issueProvider?.addComment(issueNumber: self.issueNumber, content: content) { [weak self] (comment) in
-            guard let `self` = self,
-                let comment = comment
-                else { return }
-            self.comments.append(CommentViewModel(comment: comment))
-            self.didFetch?()
+            guard let comment = comment else { return }
+            self?.comments.append(CommentViewModel(comment: comment))
+            self?.didFetch?()
         }
     }
     
@@ -142,6 +141,14 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
             }
             
             self.didFetch?()
+        })
+    }
+    
+    func toggleIssueState() {
+        issueProvider?.changeIssueState(id: issueNumber, open: !isOpened, completion: { [weak self] issue in
+            guard let issue = issue else { return }
+            self?.isOpened = issue.isOpened
+            self?.didFetch?()
         })
     }
     

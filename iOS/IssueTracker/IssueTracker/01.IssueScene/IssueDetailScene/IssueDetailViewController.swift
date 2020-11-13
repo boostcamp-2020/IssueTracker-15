@@ -19,6 +19,7 @@ class IssueDetailViewController: UIViewController {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
         blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurredEffectView.alpha = 0
         return blurredEffectView
     }()
     
@@ -26,6 +27,7 @@ class IssueDetailViewController: UIViewController {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
         blurredEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurredEffectView.alpha = 0
         return blurredEffectView
     }()
     
@@ -80,7 +82,6 @@ class IssueDetailViewController: UIViewController {
     }
     
     private func setupNavBarBlur() {
-        navBarBlurView.alpha = 0
         let navBarHeight = navigationController?.navigationBar.frame.height ?? 50
         self.navigationController?.navigationBar.addSubview(navBarBlurView)
         
@@ -93,7 +94,6 @@ class IssueDetailViewController: UIViewController {
     }
     
     private func setupContentBlur() {
-        navBarBlurView.alpha = 0
         self.view.addSubview(contentBlurView)
         
         NSLayoutConstraint.activate([
@@ -199,6 +199,7 @@ extension IssueDetailViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - BottomSheetViewDelegate Implementatioin
 
 extension IssueDetailViewController: BottomSheetViewDelegate {
+    
     func heightChanged(with newHeight: CGFloat) {
         let newAlpha = newHeight / 1000
         DispatchQueue.main.async { [weak self] in
@@ -236,6 +237,10 @@ extension IssueDetailViewController: BottomSheetViewDelegate {
         if currentIndexPath.item < self.issueDetailViewModel.comments.count - 1 {
             self.collectionView.scrollToItem(at: IndexPath(item: currentIndexPath.item + 1, section: 0), at: .top, animated: true)
         }
+    }
+    
+    func stateToggleButtonTapped() {
+        issueDetailViewModel.toggleIssueState()
     }
     
     func addCommentButtonTapped() {

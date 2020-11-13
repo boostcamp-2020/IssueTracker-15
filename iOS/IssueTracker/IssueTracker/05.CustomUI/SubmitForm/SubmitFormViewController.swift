@@ -95,8 +95,13 @@ extension SubmitFormViewController {
     @objc func formViewTapped() {
         self.view.endEditing(true)
         self.formViewEndPoint = nil
-        
-        formView.frame.origin.y += moveUpward
+        let finalPos = formView.frame.origin.y + moveUpward
+        UIView.animate(withDuration: 0.3) {
+            self.formView.frame.origin.y = finalPos
+        } completion: { _ in
+            self.formView.frame.origin.y = finalPos
+        }
+
         self.moveUpward = 0
     }
     
