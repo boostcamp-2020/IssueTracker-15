@@ -82,7 +82,6 @@ class IssueDetailViewController: UIViewController {
     }
     
     private func setupNavBarBlur() {
-        navBarBlurView.alpha = 0
         let navBarHeight = navigationController?.navigationBar.frame.height ?? 50
         self.navigationController?.navigationBar.addSubview(navBarBlurView)
         
@@ -95,7 +94,6 @@ class IssueDetailViewController: UIViewController {
     }
     
     private func setupContentBlur() {
-        navBarBlurView.alpha = 0
         self.view.addSubview(contentBlurView)
         
         NSLayoutConstraint.activate([
