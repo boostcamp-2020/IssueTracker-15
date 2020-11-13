@@ -82,12 +82,12 @@
 
 ## 🖥 2주차 데모  
 ### [Web-Server](http://118.67.133.155:3000/)  
-### [Web-Client](http://118.67.128.192/issue)  
+### [Web-Client](http://118.67.128.192)  
 
 ### [iOS](https://youtu.be/o4B0ahz36oY)  
 
 ## 🖥 3주차 데모  
 ### [Web-Server](http://118.67.133.155:3000/)  
-### [Web-Client](http://118.67.128.192/issue)  
+### [Web-Client](http://118.67.128.192)  
 
 ### [iOS](https://www.youtube.com/watch?v=JfGMH_VjZQY)
