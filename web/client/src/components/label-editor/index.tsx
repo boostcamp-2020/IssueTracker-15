@@ -80,7 +80,7 @@ export default function LabelEditor(props: LabelEditorProps) {
     if (!isSuccess) alert("업데이트 실패");
     setLabels(
       labels.map((l) => {
-        if (l.id == props.newLabel.id) {
+        if (l.id === props.newLabel.id) {
           l = { ...(props.newLabel as Label) };
         }
         return l;
@@ -90,7 +90,7 @@ export default function LabelEditor(props: LabelEditorProps) {
   };
 
   const createNewLabel = async () => {
-    const newCreatedLabel = (await postNewLabel(props.newLabel)) as Label;
+    const newCreatedLabel = await postNewLabel(props.newLabel);
     if (!newCreatedLabel) {
       alert("라벨 생성 실패");
       return;
@@ -101,7 +101,7 @@ export default function LabelEditor(props: LabelEditorProps) {
   };
 
   const changeLabelColor = () => {
-    const newLabelColor = getRandomColor() as string;
+    const newLabelColor = getRandomColor();
     colorInput.current.value = newLabelColor;
     props.setNewLabel({ ...props.newLabel, color: newLabelColor });
     if (props.setLabelColor) {
