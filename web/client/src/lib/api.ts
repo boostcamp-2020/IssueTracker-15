@@ -1,4 +1,5 @@
-import {URL} from '../config/apiConfig'
+import { PostLabel, UpdateLabel } from "../@types/label-form";
+import { URL } from "../config/apiConfig";
 
 export const getMilestones = async () => {
   const result = await fetch(`${URL}/api/milestone`, {
@@ -24,10 +25,33 @@ export const getLabels = async () => {
   const result = await fetch(`${URL}/api/label`, {
     method: "GET",
   });
-  if (!result.ok) return;
+  if (!result.ok) return false;
 
-  const labelList = await result.json();
-  return labelList;
+  return await result.json();
+};
+
+export const patchUpdateLabel = async (label: UpdateLabel) => {
+  const result = await fetch(`${URL}/api/label/${label.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ...label }),
+  });
+  return result.ok;
+};
+
+export const postNewLabel = async (label: PostLabel) => {
+  const result = await fetch(`${URL}/api/label`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ ...label }),
+  });
+  if (!result.ok) return false;
+
+  return await result.json();
 };
 
 export const deleteLabelReqeust = async (labelId: number) => {
@@ -37,35 +61,36 @@ export const deleteLabelReqeust = async (labelId: number) => {
   return result;
 };
 
-
 export const getIssueById = async (id: number) => {
-  const res = await fetch(
-    `${URL}/api/issue/${id}`
-  );
+  const res = await fetch(`${URL}/api/issue/${id}`);
 
-  if(!res.ok) return;
+  if (!res.ok) return;
   const issue = await res.json();
   return issue;
 };
 
 interface CommentProps {
-	  userId : number;
-	  issueId : number;
-    content :string;
+  userId: number;
+  issueId: number;
+  content: string;
 }
 
-export const postComment = async ({userId, issueId, content}: CommentProps ) => {
+export const postComment = async ({
+  userId,
+  issueId,
+  content,
+}: CommentProps) => {
   const res = await fetch(`${URL}/api/comment`, {
-    method: 'POST', 
-    body: JSON.stringify({userId, issueId, content}), 
-    headers:{
-      'Content-Type': 'application/json'
-    }
-  })
+    method: "POST",
+    body: JSON.stringify({ userId, issueId, content }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-  if(!res.ok) return false;
+  if (!res.ok) return false;
   return await res.json();
-}
+};
 
 export const getJWTToken = async (code: string) => {
   const result = await fetch(`${URL}/api/signin/github`, {
@@ -88,25 +113,25 @@ export const updateIssueTitle = async (id: number, title: string) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      title
+      title,
     }),
-  })
+  });
 
-  if(!result.ok) return false;
+  if (!result.ok) return false;
   return true;
 };
 
-  export const closeIssue = async (id: number) => {
-    const result = await fetch(`${URL}/api/issue/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        isOpened: false
-      }),
-    });
+export const closeIssue = async (id: number) => {
+  const result = await fetch(`${URL}/api/issue/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      isOpened: false,
+    }),
+  });
 
-  if(!result.ok) return false;
+  if (!result.ok) return false;
   return true;
-  };
+};

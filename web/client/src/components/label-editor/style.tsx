@@ -113,7 +113,7 @@ export const colorInput = styled.input`
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   width: 11rem;
   padding-right: 2rem;
