@@ -1,18 +1,25 @@
-import styled from 'styled-components';
-import Palette from '../../../assets/palette';
+import styled from "styled-components";
+import Palette from "../../../assets/palette";
 
 const { color } = Palette;
 
 export const CommentBoxWrapper = styled.div`
-  margin-left: 30px;
+  margin-left: 15px;
+  width: 100%;
+
+  margin-bottom: 2rem;
 `;
 
 export const CommentBoxTitle = styled.div<{ isAuthor: boolean }>`
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
-  padding: 16px 20px;
+  padding: 13px 20px;
+
+  width: 100%;
+  height: 25px;
 
   background: ${(props) =>
     props.isAuthor ? color.commentTitleByAuthor : color.commentTitleByUser};
@@ -28,7 +35,7 @@ export const CommentBoxTitle = styled.div<{ isAuthor: boolean }>`
     right: 100%;
     top: 50%;
     border: solid transparent;
-    content: '';
+    content: "";
     height: 0;
     width: 0;
     position: absolute;
@@ -70,7 +77,7 @@ export const WriteTime = styled.div`
 `;
 
 export const TitleRight = styled.div<{ isAuthor: boolean }>`
-  display: ${(props) => (props.isAuthor ? 'flex' : 'none')};
+  display: ${(props) => (props.isAuthor ? "flex" : "none")};
   align-items: center;
 `;
 
@@ -80,9 +87,10 @@ export const UserBox = styled.div`
   border: 1px solid #ccc;
   border-radius: 3px;
 
-  box-sizing: borer-box;
+  box-sizing: border-box;
 
-  text-align: center;
+  color: #555;
+  font-weight: 700;
 `;
 
 export const Edit = styled.div`
@@ -95,6 +103,8 @@ export const Edit = styled.div`
 export const CommentBoxBody = styled.div<{ isAuthor: boolean }>`
   padding: 16px 20px;
 
+  width: 100%;
+
   border: 1px solid
     ${(props) =>
       props.isAuthor
@@ -104,4 +114,27 @@ export const CommentBoxBody = styled.div<{ isAuthor: boolean }>`
   border-radius: 0 0 5px 5px;
 
   line-height: 1.3;
+`;
+
+export const CommentWithProfileWrapper = styled.div`
+  display: flex;
+`;
+
+export const ProfilePhotoWrapper = styled.div`
+  padding-top: 10px;
+
+  box-sizing: border-box;
+`;
+
+export const ButtonListWrapper = styled.div`
+  display: flex;
+
+  margin-top: 1rem;
+  margin-left: auto;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  width: fit-content;
+  margin-left: 0.5rem;
 `;

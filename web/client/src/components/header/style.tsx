@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Header = styled.div`
@@ -11,8 +12,9 @@ export const Header = styled.div`
   padding: 0rem;
 `;
 
-export const TitleContainer = styled.div`
+export const TitleContainer = styled(Link)`
   display: flex;
+  text-decoration: none;
   justify-content: center;
   align-items: flex-end;
   padding-bottom: 0.5rem;
@@ -36,8 +38,8 @@ export const ButtonRow = styled.div`
   align-items: center;
   height: 1rem;
   width: 100%;
-  padding-right: 4rem;
   margin-bottom: 1rem;
+  margin-right: 1rem;
 `;
 
 export const ButtonContainer = styled.div`

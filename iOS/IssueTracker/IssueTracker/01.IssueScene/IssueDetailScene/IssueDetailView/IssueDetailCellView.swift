@@ -10,22 +10,37 @@ import UIKit
 
 class IssueDetailCellView: UICollectionViewCell {
        
-    @IBOutlet weak var desc: UILabel!
-    func configure(with text: String) {
-        desc.text = text
+    @IBOutlet weak var content: UILabel!
+    @IBOutlet weak var author: UILabel!
+    @IBOutlet weak var createAt: UILabel!
+    @IBOutlet weak var profilePicture: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+        ])
     }
     
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        super.preferredLayoutAttributesFitting(layoutAttributes)
-        layoutIfNeeded()
-        
-        let size = contentView.systemLayoutSizeFitting(layoutAttributes.size)
-        
-        var frame = layoutAttributes.frame
-        frame.size.height = ceil(size.height)
-        layoutAttributes.frame = frame
-        
-        return layoutAttributes
+    func configure(with comment: CommentViewModel) {
+        content.text = comment.content
+        author.text = comment.userName
+        createAt.text = comment.createAt
+        comment.needImage { [weak self] (data) in
+            self?.setProfile(data: data)
+        }
+    }
+    
+    func setProfile(data: Data?) {
+        guard let data = data,
+            let image = UIImage(data: data)
+        else { return }
+        profilePicture.image = image
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+       profilePicture.setRound(ratio: 1)
     }
 }
 

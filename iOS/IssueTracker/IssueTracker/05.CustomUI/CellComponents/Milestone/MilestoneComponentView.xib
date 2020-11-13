@@ -29,7 +29,7 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="unc-Yh-koE" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="MJ9-nT-Dbs"/>
                 <constraint firstItem="Dbb-nl-cLY" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.3" id="TsY-8c-fZZ"/>

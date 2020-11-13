@@ -1,18 +1,11 @@
 import React, { Fragment } from "react";
-import styled from "styled-components";
-
-const TitleInputWrapAuth = styled.div`
-  padding-top: 2%;
-  padding-bottom: 0.5%;
-  display: flex;
-  flex-direction: column;
-`;
+import * as S from "./style";
 
 interface TitleProps {
   title: string;
 }
-function InputTitle<TitleProps>(props) {
-  return <TitleInputWrapAuth>{props.title}</TitleInputWrapAuth>;
+function InputTitle(props: TitleProps) {
+  return <S.TitleInputWrapAuth>{props.title}</S.TitleInputWrapAuth>;
 }
 
 export default InputTitle;

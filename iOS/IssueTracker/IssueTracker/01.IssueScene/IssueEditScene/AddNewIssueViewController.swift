@@ -9,19 +9,41 @@
 import UIKit
 import MarkdownView
 
+enum AddType: String {
+    case newIssue = "새 이슈"
+    case editIssue = "#"
+    case newComment = "댓글 추가"
+}
+
+struct PreviousData {
+    let title: String
+    let description: String
+    let issueNumber: String
+}
+
 class AddNewIssueViewController: UIViewController {
+    static let identifier = "AddNewIssueViewController"
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var titleLabel: UILabel!
     private var commentTextView: UITextView = UITextView()
     private var markdownView: MarkdownView = MarkdownView()
+    private var previousData: PreviousData?
+    var addType: AddType = .newIssue
     
     private let textViewPlaceholder = "코멘트는 여기에 작성하세요"
-    var doneButtonTapped: (() -> Void)?
+    var doneButtonTapped: (([String]) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "새 이슈"
-        
+        switch addType {
+        case .newIssue, .editIssue:
+            titleLabel.isHidden = false
+            titleTextField.isHidden = false
+        case .newComment:
+            titleLabel.isHidden = true
+            titleTextField.isHidden = true
+        }
         configureKeyboardRelated()
         configureNavigationBar()
         configureCommentTextView()
@@ -56,7 +78,13 @@ class AddNewIssueViewController: UIViewController {
         commentTextView.topAnchor.constraint(equalTo: self.segmentedControl.bottomAnchor, constant: 10).isActive = true
         commentTextView.widthAnchor.constraint(equalTo: self.segmentedControl.widthAnchor, multiplier: 1).isActive = true
         commentTextView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 10).isActive = true
-        initTextViewPlaceholder()
+        
+        switch addType {
+        case .newIssue, .newComment:
+            initTextViewPlaceholder()
+        case .editIssue:
+            initTextViewPreviousData()
+        }
     }
     
     private func configureMarkdownView() {
@@ -83,23 +111,31 @@ class AddNewIssueViewController: UIViewController {
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-        /*
-         doneButtonTapped()
-         서버와 통신, POST 요청
-         응답이 오면 (OK status code, 서버 저장에 성공한 객체)
-         해당 객체를 decode 하여 프론트 collectionview의 datasource에도 추가
-         datasource는 이슈목록 리스트에 있으므로 doneButtonTapped를 주입시키든가 delegate protocol을 통해서 datasource를 건드릴 수 있도록 수정
-         
-         dismiss()
-         현재 VC를 dismiss한다.
-        */
+        var content: [String] = [String]()
+
+        switch addType {
+        case .newIssue, .editIssue:
+            guard let title = titleTextField.text, !title.isEmpty else {
+                showAlert(at: self, title: "제목을 입력해주세요!", prepare: nil, completion: nil)
+                return
+            }
+            content.append(title)
+        default:
+            break
+        }
+
+        content.append(commentTextView.text == textViewPlaceholder ? "" : commentTextView.text)
         
-        doneButtonTapped?()
+        doneButtonTapped?(content)
         self.dismiss(animated: true, completion: nil)
     }
     
+    private func initTextViewPreviousData() {
+        titleTextField.text = previousData?.title
+        commentTextView.text = previousData?.description
+    }
+    
     private func initTextViewPlaceholder() {
-        // 마크다운 작성 View를 configure 할 때
         if commentTextView.text.isEmpty {
             commentTextView.text = textViewPlaceholder
             commentTextView.textColor = .lightGray
@@ -107,11 +143,10 @@ class AddNewIssueViewController: UIViewController {
     }
     
     private func setTextViewPlaceholder() {
-        // 마크다운 작성 View를 begin/end editing 할 때
         if commentTextView.text == textViewPlaceholder {
             commentTextView.text = ""
             commentTextView.textColor = .black
-        } else if commentTextView.text.isEmpty {
+        } else if commentTextView.text.isEmpty, addType != .editIssue {
             commentTextView.text = textViewPlaceholder
             commentTextView.textColor = .lightGray
         }
@@ -158,4 +193,37 @@ extension AddNewIssueViewController: UITextViewDelegate {
             setTextViewPlaceholder()
         }
     }
+}
+
+extension AddNewIssueViewController {
+    
+    static let storyboardName = "EditIssue"
+    
+    static func present(at viewController: UIViewController,
+                        addType: AddType,
+                        previousData: PreviousData?,
+                        onDismiss: (([String]) -> Void)?) {
+                
+        let storyBoard = UIStoryboard(name: storyboardName, bundle: Bundle.main)
+        guard let container = storyBoard.instantiateInitialViewController() as? UINavigationController,
+            let vc = container.topViewController as? AddNewIssueViewController
+            else { return }
+        
+        switch addType {
+        case .newIssue, .newComment:
+            vc.title = addType.rawValue
+        case .editIssue:
+            if let previousData = previousData {
+                vc.previousData = previousData
+                vc.title = addType.rawValue + previousData.issueNumber
+            }
+        }
+        
+        vc.addType = addType
+        vc.doneButtonTapped = onDismiss
+        
+        viewController.present(container, animated: true, completion: nil)
+        
+    }
+    
 }

@@ -25,15 +25,6 @@ struct Milestone: Codable {
         self.closedIssueNum = closeIssueLength
     }
     
-    init(title: String, description: String, dueDate: String) {
-        self.id = -1
-        self.title = title
-        self.description = description
-        self.dueDate = dueDate
-        self.openedIssueNum = "0"
-        self.closedIssueNum = "0"
-    }
-    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DeCodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)

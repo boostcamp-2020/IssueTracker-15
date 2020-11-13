@@ -1,7 +1,12 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsBoolean, IsString } from "class-validator";
 
-export default class UpdateIssueContent {
+export default class UpdateIssue {
   @IsString()
-  @IsNotEmpty()
-  description!: string;
+  title?: string;
+
+  @IsString()
+  description?: string;
+
+  @IsBoolean()
+  isOpened?: boolean;
 }

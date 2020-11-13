@@ -64,7 +64,7 @@ extension LabelSubmitFieldsView: SubmitFieldProtocol {
     
     var contentView: UIView { self }
     
-    func saveButtonTapped() -> SubmitFormView.SaveResult {
+    func saveButtonTapped() -> SubmitFormViewController.SaveResult {
         if let titleText = titleTextField.text, !titleText.isEmpty,
             let descText = descTextField.text, !descText.isEmpty,
             let hexCodeText = colorTextField.text, !hexCodeText.isEmpty {
@@ -83,3 +83,16 @@ extension LabelSubmitFieldsView: SubmitFieldProtocol {
     }
     
 }
+
+// MARK: - Load From Nib
+
+extension LabelSubmitFieldsView {
+    
+    static let labelSubmitFieldsView: String = "LabelSubmitFieldsView"
+    
+    static func createView() -> LabelSubmitFieldsView? {
+        return Bundle.main.loadNibNamed(labelSubmitFieldsView, owner: self, options: nil)?.last as? LabelSubmitFieldsView
+    }
+    
+}
+

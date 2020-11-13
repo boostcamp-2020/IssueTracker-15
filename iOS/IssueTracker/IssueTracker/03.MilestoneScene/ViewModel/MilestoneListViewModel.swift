@@ -46,7 +46,6 @@ class MilestoneListViewModel: MilestoneListViewModelProtocol {
             guard let `self` = self,
                 let milestone = milestone
                 else { return }
-            // print("listviewModel completion: \(milestone)")
             self.milestones[indexPath.row] = MilestoneItemViewModel(milestone: milestone, from: .fromSubmitView)
             DispatchQueue.main.async {
                 self.didFetch?()
@@ -61,7 +60,6 @@ class MilestoneListViewModel: MilestoneListViewModelProtocol {
                 else { return }
             milestones.forEach { self.milestones.append(MilestoneItemViewModel(milestone: $0, from: .fromServer)) }
             DispatchQueue.main.async {
-                // print("datasource: \(self.milestones)")
                 self.didFetch?()
             }
         }
