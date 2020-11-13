@@ -9,7 +9,7 @@
 import Foundation
 
 extension String {
-    var datdForServer: Date? {
+    var dateForServer: Date? {
         return DateFormatter.datdFromServer.date(from: self)
     }
     
