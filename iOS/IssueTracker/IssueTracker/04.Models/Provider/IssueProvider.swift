@@ -113,7 +113,7 @@ class IssueProvider: IssueProvidable {
             filterWork(issues.map { $0.value })
         }
     }
-    
+
     func addComment(issueNumber: Int, content: String, completion: @escaping (Comment?) -> Void) {
         guard let myId = userProvider?.currentUser?.id else {
             completion(nil)
