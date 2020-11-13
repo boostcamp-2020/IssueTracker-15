@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UserViewModel: ImageLoadable {
+struct UserViewModel: ImageLoadable {
     
     let id: Int
     var userName: String

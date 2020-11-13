@@ -22,10 +22,15 @@ class LabelBadgeCellView: UICollectionViewCell {
         layer.backgroundColor = labelViewModel.hexColor.color
     }
     
+    func setFontSize(_ size: CGFloat) {
+        label.font = label.font.withSize(size)
+        invalidateIntrinsicContentSize()
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        layer.cornerRadius = bounds.height/2 * 0.5
+        layer.cornerRadius = bounds.height/2 * 0.2
     }
 }
 

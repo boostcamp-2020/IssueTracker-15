@@ -9,7 +9,7 @@
 import Foundation
 import NetworkFramework
 
-class CommentViewModel: ImageLoadable {
+struct CommentViewModel: ImageLoadable {
     let content: String
     let createAt: String
     let userName: String

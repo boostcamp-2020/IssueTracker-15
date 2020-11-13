@@ -15,8 +15,13 @@ protocol IssucCellViewDelegate: AnyObject {
 }
 
 class IssueCellView: UICollectionViewCell {
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, LabelItemViewModel>
-    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, LabelItemViewModel>
+    
+    enum Section {
+        case labels
+    }
+    
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, LabelItemViewModel>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Section, LabelItemViewModel>
     
     weak var delegate: IssucCellViewDelegate?
     
@@ -123,9 +128,9 @@ class IssueCellView: UICollectionViewCell {
     private func setLabels(labelViewModels: [LabelItemViewModel]) {
         labelCollectionView.isHidden = false
         var snapShot = SnapShot()
-        snapShot.appendSections([0])
-        snapShot.appendItems(labelViewModels)
-        dataSource.apply(snapShot)
+        snapShot.appendSections([.labels])
+        snapShot.appendItems(labelViewModels, toSection: .labels)
+        dataSource.apply(snapShot, animatingDifferences: true)
     }
     
     private func setStatus(isOpened: Bool) {

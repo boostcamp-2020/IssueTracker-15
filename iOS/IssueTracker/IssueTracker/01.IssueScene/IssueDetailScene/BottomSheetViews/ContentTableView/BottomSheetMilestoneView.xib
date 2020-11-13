@@ -10,21 +10,21 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddCommentMilestoneCellView" rowHeight="93" id="KGk-i7-Jjw" customClass="BottomSheetMilestoneView" customModule="IssueTracker" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddCommentMilestoneCellView" rowHeight="123" id="KGk-i7-Jjw" customClass="BottomSheetMilestoneView" customModule="IssueTracker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="123"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="123"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DjU-us-0ZA">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DjU-us-0ZA">
                         <rect key="frame" x="10" y="10" width="42" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PvE-eB-TzB">
-                        <rect key="frame" x="10" y="75" width="300" height="8"/>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PvE-eB-TzB">
+                        <rect key="frame" x="10" y="40.5" width="300" height="8"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IcB-bX-DLy" userLabel="FrontBar">
                                 <rect key="frame" x="-57" y="0.0" width="414" height="8"/>
@@ -39,24 +39,32 @@
                             <constraint firstItem="IcB-bX-DLy" firstAttribute="top" secondItem="PvE-eB-TzB" secondAttribute="top" id="OIA-FF-Ez1"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgt-Ad-wpH" userLabel="dueDate">
+                        <rect key="frame" x="10" y="58.5" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="PvE-eB-TzB" secondAttribute="bottom" constant="10" id="2RB-Ur-fAS"/>
+                    <constraint firstItem="Zgt-Ad-wpH" firstAttribute="top" secondItem="PvE-eB-TzB" secondAttribute="bottom" constant="10" id="4eB-Gy-Opl"/>
                     <constraint firstItem="DjU-us-0ZA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="LMl-iA-JxW"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DjU-us-0ZA" secondAttribute="trailing" constant="10" id="Lnb-ce-A7m"/>
+                    <constraint firstAttribute="bottom" secondItem="Zgt-Ad-wpH" secondAttribute="bottom" constant="10" id="NmD-ka-i01"/>
                     <constraint firstItem="DjU-us-0ZA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="TBM-6M-J6q"/>
                     <constraint firstItem="PvE-eB-TzB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="UuU-Pm-Pv0"/>
                     <constraint firstItem="PvE-eB-TzB" firstAttribute="top" relation="greaterThanOrEqual" secondItem="DjU-us-0ZA" secondAttribute="bottom" constant="10" id="o0l-PX-asD"/>
                     <constraint firstAttribute="trailing" secondItem="PvE-eB-TzB" secondAttribute="trailing" constant="10" id="qMq-hl-xGV"/>
                     <constraint firstItem="PvE-eB-TzB" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.025" id="su2-mA-W65"/>
+                    <constraint firstItem="Zgt-Ad-wpH" firstAttribute="leading" secondItem="DjU-us-0ZA" secondAttribute="leading" id="yxb-GN-hLc"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="backgroundBar" destination="PvE-eB-TzB" id="QHT-Vp-J91"/>
+                <outlet property="dueDateLabel" destination="Zgt-Ad-wpH" id="zlp-ll-ZGI"/>
                 <outlet property="frontBar" destination="IcB-bX-DLy" id="R9d-5t-pjA"/>
                 <outlet property="titleLabel" destination="DjU-us-0ZA" id="emP-Eb-BYb"/>
             </connections>
-            <point key="canvasLocation" x="115.94202898550725" y="127.56696428571428"/>
+            <point key="canvasLocation" x="115.94202898550725" y="137.61160714285714"/>
         </tableViewCell>
     </objects>
     <resources>

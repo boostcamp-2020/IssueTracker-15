@@ -122,7 +122,7 @@ class IssueDetailViewModel: IssueDetailViewModelProtocol {
         issueProvider?.editIssue(id: issueNumber, title: title, description: description, completion: { [weak self] (editedIssue) in
             guard let `self` = self,
                 let editedIssue = editedIssue,
-                let author = self.issueProvider?.users[editedIssue.id]
+                let author = self.issueProvider?.users[editedIssue.author]
                 else { return }
             
             self.title = editedIssue.title

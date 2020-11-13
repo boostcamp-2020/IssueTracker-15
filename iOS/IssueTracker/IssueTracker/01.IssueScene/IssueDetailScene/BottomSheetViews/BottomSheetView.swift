@@ -47,6 +47,7 @@ class BottomSheetView: UIView {
         configureGesture()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.layer.masksToBounds = false
         tableView.backgroundColor = .clear
     }
     

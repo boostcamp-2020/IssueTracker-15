@@ -8,8 +8,13 @@
 import UIKit
 
 class IssueListViewController: UIViewController {
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, IssueItemViewModel>
-    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, IssueItemViewModel>
+    
+    enum Section {
+        case issues
+    }
+    
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, IssueItemViewModel>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Section, IssueItemViewModel>
     
     enum ViewingMode {
         case general
@@ -34,9 +39,9 @@ class IssueListViewController: UIViewController {
             issueListViewModel?.didItemChanged = { [weak self] issueItems in
                 guard let `self` = self else { return }
                 var snapShot = SnapShot()
-                snapShot.appendSections([0])
-                snapShot.appendItems(issueItems)
-                self.dataSource.apply(snapShot)
+                snapShot.appendSections([.issues])
+                snapShot.appendItems(issueItems, toSection: .issues)
+                self.dataSource.apply(snapShot, animatingDifferences: true)
             }
             issueListViewModel?.didCellChecked = { [weak self] (indexPath, check) in
                 guard let cell = self?.collectionView.cellForItem(at: indexPath) as? IssueCellView else { return }
@@ -54,8 +59,6 @@ class IssueListViewController: UIViewController {
         configureSearchBar()
         configureCollectionView()
         floatingButtonAspectRatioConstraint.isActive = true
-        navigationController?.isToolbarHidden = true
-        floatingButton.layoutSubviews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -93,7 +96,7 @@ class IssueListViewController: UIViewController {
         let cellHeight = self.view.bounds.height / 10
         layout.estimatedItemSize = CGSize(width: self.view.bounds.width, height: cellHeight)
         layout.minimumLineSpacing = 3
-        collectionView.setCollectionViewLayout(layout, animated: false)
+        collectionView.setCollectionViewLayout(layout, animated: true)
     }
     
     private func makeDataSource() -> DataSource {

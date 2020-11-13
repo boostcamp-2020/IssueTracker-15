@@ -83,3 +83,16 @@ extension LabelSubmitFieldsView: SubmitFieldProtocol {
     }
     
 }
+
+// MARK: - Load From Nib
+
+extension LabelSubmitFieldsView {
+    
+    static let labelSubmitFieldsView: String = "LabelSubmitFieldsView"
+    
+    static func createView() -> LabelSubmitFieldsView? {
+        return Bundle.main.loadNibNamed(labelSubmitFieldsView, owner: self, options: nil)?.last as? LabelSubmitFieldsView
+    }
+    
+}
+
