@@ -19,7 +19,7 @@ export default function Header() {
             {accessToken ? (
               <>
                 <S.joinButton>회원가입</S.joinButton>
-                <S.LoginButton onClick={setIsOpen}>로그인</S.LoginButton>{" "}
+                <S.LoginButton onClick={setIsOpen}>로그인</S.LoginButton>
               </>
             ) : (
               <>
