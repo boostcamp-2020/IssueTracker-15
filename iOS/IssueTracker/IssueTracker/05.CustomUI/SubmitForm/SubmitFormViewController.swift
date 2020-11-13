@@ -96,11 +96,12 @@ extension SubmitFormViewController {
         self.view.endEditing(true)
         self.formViewEndPoint = nil
         let finalPos = formView.frame.origin.y + moveUpward
-        UIView.animate(withDuration: 0.3) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
             self.formView.frame.origin.y = finalPos
-        } completion: { _ in
+        }, completion: { _ in
             self.formView.frame.origin.y = finalPos
-        }
+        })
 
         self.moveUpward = 0
     }
