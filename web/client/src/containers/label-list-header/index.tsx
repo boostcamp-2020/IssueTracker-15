@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
 import * as S from "./style";
 import Button from "../../components/button";
 import LabelCreateBox from "../label-create-box";
+import NavButton from "../../components/nav-button";
 
 export interface LabelContextProps {
   createLabelVisible: boolean;
